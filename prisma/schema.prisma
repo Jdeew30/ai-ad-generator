@@ -1,0 +1,233 @@
+// AI Ad Studio — data model. See docs/ARCHITECTURE.md §4.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Auth (Better Auth core schema: user / session / account / verification)
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String   @id
+  name          String
+  email         String   @unique
+  emailVerified Boolean  @default(false)
+  image         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  sessions    Session[]
+  accounts    Account[]
+  projects    Project[]
+  generations Generation[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+/// Better Auth rate limiter storage (shared across instances).
+model RateLimit {
+  id          String @id @default(cuid())
+  key         String @unique
+  count       Int
+  lastRequest BigInt
+
+  @@map("rate_limit")
+}
+
+// ---------------------------------------------------------------------------
+// Product domain
+// ---------------------------------------------------------------------------
+
+enum AssetKind {
+  LOGO
+  PRODUCT_IMAGE
+}
+
+enum ConceptSource {
+  /// Produced by an LLM (Anthropic). `Concept.model` holds the model id.
+  CLAUDE
+  /// Deterministic, non-AI compilation of the brief. Always labelled as such in the UI.
+  TEMPLATE
+}
+
+enum GenerationStatus {
+  /// Row created, not yet accepted by the provider.
+  PENDING
+  /// Accepted by the provider (externalId set); waiting for the render.
+  PROCESSING
+  /// Provider reports success; the file is being copied to our storage.
+  DOWNLOADING
+  /// File stored in our storage and verified. The only state with a downloadable video.
+  SUCCEEDED
+  FAILED
+  CANCELED
+}
+
+/// A product ad brief. Enumerated fields (tone, style, aspect ratio, language)
+/// are plain strings validated by Zod (src/modules/projects/schema.ts) so that
+/// presets can evolve without a migration.
+model Project {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productName     String
+  description     String   @db.Text
+  benefits        String[]
+  targetAudience  String   @db.Text
+  tone            String
+  visualStyle     String
+  aspectRatio     String
+  durationSeconds Int
+  language        String   @default("fr")
+  callToAction    String?
+  creativeNotes   String?  @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  assets      Asset[]
+  concepts    Concept[]
+  generations Generation[]
+
+  @@index([userId, updatedAt])
+  @@map("project")
+}
+
+model Asset {
+  id           String    @id @default(cuid())
+  projectId    String
+  project      Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  kind         AssetKind
+  /// Server-generated storage key. Never derived from the uploaded file name.
+  storageKey   String    @unique
+  mimeType     String
+  sizeBytes    Int
+  originalName String
+  createdAt    DateTime  @default(now())
+
+  @@index([projectId])
+  @@map("asset")
+}
+
+model Concept {
+  id              String        @id @default(cuid())
+  projectId       String
+  project         Project       @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  version         Int
+  source          ConceptSource
+  /// LLM model id when source = CLAUDE.
+  model           String?
+  /// Full structured concept (validated by Zod when written and when read).
+  payload         Json
+  /// Prompt actually sent to the video model. Starts as payload.videoPrompt, user-editable.
+  videoPrompt     String        @db.Text
+  negativePrompt  String?       @db.Text
+  videoPromptEdited Boolean     @default(false)
+  createdAt       DateTime      @default(now())
+
+  generations Generation[]
+
+  @@unique([projectId, version])
+  @@map("concept")
+}
+
+/// One real job on a video provider. The prompt/params are an immutable snapshot
+/// of what was submitted.
+model Generation {
+  id              String           @id @default(cuid())
+  projectId       String
+  project         Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  /// Denormalised owner, used for quota counting and authorisation without a join.
+  userId          String
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conceptId       String?
+  concept         Concept?         @relation(fields: [conceptId], references: [id], onDelete: SetNull)
+
+  providerId      String
+  /// Our model-profile id, e.g. "replicate:kwaivgi/kling-v2.1".
+  modelId         String
+  prompt          String           @db.Text
+  negativePrompt  String?          @db.Text
+  aspectRatio     String
+  durationSeconds Int
+  /// Asset used as reference image (image-to-video), if the model supports it.
+  referenceAssetId String?
+
+  status          GenerationStatus @default(PENDING)
+  /// Provider-side job id. Null until the provider accepted the job.
+  externalId      String?
+  /// Opaque provider data needed to poll (e.g. fal status/response URLs).
+  providerData    Json?
+  errorMessage    String?          @db.Text
+  progress        Int?
+  /// Times the finished file failed to be copied to our storage (transient failures are retried).
+  downloadAttempts Int             @default(0)
+
+  /// Storage key of the verified video file. Set only when status = SUCCEEDED.
+  outputKey       String?
+  outputBytes     Int?
+  outputMimeType  String?
+
+  lastPolledAt    DateTime?
+  submittedAt     DateTime?
+  completedAt     DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([projectId, createdAt])
+  @@index([status, updatedAt])
+  @@map("generation")
+}

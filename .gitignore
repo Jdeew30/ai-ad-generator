@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# next
+.next/
+out/
+next-env.d.ts
+
+# env (keep the example)
+.env
+.env.*
+!.env.example
+
+# local data
+.data/
+
+# generated
+src/generated/
+
+# misc
+*.tsbuildinfo
+.DS_Store
+npm-debug.log*
+coverage/
