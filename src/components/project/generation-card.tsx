@@ -147,7 +147,7 @@ export function GenerationCard({ initial, projectId }: { initial: GenerationDto;
               <Download className="size-4" aria-hidden /> Télécharger{g.outputBytes ? ` (${formatBytes(g.outputBytes)})` : ""}
             </a>
             <span className="inline-flex items-center gap-1.5 text-xs text-success">
-              <CircleCheck className="size-3.5" aria-hidden /> Fichier reçu et vérifié
+              <CircleCheck className="size-3.5" aria-hidden /> Fichier reçu et enregistré
             </span>
           </div>
         </div>

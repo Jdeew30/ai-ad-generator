@@ -1,6 +1,6 @@
 import { assertSameOrigin, jsonError, readBodyCapped, statusForError } from "@/lib/api";
 import { getDb } from "@/lib/db";
-import { AppError } from "@/lib/errors";
+import { AppError, isAppError } from "@/lib/errors";
 import { getSessionUser } from "@/lib/session";
 import { addAsset } from "@/modules/assets/service";
 import { MAX_ASSET_BYTES, sanitizeDisplayName } from "@/modules/assets/image";
@@ -33,7 +33,7 @@ export async function POST(request: Request, ctx: { params: Promise<{ id: string
     });
     return Response.json({ id: asset.id }, { status: 201 });
   } catch (error) {
-    if (error instanceof AppError) return jsonError(error.message, statusForError(error));
+    if (isAppError(error)) return jsonError(error.message, statusForError(error));
     console.error("[assets] upload failed", error);
     return jsonError("L'envoi du fichier a échoué.", 500);
   }

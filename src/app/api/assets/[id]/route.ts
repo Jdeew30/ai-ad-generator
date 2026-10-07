@@ -1,7 +1,7 @@
 import { Readable } from "node:stream";
 import { jsonError, statusForError } from "@/lib/api";
 import { getDb } from "@/lib/db";
-import { AppError } from "@/lib/errors";
+import { isAppError } from "@/lib/errors";
 import { getSessionUser } from "@/lib/session";
 import { getAssetForUser } from "@/modules/assets/service";
 import { getStorage } from "@/modules/storage";
@@ -29,7 +29,7 @@ export async function GET(_request: Request, ctx: { params: Promise<{ id: string
       },
     });
   } catch (error) {
-    if (error instanceof AppError) return jsonError(error.message, statusForError(error));
+    if (isAppError(error)) return jsonError(error.message, statusForError(error));
     console.error("[assets] serve failed", error);
     return jsonError("Erreur serveur.", 500);
   }

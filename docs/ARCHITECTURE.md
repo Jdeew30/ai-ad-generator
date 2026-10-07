@@ -182,3 +182,19 @@ Paiement / crédits, e-mail de vérification et reset de mot de passe (aucun ser
 e-mail branché), montage multi-clips + audio (ffmpeg), webhooks fournisseurs
 (signatures à vérifier), driver S3, file d'attente dédiée. Chacun a un point
 d'extension identifié ci-dessus.
+
+## 11. Pièges rencontrés (et leur parade)
+
+Relevés en vérifiant l'application dans un vrai navigateur, pas seulement par les tests unitaires :
+
+- **Un même module chargé deux fois.** Next.js empaquette les modules serveur séparément pour les pages (SSR) et pour
+  les route handlers. Les singletons (fournisseurs, stockage, DB) étant posés sur `globalThis`, un objet créé par un
+  bundle est utilisé par un autre, et `error instanceof ProviderApiError` y est faux : la vraie raison d'un échec
+  fournisseur était remplacée par un message générique. Parade : les erreurs portent une marque (`__brand`) et sont
+  reconnues par `isAppError` / `isProviderApiError` / `isStorageLimitError`, jamais par `instanceof` seul.
+- **`messages.parse` du SDK Anthropic** lève sa propre exception sur du JSON tronqué *avant* qu'on puisse lire
+  `stop_reason`. Parade : `messages.create` + parsing manuel dans l'ordre refus → troncature → JSON → schéma strict.
+- **SSRF par IPv6.** `new URL("https://[::ffff:10.0.0.1]/")` normalise l'adresse en `::ffff:a00:1`, que la première
+  version du filtre ne reconnaissait pas. Parade : analyse complète des adresses IPv6 (mappées, NAT64, 6to4, site-local).
+- **Limiteur de débit de l'auth** : il s'applique aux appels HTTP vers `/api/auth/*`, pas à `auth.api.*` appelé côté
+  serveur. Les formulaires de connexion/inscription passent donc par le client HTTP pour être réellement limités.

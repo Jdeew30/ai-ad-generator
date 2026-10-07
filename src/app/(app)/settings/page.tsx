@@ -1,6 +1,6 @@
 import { Check, Minus } from "lucide-react";
 import type { Metadata } from "next";
-import { Badge, Card } from "@/components/ui/card";
+import { Alert, Badge, Card } from "@/components/ui/card";
 import { getEnv } from "@/lib/env";
 import { requireUser } from "@/lib/session";
 import { describeConceptEngine } from "@/modules/concepts";
@@ -88,8 +88,15 @@ export default async function SettingsPage() {
           <Row label="Générations simultanées par utilisateur" value="3" />
           <Row label="Inscriptions" value={env.ALLOW_SIGNUP ? "Ouvertes" : "Fermées"} />
           <Row label="Stockage" value="Disque local" />
-          <Row label="Synchronisation en arrière-plan" value={env.CRON_SECRET ? "Endpoint cron activé" : "Désactivée (suivi à l'ouverture de la page)"} />
+          <Row label="Synchronisation en arrière-plan" value={env.CRON_SECRET ? "Endpoint cron activé" : "Désactivée"} />
         </Card>
+        {!env.CRON_SECRET && (
+          <Alert tone="warning" title="Sans cron, une vidéo terminée n'est récupérée qu'à l'ouverture de la page">
+            Certains fournisseurs suppriment leurs fichiers de sortie après un délai court (parfois environ une heure). Si
+            personne n&apos;ouvre le projet entre-temps, la vidéo sera perdue. Définissez CRON_SECRET et appelez
+            GET /api/cron/sync-generations avec l&apos;en-tête Authorization: Bearer … toutes les minutes.
+          </Alert>
+        )}
       </section>
     </div>
   );

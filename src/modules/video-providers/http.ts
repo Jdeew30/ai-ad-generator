@@ -7,6 +7,8 @@ import type { UrlPolicy } from "./types";
  * (network error, 429, 5xx). Non-retryable errors are terminal for the request.
  */
 export class ProviderApiError extends Error {
+  readonly __brand = "ProviderApiError" as const;
+
   constructor(
     readonly provider: string,
     readonly status: number,
@@ -16,6 +18,14 @@ export class ProviderApiError extends Error {
     super(message);
     this.name = "ProviderApiError";
   }
+}
+
+/** Brand-based check (see AppError): robust to Next.js bundling a module twice. */
+export function isProviderApiError(error: unknown): error is ProviderApiError {
+  return (
+    error instanceof ProviderApiError ||
+    (typeof error === "object" && error !== null && (error as { __brand?: unknown }).__brand === "ProviderApiError")
+  );
 }
 
 export interface RequestOptions {
@@ -96,7 +106,7 @@ export async function requestJson<T>(
         throw new ProviderApiError(provider, res.status, "Réponse non-JSON du fournisseur.", true);
       }
     } catch (error) {
-      if (error instanceof ProviderApiError) {
+      if (isProviderApiError(error)) {
         if (!error.retryable) throw error;
         lastError = error;
         continue;

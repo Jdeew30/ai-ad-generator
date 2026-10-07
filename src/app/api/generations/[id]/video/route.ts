@@ -1,7 +1,7 @@
 import { Readable } from "node:stream";
 import { jsonError, statusForError } from "@/lib/api";
 import { getDb } from "@/lib/db";
-import { AppError } from "@/lib/errors";
+import { isAppError } from "@/lib/errors";
 import { parseRange } from "@/lib/http-range";
 import { getSessionUser } from "@/lib/session";
 import { getDownloadableVideo } from "@/modules/generations/service";
@@ -65,7 +65,7 @@ export async function GET(request: Request, ctx: { params: Promise<{ id: string 
     const stream = Readable.toWeb(storage.createReadStream(video.key)) as ReadableStream;
     return new Response(stream, { headers: { ...headers, "Content-Length": String(video.size) } });
   } catch (error) {
-    if (error instanceof AppError) return jsonError(error.message, statusForError(error));
+    if (isAppError(error)) return jsonError(error.message, statusForError(error));
     console.error("[generations] video failed", error);
     return jsonError("Erreur serveur.", 500);
   }

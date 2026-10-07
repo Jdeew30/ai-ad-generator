@@ -1,5 +1,5 @@
 import { AppError } from "@/lib/errors";
-import { ProviderApiError, fetchFollowingRedirects, requestJson } from "./http";
+import { ProviderApiError, fetchFollowingRedirects, isProviderApiError, requestJson } from "./http";
 import type {
   AdapterDeps,
   JobRef,
@@ -162,7 +162,7 @@ export function createFalProvider(options: FalProviderOptions): VideoProvider {
           { fetch: options.fetch, retries: 2 },
         );
       } catch (error) {
-        if (error instanceof ProviderApiError && !error.retryable) {
+        if (isProviderApiError(error) && !error.retryable) {
           return { state: "failed", message: error.message };
         }
         throw error;

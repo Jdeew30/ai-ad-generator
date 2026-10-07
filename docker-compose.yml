@@ -1,0 +1,16 @@
+# Local development database only. Matches the credentials in .env.example.
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: adstudio
+      POSTGRES_PASSWORD: adstudio_dev
+      POSTGRES_DB: adstudio
+    ports:
+      - "5432:5432"
+    volumes:
+      - adstudio-db:/var/lib/postgresql/data
+
+volumes:
+  adstudio-db:

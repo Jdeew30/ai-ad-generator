@@ -1,5 +1,5 @@
 export * from "./types";
-export { ProviderApiError, assertSafeRemoteUrl } from "./http";
+export { ProviderApiError, isProviderApiError, assertSafeRemoteUrl } from "./http";
 export {
   buildProviders,
   findModel,

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BriefForm } from "@/components/brief/brief-form";
 import { getDb } from "@/lib/db";
-import { AppError } from "@/lib/errors";
+import { isAppError } from "@/lib/errors";
 import { requireUser } from "@/lib/session";
 import { LANGUAGE_IDS, TONE_IDS, VISUAL_STYLE_IDS, ASPECT_RATIOS } from "@/modules/projects/presets";
 import type { BriefInput } from "@/modules/projects/schema";
@@ -24,7 +24,7 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
   try {
     project = await getProjectForUser(getDb(), user.id, id);
   } catch (error) {
-    if (error instanceof AppError && error.code === "NOT_FOUND") notFound();
+    if (isAppError(error) && error.code === "NOT_FOUND") notFound();
     throw error;
   }
 

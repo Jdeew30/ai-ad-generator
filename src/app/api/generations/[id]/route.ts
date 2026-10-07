@@ -1,6 +1,6 @@
 import { jsonError, statusForError } from "@/lib/api";
 import { getDb } from "@/lib/db";
-import { AppError } from "@/lib/errors";
+import { isAppError } from "@/lib/errors";
 import { getSessionUser } from "@/lib/session";
 import { toGenerationDto } from "@/modules/generations/dto";
 import { getGenerationForUser, syncGeneration } from "@/modules/generations/service";
@@ -22,7 +22,7 @@ export async function GET(_request: Request, ctx: { params: Promise<{ id: string
     if (!g) return jsonError("Génération introuvable.", 404);
     return Response.json(toGenerationDto(g), { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
-    if (error instanceof AppError) return jsonError(error.message, statusForError(error));
+    if (isAppError(error)) return jsonError(error.message, statusForError(error));
     console.error("[generations] status failed", error);
     return jsonError("Erreur serveur.", 500);
   }

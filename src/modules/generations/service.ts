@@ -3,10 +3,10 @@ import type { ReadableStream as NodeWebReadableStream } from "node:stream/web";
 import type { Generation } from "@/generated/prisma/client";
 import type { Db } from "@/lib/db";
 import { getEnv } from "@/lib/env";
-import { AppError } from "@/lib/errors";
+import { AppError, isAppError } from "@/lib/errors";
 import { prepareReferenceImage } from "@/modules/assets/reference-image";
 import { ASPECT_RATIOS } from "@/modules/projects/presets";
-import { StorageLimitError, getStorage } from "@/modules/storage";
+import { getStorage, isStorageLimitError } from "@/modules/storage";
 import {
   MAX_PROMPT_CHARS,
   ProviderApiError,
@@ -14,6 +14,7 @@ import {
   composePrompt,
   findModel,
   getProvider,
+  isProviderApiError,
   type JobRef,
   type ProviderId,
   type ReferenceImage,
@@ -52,7 +53,7 @@ function startOfUtcDay(now: Date): Date {
 }
 
 function describeError(error: unknown, fallback: string): string {
-  if (error instanceof ProviderApiError || error instanceof AppError) return error.message;
+  if (isProviderApiError(error) || isAppError(error)) return error.message;
   return fallback;
 }
 
@@ -189,7 +190,7 @@ export async function startGeneration(db: Db, userId: string, input: StartGenera
       },
     });
   } catch (error) {
-    if (!(error instanceof ProviderApiError) && !(error instanceof AppError)) {
+    if (!isProviderApiError(error) && !isAppError(error)) {
       console.error("[generation] submit failed unexpectedly", error);
     }
     return db.generation.update({
@@ -303,13 +304,13 @@ async function downloadAndStore(
     if (storedKey) await storage.delete(storedKey).catch(() => undefined);
 
     const permanent =
-      error instanceof StorageLimitError || (error instanceof ProviderApiError && !error.retryable);
+      isStorageLimitError(error) || (isProviderApiError(error) && !error.retryable);
     const attempts = g.downloadAttempts + 1;
-    const message = error instanceof StorageLimitError
+    const message = isStorageLimitError(error)
       ? "La vidéo dépasse la taille maximale acceptée."
       : describeError(error, "Le téléchargement de la vidéo a échoué.");
 
-    if (!(error instanceof ProviderApiError) && !(error instanceof StorageLimitError)) {
+    if (!isProviderApiError(error) && !isStorageLimitError(error)) {
       console.error("[generation] download failed", error);
     }
 
@@ -403,8 +404,8 @@ export async function syncGeneration(db: Db, id: string, options: SyncOptions = 
     status = await provider.poll(job);
   } catch (error) {
     const transient =
-      error instanceof AppError ||
-      (error instanceof ProviderApiError && (error.retryable || error.status === 401 || error.status === 403));
+      isAppError(error) ||
+      (isProviderApiError(error) && (error.retryable || error.status === 401 || error.status === 403));
     if (transient) {
       // Keep the job: it may still finish. The note is shown to the user.
       await db.generation.updateMany({

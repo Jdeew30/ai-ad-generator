@@ -1,5 +1,5 @@
 import { unstable_rethrow } from "next/navigation";
-import { AppError } from "@/lib/errors";
+import { isAppError } from "@/lib/errors";
 
 export type ActionResult<T = undefined> =
   | { ok: true; data: T }
@@ -15,7 +15,7 @@ export async function runAction<T>(fn: () => Promise<T>): Promise<ActionResult<T
     return { ok: true, data: await fn() };
   } catch (error) {
     unstable_rethrow(error);
-    if (error instanceof AppError) return { ok: false, error: error.message };
+    if (isAppError(error)) return { ok: false, error: error.message };
     console.error("[action] unexpected error", error);
     return { ok: false, error: "Une erreur inattendue est survenue. Réessayez." };
   }

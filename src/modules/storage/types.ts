@@ -27,8 +27,18 @@ export interface StorageDriver {
 }
 
 export class StorageLimitError extends Error {
+  readonly __brand = "StorageLimitError" as const;
+
   constructor(readonly maxBytes: number) {
     super(`Object exceeds the maximum allowed size of ${maxBytes} bytes`);
     this.name = "StorageLimitError";
   }
+}
+
+/** Brand-based check (see AppError): robust to Next.js bundling a module twice. */
+export function isStorageLimitError(error: unknown): error is StorageLimitError {
+  return (
+    error instanceof StorageLimitError ||
+    (typeof error === "object" && error !== null && (error as { __brand?: unknown }).__brand === "StorageLimitError")
+  );
 }

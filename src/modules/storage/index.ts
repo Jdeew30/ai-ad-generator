@@ -3,7 +3,7 @@ import { LocalStorageDriver } from "./local";
 import type { StorageDriver } from "./types";
 
 export type { StorageDriver, ByteRange } from "./types";
-export { StorageLimitError } from "./types";
+export { StorageLimitError, isStorageLimitError } from "./types";
 
 const globalForStorage = globalThis as unknown as { __storage?: StorageDriver };
 

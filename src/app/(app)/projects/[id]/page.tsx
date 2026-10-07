@@ -8,7 +8,7 @@ import { GenerationPanel } from "@/components/project/generation-panel";
 import { ButtonLink } from "@/components/ui/button";
 import { Badge, Section } from "@/components/ui/card";
 import { getDb } from "@/lib/db";
-import { AppError } from "@/lib/errors";
+import { isAppError } from "@/lib/errors";
 import { requireUser } from "@/lib/session";
 import { describeConceptEngine } from "@/modules/concepts";
 import { getLatestConcept } from "@/modules/concepts/service";
@@ -29,7 +29,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   try {
     project = await getProjectForUser(db, user.id, id);
   } catch (error) {
-    if (error instanceof AppError && error.code === "NOT_FOUND") notFound();
+    if (isAppError(error) && error.code === "NOT_FOUND") notFound();
     throw error;
   }
 

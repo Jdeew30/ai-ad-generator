@@ -163,3 +163,30 @@ describe("model capability helpers", () => {
     expect(composePrompt(profile(), "A bottle", null)).toEqual({ prompt: "A bottle" });
   });
 });
+
+describe("error guards survive duplicated module instances", () => {
+  // Next.js bundles server modules separately for pages and route handlers, so
+  // an error thrown by code from one bundle is NOT `instanceof` the class seen by
+  // another. Regression test for a bug caught in a real browser run: a provider
+  // error was reported as a generic failure because `instanceof` returned false.
+  it("recognises look-alike errors from another copy of the module", async () => {
+    const { isAppError } = await import("@/lib/errors");
+    const { isProviderApiError } = await import("@/modules/video-providers/http");
+    const { isStorageLimitError } = await import("@/modules/storage/types");
+
+    class OtherCopyOfAppError extends Error { readonly __brand = "AppError" as const; code = "NOT_FOUND"; }
+    class OtherCopyOfProviderApiError extends Error { readonly __brand = "ProviderApiError" as const; retryable = false; status = 0; provider = "x"; }
+    class OtherCopyOfStorageLimitError extends Error { readonly __brand = "StorageLimitError" as const; }
+
+    expect(isAppError(new OtherCopyOfAppError("x"))).toBe(true);
+    expect(isProviderApiError(new OtherCopyOfProviderApiError("x"))).toBe(true);
+    expect(isStorageLimitError(new OtherCopyOfStorageLimitError("x"))).toBe(true);
+
+    // ...and does not over-match.
+    expect(isAppError(new Error("x"))).toBe(false);
+    expect(isAppError(null)).toBe(false);
+    expect(isAppError({ __brand: "ProviderApiError" })).toBe(false);
+    expect(isProviderApiError(new OtherCopyOfAppError("x"))).toBe(false);
+    expect(isStorageLimitError("StorageLimitError")).toBe(false);
+  });
+});
