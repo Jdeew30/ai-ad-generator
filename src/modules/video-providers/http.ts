@@ -131,12 +131,44 @@ function isPrivateIPv4(host: string): boolean {
   );
 }
 
+/** Expands an IPv6 literal into its 8 16-bit groups (handles `::` and a trailing dotted quad). */
+function expandIPv6(host: string): number[] | null {
+  let h = host.toLowerCase();
+  const dotted = h.match(/(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+  if (dotted) {
+    const [a, b, c, d] = dotted.slice(1).map(Number) as [number, number, number, number];
+    h = h.slice(0, dotted.index) + ((a << 8) | b).toString(16) + ":" + ((c << 8) | d).toString(16);
+  }
+  const halves = h.split("::");
+  if (halves.length > 2) return null;
+  const head = halves[0] ? halves[0].split(":") : [];
+  const tail = halves.length === 2 && halves[1] ? halves[1].split(":") : [];
+  const missing = 8 - head.length - tail.length;
+  if ((halves.length === 1 && missing !== 0) || missing < 0) return null;
+  const groups = [...head, ...Array<string>(halves.length === 2 ? missing : 0).fill("0"), ...tail].map((g) => parseInt(g, 16));
+  return groups.length === 8 && groups.every((g) => Number.isInteger(g) && g >= 0 && g <= 0xffff) ? groups : null;
+}
+
+function embeddedIPv4(hi: number, lo: number): string {
+  return `${hi >> 8}.${hi & 255}.${lo >> 8}.${lo & 255}`;
+}
+
 function isPrivateIPv6(host: string): boolean {
-  const h = host.toLowerCase();
-  if (h === "::1" || h === "::") return true;
-  if (h.startsWith("fc") || h.startsWith("fd") || h.startsWith("fe8") || h.startsWith("fe9") || h.startsWith("fea") || h.startsWith("feb")) return true;
-  const mapped = h.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);
-  return mapped ? isPrivateIPv4(mapped[1] as string) : false;
+  const g = expandIPv6(host);
+  if (!g) return true; // unparseable: fail closed
+  const [g0, g1, g2, g3, g4, g5, g6, g7] = g as [number, number, number, number, number, number, number, number];
+
+  // :: (unspecified), ::1 (loopback) and the deprecated IPv4-compatible ::a.b.c.d
+  if (g0 === 0 && g1 === 0 && g2 === 0 && g3 === 0 && g4 === 0 && g5 === 0) return true;
+  // IPv4-mapped ::ffff:a.b.c.d — the URL parser prints these in hex, so decode them.
+  if (g0 === 0 && g1 === 0 && g2 === 0 && g3 === 0 && g4 === 0 && g5 === 0xffff) return isPrivateIPv4(embeddedIPv4(g6, g7));
+  // NAT64 64:ff9b::/96 embeds an IPv4 address.
+  if (g0 === 0x64 && g1 === 0xff9b && g2 === 0 && g3 === 0 && g4 === 0 && g5 === 0) return isPrivateIPv4(embeddedIPv4(g6, g7));
+  // 6to4 2002::/16 embeds an IPv4 address in the next 32 bits.
+  if (g0 === 0x2002) return isPrivateIPv4(embeddedIPv4(g1, g2));
+  // fc00::/7 unique-local, fe80::/10 link-local, fec0::/10 deprecated site-local
+  if ((g0 & 0xfe00) === 0xfc00 || (g0 & 0xffc0) === 0xfe80 || (g0 & 0xffc0) === 0xfec0) return true;
+  return false;
 }
 
 /**

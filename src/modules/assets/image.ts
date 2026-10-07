@@ -32,7 +32,6 @@ export const MAX_PRODUCT_IMAGES_PER_PROJECT = 5;
 /** Strips path components and control characters; for display only, never for storage paths. */
 export function sanitizeDisplayName(name: string): string {
   const base = name.split(/[\\/]/).pop() ?? "image";
-  // eslint-disable-next-line no-control-regex
   const cleaned = base.replace(/[\u0000-\u001f\u007f]/g, "").trim();
   return (cleaned || "image").slice(0, 120);
 }

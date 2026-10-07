@@ -5,7 +5,7 @@ import type { Db } from "@/lib/db";
 import { getEnv } from "@/lib/env";
 import { AppError } from "@/lib/errors";
 import { prepareReferenceImage } from "@/modules/assets/reference-image";
-import { ASPECT_RATIOS, type AspectRatio } from "@/modules/projects/presets";
+import { ASPECT_RATIOS } from "@/modules/projects/presets";
 import { StorageLimitError, getStorage } from "@/modules/storage";
 import {
   MAX_PROMPT_CHARS,
@@ -474,6 +474,18 @@ export async function syncActiveGenerations(db: Db, limit = 25): Promise<{ check
 // Queries & user actions (always scoped by owner)
 // ---------------------------------------------------------------------------
 
+/** Daily usage as counted by the quota guard (jobs that never reached a provider are free). */
+export async function getQuotaUsage(db: Db, userId: string, now = new Date()) {
+  const used = await db.generation.count({
+    where: {
+      userId,
+      createdAt: { gte: startOfUtcDay(now) },
+      NOT: { externalId: null, status: { in: ["FAILED", "CANCELED"] } },
+    },
+  });
+  return { used, limit: getEnv().DAILY_GENERATION_LIMIT };
+}
+
 export async function getGenerationForUser(db: Db, userId: string, id: string): Promise<Generation> {
   const g = await db.generation.findFirst({ where: { id, userId } });
   if (!g) throw new AppError("Génération introuvable.", "NOT_FOUND");
@@ -511,6 +523,21 @@ export async function cancelGeneration(db: Db, userId: string, id: string): Prom
     data: { status: "CANCELED", completedAt: new Date(), errorMessage: null },
   });
   return getGenerationForUser(db, userId, id);
+}
+
+/**
+ * Best-effort: asks each provider to stop in-flight jobs of a project that is
+ * about to be deleted, so we do not keep paying for renders nobody can see.
+ */
+export async function abortActiveGenerations(db: Db, userId: string, projectId: string): Promise<void> {
+  const running = await db.generation.findMany({ where: { userId, projectId, status: "PROCESSING" } });
+  await Promise.allSettled(
+    running.map(async (g) => {
+      const provider = getProvider(g.providerId as ProviderId);
+      const job = jobRef(g);
+      if (provider?.cancel && job) await provider.cancel(job);
+    }),
+  );
 }
 
 export async function deleteGeneration(db: Db, userId: string, id: string): Promise<void> {

@@ -116,7 +116,16 @@ describe("Anthropic generator (real SDK against a local test double)", () => {
     const req = server.requests[0]!;
     expect(req.path).toBe("/v1/messages");
     expect(req.headers["x-api-key"]).toBe("sk-ant-test");
-    const body = req.json() as Record<string, any>;
+    const body = req.json() as {
+      model: string;
+      system: string;
+      thinking?: unknown;
+      temperature?: unknown;
+      top_p?: unknown;
+      tool_choice?: unknown;
+      output_config: { effort: string; format: { type: string; schema: { properties: Record<string, unknown> } } };
+      messages: { content: Array<{ type: string; text?: string }> }[];
+    };
     expect(body.model).toBe("claude-opus-5-5");
     expect(body.output_config.effort).toBe("medium");
     expect(body.output_config.format.type).toBe("json_schema");
@@ -127,7 +136,7 @@ describe("Anthropic generator (real SDK against a local test double)", () => {
     expect(body.top_p).toBeUndefined();
     expect(body.tool_choice).toBeUndefined();
     // Images come first, then the brief text.
-    const content = body.messages[0].content as Array<{ type: string; text?: string }>;
+    const content = body.messages[0]!.content;
     expect(content[0]!.type).toBe("image");
     expect(content.at(-1)!.type).toBe("text");
     expect(content.at(-1)!.text).toContain("Gourde Nomad");

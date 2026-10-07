@@ -1,5 +1,15 @@
 import { z } from "zod";
-import { ASPECT_RATIOS, DURATIONS, LANGUAGE_IDS, TONE_IDS, VISUAL_STYLE_IDS } from "./presets";
+import {
+  ASPECT_RATIOS,
+  DURATIONS,
+  LANGUAGE_IDS,
+  TONE_IDS,
+  VISUAL_STYLE_IDS,
+  type AspectRatio,
+  type LanguageId,
+  type ToneId,
+  type VisualStyleId,
+} from "./presets";
 
 const trimmed = (min: number, max: number, label: string) =>
   z
@@ -35,7 +45,21 @@ export const briefSchema = z.object({
 });
 
 export type Brief = z.infer<typeof briefSchema>;
-export type BriefInput = z.input<typeof briefSchema>;
+
+/** Shape of the form state (what the user types), before `briefSchema` cleans it. */
+export interface BriefInput {
+  productName: string;
+  description: string;
+  benefits: string[];
+  targetAudience: string;
+  tone: ToneId;
+  visualStyle: VisualStyleId;
+  aspectRatio: AspectRatio;
+  durationSeconds: number;
+  language: LanguageId;
+  callToAction: string;
+  creativeNotes: string;
+}
 
 export const DEFAULT_BRIEF: BriefInput = {
   productName: "",
