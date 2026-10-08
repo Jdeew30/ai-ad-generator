@@ -26,7 +26,7 @@ export function probe(ffmpeg: string, file: string): Probe {
   const r = spawnSync(ffmpeg, ["-hide_banner", "-i", file], { encoding: "utf8" });
   const text = `${r.stderr}`;
   const dur = /Duration: (\d+):(\d+):(\d+\.\d+)/.exec(text);
-  const vid = /Video: (\w+)[^,]*, (\w+)[^,]*, (\d+)x(\d+)/.exec(text);
+  const vid = /Video: (\w+)[^,]*, (\w+)(?:\([^)]*\))?[^,]*, (\d+)x(\d+)/.exec(text);
   if (!dur || !vid) throw new Error(`Cannot probe ${file}:\n${text}`);
   return {
     duration: Number(dur[1]) * 3600 + Number(dur[2]) * 60 + Number(dur[3]),
@@ -36,6 +36,11 @@ export function probe(ffmpeg: string, file: string): Probe {
     height: Number(vid[4]),
     hasAudio: /Audio:/.test(text),
   };
+}
+
+/** Raw `ffmpeg -i` report (stream line includes colour metadata). */
+export function probeText(ffmpeg: string, file: string): string {
+  return `${spawnSync(ffmpeg, ["-hide_banner", "-i", file], { encoding: "utf8" }).stderr}`;
 }
 
 /** Decodes one frame at `seconds` as raw RGB so tests can look at actual pixels. */

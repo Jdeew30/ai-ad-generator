@@ -69,7 +69,7 @@ export async function listProjects(db: Db, userId: string) {
         where: { status: "SUCCEEDED" },
         orderBy: { completedAt: "desc" },
         take: 1,
-        select: { id: true },
+        select: { id: true, providerId: true },
       },
     },
   });

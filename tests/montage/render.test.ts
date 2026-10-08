@@ -2,10 +2,10 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { resetFfmpegCache, resolveFfmpeg } from "@/modules/montage/ffmpeg";
+import { absolutizeBinary, resetFfmpegCache, resolveFfmpeg } from "@/modules/montage/ffmpeg";
 import { isMontageError, renderMontage, sceneFilter } from "@/modules/montage/render";
 import type { MontageSpec } from "@/modules/montage/types";
-import { availableFfmpegs, frameAt, probe, sampleLogo, samplePhoto, whiteShare } from "./helpers";
+import { availableFfmpegs, frameAt, probe, probeText, sampleLogo, samplePhoto, whiteShare } from "./helpers";
 
 const ffmpegs = availableFfmpegs();
 let dir: string;
@@ -41,6 +41,11 @@ describe.each(ffmpegs)("render with $name ffmpeg", ({ path: ffmpegPath }) => {
     expect(p.duration).toBeGreaterThan(4.9);
     expect(p.duration).toBeLessThan(5.15);
     expect(fs.readdirSync(dir)).toEqual(["result.mp4"]);
+  }, 180_000);
+
+  it("tags the colour space so players decode the colours correctly (no BT.709 guess)", async () => {
+    const file = await renderMontage(await spec({ durationSeconds: 4 }), { ffmpegPath, workDir: dir });
+    expect(probeText(ffmpegPath, file)).toMatch(/smpte170m/);
   }, 180_000);
 
   it("actually draws the text: dark at the first frame, white title text mid-scene, white pill on the end card", async () => {
@@ -114,6 +119,9 @@ describe("formats and inputs (resolved ffmpeg)", () => {
     const error = await renderMontage(await spec(), { ffmpegPath: path.join(dir, "no-such-ffmpeg"), workDir: dir }).catch((e: unknown) => e);
     expect(isMontageError(error)).toBe(true);
     expect((error as Error).message).toMatch(/lancer ffmpeg/);
+    // No server path in a message that reaches the user.
+    expect((error as Error).message).not.toContain(dir);
+    expect((error as Error).message).not.toMatch(/no-such-ffmpeg/);
   });
 
   it("stops promptly when aborted and reports a cancellation", async () => {
@@ -125,6 +133,7 @@ describe("formats and inputs (resolved ffmpeg)", () => {
     expect(isMontageError(error) && error.canceled).toBe(true);
     expect(Date.now() - started).toBeLessThan(20_000);
     expect(fs.existsSync(path.join(dir, "result.mp4"))).toBe(false);
+    expect(fs.existsSync(path.join(dir, "result.part"))).toBe(false);
   }, 60_000);
 
   it("kills a render that exceeds its time limit", async () => {
@@ -170,4 +179,30 @@ describe("resolveFfmpeg", () => {
     resetFfmpegCache();
     expect(resolveFfmpeg()).toBe(system.path);
   });
+});
+
+describe("absolutizeBinary (a relative FFMPEG_PATH must still work from the job folder)", () => {
+  it("keeps bare command names, resolves anything with a directory part", () => {
+    expect(absolutizeBinary("ffmpeg")).toBe("ffmpeg");
+    expect(path.isAbsolute(absolutizeBinary("./tools/ffmpeg"))).toBe(true);
+    expect(path.isAbsolute(absolutizeBinary("tools/ffmpeg"))).toBe(true);
+    expect(path.isAbsolute(absolutizeBinary("..\\bin\\ffmpeg.exe"))).toBe(true);
+    expect(absolutizeBinary("/usr/bin/ffmpeg")).toBe(path.resolve("/usr/bin/ffmpeg"));
+  });
+
+  it("a relative FFMPEG_PATH resolves to a binary that really renders from another directory", async () => {
+    const abs = ffmpegs.find((f) => path.isAbsolute(f.path))?.path;
+    if (!abs) return;
+    process.env.FFMPEG_PATH = path.relative(process.cwd(), abs);
+    resetFfmpegCache();
+    try {
+      const resolved = resolveFfmpeg();
+      expect(resolved && path.isAbsolute(resolved)).toBe(true);
+      const file = await renderMontage(await spec({ durationSeconds: 4 }), { ffmpegPath: resolved!, workDir: dir });
+      expect(fs.existsSync(file)).toBe(true);
+    } finally {
+      delete process.env.FFMPEG_PATH;
+      resetFfmpegCache();
+    }
+  }, 180_000);
 });

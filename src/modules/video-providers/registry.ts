@@ -1,3 +1,4 @@
+import path from "node:path";
 import { getEnv, type Env } from "@/lib/env";
 import { createFalProvider } from "./fal";
 import { createMontageProvider } from "./montage";
@@ -18,7 +19,8 @@ export function buildProviders(env: Env, deps: AdapterDeps = {}): VideoProvider[
     createReplicateProvider({ apiToken: env.REPLICATE_API_TOKEN, baseUrl: env.REPLICATE_BASE_URL, ...deps }),
     createFalProvider({ apiKey: env.FAL_KEY, queueUrl: env.FAL_QUEUE_BASE_URL, ...deps }),
     // Local, free, NOT generative AI. Always listed last and always labelled as such.
-    createMontageProvider(),
+    // Job folders live under the app's private storage folder, never in the shared OS temp dir.
+    createMontageProvider({ workRoot: path.resolve(env.STORAGE_DIR, ".montage-tmp") }),
   ];
 }
 

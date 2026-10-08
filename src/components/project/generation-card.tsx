@@ -109,9 +109,12 @@ export function GenerationCard({ initial, projectId }: { initial: GenerationDto;
         <div className="space-y-2" aria-live="polite">
           <p className="flex items-center gap-2 text-sm text-muted">
             <LoaderCircle className="size-4 animate-spin text-accent" aria-hidden />
-            {g.status === "PENDING" && "Envoi du job au fournisseur…"}
-            {g.status === "PROCESSING" && `Rendu en cours chez ${g.providerLabel} · ${formatElapsed(now - startedAt)}`}
-            {g.status === "DOWNLOADING" && "Rendu terminé, récupération du fichier…"}
+            {g.status === "PENDING" && (g.montage ? "Préparation du montage…" : "Envoi du job au fournisseur…")}
+            {g.status === "PROCESSING" &&
+              (g.montage
+                ? `Montage en cours (ou en attente d'un autre montage) · ${formatElapsed(now - startedAt)}`
+                : `Rendu en cours chez ${g.providerLabel} · ${formatElapsed(now - startedAt)}`)}
+            {g.status === "DOWNLOADING" && (g.montage ? "Montage terminé, enregistrement du fichier…" : "Rendu terminé, récupération du fichier…")}
           </p>
           {g.progress !== null && g.status === "PROCESSING" && (
             <div className="h-1.5 overflow-hidden rounded-full bg-white/8" role="progressbar" aria-valuenow={g.progress} aria-valuemin={0} aria-valuemax={100}>
@@ -119,7 +122,9 @@ export function GenerationCard({ initial, projectId }: { initial: GenerationDto;
             </div>
           )}
           <p className="text-xs text-subtle">
-            Les vidéos prennent généralement plusieurs minutes. Vous pouvez quitter cette page : le suivi reprendra à votre retour.
+            {g.montage
+              ? "Un montage prend de quelques secondes à une minute. Vous pouvez quitter cette page : le suivi reprendra à votre retour."
+              : "Les vidéos prennent généralement plusieurs minutes. Vous pouvez quitter cette page : le suivi reprendra à votre retour."}
           </p>
           {g.errorMessage && <Alert tone="warning">{g.errorMessage}</Alert>}
         </div>
@@ -154,7 +159,7 @@ export function GenerationCard({ initial, projectId }: { initial: GenerationDto;
       )}
 
       <details className="text-xs text-subtle">
-        <summary className="cursor-pointer hover:text-muted">Prompt envoyé</summary>
+        <summary className="cursor-pointer hover:text-muted">{g.montage ? "Contenu du montage" : "Prompt envoyé"}</summary>
         <p className="mt-2 font-mono leading-relaxed whitespace-pre-wrap text-muted">{g.prompt}</p>
       </details>
 

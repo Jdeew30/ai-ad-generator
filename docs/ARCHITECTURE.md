@@ -7,7 +7,7 @@
 
 ## 1. Principe directeur : zéro simulation
 
-Une génération vidéo n'existe que si un fournisseur réel l'a produite.
+Une génération vidéo *par IA* n'existe que si un fournisseur réel l'a produite. Seule exception, explicite : le **montage photo local** (§5), qui n'est pas de l'IA, ne produit rien d'autre que vos propres photos mises en scène, et est étiqueté « gratuit · sans IA » dans l'interface, le stockage (`providerId = montage`) et la description de chaque génération.
 
 - Aucun fournisseur « mock » n'est expédié dans l'application. Les doubles de test
   (faux serveur HTTP) vivent exclusivement dans `tests/` et ne sont jamais
@@ -119,6 +119,17 @@ interface VideoProvider {
   - **fal.ai** (`queue.fal.run`) — hub multi-modèles ; `status_url` / `response_url`
     renvoyés à la soumission et persistés (le chemin de statut diffère de celui de
     soumission) ; `COMPLETED` ≠ succès, le résultat est récupéré puis validé.
+- **Montage local** (`montage`) : même contrat `VideoProvider`, donc même cycle de vie, même
+  suivi, même téléchargement vérifié. Il anime les photos du projet (zoom lent, fondus) et
+  compose nom / avantages / appel à l'action / logo, avec ffmpeg (binaire installé par npm,
+  compatible avec un build de 2018 : pas de `xfade`). Le texte est dessiné en **contours
+  vectoriels** (opentype.js + police Geist) : rendu identique sur Windows, macOS et Linux.
+  Un rendu à la fois, file bornée (8), priorité CPU abaissée, dossier de travail privé
+  (`STORAGE_DIR/.montage-tmp`, 0700, propriétaire vérifié), résultat publié atomiquement
+  (`result.part` → `result.mp4`), supprimé une fois la vidéo stockée (`cleanup`). Exempt du
+  quota payant. Le plan (`planTimeline`) est une fonction pure ; `summarizePlan` décrit ce que
+  la vidéo contient réellement, pour l'UI et pour la description enregistrée : ni l'un ni
+  l'autre ne peuvent promettre plus que le rendu.
 - Prochains adapters naturels : Google Veo (Gemini API), Runway, Luma.
 
 ## 6. Cycle de vie d'une génération
@@ -198,3 +209,17 @@ Relevés en vérifiant l'application dans un vrai navigateur, pas seulement par 
   version du filtre ne reconnaissait pas. Parade : analyse complète des adresses IPv6 (mappées, NAT64, 6to4, site-local).
 - **Limiteur de débit de l'auth** : il s'applique aux appels HTTP vers `/api/auth/*`, pas à `auth.api.*` appelé côté
   serveur. Les formulaires de connexion/inscription passent donc par le client HTTP pour être réellement limités.
+- **Un import qui marche partout sauf dans le bundler.** `import opentype from "opentype.js"` réussit sous
+  Node/Vitest (build CommonJS) mais échoue sous Turbopack (build ESM sans export par défaut) : tout `next
+  build` cassait, y compris pour les pages sans rapport avec le montage. Les tests unitaires ne pouvaient pas
+  le voir (Vite externalise `node_modules`). Parade : `opentype.js` est dans `serverExternalPackages`, et la
+  règle est de lancer un vrai `npm run build` (CI comprise) avant de publier.
+- **`toPathData()` d'opentype.js peut écrire `NaN`.** Le moteur SVG s'arrête alors à ce point de la ligne : des
+  mots disparaissent de la vidéo sans erreur. Parade : sérialisation maison des tracés, qui refuse toute
+  coordonnée non finie.
+- **L'âge d'un job ne prime pas sur son résultat.** Le délai de 45 min était testé *avant* l'interrogation du
+  fournisseur : un montage terminé en 4 s mais récupéré tard était déclaré échoué. Le résultat prêt gagne toujours.
+- **Dossier temporaire partagé.** Un dossier fixe dans le répertoire temporaire du système est lisible par les
+  autres utilisateurs de la machine et attaquable (lien symbolique) : les rendus vivent dans un sous-dossier privé
+  du stockage de l'application.
+- **Chemin relatif dans `FFMPEG_PATH`.** Vérifié depuis un dossier, lancé depuis un autre : il est rendu absolu.

@@ -113,7 +113,7 @@ export function AssetsPanel({ projectId, assets }: { projectId: string; assets: 
       {error && <Alert tone="danger">{error}</Alert>}
       {assets.length === 0 && !error && (
         <p className="flex items-center gap-2 text-xs text-subtle">
-          <ImageIcon className="size-3.5" aria-hidden /> Optionnel. Les photos aident le concept à décrire fidèlement votre produit.
+          <ImageIcon className="size-3.5" aria-hidden /> Optionnel pour l&apos;IA. Au moins une photo produit est nécessaire pour le montage gratuit (sans IA).
         </p>
       )}
     </div>

@@ -2,7 +2,7 @@
 
 SaaS qui transforme un **brief produit** en **concept publicitaire** puis en **vidéo**, en pilotant un fournisseur de génération vidéo IA que vous avez connecté.
 
-> **Principe : zéro simulation.** Une vidéo n'existe que si un fournisseur réel l'a produite. Aucun fournisseur « mock » n'est expédié ; sans clé API, la génération est désactivée et l'interface le dit. Un bouton « Télécharger » n'apparaît que lorsqu'un fichier vidéo a réellement été reçu et enregistré.
+> **Principe : zéro simulation.** Une vidéo *générée par IA* n'existe que si un fournisseur réel l'a produite. Aucun fournisseur « mock » n'est expédié ; sans clé API, la génération par IA est désactivée et l'interface le dit. Une seule exception, explicite et étiquetée partout « gratuit · sans IA » : le **montage de vos photos** (voir plus bas), qui n'invente rien et ne prétend pas être de l'IA. Un bouton « Télécharger » n'apparaît que lorsqu'un fichier vidéo a réellement été reçu et enregistré.
 
 Stack : Next.js 16 (App Router) · React 19 · TypeScript strict · Tailwind CSS v4 · Prisma 7 + PostgreSQL · Better Auth · Zod 4 · SDK Anthropic.
 Architecture détaillée : [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
@@ -22,7 +22,8 @@ Architecture détaillée : [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 | Cycle de vie d'une génération (poll → téléchargement → stockage) | ✅ Testé de bout en bout | PostgreSQL + stockage disque + **vrais adaptateurs** face à un faux serveur HTTP : succès, échec fournisseur, HTML au lieu d'une vidéo, fichier vide, retries, concurrence, timeout, quotas. |
 | Lecture / téléchargement / seeking de la vidéo | ✅ Vérifié en navigateur | Fichier réel décodé par Chromium, `Range` 206/416, téléchargement identique octet pour octet. |
 | Isolation entre utilisateurs, CSRF, SSRF | ✅ Vérifié | Tests + parcours navigateur (IDOR → 404, Origin étrangère → 403, URL de sortie interne refusée). |
-| Montage multi-clips, voix off / musique générées | ❌ Non fourni | Un clip par génération ; le script de voix off est fourni pour votre montage. |
+| **Montage photo gratuit (sans IA)** | ✅ Fonctionne, sans clé | Anime vos photos (zoom lent, fondus) + nom, avantages, appel à l'action, logo → MP4 muet 1080p. Vérifié avec un vrai ffmpeg (build 2018 embarqué *et* build récent), pixels et durée contrôlés, cycle de vie complet sur PostgreSQL. **Ne génère aucune image ni mouvement** : il met en scène vos propres photos. Vidéo lisible dans Chrome/Edge/Safari/VLC (H.264). |
+| Voix off / musique générées, montage multi-clips d'IA | ❌ Non fourni | Un clip par génération ; le script de voix off est fourni pour votre montage. Le montage gratuit est muet. |
 | Paiement / crédits | ❌ Non fourni | Garde-fous coût : quota/jour + jobs simultanés. |
 | Stockage S3 / R2 | ❌ Non fourni | Interface prête (`StorageDriver`), seul le disque local est livré → volume persistant requis en production. |
 | Webhooks fournisseurs | ❌ Non fourni | Suivi par polling (UI) + endpoint cron. |
@@ -53,6 +54,8 @@ Renseignez **au moins une** variable puis redémarrez. Le modèle correspondant 
 | `REPLICATE_API_TOKEN` | Replicate | Seedance 1 Lite |
 | `FAL_KEY` | fal.ai | Kling 2.1 Master |
 
+**Sans aucune clé**, vous pouvez quand même obtenir une vidéo avec le **montage photo gratuit** (nécessite au moins une photo produit ; ffmpeg est installé par `npm install`). Il tourne sur le serveur de l'application, un rendu à la fois (8 en attente au maximum), ne consomme pas le quota payant et est étiqueté « sans IA » dans toute l'interface.
+
 Sans `ANTHROPIC_API_KEY`, le concept est un gabarit non-IA. Modèle par défaut : `claude-opus-5-5` (surchargeable avec `ANTHROPIC_MODEL`, famille Opus/Sonnet 5.x).
 
 La page **Fournisseurs** (`/settings`) affiche l'état réel de la configuration (jamais les clés).
@@ -64,7 +67,8 @@ La page **Fournisseurs** (`/settings`) affiche l'état réel de la configuration
 - **Cron obligatoire pour ne pas perdre de vidéos** : sans lui, une vidéo terminée n'est récupérée que quand quelqu'un ouvre le projet, et certains fournisseurs suppriment leurs fichiers après un délai court (parfois ~1 h).
   Définissez `CRON_SECRET` (≥ 16 car.) et appelez chaque minute :
   `curl -H "Authorization: Bearer $CRON_SECRET" https://votre-domaine/api/cron/sync-generations`
-- `STORAGE_DIR` doit pointer vers un **volume persistant** (le disque d'un hébergeur serverless est éphémère).
+- `STORAGE_DIR` doit pointer vers un **volume persistant** (le disque d'un hébergeur serverless est éphémère). Les rendus du montage utilisent un sous-dossier privé `STORAGE_DIR/.montage-tmp` (permissions 0700, nettoyé après chaque vidéo).
+- Le montage consomme du **CPU du serveur** (quelques secondes à une minute par vidéo, priorité abaissée). Variables optionnelles : `FFMPEG_PATH` (ffmpeg à utiliser à la place de celui de `npm install`), `MONTAGE_FONT_DIR` (dossier des polices Geist).
 - Derrière un reverse proxy, vérifiez que `Origin`/`Host` sont transmis tels quels (contrôle CSRF des Server Actions) ; au besoin, `experimental.serverActions.allowedOrigins` dans `next.config.ts`.
 - Pas de CSP stricte livrée (les scripts inline de Next demandent des *nonces*) ; les autres en-têtes de sécurité usuels sont en place.
 
@@ -97,7 +101,7 @@ Les doubles de test (faux serveur HTTP imitant les API fournisseurs) vivent **un
 2. L'ajouter dans `buildProviders` (`registry.ts`) et ses variables d'environnement dans `src/lib/env.ts` / `.env.example`.
 3. Écrire ses tests face à un faux serveur (voir `tests/providers/`).
 
-Règles du contrat : `submit` n'est **jamais** rejoué automatiquement (un retry pourrait créer un second job facturé) ; `poll` ne renvoie `succeeded` que si une vidéo existe réellement ; les erreurs transitoires (réseau, 5xx) sont levées comme `ProviderApiError` retryable, jamais déguisées en échec.
+Règles du contrat : `cleanup?` (optionnel) est appelé une fois le job terminé (stocké, échoué, annulé ou supprimé) ; `submit` n'est **jamais** rejoué automatiquement (un retry pourrait créer un second job facturé) ; `poll` ne renvoie `succeeded` que si une vidéo existe réellement ; les erreurs transitoires (réseau, 5xx) sont levées comme `ProviderApiError` retryable, jamais déguisées en échec.
 
 ## Notes
 

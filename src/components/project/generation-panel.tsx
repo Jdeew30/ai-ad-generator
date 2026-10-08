@@ -7,6 +7,7 @@ import { useMemo, useState, useTransition } from "react";
 import { Alert } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { summarizePlan } from "@/modules/montage/plan";
 import { startGenerationAction } from "@/modules/generations/actions";
 import type { GenerationDto, ModelOptionView } from "@/modules/generations/dto";
 import { GenerationCard } from "./generation-card";
@@ -20,6 +21,8 @@ interface Props {
   productImages: { id: string; name: string }[];
   generations: GenerationDto[];
   quota: { used: number; limit: number };
+  /** What the free montage can use from this project. */
+  montageInfo: { photos: number; benefits: number; hasLogo: boolean; hasCta: boolean };
 }
 
 function nearest(options: number[], target: number): number {
@@ -33,7 +36,7 @@ function unavailableReason(m: ModelOptionView, aspectRatio: string): string | nu
   return null;
 }
 
-export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDuration, models, productImages, generations, quota }: Props) {
+export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDuration, models, productImages, generations, quota, montageInfo }: Props) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -56,6 +59,7 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
     (isMontage ? productImages.length > 0 : hasConcept && quotaLeft > 0);
 
   function pickModel(m: ModelOptionView) {
+    setError(null);
     setModelId(m.id);
     setDuration(nearest(m.durations, targetDuration));
     if (!m.imageToVideo) setReferenceId("");
@@ -72,7 +76,9 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
         referenceAssetId: model.imageToVideo && referenceId ? referenceId : null,
       });
       if (!result.ok) setError(result.error);
-      else if (result.data.errorMessage) setError(`Le fournisseur a refusé la requête : ${result.data.errorMessage}`);
+      else if (result.data.errorMessage) {
+        setError(model.montage ? `Le montage a échoué : ${result.data.errorMessage}` : `Le fournisseur a refusé la requête : ${result.data.errorMessage}`);
+      }
       router.refresh();
     });
   }
@@ -137,9 +143,16 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
 
       {isMontage && !unavailableReason(model!, aspectRatio) && (
         <Alert tone={productImages.length > 0 ? "info" : "warning"} title="Ce n'est pas de l'IA : un montage de vos propres photos">
-          {productImages.length > 0
-            ? `Vos ${productImages.length} photo${productImages.length > 1 ? "s" : ""} produit seront animées (zoom lent, fondus) avec le nom, les avantages et l'appel à l'action de votre brief, puis exportées en MP4 muet. Aucun prompt n'est utilisé, c'est gratuit et réalisé sur cet ordinateur. Ne vous attendez pas à de nouvelles images ni à du mouvement généré.`
-            : "Ajoutez au moins une photo produit dans le bloc « Logo et photos produit » ci-dessus : le montage anime vos propres photos."}
+          {productImages.length > 0 ? (
+            <>
+              <p>
+                {productImages.length > 1 ? `Vos ${productImages.length} photos produit seront animées` : "Votre photo produit sera animée"} (zoom lent, fondus) avec le nom, les avantages et l&apos;appel à l&apos;action de votre brief, puis exportées en MP4 muet. Aucun prompt n&apos;est utilisé : c&apos;est gratuit et réalisé sur le serveur de l&apos;application. Ne vous attendez pas à de nouvelles images ni à du mouvement généré.
+              </p>
+              <MontageCoverage duration={duration} info={montageInfo} />
+            </>
+          ) : (
+            "Ajoutez au moins une photo produit dans le bloc « Logo et photos produit » ci-dessus : le montage anime vos propres photos."
+          )}
         </Alert>
       )}
 
@@ -194,7 +207,7 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
         {model && !unavailableReason(model, aspectRatio) && (
           <p className="text-xs text-subtle">
             {isMontage
-              ? "Réalisé localement : aucun fournisseur, aucune clé, aucun frais. Le rendu prend de quelques secondes à une minute selon votre ordinateur."
+              ? "Réalisé sur le serveur de l'application : aucun fournisseur, aucune clé, aucun frais. Le rendu prend de quelques secondes à une minute selon la machine."
               : `Le job sera envoyé à ${model.providerLabel} avec votre clé API et peut être facturé par ce fournisseur selon son tarif.`}
           </p>
         )}
@@ -225,5 +238,19 @@ function RefOption({ selected, onSelect, label, src }: { selected: boolean; onSe
         <span className="max-w-32 truncate">{label}</span>
       </span>
     </label>
+  );
+}
+
+/** Says what the chosen duration will really show, computed from the same plan the renderer uses. */
+function MontageCoverage({ duration, info }: { duration: number; info: Props["montageInfo"] }) {
+  const plan = summarizePlan({ durationSeconds: duration, photoCount: info.photos, benefitCount: info.benefits, hasLogo: info.hasLogo, hasCallToAction: info.hasCta });
+  const partial = plan.photosShown < info.photos || plan.benefitsShown < Math.min(3, info.benefits);
+  return (
+    <p className="mt-2">
+      Avec {duration} s : {plan.scenes} scènes, {plan.photosShown} photo{plan.photosShown > 1 ? "s" : ""} sur {info.photos}, {plan.benefitsShown} avantage{plan.benefitsShown > 1 ? "s" : ""} sur {Math.min(3, info.benefits)}
+      {info.hasLogo ? (plan.logoShown ? ", logo sur la dernière scène" : ", logo non affiché") : ""}.{" "}
+      {partial ? "Choisissez une durée plus longue pour en montrer davantage. " : ""}
+      Les textes trop longs sont raccourcis et les emojis retirés.
+    </p>
   );
 }

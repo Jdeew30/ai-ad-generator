@@ -2,6 +2,7 @@ import fs from "node:fs";
 import { beforeEach, afterEach, describe, expect, it } from "vitest";
 import { getDb } from "@/lib/db";
 import { getEnv, resetEnvCache } from "@/lib/env";
+import { toGenerationDto } from "@/modules/generations/dto";
 import {
   cancelGeneration,
   getDownloadableVideo,
@@ -133,4 +134,81 @@ describe("free montage through the real generation lifecycle", () => {
     expect(g.errorMessage).toMatch(/photo produit/);
     expect(g.outputKey).toBeNull();
   });
+});
+
+describe("montage: review findings (regression)", () => {
+  async function projectWithPhotos(photos: number, over: Parameters<typeof createProject>[1] = {}) {
+    const user = await createUser();
+    const project = await createProject(user.id, { aspectRatio: "1:1", ...over });
+    await db.project.update({
+      where: { id: project.id },
+      data: { benefits: ["Premier avantage", "Deuxième avantage", "Troisième avantage"], callToAction: "Découvrez-le" },
+    });
+    for (let i = 0; i < photos; i++) await addAsset(project.id, "PRODUCT_IMAGE", await samplePhoto(`#${(i * 3 + 2).toString(16).repeat(6).slice(0, 6)}`));
+    return { user, project };
+  }
+
+  it("the stored description tells what the video really contains (not the raw spec)", async () => {
+    const { user, project } = await projectWithPhotos(5);
+    await addAsset(project.id, "LOGO", await sampleLogo());
+    const short = await startGeneration(db, user.id, { projectId: project.id, modelId: MONTAGE, durationSeconds: 5 });
+    expect(short.prompt).toContain("2 photo(s) utilisée(s) sur 5");
+    expect(short.prompt).toContain("« Premier avantage »");
+    expect(short.prompt).not.toContain("Troisième avantage");
+    expect(short.prompt).toContain("logo affiché");
+    await cancelGeneration(db, user.id, short.id);
+
+    const long = await startGeneration(db, user.id, { projectId: project.id, modelId: MONTAGE, durationSeconds: 10 });
+    expect(long.prompt).toContain("5 photo(s) utilisée(s) sur 5");
+    for (const b of ["Premier", "Deuxième", "Troisième"]) expect(long.prompt).toContain(`« ${b} avantage »`);
+    await cancelGeneration(db, user.id, long.id);
+  });
+
+  it("is not linked to an AI concept, even when the project has one", async () => {
+    const { user, project } = await projectWithPhotos(1);
+    await db.concept.create({ data: { projectId: project.id, version: 1, source: "TEMPLATE", payload: {}, videoPrompt: "x".repeat(40) } });
+    const g = await startGeneration(db, user.id, { projectId: project.id, modelId: MONTAGE, durationSeconds: 4 });
+    expect(g.conceptId).toBeNull();
+    expect(toGenerationDto(g).montage).toBe(true);
+    await cancelGeneration(db, user.id, g.id);
+  });
+
+  it("a finished montage collected after the 45-minute limit is still a success", async () => {
+    const { user, project } = await projectWithPhotos(1);
+    const g = await startGeneration(db, user.id, { projectId: project.id, modelId: MONTAGE, durationSeconds: 4 });
+    // Let the render finish without anyone collecting it...
+    const provider = buildProviders(getEnv()); // (separate instance: only to prove nothing else is needed)
+    void provider;
+    const start = Date.now();
+    for (;;) {
+      const row = (await db.generation.findUnique({ where: { id: g.id } }))!;
+      await new Promise((r) => setTimeout(r, 400));
+      const files = fs.existsSync(`${process.env.STORAGE_DIR}/.montage-tmp/${row.externalId}/result.mp4`);
+      if (files) break;
+      if (Date.now() - start > 90_000) throw new Error("render never finished");
+    }
+    // ...then collect it 46 minutes late: the ready result must win over the age limit.
+    const late = new Date(Date.now() + 46 * 60_000);
+    const done = (await syncGeneration(db, g.id, { force: true, now: late }))!;
+    expect(done.status).toBe("SUCCEEDED");
+    expect(done.outputKey).not.toBeNull();
+  }, 150_000);
+
+  it("removes the temporary render folder once the video is stored", async () => {
+    const { user, project } = await projectWithPhotos(1);
+    const g = await startGeneration(db, user.id, { projectId: project.id, modelId: MONTAGE, durationSeconds: 4 });
+    const done = await finish(g.id);
+    expect(done.status).toBe("SUCCEEDED");
+    expect(fs.existsSync(`${process.env.STORAGE_DIR}/.montage-tmp/${g.externalId}`)).toBe(false);
+    // the stored copy remains available
+    expect((await getDownloadableVideo(db, user.id, g.id)).size).toBeGreaterThan(10_000);
+  }, 150_000);
+
+  it("a canceled montage leaves no render folder behind", async () => {
+    const { user, project } = await projectWithPhotos(2, { aspectRatio: "9:16" });
+    const g = await startGeneration(db, user.id, { projectId: project.id, modelId: MONTAGE, durationSeconds: 12 });
+    await cancelGeneration(db, user.id, g.id);
+    await new Promise((r) => setTimeout(r, 1500));
+    expect(fs.existsSync(`${process.env.STORAGE_DIR}/.montage-tmp/${g.externalId}`)).toBe(false);
+  }, 60_000);
 });

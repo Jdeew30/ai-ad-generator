@@ -1,9 +1,11 @@
 import { randomUUID } from "node:crypto";
+import sharp from "sharp";
 import type { Db } from "@/lib/db";
 import { AppError } from "@/lib/errors";
 import { getStorage } from "@/modules/storage";
 import {
   MAX_ASSET_BYTES,
+  MAX_ASSET_PIXELS,
   MAX_LOGOS_PER_PROJECT,
   MAX_PRODUCT_IMAGES_PER_PROJECT,
   detectImage,
@@ -26,6 +28,19 @@ export async function addAsset(
   }
   const image = detectImage(input.bytes);
   if (!image) throw new AppError("Format non supporté. Utilisez une image PNG, JPEG ou WebP.");
+
+  // Header-only read: refuse images whose decoded size would be abusive, before storing them.
+  let pixels = 0;
+  try {
+    const meta = await sharp(input.bytes).metadata();
+    pixels = (meta.width ?? 0) * (meta.height ?? 0);
+  } catch {
+    throw new AppError("Image illisible ou corrompue.");
+  }
+  if (pixels === 0) throw new AppError("Image illisible ou corrompue.");
+  if (pixels > MAX_ASSET_PIXELS) {
+    throw new AppError(`Image trop grande (${Math.round(pixels / 1_000_000)} mégapixels, maximum ${MAX_ASSET_PIXELS / 1_000_000}). Réduisez-la avant l'envoi.`);
+  }
 
   const max = input.kind === "LOGO" ? MAX_LOGOS_PER_PROJECT : MAX_PRODUCT_IMAGES_PER_PROJECT;
   const existing = await db.asset.count({ where: { projectId: project.id, kind: input.kind } });

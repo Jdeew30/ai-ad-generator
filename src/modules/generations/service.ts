@@ -5,6 +5,7 @@ import type { Db } from "@/lib/db";
 import { getEnv } from "@/lib/env";
 import { AppError, isAppError } from "@/lib/errors";
 import { prepareReferenceImage } from "@/modules/assets/reference-image";
+import { planTimeline } from "@/modules/montage/plan";
 import type { MontageSpec } from "@/modules/montage/types";
 import { ASPECT_RATIOS } from "@/modules/projects/presets";
 import { getStorage, isStorageLimitError } from "@/modules/storage";
@@ -120,13 +121,17 @@ async function buildMontageSpec(
   };
 }
 
+/** Stored description: derived from the plan that is actually rendered, so it never promises more than the video shows. */
 function describeMontage(spec: MontageSpec): string {
+  const plan = planTimeline(spec);
+  const photosUsed = new Set(plan.map((scene) => scene.imageIndex)).size;
+  const texts = plan.flatMap((scene) => scene.texts.map((t) => `« ${t.text} »`));
+  const logo = !spec.logo ? "pas de logo" : plan.some((scene) => scene.isEndCard) ? "logo affiché sur la dernière scène" : "logo non affiché";
   return [
-    "Montage automatique (sans IA, réalisé en local) :",
-    `${spec.images.length} photo(s)${spec.logo ? " + logo" : ""}, ${spec.durationSeconds} s, ${spec.aspectRatio}.`,
-    `Titre : « ${spec.headline} ».`,
-    spec.captions.length ? `Légendes : ${spec.captions.map((c) => `« ${c} »`).join(" ; ")}.` : "",
-    spec.callToAction ? `Appel à l'action : « ${spec.callToAction} ».` : "",
+    "Montage automatique (sans IA, réalisé sur le serveur) :",
+    `${plan.length} scène(s), ${spec.durationSeconds} s, ${spec.aspectRatio} ; ${photosUsed} photo(s) utilisée(s) sur ${spec.images.length} ; ${logo}.`,
+    texts.length ? `Textes affichés : ${texts.join(" ; ")}.` : "",
+    "Les textes trop longs sont raccourcis et les symboles non pris en charge (émojis…) sont retirés.",
   ]
     .filter(Boolean)
     .join(" ");
@@ -226,7 +231,7 @@ export async function startGeneration(db: Db, userId: string, input: StartGenera
       data: {
         projectId: project.id,
         userId,
-        conceptId: concept?.id ?? null,
+        conceptId: isMontage ? null : (concept?.id ?? null),
         providerId: entry.provider.id,
         modelId: entry.profile.id,
         prompt: prompt || "Montage automatique (sans IA).",
@@ -288,7 +293,7 @@ export async function startGeneration(db: Db, userId: string, input: StartGenera
       where: { id: generation.id },
       data: {
         status: "FAILED",
-        errorMessage: describeError(error, "La soumission au fournisseur a échoué."),
+        errorMessage: describeError(error, isMontage ? "Le montage a échoué." : "La soumission au fournisseur a échoué."),
         completedAt: new Date(),
       },
     });
@@ -335,6 +340,13 @@ async function readHead(source: Readable, n: number): Promise<{ head: Buffer; st
     }
   }
   return { head, stream: Readable.from(replay()) };
+}
+
+/** Best effort: lets a provider that keeps local files (the montage) remove them once a job is over. */
+async function releaseJob(g: Generation): Promise<void> {
+  const provider = getProvider(g.providerId as ProviderId);
+  const job = jobRef(g);
+  if (provider?.cleanup && job) await provider.cleanup(job).catch(() => undefined);
 }
 
 async function failGeneration(db: Db, id: string, message: string, from: Generation["status"][]) {
@@ -391,6 +403,7 @@ async function downloadAndStore(
         completedAt: new Date(),
       },
     });
+    await releaseJob(g);
   } catch (error) {
     if (storedKey) await storage.delete(storedKey).catch(() => undefined);
 
@@ -407,6 +420,7 @@ async function downloadAndStore(
 
     if (permanent || attempts >= MAX_DOWNLOAD_ATTEMPTS) {
       await failGeneration(db, g.id, message, ["DOWNLOADING"]);
+      await releaseJob(g);
     } else {
       // Transient: the job is paid for, so go back to PROCESSING and retry on the next sync.
       await db.generation.updateMany({
@@ -437,7 +451,7 @@ export async function syncGeneration(db: Db, id: string, options: SyncOptions = 
 
   if (g.status === "PENDING") {
     if (age(g.createdAt) > PENDING_STALE_MS) {
-      await failGeneration(db, g.id, "La soumission au fournisseur a été interrompue.", ["PENDING"]);
+      await failGeneration(db, g.id, "Le démarrage de la génération a été interrompu.", ["PENDING"]);
     }
     return db.generation.findUnique({ where: { id } });
   }
@@ -463,17 +477,21 @@ export async function syncGeneration(db: Db, id: string, options: SyncOptions = 
     return db.generation.findUnique({ where: { id } });
   }
 
-  const submittedAt = g.submittedAt ?? g.createdAt;
-  if (age(submittedAt) > MAX_JOB_MS) {
+  // The age limit only applies to jobs that are still unfinished: a result that is ready
+  // always wins, even if it is collected late.
+  const expired = age(g.submittedAt ?? g.createdAt) > MAX_JOB_MS;
+  const expire = async () => {
     if (provider.cancel) await provider.cancel(job).catch(() => undefined);
     await failGeneration(
       db,
       g.id,
-      "Délai dépassé : le fournisseur n'a pas terminé la vidéo en 45 minutes. Le job a été abandonné.",
+      provider.id === "montage"
+        ? "Délai dépassé : le montage n'a pas abouti en 45 minutes. Il a été abandonné."
+        : "Délai dépassé : le fournisseur n'a pas terminé la vidéo en 45 minutes. Le job a été abandonné.",
       ["PROCESSING"],
     );
-    return db.generation.findUnique({ where: { id } });
-  }
+    await releaseJob(g);
+  };
 
   // Claim this poll (throttle + dedupe across tabs/cron).
   if (!options.force) {
@@ -497,7 +515,9 @@ export async function syncGeneration(db: Db, id: string, options: SyncOptions = 
     const transient =
       isAppError(error) ||
       (isProviderApiError(error) && (error.retryable || error.status === 401 || error.status === 403));
-    if (transient) {
+    if (transient && expired) {
+      await expire();
+    } else if (transient) {
       // Keep the job: it may still finish. The note is shown to the user.
       await db.generation.updateMany({
         where: { id: g.id, status: "PROCESSING" },
@@ -505,28 +525,35 @@ export async function syncGeneration(db: Db, id: string, options: SyncOptions = 
       });
     } else {
       await failGeneration(db, g.id, describeError(error, "Le suivi du job a échoué."), ["PROCESSING"]);
+      await releaseJob(g);
     }
     return db.generation.findUnique({ where: { id } });
   }
 
   switch (status.state) {
     case "queued":
-      await db.generation.updateMany({ where: { id: g.id, status: "PROCESSING" }, data: { errorMessage: null } });
+      if (expired) await expire();
+      else await db.generation.updateMany({ where: { id: g.id, status: "PROCESSING" }, data: { errorMessage: null } });
       break;
     case "processing":
-      await db.generation.updateMany({
-        where: { id: g.id, status: "PROCESSING" },
-        data: { errorMessage: null, ...(status.progress !== undefined ? { progress: status.progress } : {}) },
-      });
+      if (expired) await expire();
+      else {
+        await db.generation.updateMany({
+          where: { id: g.id, status: "PROCESSING" },
+          data: { errorMessage: null, ...(status.progress !== undefined ? { progress: status.progress } : {}) },
+        });
+      }
       break;
     case "failed":
       await failGeneration(db, g.id, status.message, ["PROCESSING"]);
+      await releaseJob(g);
       break;
     case "canceled":
       await db.generation.updateMany({
         where: { id: g.id, status: "PROCESSING" },
         data: { status: "CANCELED", completedAt: now, errorMessage: null },
       });
+      await releaseJob(g);
       break;
     case "succeeded": {
       const claimed = await db.generation.updateMany({
@@ -615,6 +642,7 @@ export async function cancelGeneration(db: Db, userId: string, id: string): Prom
     where: { id, status: "PROCESSING" },
     data: { status: "CANCELED", completedAt: new Date(), errorMessage: null },
   });
+  await releaseJob(g);
   return getGenerationForUser(db, userId, id);
 }
 
@@ -629,6 +657,7 @@ export async function abortActiveGenerations(db: Db, userId: string, projectId: 
       const provider = getProvider(g.providerId as ProviderId);
       const job = jobRef(g);
       if (provider?.cancel && job) await provider.cancel(job);
+      await releaseJob(g);
     }),
   );
 }
@@ -637,6 +666,7 @@ export async function deleteGeneration(db: Db, userId: string, id: string): Prom
   const g = await getGenerationForUser(db, userId, id);
   if (!isTerminal(g.status)) throw new AppError("Attendez la fin de la génération avant de la supprimer.");
   await db.generation.delete({ where: { id } });
+  await releaseJob(g);
   if (g.outputKey) await getStorage().delete(g.outputKey).catch(() => undefined);
 }
 

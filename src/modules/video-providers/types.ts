@@ -92,6 +92,11 @@ export interface VideoProvider {
   download(job: JobRef, status: SucceededStatus): Promise<Response>;
   /** Optional: absent when the provider has no cancellation endpoint. */
   cancel?(job: JobRef): Promise<void>;
+  /**
+   * Optional: called (best effort) once a job is over — stored, failed, canceled or
+   * deleted — so a provider that keeps local files can remove them.
+   */
+  cleanup?(job: JobRef): Promise<void>;
 }
 
 export type UrlPolicy = "public-https" | "any";

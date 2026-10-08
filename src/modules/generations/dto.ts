@@ -41,6 +41,8 @@ export interface GenerationDto {
   modelLabel: string;
   durationSeconds: number;
   aspectRatio: string;
+  /** Free local photo montage (not AI): changes the wording of the card. */
+  montage: boolean;
   prompt: string;
   createdAt: string;
   submittedAt: string | null;
@@ -63,6 +65,7 @@ export function toGenerationDto(g: Generation): GenerationDto {
     modelLabel: entry?.profile.label ?? g.modelId,
     durationSeconds: g.durationSeconds,
     aspectRatio: g.aspectRatio,
+    montage: g.providerId === "montage",
     prompt: g.prompt,
     createdAt: g.createdAt.toISOString(),
     submittedAt: g.submittedAt?.toISOString() ?? null,

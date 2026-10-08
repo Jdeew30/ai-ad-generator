@@ -26,6 +26,8 @@ export function detectImage(bytes: Uint8Array): DetectedImage | null {
 }
 
 export const MAX_ASSET_BYTES = 8 * 1024 * 1024;
+/** A small file can still decode to a huge bitmap (e.g. a highly compressible PNG): cap the pixel count. */
+export const MAX_ASSET_PIXELS = 30_000_000;
 export const MAX_LOGOS_PER_PROJECT = 1;
 export const MAX_PRODUCT_IMAGES_PER_PROJECT = 5;
 

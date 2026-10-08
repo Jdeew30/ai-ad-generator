@@ -53,6 +53,26 @@ describe("addAsset", () => {
     expect(await db.asset.count()).toBe(0);
   });
 
+  it("refuses images with an abusive pixel count even when the file is tiny (decompression-bomb style)", async () => {
+    const user = await createUser();
+    const project = await seedProject(user.id);
+    // 6000 x 6000 = 36 Mpx of flat colour compresses to a few KB.
+    const huge = await sharp({ create: { width: 6000, height: 6000, channels: 3, background: "#808080" } }).png({ compressionLevel: 9 }).toBuffer();
+    expect(huge.length).toBeLessThan(8 * 1024 * 1024);
+    await expect(addAsset(db, user.id, { projectId: project.id, kind: "PRODUCT_IMAGE", originalName: "bomb.png", bytes: huge })).rejects.toThrow(/mégapixels/);
+    expect(await db.asset.count()).toBe(0);
+
+    const ok = await sharp({ create: { width: 4000, height: 3000, channels: 3, background: "#808080" } }).jpeg().toBuffer(); // 12 Mpx
+    await expect(addAsset(db, user.id, { projectId: project.id, kind: "PRODUCT_IMAGE", originalName: "ok.jpg", bytes: ok })).resolves.toBeTruthy();
+  }, 60_000);
+
+  it("rejects a file that has valid magic bytes but cannot be decoded", async () => {
+    const user = await createUser();
+    const project = await seedProject(user.id);
+    const fake = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.alloc(64, 7)]);
+    await expect(addAsset(db, user.id, { projectId: project.id, kind: "LOGO", originalName: "x.png", bytes: fake })).rejects.toThrow(/illisible/);
+  });
+
   it("enforces per-kind limits", async () => {
     const user = await createUser();
     const project = await seedProject(user.id);

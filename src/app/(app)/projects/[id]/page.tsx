@@ -112,7 +112,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         </dl>
       </Section>
 
-      <Section step={2} title="Logo et photos produit" description="Optionnel. Les photos servent à décrire fidèlement le produit et, selon le modèle, d'image de référence.">
+      <Section step={2} title="Logo et photos produit" description="Optionnel pour l'IA (les photos aident à décrire le produit). Au moins une photo produit est nécessaire pour le montage gratuit, sans IA.">
         <AssetsPanel
           projectId={project.id}
           assets={project.assets.map((a) => ({ id: a.id, kind: a.kind, originalName: a.originalName, sizeBytes: a.sizeBytes }))}
@@ -123,7 +123,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <ConceptPanel projectId={project.id} concept={conceptView} engine={describeConceptEngine()} />
       </Section>
 
-      <Section step={4} title="Vidéo" description="Envoi du prompt à un fournisseur de génération vidéo IA, suivi du rendu et téléchargement.">
+      <Section step={4} title="Vidéo" description="Génération par IA via un fournisseur configuré, ou montage gratuit de vos photos (sans IA) : suivi du rendu et téléchargement.">
         <GenerationPanel
           projectId={project.id}
           hasConcept={Boolean(conceptView)}
@@ -133,6 +133,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           productImages={productImages}
           generations={generations.map(toGenerationDto)}
           quota={quota}
+          montageInfo={{
+            photos: productImages.length,
+            benefits: project.benefits.length,
+            hasLogo: project.assets.some((a) => a.kind === "LOGO"),
+            hasCta: Boolean(project.callToAction),
+          }}
         />
       </Section>
     </div>

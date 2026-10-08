@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import opentype, { type Font } from "opentype.js";
+import opentype, { type Font, type PathCommand } from "opentype.js";
 
 /**
  * Text is converted to vector outlines (SVG paths) from a bundled font file
@@ -101,6 +101,34 @@ export function wrapText(font: Font, text: string, fontSize: number, maxWidth: n
   return kept;
 }
 
+/**
+ * Serialises glyph outlines to SVG path data. opentype.js's own `toPathData()` can
+ * emit the literal "NaN" for some offsets, and the SVG renderer then silently stops
+ * reading the line (words vanish from the ad), so we format the numbers ourselves and
+ * refuse to produce an invalid path.
+ */
+export function pathData(commands: PathCommand[], decimals = 2): string {
+  const n = (v: number | undefined): string => {
+    if (v === undefined || !Number.isFinite(v)) throw new Error("Tracé de police invalide (coordonnée non finie).");
+    return String(Number(v.toFixed(decimals)));
+  };
+  return commands
+    .map((c) => {
+      switch (c.type) {
+        case "M":
+        case "L":
+          return `${c.type}${n(c.x)} ${n(c.y)}`;
+        case "Q":
+          return `Q${n(c.x1)} ${n(c.y1)} ${n(c.x)} ${n(c.y)}`;
+        case "C":
+          return `C${n(c.x1)} ${n(c.y1)} ${n(c.x2)} ${n(c.y2)} ${n(c.x)} ${n(c.y)}`;
+        default:
+          return "Z";
+      }
+    })
+    .join("");
+}
+
 export interface TypesetBlock {
   /** SVG <path> elements (already positioned). */
   svg: string;
@@ -121,7 +149,7 @@ export function typesetCentered(
     const w = font.getAdvanceWidth(line, opts.fontSize, { kerning: true });
     const x = opts.centerX - w / 2;
     const y = opts.baselineTop + i * opts.lineHeight;
-    const d = font.getPath(line, x, y, opts.fontSize, { kerning: true }).toPathData(2);
+    const d = pathData(font.getPath(line, x, y, opts.fontSize, { kerning: true }).commands);
     return `<path d="${d}" fill="${opts.fill}"/>`;
   });
   return { svg: paths.join(""), height: Math.max(0, lines.length - 1) * opts.lineHeight + opts.fontSize };

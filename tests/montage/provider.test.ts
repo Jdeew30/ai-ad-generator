@@ -2,6 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { isAppError } from "@/lib/errors";
 import { createMontageProvider } from "@/modules/video-providers/montage";
 import { isProviderApiError } from "@/modules/video-providers/http";
 import type { JobRef, ProviderJobStatus, VideoProvider } from "@/modules/video-providers/types";
@@ -150,5 +151,70 @@ describe("local montage provider", () => {
     const { externalId } = await submit(provider, await spec({ images: [new Uint8Array([9, 9, 9])] }));
     const { status } = await until(provider, ref(externalId), (s) => s.state === "succeeded" || s.state === "failed", 30_000);
     expect(status.state).toBe("failed");
+  }, 60_000);
+});
+
+describe("local montage provider: hardening", () => {
+  it("keeps its work folder private (0700) and refuses a symlinked or foreign root", async () => {
+    const provider = createMontageProvider({ workRoot: path.join(root, "private"), ffmpegPath: () => ffmpeg });
+    const { externalId } = await submit(provider, await spec());
+    if (process.platform !== "win32") {
+      expect(fs.statSync(path.join(root, "private")).mode & 0o777).toBe(0o700);
+      expect(fs.statSync(path.join(root, "private", externalId)).mode & 0o777).toBe(0o700);
+    }
+    await provider.cancel!(ref(externalId));
+
+    // A symlink planted where the work folder should be is refused.
+    const target = path.join(root, "elsewhere");
+    fs.mkdirSync(target);
+    const link = path.join(root, "link");
+    fs.symlinkSync(target, link);
+    const evil = createMontageProvider({ workRoot: link, ffmpegPath: () => ffmpeg });
+    const error = await submit(evil, await spec()).catch((e: unknown) => e);
+    expect(isAppError(error)).toBe(true);
+    expect((error as Error).message).toMatch(/pas sûr/);
+    expect(fs.readdirSync(target)).toEqual([]);
+  });
+
+  it("bounds the queue instead of accepting unlimited work", async () => {
+    const provider = createMontageProvider({ workRoot: root, ffmpegPath: () => ffmpeg });
+    const accepted: string[] = [];
+    for (let i = 0; i < 8; i++) accepted.push((await submit(provider, await spec({ durationSeconds: 12, aspectRatio: "9:16" }))).externalId);
+    const error = await submit(provider, await spec()).catch((e: unknown) => e);
+    expect(isAppError(error) && error.code).toBe("QUOTA");
+    // Canceling frees capacity right away.
+    await provider.cancel!(ref(accepted[7]!));
+    await expect(submit(provider, await spec())).resolves.toHaveProperty("externalId");
+    for (const id of accepted) await provider.cancel!(ref(id));
+  }, 120_000);
+
+  it("cleanup removes a finished job's folder, never a running one's", async () => {
+    const provider = createMontageProvider({ workRoot: root, ffmpegPath: () => ffmpeg });
+    const { externalId } = await submit(provider, await spec());
+    await provider.cleanup!(ref(externalId)); // still pending: must be left alone
+    expect(fs.existsSync(path.join(root, externalId))).toBe(true);
+    await until(provider, ref(externalId), (s) => s.state === "succeeded");
+    expect(fs.existsSync(path.join(root, externalId, "result.mp4"))).toBe(true);
+    await provider.cleanup!(ref(externalId));
+    expect(fs.existsSync(path.join(root, externalId))).toBe(false);
+    expect((await provider.poll(ref(externalId))).state).toBe("failed");
+  }, 120_000);
+
+  it("a half-written output after a crash is never mistaken for a finished video", async () => {
+    const provider = createMontageProvider({ workRoot: root, ffmpegPath: () => ffmpeg });
+    const id = "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee";
+    fs.mkdirSync(path.join(root, id));
+    fs.writeFileSync(path.join(root, id, "result.part"), Buffer.alloc(5000, 1)); // no moov, not published
+    expect(await provider.poll(ref(id))).toMatchObject({ state: "failed", message: expect.stringContaining("interrompu") });
+  });
+
+  it("does not leak server paths or internal error text in failure messages", async () => {
+    const provider = createMontageProvider({ workRoot: root, ffmpegPath: () => ffmpeg });
+    const { externalId } = await submit(provider, await spec({ images: [new Uint8Array([9, 9, 9])] }));
+    const { status } = await until(provider, ref(externalId), (s) => s.state === "failed", 30_000);
+    expect(status.state).toBe("failed");
+    const message = (status as { message: string }).message;
+    expect(message).not.toContain(root);
+    expect(message).not.toMatch(/node_modules|\/home\/|\/tmp\/|C:\\/);
   }, 60_000);
 });

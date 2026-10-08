@@ -1,5 +1,5 @@
 import { spawn, type ChildProcess } from "node:child_process";
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { composeCaptionLayer, composeSceneStill } from "./compose";
 import { planTimeline } from "./plan";
@@ -72,7 +72,9 @@ function runFfmpeg(args: string[], opts: RenderOptions): Promise<void> {
     };
     opts.signal?.addEventListener("abort", onAbort, { once: true });
 
-    child.on("error", (error) => finish(() => reject(new MontageError(`Impossible de lancer ffmpeg (${error.message}).`))));
+    child.on("error", (error: NodeJS.ErrnoException) =>
+      finish(() => reject(new MontageError(`Impossible de lancer ffmpeg (${error.code ?? "erreur"}). Vérifiez FFMPEG_PATH ou relancez « npm install ».`))),
+    );
     child.on("close", (code) => {
       if (code === 0) return finish(resolve);
       const lastLine = stderr.trim().split(/\r?\n/).filter(Boolean).pop() ?? "erreur inconnue";
@@ -133,6 +135,8 @@ export async function renderMontage(spec: MontageSpec, opts: RenderOptions): Pro
         "-frames:v", String(scene.frames),
         "-r", String(FPS),
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p",
+        // The pixels are converted with the BT.601 matrix; tag them so players do not assume BT.709.
+        "-colorspace", "smpte170m", "-color_primaries", "smpte170m", "-color_trc", "smpte170m", "-color_range", "tv",
         "-an",
         clipName,
       );
@@ -142,7 +146,9 @@ export async function renderMontage(spec: MontageSpec, opts: RenderOptions): Pro
     }
 
     await writeFile(path.join(opts.workDir, "list.txt"), clips.map((c) => `file '${c}'`).join("\n") + "\n");
-    await runFfmpeg(["-f", "concat", "-safe", "0", "-i", "list.txt", "-c", "copy", "-movflags", "+faststart", "result.mp4"], opts);
+    // Never leave a half-written result.mp4 behind: write under another name, then publish.
+    await runFfmpeg(["-f", "concat", "-safe", "0", "-i", "list.txt", "-c", "copy", "-movflags", "+faststart", "-f", "mp4", "result.part"], opts);
+    await rename(path.join(opts.workDir, "result.part"), path.join(opts.workDir, "result.mp4"));
     opts.onProgress?.(1);
     return path.join(opts.workDir, "result.mp4");
   } finally {
@@ -151,6 +157,7 @@ export async function renderMontage(spec: MontageSpec, opts: RenderOptions): Pro
       timeline.flatMap((s) => [`scene_${s.index}.jpg`, `caption_${s.index}.png`, `clip_${s.index}.mp4`].map((f) => rm(path.join(opts.workDir, f), { force: true }))),
     );
     await rm(path.join(opts.workDir, "list.txt"), { force: true });
+    await rm(path.join(opts.workDir, "result.part"), { force: true });
   }
 }
 

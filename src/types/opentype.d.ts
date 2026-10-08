@@ -1,7 +1,17 @@
 // Minimal typings for the few opentype.js APIs we use (the package ships none).
 declare module "opentype.js" {
+  export interface PathCommand {
+    type: "M" | "L" | "C" | "Q" | "Z";
+    x?: number;
+    y?: number;
+    x1?: number;
+    y1?: number;
+    x2?: number;
+    y2?: number;
+  }
+
   export interface Path {
-    toPathData(decimalPlaces?: number): string;
+    readonly commands: PathCommand[];
   }
 
   export interface Font {

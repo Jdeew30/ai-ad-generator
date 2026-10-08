@@ -301,7 +301,7 @@ export function BriefForm(props: Props) {
               <div>
                 <h3 className="text-sm font-medium">Logo et photos produit</h3>
                 <p className="mt-1 text-xs text-subtle">
-                  PNG, JPEG ou WebP, 8 Mo maximum. Les photos aident le concept à décrire fidèlement votre produit et peuvent servir d&apos;image de référence si le modèle choisi le permet.
+                  PNG, JPEG ou WebP, 8 Mo maximum. Les photos aident le concept à décrire fidèlement votre produit et peuvent servir d&apos;image de référence si le modèle choisi le permet. Elles sont indispensables au montage gratuit (sans IA).
                 </p>
               </div>
               <MediaPicker files={files} onAdd={addFiles} onRemove={removeFile} disabled={pending} />

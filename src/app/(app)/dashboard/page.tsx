@@ -60,7 +60,7 @@ export default async function DashboardPage() {
                     <h2 className="line-clamp-1 font-semibold tracking-tight group-hover:text-accent">{p.productName}</h2>
                     {ready && (
                       <Badge tone="success">
-                        <Film className="size-3" aria-hidden /> Vidéo prête
+                        <Film className="size-3" aria-hidden /> {p.generations[0]?.providerId === "montage" ? "Montage prêt (sans IA)" : "Vidéo prête"}
                       </Badge>
                     )}
                   </div>

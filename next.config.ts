@@ -9,8 +9,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  // The ffmpeg installer resolves a platform-specific binary at runtime: keep it out of the bundle.
-  serverExternalPackages: ["pg", "@ffmpeg-installer/ffmpeg"],
+  // Kept out of the bundle: the ffmpeg installer resolves a platform binary at runtime, and opentype.js
+  // only exposes its default export in the CommonJS build (Turbopack would pick the ESM build and fail).
+  serverExternalPackages: ["pg", "@ffmpeg-installer/ffmpeg", "opentype.js"],
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
