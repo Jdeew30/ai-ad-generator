@@ -32,7 +32,7 @@ const does = [
 const doesNot = [
   "Pas de montage multi-clips, de musique ni de voix off générées : le script est fourni pour votre montage",
   "Pas de paiement ni de crédits intégrés dans cette version",
-  "Aucune vidéo « de démonstration » : sans clé API de fournisseur, la génération reste désactivée",
+  "Aucune vidéo « de démonstration » : sans clé API, la génération par IA reste désactivée ; seul le montage gratuit de vos photos (sans IA, étiqueté comme tel) est proposé",
 ];
 
 export default async function HomePage() {
@@ -71,8 +71,8 @@ export default async function HomePage() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted text-pretty">
               Décrivez votre produit. AI Ad Studio rédige le concept, prépare le prompt, puis pilote le fournisseur de
-              génération vidéo IA que vous avez connecté. Pas de promesse magique : chaque vidéo est rendue par un vrai
-              modèle, avec votre clé API.
+              génération vidéo IA que vous avez connecté. Pas de promesse magique : chaque vidéo est soit rendue par un vrai
+              modèle d&apos;IA avec votre clé API, soit un montage gratuit de vos photos, clairement présenté comme tel.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <ButtonLink href={user ? "/projects/new" : "/register"} size="lg">
@@ -111,7 +111,8 @@ export default async function HomePage() {
               AI Ad Studio ne génère pas de vidéo lui-même : il orchestre des fournisseurs tiers. Cette version sait
               piloter OpenAI Sora, Replicate et fal.ai. Un fournisseur n&apos;apparaît comme utilisable que si sa clé est
               configurée côté serveur, et l&apos;architecture permet d&apos;en ajouter d&apos;autres sans toucher au reste
-              de l&apos;application.
+              de l&apos;application. Pour tester sans payer, un montage gratuit de vos photos (sans IA) est aussi proposé : il
+              anime vos images, il ne génère rien.
             </p>
           </Card>
         </section>

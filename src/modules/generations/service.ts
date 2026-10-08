@@ -5,6 +5,7 @@ import type { Db } from "@/lib/db";
 import { getEnv } from "@/lib/env";
 import { AppError, isAppError } from "@/lib/errors";
 import { prepareReferenceImage } from "@/modules/assets/reference-image";
+import type { MontageSpec } from "@/modules/montage/types";
 import { ASPECT_RATIOS } from "@/modules/projects/presets";
 import { getStorage, isStorageLimitError } from "@/modules/storage";
 import {
@@ -69,26 +70,86 @@ export interface StartGenerationInput {
   referenceAssetId?: string | null;
 }
 
+const MAX_MONTAGE_PHOTOS = 5;
+
+async function readAsset(storageKey: string): Promise<Buffer> {
+  const chunks: Buffer[] = [];
+  for await (const chunk of getStorage().createReadStream(storageKey)) chunks.push(chunk as Buffer);
+  return Buffer.concat(chunks);
+}
+
+/** Collects the project's own photos, logo and words for the local (non-AI) montage. */
+async function buildMontageSpec(
+  project: {
+    productName: string;
+    benefits: string[];
+    callToAction: string | null;
+    assets: { id: string; kind: "LOGO" | "PRODUCT_IMAGE"; storageKey: string }[];
+  },
+  aspectRatio: MontageSpec["aspectRatio"],
+  durationSeconds: number,
+): Promise<MontageSpec> {
+  const images: Uint8Array[] = [];
+  for (const asset of project.assets.filter((a) => a.kind === "PRODUCT_IMAGE").slice(0, MAX_MONTAGE_PHOTOS)) {
+    try {
+      images.push((await prepareReferenceImage(await readAsset(asset.storageKey), 1600)).bytes);
+    } catch (error) {
+      console.warn("[montage] skipping unreadable photo", asset.id, error);
+    }
+  }
+  if (images.length === 0) throw new AppError("Aucune photo produit exploitable : ajoutez-en une dans le projet.");
+
+  let logo: Uint8Array | undefined;
+  const logoAsset = project.assets.find((a) => a.kind === "LOGO");
+  if (logoAsset) {
+    try {
+      logo = (await prepareReferenceImage(await readAsset(logoAsset.storageKey), 800)).bytes;
+    } catch (error) {
+      console.warn("[montage] skipping unreadable logo", error); // the logo is optional
+    }
+  }
+
+  return {
+    aspectRatio,
+    durationSeconds,
+    images,
+    logo,
+    headline: project.productName,
+    captions: project.benefits.slice(0, 3),
+    callToAction: project.callToAction ?? undefined,
+  };
+}
+
+function describeMontage(spec: MontageSpec): string {
+  return [
+    "Montage automatique (sans IA, réalisé en local) :",
+    `${spec.images.length} photo(s)${spec.logo ? " + logo" : ""}, ${spec.durationSeconds} s, ${spec.aspectRatio}.`,
+    `Titre : « ${spec.headline} ».`,
+    spec.captions.length ? `Légendes : ${spec.captions.map((c) => `« ${c} »`).join(" ; ")}.` : "",
+    spec.callToAction ? `Appel à l'action : « ${spec.callToAction} ».` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
 /**
  * Validates, enforces cost guards, records the job and submits it to the
  * provider. If the provider rejects the request, the returned generation is
  * FAILED with the provider's message (no phantom job is ever left PROCESSING).
+ *
+ * AI models are driven by the concept's video prompt. The local montage model is
+ * not AI: it needs no concept, uses the project's own photos and brief text, and is
+ * free, so it is exempt from the daily paid-generation quota.
  */
 export async function startGeneration(db: Db, userId: string, input: StartGenerationInput): Promise<Generation> {
   const project = await db.project.findFirst({
     where: { id: input.projectId, userId },
-    include: { concepts: { orderBy: { version: "desc" }, take: 1 } },
+    include: {
+      concepts: { orderBy: { version: "desc" }, take: 1 },
+      assets: { orderBy: { createdAt: "asc" }, select: { id: true, kind: true, storageKey: true } },
+    },
   });
   if (!project) throw new AppError("Projet introuvable.", "NOT_FOUND");
-
-  const concept = project.concepts[0];
-  if (!concept) throw new AppError("Générez d'abord un concept pour ce projet.");
-
-  const prompt = concept.videoPrompt.trim();
-  if (!prompt) throw new AppError("Le prompt vidéo est vide.");
-  if (prompt.length > MAX_PROMPT_CHARS) {
-    throw new AppError(`Le prompt vidéo dépasse ${MAX_PROMPT_CHARS} caractères (${prompt.length}). Raccourcissez-le.`);
-  }
 
   const entry = findModel(input.modelId);
   if (!entry) throw new AppError("Modèle vidéo inconnu.");
@@ -98,12 +159,24 @@ export async function startGeneration(db: Db, userId: string, input: StartGenera
       "NOT_CONFIGURED",
     );
   }
+  const isMontage = entry.profile.capabilities.montage === true;
+
+  const concept = project.concepts[0];
+  let prompt = "";
+  if (!isMontage) {
+    if (!concept) throw new AppError("Générez d'abord un concept pour ce projet.");
+    prompt = concept.videoPrompt.trim();
+    if (!prompt) throw new AppError("Le prompt vidéo est vide.");
+    if (prompt.length > MAX_PROMPT_CHARS) {
+      throw new AppError(`Le prompt vidéo dépasse ${MAX_PROMPT_CHARS} caractères (${prompt.length}). Raccourcissez-le.`);
+    }
+  }
 
   const aspect = ASPECT_RATIOS.find((a) => a === project.aspectRatio);
   if (!aspect) throw new AppError("Format du projet invalide.");
 
   let referenceAsset: { id: string; storageKey: string } | null = null;
-  if (input.referenceAssetId) {
+  if (input.referenceAssetId && !isMontage) {
     referenceAsset = await db.asset.findFirst({
       where: { id: input.referenceAssetId, projectId: project.id, kind: "PRODUCT_IMAGE" },
       select: { id: true, storageKey: true },
@@ -115,6 +188,7 @@ export async function startGeneration(db: Db, userId: string, input: StartGenera
     aspectRatio: aspect,
     durationSeconds: input.durationSeconds,
     withImage: Boolean(referenceAsset),
+    productImages: project.assets.filter((a) => a.kind === "PRODUCT_IMAGE").length,
   });
   if (problems.length) throw new AppError(problems.join(" "));
 
@@ -126,19 +200,22 @@ export async function startGeneration(db: Db, userId: string, input: StartGenera
   const generation = await db.$transaction(async (tx) => {
     await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${userId}))`;
 
-    const usedToday = await tx.generation.count({
-      where: {
-        userId,
-        createdAt: { gte: startOfUtcDay(now) },
-        // A job that never reached the provider cost nothing.
-        NOT: { externalId: null, status: { in: ["FAILED", "CANCELED"] } },
-      },
-    });
-    if (usedToday >= env.DAILY_GENERATION_LIMIT) {
-      throw new AppError(
-        `Limite quotidienne atteinte (${env.DAILY_GENERATION_LIMIT} générations par jour). Réessayez demain.`,
-        "QUOTA",
-      );
+    if (!isMontage) {
+      const usedToday = await tx.generation.count({
+        where: {
+          userId,
+          createdAt: { gte: startOfUtcDay(now) },
+          providerId: { not: "montage" },
+          // A job that never reached the provider cost nothing.
+          NOT: { externalId: null, status: { in: ["FAILED", "CANCELED"] } },
+        },
+      });
+      if (usedToday >= env.DAILY_GENERATION_LIMIT) {
+        throw new AppError(
+          `Limite quotidienne atteinte (${env.DAILY_GENERATION_LIMIT} générations par jour). Réessayez demain.`,
+          "QUOTA",
+        );
+      }
     }
     const active = await tx.generation.count({ where: { userId, status: { in: [...ACTIVE_STATUSES] } } });
     if (active >= MAX_ACTIVE_PER_USER) {
@@ -149,11 +226,11 @@ export async function startGeneration(db: Db, userId: string, input: StartGenera
       data: {
         projectId: project.id,
         userId,
-        conceptId: concept.id,
+        conceptId: concept?.id ?? null,
         providerId: entry.provider.id,
         modelId: entry.profile.id,
-        prompt,
-        negativePrompt: concept.negativePrompt,
+        prompt: prompt || "Montage automatique (sans IA).",
+        negativePrompt: isMontage ? null : (concept?.negativePrompt ?? null),
         aspectRatio: aspect,
         durationSeconds: input.durationSeconds,
         referenceAssetId: referenceAsset?.id ?? null,
@@ -163,14 +240,28 @@ export async function startGeneration(db: Db, userId: string, input: StartGenera
   });
 
   try {
-    let referenceImage: ReferenceImage | undefined;
-    if (referenceAsset) {
-      const chunks: Buffer[] = [];
-      for await (const chunk of getStorage().createReadStream(referenceAsset.storageKey)) chunks.push(chunk as Buffer);
-      referenceImage = await prepareReferenceImage(Buffer.concat(chunks));
+    if (isMontage) {
+      const montage = await buildMontageSpec(project, aspect, input.durationSeconds);
+      await db.generation.update({ where: { id: generation.id }, data: { prompt: describeMontage(montage) } });
+      const submitted = await entry.provider.submit({
+        model: entry.profile,
+        prompt: "",
+        aspectRatio: aspect,
+        durationSeconds: input.durationSeconds,
+        montage,
+      });
+      return await db.generation.update({
+        where: { id: generation.id },
+        data: { status: "PROCESSING", externalId: submitted.externalId, submittedAt: new Date() },
+      });
     }
 
-    const composed = composePrompt(entry.profile, prompt, concept.negativePrompt);
+    let referenceImage: ReferenceImage | undefined;
+    if (referenceAsset) {
+      referenceImage = await prepareReferenceImage(await readAsset(referenceAsset.storageKey));
+    }
+
+    const composed = composePrompt(entry.profile, prompt, concept?.negativePrompt);
     const submitted = await entry.provider.submit({
       model: entry.profile,
       prompt: composed.prompt,
@@ -481,6 +572,7 @@ export async function getQuotaUsage(db: Db, userId: string, now = new Date()) {
     where: {
       userId,
       createdAt: { gte: startOfUtcDay(now) },
+      providerId: { not: "montage" },
       NOT: { externalId: null, status: { in: ["FAILED", "CANCELED"] } },
     },
   });

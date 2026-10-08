@@ -5,7 +5,7 @@ export {
   findModel,
   getProvider,
   getProviders,
-  hasConfiguredProvider,
+  hasConfiguredAiProvider,
   listModels,
   setProvidersForTests,
   type ModelEntry,

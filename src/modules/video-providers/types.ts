@@ -1,6 +1,7 @@
+import type { MontageSpec } from "@/modules/montage/types";
 import type { AspectRatio } from "@/modules/projects/presets";
 
-export type ProviderId = "openai" | "replicate" | "fal";
+export type ProviderId = "openai" | "replicate" | "fal" | "montage";
 
 /**
  * Declarative capabilities of one model. The UI and the server both validate a
@@ -20,6 +21,11 @@ export interface VideoModelProfile {
     imageToVideo: boolean;
     /** If false, a negative prompt is folded into the prompt as an "Avoid:" clause. */
     supportsNegativePrompt: boolean;
+    /**
+     * Local photo montage (NOT generative AI): ignores the prompt, needs at least one
+     * product photo, and runs on this machine at no cost.
+     */
+    montage?: boolean;
   };
 }
 
@@ -35,6 +41,8 @@ export interface SubmitInput {
   aspectRatio: AspectRatio;
   durationSeconds: number;
   referenceImage?: ReferenceImage;
+  /** Only for models with `capabilities.montage`. */
+  montage?: MontageSpec;
   signal?: AbortSignal;
 }
 
@@ -96,7 +104,7 @@ export interface AdapterDeps {
 
 export function checkCompatibility(
   profile: VideoModelProfile,
-  req: { aspectRatio: AspectRatio; durationSeconds: number; withImage: boolean },
+  req: { aspectRatio: AspectRatio; durationSeconds: number; withImage: boolean; productImages?: number },
 ): string[] {
   const problems: string[] = [];
   const c = profile.capabilities;
@@ -108,6 +116,9 @@ export function checkCompatibility(
   }
   if (req.withImage && !c.imageToVideo) {
     problems.push(`${profile.label} n'accepte pas d'image de référence.`);
+  }
+  if (c.montage && (req.productImages ?? 0) < 1) {
+    problems.push("Le montage a besoin d'au moins une photo produit : ajoutez-en une dans le projet.");
   }
   return problems;
 }

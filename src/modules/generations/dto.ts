@@ -12,6 +12,8 @@ export interface ModelOptionView {
   durations: number[];
   aspectRatios: string[];
   imageToVideo: boolean;
+  /** Local photo montage: free, NOT generative AI. */
+  montage: boolean;
 }
 
 export function toModelOptionView(entry: ModelEntry): ModelOptionView {
@@ -25,6 +27,7 @@ export function toModelOptionView(entry: ModelEntry): ModelOptionView {
     durations: [...entry.profile.capabilities.durations],
     aspectRatios: [...entry.profile.capabilities.aspectRatios],
     imageToVideo: entry.profile.capabilities.imageToVideo,
+    montage: entry.profile.capabilities.montage === true,
   };
 }
 

@@ -43,7 +43,7 @@ export default async function SettingsPage() {
                     <li key={m.id} className="rounded-xl border border-border bg-white/3 p-3 text-sm">
                       <p className="font-medium">{m.label}</p>
                       <p className="mt-0.5 text-xs text-subtle">
-                        {m.capabilities.durations.join(" / ")} s · {m.capabilities.aspectRatios.join(", ")} · {m.capabilities.imageToVideo ? "image de référence" : "texte seul"}
+                        {m.capabilities.durations.join(" / ")} s · {m.capabilities.aspectRatios.join(", ")} · {m.capabilities.montage ? "vos photos produit, sans IA, gratuit" : m.capabilities.imageToVideo ? "image de référence" : "texte seul"}
                       </p>
                     </li>
                   ))}

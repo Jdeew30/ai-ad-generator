@@ -9,7 +9,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  serverExternalPackages: ["pg"],
+  // The ffmpeg installer resolves a platform-specific binary at runtime: keep it out of the bundle.
+  serverExternalPackages: ["pg", "@ffmpeg-installer/ffmpeg"],
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

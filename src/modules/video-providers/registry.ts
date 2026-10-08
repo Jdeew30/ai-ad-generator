@@ -1,5 +1,6 @@
 import { getEnv, type Env } from "@/lib/env";
 import { createFalProvider } from "./fal";
+import { createMontageProvider } from "./montage";
 import { createOpenAiProvider } from "./openai";
 import { createReplicateProvider } from "./replicate";
 import type { AdapterDeps, ProviderId, VideoModelProfile, VideoProvider } from "./types";
@@ -16,6 +17,8 @@ export function buildProviders(env: Env, deps: AdapterDeps = {}): VideoProvider[
     createOpenAiProvider({ apiKey: env.OPENAI_API_KEY, baseUrl: env.OPENAI_BASE_URL, ...deps }),
     createReplicateProvider({ apiToken: env.REPLICATE_API_TOKEN, baseUrl: env.REPLICATE_BASE_URL, ...deps }),
     createFalProvider({ apiKey: env.FAL_KEY, queueUrl: env.FAL_QUEUE_BASE_URL, ...deps }),
+    // Local, free, NOT generative AI. Always listed last and always labelled as such.
+    createMontageProvider(),
   ];
 }
 
@@ -53,6 +56,7 @@ export function findModel(modelId: string): ModelEntry | undefined {
   return listModels().find((m) => m.profile.id === modelId);
 }
 
-export function hasConfiguredProvider(): boolean {
-  return getProviders().some((p) => p.isConfigured());
+/** True when at least one real generative-AI provider has credentials (the local montage does not count). */
+export function hasConfiguredAiProvider(): boolean {
+  return getProviders().some((p) => p.id !== "montage" && p.isConfigured());
 }

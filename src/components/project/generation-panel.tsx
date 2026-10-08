@@ -44,9 +44,16 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
   const [duration, setDuration] = useState<number>(() => (usable[0] ? nearest(usable[0].durations, targetDuration) : targetDuration));
   const [referenceId, setReferenceId] = useState<string>("");
 
-  const anyConfigured = models.some((m) => m.configured);
+  const anyAiConfigured = models.some((m) => m.configured && !m.montage);
+  const montageReady = models.some((m) => m.configured && m.montage);
+  const isMontage = model?.montage === true;
   const quotaLeft = Math.max(0, quota.limit - quota.used);
-  const canStart = hasConcept && Boolean(model) && !unavailableReason(model!, aspectRatio) && model!.durations.includes(duration) && quotaLeft > 0;
+  // The local montage is free and needs photos, not a concept; AI models need a concept and quota.
+  const canStart =
+    Boolean(model) &&
+    !unavailableReason(model!, aspectRatio) &&
+    model!.durations.includes(duration) &&
+    (isMontage ? productImages.length > 0 : hasConcept && quotaLeft > 0);
 
   function pickModel(m: ModelOptionView) {
     setModelId(m.id);
@@ -72,20 +79,21 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
 
   return (
     <div className="space-y-6">
-      {!anyConfigured && (
-        <Alert tone="warning" title="Aucun fournisseur vidéo configuré">
+      {!anyAiConfigured && (
+        <Alert tone={montageReady ? "info" : "warning"} title="Aucun fournisseur d'IA vidéo configuré">
           <p>
-            La génération est désactivée : aucune clé API de fournisseur n&apos;est définie côté serveur, donc aucune
-            vidéo ne peut être produite.
+            {montageReady
+              ? "La génération par IA est désactivée : aucune clé API de fournisseur n'est définie côté serveur. Le montage gratuit de vos photos (sans IA) reste disponible ci-dessous."
+              : "La génération est désactivée : aucune clé API de fournisseur n'est définie côté serveur, donc aucune vidéo ne peut être produite."}
           </p>
           <p className="mt-1">
-            Définissez au moins une variable parmi {[...new Set(models.flatMap((m) => m.envVars))].join(", ")}, puis redémarrez l&apos;application.{" "}
+            Pour l&apos;IA, définissez au moins une variable parmi {[...new Set(models.filter((m) => !m.montage).flatMap((m) => m.envVars))].join(", ")}, puis redémarrez l&apos;application.{" "}
             <Link href="/settings" className="font-medium text-foreground underline underline-offset-2">Détails</Link>
           </p>
         </Alert>
       )}
 
-      {!hasConcept && <Alert tone="info">Générez d&apos;abord un concept : son prompt vidéo est ce qui sera envoyé au modèle.</Alert>}
+      {!hasConcept && !isMontage && <Alert tone="info">Générez d&apos;abord un concept : son prompt vidéo est ce qui sera envoyé au modèle.</Alert>}
 
       <fieldset className="space-y-2" disabled={pending}>
         <legend className="mb-2 text-sm font-medium">Modèle de génération</legend>
@@ -105,7 +113,11 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
                 >
                   <span className="flex items-center justify-between gap-2">
                     <span className="text-sm font-medium">{m.label}</span>
-                    <span className="text-xs text-subtle">{m.providerLabel}</span>
+                    {m.montage ? (
+                      <span className="rounded-full border border-success/25 bg-success-soft px-2 py-0.5 text-xs font-medium text-success">Gratuit · sans IA</span>
+                    ) : (
+                      <span className="text-xs text-subtle">{m.providerLabel}</span>
+                    )}
                   </span>
                   <span className="mt-1 block text-xs text-muted">{m.description}</span>
                   <span className="mt-2 block text-xs text-subtle">
@@ -122,6 +134,14 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
           })}
         </div>
       </fieldset>
+
+      {isMontage && !unavailableReason(model!, aspectRatio) && (
+        <Alert tone={productImages.length > 0 ? "info" : "warning"} title="Ce n'est pas de l'IA : un montage de vos propres photos">
+          {productImages.length > 0
+            ? `Vos ${productImages.length} photo${productImages.length > 1 ? "s" : ""} produit seront animées (zoom lent, fondus) avec le nom, les avantages et l'appel à l'action de votre brief, puis exportées en MP4 muet. Aucun prompt n'est utilisé, c'est gratuit et réalisé sur cet ordinateur. Ne vous attendez pas à de nouvelles images ni à du mouvement généré.`
+            : "Ajoutez au moins une photo produit dans le bloc « Logo et photos produit » ci-dessus : le montage anime vos propres photos."}
+        </Alert>
+      )}
 
       {model && !unavailableReason(model, aspectRatio) && (
         <div className="grid gap-5 sm:grid-cols-2">
@@ -163,15 +183,19 @@ export function GenerationPanel({ projectId, hasConcept, aspectRatio, targetDura
       <div className="space-y-3">
         <div className="flex flex-wrap items-center gap-3">
           <Button size="lg" onClick={start} loading={pending} disabled={!canStart} icon={<Play className="size-4" aria-hidden />}>
-            Générer la vidéo
+            {isMontage ? "Créer le montage" : "Générer la vidéo"}
           </Button>
-          <p className="text-xs text-subtle">
-            {quotaLeft > 0 ? `${quotaLeft} génération${quotaLeft > 1 ? "s" : ""} restante${quotaLeft > 1 ? "s" : ""} aujourd'hui (limite ${quota.limit}).` : `Limite quotidienne atteinte (${quota.limit}).`}
-          </p>
+          {!isMontage && (
+            <p className="text-xs text-subtle">
+              {quotaLeft > 0 ? `${quotaLeft} génération${quotaLeft > 1 ? "s" : ""} restante${quotaLeft > 1 ? "s" : ""} aujourd'hui (limite ${quota.limit}).` : `Limite quotidienne atteinte (${quota.limit}).`}
+            </p>
+          )}
         </div>
         {model && !unavailableReason(model, aspectRatio) && (
           <p className="text-xs text-subtle">
-            Le job sera envoyé à {model.providerLabel} avec votre clé API et peut être facturé par ce fournisseur selon son tarif.
+            {isMontage
+              ? "Réalisé localement : aucun fournisseur, aucune clé, aucun frais. Le rendu prend de quelques secondes à une minute selon votre ordinateur."
+              : `Le job sera envoyé à ${model.providerLabel} avec votre clé API et peut être facturé par ce fournisseur selon son tarif.`}
           </p>
         )}
         {error && <Alert tone="danger">{error}</Alert>}
