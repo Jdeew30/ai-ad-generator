@@ -75,6 +75,11 @@ class RunReport:
             lines.append("")
         if self.compilation:
             lines.append(f"### Compilation : {self.compilation['title']}")
+            if self.compilation.get("duration"):
+                minutes, seconds = divmod(int(self.compilation["duration"]), 60)
+                lines.append(f"- Durée : {minutes} min {seconds:02d} s · textes {'Claude' if self.compilation.get('ai') else 'gabarit (sans IA)'}")
+            for clip in self.compilation.get("clips", []):
+                lines.append(f"- #{clip['rank']} [{clip['streamer']}]({clip['url']}) — {clip['label']} ({clip['views']} vues)")
             for result in self.compilation.get("results", []):
                 status = "✅" if result.ok else "❌"
                 lines.append(f"- {status} {result.platform}{f' — {result.url}' if result.url else ''}{f' ({result.detail})' if result.detail else ''}")
@@ -449,6 +454,7 @@ class Clipper:
         for candidate in ranked:
             if len(prepared) >= wanted or used >= budget:
                 break
+            log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
             item = self.prepare(candidate, transcribe=use_ai, sheet=use_ai and self.config.ai.review_frames)
             if item is None:
                 continue
@@ -497,7 +503,8 @@ class Clipper:
             names = " · ".join(dict.fromkeys(c.streamer for c, _ in reversed(labels)))
             thumbnail = make_thumbnail(frame, video.with_suffix(".jpg"), headline=meta.thumbnail_text, subline=names,
                                        highlight=self.config.shorts.highlight_color)
-        description = self._compilation_description(meta, chapters, labels, probe(video).duration)
+        duration = probe(video).duration
+        description = self._compilation_description(meta, chapters, labels, duration)
         video.with_suffix(".txt").write_text(f"{meta.title}\n\n{description}\n", encoding="utf-8")
         results: list[PublishResult] = []
         if not dry_run:
@@ -517,7 +524,13 @@ class Clipper:
             report.errors += [f"{r.platform} : {r.detail}" for r in results if not r.ok]
             if not results or any(r.ok for r in results):
                 self.state.record_compilation([c.key for c, _ in labels], meta.title, results)
-        report.compilation = {"title": meta.title, "video": str(video), "results": results}
+        clips = [
+            {"rank": len(labels) - index, "streamer": candidate.streamer, "label": label, "url": candidate.url, "views": candidate.views}
+            for index, (candidate, label) in enumerate(labels)
+        ]
+        report.compilation = {
+            "title": meta.title, "video": str(video), "results": results, "duration": duration, "clips": clips, "ai": meta.ai,
+        }  # fmt: skip
 
     def _compilation_description(self, meta: CompilationMeta, chapters: list[tuple[float, str]],
                                  labels: list[tuple[Candidate, str]], total: float) -> str:

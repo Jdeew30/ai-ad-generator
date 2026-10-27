@@ -183,6 +183,9 @@ def test_weekly_compilation(media, paths):
                   compilation={"clips": 4, "min_clips": 3})  # fmt: skip
     report = run.run_compilation()
     assert report.compilation and report.compilation["title"].startswith("TOP 4")
+    summary = report.markdown()
+    assert "- #1 [Alpha](https://clips.twitch.tv/Alpha-Cam1) — clip Alpha-Cam1 (5000 vues)" in summary
+    assert "- #4 [" in summary and "- Durée : 0 min" in summary
     video, meta, description, thumbnail = youtube.calls[0]
     assert video.exists() and thumbnail is not None and thumbnail.exists()
     assert "#1 Alpha — clip Alpha-Cam1 : https://clips.twitch.tv/Alpha-Cam1" in description

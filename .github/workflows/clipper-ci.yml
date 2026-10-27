@@ -57,7 +57,7 @@ jobs:
           key: whisper-${{ hashFiles('clipper/config.yaml') }}
           restore-keys: whisper-
       - name: Essai à blanc sur les clips Twitch du moment
-        run: python -m clipper run --dry-run --count 2 --no-queue
+        run: python -m clipper run --dry-run --count 1 --no-queue
       - uses: actions/upload-artifact@v4
         if: always()
         with:
