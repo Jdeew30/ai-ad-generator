@@ -94,7 +94,7 @@ def run_ffmpeg(args: list[str], *, cwd: Path | None = None, timeout: float = 360
         raise MediaError(f"ffmpeg a échoué ({result.returncode}) : {result.stderr.strip()[-2000:]}")
 
 
-def extract_frames(path: Path, out_dir: Path, *, count: int = 8, width: int = 960, duration: float | None = None) -> list[Path]:
+def extract_frames(path: Path, out_dir: Path, *, count: int = 8, width: int = 1280, duration: float | None = None) -> list[Path]:
     """`count` frames spread evenly over the video (skipping the very first/last instants)."""
     out_dir.mkdir(parents=True, exist_ok=True)
     duration = duration if duration is not None else probe(path).duration

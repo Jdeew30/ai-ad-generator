@@ -42,7 +42,7 @@ class LayoutPlan:
 Face = tuple[float, float, float, float]  # cx, cy, w, h as fractions of the frame
 
 
-def faces_per_frame(frames: list[Path], *, min_score: float = 0.75) -> list[tuple[Path, Face | None]]:
+def faces_per_frame(frames: list[Path], *, min_score: float = 0.7) -> list[tuple[Path, Face | None]]:
     """Largest face of each frame (YuNet), or None."""
     import cv2
 
@@ -69,7 +69,7 @@ def faces_per_frame(frames: list[Path], *, min_score: float = 0.75) -> list[tupl
     return results
 
 
-def detect_faces(frames: list[Path], *, min_score: float = 0.75) -> list[Face]:
+def detect_faces(frames: list[Path], *, min_score: float = 0.7) -> list[Face]:
     """Largest face of each frame where one was found."""
     return [face for _, face in faces_per_frame(frames, min_score=min_score) if face is not None]
 
