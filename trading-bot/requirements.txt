@@ -1,0 +1,2 @@
+# Uniquement nécessaire pour le mode live (backtest et paper n'ont aucune dépendance)
+ccxt>=4.4,<5
