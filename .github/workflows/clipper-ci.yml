@@ -1,0 +1,67 @@
+name: Clipper CI
+
+on:
+  push:
+    paths: ["clipper/**", ".github/workflows/clipper*.yml"]
+  pull_request:
+    paths: ["clipper/**", ".github/workflows/clipper*.yml"]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: clipper
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: clipper/requirements*.txt
+      - name: Installer ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: pip install -r requirements-dev.txt
+      - run: python -m pytest -q
+
+  # Vrai Twitch, sans aucun identifiant et sans rien publier : prouve que la découverte, le
+  # téléchargement, la transcription et le montage fonctionnent aujourd'hui. Le short monté est
+  # disponible en artefact du workflow.
+  smoke:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    defaults:
+      run:
+        working-directory: clipper
+    env:
+      CLIPPER_OUTPUT_DIR: ${{ github.workspace }}/smoke-output
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: clipper/requirements*.txt
+      - name: Installer ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: pip install -r requirements.txt
+      - name: Modèle Whisper en cache
+        uses: actions/cache@v4
+        with:
+          path: clipper/data/models
+          key: whisper-${{ hashFiles('clipper/config.yaml') }}
+          restore-keys: whisper-
+      - name: Essai à blanc sur les clips Twitch du moment
+        run: python -m clipper run --dry-run --count 2 --no-queue
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: clipper-smoke-${{ github.run_id }}
+          path: smoke-output/
+          retention-days: 7
+          if-no-files-found: ignore

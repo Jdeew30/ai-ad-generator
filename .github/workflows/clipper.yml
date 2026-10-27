@@ -1,0 +1,129 @@
+name: Clipper
+
+# Robot de la chaîne : 3 shorts par jour + le best-of du dimanche.
+# Les horaires sont en UTC (Paris = UTC+1 l'hiver, UTC+2 l'été). Les workflows planifiés ne
+# tournent que depuis la branche par défaut du dépôt.
+on:
+  schedule:
+    - cron: "13 11 * * *" # ~12h13 à Paris (hiver)
+    - cron: "47 16 * * *" # ~17h47
+    - cron: "29 19 * * *" # ~20h29
+    - cron: "41 8 * * 0" # dimanche ~9h41 : compilation de la semaine
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "shorts = clips du moment, compilation = best-of, url = monter une URL précise"
+        type: choice
+        options: [shorts, compilation, url]
+        default: shorts
+      url:
+        description: "Mode url : clip Twitch, VOD, vidéo YouTube…"
+        required: false
+      start:
+        description: "Mode url : début (ex. 1:23)"
+        required: false
+      end:
+        description: "Mode url : fin (ex. 2:05)"
+        required: false
+      dry_run:
+        description: "Essai à blanc : monter sans publier"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write # pousse l'état (clips déjà publiés) sur la branche clipper-state
+
+concurrency:
+  group: clipper
+  cancel-in-progress: false
+
+jobs:
+  clip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    defaults:
+      run:
+        working-directory: clipper
+    env:
+      CLIPPER_STATE_PATH: ${{ github.workspace }}/.clipper-state/state.json
+      CLIPPER_OUTPUT_DIR: ${{ github.workspace }}/clipper-output
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Charger l'état (branche clipper-state)
+        working-directory: ${{ github.workspace }}
+        run: |
+          if git ls-remote --exit-code --heads origin clipper-state > /dev/null 2>&1; then
+            git fetch --depth=1 origin clipper-state
+            git worktree add --detach .clipper-state FETCH_HEAD
+          else
+            git worktree add --orphan -b clipper-state .clipper-state
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: clipper/requirements.txt
+
+      - name: Installer ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Modèle Whisper en cache
+        uses: actions/cache@v4
+        with:
+          path: clipper/data/models
+          key: whisper-${{ hashFiles('clipper/config.yaml') }}
+          restore-keys: whisper-
+
+      - name: Lancer le clipper
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
+          YTDLP_COOKIES: ${{ secrets.YTDLP_COOKIES }}
+          MODE: ${{ github.event_name == 'schedule' && (github.event.schedule == '41 8 * * 0' && 'compilation' || 'shorts') || inputs.mode }}
+          URL: ${{ inputs.url }}
+          START: ${{ inputs.start }}
+          END: ${{ inputs.end }}
+          DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: |
+          case "$MODE" in
+            compilation) python -m clipper compile $DRY_RUN ;;
+            url)
+              if [ -z "$URL" ]; then echo "::error::Le mode url demande une URL"; exit 1; fi
+              python -m clipper run $DRY_RUN --url "$URL" ${START:+--start "$START"} ${END:+--end "$END"} ;;
+            *) python -m clipper run $DRY_RUN ;;
+          esac
+
+      - name: Sauvegarder l'état
+        if: always()
+        working-directory: ${{ github.workspace }}/.clipper-state
+        run: |
+          git add -A
+          if ! git diff --cached --quiet; then
+            git -c user.name="clipper-bot" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "clipper: état du $(date -u '+%F %H:%M') UTC"
+            git push -q origin HEAD:clipper-state
+          fi
+
+      - name: Vidéos montées (à télécharger pour publier à la main si besoin)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clipper-${{ github.run_id }}
+          path: clipper-output/
+          retention-days: 7
+          if-no-files-found: ignore
