@@ -1,0 +1,368 @@
+from __future__ import annotations
+
+import base64
+import json
+import logging
+import re
+import unicodedata
+from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
+from .captions import clean
+from .config import Config
+from .models import Candidate, CompilationMeta, ShortMeta, Transcript
+
+log = logging.getLogger(__name__)
+
+# Server-side refusal fallback ("default" routing) is offered on these models only.
+FALLBACK_MODELS = {"claude-opus-5-5", "claude-opus-5", "claude-sonnet-5-5", "claude-fable-5-1"}
+FALLBACK_BETA = "server-side-fallback-2026-07-01"
+MAX_SHORT = 59.0  # trimmed length ceiling (Shorts/TikTok sweet spot)
+MIN_SHORT = 8.0
+
+SHORTS_SYSTEM = """Tu es le rédacteur en chef d'une chaîne francophone (YouTube Shorts et TikTok) qui republie, \
+en les créditant, les meilleurs moments de streamers et de vidéastes. On te présente des extraits candidats : \
+pour chacun, tu décides s'il mérite d'être publié, tu notes son potentiel, et tu écris les textes de publication.
+
+Ce qui fait un bon extrait (score élevé) : un moment fort compréhensible sans contexte en moins de 3 secondes \
+(réaction, fou rire, rage, fail, clutch, punchline, situation absurde), une vraie chute, un rythme sans temps mort.
+Score faible : rien de notable, silence ou menus, moment qui n'a de sens qu'avec le contexte du live, publicité \
+ou sponsor, écran d'attente.
+
+Rejette (verdict "reject", avec la raison) tout extrait qui contient : nudité ou contenu sexuel ; haine, \
+harcèlement ou insultes visant une personne ou un groupe ; violence réelle ou automutilation ; informations \
+privées (adresse, téléphone, messages privés, visage d'un anonyme mis en cause) ; un mineur dans une situation \
+gênante ; des accusations contre une personne réelle ; une moquerie d'un anonyme (viewer, appel) ; ou s'il \
+s'agit surtout de musique, film ou émission TV qui n'appartient pas au créateur.
+
+Textes, en français, sans mentir sur le contenu :
+- hook : accroche incrustée sur la vidéo, 40 caractères maximum, sans emoji ni hashtag, qui donne envie de \
+regarder sans révéler la chute (ex. « IL NE S'Y ATTENDAIT PAS »).
+- title : titre YouTube de 90 caractères maximum, avec le nom du créateur, au plus un emoji, pas de hashtag.
+- description : une ou deux phrases.
+- hashtags : 3 à 6, en minuscules, sans « # » ni espace (nom du créateur, jeu s'il y a lieu, thème).
+- trim_start / trim_end : bornes en secondes, relatives au début de l'extrait, qui gardent le moment entier \
+(mise en place et chute) et coupent les temps morts ; durée finale entre 8 et 59 secondes quand l'extrait le \
+permet. Si l'extrait est déjà bon, renvoie 0 et sa durée.
+
+Les transcriptions viennent d'une reconnaissance vocale automatique : elles peuvent contenir des erreurs."""
+
+COMPILATION_SYSTEM = """Tu es le rédacteur en chef d'une chaîne YouTube francophone de best-of de streamers. \
+Tu écris le titre, l'introduction de la description, les hashtags et le texte de la miniature d'une \
+compilation dont on te donne la liste des clips (du dernier au premier du classement). Titre de 90 caractères \
+maximum avec les noms des créateurs les plus connus, sans mentir sur le contenu ; texte de miniature de 4 à 6 \
+mots percutants en majuscules sans emoji ; 3 à 8 hashtags en minuscules sans « # »."""
+
+SHORTS_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "clips": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "string"},
+                    "verdict": {"type": "string", "enum": ["publish", "reject"]},
+                    "reason": {"type": "string"},
+                    "score": {"type": "integer"},
+                    "hook": {"type": "string"},
+                    "title": {"type": "string"},
+                    "description": {"type": "string"},
+                    "hashtags": {"type": "array", "items": {"type": "string"}},
+                    "trim_start": {"type": "number"},
+                    "trim_end": {"type": "number"},
+                },
+                "required": [
+                    "id", "verdict", "reason", "score", "hook", "title", "description", "hashtags", "trim_start", "trim_end",
+                ],  # fmt: skip
+                "additionalProperties": False,
+            },
+        }
+    },
+    "required": ["clips"],
+    "additionalProperties": False,
+}
+
+COMPILATION_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "title": {"type": "string"},
+        "intro": {"type": "string"},
+        "hashtags": {"type": "array", "items": {"type": "string"}},
+        "thumbnail_text": {"type": "string"},
+    },
+    "required": ["title", "intro", "hashtags", "thumbnail_text"],
+    "additionalProperties": False,
+}
+
+
+@dataclass
+class ReviewItem:
+    candidate: Candidate
+    duration: float  # length of the downloaded extract
+    transcript: Transcript | None = None
+    sheet: Path | None = None  # contact sheet of a few frames
+
+
+@dataclass
+class Review:
+    verdict: str  # "publish" | "reject"
+    reason: str
+    score: float  # 0..100
+    meta: ShortMeta
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "verdict": self.verdict,
+            "reason": self.reason,
+            "score": self.score,
+            "meta": {
+                "hook": self.meta.hook,
+                "title": self.meta.title,
+                "description": self.meta.description,
+                "hashtags": self.meta.hashtags,
+                "trim_start": self.meta.trim_start,
+                "trim_end": self.meta.trim_end,
+                "ai": self.meta.ai,
+            },
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> Review:
+        return cls(
+            verdict=data["verdict"], reason=data.get("reason", ""), score=float(data.get("score", 0)), meta=ShortMeta(**data["meta"])
+        )
+
+
+def hashtag(text: str | None) -> str:
+    """'Joueur du Grenier' -> 'joueurdugrenier' (letters and digits only, accents removed)."""
+    if not text:
+        return ""
+    ascii_text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]", "", ascii_text.lower())
+
+
+def _hashtags(values: list[str], limit: int = 8) -> list[str]:
+    seen: list[str] = []
+    for value in values:
+        tag = hashtag(value)
+        if tag and tag not in seen:
+            seen.append(tag)
+    return seen[:limit]
+
+
+def _cut(text: str, limit: int) -> str:
+    text = " ".join(text.split())
+    return text if len(text) <= limit else text[: limit - 1].rstrip(" ,.;:-") + "…"
+
+
+def default_trim(candidate: Candidate, duration: float) -> tuple[float | None, float | None]:
+    """Long YouTube windows without an AI pick: keep MAX_SHORT seconds around the peak."""
+    if duration <= MAX_SHORT + 1 or candidate.manual:
+        return None, None
+    start = max(0.0, (duration - MAX_SHORT) * 0.45)
+    return round(start, 2), round(start + MAX_SHORT, 2)
+
+
+def template_review(item: ReviewItem, config: Config) -> Review:
+    """No AI: the original title becomes the hook and the title, popularity becomes the score."""
+    candidate = item.candidate
+    base = clean(candidate.title) or f"Moment fort de {candidate.streamer}"
+    title = base if candidate.streamer.lower() in base.lower() else f"{candidate.streamer} : {base}"
+    trim_start, trim_end = default_trim(candidate, item.duration)
+    meta = ShortMeta(
+        hook=_cut(base, 40),
+        title=_cut(title, 95),
+        description=f"{base} — {candidate.streamer} en live.",
+        hashtags=_hashtags([candidate.streamer_login, candidate.game or "", *config.channel.hashtags]),
+        trim_start=trim_start,
+        trim_end=trim_end,
+        ai=False,
+    )
+    return Review(verdict="publish", reason="gabarit (sans IA)", score=min(100.0, candidate.score * 10), meta=meta)
+
+
+def _validated(raw: dict[str, Any], item: ReviewItem, config: Config) -> Review:
+    candidate = item.candidate
+    fallback = template_review(item, config)
+    hook = _cut(clean(str(raw.get("hook") or "")), 48) or fallback.meta.hook
+    title = _cut(clean(str(raw.get("title") or "")), 95) or fallback.meta.title
+    description = _cut(str(raw.get("description") or "").strip(), 900) or fallback.meta.description
+    tags = _hashtags([*(raw.get("hashtags") or []), candidate.streamer_login, *config.channel.hashtags])
+    trim_start, trim_end = fallback.meta.trim_start, fallback.meta.trim_end
+    try:
+        start, end = float(raw.get("trim_start", 0.0)), float(raw.get("trim_end", item.duration))
+        start, end = max(0.0, start), min(item.duration, end)
+        if end - start >= min(MIN_SHORT, item.duration) - 0.01 and (start > 0.05 or end < item.duration - 0.05):
+            trim_start, trim_end = round(start, 2), round(min(end, start + 180.0), 2)
+        elif end - start >= min(MIN_SHORT, item.duration) - 0.01:
+            trim_start, trim_end = None, None
+    except (TypeError, ValueError):
+        pass
+    verdict = raw.get("verdict") if raw.get("verdict") in {"publish", "reject"} else "publish"
+    score = max(0.0, min(100.0, float(raw.get("score") or 0)))
+    meta = ShortMeta(
+        hook=hook, title=title, description=description, hashtags=tags, trim_start=trim_start, trim_end=trim_end, ai=True
+    )
+    return Review(verdict=verdict, reason=_cut(str(raw.get("reason") or ""), 300), score=score, meta=meta)
+
+
+def _age(created: datetime | None, now: datetime) -> str:
+    if created is None:
+        return "date inconnue"
+    hours = (now - created).total_seconds() / 3600
+    return f"il y a {hours:.0f} h" if hours < 48 else f"il y a {hours / 24:.0f} j"
+
+
+class ClaudeCurator:
+    """Reviews candidates and writes publication texts with Claude (structured JSON output)."""
+
+    def __init__(self, api_key: str, config: Config, *, client: Any = None) -> None:
+        import anthropic
+
+        self.config = config
+        self.client = client or anthropic.Anthropic(api_key=api_key, max_retries=3)
+        self.disabled_reason: str | None = None
+
+    def _call(self, system: str, content: list[dict[str, Any]], schema: dict[str, Any]) -> dict[str, Any] | None:
+        import anthropic
+
+        if self.disabled_reason:
+            return None
+        model = self.config.ai.model
+        extra: dict[str, Any] = {}
+        if model in FALLBACK_MODELS:
+            extra = {"betas": [FALLBACK_BETA], "fallbacks": "default"}
+        request: dict[str, Any] = {
+            "model": model,
+            "max_tokens": 16000,
+            "system": system,
+            "output_config": {"effort": self.config.ai.effort, "format": {"type": "json_schema", "schema": schema}},
+            "messages": [{"role": "user", "content": content}],
+        }
+        try:
+            try:
+                response = self.client.beta.messages.create(**request, **extra)
+            except anthropic.BadRequestError as exc:
+                if not extra:
+                    raise
+                # The refusal fallback is a beta: never let it cost the whole review.
+                log.warning("Claude : repli serveur refusé (%s), nouvel essai sans.", exc.message)
+                response = self.client.beta.messages.create(**request)
+        except anthropic.AuthenticationError:
+            self.disabled_reason = "ANTHROPIC_API_KEY refusée"
+            log.error("Claude : clé API refusée, textes générés par gabarit pour ce passage.")
+            return None
+        except anthropic.PermissionDeniedError as exc:
+            self.disabled_reason = "accès refusé"
+            log.error("Claude : accès refusé (%s), textes générés par gabarit.", exc.message)
+            return None
+        except anthropic.BadRequestError as exc:
+            log.error("Claude : requête refusée (%s), textes générés par gabarit.", exc.message)
+            return None
+        except anthropic.RateLimitError:
+            log.warning("Claude : limite de débit atteinte, textes générés par gabarit.")
+            return None
+        except anthropic.APIStatusError as exc:
+            log.warning("Claude : erreur %s (%s), textes générés par gabarit.", exc.status_code, exc.message)
+            return None
+        except anthropic.APIConnectionError:
+            log.warning("Claude : injoignable, textes générés par gabarit.")
+            return None
+        if response.stop_reason == "refusal":
+            details = getattr(response, "stop_details", None)
+            log.warning("Claude a décliné la demande (%s), textes générés par gabarit.", getattr(details, "category", None))
+            return None
+        if response.stop_reason == "max_tokens":
+            log.warning("Claude : réponse tronquée, textes générés par gabarit.")
+            return None
+        text = next((block.text for block in response.content if block.type == "text"), "")
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError:
+            log.warning("Claude : JSON illisible, textes générés par gabarit.")
+            return None
+        return data if isinstance(data, dict) else None
+
+    def review(self, items: list[ReviewItem], *, now: datetime) -> dict[str, Review]:
+        """One request for the whole batch: Claude compares the candidates with each other."""
+        if not items:
+            return {}
+        content: list[dict[str, Any]] = []
+        ids: dict[str, ReviewItem] = {}
+        for index, item in enumerate(items, start=1):
+            clip_id = f"c{index}"
+            ids[clip_id] = item
+            candidate = item.candidate
+            transcript = item.transcript.timestamped() if item.transcript and item.transcript.words else "(aucune parole détectée)"
+            lines = [
+                f'<candidat id="{clip_id}">',
+                f"Créateur : {candidate.streamer} ({candidate.credit})",
+                f"Source : {candidate.source}" + (" (ajouté à la main)" if candidate.manual else ""),
+                f"Titre d'origine : {candidate.title or '(aucun)'}",
+                f"Jeu / catégorie : {candidate.game or 'inconnu'}",
+                f"Vues : {candidate.views} · publié {_age(candidate.created_at, now)} · durée de l'extrait : {item.duration:.1f} s",
+                "Transcription (secondes depuis le début de l'extrait) :",
+                transcript,
+                "</candidat>",
+            ]
+            content.append({"type": "text", "text": "\n".join(lines)})
+            if self.config.ai.review_frames and item.sheet and item.sheet.exists():
+                content.append({"type": "text", "text": f"Images de {clip_id} (4 instants, de gauche à droite puis de haut en bas) :"})
+                content.append(
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": "image/jpeg",
+                            "data": base64.standard_b64encode(item.sheet.read_bytes()).decode("ascii"),
+                        },
+                    }
+                )
+        content.append({"type": "text", "text": f"Évalue les {len(items)} candidats ci-dessus : un objet par candidat, avec le même id."})
+        data = self._call(SHORTS_SYSTEM, content, SHORTS_SCHEMA)
+        reviews: dict[str, Review] = {}
+        for raw in (data or {}).get("clips", []):
+            item = ids.get(str(raw.get("id")))
+            if item is not None and item.candidate.key not in reviews:
+                reviews[item.candidate.key] = _validated(raw, item, self.config)
+        missing = [item for item in items if item.candidate.key not in reviews]
+        if data is not None and missing:
+            log.warning("Claude n'a pas évalué %d candidat(s) : gabarit utilisé pour eux.", len(missing))
+        for item in missing:
+            reviews[item.candidate.key] = template_review(item, self.config)
+        return reviews
+
+    def compilation_meta(self, clips: list[tuple[Candidate, str]], *, period: str) -> CompilationMeta:
+        fallback = template_compilation_meta(clips, self.config, period=period)
+        listing = "\n".join(
+            f"#{len(clips) - i} {candidate.streamer} — {label} ({candidate.views} vues)" for i, (candidate, label) in enumerate(clips)
+        )
+        content = [{"type": "text", "text": f"Chaîne : {self.config.channel.name}\nPériode : {period}\nClips :\n{listing}"}]
+        data = self._call(COMPILATION_SYSTEM, content, COMPILATION_SCHEMA)
+        if not data:
+            return fallback
+        return CompilationMeta(
+            title=_cut(clean(str(data.get("title") or "")), 95) or fallback.title,
+            description=_cut(str(data.get("intro") or "").strip(), 1500) or fallback.description,
+            hashtags=_hashtags([*(data.get("hashtags") or []), *self.config.channel.hashtags]) or fallback.hashtags,
+            thumbnail_text=_cut(clean(str(data.get("thumbnail_text") or "")), 40) or fallback.thumbnail_text,
+            ai=True,
+        )
+
+
+def template_compilation_meta(clips: list[tuple[Candidate, str]], config: Config, *, period: str) -> CompilationMeta:
+    names: list[str] = []
+    for candidate, _ in reversed(clips):  # best first
+        if candidate.streamer not in names:
+            names.append(candidate.streamer)
+    title = f"TOP {len(clips)} des meilleurs clips de la semaine ({', '.join(names[:3])})"
+    return CompilationMeta(
+        title=_cut(title, 95),
+        description=f"Les {len(clips)} moments les plus forts de la semaine ({period}), du #{len(clips)} au #1.",
+        hashtags=_hashtags([*names[:5], *config.channel.hashtags, "bestof"]),
+        thumbnail_text=f"TOP {len(clips)} DE LA SEMAINE",
+        ai=False,
+    )

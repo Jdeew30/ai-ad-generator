@@ -108,3 +108,7 @@ Règles du contrat : `cleanup?` (optionnel) est appelé une fois le job terminé
 - `npm audit` signale 4 vulnérabilités « high » dans la chaîne **CLI** de Prisma (`prisma` → `@prisma/config` → `deepmerge-ts`, `mysql2`), en `devDependencies`, hors exécution de l'application et sans usage de MySQL. À surveiller lors des prochaines versions de Prisma 7.
 - Prisma 7.10 (dernière version stable) est utilisé ; le tag `latest` de npm pointe sur une RC 8.
 - Les attentes de l'API Claude respectent les contraintes d'Opus 5.5 (pas de `thinking` désactivé, pas de paramètres d'échantillonnage, `effort` explicite). Le paramètre serveur `fallbacks` n'est **pas** activé : sa combinaison de beta-headers n'a pas pu être vérifiée sans clé, et un refus est de toute façon remonté proprement à l'utilisateur.
+
+## Clipper : chaîne de clips automatisée
+
+Le dossier [`clipper/`](clipper/README.md) contient un outil Python indépendant de l'application : il repère les meilleurs moments des streamers (clips Twitch, pics « les plus revus » sur YouTube), les monte en shorts verticaux sous-titrés et en best-of de la semaine, puis les publie sur YouTube et TikTok depuis GitHub Actions (`.github/workflows/clipper.yml`). Mode d'emploi, état réel et limites : [`clipper/README.md`](clipper/README.md).

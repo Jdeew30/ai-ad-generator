@@ -1,0 +1,174 @@
+from datetime import timedelta
+from pathlib import Path
+
+import pytest
+
+from clipper.config import Config, Secrets, YouTubeSourceConfig, build
+from clipper.sources import discover
+from clipper.sources.manual import QueueError, load_queue, manual_candidate, parse_timestamp
+from clipper.sources.twitch import TwitchApi, clip_slug, discover_twitch
+from clipper.sources.youtube import candidates_from_info, channel_url, most_replayed
+from clipper.ytdlp import DownloadError
+
+from .conftest import NOW
+
+
+def helix_clip(slug: str, views: int, *, offset=120, video="v1", login_id="1", name="Squeezie", game="g1"):
+    return {
+        "id": slug, "url": f"https://clips.twitch.tv/{slug}", "broadcaster_id": login_id, "broadcaster_name": name,
+        "creator_name": "viewer42", "video_id": video, "game_id": game, "language": "fr", "title": f"clip {slug}",
+        "view_count": views, "created_at": "2026-10-27T10:00:00Z", "thumbnail_url": "https://t/x.jpg",
+        "duration": 29.9, "vod_offset": offset,
+    }  # fmt: skip
+
+
+class FakeYtDlp:
+    def __init__(self, listings=None, infos=None):
+        self.listings = listings or {}
+        self.infos = infos or {}
+        self.listed: list[str] = []
+
+    def list_flat(self, url, limit):
+        self.listed.append(url)
+        for prefix, entries in self.listings.items():
+            if url.startswith(prefix):
+                if isinstance(entries, Exception):
+                    raise entries
+                return entries[:limit]
+        raise DownloadError("not found", permanent=True)
+
+    def info(self, url):
+        return self.infos[url]
+
+
+def test_helix_discovery(server, http):
+    server.route("POST", "/oauth2/token", (200, {}, {"access_token": "tok", "expires_in": 5000}))
+    server.route("GET", "/helix/streams", (200, {}, {"data": [{"user_login": "Gotaga"}, {"user_login": "squeezie"}, {"user_login": "blocked"}]}))
+    server.route("GET", "/helix/users", (200, {}, {"data": [
+        {"id": "1", "login": "squeezie", "display_name": "Squeezie"},
+        {"id": "2", "login": "gotaga", "display_name": "Gotaga"},
+    ]}))  # fmt: skip
+
+    def clips(request):
+        if request.query["broadcaster_id"] == ["1"]:
+            return 200, {}, {"data": [helix_clip("SlugA", 5000), helix_clip("SlugB", 300, offset=None, video="")]}
+        return 200, {}, {"data": [helix_clip("SlugC", 900, login_id="2", name="Gotaga", game="g2")]}
+
+    server.route("GET", "/helix/clips", clips)
+    server.route("GET", "/helix/games", (200, {}, {"data": [{"id": "g1", "name": "Fortnite"}, {"id": "g2", "name": "Valorant"}]}))
+    config = build(Config, {"twitch": {"streamers": ["squeezie", "nobody"]}, "blocklist": ["blocked"]})
+    api = TwitchApi("cid", "secret", http, base_url=f"{server.url}/helix", token_url=f"{server.url}/oauth2/token")
+    found = discover_twitch(config, Secrets(), http, FakeYtDlp(), now=NOW, window=timedelta(hours=36), api=api)
+
+    by_key = {c.key: c for c in found}
+    assert set(by_key) == {"twitch:SlugA", "twitch:SlugB", "twitch:SlugC"}
+    a = by_key["twitch:SlugA"]
+    assert (a.streamer, a.streamer_login, a.game, a.views, a.vod_id, a.vod_offset, a.clipper) == (
+        "Squeezie", "squeezie", "Fortnite", 5000, "v1", 120.0, "viewer42",
+    )  # fmt: skip
+    assert by_key["twitch:SlugB"].vod_id is None and by_key["twitch:SlugB"].vod_offset is None
+    users = server.calls("GET", "/helix/users")[0]
+    assert sorted(users.query["login"]) == ["gotaga", "nobody", "squeezie"]  # live channel added, blocked one not
+    clip_call = server.calls("GET", "/helix/clips")[0]
+    assert clip_call.headers["client-id"] == "cid" and clip_call.headers["authorization"] == "Bearer tok"
+    assert clip_call.query["started_at"] == ["2026-10-26T00:00:00Z"] and clip_call.query["ended_at"] == ["2026-10-27T12:00:00Z"]
+
+
+def test_helix_refreshes_an_expired_app_token(server, http):
+    tokens = iter(["old", "new"])
+    server.route("POST", "/token", lambda _r: (200, {}, {"access_token": next(tokens)}))
+    server.route("GET", "/helix/users", lambda r: (401, {}, {"message": "Invalid OAuth token"}) if r.headers["authorization"] == "Bearer old" else (200, {}, {"data": []}))
+    api = TwitchApi("cid", "s", http, base_url=f"{server.url}/helix", token_url=f"{server.url}/token")
+    assert api.users(["x"]) == {}
+    assert len(server.calls("POST", "/token")) == 2
+
+
+def test_listing_fallback_without_api_keys():
+    entries = [
+        {"url": "https://clips.twitch.tv/Fresh-Slug_1", "title": "frais", "view_count": 800, "duration": 20, "timestamp": (NOW - timedelta(hours=2)).timestamp()},
+        {"url": "https://clips.twitch.tv/OldSlug", "title": "vieux", "view_count": 9000, "duration": 20, "timestamp": (NOW - timedelta(days=3)).timestamp()},
+        {"url": "https://www.twitch.tv/videos/123", "title": "pas un clip"},
+    ]
+    ytdlp = FakeYtDlp({"https://www.twitch.tv/squeezie/clips": entries, "https://www.twitch.tv/broken": DownloadError("boom")})
+    config = build(Config, {"twitch": {"streamers": ["squeezie", "broken"]}})
+    found = discover_twitch(config, Secrets(), None, ytdlp, now=NOW, window=timedelta(hours=36))
+    assert [c.key for c in found] == ["twitch:Fresh-Slug_1"]
+    assert "range=7d" in ytdlp.listed[0]  # 36 h window needs the weekly list, then filters by date
+
+
+def test_clip_slug_variants():
+    assert clip_slug("https://clips.twitch.tv/FaintLightGullWholeWheat") == "FaintLightGullWholeWheat"
+    assert clip_slug("https://www.twitch.tv/xqc/clip/Cultured-TiZ_-ixAGYR3y2Uy?filter=clips") == "Cultured-TiZ_-ixAGYR3y2Uy"
+    assert clip_slug("https://clips.twitch.tv/embed?parent=a&clip=Inquisitive") == "Inquisitive"
+    assert clip_slug("https://www.twitch.tv/videos/123") is None
+
+
+def test_most_replayed_picks_peaks_away_from_intro():
+    values = [1.0] + [0.2] * 40 + [0.5, 0.9, 0.95, 0.7] + [0.2] * 30 + [0.8] + [0.2] * 24
+    heatmap = [{"start_time": i * 36.0, "end_time": (i + 1) * 36.0, "value": v} for i, v in enumerate(values)]
+    windows = most_replayed(heatmap, 3600, count=2, min_peak=0.55, seg_min=20, seg_max=58)
+    assert len(windows) == 2
+    (s1, e1, h1), (s2, e2, h2) = windows
+    assert h1 == 0.95 and 1476 <= s1 < 1548 and e1 - s1 == pytest.approx(72, abs=0.2)  # hot region kept whole, trimmed later
+    assert h2 == 0.8 and e2 - s2 == pytest.approx(36, abs=0.2)
+    assert most_replayed(heatmap, 3600, count=3, min_peak=0.99, seg_min=20, seg_max=58) == []
+
+
+def test_youtube_candidates_from_info():
+    heatmap = [{"start_time": i * 10.0, "end_time": (i + 1) * 10.0, "value": 0.9 if i == 50 else 0.1} for i in range(100)]
+    info = {
+        "id": "abcdefghijk", "title": "Ma vidéo", "uploader_id": "@Squeezie", "channel": "Squeezie",
+        "channel_url": "https://www.youtube.com/@Squeezie", "view_count": 50000, "duration": 1000,
+        "timestamp": (NOW - timedelta(days=1)).timestamp(), "heatmap": heatmap,
+    }  # fmt: skip
+    config = build(Config, {})
+    settings = YouTubeSourceConfig(enabled=True)
+    [candidate] = candidates_from_info(info, settings, config, NOW)
+    assert candidate.key.startswith("youtube:abcdefghijk@")
+    assert candidate.streamer_login == "squeezie" and candidate.start < 505 < candidate.end
+    assert candidate.vod_span()[0] == "yt:abcdefghijk"
+    assert candidates_from_info({**info, "view_count": 10}, settings, config, NOW) == []
+    assert candidates_from_info({**info, "timestamp": (NOW - timedelta(days=30)).timestamp()}, settings, config, NOW) == []
+    assert channel_url("Squeezie") == "https://www.youtube.com/@Squeezie"
+    assert channel_url("UC" + "x" * 22).endswith("/channel/UC" + "x" * 22)
+
+
+def test_manual_queue(tmp_path: Path):
+    assert parse_timestamp("1:23") == 83 and parse_timestamp("1h2m3s") == 3723 and parse_timestamp(7) == 7
+    with pytest.raises(QueueError):
+        parse_timestamp("demain")
+    clip = manual_candidate("https://clips.twitch.tv/SomeSlug")
+    assert clip.key == "twitch:SomeSlug" and clip.manual
+    segment = manual_candidate("https://youtu.be/abcdefghijk", "1:00", "1:45")
+    assert segment.key == "youtube:abcdefghijk@60-105" and segment.duration == 45
+    vod = manual_candidate("https://www.twitch.tv/gotaga/v/123?t=1h", "10", "40")
+    assert vod.key.startswith("manual:") and vod.streamer_login == "gotaga"
+    with pytest.raises(QueueError):
+        manual_candidate("https://youtu.be/abcdefghijk", "2:00", "1:00")
+
+    queue = tmp_path / "queue.yaml"
+    queue.write_text("items:\n  - https://clips.twitch.tv/A\n  - url: https://youtu.be/abcdefghijk\n    start: 10\n    end: 30\n", encoding="utf-8")
+    assert [c.key for c in load_queue(queue)] == ["twitch:A", "youtube:abcdefghijk@10-30"]
+    queue.write_text("items:\n  - url: https://clips.twitch.tv/A\n    debut: 3\n", encoding="utf-8")
+    with pytest.raises(QueueError, match="debut"):
+        load_queue(queue)
+    assert load_queue(tmp_path / "missing.yaml") == []
+
+
+def test_discover_puts_the_queue_first(tmp_path: Path):
+    queue = tmp_path / "queue.yaml"
+    queue.write_text("items: [https://clips.twitch.tv/Manual]\n", encoding="utf-8")
+    entries = [{"url": "https://clips.twitch.tv/Auto", "view_count": 500, "duration": 20, "timestamp": NOW.timestamp()}]
+    config = build(Config, {"twitch": {"streamers": ["s"]}})
+    found = discover(config, Secrets(), None, FakeYtDlp({"https://www.twitch.tv/s/clips": entries}), now=NOW,
+                     window=timedelta(hours=24), queue=queue)
+    assert [c.key for c in found] == ["twitch:Manual", "twitch:Auto"]
+
+
+def test_an_unreachable_twitch_is_an_error_not_an_empty_day():
+    from clipper.sources.twitch import SourceError
+
+    ytdlp = FakeYtDlp({"https://www.twitch.tv/": DownloadError("Tunnel connection failed: 403")})
+    config = build(Config, {"twitch": {"streamers": ["a", "b"]}})
+    with pytest.raises(SourceError, match="toutes les chaînes"):
+        discover_twitch(config, Secrets(), None, ytdlp, now=NOW, window=timedelta(hours=24))

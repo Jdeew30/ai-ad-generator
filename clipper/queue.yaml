@@ -1,0 +1,12 @@
+# File d'attente manuelle : ces URLs passent avant les clips découverts automatiquement
+# (sans filtre de popularité ; l'IA écrit seulement les textes). Chaque URL n'est traitée qu'une fois.
+# Formats d'horodatage : 83, 1:23, 1:02:03 ou 1h2m3s.
+items: []
+#  - url: https://clips.twitch.tv/NomDuClip
+#  - url: https://www.youtube.com/watch?v=XXXXXXXXXXX
+#    start: "12:34"
+#    end: "13:10"
+#  - url: https://www.twitch.tv/videos/1234567890
+#    start: 1h02m10s
+#    end: 1h02m55s
+#    title: "Il découvre la surprise"

@@ -1,0 +1,108 @@
+# Configuration du clipper. Toutes les clés sont facultatives (valeurs par défaut dans clipper/config.py).
+# Une clé inconnue ou une valeur invalide arrête le programme avec un message clair.
+
+channel:
+  name: "Clips FR"              # nom de votre chaîne (descriptions, compilations)
+  language: fr                  # langue des sous-titres et des métadonnées
+  hashtags: [clip, twitchfr, drole]
+
+twitch:
+  enabled: true
+  # Logins Twitch suivis (la fin de l'URL twitch.tv/<login>). Un login inconnu est signalé dans le journal.
+  streamers:
+    - squeezie
+    - gotaga
+    - kamet0
+    - zerator
+    - aminematue
+    - inoxtag
+    - michou
+    - joueur_du_grenier
+    - ponce
+    - mistermv
+    - antoinedaniellive
+    - domingo
+    - locklear
+    - sardoche
+    - maghla
+    - etoiles
+    - bagherajones
+    - lebouseuh
+    - wankilstudio
+    - anyme023
+    - rivenzi
+    - zacknani
+    - doigby
+    - ultia
+  # Avec les clés API Twitch : ajoute aussi les plus gros lives du moment dans cette langue.
+  discover_live: true
+  discover_language: fr
+  discover_limit: 15
+  clips_per_streamer: 20
+  window_hours: 36              # ancienneté maximale d'un clip pour un short
+  min_views: 300
+
+youtube:
+  # Moments « les plus revus » des vidéos récentes. Désactivé par défaut : YouTube bloque souvent
+  # les serveurs de GitHub (voir README, section YouTube).
+  enabled: false
+  channels: []                  # ex. ["@Squeezie", "https://www.youtube.com/@ZeratoRVOD"]
+  videos_per_channel: 3
+  max_age_days: 7
+  min_views: 20000
+  segments_per_video: 2
+
+shorts:
+  per_run: 1                    # shorts publiés à chaque passage (3 passages par jour dans le workflow)
+  candidates_factor: 3          # avec Claude : 3 candidats examinés par short publié
+  max_per_streamer_per_day: 2
+  min_duration: 8
+  max_duration: 90
+  layout: auto                  # auto | split (facecam en haut) | crop (plein cadre) | blur (fond flouté)
+  captions: true                # sous-titres animés mot à mot (Whisper)
+  hook: true                    # accroche incrustée en haut de la vidéo
+  hook_seconds: 3
+  highlight_color: "#FFE600"    # couleur du mot prononcé
+  credit: true                  # « twitch.tv/<streamer> » incrusté sur la vidéo
+  whisper_model: small          # tiny | base | small | medium | large-v3-turbo (plus précis, plus lent)
+  max_fps: 60
+
+compilation:
+  clips: 12                     # « TOP 12 » de la semaine
+  min_clips: 5
+  window_days: 7
+  max_minutes: 15
+  intro: true
+
+ai:
+  enabled: auto                 # auto = Claude si ANTHROPIC_API_KEY est défini
+  model: claude-opus-5-5
+  effort: medium
+  review_frames: true           # montre 4 images de chaque extrait à Claude (en plus de la transcription)
+
+publish:
+  youtube:
+    enabled: auto               # auto = si les secrets YOUTUBE_* sont présents
+    privacy: public             # public | unlisted | private
+    category_id: "20"           # 20 Jeux vidéo, 24 Divertissement, 23 Humour
+    shorts: true
+    compilations: true
+    notify_subscribers: true
+  tiktok:
+    enabled: auto
+    mode: inbox                 # inbox = brouillon dans votre appli TikTok (1 tap pour publier) ; direct = publication directe (app auditée)
+    privacy: PUBLIC_TO_EVERYONE
+  telegram:
+    enabled: auto               # chaque vidéo arrive sur votre téléphone avec le texte à coller
+
+# Chaînes qui ont demandé à ne pas être clippées : jamais téléchargées.
+blocklist: []
+
+# Réglages par streamer (login en minuscules).
+streamers: {}
+#  squeezie:
+#    name: Squeezie             # nom affiché
+#    layout: split
+#    facecam: [0.0, 0.62, 0.22, 0.38]   # position de la facecam : x, y, largeur, hauteur (fractions de l'image)
+#  unstreamer:
+#    skip: true
