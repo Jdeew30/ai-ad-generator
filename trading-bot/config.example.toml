@@ -1,0 +1,47 @@
+# Configuration de TradeBot
+# Copiez ce fichier en config.toml (ou lancez : python -m tradebot init).
+# Les secrets (clés API, mots de passe) vont dans .env, jamais ici.
+
+[general]
+brand = "TradeBot"        # nom affiché (tableau de bord, Telegram, rapports) — personnalisable
+data_dir = "data"         # base de données et journaux
+
+[exchange]
+name = "binance"          # tout exchange supporté par ccxt : binance, kraken, bybit, okx, coinbase...
+mode = "paper"            # paper = argent fictif sur prix réels | live = ordres réels
+sandbox = true            # en live : true = testnet de l'exchange, false = ARGENT RÉEL
+
+[trading]
+symbols = ["BTC/USDT", "ETH/USDT"]  # même devise de cotation pour toutes les paires
+timeframe = "1h"          # unité des bougies : 15m, 1h, 4h, 1d...
+poll_seconds = 60         # fréquence de vérification (prix, stops)
+paper_capital = 10000     # capital de départ du mode paper
+slippage_pct = 0.0005     # glissement de prix simulé (paper et backtest)
+
+[strategy]
+name = "ema_rsi"          # ema_rsi | bollinger_rsi | donchian_breakout | macd_trend
+                          # liste détaillée : python -m tradebot strategies
+
+[strategy.params]         # vide = valeurs par défaut de la stratégie
+fast = 12
+slow = 26
+
+[risk]
+risk_per_trade = 0.01     # 1 % du capital perdu au maximum si le stop est touché
+stop_loss_pct = 0.03      # stop à -3 % sous le prix d'entrée...
+stop_atr_mult = 0         # ...ou, si > 0, stop à N × ATR (s'adapte à la volatilité, ex. 2.5)
+atr_period = 14
+take_profit_rr = 2.0      # objectif = 2 × la distance du stop (0 = laisser courir)
+trailing_stop_pct = 0     # stop suiveur, ex. 0.05 = -5 % sous le plus haut (0 = désactivé)
+max_position_pct = 0.25   # au plus 25 % du capital dans une même position
+max_open_positions = 3
+max_daily_loss_pct = 0.05 # coupe-circuit : plus d'achat ce jour-là après -5 % (0 = désactivé)
+fee_pct = 0.001           # frais de l'exchange par ordre (0,1 %)
+
+[telegram]
+enabled = false           # alertes + commandes à distance ; token et chat_id dans .env
+
+[dashboard]
+enabled = true
+host = "127.0.0.1"        # local uniquement ; voir le README pour un accès à distance sécurisé
+port = 8080

@@ -1,0 +1,46 @@
+MODÈLE DE CONTRAT DE LICENCE — À COMPLÉTER ET À FAIRE RELIRE PAR UN JURISTE
+Remplacez les éléments entre [crochets] avant toute diffusion.
+
+Copyright (c) 2026 [VOTRE NOM OU RAISON SOCIALE], [ADRESSE], [SIRET]. Tous droits réservés.
+
+CONTRAT DE LICENCE UTILISATEUR — [NOM DU PRODUIT]
+
+1. Objet
+Le présent contrat accorde à l'acheteur (le « Licencié ») un droit d'utilisation du logiciel
+[NOM DU PRODUIT] (le « Logiciel »), personnel, non exclusif et non transférable, pour [une seule
+installation / un nombre d'installations], pour la durée [indéterminée / de l'abonnement].
+
+2. Restrictions
+Sauf accord écrit préalable, le Licencié s'interdit de : revendre, louer, prêter, distribuer ou
+publier le Logiciel ou une version modifiée ; le mettre à disposition de tiers, y compris sous forme
+de service hébergé ; supprimer les mentions de droits d'auteur. Le Licencié peut modifier le
+Logiciel pour son propre usage.
+
+3. Nature du Logiciel — absence de conseil
+Le Logiciel est un outil d'automatisation. Il ne constitue ni un conseil en investissement, ni une
+recommandation personnalisée, ni un service de gestion de portefeuille. Le Licencié configure et
+utilise le Logiciel sous sa seule responsabilité, avec ses propres comptes et clés d'accès, que
+l'éditeur ne détient à aucun moment.
+
+4. Avertissement sur les risques
+Le trading de crypto-actifs comporte un risque élevé de perte, pouvant aller jusqu'à la totalité du
+capital engagé. Les résultats de simulation (backtests) ou passés ne préjugent pas des résultats
+futurs. Aucun rendement n'est promis ni garanti. Des dysfonctionnements (panne de réseau, de
+serveur, d'exchange ou du Logiciel) peuvent entraîner des pertes.
+
+5. Garantie et responsabilité
+Le Logiciel est fourni « en l'état ». Dans les limites permises par la loi, l'éditeur ne pourra
+être tenu responsable des pertes financières, manques à gagner ou dommages indirects liés à
+l'utilisation du Logiciel. [À adapter : responsabilité limitée au prix payé, exclusions légales
+applicables aux consommateurs.]
+
+6. Mises à jour et support
+[Durée et contenu des mises à jour et du support inclus.]
+
+7. Composants tiers
+Le Logiciel peut utiliser des composants tiers soumis à leur propre licence (notamment ccxt, licence
+MIT). Ces licences s'appliquent à ces composants.
+
+8. Droit applicable
+Le présent contrat est soumis au droit [français]. [Tribunaux compétents / médiation de la
+consommation.]

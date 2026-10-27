@@ -1,0 +1,15 @@
+services:
+  tradebot:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DASHBOARD_HOST: 0.0.0.0  # dans le conteneur ; l'accès reste limité par le port ci-dessous
+    volumes:
+      - ./config.toml:/app/config.toml:ro
+      - tradebot-data:/app/data
+    ports:
+      - "127.0.0.1:8080:8080"  # tableau de bord accessible depuis cette machine uniquement
+
+volumes:
+  tradebot-data:

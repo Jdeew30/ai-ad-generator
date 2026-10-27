@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}} — Tableau de bord</title>
+<style>
+:root {
+  --bg: #0d1117; --panel: #161b22; --panel-2: #1c2330; --line: #2a3340;
+  --text: #e6edf3; --muted: #8b98a5; --accent: #58a6ff;
+  --pos: #3fb950; --neg: #f85149; --warn: #d29922;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f6f8fa; --panel: #ffffff; --panel-2: #f3f5f8; --line: #d8dee4;
+    --text: #1f2328; --muted: #59636e; --accent: #0969da;
+    --pos: #1a7f37; --neg: #cf222e; --warn: #9a6700;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1200px; margin: 0 auto; padding: 20px 16px 48px; }
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; }
+h1 { font-size: 20px; margin: 0; }
+h2 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase;
+  letter-spacing: .04em; margin: 0 0 12px; }
+.badge { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--panel-2); }
+.badge.live { background: var(--neg); border-color: var(--neg); color: #fff; }
+.badge.sandbox { color: var(--warn); border-color: var(--warn); }
+.badge.paper { color: var(--accent); border-color: var(--accent); }
+.badge.paused, .badge.halted { color: var(--warn); border-color: var(--warn); }
+.badge.running { color: var(--pos); border-color: var(--pos); }
+.meta { color: var(--muted); font-size: 13px; }
+.spacer { flex: 1; }
+button { font: inherit; font-weight: 600; cursor: pointer; padding: 7px 14px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--panel-2); color: var(--text); }
+button:hover { border-color: var(--accent); }
+button.danger { color: var(--neg); border-color: var(--neg); }
+button.danger:hover { background: var(--neg); color: #fff; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.card, .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.card { padding: 14px 16px; }
+.card span { display: block; color: var(--muted); font-size: 12px; }
+.card strong { font-size: 20px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.card small { color: var(--muted); font-variant-numeric: tabular-nums; }
+.panel { padding: 16px; margin-bottom: 16px; overflow-x: auto; }
+.grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+.grid > * { min-width: 0; } /* les tableaux défilent dans leur panneau au lieu d'élargir la page */
+@media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+canvas { width: 100%; height: 260px; display: block; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { color: var(--muted); font-weight: 500; }
+.pos { color: var(--pos); } .neg { color: var(--neg); }
+.empty { color: var(--muted); padding: 12px 0; }
+.events { list-style: none; margin: 0; padding: 0; max-height: 420px; overflow-y: auto; font-size: 13px; }
+.events li { padding: 6px 0; border-bottom: 1px solid var(--line); white-space: pre-line; }
+.events time { color: var(--muted); font-size: 12px; display: block; }
+.events .error { color: var(--neg); } .events .warning { color: var(--warn); }
+.stale { color: var(--warn); font-weight: 600; }
+footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>{{BRAND}}</h1>
+    <span id="mode" class="badge">…</span>
+    <span id="state" class="badge">…</span>
+    <span id="meta" class="meta"></span>
+    <span class="spacer"></span>
+    <button id="pause" type="button">Pause</button>
+    <button id="resume" type="button" hidden>Reprendre</button>
+    <button id="closeAll" type="button" class="danger">Tout fermer</button>
+  </header>
+
+  <section class="cards" aria-label="Indicateurs">
+    <div class="card"><span>Capital total</span><strong id="equity">—</strong></div>
+    <div class="card"><span>Disponible</span><strong id="cash">—</strong></div>
+    <div class="card"><span>Résultat du jour</span><strong id="today">—</strong><small id="todayPct"></small></div>
+    <div class="card"><span>Résultat réalisé (total)</span><strong id="realized">—</strong></div>
+    <div class="card"><span>Trades clôturés</span><strong id="trades">—</strong><small id="winrate"></small></div>
+  </section>
+
+  <section class="panel">
+    <h2>Évolution du capital</h2>
+    <canvas id="chart" role="img" aria-label="Courbe du capital"></canvas>
+  </section>
+
+  <div class="grid">
+    <div>
+      <section class="panel">
+        <h2>Positions ouvertes</h2>
+        <table>
+          <thead><tr><th>Paire</th><th>Quantité</th><th>Entrée</th><th>Prix</th><th>Valeur</th><th>Résultat</th><th>Stop</th><th>Objectif</th></tr></thead>
+          <tbody id="positions"></tbody>
+        </table>
+      </section>
+      <section class="panel">
+        <h2>Derniers trades</h2>
+        <table>
+          <thead><tr><th>Clôture</th><th>Paire</th><th>Entrée</th><th>Sortie</th><th>Résultat</th><th>Raison</th></tr></thead>
+          <tbody id="tradeRows"></tbody>
+        </table>
+      </section>
+    </div>
+    <section class="panel">
+      <h2>Journal</h2>
+      <ul id="events" class="events"></ul>
+    </section>
+  </div>
+
+  <footer>Le trading de cryptomonnaies comporte un risque de perte en capital. Les performances passées ne préjugent pas des performances futures.</footer>
+</main>
+
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+let quote = "";
+const money = (v) => v == null ? "—" : v.toLocaleString("fr-FR", {minimumFractionDigits: 2, maximumFractionDigits: 2}) + (quote ? " " + quote : "");
+const signed = (v) => (v > 0 ? "+" : "") + money(v);
+const num = (v) => v == null ? "—" : Number(v).toLocaleString("fr-FR", {maximumSignificantDigits: 6});
+const cls = (v) => v > 0 ? "pos" : v < 0 ? "neg" : "";
+const when = (ms) => new Date(ms).toLocaleString("fr-FR", {dateStyle: "short", timeStyle: "short"});
+
+async function api(path, options) {
+  const res = await fetch(path, Object.assign({credentials: "same-origin"}, options));
+  if (!res.ok) throw new Error(res.status + " " + res.statusText);
+  return res.json();
+}
+
+async function command(name, confirmText) {
+  if (confirmText && !confirm(confirmText)) return;
+  try {
+    await api("/api/command", {method: "POST", headers: {"Content-Type": "application/json", "X-Requested-With": "tradebot"},
+      body: JSON.stringify({command: name})});
+    $("meta").textContent = "Commande envoyée, exécutée au prochain tour du bot…";
+  } catch (e) { alert("Échec : " + e.message); }
+}
+$("pause").onclick = () => command("pause");
+$("resume").onclick = () => command("resume");
+$("closeAll").onclick = () => command("close_all", "Vendre TOUTES les positions au prix du marché et mettre le bot en pause ?");
+
+function renderSummary(data) {
+  const s = data.status || {};
+  quote = s.quote || "";
+  const mode = (s.mode || "?").toLowerCase();
+  $("mode").textContent = s.mode || "?";
+  $("mode").className = "badge " + mode;
+  const state = s.halted ? ["halted", "Coupe-circuit"] : s.paused ? ["paused", "En pause"] : ["running", "Actif"];
+  $("state").className = "badge " + state[0];
+  $("state").textContent = state[1];
+  $("pause").hidden = !!s.paused;
+  $("resume").hidden = !s.paused;
+  const age = s.updated_at ? (Date.now() - s.updated_at) / 1000 : null;
+  const stale = age != null && age > 600;
+  $("meta").innerHTML = s.updated_at
+    ? esc(s.strategy_label || s.strategy || "") + " · " + esc(s.timeframe || "") + " · " +
+      (stale ? '<span class="stale">pas de nouvelles du bot depuis ' + Math.round(age / 60) + ' min</span>' : "mis à jour " + when(s.updated_at))
+    : "En attente du premier tour du bot…";
+
+  $("equity").textContent = money(s.equity);
+  $("cash").textContent = money(s.cash);
+  const dayPnl = s.equity != null && s.day_start_equity ? s.equity - s.day_start_equity : null;
+  $("today").textContent = dayPnl == null ? "—" : signed(dayPnl);
+  $("today").className = cls(dayPnl);
+  $("todayPct").textContent = dayPnl == null ? "" : " " + (dayPnl / s.day_start_equity * 100).toFixed(2) + " %";
+  $("realized").textContent = signed(data.realized_pnl);
+  $("realized").className = cls(data.realized_pnl);
+  $("trades").textContent = data.trades;
+  $("winrate").textContent = data.trades ? " " + data.win_rate.toFixed(0) + " % gagnants" : "";
+
+  const rows = (s.positions || []).map((p) =>
+    "<tr><td>" + esc(p.symbol) + "</td><td>" + num(p.qty) + "</td><td>" + num(p.entry_price) + "</td><td>" + num(p.price) +
+    "</td><td>" + money(p.value) + '</td><td class="' + cls(p.pnl) + '">' + signed(p.pnl) + " (" + p.pnl_pct.toFixed(2) + " %)</td><td>" +
+    num(p.stop) + "</td><td>" + (p.target ? num(p.target) : "—") + "</td></tr>");
+  $("positions").innerHTML = rows.join("") || '<tr><td colspan="8" class="empty">Aucune position ouverte</td></tr>';
+}
+
+function renderTrades(trades) {
+  $("tradeRows").innerHTML = trades.slice(0, 50).map((t) =>
+    "<tr><td>" + when(t.closed_at) + "</td><td>" + esc(t.symbol) + "</td><td>" + num(t.entry_price) + "</td><td>" + num(t.exit_price) +
+    '</td><td class="' + cls(t.pnl) + '">' + signed(t.pnl) + " (" + t.pnl_pct.toFixed(2) + " %)</td><td>" + esc(t.reason) + "</td></tr>"
+  ).join("") || '<tr><td colspan="6" class="empty">Aucun trade pour le moment</td></tr>';
+}
+
+function renderEvents(events) {
+  $("events").innerHTML = events.map((e) =>
+    '<li class="' + esc(e.level) + '"><time>' + when(e.ts) + "</time>" + esc(e.message) + "</li>").join("") ||
+    '<li class="empty">Rien pour le moment</li>';
+}
+
+function renderChart(points) {
+  const canvas = $("chart"), ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+  canvas.width = w * dpr; canvas.height = h * dpr; ctx.scale(dpr, dpr); ctx.clearRect(0, 0, w, h);
+  const css = getComputedStyle(document.documentElement);
+  const muted = css.getPropertyValue("--muted"), line = css.getPropertyValue("--line"), accent = css.getPropertyValue("--accent");
+  ctx.font = "12px system-ui, sans-serif"; ctx.fillStyle = muted;
+  if (points.length < 2) { ctx.fillText("La courbe apparaîtra après quelques minutes de fonctionnement.", 8, h / 2); return; }
+  const values = points.map((p) => p[1]);
+  let lo = Math.min(...values), hi = Math.max(...values);
+  if (hi === lo) { hi += 1; lo -= 1; }
+  const padL = 8, padR = 8, padT = 18, padB = 22;
+  const x = (i) => padL + (w - padL - padR) * i / (points.length - 1);
+  const y = (v) => padT + (h - padT - padB) * (1 - (v - lo) / (hi - lo));
+  ctx.strokeStyle = line; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(padL, h - padB); ctx.lineTo(w - padR, h - padB); ctx.stroke();
+  ctx.beginPath();
+  points.forEach((p, i) => i ? ctx.lineTo(x(i), y(p[1])) : ctx.moveTo(x(i), y(p[1])));
+  ctx.strokeStyle = accent; ctx.lineWidth = 2; ctx.stroke();
+  ctx.lineTo(x(points.length - 1), h - padB); ctx.lineTo(x(0), h - padB); ctx.closePath();
+  ctx.globalAlpha = 0.12; ctx.fillStyle = accent; ctx.fill(); ctx.globalAlpha = 1;
+  ctx.fillStyle = muted;
+  ctx.fillText(money(hi), padL, 12);
+  ctx.fillText(when(points[0][0]), padL, h - 6);
+  const last = when(points[points.length - 1][0]);
+  ctx.fillText(last, w - padR - ctx.measureText(last).width, h - 6);
+}
+
+let equityPoints = [];
+async function refresh() {
+  try {
+    const [summary, trades, events, equity] = await Promise.all(
+      [api("/api/summary"), api("/api/trades"), api("/api/events"), api("/api/equity")]);
+    renderSummary(summary); renderTrades(trades); renderEvents(events);
+    equityPoints = equity; renderChart(equityPoints);
+  } catch (e) {
+    $("meta").innerHTML = '<span class="stale">Tableau de bord injoignable : ' + esc(e.message) + "</span>";
+  }
+}
+window.addEventListener("resize", () => renderChart(equityPoints));
+refresh();
+setInterval(refresh, 10000);
+</script>
+</body>
+</html>
