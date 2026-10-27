@@ -227,6 +227,10 @@ class Clipper:
                 prepared.transcript = self.transcriber.transcribe(media, prompt=hint)
             except TranscriptionError as exc:
                 log.warning("Sous-titres indisponibles : %s", exc)
+            else:
+                text = prepared.transcript.text
+                excerpt = text if len(text) <= 160 else text[:159] + "…"
+                log.info("Transcription : %d mot(s)%s", len(prepared.transcript.words), f" — « {excerpt} »" if text else "")
         return prepared
 
     # --- review ------------------------------------------------------------------------------
@@ -261,6 +265,7 @@ class Clipper:
         if item.frames and requested != "blur" and override.facecam is None:
             faces = [face for _, face in faces_per_frame(item.frames) if face is not None]
             stats = face_stats(faces, len(item.frames))
+            log.info("Visage trouvé sur %d image(s) sur %d", len(faces), len(item.frames))
         plan = plan_layout(info, stats, requested=requested, facecam=override.facecam)
         log.info("Mise en page « %s » : %s", plan.kind, plan.reason)
         stamp = self.now.strftime("%Y%m%d-%H%M")
