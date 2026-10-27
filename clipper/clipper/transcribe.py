@@ -2,12 +2,18 @@ from __future__ import annotations
 
 import logging
 import re
+import subprocess
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+
+from .media import MediaError, ffmpeg_bin
 from .models import Transcript, Word
 
 log = logging.getLogger(__name__)
+
+SAMPLE_RATE = 16000  # what Whisper expects
 
 # Phrases Whisper invents on music, silence or crowd noise (mostly from subtitled TV in its training data).
 _HALLUCINATIONS = re.compile(
@@ -18,6 +24,23 @@ _HALLUCINATIONS = re.compile(
 
 class TranscriptionError(Exception):
     pass
+
+
+def load_audio(media: Path) -> np.ndarray:
+    """Mono 16 kHz float32 samples, decoded by ffmpeg.
+
+    faster-whisper decodes files with PyAV, and its call breaks on recent PyAV releases
+    (`metadata_errors` was removed); handing it samples sidesteps PyAV entirely.
+    """
+    try:
+        command = [ffmpeg_bin(), "-nostdin", "-hide_banner", "-loglevel", "error", "-i", str(media),
+                   "-vn", "-ac", "1", "-ar", str(SAMPLE_RATE), "-f", "f32le", "-"]  # fmt: skip
+        result = subprocess.run(command, capture_output=True, timeout=900)
+    except (MediaError, subprocess.TimeoutExpired) as exc:
+        raise TranscriptionError(f"audio de {media.name} illisible : {exc}") from exc
+    if result.returncode != 0:
+        raise TranscriptionError(f"audio de {media.name} illisible : {result.stderr.decode(errors='replace').strip()[-300:]}")
+    return np.frombuffer(result.stdout, dtype=np.float32)
 
 
 class Transcriber:
@@ -49,10 +72,13 @@ class Transcriber:
         return self._model
 
     def transcribe(self, media: Path, *, prompt: str | None = None) -> Transcript:
+        audio = load_audio(media)
+        if audio.size < SAMPLE_RATE // 2:
+            return Transcript(words=[], language=self.language)
         model = self._load()
         try:
             segments, info = model.transcribe(
-                str(media),
+                audio,
                 language=self.language,
                 word_timestamps=True,
                 vad_filter=True,

@@ -222,3 +222,20 @@ def test_update_github_secret_seals_the_value(server, http):
     payload = put.json()
     assert payload["key_id"] == "k1" and put.headers["authorization"] == "Bearer ghp_x"
     assert public.SealedBox(private).decrypt(base64.b64decode(payload["encrypted_value"])) == b"new-token"
+
+
+def test_youtube_upload_completed_while_the_response_was_lost(server, http, video, monkeypatch):
+    monkeypatch.setattr(youtube_module, "CHUNK", 2 * 1024 * 1024)  # whole file in one chunk
+    server.route("POST", "/token", (200, {}, {"access_token": "ya29"}))
+    server.route("POST", "/upload/youtube/v3/videos", (200, {"Location": f"{server.url}/session/3"}, {}))
+    calls = {"n": 0}
+
+    def session(request):
+        calls["n"] += 1
+        if request.headers["content-range"].startswith("bytes */"):
+            return 200, {}, {"id": "done1", "status": {"privacyStatus": "public"}}
+        return 502, {}, "bad gateway"  # the bytes arrived, the answer did not
+
+    server.route("PUT", "/session/3", session)
+    result = youtube(server, http).publish_short(video, META, make_candidate())
+    assert result.id == "done1" and calls["n"] == 2

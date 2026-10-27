@@ -162,16 +162,21 @@ class YouTubePublisher:
                     raise PublishError(f"YouTube : envoi interrompu ({error})")
                 log.warning("YouTube : envoi interrompu (%s), reprise…", error)
                 self.http.sleep(min(2**resumes, 30))
-                offset = self._resume_offset(session, token, size)
+                offset, finished = self._resume_offset(session, token, size)
+                if finished is not None:
+                    return finished
 
-    def _resume_offset(self, session: str, token: str, size: int) -> int:
+    def _resume_offset(self, session: str, token: str, size: int) -> tuple[int, dict[str, Any] | None]:
+        """Asks how much the session holds; it may even be complete if only the response was lost."""
         try:
             response = self.http.session.put(
                 session, headers={"Authorization": f"Bearer {token}", "Content-Range": f"bytes */{size}"}, timeout=60
             )
         except (requests.ConnectionError, requests.Timeout):
-            return 0
-        return _next_offset(response) if response.status_code == 308 else 0
+            return 0, None
+        if response.status_code in {200, 201}:
+            return size, response.json()
+        return (_next_offset(response) if response.status_code == 308 else 0), None
 
     def _body(self, title: str, description: str, tags: list[str]) -> dict[str, Any]:
         return {

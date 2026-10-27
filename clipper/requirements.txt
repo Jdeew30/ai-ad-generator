@@ -1,6 +1,7 @@
 yt-dlp[default]>=2026.10.26
 faster-whisper>=1.2.1,<2
 opencv-python-headless>=4.8
+numpy>=1.26
 anthropic>=2.3.0,<3
 requests>=2.32,<3
 PyYAML>=6.0,<7

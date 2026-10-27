@@ -67,18 +67,22 @@ class TelegramPublisher:
         except MediaError as exc:
             self.message(f"{text}\n\n⚠️ Vidéo non envoyée : {exc}")
             return PublishResult(self.name, True, detail=f"texte seul ({exc})")
-        info = probe(to_send)
-        result = self._send(
-            "sendVideo",
-            {
-                "caption": text[:1024],
-                "supports_streaming": "true",
-                "width": str(info.width),
-                "height": str(info.height),
-                "duration": str(int(info.duration)),
-            },
-            files={"video": (f"{candidate.streamer_login or 'clip'}.mp4", to_send.read_bytes(), "video/mp4")},
-        )
+        try:
+            info = probe(to_send)
+            result = self._send(
+                "sendVideo",
+                {
+                    "caption": text[:1024],
+                    "supports_streaming": "true",
+                    "width": str(info.width),
+                    "height": str(info.height),
+                    "duration": str(int(info.duration)),
+                },
+                files={"video": (f"{candidate.streamer_login or 'clip'}.mp4", to_send.read_bytes(), "video/mp4")},
+            )
+        finally:
+            if to_send != video:  # the lighter copy only existed for Telegram
+                to_send.unlink(missing_ok=True)
         if len(text) > 1024:
             self.message(text)
         return PublishResult(self.name, True, str(result.get("message_id", "")) or None)
