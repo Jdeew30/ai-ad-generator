@@ -196,6 +196,11 @@ class YouTubePublisher:
             },
         }
 
+    def verify(self) -> str:
+        """Checks the credentials without uploading anything."""
+        self._access_token()
+        return f"jeton valide (vidéos publiées en « {self.settings.privacy} »)"
+
     def publish_short(self, video: Path, meta: ShortMeta, candidate: Candidate) -> PublishResult:
         body = self._body(meta.title, short_description(meta, candidate), meta.tags())
         result = self._upload(video, body, notify=self.settings.notify_subscribers)

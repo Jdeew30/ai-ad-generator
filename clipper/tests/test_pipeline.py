@@ -219,3 +219,16 @@ def test_required_platform_without_credentials_fails_before_any_work(media, path
     assert run.ytdlp.downloads == []
     run.run_shorts(dry_run=True)  # a dry run needs no credentials
     assert run.ytdlp.downloads
+
+
+def test_twitch_clipper_name_is_never_used_as_the_streamer(media, paths):
+    class CuratorOnly(FakeYtDlp):
+        def download(self, url, dest_dir, name, *, start=None, end=None):
+            path, _ = super().download(url, dest_dir, name, start=start, end=end)
+            return path, {"title": "x", "uploader": "viewer42"}  # yt-dlp without broadcaster details
+
+    run = clipper(media, paths, clips=CLIPS, publishers={}, streamers={"alpha": {"name": "Alpha Le Vrai"}})
+    run.ytdlp = CuratorOnly(media, CLIPS)
+    [outcome] = run.run_shorts(dry_run=True).published
+    assert outcome.candidate.streamer == "Alpha Le Vrai" and outcome.candidate.clipper == "viewer42"
+    assert outcome.meta.title.startswith("Alpha Le Vrai : ")

@@ -159,6 +159,18 @@ class TikTokPublisher:
                 raise PublishError(f"TikTok : toujours « {status} » après {self.poll_timeout:.0f}s (publish_id {publish_id})")
             self.http.sleep(self.poll_interval)
 
+    def verify(self) -> str:
+        """Checks the credentials (and, for direct posts, the allowed privacy levels) without posting."""
+        token = self._access_token()
+        if self.settings.mode == "inbox":
+            return "jeton valide (mode brouillon : les vidéos arrivent dans ta boîte TikTok)"
+        creator = self._call(token, "/post/publish/creator_info/query/", {}, retry=True)
+        options = creator.get("privacy_level_options") or []
+        detail = f"compte @{creator.get('creator_username', '?')}, confidentialités possibles : {', '.join(options) or 'aucune'}"
+        if self.settings.privacy not in options:
+            raise PublishError(f"{detail} — {self.settings.privacy} refusé (app pas encore auditée ?)")
+        return detail
+
     def publish_short(self, video: Path, meta: ShortMeta, candidate: Candidate) -> PublishResult:
         token = self._access_token()
         size = video.stat().st_size

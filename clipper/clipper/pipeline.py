@@ -174,7 +174,9 @@ class Clipper:
         """Fills what the listing did not know (yt-dlp metadata of the downloaded media)."""
         if not candidate.title:
             candidate.title = (info.get("title") or "").strip()
-        channel = info.get("channel") or info.get("uploader")
+        channel = info.get("channel")
+        if not channel and "twitch.tv" not in candidate.url:
+            channel = info.get("uploader")  # on Twitch clips the uploader is the viewer who clipped, not the streamer
         if channel and (not candidate.streamer or candidate.streamer == candidate.streamer_login):
             candidate.streamer = self.config.override_for(candidate.streamer_login).name or channel
         if not candidate.streamer_login:

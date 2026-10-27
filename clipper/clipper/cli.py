@@ -84,6 +84,16 @@ def cmd_discover(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_check(args: argparse.Namespace) -> int:
+    from .check import markdown, run_checks
+    from .http import Http
+
+    config = load_config(Path(args.config) if args.config else None)
+    checks = run_checks(config, Secrets.from_env(), Http())
+    _summary(markdown(checks))
+    return 1 if any(check.status == "error" for check in checks) else 0
+
+
 def cmd_auth(args: argparse.Namespace) -> int:
     from .auth import AuthError, code_from_redirect, tiktok_authorize_url, tiktok_tokens, youtube_refresh_token
     from .http import Http
@@ -217,6 +227,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     doctor = commands.add_parser("doctor", help="vérifie l'installation et les identifiants présents")
     doctor.set_defaults(func=cmd_doctor)
+
+    check = commands.add_parser("check", help="essaie chaque identifiant (message de test Telegram), sans rien publier")
+    check.set_defaults(func=cmd_check)
     return parser
 
 

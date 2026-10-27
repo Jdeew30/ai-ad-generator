@@ -98,11 +98,36 @@ publish:
 # Chaînes qui ont demandé à ne pas être clippées : jamais téléchargées.
 blocklist: []
 
-# Réglages par streamer (login en minuscules).
-streamers: {}
-#  squeezie:
-#    name: Squeezie             # nom affiché
+# Réglages par streamer (login en minuscules) : nom affiché dans les titres et crédits, mise en page,
+# position exacte de la facecam [x, y, largeur, hauteur] en fractions de l'image, ou skip: true.
+streamers:
+  squeezie: {name: Squeezie}
+  gotaga: {name: Gotaga}
+  kamet0: {name: Kameto}
+  zerator: {name: ZeratoR}
+  aminematue: {name: AmineMaTue}
+  inoxtag: {name: Inoxtag}
+  michou: {name: Michou}
+  joueur_du_grenier: {name: Joueur du Grenier}
+  ponce: {name: Ponce}
+  mistermv: {name: MisterMV}
+  antoinedaniellive: {name: Antoine Daniel}
+  domingo: {name: Domingo}
+  locklear: {name: Locklear}
+  sardoche: {name: Sardoche}
+  maghla: {name: Maghla}
+  etoiles: {name: Etoiles}
+  bagherajones: {name: Baghera Jones}
+  lebouseuh: {name: LeBouseuh}
+  wankilstudio: {name: Wankil Studio}
+  anyme023: {name: Anyme023}
+  rivenzi: {name: Rivenzi}
+  zacknani: {name: Zack Nani}
+  doigby: {name: Doigby}
+  ultia: {name: Ultia}
+#  exemple:
+#    name: Exemple
 #    layout: split
-#    facecam: [0.0, 0.62, 0.22, 0.38]   # position de la facecam : x, y, largeur, hauteur (fractions de l'image)
-#  unstreamer:
+#    facecam: [0.0, 0.62, 0.22, 0.38]
+#  unautre:
 #    skip: true
