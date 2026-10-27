@@ -12,9 +12,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "shorts = clips du moment, compilation = best-of, url = monter une URL précise"
+        description: "shorts = clips du moment, compilation = best-of, url = monter une URL précise, check = vérifier les branchements"
         type: choice
-        options: [shorts, compilation, url]
+        options: [shorts, compilation, url, check]
         default: shorts
       url:
         description: "Mode url : clip Twitch, VOD, vidéo YouTube…"
@@ -102,6 +102,7 @@ jobs:
         run: |
           case "$MODE" in
             compilation) python -m clipper compile $DRY_RUN ;;
+            check) python -m clipper check ;;
             url)
               if [ -z "$URL" ]; then echo "::error::Le mode url demande une URL"; exit 1; fi
               python -m clipper run $DRY_RUN --url "$URL" ${START:+--start "$START"} ${END:+--end "$END"} ;;

@@ -57,6 +57,10 @@ class TelegramPublisher:
         )  # fmt: skip
         return smaller
 
+    def verify(self) -> str:
+        self.message("✅ Clipper est bien connecté : les prochaines vidéos arriveront ici.")
+        return "message de test envoyé"
+
     def publish_short(self, video: Path, meta: ShortMeta, candidate: Candidate, published: list[PublishResult]) -> PublishResult:
         tiktok_text = f"{meta.title}\n\n{meta.hashtag_line()}\n🎥 {candidate.credit}"
         lines = [f"🎬 {meta.title}", "", "Texte à coller (TikTok) :", tiktok_text, ""]

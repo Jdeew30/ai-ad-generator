@@ -46,13 +46,15 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
 
 ### Sur GitHub (recommandé : 100 % automatique)
 
-1. Fusionne cette branche dans la branche par défaut du dépôt (le planning ne tourne que depuis celle-ci).
+1. Le workflow doit être sur la branche par défaut du dépôt (le planning ne tourne que depuis celle-ci).
 2. Va dans **Actions → Clipper → Run workflow**, coche **Essai à blanc** et lance. Au bout de quelques
    minutes, le short monté est téléchargeable dans les **Artifacts** du run. Sans aucun identifiant, le
    robot fonctionne déjà : clips Twitch via yt-dlp, textes par gabarit, vidéos en artefacts.
-3. Ajoute les secrets au fur et à mesure (**Settings → Secrets and variables → Actions → New repository
-   secret**), dans l'ordre conseillé : Telegram, Claude, Twitch, puis YouTube et TikTok (détails plus bas).
-4. C'est tout : 3 shorts par jour (vers 12 h, 18 h et 20 h 30 à Paris l'hiver, une heure plus tard l'été)
+3. Ajoute les secrets au fur et à mesure, dans l'ordre conseillé : Telegram, Claude, Twitch, puis YouTube
+   et TikTok (détails plus bas, tout se fait depuis un navigateur).
+4. Vérifie : **Run workflow** → mode **`check`**. Le résumé du run affiche ✅ / ❌ pour chaque service, et
+   Telegram reçoit un message de test. Rien n'est publié.
+5. C'est tout : 3 shorts par jour (vers 12 h, 18 h et 20 h 30 à Paris l'hiver, une heure plus tard l'été)
    et le best-of le dimanche matin.
 
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
@@ -68,6 +70,7 @@ python -m venv .venv && source .venv/bin/activate   # Windows : .venv\Scripts\ac
 pip install -r requirements.txt
 cp .env.example .env                                # puis remplis ce que tu as
 python -m clipper doctor                            # vérifie l'installation
+python -m clipper check                             # essaie chaque identifiant, sans rien publier
 python -m clipper discover                          # liste les meilleurs clips du moment, sans rien télécharger
 python -m clipper run --dry-run                     # monte 1 short dans output/ sans publier
 python -m clipper render https://clips.twitch.tv/XXXX   # monte un clip précis
@@ -82,11 +85,16 @@ d'un `.json`.
 Tous les identifiants sont facultatifs : chacun débloque une fonction. Ils se mettent en **secrets GitHub**
 (et/ou dans `clipper/.env` pour un lancement local). Ne les colle jamais dans un fichier commité.
 
+**Ajouter un secret** : sur la page du dépôt, **Settings → Secrets and variables → Actions → New repository
+secret**, nom exactement comme indiqué ci-dessous (ex. `TELEGRAM_BOT_TOKEN`), valeur collée telle quelle.
+
 ### Telegram : recevoir les vidéos sur ton téléphone (2 min)
 
 1. Dans Telegram, écris à **@BotFather** → `/newbot` → note le jeton (`TELEGRAM_BOT_TOKEN`).
 2. Écris `/start` à ton nouveau bot.
-3. `TELEGRAM_BOT_TOKEN=… python -m clipper auth telegram` affiche ton `TELEGRAM_CHAT_ID`.
+3. Ouvre dans un navigateur `https://api.telegram.org/bot<TON_JETON>/getUpdates` (en remplaçant
+   `<TON_JETON>`) : le nombre après `"chat":{"id":` est ton `TELEGRAM_CHAT_ID`. (En local :
+   `python -m clipper auth telegram` l'affiche aussi.)
 
 C'est le meilleur moyen de démarrer TikTok pendant que ton app TikTok est en validation : tu reçois la
 vidéo + la légende, tu enregistres, tu publies (ou tu programmes dans TikTok Studio).
@@ -116,15 +124,21 @@ chaque clip dans la VOD (anti-doublon plus précis).
    production »)**. En mode « Test », Google invalide le jeton au bout de 7 jours et le robot s'arrête.
    Pour un usage perso, pas besoin de faire vérifier l'app : à la connexion, clique « Paramètres avancés →
    Accéder à … ».
-3. **Identifiants → Créer un ID client OAuth → Application de bureau** → `YOUTUBE_CLIENT_ID` et
-   `YOUTUBE_CLIENT_SECRET`.
-4. Sur ton ordinateur : `python -m clipper auth youtube` → connecte le compte **de la chaîne** → copie le
-   `YOUTUBE_REFRESH_TOKEN` affiché en secret.
+3. **Identifiants → Créer un ID client OAuth → Application Web**, avec comme URI de redirection autorisé
+   `https://developers.google.com/oauthplayground` → `YOUTUBE_CLIENT_ID` et `YOUTUBE_CLIENT_SECRET`.
+4. Le refresh token, sans rien installer : ouvre
+   [developers.google.com/oauthplayground](https://developers.google.com/oauthplayground) → roue dentée en
+   haut à droite → coche **Use your own OAuth credentials** et colle l'ID client et le secret → dans
+   « Input your own scopes », saisis `https://www.googleapis.com/auth/youtube.upload` → **Authorize APIs** →
+   connecte le compte **de la chaîne** → **Exchange authorization code for tokens** → copie le
+   **Refresh token** dans le secret `YOUTUBE_REFRESH_TOKEN`. (Avec tes propres identifiants, le Playground
+   ne révoque pas le jeton.) Variante en local : un ID client « Application de bureau » et
+   `python -m clipper auth youtube`.
 5. ⚠️ **Audit obligatoire pour publier en public** : les vidéos envoyées par un projet non audité sont
-   verrouillées en privé. Remplis le formulaire
+   verrouillées en privé, définitivement. Remplis le formulaire
    [YouTube API Services – Audit and Quota Extension](https://support.google.com/youtube/contact/yt_api_form)
-   (gratuit, quelques jours à quelques semaines). En attendant, laisse `publish.youtube.enabled: false` et
-   publie à la main depuis Telegram ou les artefacts.
+   (gratuit, quelques jours à quelques semaines) et **n'ajoute les trois secrets `YOUTUBE_*` qu'une fois
+   l'audit accepté**. En attendant, publie à la main depuis Telegram ou les artefacts.
 6. Quota : 10 000 unités par jour par défaut. La grille de Google compte 1 600 unités par envoi (vérifie
    le chiffre actuel dans la console), soit environ 6 envois par jour : assez pour 3 shorts + le best-of.
    Les miniatures personnalisées exigent une chaîne validée par téléphone
