@@ -2,7 +2,8 @@
 # Une clé inconnue ou une valeur invalide arrête le programme avec un message clair.
 
 channel:
-  name: "Clips FR"              # nom de votre chaîne (descriptions, compilations)
+  # YouTube : https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw · TikTok : https://www.tiktok.com/@tesmeilleursclips
+  name: "Tes Meilleurs Clips"   # nom de la chaîne (Claude s'en sert pour les textes du best-of)
   language: fr                  # langue des sous-titres et des métadonnées
   hashtags: [clip, twitchfr, drole]
 

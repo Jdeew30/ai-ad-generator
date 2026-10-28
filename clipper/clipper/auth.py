@@ -20,7 +20,11 @@ YOUTUBE_SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 
 TIKTOK_AUTH_URL = "https://www.tiktok.com/v2/auth/authorize/"
 TIKTOK_TOKEN_URL = "https://open.tiktokapis.com/v2/oauth/token/"
-TIKTOK_SCOPES = ["user.info.basic", "video.upload", "video.publish"]
+# Inbox drafts only need video.upload; requesting video.publish fails on apps without Direct Post.
+TIKTOK_SCOPES = {
+    "inbox": ["user.info.basic", "video.upload"],
+    "direct": ["user.info.basic", "video.upload", "video.publish"],
+}
 
 
 class AuthError(Exception):
@@ -112,11 +116,11 @@ def youtube_refresh_token(
     return tokens
 
 
-def tiktok_authorize_url(client_key: str, redirect_uri: str, state: str) -> str:
+def tiktok_authorize_url(client_key: str, redirect_uri: str, state: str, *, mode: str = "inbox") -> str:
     return TIKTOK_AUTH_URL + "?" + urlencode(
         {
             "client_key": client_key,
-            "scope": ",".join(TIKTOK_SCOPES),
+            "scope": ",".join(TIKTOK_SCOPES[mode]),
             "response_type": "code",
             "redirect_uri": redirect_uri,
             "state": state,
