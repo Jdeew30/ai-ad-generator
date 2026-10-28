@@ -44,8 +44,9 @@ regarder sans révéler la chute (ex. « IL NE S'Y ATTENDAIT PAS »).
 - description : une ou deux phrases.
 - hashtags : 3 à 6, en minuscules, sans « # » ni espace (nom du créateur, jeu s'il y a lieu, thème).
 - trim_start / trim_end : bornes en secondes, relatives au début de l'extrait, qui gardent le moment entier \
-(mise en place et chute) et coupent les temps morts ; durée finale entre 8 et 59 secondes quand l'extrait le \
-permet. Si l'extrait est déjà bon, renvoie 0 et sa durée.
+(mise en place et chute) et coupent les temps morts ; durée finale idéalement entre 15 et 59 secondes, jusqu'à \
+90 secondes si le moment le mérite vraiment (histoire complète, chute tardive). Si l'extrait est déjà bon, renvoie \
+0 et sa durée.
 
 Les transcriptions viennent d'une reconnaissance vocale automatique : elles peuvent contenir des erreurs."""
 

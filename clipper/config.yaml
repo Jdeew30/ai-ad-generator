@@ -53,7 +53,7 @@ youtube:
   segments_per_video: 2
 
 shorts:
-  per_run: 1                    # shorts publiés à chaque passage (3 passages par jour dans le workflow)
+  per_run: 1                    # shorts publiés à chaque passage (5 passages par jour dans le workflow)
   candidates_factor: 3          # avec Claude : 3 candidats examinés par short publié
   max_per_streamer_per_day: 2
   min_duration: 8
