@@ -166,16 +166,23 @@ def default_trim(candidate: Candidate, duration: float) -> tuple[float | None, f
     return round(start, 2), round(start + MAX_SHORT, 2)
 
 
+def clip_title(candidate: Candidate) -> str:
+    """The clip's own title, or "" when viewers gave it a throwaway name ("f", "lol", "...")."""
+    title = clean(candidate.title)
+    return title if sum(char.isalpha() for char in title) >= 4 else ""
+
+
 def template_review(item: ReviewItem, config: Config) -> Review:
     """No AI: the original title becomes the hook and the title, popularity becomes the score."""
     candidate = item.candidate
-    base = clean(candidate.title) or f"Moment fort de {candidate.streamer}"
+    own = clip_title(candidate)
+    base = own or f"Moment fort de {candidate.streamer}"
     title = base if candidate.streamer.lower() in base.lower() else f"{candidate.streamer} : {base}"
     trim_start, trim_end = default_trim(candidate, item.duration)
     meta = ShortMeta(
         hook=_cut(base, 40),
         title=_cut(title, 95),
-        description=f"{base} — {candidate.streamer} en live.",
+        description=f"{own} — {candidate.streamer} en live." if own else f"Un moment fort de {candidate.streamer} en live.",
         hashtags=_hashtags([candidate.streamer_login, candidate.game or "", *config.channel.hashtags]),
         trim_start=trim_start,
         trim_end=trim_end,

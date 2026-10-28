@@ -118,7 +118,8 @@ chaque clip dans la VOD (anti-doublon plus précis).
 
 1. Active la double authentification sur ton compte Twitch.
 2. [dev.twitch.tv/console/apps](https://dev.twitch.tv/console/apps) → **Register Your Application** →
-   URL de redirection `http://localhost`, type « Confidential ».
+   URL de redirection `https://localhost` (Twitch exige du HTTPS ; le robot ne s'en sert jamais),
+   type « Confidential ».
 3. Secrets `TWITCH_CLIENT_ID` et `TWITCH_CLIENT_SECRET` (bouton « New Secret »).
 
 ### YouTube : publication automatique

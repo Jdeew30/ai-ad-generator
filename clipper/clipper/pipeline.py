@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from .ai import ClaudeCurator, Review, ReviewItem, template_compilation_meta, template_review
+from .ai import ClaudeCurator, Review, ReviewItem, clip_title, template_compilation_meta, template_review
 from .captions import clean
 from .compilation import Part, chapters_text, render_compilation
 from .config import Config, ConfigError, Paths, Secrets
@@ -470,7 +470,7 @@ class Clipper:
 
         # Countdown: weakest first, the best moment last.
         kept.sort(key=lambda pair: pair[1].score)
-        labels = [(item.candidate, clean(item.candidate.title) or review.meta.hook) for item, review in kept]
+        labels = [(item.candidate, clip_title(item.candidate) or review.meta.hook) for item, review in kept]
         first_day = (self.now - window).strftime("%d/%m")
         period = f"du {first_day} au {self.now.strftime('%d/%m/%Y')}"
         meta: CompilationMeta = (

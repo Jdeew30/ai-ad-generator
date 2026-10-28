@@ -176,7 +176,7 @@ def test_single_url_mode(media, paths):
 def test_weekly_compilation(media, paths):
     clips = {
         "alpha": [entry("Alpha-Cam1", 5000, 20), entry("Alpha-2", 3000, 40)],
-        "beta": [entry("Beta-1", 1500, 50), entry("Beta-Cam2", 900, 70)],
+        "beta": [entry("Beta-1", 1500, 50), entry("Beta-Cam2", 900, 70, title="f")],
     }
     youtube, telegram = FakePublisher("youtube"), FakePublisher("telegram")
     run = clipper(media, paths, clips=clips, publishers={"youtube": youtube, "telegram": telegram},
@@ -185,7 +185,8 @@ def test_weekly_compilation(media, paths):
     assert report.compilation and report.compilation["title"].startswith("TOP 4")
     summary = report.markdown()
     assert "- #1 [Alpha](https://clips.twitch.tv/Alpha-Cam1) — clip Alpha-Cam1 (5000 vues)" in summary
-    assert "- #4 [" in summary and "- Durée : 0 min" in summary
+    assert "- #4 [Beta](https://clips.twitch.tv/Beta-Cam2) — Moment fort de Beta (900 vues)" in summary  # not "f"
+    assert "- Durée : 0 min" in summary
     video, meta, description, thumbnail = youtube.calls[0]
     assert video.exists() and thumbnail is not None and thumbnail.exists()
     assert "#1 Alpha — clip Alpha-Cam1 : https://clips.twitch.tv/Alpha-Cam1" in description
