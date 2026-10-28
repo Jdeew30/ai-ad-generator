@@ -4,7 +4,7 @@ from pathlib import Path
 import anthropic
 import pytest
 
-from clipper.ai import ClaudeCurator, Review, ReviewItem, default_trim, hashtag, template_compilation_meta, template_review
+from clipper.ai import ClaudeCurator, Review, ReviewItem, clip_title, default_trim, hashtag, template_compilation_meta, template_review
 from clipper.config import Config, build
 from clipper.models import Transcript, Word
 
@@ -130,6 +130,15 @@ def test_template_review_and_trim():
     assert default_trim(item.candidate, 40.0) == (None, None)
     assert Review.from_dict(review.to_dict()).meta == review.meta
     assert hashtag("Joueur du Grenier") == "joueurdugrenier" and hashtag("Été #1") == "ete1"
+
+
+def test_throwaway_clip_titles_are_replaced():
+    for junk in ["f", "lol", "...", "😂😂😂", "W"]:
+        item = ReviewItem(make_candidate("twitch:x", "chan", title=junk), 30.0)
+        assert clip_title(item.candidate) == ""
+        meta = template_review(item, build(Config, {})).meta
+        assert meta.hook == meta.title == "Moment fort de Chan" and meta.description == "Un moment fort de Chan en live."
+    assert clip_title(make_candidate("twitch:y", "chan", title="WTF ce clip")) == "WTF ce clip"
 
 
 def test_a_rejected_fallback_beta_is_retried_without_it(server, tmp_path):
