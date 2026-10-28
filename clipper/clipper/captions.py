@@ -19,7 +19,7 @@ class TextLayout:
     hook_until: float | None = None  # None: the hook stays for the whole video
     credit_y: int | None = 1300
     caption_size: int = 96
-    hook_size: int = 66
+    hook_size: int = 74
     credit_size: int = 38
 
 
@@ -126,8 +126,8 @@ def build_short_ass(
     styles = [
         f"Style: Caption,{FONT},{layout.caption_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,"
         "0,0,0,0,100,100,1,0,1,7,3,5,40,40,0,1",
-        f"Style: Hook,{FONT},{layout.hook_size},&H00141414,&H00141414,&H00FFFFFF,&H00000000,"
-        "0,0,0,0,100,100,0,0,3,16,0,5,60,60,0,1",
+        f"Style: Hook,{FONT},{layout.hook_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H96000000,"
+        "0,0,0,0,100,100,1,0,1,6,3,5,60,60,0,1",
         f"Style: Credit,{FONT},{layout.credit_size},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,"
         "0,0,0,0,100,100,1,0,1,3,1,5,40,40,0,1",
     ]
