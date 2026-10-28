@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from pathlib import Path
 
 from ..config import Secrets
@@ -18,6 +19,12 @@ MAX_UPLOAD = 49 * 1024 * 1024  # bots may send files up to 50 MB
 
 def _links(results: list[PublishResult]) -> list[str]:
     return [f"{r.platform} : {r.url}" for r in results if r.ok and r.url]
+
+
+def run_url() -> str | None:
+    """The page of the current GitHub Actions run, whose "Artifacts" section holds the finished videos."""
+    server, repository, run = (os.environ.get(name) for name in ("GITHUB_SERVER_URL", "GITHUB_REPOSITORY", "GITHUB_RUN_ID"))
+    return f"{server}/{repository}/actions/runs/{run}" if server and repository and run else None
 
 
 class TelegramPublisher:
@@ -94,13 +101,23 @@ class TelegramPublisher:
     def publish_compilation(
         self, video: Path, meta: CompilationMeta, description: str, thumbnail: Path | None, published: list[PublishResult]
     ) -> PublishResult:
-        text = "\n".join([f"🏆 {meta.title}", "", *(_links(published) or [f"Vidéo prête : {video.name} (artefact du workflow)"])])
+        links = _links(published)
+        run = run_url()
+        if links:
+            where = links
+        elif run:  # a best-of weighs hundreds of MB, far over the 50 MB a bot may send
+            where = [f"⬇️ Vidéo trop lourde pour Telegram : elle t'attend ici, section « Artifacts » (7 jours) : {run}"]
+        else:
+            where = [f"Vidéo prête : {video.name} (artefact du workflow)"]
+        text = "\n".join([f"🏆 {meta.title}", "", *where])
         if thumbnail is not None and thumbnail.exists():
             result = self._send(
                 "sendPhoto", {"caption": text[:1024]}, files={"photo": (thumbnail.name, thumbnail.read_bytes(), "image/jpeg")}
             )
         else:
             result = self._send("sendMessage", {"text": text[:4000]})
+        if not links:  # to post it by hand: the texts, chapters and credits included
+            self.message(f"À coller sur YouTube\n\nTitre :\n{meta.title}\n\nDescription :\n{description}")
         return PublishResult(self.name, True, str(result.get("message_id", "")) or None)
 
     def chats(self) -> list[tuple[str, str]]:

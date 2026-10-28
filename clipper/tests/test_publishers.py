@@ -196,6 +196,29 @@ def test_telegram_errors_are_reported(server, http, video, monkeypatch):
         TelegramPublisher(SECRETS, http, api_url=server.url).publish_short(video, META, make_candidate(), [])
 
 
+
+def test_telegram_points_to_the_best_of_on_github_with_the_texts_to_paste(server, http, tmp_path, monkeypatch):
+    monkeypatch.setenv("GITHUB_SERVER_URL", "https://github.com")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "moi/clips")
+    monkeypatch.setenv("GITHUB_RUN_ID", "99")
+    server.route("POST", "/bot123:abc/sendPhoto", (200, {}, {"ok": True, "result": {"message_id": 5}}))
+    server.route("POST", "/bot123:abc/sendMessage", (200, {}, {"ok": True, "result": {"message_id": 6}}))
+    thumbnail = tmp_path / "comp.jpg"
+    thumbnail.write_bytes(b"\xff\xd8\xff\xe0fakejpeg")
+    meta = CompilationMeta(title="TOP 12 de la semaine", description="d", hashtags=["bestof"], thumbnail_text="TOP 12")
+    publisher = TelegramPublisher(SECRETS, http, api_url=server.url)
+
+    assert publisher.publish_compilation(tmp_path / "comp.mp4", meta, "0:00 Intro\n1:02 #12 Alpha", thumbnail, []).id == "5"
+    [photo] = server.calls("POST", "/bot123:abc/sendPhoto")
+    assert "TOP 12 de la semaine".encode() in photo.body and b"https://github.com/moi/clips/actions/runs/99" in photo.body
+    [texts] = server.calls("POST", "/bot123:abc/sendMessage")
+    assert texts.form()["text"] == "À coller sur YouTube\n\nTitre :\nTOP 12 de la semaine\n\nDescription :\n0:00 Intro\n1:02 #12 Alpha"
+
+    on_youtube = [PublishResult("youtube", True, "c", "https://www.youtube.com/watch?v=c")]
+    publisher.publish_compilation(tmp_path / "comp.mp4", meta, "0:00 Intro", thumbnail, on_youtube)
+    assert b"youtube : https://www.youtube.com/watch?v=c" in server.calls("POST", "/bot123:abc/sendPhoto")[1].body
+    assert len(server.calls("POST", "/bot123:abc/sendMessage")) == 1  # already online: nothing to paste
+
 def test_telegram_chat_discovery(server, http):
     server.route("GET", "/bot123:abc/getUpdates", (200, {}, {"ok": True, "result": [{"message": {"chat": {"id": 42, "first_name": "Moi"}}}]}))
     assert TelegramPublisher(SECRETS, http, api_url=server.url).chats() == [("42", "Moi")]

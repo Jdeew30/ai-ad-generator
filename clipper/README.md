@@ -20,7 +20,10 @@ Un robot qui, plusieurs fois par jour :
 5. **publie** sur YouTube Shorts (une fois l'audit de Google accepté) et t'envoie chaque vidéo sur
    **Telegram** avec le texte prêt à coller, pour TikTok et en attendant l'audit ;
 6. chaque dimanche, monte un **best-of de la semaine** en 16:9 (compte à rebours #12 → #1, bandeau avec le
-   nom du streamer, carte d'intro, miniature générée, chapitres et crédits dans la description).
+   nom du streamer, carte d'intro, miniature générée, chapitres et crédits dans la description). Il pèse
+   quelques centaines de Mo, bien plus que les 50 Mo qu'un bot Telegram peut envoyer : tu reçois sur
+   Telegram la miniature, le lien pour le télécharger (section « Artifacts » du passage, gardé 7 jours) et
+   un message avec le titre et la description à coller. Une fois YouTube branché, il est publié tout seul.
 
 Tout tourne gratuitement dans **GitHub Actions** (aucun serveur à louer). Le robot se souvient de ce qu'il
 a déjà publié grâce à une branche dédiée `clipper-state`.
@@ -228,6 +231,9 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
 
 - **GitHub Actions** : dépôt privé, 2 000 minutes gratuites par mois. Le robot en consomme environ 1 300
   (5 passages par jour de 6 à 8 minutes, plus le best-of et les tests). Dépôt public : illimité.
+- **Stockage GitHub** : 500 Mo gratuits pour les vidéos gardées par les passages (« artefacts »), et plus
+  aucun dépôt possible au-delà. Les shorts, déjà sur Telegram, ne sont donc gardés qu'un jour, le best-of
+  7 jours, et chaque passage supprime les vidéos des passages plus anciens.
 - **Claude** : quelques centimes par passage (une requête par série de 3 candidats, avec transcriptions et
   images), soit environ 10 à 25 $ par mois au rythme par défaut selon le nombre de séries. Facultatif.
 - Tout le reste (Twitch, YouTube, TikTok, Telegram, Whisper, ffmpeg) est gratuit.

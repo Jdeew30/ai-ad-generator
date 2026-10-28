@@ -34,6 +34,7 @@ on:
 
 permissions:
   contents: write # pousse l'état (clips déjà publiés) sur la branche clipper-state
+  actions: write # supprime les vidéos des anciens passages (GitHub gratuit : 500 Mo pour les artefacts)
 
 concurrency:
   group: clipper
@@ -49,6 +50,7 @@ jobs:
     env:
       CLIPPER_STATE_PATH: ${{ github.workspace }}/.clipper-state/state.json
       CLIPPER_OUTPUT_DIR: ${{ github.workspace }}/clipper-output
+      MODE: ${{ github.event_name == 'schedule' && (github.event.schedule == '41 8 * * 0' && 'compilation' || 'shorts') || inputs.mode }}
     steps:
       - uses: actions/checkout@v4
 
@@ -96,7 +98,6 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
           YTDLP_COOKIES: ${{ secrets.YTDLP_COOKIES }}
-          MODE: ${{ github.event_name == 'schedule' && (github.event.schedule == '41 8 * * 0' && 'compilation' || 'shorts') || inputs.mode }}
           URL: ${{ inputs.url }}
           START: ${{ inputs.start }}
           END: ${{ inputs.end }}
@@ -122,11 +123,27 @@ jobs:
             git push -q origin HEAD:clipper-state
           fi
 
+      # GitHub gratuit garde 500 Mo d'artefacts, et bloque les dépôts au-delà. Les shorts sont déjà sur
+      # Telegram : leurs copies ne restent qu'un jour. Le best-of (trop lourd pour Telegram) reste 7 jours.
+      - name: Faire de la place (vidéos des anciens passages)
+        if: always()
+        continue-on-error: true
+        working-directory: ${{ github.workspace }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          export CUTOFF="$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ)"
+          gh api --paginate "repos/$GITHUB_REPOSITORY/actions/artifacts?per_page=100" |
+            jq '.artifacts[] | select((.expired | not) and (.name | test("compilation") | not) and .created_at < $ENV.CUTOFF) | .id' |
+          while read -r id; do
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/actions/artifacts/$id" --silent && echo "supprimé : artefact $id"
+          done
+
       - name: Vidéos montées (à télécharger pour publier à la main si besoin)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: clipper-${{ github.run_id }}
+          name: clipper-${{ env.MODE }}-${{ github.run_id }}
           path: clipper-output/
-          retention-days: 7
+          retention-days: ${{ env.MODE == 'compilation' && 7 || 1 }}
           if-no-files-found: ignore
