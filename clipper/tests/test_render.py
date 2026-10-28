@@ -54,6 +54,28 @@ def test_layout_detection(media, tmp_path):
     assert plan_layout(MediaInfo(1080, 1920, 10, 30, True), None).kind == "crop"  # vertical source
 
 
+def test_gameplay_panel_does_not_show_the_facecam_again():
+    info = MediaInfo(1920, 1080, 30, 60, True)
+
+    def span(box):
+        return box[0], box[0] + box[2]
+
+    def overlap(a, b):
+        return max(0, min(span(a)[1], span(b)[1]) - max(span(a)[0], span(b)[0]))
+
+    # Camera column on the left (a multi-camera stream): the gameplay window moves right of it.
+    left = plan_layout(info, None, facecam=[0.0, 0.0, 0.4, 0.5])
+    assert overlap(left.face_box, left.game_box) == 0 and span(left.game_box)[1] <= 1920
+    # Small corner facecam on the right: the window moves left of it, as close to the centre as it can.
+    right = plan_layout(info, None, facecam=[0.82, 0.7, 0.18, 0.3])
+    assert overlap(right.face_box, right.game_box) == 0 and right.game_box[0] >= 0
+    assert abs(right.game_box[0] + right.game_box[2] / 2 - 960) < 400
+    # A facecam that cannot be avoided: the window takes the side with the most of the rest of the frame.
+    wide = plan_layout(info, None, facecam=[0.3, 0.2, 0.5, 0.6])
+    assert wide.game_box[0] + wide.game_box[2] == 1920 or wide.game_box[0] == 0
+    assert overlap(wide.face_box, wide.game_box) < wide.game_box[2]
+
+
 @pytest.mark.parametrize("source", ["facecam", "fullcam", "noface"])
 def test_render_short_layouts(media, tmp_path, source):
     info, frames, stats = analyse(media[source], tmp_path)

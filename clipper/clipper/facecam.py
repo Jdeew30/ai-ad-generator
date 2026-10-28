@@ -126,6 +126,30 @@ def _aspect_box(target_aspect: float, cx: float, width: int, height: int) -> Box
     return _fit_box(cx, height / 2, w, h, width, height)
 
 
+def _game_centre(game_w: float, face_box: Box, width: int) -> float:
+    """Centre of the gameplay window: as central as possible without showing the facecam a second time.
+
+    Many streams put the camera in a corner or a side column; a centred window then shows it again in
+    the gameplay panel, right under the facecam panel."""
+    centred = width / 2
+    if game_w >= width:
+        return centred
+    # The camera's frame usually extends beyond the head-and-shoulders box: keep a margin around it.
+    margin = face_box[2] * 0.25
+    face_left, face_right = face_box[0] - margin, face_box[0] + face_box[2] + margin
+    half = game_w / 2
+    lowest, highest = half, width - half
+    candidates = []
+    if face_right + half <= highest:  # the window fits entirely right of the facecam
+        candidates.append(min(max(centred, face_right + half), highest))
+    if face_left - half >= lowest:  # ... or entirely left of it
+        candidates.append(max(min(centred, face_left - half), lowest))
+    if candidates:
+        return min(candidates, key=lambda centre: abs(centre - centred))
+    # The facecam is too wide to avoid: keep the side that has the most of the rest of the frame.
+    return highest if (face_left + face_right) / 2 < centred else lowest
+
+
 def plan_layout(info: MediaInfo, faces: FaceStats | None, *, requested: str = "auto", facecam: list[float] | None = None) -> LayoutPlan:
     width, height = info.width, info.height
     if width <= 0 or height <= 0:
@@ -137,7 +161,8 @@ def plan_layout(info: MediaInfo, faces: FaceStats | None, *, requested: str = "a
     bottom_aspect = OUT_W / (OUT_H - SPLIT_TOP)
 
     def split(face_box: Box, reason: str) -> LayoutPlan:
-        game = _aspect_box(bottom_aspect, width / 2, width, height)
+        game_w = height * bottom_aspect if width / height > bottom_aspect else width
+        game = _aspect_box(bottom_aspect, _game_centre(game_w, face_box, width), width, height)
         return LayoutPlan("split", face_box=face_box, game_box=game, reason=reason)
 
     if facecam is not None and requested in {"auto", "split"}:
