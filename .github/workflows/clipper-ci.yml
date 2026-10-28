@@ -63,5 +63,5 @@ jobs:
         with:
           name: clipper-smoke-${{ github.run_id }}
           path: smoke-output/
-          retention-days: 7
+          retention-days: 1 # GitHub gratuit : 500 Mo d'artefacts en tout
           if-no-files-found: ignore
