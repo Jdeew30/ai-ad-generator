@@ -188,7 +188,7 @@ you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou
 
 ## Réglages utiles (`config.yaml`)
 
-- `twitch.streamers` : la liste des logins suivis (24 gros streamers FR par défaut). Un login faux est
+- `twitch.streamers` : la liste des logins suivis (23 gros streamers FR par défaut). Un login faux est
   signalé dans le journal.
 - `shorts.per_run` / le `cron` du workflow : le rythme de publication (3 par jour par défaut).
 - `shorts.layout` et `streamers.<login>.layout` / `facecam` : forcer une mise en page, ou donner la position

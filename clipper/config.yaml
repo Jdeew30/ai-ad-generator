@@ -21,7 +21,6 @@ twitch:
     - joueur_du_grenier
     - ponce
     - mistermv
-    - antoinedaniellive
     - domingo
     - locklear
     - sardoche
@@ -41,7 +40,7 @@ twitch:
   discover_limit: 15
   clips_per_streamer: 20
   window_hours: 36              # ancienneté maximale d'un clip pour un short
-  min_views: 300
+  min_views: 150               # Claude écarte ensuite les clips sans intérêt
 
 youtube:
   # Moments « les plus revus » des vidéos récentes. Désactivé par défaut : YouTube bloque souvent
@@ -112,7 +111,6 @@ streamers:
   joueur_du_grenier: {name: Joueur du Grenier}
   ponce: {name: Ponce}
   mistermv: {name: MisterMV}
-  antoinedaniellive: {name: Antoine Daniel}
   domingo: {name: Domingo}
   locklear: {name: Locklear}
   sardoche: {name: Sardoche}

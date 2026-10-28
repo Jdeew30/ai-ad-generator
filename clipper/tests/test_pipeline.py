@@ -164,6 +164,14 @@ def test_review_rejections_are_remembered(media, paths):
     assert run.transcriber.calls == 2  # both candidates reviewed (pool = 1 short x 3)
 
 
+def test_a_second_batch_is_reviewed_when_the_first_is_rejected(media, paths):
+    clips = {"alpha": [entry("Alpha-Toxic", 9000, 1, "Toxic moment")], "beta": [entry("Beta-1", 1500, 3)]}
+    run = clipper(media, paths, clips=clips, publishers={}, curator=RejectFirst(), shorts={"min_duration": 3, "candidates_factor": 1})
+    report = run.run_shorts()
+    assert [o.candidate.key for o in report.published] == ["twitch:Beta-1"]
+    assert [c.key for c, _ in report.rejected] == ["twitch:Alpha-Toxic"] and run.transcriber.calls == 2
+
+
 def test_single_url_mode(media, paths):
     youtube = FakePublisher("youtube")
     run = clipper(media, paths, clips={}, publishers={"youtube": youtube})
