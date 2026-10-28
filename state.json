@@ -27,6 +27,30 @@
    "url": "https://www.twitch.tv/domingo/clip/CalmExquisiteYakinikuJKanStyle-mTy_P82A25RYqb6g",
    "views": 297
   },
+  "twitch:FineEmpathicGrouseThisIsSparta-fiHOfxG3QFpboQuF": {
+   "at": "2026-10-28T22:27:48.242639+00:00",
+   "created_at": "2026-10-25T12:35:32+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "13",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2910372191",
+    830.0,
+    861.7
+   ],
+   "streamer": "Domingo",
+   "streamer_login": "domingo",
+   "title": "Freeman débarque en costume… pour la mauvaise équipe (Domingo)",
+   "url": "https://www.twitch.tv/domingo/clip/FineEmpathicGrouseThisIsSparta-fiHOfxG3QFpboQuF",
+   "views": 1308
+  },
   "twitch:HandsomeCourteousBaboonCoolStoryBob-FJT6b5z_doViYQvu": {
    "at": "2026-10-28T11:48:56.358618+00:00",
    "created_at": "2026-10-27T21:06:42+00:00",
