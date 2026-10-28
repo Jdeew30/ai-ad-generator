@@ -3,6 +3,30 @@
  "compiled": {},
  "failures": {},
  "posted": {
+  "twitch:CalmExquisiteYakinikuJKanStyle-mTy_P82A25RYqb6g": {
+   "at": "2026-10-28T16:03:21.821466+00:00",
+   "created_at": "2026-10-27T19:48:30+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "7",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2912376009",
+    3348.0,
+    3402.4
+   ],
+   "streamer": "Domingo",
+   "streamer_login": "domingo",
+   "title": "Domingo tombe sur une carte ultra rare de Wembanyama",
+   "url": "https://www.twitch.tv/domingo/clip/CalmExquisiteYakinikuJKanStyle-mTy_P82A25RYqb6g",
+   "views": 297
+  },
   "twitch:HandsomeCourteousBaboonCoolStoryBob-FJT6b5z_doViYQvu": {
    "at": "2026-10-28T11:48:56.358618+00:00",
    "created_at": "2026-10-27T21:06:42+00:00",
@@ -36,7 +60,28 @@
    "views": 1951
   }
  },
- "rejected": {},
+ "rejected": {
+  "twitch:ConcernedBumblingOctopusRaccAttack-mj8BuIsELF0Nksgr": {
+   "at": "2026-10-28T16:00:10.934608+00:00",
+   "reason": "revue : L'extrait est essentiellement une performance musicale en concert, dont la musique n'appartient vraisemblablement pas au créateur. Il n'y a pas de moment de stream à proprement parler."
+  },
+  "twitch:PoliteZanySmoothieTF2John-sE5WS3TxPHQaF3JB": {
+   "at": "2026-10-28T16:02:23.867840+00:00",
+   "reason": "revue : Près de 30 secondes sans parole et l'action en jeu reste illisible. Le « je peux tout vous expliquer » n'a pas de mise en place compréhensible sans le contexte de la partie de Lycans."
+  },
+  "twitch:TenaciousMoldyCheesecakePrimeMe-th0QrMurEuyWwZuX": {
+   "at": "2026-10-28T16:02:23.867783+00:00",
+   "reason": "revue : Aucun moment fort : Ponce lit un message du chat à propos d'une Switch 2 offerte en cadeau, puis parle du clip lui-même. L'extrait n'a de sens qu'avec le contexte du live et n'a pas de chute."
+  },
+  "twitch:VivaciousFragileGuanacoFeelsBadMan-ZvPgIkNTuHFcgmUP": {
+   "at": "2026-10-28T16:00:10.934566+00:00",
+   "reason": "revue : Aucun moment fort compréhensible sans contexte : discussion confuse autour d'une banane et de « recyclage » d'éléments de décor, sans réaction marquée ni chute."
+  },
+  "twitch:WittyImportantCrabsPeteZaroll-djWL-kySG1qgEKg3": {
+   "at": "2026-10-28T16:00:10.934639+00:00",
+   "reason": "revue : L'image est surtout une diffusion officielle d'un tournoi VALORANT (Riot Games) qui n'appartient pas au créateur. Les commentaires de Squeezie sont trop légers et sans chute."
+  }
+ },
  "reviews": {},
  "version": 1
 }
