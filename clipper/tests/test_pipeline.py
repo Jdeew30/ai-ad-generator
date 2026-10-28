@@ -232,6 +232,98 @@ def test_the_mark_only_gates_claude_reviews_of_discovered_clips():
     assert refusal(Review("reject", "insulte", 10, meta), candidate("y", manual=True), 60) is None
 
 
+class ReplayYtDlp(FakeYtDlp):
+    """Serves VOD sections from a given file, or fails like a deleted or subscribers-only replay."""
+
+    def __init__(self, media, replay=None):
+        super().__init__(media, {})
+        self.replay = replay
+        self.sections = []
+
+    def download(self, url, dest_dir, name, *, start=None, end=None):
+        if "/videos/" not in url:
+            return super().download(url, dest_dir, name, start=start, end=end)
+        self.sections.append((url, start, end))
+        if self.replay is None:
+            from clipper.ytdlp import DownloadError
+
+            raise DownloadError("vidéo réservée aux abonnés")
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        target = dest_dir / f"{name}.mp4"
+        shutil.copyfile(self.replay, target)
+        return target, {"title": "replay"}
+
+
+def found_clip(**fields):
+    from clipper.models import Candidate
+
+    values = {"key": "twitch:Alpha-Cam1", "source": "twitch", "url": "https://clips.twitch.tv/Alpha-Cam1", "title": "clip",
+              "streamer": "Alpha", "streamer_login": "alpha", "channel_url": "https://www.twitch.tv/alpha", "views": 500,
+              "duration": 3.0, "vod_id": "123", "vod_offset": 10.0}  # fmt: skip
+    return Candidate(**{**values, **fields})
+
+
+def with_replay(media, paths, replay, **shorts):
+    run = clipper(media, paths, clips={}, shorts={"min_duration": 3, "context_before": 2, "context_after": 1, **shorts})
+    run.ytdlp = ReplayYtDlp(media, replay)
+    return run
+
+
+def test_twitch_clips_come_with_the_replay_around_them(media, paths):
+    run = with_replay(media, paths, media["noface"])
+    item = run.prepare(found_clip(), transcribe=False, sheet=False, context=True)
+    assert run.ytdlp.sections == [("https://www.twitch.tv/videos/123", 8.0, 14.0)] and run.ytdlp.downloads == []
+    assert item.clip_span == (2.0, 5.0) and item.duration == pytest.approx(6, abs=0.2)
+
+
+@pytest.fixture
+def hushed(tmp_path) -> Path:
+    """A replay whose sound Twitch muted (copyrighted music): an audio track of pure silence."""
+    from .conftest import ffmpeg
+
+    path = tmp_path / "hushed.mp4"
+    ffmpeg("-f", "lavfi", "-i", "testsrc2=s=640x360:r=25:d=6", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+           "-t", "6", "-pix_fmt", "yuv420p", "-c:v", "libx264", "-preset", "ultrafast", "-c:a", "aac", str(path))  # fmt: skip
+    return path
+
+
+@pytest.mark.parametrize("case", ["unavailable", "muted", "too short"])
+def test_the_clip_alone_is_used_when_the_replay_does_not_fit(media, paths, hushed, case):
+    replay = {"unavailable": None, "muted": hushed, "too short": media["noface"]}[case]
+    run = with_replay(media, paths, replay, context_before=5 if case == "too short" else 2)  # 5 s before: clip at 5-8 s of 6
+    item = run.prepare(found_clip(), transcribe=False, sheet=False, context=True)
+    assert len(run.ytdlp.sections) == 1 and run.ytdlp.downloads == ["https://clips.twitch.tv/Alpha-Cam1"]
+    assert item.clip_span is None
+
+
+def test_no_replay_without_its_position_or_for_hand_picked_urls(media, paths):
+    run = with_replay(media, paths, media["noface"])
+    for candidate in (found_clip(vod_offset=None), found_clip(key="twitch:B-1", manual=True)):
+        assert run.prepare(candidate, transcribe=False, sheet=False, context=True).clip_span is None
+    assert run.prepare(found_clip(key="twitch:C-1"), transcribe=False, sheet=False).clip_span is None  # compilations
+    assert run.ytdlp.sections == []
+
+
+def test_a_review_is_only_reused_for_the_same_extract(media, paths):
+    class Counting(Marks):
+        def __init__(self):
+            super().__init__({})
+            self.extracts = []
+
+        def review(self, items, *, now):
+            self.extracts += [item.clip_span for item in items]
+            return super().review(items, now=now)
+
+    run = with_replay(media, paths, media["noface"])
+    run.curator = Counting()
+    replayed = run.prepare(found_clip(), transcribe=False, sheet=False, context=True)
+    assert run.review([replayed])[replayed.candidate.key].meta.ai
+    run.review([replayed])
+    clip_only = run.prepare(found_clip(), transcribe=False, sheet=False)
+    run.review([clip_only])
+    assert run.curator.extracts == [(2.0, 5.0), None]
+
+
 def test_single_url_mode(media, paths):
     youtube = FakePublisher("youtube")
     run = clipper(media, paths, clips={}, publishers={"youtube": youtube})

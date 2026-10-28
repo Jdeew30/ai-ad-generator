@@ -67,6 +67,8 @@ class ShortsConfig:
     per_run: int = 1
     candidates_factor: int = 3  # how many candidates are downloaded and reviewed per short published
     min_score: float = 60.0  # Claude's mark out of 100 a clip needs to be posted
+    context_before: float = 20.0  # seconds of the Twitch replay (VOD) kept before a clip, for the setup (0 = clip only)
+    context_after: float = 8.0  # and after it, for the end of the reaction
     max_per_streamer_per_day: int = 2
     min_duration: float = 8.0
     max_duration: float = 90.0
@@ -232,6 +234,8 @@ def load_config(path: Path | None = None) -> Config:
         raise ConfigError("config.shorts : per_run >= 0 et candidates_factor >= 1 attendus")
     if not 0 <= config.shorts.min_score <= 100:
         raise ConfigError("config.shorts.min_score : une note entre 0 et 100 attendue")
+    if config.shorts.context_before < 0 or config.shorts.context_after < 0:
+        raise ConfigError("config.shorts : context_before et context_after >= 0 attendus (en secondes)")
     for login, override in config.streamers.items():
         if override.facecam is not None and (
             len(override.facecam) != 4 or not all(0 <= v <= 1 for v in override.facecam)

@@ -7,7 +7,9 @@ Un robot qui, plusieurs fois par jour :
    YouTube, et les URLs que tu ajoutes à la main ;
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
    même clip, 2 clips max par streamer et par jour, popularité *relative* au streamer, fraîcheur ;
-3. **fait juger** les candidats par **Claude** (facultatif) : transcription + 4 images de chaque extrait, il
+3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
+   avec 20 s avant et 8 s après (la mise en place et la fin de la réaction ; le clip seul si le replay est
+   indisponible ou muet), puis Claude reçoit la transcription + 4 images de chaque extrait ; il
    écarte ce qui est risqué (insultes, contenu sexuel, infos privées, musique protégée…), note chaque extrait
    sur 100 et ne laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
    l'accroche, le titre, la description et les hashtags. Si rien n'est assez bon, il examine une nouvelle
@@ -196,6 +198,8 @@ you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
+- `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (20 et 8),
+  que Claude garde ou coupe. `0` pour travailler sur le clip seul.
 - `shorts.layout` et `streamers.<login>.layout` / `facecam` : forcer une mise en page, ou donner la position
   exacte de la facecam d'un streamer.
 - `shorts.whisper_model` : `small` par défaut ; `large-v3-turbo` est plus précis mais plus lent.

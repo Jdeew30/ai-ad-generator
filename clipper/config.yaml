@@ -56,6 +56,8 @@ shorts:
   per_run: 1                    # shorts publiés à chaque passage (5 passages par jour dans le workflow)
   candidates_factor: 3          # avec Claude : 3 candidats examinés par série (jusqu'à 3 séries par passage)
   min_score: 60                 # note de Claude sur 100 : en dessous, le clip n'est pas publié
+  context_before: 20            # secondes du replay (VOD) ajoutées avant chaque clip Twitch : la mise en place (0 = clip seul)
+  context_after: 8              # et après : la fin de la réaction. Claude coupe ensuite ce qui ne sert pas
   max_per_streamer_per_day: 2
   min_duration: 8
   max_duration: 90
