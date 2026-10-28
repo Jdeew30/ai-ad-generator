@@ -80,10 +80,10 @@ class RejectFirst:
         reviews = {}
         for item in items:
             base = template_review(item, build(Config, {}))
+            base.meta.ai = True  # Claude's answer, verdict included
             if "Toxic" in item.candidate.title:
                 reviews[item.candidate.key] = Review("reject", "insulte un viewer", 0, base.meta)
             else:
-                base.meta.ai = True
                 reviews[item.candidate.key] = Review("publish", "ok", 80, base.meta)
         return reviews
 
@@ -104,6 +104,17 @@ class Marks:
             mark = next((m for word, m in self.marks.items() if word in item.candidate.title), 80)
             reviews[item.candidate.key] = Review("publish", "rien de notable", mark, meta)
         return reviews
+
+
+class Partial(Marks):
+    """Curator double: like Claude skipping candidates, it only answers for the clips whose key holds a `judged` word."""
+
+    def __init__(self, judged, marks=None):
+        super().__init__(marks or {})
+        self.judged = judged
+
+    def review(self, items, *, now):
+        return {key: review for key, review in super().review(items, now=now).items() if any(word in key for word in self.judged)}
 
 
 def entry(slug, views, hours_ago, title=None):
@@ -214,6 +225,25 @@ def test_a_slot_without_a_good_clip_is_announced(media, paths):
     dry = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram}, curator=Marks({"clip": 59}))
     dry.state.rejected.clear()
     assert dry.run_shorts(dry_run=True).published == [] and len(telegram.messages) == 1
+
+
+def test_a_clip_claude_did_not_judge_is_never_posted(media, paths):
+    telegram = FakePublisher("telegram")
+    clips = {"alpha": [entry("Alpha-Cam1", 9000, 1)], "beta": [entry("Beta-1", 1500, 3, "Beta moment")]}
+    curator = Partial(["Beta"], {"Beta": 50})  # Alpha, the most viewed, gets no answer: the template must not let it through
+    report = clipper(media, paths, clips=clips, publishers={"telegram": telegram}, curator=curator).run_shorts()
+    assert report.published == [] and telegram.calls == []
+    assert telegram.messages == ["⏭️ Pas de short à ce passage : aucun des 2 clips examinés n'a été retenu."]
+    state = State.load(paths.state)
+    assert "twitch:Beta-1" in state.rejected
+    assert "twitch:Alpha-Cam1" not in state.rejected and state.failures["twitch:Alpha-Cam1"]["count"] == 1  # reviewed again later
+
+
+def test_without_any_answer_from_claude_the_owner_is_told(media, paths):
+    telegram = FakePublisher("telegram")
+    report = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram}, curator=Partial([])).run_shorts()
+    assert report.published == [] and not State.load(paths.state).rejected
+    assert telegram.messages == ["⚠️ Pas de short à ce passage : Claude n'a pas répondu (clé, crédits ou panne ?). Les clips seront réexaminés."]
 
 
 def test_the_mark_only_gates_claude_reviews_of_discovered_clips():
