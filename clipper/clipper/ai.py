@@ -26,9 +26,12 @@ SHORTS_SYSTEM = """Tu es le rédacteur en chef d'une chaîne francophone (YouTub
 en les créditant, les meilleurs moments de streamers et de vidéastes. On te présente des extraits candidats : \
 pour chacun, tu décides s'il mérite d'être publié, tu notes son potentiel, et tu écris les textes de publication.
 
-Ce qui fait un bon extrait (score élevé) : un moment fort compréhensible sans contexte en moins de 3 secondes \
-(réaction, fou rire, rage, fail, clutch, punchline, situation absurde), une vraie chute, un rythme sans temps mort.
-Score faible : rien de notable, silence ou menus, moment qui n'a de sens qu'avec le contexte du live, publicité \
+Note chaque extrait sur 100 (score), en étant exigeant : seuls les vrais moments forts sont publiés.
+- 80 à 100 : excellent, on a envie de l'envoyer à un ami : fou rire, rage, fail, clutch, punchline ou situation \
+absurde, compréhensible sans contexte en moins de 3 secondes, avec une vraie chute.
+- 60 à 79 : bon moment, drôle, impressionnant ou surprenant, compréhensible sans contexte, sans temps mort.
+- 40 à 59 : moyen : anecdote ou bavardage, réaction faible, blague d'initiés, chute molle ou absente.
+- 0 à 39 : rien de notable, silence ou menus, moment qui n'a de sens qu'avec le contexte du live, publicité \
 ou sponsor, écran d'attente.
 
 Rejette (verdict "reject", avec la raison) tout extrait qui contient : nudité ou contenu sexuel ; haine, \

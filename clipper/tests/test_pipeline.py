@@ -10,7 +10,7 @@ import pytest
 from clipper.ai import Review
 from clipper.config import Config, Paths, Secrets, build
 from clipper.models import PublishResult, Transcript, Word
-from clipper.pipeline import Clipper
+from clipper.pipeline import Clipper, refusal
 from clipper.state import State
 
 from .conftest import NOW, requires_ffmpeg
@@ -52,6 +52,10 @@ class FakePublisher:
         self.name = name
         self.ok = ok
         self.calls = []
+        self.messages = []
+
+    def message(self, text):
+        self.messages.append(text)
 
     def publish_short(self, video, meta, candidate, *published):
         self.calls.append((video, meta, candidate))
@@ -80,6 +84,24 @@ class RejectFirst:
             else:
                 base.meta.ai = True
                 reviews[item.candidate.key] = Review("publish", "ok", 80, base.meta)
+        return reviews
+
+
+class Marks:
+    """Curator double: Claude approves every clip, with the mark set for a word of its title (80 otherwise)."""
+
+    def __init__(self, marks):
+        self.marks = marks
+
+    def review(self, items, *, now):
+        from clipper.ai import template_review
+
+        reviews = {}
+        for item in items:
+            meta = template_review(item, build(Config, {})).meta
+            meta.ai = True
+            mark = next((m for word, m in self.marks.items() if word in item.candidate.title), 80)
+            reviews[item.candidate.key] = Review("publish", "rien de notable", mark, meta)
         return reviews
 
 
@@ -170,6 +192,44 @@ def test_a_second_batch_is_reviewed_when_the_first_is_rejected(media, paths):
     report = run.run_shorts()
     assert [o.candidate.key for o in report.published] == ["twitch:Beta-1"]
     assert [c.key for c, _ in report.rejected] == ["twitch:Alpha-Toxic"] and run.transcriber.calls == 2
+
+
+def test_clips_marked_under_the_bar_are_not_posted(media, paths):
+    clips = {"alpha": [entry("Alpha-Dull", 9000, 1, "Dull moment")], "beta": [entry("Beta-1", 1500, 3)]}
+    telegram = FakePublisher("telegram")
+    report = clipper(media, paths, clips=clips, publishers={"telegram": telegram}, curator=Marks({"Dull": 35})).run_shorts()
+    assert [o.candidate.key for o in report.published] == ["twitch:Beta-1"]
+    assert [(c.key, reason) for c, reason in report.rejected] == [("twitch:Alpha-Dull", "note 35/100 (minimum 60). rien de notable")]
+    assert "twitch:Alpha-Dull" in State.load(paths.state).rejected and telegram.messages == []
+
+
+def test_a_slot_without_a_good_clip_is_announced(media, paths):
+    telegram = FakePublisher("telegram")
+    run = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram}, curator=Marks({"clip": 59}))
+    report = run.run_shorts()
+    assert report.published == [] and len(report.rejected) == 3 and telegram.calls == []
+    assert telegram.messages == ["⏭️ Pas de short à ce passage : aucun des 3 clips examinés n'a été retenu."]
+    dry = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram}, curator=Marks({"clip": 59}))
+    dry.state.rejected.clear()
+    assert dry.run_shorts(dry_run=True).published == [] and len(telegram.messages) == 1
+
+
+def test_the_mark_only_gates_claude_reviews_of_discovered_clips():
+    from clipper.models import Candidate, ShortMeta
+
+    def candidate(slug, manual=False):
+        return Candidate(f"twitch:{slug}", "twitch", f"https://clips.twitch.tv/{slug}", slug, "Alpha", "alpha",
+                         "https://www.twitch.tv/alpha", manual=manual)  # fmt: skip
+
+    meta = ShortMeta(hook="H", title="T", description="D", hashtags=[], ai=True)
+    found = candidate("x")
+    assert refusal(Review("publish", "bof", 59, meta), found, 60) == "note 59/100 (minimum 60). bof"
+    assert refusal(Review("publish", "bien", 60, meta), found, 60) is None
+    assert refusal(Review("reject", "insulte", 90, meta), found, 60) == "insulte"
+    assert refusal(Review("reject", "", 90, meta), found, 60) == "refusé par Claude"
+    template = ShortMeta(hook="H", title="T", description="D", hashtags=[], ai=False)
+    assert refusal(Review("publish", "gabarit", 12, template), found, 60) is None  # popularity, not a mark
+    assert refusal(Review("reject", "insulte", 10, meta), candidate("y", manual=True), 60) is None
 
 
 def test_single_url_mode(media, paths):

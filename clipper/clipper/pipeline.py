@@ -33,8 +33,8 @@ from .ytdlp import DownloadError, YtDlp
 
 log = logging.getLogger(__name__)
 
-# With Claude, a second batch of candidates is reviewed when the first one does not give enough shorts.
-REVIEW_ROUNDS = 2
+# With Claude, more batches of candidates are reviewed while the previous ones do not give enough shorts.
+REVIEW_ROUNDS = 3
 
 
 @dataclass
@@ -102,6 +102,20 @@ class RunReport:
 
 def _slug(text: str) -> str:
     return re.sub(r"[^A-Za-z0-9_-]+", "-", text).strip("-")[:80] or "clip"
+
+
+def refusal(review: Review, candidate: Candidate, min_score: float) -> str | None:
+    """Why a reviewed clip must not be posted: Claude's veto, or a mark under the bar.
+
+    URLs added by hand always pass. Template reviews are not marked on quality (their score is popularity).
+    """
+    if candidate.manual:
+        return None
+    if review.verdict == "reject":
+        return review.reason or "refusé par Claude"
+    if review.meta.ai and review.score < min_score:
+        return f"note {review.score:.0f}/100 (minimum {min_score:.0f}). {review.reason}".strip()
+    return None
 
 
 class Clipper:
@@ -332,6 +346,16 @@ class Clipper:
                 results.append(PublishResult("telegram", False, detail=str(exc)))
         return results
 
+    def notify(self, text: str) -> None:
+        """A note on Telegram, so that a slot without a video is not mistaken for a breakdown."""
+        telegram = self.publishers.get("telegram")
+        if telegram is None:
+            return
+        try:
+            telegram.message(text)
+        except PublishError as exc:
+            log.error("telegram : %s", exc)
+
     def run_shorts(self, *, dry_run: bool = False, count: int | None = None, url: str | None = None,
                    start: str | None = None, end: str | None = None, queue: Path | None = None) -> RunReport:
         report = RunReport("shorts", dry_run)
@@ -391,7 +415,7 @@ class Clipper:
         approved: list[tuple[Prepared, Review]] = []
         for round_number in range(REVIEW_ROUNDS if use_ai else 1):
             if round_number:
-                log.info("Pas assez de clips retenus : revue d'une deuxième série de candidats.")
+                log.info("Pas assez de clips retenus : revue d'une nouvelle série de candidats.")
             prepared: list[Prepared] = []
             for candidate in remaining:
                 log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
@@ -405,16 +429,22 @@ class Clipper:
             reviews = self.review(prepared)
             for item in prepared:
                 review = reviews[item.candidate.key]
-                if review.verdict == "reject" and not item.candidate.manual:
-                    log.info("Écarté par la revue : %s — %s", item.candidate.title, review.reason)
-                    report.rejected.append((item.candidate, review.reason))
+                reason = refusal(review, item.candidate, self.config.shorts.min_score)
+                if reason:
+                    log.info("Écarté par la revue : %s — %s", item.candidate.title, reason)
+                    report.rejected.append((item.candidate, reason))
                     if not dry_run:
-                        self.state.record_rejection(item.candidate, f"revue : {review.reason}")
+                        self.state.record_rejection(item.candidate, f"revue : {reason}")
                     continue
                 approved.append((item, review))
             if len(approved) >= wanted:
                 break
         approved.sort(key=lambda pair: (pair[0].candidate.manual, pair[1].score), reverse=True)
+        if not approved and report.rejected and not dry_run:
+            examined = len(report.rejected)
+            self.notify("⏭️ Pas de short à ce passage : " + (
+                f"aucun des {examined} clips examinés n'a été retenu." if examined > 1 else "le seul clip examiné n'a pas été retenu."
+            ))
 
         for item, review in approved[:wanted]:
             candidate = item.candidate
