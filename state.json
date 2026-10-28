@@ -145,6 +145,30 @@
    "at": "2026-10-28T16:00:10.934608+00:00",
    "reason": "revue : L'extrait est essentiellement une performance musicale en concert, dont la musique n'appartient vraisemblablement pas au créateur. Il n'y a pas de moment de stream à proprement parler."
   },
+  "twitch:FilthyTenderQuailRickroll-k1pI4EMU9CbNbqAa": {
+   "at": "2026-10-28T22:03:37.601090+00:00",
+   "reason": "revue : Simple discussion de gameplay sur l'emplacement des shops dans Deadlock : pas de réaction forte, pas de chute, peu compréhensible sans contexte."
+  },
+  "twitch:HealthyGeniusWombatCoolStoryBob-NHLaiGwUD5z8dFso": {
+   "at": "2026-10-28T22:01:42.253122+00:00",
+   "reason": "revue : Action de League of Legends confuse avec un double kill puis une mort, et une réaction assez plate. Elle n'est compréhensible qu'avec le contexte de la partie, et il n'y a pas de vraie chute."
+  },
+  "twitch:HilariousSmokyBasenjiCharlieBitMe-VBXX--T2Vl6SARdR": {
+   "at": "2026-10-28T22:03:37.601216+00:00",
+   "reason": "revue : Il s'agit surtout de la retransmission d'un événement (annonceur sur scène, logo sponsor BoursoBank) qui n'appartient pas au créateur. L'extrait est trop court et sans réaction du streamer."
+  },
+  "twitch:InterestingDeadRabbitTBTacoRight-pVtdbvGyT5XBfLBP": {
+   "at": "2026-10-28T22:01:42.253026+00:00",
+   "reason": "revue : Fail visuel potentiellement drôle (l'écran passe en « NO SIGNAL » en pleine partie de ping-pong), mais il n'y a presque aucune réaction audible ni de chute claire. Sans le titre, on ne comprend pas ce qui s'est passé : moment trop faible."
+  },
+  "twitch:ObedientSneakyDoveCharlietheUnicorn-WmgqcgyD6iQejgrt": {
+   "at": "2026-10-28T22:03:37.601163+00:00",
+   "reason": "revue : Simple annonce promotionnelle d'un événement à venir : aucune action, aucune réaction, aucune chute."
+  },
+  "twitch:ObliqueSleepyTofuPeoplesChamp-XC7kUTcWQq6BRSj-": {
+   "at": "2026-10-28T22:01:42.253188+00:00",
+   "reason": "revue : Longue exploration sombre avec peu de dialogue et de nombreux temps morts. Le screamer n'est pas visible et la réaction finale se limite à un simple « Ah ! », trop faible pour un moment fort."
+  },
   "twitch:PoliteZanySmoothieTF2John-sE5WS3TxPHQaF3JB": {
    "at": "2026-10-28T16:02:23.867840+00:00",
    "reason": "revue : Près de 30 secondes sans parole et l'action en jeu reste illisible. Le « je peux tout vous expliquer » n'a pas de mise en place compréhensible sans le contexte de la partie de Lycans."
@@ -152,6 +176,18 @@
   "twitch:SavageSpunkyLaptopHotPokket-pwJjpFRp79vWUudk": {
    "at": "2026-10-28T20:06:28.073825+00:00",
    "reason": "revue : L'explosion nucléaire contre les abeilles est visuelle, mais la réaction est faible et le moment manque de mise en place pour être compris sans connaître la partie."
+  },
+  "twitch:SilkyRoughLemurWow-ICd0rJPdD39clXr9": {
+   "at": "2026-10-28T22:06:09.799847+00:00",
+   "reason": "revue : Il y a des cris et de l'agitation, mais on ne comprend pas ce qui se passe sans contexte : on voit seulement un achat dans une boutique et un captcha. Il n'y a pas de vraie chute lisible."
+  },
+  "twitch:SpikyMistyPartridgeRiPepperonis-s6ciChYjbcoNZxUi": {
+   "at": "2026-10-28T22:06:09.799794+00:00",
+   "reason": "revue : Bavardage dans le menu du jeu, sans action ni réaction notable. La transcription est confuse et le moment n'a de sens qu'avec le contexte du live."
+  },
+  "twitch:SquareDistinctAirGuitarTriHard-tfS1nH4I2uXT5Y83": {
+   "at": "2026-10-28T22:06:09.799726+00:00",
+   "reason": "revue : L'extrait est surtout une vidéo de Bear Grylls (Discovery) qui n'appartient pas au créateur. La réaction de Domingo reste faible et commentée par-dessus."
   },
   "twitch:TenaciousMoldyCheesecakePrimeMe-th0QrMurEuyWwZuX": {
    "at": "2026-10-28T16:02:23.867783+00:00",
