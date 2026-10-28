@@ -111,9 +111,10 @@ def cmd_auth(args: argparse.Namespace) -> int:
             client_key = args.client_id or found.tiktok_client_key or input("TIKTOK_CLIENT_KEY : ").strip()
             client_secret = args.client_secret or found.tiktok_client_secret or input("TIKTOK_CLIENT_SECRET : ").strip()
             redirect = args.redirect_uri or input("Redirect URI déclarée dans l'app TikTok : ").strip()
+            mode = load_config(Path(args.config) if args.config else None).publish.tiktok.mode
             state = stdlib_secrets.token_urlsafe(12)
             print("\nOuvrez cette adresse avec le compte TikTok de la chaîne et acceptez :\n")
-            print(tiktok_authorize_url(client_key, redirect, state) + "\n")
+            print(tiktok_authorize_url(client_key, redirect, state, mode=mode) + "\n")
             pasted = input("Collez ici l'adresse complète de la page sur laquelle vous arrivez : ")
             tokens = tiktok_tokens(client_key, client_secret, code_from_redirect(pasted, state), redirect, http)
             print(f"\nScopes accordés : {tokens.get('scope')}")

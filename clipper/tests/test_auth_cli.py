@@ -30,7 +30,9 @@ def test_code_from_redirect():
 def test_tiktok_authorize_url():
     query = parse_qs(urlparse(tiktok_authorize_url("key", "https://me.example/cb", "st")).query)
     assert query["client_key"] == ["key"] and query["response_type"] == ["code"]
-    assert query["scope"] == ["user.info.basic,video.upload,video.publish"] and query["redirect_uri"] == ["https://me.example/cb"]
+    assert query["scope"] == ["user.info.basic,video.upload"] and query["redirect_uri"] == ["https://me.example/cb"]
+    direct = parse_qs(urlparse(tiktok_authorize_url("key", "https://me.example/cb", "st", mode="direct")).query)
+    assert direct["scope"] == ["user.info.basic,video.upload,video.publish"]
 
 
 def test_youtube_loopback_flow(server, http, monkeypatch):

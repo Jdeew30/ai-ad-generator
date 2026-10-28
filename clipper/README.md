@@ -13,13 +13,16 @@ Un robot qui, plusieurs fois par jour :
 4. **monte** chaque short en 1080×1920 : facecam en haut et jeu en bas (détection automatique du visage),
    ou plein cadre centré sur le streamer, ou fond flouté ; **sous-titres animés mot à mot** (Whisper),
    accroche incrustée, crédit `twitch.tv/<streamer>`, son normalisé ;
-5. **publie** sur YouTube Shorts et TikTok, et t'envoie chaque vidéo sur **Telegram** avec le texte prêt
-   à coller ;
+5. **publie** sur YouTube Shorts (une fois l'audit de Google accepté) et t'envoie chaque vidéo sur
+   **Telegram** avec le texte prêt à coller, pour TikTok et en attendant l'audit ;
 6. chaque dimanche, monte un **best-of de la semaine** en 16:9 (compte à rebours #12 → #1, bandeau avec le
    nom du streamer, carte d'intro, miniature générée, chapitres et crédits dans la description).
 
 Tout tourne gratuitement dans **GitHub Actions** (aucun serveur à louer). Le robot se souvient de ce qu'il
 a déjà publié grâce à une branche dédiée `clipper-state`.
+
+Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) ·
+[TikTok @tesmeilleursclips](https://www.tiktok.com/@tesmeilleursclips).
 
 ## État réel (à lire avant de compter dessus)
 
@@ -34,7 +37,7 @@ a déjà publié grâce à une branche dédiée `clipper-state`.
 | Sous-titres Whisper | ✅ Vérifié en réel | Modèle `small` sur de vrais clips en français : « Il a défoncé la main avec le crayon ! Il lui a planté la main ? Ah oui ! » ; « …mesdames et messieurs, veuillez accueillir ! ». Des erreurs restent possibles sur l'argot, les noms propres ou un fond musical fort. |
 | Revue et textes par Claude | ⚠️ Écrit, testé avec le vrai SDK contre un faux serveur | Forme exacte de la requête vérifiée (sortie JSON structurée, `effort`, repli serveur en cas de refus). Jamais appelé avec une vraie clé. Sans clé : gabarit non-IA (titre du clip d'origine). |
 | Publication YouTube | ⚠️ Écrite, testée contre un faux serveur | Envoi « resumable » par morceaux avec reprise après coupure. **Tant que ton projet Google n'a pas passé l'audit de l'API, YouTube verrouille les vidéos envoyées en privé** (voir plus bas). |
-| Publication TikTok | ⚠️ Écrite, testée contre un faux serveur | Brouillon (« inbox ») ou publication directe. **TikTok doit d'abord valider ton app**, et la publication directe publique exige un audit. |
+| Publication TikTok | ⚠️ Écrite, testée contre un faux serveur | Brouillon (« inbox ») ou publication directe. **En pratique, publication à la main depuis Telegram** : le règlement de l'API TikTok exclut les outils qui publient sur tes propres comptes et la reprise de contenus d'autres plateformes, donc pas d'audit, et sans audit tout reste privé (voir TikTok plus bas). |
 | Envoi Telegram | ⚠️ Écrit, testé contre un faux serveur | Le plus simple à brancher (2 minutes), et utilisable tout de suite. |
 | Workflows GitHub Actions | ⚠️ À valider sur ton dépôt | Les tests tournent à chaque push. Le planning (3 shorts par jour + best-of du dimanche) ne démarre qu'une fois le workflow sur la branche par défaut. |
 
@@ -51,7 +54,8 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
    minutes, le short monté est téléchargeable dans les **Artifacts** du run. Sans aucun identifiant, le
    robot fonctionne déjà : clips Twitch via yt-dlp, textes par gabarit, vidéos en artefacts.
 3. Ajoute les secrets au fur et à mesure, dans l'ordre conseillé : Telegram, Claude, Twitch, puis YouTube
-   et TikTok (détails plus bas, tout se fait depuis un navigateur).
+   une fois l'audit de Google accepté (détails plus bas, tout se fait depuis un navigateur). TikTok se
+   publie à la main depuis Telegram.
 4. Vérifie : **Run workflow** → mode **`check`**. Le résumé du run affiche ✅ / ❌ pour chaque service, et
    Telegram reçoit un message de test. Rien n'est publié.
 5. C'est tout : 3 shorts par jour (vers 12 h, 18 h et 20 h 30 à Paris l'hiver, une heure plus tard l'été)
@@ -96,8 +100,9 @@ secret**, nom exactement comme indiqué ci-dessous (ex. `TELEGRAM_BOT_TOKEN`), v
    `<TON_JETON>`) : le nombre après `"chat":{"id":` est ton `TELEGRAM_CHAT_ID`. (En local :
    `python -m clipper auth telegram` l'affiche aussi.)
 
-C'est le meilleur moyen de démarrer TikTok pendant que ton app TikTok est en validation : tu reçois la
-vidéo + la légende, tu enregistres, tu publies (ou tu programmes dans TikTok Studio).
+Le bot ne répond pas aux messages, c'est normal : il sert seulement à t'envoyer les vidéos. C'est la voie
+normale pour TikTok (voir plus bas), et pour YouTube tant que l'audit n'est pas accepté : tu reçois la
+vidéo et la légende, tu enregistres, tu publies (ou tu programmes dans TikTok Studio).
 
 ### Claude : le tri et les textes par IA
 
@@ -120,12 +125,13 @@ chaque clip dans la VOD (anti-doublon plus précis).
 
 1. [console.cloud.google.com](https://console.cloud.google.com) → crée un projet → **API et services →
    Bibliothèque** → active **YouTube Data API v3**.
-2. **Écran de consentement OAuth** : type « Externe », ton e-mail, puis **publie l'application (« En
-   production »)**. En mode « Test », Google invalide le jeton au bout de 7 jours et le robot s'arrête.
-   Pour un usage perso, pas besoin de faire vérifier l'app : à la connexion, clique « Paramètres avancés →
-   Accéder à … ».
-3. **Identifiants → Créer un ID client OAuth → Application Web**, avec comme URI de redirection autorisé
-   `https://developers.google.com/oauthplayground` → `YOUTUBE_CLIENT_ID` et `YOUTUBE_CLIENT_SECRET`.
+2. **Google Auth Platform** (l'ancien « écran de consentement OAuth ») → Commencer : nom de l'appli, ton
+   e-mail, audience « Externe ». Puis **Audience → Publier l'application** (statut « En production »). En
+   mode « Test », Google invalide le jeton au bout de 7 jours et le robot s'arrête. Pour un usage perso, pas
+   besoin de faire vérifier l'app : à la connexion, clique « Paramètres avancés → Accéder à … ».
+3. **Google Auth Platform → Clients → Créer un client → Application Web**, avec comme URI de redirection
+   autorisé `https://developers.google.com/oauthplayground` → `YOUTUBE_CLIENT_ID` et `YOUTUBE_CLIENT_SECRET`.
+   Copie le code secret tout de suite : la console ne le réaffiche plus ensuite.
 4. Le refresh token, sans rien installer : ouvre
    [developers.google.com/oauthplayground](https://developers.google.com/oauthplayground) → roue dentée en
    haut à droite → coche **Use your own OAuth credentials** et colle l'ID client et le secret → dans
@@ -137,28 +143,38 @@ chaque clip dans la VOD (anti-doublon plus précis).
 5. ⚠️ **Audit obligatoire pour publier en public** : les vidéos envoyées par un projet non audité sont
    verrouillées en privé, définitivement. Remplis le formulaire
    [YouTube API Services – Audit and Quota Extension](https://support.google.com/youtube/contact/yt_api_form)
-   (gratuit, quelques jours à quelques semaines) et **n'ajoute les trois secrets `YOUTUBE_*` qu'une fois
-   l'audit accepté**. En attendant, publie à la main depuis Telegram ou les artefacts.
-6. Quota : 10 000 unités par jour par défaut. La grille de Google compte 1 600 unités par envoi (vérifie
-   le chiffre actuel dans la console), soit environ 6 envois par jour : assez pour 3 shorts + le best-of.
+   (gratuit, quelques jours à quelques semaines, sans garantie d'accord) et **n'ajoute les trois secrets
+   `YOUTUBE_*` qu'une fois l'audit accepté**. En attendant, publie à la main depuis Telegram ou les
+   artefacts.
+6. Quota : 10 000 unités par jour par défaut. Un envoi a longtemps coûté 1 600 unités (environ 6 envois par
+   jour) ; Google aurait fortement baissé ce coût fin 2025, vérifie le chiffre actuel dans la console. Même à
+   1 600, c'est assez pour 3 shorts + le best-of.
    Les miniatures personnalisées exigent une chaîne validée par téléphone
    ([youtube.com/verify](https://www.youtube.com/verify)).
 
-### TikTok : envoi automatique
+### TikTok : publication à la main (et option avancée)
 
-1. [developers.tiktok.com](https://developers.tiktok.com) → crée une app (il faut une page web avec
-   conditions d'utilisation et politique de confidentialité : une page GitHub Pages suffit).
-2. Ajoute **Login Kit** et **Content Posting API**, les scopes `user.info.basic`, `video.upload`,
-   `video.publish`, et une URL de redirection HTTPS (par exemple ta page GitHub Pages).
-3. Soumets l'app à la validation de TikTok. En attendant, le mode *sandbox* ne publie qu'en privé.
-4. Sur ton ordinateur : `python -m clipper auth tiktok --redirect-uri https://…` → ouvre le lien, accepte,
-   puis colle l'adresse de la page d'arrivée → `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`,
-   `TIKTOK_REFRESH_TOKEN` en secrets.
-5. Mode **`inbox`** (défaut) : la vidéo arrive en brouillon dans ton appli TikTok, tu ajoutes un son
-   tendance si tu veux, et tu publies d'un tap. Mode **`direct`** : publication sans toi, mais TikTok
-   n'autorise le public qu'aux apps **auditées** (sinon erreur `unaudited_client_can_only_post_to_private_accounts`,
-   que le robot explique).
-6. TikTok peut renouveler le refresh token. Pour que le robot l'enregistre seul, ajoute le secret
+Le règlement de l'API de publication de TikTok exclut les outils qui publient sur tes propres comptes et
+les applis qui reprennent des contenus d'autres plateformes. TikTok n'auditera donc pas ce robot, et sans
+audit, tout ce qui passe par son API reste privé. **La voie normale, c'est Telegram** : la vidéo et sa
+légende arrivent sur ton téléphone, tu publies en une minute (avec un son tendance si tu veux).
+
+Option avancée, **jamais testée en réel** : recevoir chaque vidéo en brouillon dans l'appli TikTok, via une
+app développeur restée en mode *sandbox* (pas de validation TikTok, 10 comptes de test au maximum).
+
+1. [developers.tiktok.com](https://developers.tiktok.com) → crée une app, puis une **sandbox** → ajoute ton
+   compte TikTok dans ses comptes cibles (*target users*).
+2. Ajoute **Login Kit** (plateforme Web) avec une URL de redirection HTTPS sur un site que tu contrôles (ce
+   dépôt est privé : GitHub Pages n'y est pas disponible sur un compte gratuit), et **Content Posting API**
+   en envoi de brouillons, avec les scopes `user.info.basic` et `video.upload`.
+3. Sur ton ordinateur : `python -m clipper auth tiktok --redirect-uri https://…` → ouvre le lien, accepte,
+   puis colle l'adresse de la page d'arrivée → secrets `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`,
+   `TIKTOK_REFRESH_TOKEN`.
+4. Mode **`inbox`** (défaut) : la vidéo arrive en brouillon, tu publies d'un tap. TikTok limite le nombre de
+   brouillons en attente. Le mode **`direct`** demande en plus le scope `video.publish` et un audit que
+   TikTok n'accorde pas à ce type d'outil (erreur `unaudited_client_can_only_post_to_private_accounts`, que
+   le robot explique).
+5. TikTok peut renouveler le refresh token. Pour que le robot l'enregistre seul, ajoute le secret
    `GH_SECRETS_TOKEN` : un jeton GitHub *fine-grained* limité à ce dépôt avec la permission
    « Secrets : Read and write ». Sans lui, le journal te prévient s'il faut mettre le secret à jour.
 
@@ -215,7 +231,7 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
 | `YOUTUBE_REFRESH_TOKEN expiré` | Écran de consentement « En production », puis `python -m clipper auth youtube`. |
 | Vidéos YouTube en privé | Audit de l'API pas encore accordé (voir YouTube, étape 5). |
 | `quota quotidien` YouTube | Moins d'envois par jour, ou demande d'extension de quota. |
-| TikTok `unaudited_client…` | `publish.tiktok.mode: inbox`, ou fais auditer l'app. |
+| TikTok `unaudited_client…` | `publish.tiktok.mode: inbox` (TikTok n'audite pas ce type d'outil). |
 | Sous-titres absents | Voir le journal : modèle Whisper non téléchargé, ou aucune parole détectée. |
 | Mauvais cadrage d'un streamer | `streamers: { login: { layout: split, facecam: [x, y, l, h] } }`. |
 
