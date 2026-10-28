@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 from dataclasses import dataclass
@@ -92,6 +93,19 @@ def run_ffmpeg(args: list[str], *, cwd: Path | None = None, timeout: float = 360
         raise MediaError(f"ffmpeg a dépassé {timeout:.0f}s") from exc
     if result.returncode != 0:
         raise MediaError(f"ffmpeg a échoué ({result.returncode}) : {result.stderr.strip()[-2000:]}")
+
+
+def max_volume(path: Path) -> float | None:
+    """Loudest level of the audio track, in dB (0 = full scale, about -91 = digital silence); None without audio."""
+    command = [ffmpeg_bin(), "-hide_banner", "-nostdin", "-i", str(path), "-map", "0:a:0", "-af", "volumedetect", "-f", "null", "-"]
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=600)
+    except subprocess.TimeoutExpired as exc:
+        raise MediaError("ffmpeg a dépassé 600s") from exc
+    match = re.search(r"max_volume:\s*(-?inf|-?[\d.]+) dB", result.stderr)
+    if result.returncode != 0 or match is None:
+        return None
+    return float(match.group(1))
 
 
 def extract_frames(path: Path, out_dir: Path, *, count: int = 8, width: int = 1280, duration: float | None = None) -> list[Path]:

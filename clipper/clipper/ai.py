@@ -111,6 +111,7 @@ class ReviewItem:
     duration: float  # length of the downloaded extract
     transcript: Transcript | None = None
     sheet: Path | None = None  # contact sheet of a few frames
+    clip_span: tuple[float, float] | None = None  # where the original clip sits in the extract (None: the extract is the clip)
 
 
 @dataclass
@@ -185,7 +186,7 @@ def template_review(item: ReviewItem, config: Config) -> Review:
     own = clip_title(candidate)
     base = own or f"Moment fort de {candidate.streamer}"
     title = base if candidate.streamer.lower() in base.lower() else f"{candidate.streamer} : {base}"
-    trim_start, trim_end = default_trim(candidate, item.duration)
+    trim_start, trim_end = item.clip_span or default_trim(candidate, item.duration)
     meta = ShortMeta(
         hook=_cut(base, 40),
         title=_cut(title, 95),
@@ -318,10 +319,12 @@ class ClaudeCurator:
                 f"Titre d'origine : {candidate.title or '(aucun)'}",
                 f"Jeu / catégorie : {candidate.game or 'inconnu'}",
                 f"Vues : {candidate.views} · publié {_age(candidate.created_at, now)} · durée de l'extrait : {item.duration:.1f} s",
-                "Transcription (secondes depuis le début de l'extrait) :",
-                transcript,
-                "</candidat>",
             ]
+            if item.clip_span:
+                start, end = item.clip_span
+                lines.append(f"Clip d'origine (choisi par les viewers) : de {start:.1f} s à {end:.1f} s de l'extrait ; avant et "
+                             "après, c'est le replay du live : n'en garde que ce qui sert la mise en place ou la chute.")
+            lines += ["Transcription (secondes depuis le début de l'extrait) :", transcript, "</candidat>"]
             content.append({"type": "text", "text": "\n".join(lines)})
             if self.config.ai.review_frames and item.sheet and item.sheet.exists():
                 content.append({"type": "text", "text": f"Images de {clip_id} (4 instants, de gauche à droite puis de haut en bas) :"})

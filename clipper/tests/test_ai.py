@@ -35,7 +35,7 @@ def items(tmp_path: Path) -> list[ReviewItem]:
     transcript = Transcript([Word(0.5, 1.0, "Non"), Word(1.0, 1.4, "mais"), Word(1.4, 2.0, "sérieux !")], "fr")
     return [
         ReviewItem(make_candidate("twitch:A", "squeezie", game="Fortnite"), 30.0, transcript, sheet),
-        ReviewItem(make_candidate("twitch:B", "gotaga"), 25.0, None, None),
+        ReviewItem(make_candidate("twitch:B", "gotaga"), 25.0, None, None, clip_span=(5.0, 20.0)),
     ]
 
 
@@ -77,6 +77,7 @@ def test_review_sends_one_structured_request_and_validates_the_answer(server, tm
     assert len(images) == 1 and images[0]["source"]["media_type"] == "image/jpeg"  # B has no contact sheet
     texts = "\n".join(block["text"] for block in content if block["type"] == "text")
     assert 'id="c1"' in texts and "Non mais sérieux !" in texts and "Fortnite" in texts
+    assert texts.count("Clip d'origine") == 1 and "de 5.0 s à 20.0 s de l'extrait" in texts  # only B comes with its replay
 
 
 def test_refusal_and_errors_fall_back_to_the_template(server, tmp_path):
@@ -129,6 +130,8 @@ def test_template_review_and_trim():
     assert default_trim(item.candidate, 100.0) == pytest.approx((18.45, 77.45))
     assert default_trim(item.candidate, 40.0) == (None, None)
     assert Review.from_dict(review.to_dict()).meta == review.meta
+    replay = template_review(ReviewItem(make_candidate("twitch:C", "chan"), 53.0, clip_span=(20.0, 45.0)), build(Config, {}))
+    assert (replay.meta.trim_start, replay.meta.trim_end) == (20.0, 45.0)  # without Claude: the clip as the viewers cut it
     assert hashtag("Joueur du Grenier") == "joueurdugrenier" and hashtag("Été #1") == "ete1"
 
 

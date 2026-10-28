@@ -172,3 +172,21 @@ def test_an_unreachable_twitch_is_an_error_not_an_empty_day():
     config = build(Config, {"twitch": {"streamers": ["a", "b"]}})
     with pytest.raises(SourceError, match="toutes les chaînes"):
         discover_twitch(config, Secrets(), None, ytdlp, now=NOW, window=timedelta(hours=24))
+
+
+def test_sections_are_copied_unless_exact_cuts_are_asked(tmp_path: Path):
+    from clipper.ytdlp import YtDlp
+
+    class Recording(YtDlp):
+        def _run(self, url, options, download):
+            self.options = options
+            (tmp_path / "replay.mp4").write_bytes(b"")
+            return {"requested_downloads": [{"filepath": str(tmp_path / "replay.mp4")}]}
+
+    ytdlp = Recording()
+    ytdlp.download("https://www.twitch.tv/videos/1", tmp_path, "replay", start=80.0, end=120.0, exact=False)
+    assert ytdlp.options["force_keyframes_at_cuts"] is False  # stream copy: seconds instead of a 1080p60 re-encode
+    ytdlp.download("https://www.twitch.tv/videos/1", tmp_path, "replay", start=80.0, end=120.0)
+    assert ytdlp.options["force_keyframes_at_cuts"] is True
+    ytdlp.download("https://clips.twitch.tv/x", tmp_path, "replay")
+    assert "download_ranges" not in ytdlp.options and "force_keyframes_at_cuts" not in ytdlp.options

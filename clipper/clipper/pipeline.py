@@ -16,7 +16,7 @@ from .config import Config, ConfigError, Paths, Secrets
 from .facecam import best_frame, face_stats, faces_per_frame, plan_layout
 from .github_secrets import secret_saver
 from .http import Http
-from .media import MediaError, contact_sheet, extract_frames, probe
+from .media import MediaError, contact_sheet, extract_frames, max_volume, probe
 from .models import Candidate, CompilationMeta, PublishResult, ShortMeta, Transcript, parse_time, utcnow
 from .publishers import PublishError, build_publishers
 from .publishers.tiktok import TikTokPublisher, caption as tiktok_caption
@@ -35,6 +35,7 @@ log = logging.getLogger(__name__)
 
 # With Claude, more batches of candidates are reviewed while the previous ones do not give enough shorts.
 REVIEW_ROUNDS = 3
+MUTED_DB = -50.0  # a replay whose loudest sound is quieter than this was muted by Twitch (copyrighted music)
 
 
 @dataclass
@@ -45,6 +46,7 @@ class Prepared:
     frames: list[Path] = field(default_factory=list)
     transcript: Transcript | None = None
     sheet: Path | None = None
+    clip_span: tuple[float, float] | None = None  # where the original clip sits in `media` (None: media is the clip)
 
 
 @dataclass
@@ -54,6 +56,8 @@ class ShortOutcome:
     meta: ShortMeta
     layout: str
     results: list[PublishResult] = field(default_factory=list)
+    score: float | None = None  # Claude's mark out of 100 (None with the template)
+    duration: float = 0.0  # length of the finished short, in seconds
 
 
 @dataclass
@@ -69,8 +73,10 @@ class RunReport:
         lines = [f"## Clipper — {self.mode}{' (essai à blanc)' if self.dry_run else ''}", ""]
         for outcome in self.published:
             lines.append(f"### {outcome.meta.title}")
-            lines.append(f"- Source : [{outcome.candidate.streamer}]({outcome.candidate.url}) · {outcome.candidate.views} vues · mise en page `{outcome.layout}`")
-            lines.append(f"- Accroche : « {outcome.meta.hook} » · textes {'Claude' if outcome.meta.ai else 'gabarit (sans IA)'}")
+            lines.append(f"- Source : [{outcome.candidate.streamer}]({outcome.candidate.url}) · {outcome.candidate.views} vues · "
+                         f"mise en page `{outcome.layout}` · {outcome.duration:.0f} s")
+            mark = f" · note {outcome.score:.0f}/100" if outcome.score is not None else ""
+            lines.append(f"- Accroche : « {outcome.meta.hook} » · textes {'Claude' if outcome.meta.ai else 'gabarit (sans IA)'}{mark}")
             for result in outcome.results:
                 status = "✅" if result.ok else "❌"
                 target = f" — {result.url}" if result.url else ""
@@ -217,11 +223,50 @@ class Clipper:
         if not candidate.clipper and candidate.source == "twitch":
             candidate.clipper = info.get("uploader")
 
-    def prepare(self, candidate: Candidate, *, transcribe: bool, sheet: bool) -> Prepared | None:
-        workdir = self._workdir(_slug(candidate.key))
+    def _replay(self, candidate: Candidate, workdir: Path) -> tuple[Path, tuple[float, float]] | None:
+        """The clip with some of the live around it, cut from the replay (VOD): the setup and the end of the moment.
+
+        None when the clip's place in the replay is unknown, or when the replay is unavailable (deleted, reserved
+        for subscribers), incomplete or muted by Twitch: the clip alone is used then.
+        """
+        rules = self.config.shorts
+        if candidate.manual or candidate.source != "twitch" or not candidate.vod_id or candidate.vod_offset is None:
+            return None
+        if not candidate.duration or rules.context_before + rules.context_after <= 0:
+            return None
+        start = max(0.0, candidate.vod_offset - rules.context_before)
+        end = candidate.vod_offset + candidate.duration + rules.context_after
+        clip = (round(candidate.vod_offset - start, 2), round(candidate.vod_offset - start + candidate.duration, 2))
         try:
-            media, info = self.ytdlp.download(candidate.url, workdir, "source", start=candidate.start, end=candidate.end)
-            self._enrich(candidate, info)
+            # Copied, not re-encoded (minutes for a 1080p60 section): the render re-encodes it anyway.
+            media, _ = self.ytdlp.download(
+                f"https://www.twitch.tv/videos/{candidate.vod_id}", workdir, "replay", start=start, end=end, exact=False
+            )
+            duration = probe(media).duration
+            level = max_volume(media)
+        except (DownloadError, MediaError) as exc:
+            log.info("Replay indisponible, clip seul : %s", exc)
+            return None
+        if duration < clip[1] - 1.0:
+            log.info("Replay incomplet (%.0f s), clip seul.", duration)
+            return None
+        if level is None or level < MUTED_DB:
+            log.info("Replay muet (son coupé par Twitch), clip seul.")
+            return None
+        log.info("Replay : %.0f s de contexte avant le clip, %.0f s après.", clip[0], duration - clip[1])
+        return media, clip
+
+    def prepare(self, candidate: Candidate, *, transcribe: bool, sheet: bool, context: bool = False) -> Prepared | None:
+        """Downloads, then frames and transcript. With `context`, a Twitch clip comes with the replay around it."""
+        workdir = self._workdir(_slug(candidate.key))
+        replay = self._replay(candidate, workdir) if context else None
+        try:
+            if replay:
+                media, clip_span = replay
+            else:
+                media, info = self.ytdlp.download(candidate.url, workdir, "source", start=candidate.start, end=candidate.end)
+                self._enrich(candidate, info)
+                clip_span = None
             if candidate.streamer_login and self.config.is_blocked(candidate.streamer_login):
                 self.state.record_rejection(candidate, "chaîne sur liste noire")
                 return None
@@ -237,7 +282,7 @@ class Clipper:
             log.warning("Fichier illisible (%s) : %s", candidate.url, exc)
             self.state.record_failure(candidate, str(exc))
             return None
-        prepared = Prepared(candidate=candidate, media=media, duration=details.duration)
+        prepared = Prepared(candidate=candidate, media=media, duration=details.duration, clip_span=clip_span)
         try:
             prepared.frames = extract_frames(media, workdir / "frames", count=8, duration=details.duration)
             if sheet and prepared.frames:
@@ -264,10 +309,11 @@ class Clipper:
         pending: list[ReviewItem] = []
         for item in prepared:
             cached = self.state.cached_review(item.candidate.key)
-            if cached:
+            span = list(item.clip_span) if item.clip_span else None
+            if cached and cached.get("clip_span") == span:  # trims only fit the extract they were chosen on
                 reviews[item.candidate.key] = Review.from_dict(cached)
             else:
-                pending.append(ReviewItem(item.candidate, item.duration, item.transcript, item.sheet))
+                pending.append(ReviewItem(item.candidate, item.duration, item.transcript, item.sheet, item.clip_span))
         if pending and self.curator is not None:
             reviews.update(self.curator.review(pending, now=self.now))
         for item in pending:
@@ -275,7 +321,8 @@ class Clipper:
         for item in pending:
             review = reviews[item.candidate.key]
             if review.meta.ai:  # only Claude's opinion is worth remembering between runs
-                self.state.store_review(item.candidate.key, review.to_dict())
+                span = list(item.clip_span) if item.clip_span else None
+                self.state.store_review(item.candidate.key, {**review.to_dict(), "clip_span": span})
         return reviews
 
     # --- shorts ------------------------------------------------------------------------------
@@ -419,7 +466,8 @@ class Clipper:
             prepared: list[Prepared] = []
             for candidate in remaining:
                 log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
-                item = self.prepare(candidate, transcribe=self.config.shorts.captions or use_ai, sheet=use_ai and self.config.ai.review_frames)
+                item = self.prepare(candidate, transcribe=self.config.shorts.captions or use_ai,
+                                    sheet=use_ai and self.config.ai.review_frames, context=use_ai)
                 if item is not None:
                     prepared.append(item)
                     if len(prepared) >= batch:
@@ -450,6 +498,7 @@ class Clipper:
             candidate = item.candidate
             try:
                 video, layout = self._render(item, review.meta)
+                length = probe(video).duration
             except MediaError as exc:
                 log.error("Montage impossible (%s) : %s", candidate.key, exc)
                 report.errors.append(f"{candidate.key} : montage impossible ({exc})")
@@ -457,7 +506,7 @@ class Clipper:
                     self.state.record_failure(candidate, str(exc))
                 continue
             self._write_sidecar(video, candidate, review.meta)
-            outcome = ShortOutcome(candidate, video, review.meta, layout)
+            outcome = ShortOutcome(candidate, video, review.meta, layout, score=review.score if review.meta.ai else None, duration=length)
             if not dry_run:
                 outcome.results = self.publish_short(video, review.meta, candidate)
                 failed = [r for r in outcome.results if not r.ok]
