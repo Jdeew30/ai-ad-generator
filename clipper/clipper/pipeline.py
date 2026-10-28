@@ -33,6 +33,9 @@ from .ytdlp import DownloadError, YtDlp
 
 log = logging.getLogger(__name__)
 
+# With Claude, a second batch of candidates is reviewed when the first one does not give enough shorts.
+REVIEW_ROUNDS = 2
+
 
 @dataclass
 class Prepared:
@@ -383,27 +386,34 @@ class Clipper:
 
         use_ai = self.curator is not None
         # Without AI the popularity order is final: only the clips that will be posted are prepared.
-        pool_size = wanted * self.config.shorts.candidates_factor if use_ai else wanted
-        prepared: list[Prepared] = []
-        for candidate in ranked:
-            if len(prepared) >= pool_size:
-                break
-            log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
-            item = self.prepare(candidate, transcribe=self.config.shorts.captions or use_ai, sheet=use_ai and self.config.ai.review_frames)
-            if item is not None:
-                prepared.append(item)
-
-        reviews = self.review(prepared)
+        batch = wanted * self.config.shorts.candidates_factor if use_ai else wanted
+        remaining = iter(ranked)
         approved: list[tuple[Prepared, Review]] = []
-        for item in prepared:
-            review = reviews[item.candidate.key]
-            if review.verdict == "reject" and not item.candidate.manual:
-                log.info("Écarté par la revue : %s — %s", item.candidate.title, review.reason)
-                report.rejected.append((item.candidate, review.reason))
-                if not dry_run:
-                    self.state.record_rejection(item.candidate, f"revue : {review.reason}")
-                continue
-            approved.append((item, review))
+        for round_number in range(REVIEW_ROUNDS if use_ai else 1):
+            if round_number:
+                log.info("Pas assez de clips retenus : revue d'une deuxième série de candidats.")
+            prepared: list[Prepared] = []
+            for candidate in remaining:
+                log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
+                item = self.prepare(candidate, transcribe=self.config.shorts.captions or use_ai, sheet=use_ai and self.config.ai.review_frames)
+                if item is not None:
+                    prepared.append(item)
+                    if len(prepared) >= batch:
+                        break
+            if not prepared:
+                break
+            reviews = self.review(prepared)
+            for item in prepared:
+                review = reviews[item.candidate.key]
+                if review.verdict == "reject" and not item.candidate.manual:
+                    log.info("Écarté par la revue : %s — %s", item.candidate.title, review.reason)
+                    report.rejected.append((item.candidate, review.reason))
+                    if not dry_run:
+                        self.state.record_rejection(item.candidate, f"revue : {review.reason}")
+                    continue
+                approved.append((item, review))
+            if len(approved) >= wanted:
+                break
         approved.sort(key=lambda pair: (pair[0].candidate.manual, pair[1].score), reverse=True)
 
         for item, review in approved[:wanted]:
