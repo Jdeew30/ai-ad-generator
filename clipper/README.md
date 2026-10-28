@@ -40,7 +40,7 @@ Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) �
 | Best-of 16:9, miniature, chapitres YouTube | ✅ Vérifié | Vrai ffmpeg + Pillow ; règles des chapitres (0:00, 3 minimum, 10 s minimum) testées. |
 | Anti-doublons, quotas par streamer, mémoire entre passages | ✅ Vérifié | Tests de bout en bout sur 4 passages successifs, et en réel : sur 61 clips du moment, doublons d'un même moment et quota par streamer écartés. |
 | Découverte Twitch sans clés (yt-dlp) | ✅ Vérifié en réel | Job `smoke` de **Clipper CI** (sur les serveurs de GitHub) : 61 clips trouvés sur les 24 chaînes, les meilleurs téléchargés, transcrits et montés en shorts (artefact du workflow). |
-| API Twitch officielle (avec clés) | ✅ Vérifié en réel | Avec tes clés : les 23 chaînes suivies et les plus gros lives FR du moment, environ 260 clips examinés à chaque passage. |
+| API Twitch officielle (avec clés) | ✅ Vérifié en réel | Avec tes clés : les chaînes suivies et les plus gros lives FR du moment, plusieurs centaines de clips de la semaine examinés à chaque passage. |
 | Sous-titres Whisper | ✅ Vérifié en réel | Modèle `small` sur de vrais clips en français : « Il a défoncé la main avec le crayon ! Il lui a planté la main ? Ah oui ! » ; « …mesdames et messieurs, veuillez accueillir ! ». Des erreurs restent possibles sur l'argot, les noms propres ou un fond musical fort. |
 | Revue et textes par Claude | ✅ Vérifié en réel | Sur de vrais clips : écarte les extraits sans chute ou incompréhensibles hors du live (la raison est dans le résumé du workflow), coupe et écrit les textes. Note sur 100 : sous 60, le clip n'est pas publié. Sans clé : gabarit non-IA (titre du clip d'origine). |
 | Publication YouTube | ⚠️ Écrite, testée contre un faux serveur | Envoi « resumable » par morceaux avec reprise après coupure. **Tant que ton projet Google n'a pas passé l'audit de l'API, YouTube verrouille les vidéos envoyées en privé** (voir plus bas). |
@@ -195,7 +195,8 @@ you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou
 
 ## Réglages utiles (`config.yaml`)
 
-- `twitch.streamers` : la liste des logins suivis (23 gros streamers FR par défaut). Un login faux est
+- `twitch.streamers` : la liste des logins suivis (51 streamers FR par défaut). `twitch.discover_limit` y ajoute
+  les plus gros lives FR du moment (30). Un login faux est
   signalé dans le journal.
 - `shorts.per_run` / le `cron` du workflow : le rythme de publication (5 par jour par défaut).
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.

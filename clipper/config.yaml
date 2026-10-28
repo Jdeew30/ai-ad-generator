@@ -34,10 +34,39 @@ twitch:
     - zacknani
     - doigby
     - ultia
+    # Ajoutés le 28/10 : vus parmi les plus gros lives FR ce jour-là, ou très connus pour leurs moments forts.
+    - antoinedaniel
+    - amixem
+    - jirayalecochon
+    - alphacast
+    - aypierre
+    - mastu
+    - nikof
+    - skyyart
+    - lestwins
+    - gom4rt
+    - laurebv
+    - chowh1
+    - jolavanille
+    - kaatsup
+    - moman
+    - shaunz
+    - mynthos
+    - kayane
+    - kenbogard
+    - terracid
+    - byilhann
+    - alderiate
+    - rebeudeter
+    - xari
+    - djilsi
+    - pfut
+    - joyca
+    - jbzzed
   # Avec les clés API Twitch : ajoute aussi les plus gros lives du moment dans cette langue.
   discover_live: true
   discover_language: fr
-  discover_limit: 15
+  discover_limit: 30
   clips_per_streamer: 20
   window_hours: 168             # ancienneté maximale d'un clip pour un short (7 jours : les plus vus d'abord)
   min_views: 150               # Claude écarte ensuite les clips sans intérêt
