@@ -71,6 +71,30 @@
    "url": "https://www.twitch.tv/locklear/clip/InexpensiveOddLasagnaCclamChamp-CcoBA26l9HagnQkY",
    "views": 172
   },
+  "twitch:MoldyKindShrimpBCouch-UOgzkLhqCVrI4nT8": {
+   "at": "2026-10-28T19:19:24.705697+00:00",
+   "created_at": "2026-10-27T19:47:21+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "9",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2912383018",
+    2801.0,
+    2826.3
+   ],
+   "streamer": "Mastu",
+   "streamer_login": "mastu",
+   "title": "Mastu se fait griller par sa mère dans Schoolboy Runaway",
+   "url": "https://www.twitch.tv/mastu/clip/MoldyKindShrimpBCouch-UOgzkLhqCVrI4nT8",
+   "views": 456
+  },
   "twitch:SteamyViscousBobaSquadGoals-9H2W9n1kDXecq7dm": {
    "at": "2026-10-27T19:57:59.241205+00:00",
    "created_at": "2026-10-26T19:38:34+00:00",
@@ -85,6 +109,10 @@
   }
  },
  "rejected": {
+  "twitch:AmericanToughMangetoutNinjaGrumpy-w_l1B5xz4k8vD164": {
+   "at": "2026-10-28T19:18:45.866864+00:00",
+   "reason": "revue : Discussion de groupe qui n'a de sens qu'avec le contexte du live. Il n'y a aucun moment fort identifiable ni de vraie chute, et la transcription est confuse. L'extrait n'est pas compréhensible en 3 secondes."
+  },
   "twitch:ConcernedBumblingOctopusRaccAttack-mj8BuIsELF0Nksgr": {
    "at": "2026-10-28T16:00:10.934608+00:00",
    "reason": "revue : L'extrait est essentiellement une performance musicale en concert, dont la musique n'appartient vraisemblablement pas au créateur. Il n'y a pas de moment de stream à proprement parler."
@@ -133,6 +161,30 @@
    },
    "reason": "Le début de live où Anyme explique sa panne d'électricité et son décor improvisé est compréhensible et anecdotique. En revanche, il n'y a pas vraiment de punchline forte et le rythme reste celui d'un bavardage.",
    "score": 3.0,
+   "verdict": "publish"
+  },
+  "twitch:SuperThirstyMelonRickroll-OMzO9HhL__GOnNSg": {
+   "at": "2026-10-28T19:18:45.866728+00:00",
+   "meta": {
+    "ai": true,
+    "description": "Mastu ne sait plus s'il doit se cacher ou rester quand sa mère arrive dans Schoolboy Runaway.",
+    "hashtags": [
+     "mastu",
+     "schoolboyrunaway",
+     "twitch",
+     "stress",
+     "panique",
+     "clip",
+     "twitchfr",
+     "drole"
+    ],
+    "hook": "IL PANIQUE TOTALEMENT",
+    "title": "Mastu en pleine panique dans Schoolboy Runaway",
+    "trim_end": 25.0,
+    "trim_start": 4.0
+   },
+   "reason": "Le stress de Mastu, qui hésite à se cacher face à la mère du jeu, est lisible. En revanche, il n'y a pas de vraie chute, ce qui limite le potentiel.",
+   "score": 42.0,
    "verdict": "publish"
   }
  },
