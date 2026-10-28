@@ -460,6 +460,7 @@ class Clipper:
         batch = wanted * self.config.shorts.candidates_factor if use_ai else wanted
         remaining = iter(ranked)
         approved: list[tuple[Prepared, Review]] = []
+        unjudged = 0
         for round_number in range(REVIEW_ROUNDS if use_ai else 1):
             if round_number:
                 log.info("Pas assez de clips retenus : revue d'une nouvelle série de candidats.")
@@ -477,6 +478,15 @@ class Clipper:
             reviews = self.review(prepared)
             for item in prepared:
                 review = reviews[item.candidate.key]
+                if use_ai and not review.meta.ai and not item.candidate.manual:
+                    # Claude skipped it or did not answer: a clip it has not judged (quality, rights) is never
+                    # posted. It counts as a failure, so it is reviewed again later, three times at most.
+                    unjudged += 1
+                    log.info("Non évalué par Claude : %s — réexaminé à un prochain passage.", item.candidate.title)
+                    report.rejected.append((item.candidate, "pas évalué par Claude, réexaminé à un prochain passage"))
+                    if not dry_run:
+                        self.state.record_failure(item.candidate, "non évalué par Claude")
+                    continue
                 reason = refusal(review, item.candidate, self.config.shorts.min_score)
                 if reason:
                     log.info("Écarté par la revue : %s — %s", item.candidate.title, reason)
@@ -490,9 +500,13 @@ class Clipper:
         approved.sort(key=lambda pair: (pair[0].candidate.manual, pair[1].score), reverse=True)
         if not approved and report.rejected and not dry_run:
             examined = len(report.rejected)
-            self.notify("⏭️ Pas de short à ce passage : " + (
-                f"aucun des {examined} clips examinés n'a été retenu." if examined > 1 else "le seul clip examiné n'a pas été retenu."
-            ))
+            if unjudged == examined:
+                self.notify("⚠️ Pas de short à ce passage : Claude n'a pas répondu (clé, crédits ou panne ?). "
+                            "Les clips seront réexaminés.")
+            else:
+                self.notify("⏭️ Pas de short à ce passage : " + (
+                    f"aucun des {examined} clips examinés n'a été retenu." if examined > 1 else "le seul clip examiné n'a pas été retenu."
+                ))
 
         for item, review in approved[:wanted]:
             candidate = item.candidate
