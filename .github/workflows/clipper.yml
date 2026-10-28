@@ -1,13 +1,15 @@
 name: Clipper
 
-# Robot de la chaîne : 3 shorts par jour + le best-of du dimanche.
+# Robot de la chaîne : 5 shorts par jour + le best-of du dimanche.
 # Les horaires sont en UTC (Paris = UTC+1 l'hiver, UTC+2 l'été). Les workflows planifiés ne
 # tournent que depuis la branche par défaut du dépôt.
 on:
   schedule:
-    - cron: "13 11 * * *" # ~12h13 à Paris (hiver)
-    - cron: "47 16 * * *" # ~17h47
-    - cron: "29 19 * * *" # ~20h29
+    - cron: "11 9 * * *" # ~10h11 à Paris (hiver)
+    - cron: "13 12 * * *" # ~13h13
+    - cron: "17 15 * * *" # ~16h17
+    - cron: "19 18 * * *" # ~19h19
+    - cron: "23 21 * * *" # ~22h23
     - cron: "41 8 * * 0" # dimanche ~9h41 : compilation de la semaine
   workflow_dispatch:
     inputs:

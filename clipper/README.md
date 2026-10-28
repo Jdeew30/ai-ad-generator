@@ -39,7 +39,7 @@ Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) �
 | Publication YouTube | ⚠️ Écrite, testée contre un faux serveur | Envoi « resumable » par morceaux avec reprise après coupure. **Tant que ton projet Google n'a pas passé l'audit de l'API, YouTube verrouille les vidéos envoyées en privé** (voir plus bas). |
 | Publication TikTok | ⚠️ Écrite, testée contre un faux serveur | Brouillon (« inbox ») ou publication directe. **En pratique, publication à la main depuis Telegram** : le règlement de l'API TikTok exclut les outils qui publient sur tes propres comptes et la reprise de contenus d'autres plateformes, donc pas d'audit, et sans audit tout reste privé (voir TikTok plus bas). |
 | Envoi Telegram | ⚠️ Écrit, testé contre un faux serveur | Le plus simple à brancher (2 minutes), et utilisable tout de suite. |
-| Workflows GitHub Actions | ⚠️ À valider sur ton dépôt | Les tests tournent à chaque push. Le planning (3 shorts par jour + best-of du dimanche) ne démarre qu'une fois le workflow sur la branche par défaut. |
+| Workflows GitHub Actions | ⚠️ À valider sur ton dépôt | Les tests tournent à chaque push. Le planning (5 shorts par jour + best-of du dimanche) ne démarre qu'une fois le workflow sur la branche par défaut. |
 
 **Le premier passage avec tes vrais comptes est la vraie validation des publications.** Toute erreur
 (quota, jeton expiré, refus de la plateforme) apparaît telle quelle dans le résumé du workflow et sur
@@ -58,7 +58,7 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
    publie à la main depuis Telegram.
 4. Vérifie : **Run workflow** → mode **`check`**. Le résumé du run affiche ✅ / ❌ pour chaque service, et
    Telegram reçoit un message de test. Rien n'est publié.
-5. C'est tout : 3 shorts par jour (vers 12 h, 18 h et 20 h 30 à Paris l'hiver, une heure plus tard l'été)
+5. C'est tout : 5 shorts par jour (vers 10 h, 13 h, 16 h, 19 h et 22 h à Paris l'hiver, une heure plus tard l'été)
    et le best-of le dimanche matin.
 
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
@@ -108,7 +108,7 @@ vidéo et la légende, tu enregistres, tu publies (ou tu programmes dans TikTok 
 
 Crée une clé sur [platform.claude.com](https://platform.claude.com) → secret `ANTHROPIC_API_KEY`.
 Modèle par défaut : `claude-opus-5-5`, effort `medium`, avec le repli automatique côté serveur si une
-demande est déclinée. Une seule requête par passage pour tous les candidats.
+demande est déclinée. Une requête par série de candidats (deux séries au plus par passage).
 
 ### Twitch : la découverte des lives (5 min, gratuit)
 
@@ -149,7 +149,7 @@ chaque clip dans la VOD (anti-doublon plus précis).
    artefacts.
 6. Quota : 10 000 unités par jour par défaut. Un envoi a longtemps coûté 1 600 unités (environ 6 envois par
    jour) ; Google aurait fortement baissé ce coût fin 2025, vérifie le chiffre actuel dans la console. Même à
-   1 600, c'est assez pour 3 shorts + le best-of.
+   1 600, c'est juste assez pour 5 shorts + le best-of du dimanche.
    Les miniatures personnalisées exigent une chaîne validée par téléphone
    ([youtube.com/verify](https://www.youtube.com/verify)).
 
@@ -217,10 +217,10 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
 
 ## Coûts
 
-- **GitHub Actions** : dépôt privé, 2 000 minutes gratuites par mois. Le robot en consomme environ 1 000
-  (environ 8 minutes par passage, plus le best-of). Dépôt public : illimité.
+- **GitHub Actions** : dépôt privé, 2 000 minutes gratuites par mois. Le robot en consomme environ 1 300
+  (5 passages par jour de 6 à 8 minutes, plus le best-of et les tests). Dépôt public : illimité.
 - **Claude** : quelques centimes par passage (une requête : transcriptions + 3 images par candidat),
-  soit environ 5 à 10 $ par mois au rythme par défaut. Facultatif.
+  soit environ 10 à 15 $ par mois au rythme par défaut. Facultatif.
 - Tout le reste (Twitch, YouTube, TikTok, Telegram, Whisper, ffmpeg) est gratuit.
 
 ## Dépannage
