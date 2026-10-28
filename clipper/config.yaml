@@ -39,7 +39,7 @@ twitch:
   discover_language: fr
   discover_limit: 15
   clips_per_streamer: 20
-  window_hours: 72              # ancienneté maximale d'un clip pour un short (3 jours)
+  window_hours: 168             # ancienneté maximale d'un clip pour un short (7 jours : les plus vus d'abord)
   min_views: 150               # Claude écarte ensuite les clips sans intérêt
 
 youtube:

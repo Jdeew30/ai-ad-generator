@@ -37,7 +37,7 @@ class TwitchConfig:
     discover_language: str = "fr"
     discover_limit: int = 15
     clips_per_streamer: int = 20
-    window_hours: int = 72
+    window_hours: int = 168
     min_views: int = 300
 
 

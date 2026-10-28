@@ -2,7 +2,7 @@
 
 Un robot qui, plusieurs fois par jour :
 
-1. **repère** les meilleurs moments des gros streamers : les clips Twitch les plus vus des 3 derniers jours
+1. **repère** les meilleurs moments des gros streamers : les clips Twitch les plus vus des 7 derniers jours
    (ce sont les viewers eux-mêmes qui clippent les moments drôles), les pics « les plus revus » des vidéos
    YouTube, et les URLs que tu ajoutes à la main ;
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
@@ -195,7 +195,7 @@ you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou
 - `shorts.per_run` / le `cron` du workflow : le rythme de publication (5 par jour par défaut).
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
-- `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (72 h) et le nombre de vues minimal.
+- `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
 - `shorts.layout` et `streamers.<login>.layout` / `facecam` : forcer une mise en page, ou donner la position
   exacte de la facecam d'un streamer.
 - `shorts.whisper_model` : `small` par défaut ; `large-v3-turbo` est plus précis mais plus lent.

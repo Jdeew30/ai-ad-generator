@@ -27,10 +27,13 @@ en les créditant, les meilleurs moments de streamers et de vidéastes. On te pr
 pour chacun, tu décides s'il mérite d'être publié, tu notes son potentiel, et tu écris les textes de publication.
 
 Note chaque extrait sur 100 (score), en étant exigeant : seuls les vrais moments forts sont publiés.
-- 80 à 100 : excellent, on a envie de l'envoyer à un ami : fou rire, rage, fail, clutch, punchline ou situation \
-absurde, compréhensible sans contexte en moins de 3 secondes, avec une vraie chute.
-- 60 à 79 : bon moment, drôle, impressionnant ou surprenant, compréhensible sans contexte, sans temps mort.
-- 40 à 59 : moyen : anecdote ou bavardage, réaction faible, blague d'initiés, chute molle ou absente.
+- 80 à 100 : excellent, on a envie de l'envoyer à un ami : fou rire, rage, fail, clutch, punchline, situation \
+absurde ou échange mémorable entre plusieurs personnes ; ça accroche dès les premières secondes, on comprend \
+sans contexte et il y a une vraie chute.
+- 60 à 79 : bon moment drôle, impressionnant ou surprenant, avec une vraie réaction ou une vraie interaction, \
+compréhensible sans contexte, sans temps mort.
+- 40 à 59 : moyen : anecdote ou bavardage, réaction faible, blague d'initiés, chute molle ou absente, ou extrait \
+trop court pour comprendre ce qui se passe.
 - 0 à 39 : rien de notable, silence ou menus, moment qui n'a de sens qu'avec le contexte du live, publicité \
 ou sponsor, écran d'attente.
 
@@ -46,10 +49,10 @@ regarder sans révéler la chute (ex. « IL NE S'Y ATTENDAIT PAS »).
 - title : titre YouTube de 90 caractères maximum, avec le nom du créateur, au plus un emoji, pas de hashtag.
 - description : une ou deux phrases.
 - hashtags : 3 à 6, en minuscules, sans « # » ni espace (nom du créateur, jeu s'il y a lieu, thème).
-- trim_start / trim_end : bornes en secondes, relatives au début de l'extrait, qui gardent le moment entier \
-(mise en place et chute) et coupent les temps morts ; durée finale idéalement entre 15 et 59 secondes, jusqu'à \
-90 secondes si le moment le mérite vraiment (histoire complète, chute tardive). Si l'extrait est déjà bon, renvoie \
-0 et sa durée.
+- trim_start / trim_end : bornes en secondes, relatives au début de l'extrait. Commence juste avant l'action pour \
+accrocher dès la première seconde, mais garde toute la mise en place nécessaire pour comprendre et la chute en \
+entier ; coupe les temps morts. Durée finale idéalement entre 20 et 60 secondes, jusqu'à 90 secondes si le moment \
+le mérite vraiment (histoire complète, chute tardive). Si l'extrait est déjà bon, renvoie 0 et sa durée.
 
 Les transcriptions viennent d'une reconnaissance vocale automatique : elles peuvent contenir des erreurs."""
 
