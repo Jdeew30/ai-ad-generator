@@ -37,7 +37,7 @@ class TwitchConfig:
     discover_language: str = "fr"
     discover_limit: int = 15
     clips_per_streamer: int = 20
-    window_hours: int = 36
+    window_hours: int = 168
     min_views: int = 300
 
 
@@ -66,6 +66,7 @@ class StreamerOverride:
 class ShortsConfig:
     per_run: int = 1
     candidates_factor: int = 3  # how many candidates are downloaded and reviewed per short published
+    min_score: float = 60.0  # Claude's mark out of 100 a clip needs to be posted
     max_per_streamer_per_day: int = 2
     min_duration: float = 8.0
     max_duration: float = 90.0
@@ -229,6 +230,8 @@ def load_config(path: Path | None = None) -> Config:
     config.twitch.streamers = [s.lower().lstrip("@") for s in config.twitch.streamers]
     if config.shorts.per_run < 0 or config.shorts.candidates_factor < 1:
         raise ConfigError("config.shorts : per_run >= 0 et candidates_factor >= 1 attendus")
+    if not 0 <= config.shorts.min_score <= 100:
+        raise ConfigError("config.shorts.min_score : une note entre 0 et 100 attendue")
     for login, override in config.streamers.items():
         if override.facecam is not None and (
             len(override.facecam) != 4 or not all(0 <= v <= 1 for v in override.facecam)

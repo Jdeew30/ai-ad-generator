@@ -2,14 +2,16 @@
 
 Un robot qui, plusieurs fois par jour :
 
-1. **repère** les meilleurs moments des gros streamers : les clips Twitch les plus vus des dernières heures
+1. **repère** les meilleurs moments des gros streamers : les clips Twitch les plus vus des 7 derniers jours
    (ce sont les viewers eux-mêmes qui clippent les moments drôles), les pics « les plus revus » des vidéos
    YouTube, et les URLs que tu ajoutes à la main ;
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
    même clip, 2 clips max par streamer et par jour, popularité *relative* au streamer, fraîcheur ;
 3. **fait juger** les candidats par **Claude** (facultatif) : transcription + 4 images de chaque extrait, il
-   écarte ce qui est risqué (insultes, contenu sexuel, infos privées, musique protégée…), note le potentiel
-   viral, coupe les temps morts et écrit l'accroche, le titre, la description et les hashtags ;
+   écarte ce qui est risqué (insultes, contenu sexuel, infos privées, musique protégée…), note chaque extrait
+   sur 100 et ne laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
+   l'accroche, le titre, la description et les hashtags. Si rien n'est assez bon, il examine une nouvelle
+   série de clips (3 séries au plus), puis préfère ne rien publier et te prévient sur Telegram ;
 4. **monte** chaque short en 1080×1920 : facecam en haut et jeu en bas (détection automatique du visage),
    ou plein cadre centré sur le streamer, ou fond flouté ; **sous-titres animés mot à mot** (Whisper),
    accroche incrustée, crédit `twitch.tv/<streamer>`, son normalisé ;
@@ -33,13 +35,13 @@ Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) �
 | Best-of 16:9, miniature, chapitres YouTube | ✅ Vérifié | Vrai ffmpeg + Pillow ; règles des chapitres (0:00, 3 minimum, 10 s minimum) testées. |
 | Anti-doublons, quotas par streamer, mémoire entre passages | ✅ Vérifié | Tests de bout en bout sur 4 passages successifs, et en réel : sur 61 clips du moment, doublons d'un même moment et quota par streamer écartés. |
 | Découverte Twitch sans clés (yt-dlp) | ✅ Vérifié en réel | Job `smoke` de **Clipper CI** (sur les serveurs de GitHub) : 61 clips trouvés sur les 24 chaînes, les meilleurs téléchargés, transcrits et montés en shorts (artefact du workflow). |
-| API Twitch officielle (avec clés) | ⚠️ Écrite, testée contre un faux serveur | Forme des requêtes conforme à la doc Helix (Get Clips, Get Users, Get Streams, Get Games). Jamais exécutée avec de vraies clés. |
+| API Twitch officielle (avec clés) | ✅ Vérifié en réel | Avec tes clés : les 23 chaînes suivies et les plus gros lives FR du moment, environ 260 clips examinés à chaque passage. |
 | Sous-titres Whisper | ✅ Vérifié en réel | Modèle `small` sur de vrais clips en français : « Il a défoncé la main avec le crayon ! Il lui a planté la main ? Ah oui ! » ; « …mesdames et messieurs, veuillez accueillir ! ». Des erreurs restent possibles sur l'argot, les noms propres ou un fond musical fort. |
-| Revue et textes par Claude | ⚠️ Écrit, testé avec le vrai SDK contre un faux serveur | Forme exacte de la requête vérifiée (sortie JSON structurée, `effort`, repli serveur en cas de refus). Jamais appelé avec une vraie clé. Sans clé : gabarit non-IA (titre du clip d'origine). |
+| Revue et textes par Claude | ✅ Vérifié en réel | Sur de vrais clips : écarte les extraits sans chute ou incompréhensibles hors du live (la raison est dans le résumé du workflow), coupe et écrit les textes. Note sur 100 : sous 60, le clip n'est pas publié. Sans clé : gabarit non-IA (titre du clip d'origine). |
 | Publication YouTube | ⚠️ Écrite, testée contre un faux serveur | Envoi « resumable » par morceaux avec reprise après coupure. **Tant que ton projet Google n'a pas passé l'audit de l'API, YouTube verrouille les vidéos envoyées en privé** (voir plus bas). |
 | Publication TikTok | ⚠️ Écrite, testée contre un faux serveur | Brouillon (« inbox ») ou publication directe. **En pratique, publication à la main depuis Telegram** : le règlement de l'API TikTok exclut les outils qui publient sur tes propres comptes et la reprise de contenus d'autres plateformes, donc pas d'audit, et sans audit tout reste privé (voir TikTok plus bas). |
-| Envoi Telegram | ⚠️ Écrit, testé contre un faux serveur | Le plus simple à brancher (2 minutes), et utilisable tout de suite. |
-| Workflows GitHub Actions | ⚠️ À valider sur ton dépôt | Les tests tournent à chaque push. Le planning (5 shorts par jour + best-of du dimanche) ne démarre qu'une fois le workflow sur la branche par défaut. |
+| Envoi Telegram | ✅ Vérifié en réel | Chaque short arrive avec le texte à coller ; un message prévient quand un passage ne trouve rien d'assez bon. |
+| Workflows GitHub Actions | ✅ Vérifié en réel | 5 passages par jour (+ best-of du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés avec 30 à 45 minutes de retard. |
 
 **Le premier passage avec tes vrais comptes est la vraie validation des publications.** Toute erreur
 (quota, jeton expiré, refus de la plateforme) apparaît telle quelle dans le résumé du workflow et sur
@@ -190,7 +192,10 @@ you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou
 
 - `twitch.streamers` : la liste des logins suivis (23 gros streamers FR par défaut). Un login faux est
   signalé dans le journal.
-- `shorts.per_run` / le `cron` du workflow : le rythme de publication (3 par jour par défaut).
+- `shorts.per_run` / le `cron` du workflow : le rythme de publication (5 par jour par défaut).
+- `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
+  Plus haut : moins de shorts mais meilleurs.
+- `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
 - `shorts.layout` et `streamers.<login>.layout` / `facecam` : forcer une mise en page, ou donner la position
   exacte de la facecam d'un streamer.
 - `shorts.whisper_model` : `small` par défaut ; `large-v3-turbo` est plus précis mais plus lent.
@@ -219,8 +224,8 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
 
 - **GitHub Actions** : dépôt privé, 2 000 minutes gratuites par mois. Le robot en consomme environ 1 300
   (5 passages par jour de 6 à 8 minutes, plus le best-of et les tests). Dépôt public : illimité.
-- **Claude** : quelques centimes par passage (une requête : transcriptions + 3 images par candidat),
-  soit environ 10 à 15 $ par mois au rythme par défaut. Facultatif.
+- **Claude** : quelques centimes par passage (une requête par série de 3 candidats, avec transcriptions et
+  images), soit environ 10 à 25 $ par mois au rythme par défaut selon le nombre de séries. Facultatif.
 - Tout le reste (Twitch, YouTube, TikTok, Telegram, Whisper, ffmpeg) est gratuit.
 
 ## Dépannage

@@ -82,7 +82,7 @@ def rank(
     for candidate in kept:
         peers = views_by_streamer[(candidate.source, candidate.streamer_login)]
         median = statistics.median(peers) if len(peers) >= 3 else 0.0
-        candidate.score = score(candidate, median, now, freshness_weight=0.15 if compilation else 0.4)
+        candidate.score = score(candidate, median, now, freshness_weight=0.15 if compilation else 0.25)
     kept.sort(key=lambda c: c.score, reverse=True)
 
     # The same moment is often clipped by several viewers: keep the best version only.
