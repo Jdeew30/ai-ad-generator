@@ -47,6 +47,30 @@
    "url": "https://www.twitch.tv/inoxtag/clip/HandsomeCourteousBaboonCoolStoryBob-FJT6b5z_doViYQvu",
    "views": 628
   },
+  "twitch:InexpensiveOddLasagnaCclamChamp-CcoBA26l9HagnQkY": {
+   "at": "2026-10-28T19:04:24.206492+00:00",
+   "created_at": "2026-10-27T21:15:26+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "8",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2912421596",
+    5450.0,
+    5480.0
+   ],
+   "streamer": "Locklear",
+   "streamer_login": "locklear",
+   "title": "Locklear et la voix de Barry White dans Moon Sweepers",
+   "url": "https://www.twitch.tv/locklear/clip/InexpensiveOddLasagnaCclamChamp-CcoBA26l9HagnQkY",
+   "views": 172
+  },
   "twitch:SteamyViscousBobaSquadGoals-9H2W9n1kDXecq7dm": {
    "at": "2026-10-27T19:57:59.241205+00:00",
    "created_at": "2026-10-26T19:38:34+00:00",
@@ -77,11 +101,40 @@
    "at": "2026-10-28T16:00:10.934566+00:00",
    "reason": "revue : Aucun moment fort compréhensible sans contexte : discussion confuse autour d'une banane et de « recyclage » d'éléments de décor, sans réaction marquée ni chute."
   },
+  "twitch:WimpyGoodHummingbirdAMPTropPunch-hMtPybICTLl5uWNp": {
+   "at": "2026-10-28T19:03:48.326255+00:00",
+   "reason": "revue : Extrait trop court (10,7 s) et sans moment fort : simple introduction d'un game show coupée avant l'arrivée des invités. Aucune chute, et le contenu n'a de sens qu'avec le contexte du live."
+  },
   "twitch:WittyImportantCrabsPeteZaroll-djWL-kySG1qgEKg3": {
    "at": "2026-10-28T16:00:10.934639+00:00",
    "reason": "revue : L'image est surtout une diffusion officielle d'un tournoi VALORANT (Riot Games) qui n'appartient pas au créateur. Les commentaires de Squeezie sont trop légers et sans chute."
   }
  },
- "reviews": {},
+ "reviews": {
+  "twitch:CloudyIncredulousDeerBIRB-8nsN7lf3j1VjQ8Y1": {
+   "at": "2026-10-28T19:03:48.326092+00:00",
+   "meta": {
+    "ai": true,
+    "description": "Panne d'électricité, frigo mort : Anyme023 a dû streamer depuis un bureau improvisé. Et non, ce n'est pas un fond vert.",
+    "hashtags": [
+     "anyme023",
+     "anyme",
+     "twitch",
+     "justchatting",
+     "stream",
+     "clip",
+     "twitchfr",
+     "drole"
+    ],
+    "hook": "POURQUOI IL N'EST PAS CHEZ LUI",
+    "title": "Anyme023 explique pourquoi il stream depuis un endroit « sans âme »",
+    "trim_end": 60.0,
+    "trim_start": 32.5
+   },
+   "reason": "Le début de live où Anyme explique sa panne d'électricité et son décor improvisé est compréhensible et anecdotique. En revanche, il n'y a pas vraiment de punchline forte et le rythme reste celui d'un bavardage.",
+   "score": 3.0,
+   "verdict": "publish"
+  }
+ },
  "version": 1
 }
