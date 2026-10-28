@@ -1,6 +1,7 @@
 """End-to-end runs: fake network (listing, download, publishers), real ffmpeg editing."""
 
 import json
+import re
 import shutil
 from datetime import timedelta
 from pathlib import Path
@@ -28,7 +29,7 @@ class FakeYtDlp:
         login = url.split("twitch.tv/")[1].split("/")[0]
         return self.clips.get(login, [])[:limit]
 
-    def download(self, url, dest_dir, name, *, start=None, end=None):
+    def download(self, url, dest_dir, name, *, start=None, end=None, exact=True):
         self.downloads.append(url)
         slug = url.rsplit("/", 1)[-1]
         source = self.media["facecam" if "Cam" in slug else "noface"]
@@ -201,6 +202,7 @@ def test_clips_marked_under_the_bar_are_not_posted(media, paths):
     assert [o.candidate.key for o in report.published] == ["twitch:Beta-1"]
     assert [(c.key, reason) for c, reason in report.rejected] == [("twitch:Alpha-Dull", "note 35/100 (minimum 60). rien de notable")]
     assert "twitch:Alpha-Dull" in State.load(paths.state).rejected and telegram.messages == []
+    assert "· note 80/100" in report.markdown() and re.search(r"mise en page `\w+` · 6 s", report.markdown())
 
 
 def test_a_slot_without_a_good_clip_is_announced(media, paths):
@@ -240,10 +242,10 @@ class ReplayYtDlp(FakeYtDlp):
         self.replay = replay
         self.sections = []
 
-    def download(self, url, dest_dir, name, *, start=None, end=None):
+    def download(self, url, dest_dir, name, *, start=None, end=None, exact=True):
         if "/videos/" not in url:
             return super().download(url, dest_dir, name, start=start, end=end)
-        self.sections.append((url, start, end))
+        self.sections.append((url, start, end, exact))
         if self.replay is None:
             from clipper.ytdlp import DownloadError
 
@@ -272,7 +274,7 @@ def with_replay(media, paths, replay, **shorts):
 def test_twitch_clips_come_with_the_replay_around_them(media, paths):
     run = with_replay(media, paths, media["noface"])
     item = run.prepare(found_clip(), transcribe=False, sheet=False, context=True)
-    assert run.ytdlp.sections == [("https://www.twitch.tv/videos/123", 8.0, 14.0)] and run.ytdlp.downloads == []
+    assert run.ytdlp.sections == [("https://www.twitch.tv/videos/123", 8.0, 14.0, False)] and run.ytdlp.downloads == []
     assert item.clip_span == (2.0, 5.0) and item.duration == pytest.approx(6, abs=0.2)
 
 

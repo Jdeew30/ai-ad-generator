@@ -56,6 +56,8 @@ class ShortOutcome:
     meta: ShortMeta
     layout: str
     results: list[PublishResult] = field(default_factory=list)
+    score: float | None = None  # Claude's mark out of 100 (None with the template)
+    duration: float = 0.0  # length of the finished short, in seconds
 
 
 @dataclass
@@ -71,8 +73,10 @@ class RunReport:
         lines = [f"## Clipper — {self.mode}{' (essai à blanc)' if self.dry_run else ''}", ""]
         for outcome in self.published:
             lines.append(f"### {outcome.meta.title}")
-            lines.append(f"- Source : [{outcome.candidate.streamer}]({outcome.candidate.url}) · {outcome.candidate.views} vues · mise en page `{outcome.layout}`")
-            lines.append(f"- Accroche : « {outcome.meta.hook} » · textes {'Claude' if outcome.meta.ai else 'gabarit (sans IA)'}")
+            lines.append(f"- Source : [{outcome.candidate.streamer}]({outcome.candidate.url}) · {outcome.candidate.views} vues · "
+                         f"mise en page `{outcome.layout}` · {outcome.duration:.0f} s")
+            mark = f" · note {outcome.score:.0f}/100" if outcome.score is not None else ""
+            lines.append(f"- Accroche : « {outcome.meta.hook} » · textes {'Claude' if outcome.meta.ai else 'gabarit (sans IA)'}{mark}")
             for result in outcome.results:
                 status = "✅" if result.ok else "❌"
                 target = f" — {result.url}" if result.url else ""
@@ -234,7 +238,10 @@ class Clipper:
         end = candidate.vod_offset + candidate.duration + rules.context_after
         clip = (round(candidate.vod_offset - start, 2), round(candidate.vod_offset - start + candidate.duration, 2))
         try:
-            media, _ = self.ytdlp.download(f"https://www.twitch.tv/videos/{candidate.vod_id}", workdir, "replay", start=start, end=end)
+            # Copied, not re-encoded (minutes for a 1080p60 section): the render re-encodes it anyway.
+            media, _ = self.ytdlp.download(
+                f"https://www.twitch.tv/videos/{candidate.vod_id}", workdir, "replay", start=start, end=end, exact=False
+            )
             duration = probe(media).duration
             level = max_volume(media)
         except (DownloadError, MediaError) as exc:
@@ -491,6 +498,7 @@ class Clipper:
             candidate = item.candidate
             try:
                 video, layout = self._render(item, review.meta)
+                length = probe(video).duration
             except MediaError as exc:
                 log.error("Montage impossible (%s) : %s", candidate.key, exc)
                 report.errors.append(f"{candidate.key} : montage impossible ({exc})")
@@ -498,7 +506,7 @@ class Clipper:
                     self.state.record_failure(candidate, str(exc))
                 continue
             self._write_sidecar(video, candidate, review.meta)
-            outcome = ShortOutcome(candidate, video, review.meta, layout)
+            outcome = ShortOutcome(candidate, video, review.meta, layout, score=review.score if review.meta.ai else None, duration=length)
             if not dry_run:
                 outcome.results = self.publish_short(video, review.meta, candidate)
                 failed = [r for r in outcome.results if not r.ok]

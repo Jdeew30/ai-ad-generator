@@ -92,7 +92,14 @@ class YtDlp:
         *,
         start: float | None = None,
         end: float | None = None,
+        exact: bool = True,
     ) -> tuple[Path, dict[str, Any]]:
+        """Downloads `url`, or only its section from `start` to `end` (seconds).
+
+        `exact` re-encodes the section so that it starts on the very frame asked for, which takes minutes on a
+        long 1080p60 section. Without it the section is copied as is and starts on the keyframe just before
+        `start` (up to a couple of seconds earlier on Twitch).
+        """
         from yt_dlp.utils import download_range_func
 
         dest_dir.mkdir(parents=True, exist_ok=True)
@@ -105,7 +112,7 @@ class YtDlp:
         }
         if start is not None or end is not None:
             extra["download_ranges"] = download_range_func(None, [(start or 0.0, end if end is not None else float("inf"))])
-            extra["force_keyframes_at_cuts"] = True
+            extra["force_keyframes_at_cuts"] = exact
         info = self._run(url, self._options(**extra), True)
         paths = [Path(d["filepath"]) for d in info.get("requested_downloads") or [] if d.get("filepath")]
         path = next((p for p in paths if p.exists()), None)
