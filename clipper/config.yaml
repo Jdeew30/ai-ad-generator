@@ -79,10 +79,24 @@ youtube:
   # Moments « les plus revus » des vidéos récentes des YouTubeurs FR (testé depuis GitHub le 29/10 : pas bloqué).
   # Ces extraits ne sont pas republiés sur YouTube (Content ID) : publish.youtube.youtube_sources.
   enabled: true
-  channels: ["@Squeezie", "@Amixem", "@Inoxtag", "@Michou", "@mcflyetcarlito", "@TiboInShape", "@JoueurDuGrenier",
-             "@SebLaFrite", "@cyprien", "@NormanFaitDesVideos", "@MisterV", "@Joyca", "@Gotaga", "@Mastu",
-             "@Lebouseuh", "@Domingo", "@ZeratoR"]
-  channels_per_run: 6           # à tour de rôle : toutes les chaînes vues en 3 passages
+  # YouTubeurs FR de tous les domaines. Une chaîne introuvable est signalée dans le journal du passage.
+  channels: [
+    # humour, divertissement, vlogs
+    "@Squeezie", "@Amixem", "@Inoxtag", "@Michou", "@mcflyetcarlito", "@cyprien", "@NormanFaitDesVideos",
+    "@MisterV", "@Joyca", "@SebLaFrite", "@Lebouseuh", "@Natoo", "@LeRireJaune", "@HugoToutSeul",
+    "@PierreCroce", "@LeGrandJD", "@Valouzz", "@goldenmoustache", "@StudioBagel", "@Ludovik", "@AndyRaconte",
+    "@LenaSituations", "@EnjoyPhoenix", "@LeaElui", "@PoissonFecond",
+    # jeux vidéo et streamers
+    "@JoueurDuGrenier", "@Gotaga", "@Mastu", "@Domingo", "@ZeratoR", "@Sardoche", "@Doigby", "@TheKAIRI78",
+    "@Grimkujow", "@FuriousJumper", "@Siphano", "@Aypierre", "@Frigiel", "@Maghla",
+    # sport, auto, défis
+    "@TiboInShape", "@jujufitcats", "@Vilebrequin", "@FlorianOnAir",
+    # sciences, histoire, mystères, actu
+    "@DrNozman", "@ScienceEtonnante", "@epenser", "@HugoDecrypte", "@Feldup", "@Mamytwink",
+    # cuisine
+    "@ChefMichelDumas", "@FastGoodCuisine",
+  ]
+  channels_per_run: 8           # à tour de rôle : toutes les chaînes vues en un peu plus d'une journée
   tabs: [videos]
   videos_per_channel: 2
   max_age_days: 7

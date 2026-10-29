@@ -145,7 +145,8 @@ def discover_youtube(config: Config, ytdlp: YtDlp, *, now: datetime, offset: int
             try:
                 entries = ytdlp.list_flat(f"{base}/{tab}", settings.videos_per_channel)
             except DownloadError as exc:
-                log.debug("Onglet %s de %s indisponible : %s", tab, base, exc)
+                # The videos tab exists on every channel: failing there means a wrong handle (or YouTube blocking).
+                (log.warning if tab == "videos" else log.debug)("Chaîne YouTube introuvable ou indisponible (%s/%s) : %s", base, tab, exc)
                 continue
             for entry in entries:
                 video_id = entry.get("id")

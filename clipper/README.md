@@ -6,7 +6,8 @@ Un robot qui, plusieurs fois par jour :
    les viewers eux-mêmes qui clippent les moments forts) des 51 streamers suivis, des 100 plus gros lives FR
    du moment, des chaînes FR vues ces 14 derniers jours (même hors ligne), et les clips FR les plus vus de la
    semaine dans les 20 catégories les plus regardées, quelle que soit la chaîne ; plus les passages « les
-   plus revus » des vidéos des YouTubeurs FR (17, à tour de rôle) et les URLs que tu ajoutes à la main ;
+   plus revus » des vidéos de 51 YouTubeurs FR de tous les domaines (à tour de rôle) et les URLs que tu
+   ajoutes à la main ;
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
    même clip, 2 clips max par streamer et par jour, popularité *relative* au streamer, fraîcheur ;
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
@@ -193,7 +194,8 @@ app développeur restée en mode *sandbox* (pas de validation TikTok, 10 comptes
 
 ### YouTube comme source : les YouTubeurs FR
 
-Activée : 17 YouTubeurs FR (`youtube.channels`), 6 par passage à tour de rôle (`channels_per_run`). Le robot
+Activée : 51 YouTubeurs FR de tous les domaines (`youtube.channels`), 8 par passage à tour de rôle
+(`channels_per_run`). Une chaîne introuvable est signalée dans le journal du passage. Le robot
 prend leurs vidéos de la semaine (plus de 50 000 vues) et découpe les passages « les plus revus ». Testé
 depuis les serveurs de GitHub le 29/10 : YouTube n'a pas bloqué. S'il bloque un jour (« Sign in to confirm
 you're not a bot »), fournis des cookies (`YTDLP_COOKIES`, format Netscape, idéalement d'un compte secondaire).
