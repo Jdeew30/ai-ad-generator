@@ -76,13 +76,17 @@ twitch:
   skip_title_words: [worlds, watch party, watchparty, co-stream, costream, publicité, sponsorisé, partenariat]
 
 youtube:
-  # Moments « les plus revus » des vidéos récentes. Désactivé par défaut : YouTube bloque souvent
-  # les serveurs de GitHub (voir README, section YouTube).
-  enabled: false
-  channels: []                  # ex. ["@Squeezie", "https://www.youtube.com/@ZeratoRVOD"]
-  videos_per_channel: 3
+  # Moments « les plus revus » des vidéos récentes des YouTubeurs FR (testé depuis GitHub le 29/10 : pas bloqué).
+  # Ces extraits ne sont pas republiés sur YouTube (Content ID) : publish.youtube.youtube_sources.
+  enabled: true
+  channels: ["@Squeezie", "@Amixem", "@Inoxtag", "@Michou", "@mcflyetcarlito", "@TiboInShape", "@JoueurDuGrenier",
+             "@SebLaFrite", "@cyprien", "@NormanFaitDesVideos", "@MisterV", "@Joyca", "@Gotaga", "@Mastu",
+             "@Lebouseuh", "@Domingo", "@ZeratoR"]
+  channels_per_run: 6           # à tour de rôle : toutes les chaînes vues en 3 passages
+  tabs: [videos]
+  videos_per_channel: 2
   max_age_days: 7
-  min_views: 20000
+  min_views: 50000
   segments_per_video: 2
 
 shorts:
@@ -124,6 +128,7 @@ publish:
     shorts: true
     compilations: true
     notify_subscribers: true
+    youtube_sources: false      # les extraits de vidéos YouTube ne sont pas republiés sur YouTube (Content ID)
   tiktok:
     enabled: auto
     mode: inbox                 # inbox = brouillon dans votre appli TikTok (1 tap pour publier) ; direct = publication directe (app auditée)

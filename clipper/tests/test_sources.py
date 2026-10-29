@@ -187,6 +187,15 @@ def test_manual_queue(tmp_path: Path):
     assert load_queue(tmp_path / "missing.yaml") == []
 
 
+def test_youtube_channels_take_turns():
+    from clipper.sources.youtube import discover_youtube
+
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b", "@c"], "channels_per_run": 2, "tabs": ["videos"]}})
+    ytdlp = FakeYtDlp()  # every listing fails: only the URLs asked for matter here
+    assert discover_youtube(config, ytdlp, now=NOW, offset=2) == []
+    assert ytdlp.listed == ["https://www.youtube.com/@c/videos", "https://www.youtube.com/@a/videos"]
+
+
 def test_discover_puts_the_queue_first(tmp_path: Path):
     queue = tmp_path / "queue.yaml"
     queue.write_text("items: [https://clips.twitch.tv/Manual]\n", encoding="utf-8")

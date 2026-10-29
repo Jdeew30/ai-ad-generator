@@ -377,6 +377,9 @@ class Clipper:
             publisher = self.publishers.get(name)
             if publisher is None:
                 continue
+            if name == "youtube" and candidate.source == "youtube" and not self.config.publish.youtube.youtube_sources:
+                log.info("youtube : extrait d'une vidéo YouTube, pas republié sur YouTube (Content ID).")
+                continue
             try:
                 result = publisher.publish_short(video, meta, candidate)
                 log.info("%s : publié %s", name, result.url or result.id or "")
@@ -446,7 +449,8 @@ class Clipper:
             window = timedelta(hours=self.config.twitch.window_hours)
             try:
                 found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
-                                 memory=self.state.streamers_seen)
+                                 memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor)
+                self.state.youtube_cursor += self.config.youtube.channels_per_run
             except (SourceError, QueueError) as exc:
                 log.error("Découverte impossible : %s", exc)
                 report.errors.append(f"découverte : {exc}")
@@ -541,8 +545,9 @@ class Clipper:
         wanted = count or settings.clips
         window = timedelta(days=settings.window_days)
         try:
+            # A Twitch best-of: the weekly video goes to YouTube, where Content ID would claim YouTube extracts.
             found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, per_streamer=10,
-                             memory=self.state.streamers_seen)
+                             memory=self.state.streamers_seen, include_youtube=False)
         except SourceError as exc:
             log.error("Découverte impossible : %s", exc)
             report.errors.append(f"découverte : {exc}")

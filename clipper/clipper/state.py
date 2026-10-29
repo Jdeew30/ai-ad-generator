@@ -64,6 +64,7 @@ class State:
         self.compiled: dict[str, str] = data.get("compiled", {})
         self.compilations: list[dict[str, Any]] = data.get("compilations", [])
         self.streamers_seen: dict[str, str] = data.get("streamers_seen", {})  # login -> last seen live or in the top
+        self.youtube_cursor: int = int(data.get("youtube_cursor", 0))  # next YouTube channel to look at
 
     @classmethod
     def load(cls, path: Path) -> State:
@@ -85,6 +86,7 @@ class State:
             "compiled": self.compiled,
             "compilations": self.compilations[-60:],
             "streamers_seen": self.streamers_seen,
+            "youtube_cursor": self.youtube_cursor,
         }
         self.path.parent.mkdir(parents=True, exist_ok=True)
         fd, tmp = tempfile.mkstemp(prefix=".state-", suffix=".json", dir=self.path.parent)

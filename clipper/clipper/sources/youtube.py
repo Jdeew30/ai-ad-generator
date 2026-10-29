@@ -127,15 +127,21 @@ def candidates_from_info(info: dict[str, Any], settings: YouTubeSourceConfig, co
     ]
 
 
-def discover_youtube(config: Config, ytdlp: YtDlp, *, now: datetime) -> list[Candidate]:
+def discover_youtube(config: Config, ytdlp: YtDlp, *, now: datetime, offset: int = 0) -> list[Candidate]:
+    """Peaks of the channels' recent videos. With channels_per_run, the channels take turns from `offset`."""
     settings = config.youtube
     if not settings.enabled or not settings.channels:
         return []
+    channels = settings.channels
+    if 0 < settings.channels_per_run < len(channels):
+        start = offset % len(channels)
+        channels = (channels[start:] + channels[:start])[: settings.channels_per_run]
+        log.info("YouTube : %s", ", ".join(channels))
     candidates: list[Candidate] = []
-    for ref in settings.channels:
+    for ref in channels:
         base = channel_url(ref)
         seen: set[str] = set()
-        for tab in ("videos", "streams"):
+        for tab in settings.tabs:
             try:
                 entries = ytdlp.list_flat(f"{base}/{tab}", settings.videos_per_channel)
             except DownloadError as exc:

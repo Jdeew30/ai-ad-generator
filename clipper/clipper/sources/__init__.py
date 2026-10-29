@@ -27,6 +27,7 @@ def discover(
     queue: Path | None = None,
     include_youtube: bool = True,
     memory: dict[str, str] | None = None,
+    youtube_offset: int = 0,
 ) -> list[Candidate]:
     """Every candidate moment: the manual queue first, then Twitch clips, then YouTube peaks."""
     candidates: list[Candidate] = []
@@ -36,6 +37,6 @@ def discover(
         discover_twitch(config, secrets, http, ytdlp, now=now, window=window, per_streamer=per_streamer, memory=memory)
     )
     if include_youtube:
-        candidates.extend(discover_youtube(config, ytdlp, now=now))
+        candidates.extend(discover_youtube(config, ytdlp, now=now, offset=youtube_offset))
     log.info("%d candidat(s) trouvé(s)", len(candidates))
     return candidates

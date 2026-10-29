@@ -356,6 +356,17 @@ def test_a_review_is_only_reused_for_the_same_extract(media, paths):
     assert run.curator.extracts == [(2.0, 5.0), None]
 
 
+def test_youtube_extracts_are_not_reuploaded_to_youtube(media, paths):
+    from clipper.models import Candidate, ShortMeta
+
+    youtube, tiktok, telegram = FakePublisher("youtube"), FakePublisher("tiktok"), FakePublisher("telegram")
+    run = clipper(media, paths, clips={}, publishers={"youtube": youtube, "tiktok": tiktok, "telegram": telegram})
+    extract = Candidate("youtube:abc@10-40", "youtube", "https://www.youtube.com/watch?v=abc", "Vidéo", "Squeezie", "squeezie",
+                        "https://www.youtube.com/@Squeezie")  # fmt: skip
+    results = run.publish_short(media["noface"], ShortMeta(hook="H", title="T", description="D", hashtags=[]), extract)
+    assert [r.platform for r in results] == ["tiktok", "telegram"] and youtube.calls == []  # Content ID would claim it
+
+
 def test_single_url_mode(media, paths):
     youtube = FakePublisher("youtube")
     run = clipper(media, paths, clips={}, publishers={"youtube": youtube})
