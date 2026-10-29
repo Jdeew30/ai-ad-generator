@@ -18,10 +18,11 @@ Un robot qui, plusieurs fois par jour :
    officielles…), note chaque extrait sur 100 dans l'esprit des best-of Twitch FR comme « La Crème de Twitch »
    (moments drôles, annonces et actu du milieu, anecdotes, piques entre streamers, duos, exploits) et ne
    laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
-   l'accroche, le titre, la description et les hashtags. Il connaît les shorts publiés ces 3 derniers jours
-   et refuse les redites : pas un deuxième short sur la même histoire, même vue par un autre streamer.
-   Chaque série met en concurrence des streamers différents ; si rien n'est assez bon, il examine une
-   nouvelle série (4 séries au plus), puis préfère ne rien publier et te prévient sur Telegram ;
+   l'accroche, le titre, la description et les hashtags. Il connaît les shorts publiés ces 3 derniers jours :
+   plusieurs parties d'un même live ou d'une même histoire sont possibles (« (partie 2) » dans le titre),
+   jamais deux fois le même moment, même filmé par un autre streamer. Chaque série met en concurrence des
+   streamers différents ; si rien n'est assez bon, il examine une nouvelle série (4 séries au plus), puis
+   préfère ne rien publier et te prévient sur Telegram ;
 4. **monte** chaque short en 1080×1920 : l'image entière, nette au milieu, sur un fond flouté (réglage choisi
    pour la chaîne) ; en mode `auto`, facecam en haut et jeu en bas (détection automatique du visage) ou plein
    cadre centré sur le streamer selon le clip ; **sous-titres animés mot à mot** (Whisper),
@@ -84,8 +85,9 @@ Pour un passage **ciblé** : mode `shorts` → champ **focus**, avec des chaîne
 (`@nom`) ou des liens de vidéos YouTube, séparés par des virgules. Par exemple `gotaga, aminematue` ou le
 lien du replay d'un événement. Seules ces sources sont regardées : les clips Twitch de la semaine (50 par
 chaîne) et les 6 passages les plus revus de chaque vidéo YouTube, quels que soient son âge et ses vues. Claude
-choisit toujours, avec la même note minimale et sans redite. Le plafond par streamer ne compte pas, puisque tu
-as demandé ces chaînes. Le champ **count** fixe le nombre de shorts (1 si vide).
+choisit toujours, avec la même note minimale. Le plafond par streamer ne compte pas, puisque tu as demandé ces
+chaînes. Le champ **count** fixe le nombre de shorts (1 si vide). Les passages planifiés, eux, regardent
+toujours tout Twitch FR et tous les YouTubeurs de la liste.
 
 ### Sur ton ordinateur (pour tester ou pour YouTube)
 

@@ -35,7 +35,7 @@ log = logging.getLogger(__name__)
 
 # With Claude, more batches of candidates are reviewed while the previous ones do not give enough shorts.
 REVIEW_ROUNDS = 4
-# Claude sees what was published lately, so as not to publish the same story twice.
+# Claude sees what was published lately: never the same moment twice, and "(partie 2)" for the next part of a story.
 RECENT_DAYS = 3
 RECENT_SHORTS = 15
 MUTED_DB = -50.0  # a replay whose loudest sound is quieter than this was muted by Twitch (copyrighted music)
@@ -499,7 +499,7 @@ class Clipper:
                         break
             if not prepared:
                 break
-            # The clips approved in an earlier round count as published: no second short on their story either.
+            # The clips approved in an earlier round count as published: their moment is taken too.
             reviews = self.review(prepared, recent=[(self.now, review.meta.title) for _, review in reversed(approved)] + recent)
             for item in prepared:
                 review = reviews[item.candidate.key]

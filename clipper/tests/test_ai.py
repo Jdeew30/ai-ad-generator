@@ -91,7 +91,8 @@ def test_claude_is_told_what_was_published_lately(server, tmp_path):
         "Shorts déjà publiés, du plus récent au plus ancien :\n"
         "- Michou défend le skin d'Inoxtag (publié il y a 3 h)\n- Mastu et sa mort la plus bête (publié il y a 2 j)"
     )
-    assert "Pas de redite" in json.dumps(body["system"], ensure_ascii=False)
+    system = json.dumps(body["system"], ensure_ascii=False)
+    assert "moment déjà publié" in system and "(partie 2)" in system
 
 
 def test_refusal_and_errors_fall_back_to_the_template(server, tmp_path):

@@ -45,11 +45,12 @@ extrait trop court pour comprendre ce qui se passe.
 - 0 à 39 : rien de notable, silence ou menus, moment qui n'a de sens qu'avec le contexte du live, publicité \
 ou sponsor, écran d'attente.
 
-Pas de redite : on te donne la liste des shorts déjà publiés. Un extrait qui raconte la même chose qu'eux (même \
-histoire, même polémique, même annonce), même chez un autre créateur ou sous un autre angle, n'apporte rien : \
-verdict "reject", raison « sujet déjà publié ». Un autre moment d'un même événement (un autre match, une autre \
-réaction, un autre fail) reste bienvenu s'il raconte autre chose. De même, quand plusieurs candidats montrent le \
-même moment ou racontent la même chose, garde seulement le meilleur et rejette les autres.
+Shorts déjà publiés : on t'en donne la liste. Plusieurs shorts tirés d'un même live ou d'une même histoire sont \
+bienvenus s'ils sont intéressants chacun ; si l'extrait est la suite directe d'une histoire déjà publiée, termine \
+son titre par « (partie 2) », « (partie 3) »… Mais un extrait qui montre exactement le même moment qu'un short déjà \
+publié (même scène, même blague), même filmé depuis le live d'un autre streamer, n'apporte rien : verdict \
+"reject", raison « moment déjà publié ». De même, quand plusieurs candidats montrent exactement le même moment, \
+garde seulement le meilleur et rejette les autres.
 
 Rejette (verdict "reject", avec la raison) tout extrait qui contient : nudité ou contenu sexuel ; haine, \
 harcèlement ou insultes visant une personne ou un groupe ; violence réelle ou automutilation ; informations \
@@ -322,8 +323,8 @@ class ClaudeCurator:
     ) -> dict[str, Review]:
         """One request for the whole batch: Claude compares the candidates with each other.
 
-        `recent` lists the (date, title) of the shorts already published, so that Claude does not publish the same
-        story twice, from another streamer or another angle.
+        `recent` lists the (date, title) of the shorts already published: the same moment is not published twice
+        (even from another streamer's live), and the next part of a published story is titled as such.
         """
         if not items:
             return {}
