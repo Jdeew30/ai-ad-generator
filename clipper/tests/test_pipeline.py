@@ -74,7 +74,7 @@ class FakePublisher:
 class RejectFirst:
     """Curator double: rejects the candidate whose title mentions 'Toxic'."""
 
-    def review(self, items, *, now):
+    def review(self, items, *, now, recent=None):
         from clipper.ai import template_review
 
         reviews = {}
@@ -94,7 +94,7 @@ class Marks:
     def __init__(self, marks):
         self.marks = marks
 
-    def review(self, items, *, now):
+    def review(self, items, *, now, recent=None):
         from clipper.ai import template_review
 
         reviews = {}
@@ -113,8 +113,20 @@ class Partial(Marks):
         super().__init__(marks or {})
         self.judged = judged
 
-    def review(self, items, *, now):
+    def review(self, items, *, now, recent=None):
         return {key: review for key, review in super().review(items, now=now).items() if any(word in key for word in self.judged)}
+
+
+class Recording(Marks):
+    """Curator double: marks like Marks, and remembers each request (the clips, and the shorts said to be published)."""
+
+    def __init__(self, marks=None):
+        super().__init__(marks or {})
+        self.requests = []
+
+    def review(self, items, *, now, recent=None):
+        self.requests.append(([item.candidate.key for item in items], recent))
+        return super().review(items, now=now)
 
 
 def entry(slug, views, hours_ago, title=None):
@@ -246,6 +258,27 @@ def test_without_any_answer_from_claude_the_owner_is_told(media, paths):
     assert telegram.messages == ["⚠️ Pas de short à ce passage : Claude n'a pas répondu (clé, crédits ou panne ?). Les clips seront réexaminés."]
 
 
+def test_each_review_compares_clips_of_different_creators(media, paths):
+    curator = Recording({"clip": 59})
+    clipper(media, paths, clips=CLIPS, publishers={}, curator=curator).run_shorts()
+    assert [keys for keys, _ in curator.requests] == [["twitch:Alpha-Cam1", "twitch:Beta-1"], ["twitch:Alpha-2"]]
+
+
+def test_claude_knows_the_latest_shorts_and_a_verdict_only_holds_for_them(media, paths):
+    run = clipper(media, paths, clips=CLIPS, publishers={}, curator=Recording())
+    for key, hours, title in [("old", 96, "Vieux short"), ("b", 20, "Delta : record du monde"), ("a", 2, "Gamma : le skin d'Inox")]:
+        run.state.posted[f"twitch:{key}"] = {"at": (NOW - timedelta(hours=hours)).isoformat(), "streamer_login": "gamma", "title": title}
+    published = run.run_shorts().published[0].meta.title
+    [(keys, recent)] = run.curator.requests
+    assert keys == ["twitch:Alpha-Cam1", "twitch:Beta-1"]  # both approved, only the first one published
+    assert recent == [(NOW - timedelta(hours=2), "Gamma : le skin d'Inox"), (NOW - timedelta(hours=20), "Delta : record du monde")]
+
+    again = clipper(media, paths, clips=CLIPS, publishers={}, curator=Recording())
+    again.run_shorts()
+    [(keys, recent)] = again.curator.requests
+    assert "twitch:Beta-1" in keys and recent[0][1] == published  # judged again, now that Alpha's short is out
+
+
 def test_the_mark_only_gates_claude_reviews_of_discovered_clips():
     from clipper.models import Candidate, ShortMeta
 
@@ -342,7 +375,7 @@ def test_a_review_is_only_reused_for_the_same_extract(media, paths):
             super().__init__({})
             self.extracts = []
 
-        def review(self, items, *, now):
+        def review(self, items, *, now, recent=None):
             self.extracts += [item.clip_span for item in items]
             return super().review(items, now=now)
 

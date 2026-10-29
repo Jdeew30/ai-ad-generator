@@ -1,4 +1,5 @@
 import json
+from datetime import timedelta
 from pathlib import Path
 
 import anthropic
@@ -78,6 +79,19 @@ def test_review_sends_one_structured_request_and_validates_the_answer(server, tm
     texts = "\n".join(block["text"] for block in content if block["type"] == "text")
     assert 'id="c1"' in texts and "Non mais sérieux !" in texts and "Fortnite" in texts
     assert texts.count("Clip d'origine") == 1 and "de 5.0 s à 20.0 s de l'extrait" in texts  # only B comes with its replay
+
+
+def test_claude_is_told_what_was_published_lately(server, tmp_path):
+    server.route("POST", "/v1/messages", (200, {}, message({"clips": []})))
+    recent = [(NOW - timedelta(hours=3), "Michou défend le skin d'Inoxtag"), (NOW - timedelta(days=2), "Mastu et sa mort la plus bête")]
+    curator(server).review(items(tmp_path), now=NOW, recent=recent)
+    [request] = server.calls("POST", "/v1/messages")
+    body = request.json()
+    assert body["messages"][0]["content"][0]["text"] == (
+        "Shorts déjà publiés, du plus récent au plus ancien :\n"
+        "- Michou défend le skin d'Inoxtag (publié il y a 3 h)\n- Mastu et sa mort la plus bête (publié il y a 2 j)"
+    )
+    assert "Pas de redite" in json.dumps(body["system"], ensure_ascii=False)
 
 
 def test_refusal_and_errors_fall_back_to_the_template(server, tmp_path):

@@ -144,6 +144,11 @@ class State:
             and (parse_time(entry.get("at")) or since) >= since
         )
 
+    def recent_posts(self, since: datetime) -> list[dict[str, Any]]:
+        """Shorts posted since `since`, most recent first."""
+        entries = [entry for entry in self.posted.values() if (parse_time(entry.get("at")) or since) >= since]
+        return sorted(entries, key=lambda entry: parse_time(entry.get("at")) or since, reverse=True)
+
     def cached_review(self, key: str) -> dict[str, Any] | None:
         return self.reviews.get(key)
 

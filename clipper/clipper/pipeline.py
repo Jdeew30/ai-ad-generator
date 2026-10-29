@@ -4,6 +4,7 @@ import json
 import logging
 import re
 import shutil
+from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -34,7 +35,10 @@ from .ytdlp import DownloadError, YtDlp
 log = logging.getLogger(__name__)
 
 # With Claude, more batches of candidates are reviewed while the previous ones do not give enough shorts.
-REVIEW_ROUNDS = 3
+REVIEW_ROUNDS = 4
+# Claude sees what was published lately, so as not to publish the same story twice.
+RECENT_DAYS = 3
+RECENT_SHORTS = 15
 MUTED_DB = -50.0  # a replay whose loudest sound is quieter than this was muted by Twitch (copyrighted music)
 
 
@@ -304,25 +308,32 @@ class Clipper:
 
     # --- review ------------------------------------------------------------------------------
 
-    def review(self, prepared: list[Prepared]) -> dict[str, Review]:
+    def recent_shorts(self) -> list[tuple[datetime | None, str]]:
+        """(date, title) of the latest shorts, most recent first."""
+        entries = self.state.recent_posts(self.now - timedelta(days=RECENT_DAYS))[:RECENT_SHORTS]
+        return [(parse_time(entry.get("at")), entry.get("title") or entry.get("streamer") or "?") for entry in entries]
+
+    def review(self, prepared: list[Prepared], *, recent: list[tuple[datetime | None, str]] | None = None) -> dict[str, Review]:
         reviews: dict[str, Review] = {}
         pending: list[ReviewItem] = []
+        known = [title for _, title in recent or []]
         for item in prepared:
             cached = self.state.cached_review(item.candidate.key)
             span = list(item.clip_span) if item.clip_span else None
-            if cached and cached.get("clip_span") == span:  # trims only fit the extract they were chosen on
+            # Trims only fit the extract they were chosen on, and a verdict only holds for the shorts published by then.
+            if cached and cached.get("clip_span") == span and cached.get("recent", []) == known:
                 reviews[item.candidate.key] = Review.from_dict(cached)
             else:
                 pending.append(ReviewItem(item.candidate, item.duration, item.transcript, item.sheet, item.clip_span))
         if pending and self.curator is not None:
-            reviews.update(self.curator.review(pending, now=self.now))
+            reviews.update(self.curator.review(pending, now=self.now, recent=recent))
         for item in pending:
             reviews.setdefault(item.candidate.key, template_review(item, self.config))
         for item in pending:
             review = reviews[item.candidate.key]
             if review.meta.ai:  # only Claude's opinion is worth remembering between runs
                 span = list(item.clip_span) if item.clip_span else None
-                self.state.store_review(item.candidate.key, {**review.to_dict(), "clip_span": span})
+                self.state.store_review(item.candidate.key, {**review.to_dict(), "clip_span": span, "recent": known})
         return reviews
 
     # --- shorts ------------------------------------------------------------------------------
@@ -464,24 +475,31 @@ class Clipper:
         use_ai = self.curator is not None
         # Without AI the popularity order is final: only the clips that will be posted are prepared.
         batch = wanted * self.config.shorts.candidates_factor if use_ai else wanted
-        remaining = iter(ranked)
+        queue = deque(ranked)
+        recent = self.recent_shorts()
         approved: list[tuple[Prepared, Review]] = []
         unjudged = 0
         for round_number in range(REVIEW_ROUNDS if use_ai else 1):
             if round_number:
                 log.info("Pas assez de clips retenus : revue d'une nouvelle série de candidats.")
             prepared: list[Prepared] = []
-            for candidate in remaining:
+            held: list[Candidate] = []
+            while queue and len(prepared) < batch:
+                candidate = queue.popleft()
+                login = candidate.streamer_login.lower()
+                if use_ai and login and any(item.candidate.streamer_login.lower() == login for item in prepared):
+                    held.append(candidate)  # one clip per creator in a review, for variety: the next ones wait their turn
+                    continue
                 log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
                 item = self.prepare(candidate, transcribe=self.config.shorts.captions or use_ai,
                                     sheet=use_ai and self.config.ai.review_frames, context=use_ai)
                 if item is not None:
                     prepared.append(item)
-                    if len(prepared) >= batch:
-                        break
+            queue.extendleft(reversed(held))
             if not prepared:
                 break
-            reviews = self.review(prepared)
+            # The clips approved in an earlier round count as published: no second short on their story either.
+            reviews = self.review(prepared, recent=[(self.now, review.meta.title) for _, review in reversed(approved)] + recent)
             for item in prepared:
                 review = reviews[item.candidate.key]
                 if use_ai and not review.meta.ai and not item.candidate.manual:

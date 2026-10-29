@@ -18,8 +18,10 @@ Un robot qui, plusieurs fois par jour :
    officielles…), note chaque extrait sur 100 dans l'esprit des best-of Twitch FR comme « La Crème de Twitch »
    (moments drôles, annonces et actu du milieu, anecdotes, piques entre streamers, duos, exploits) et ne
    laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
-   l'accroche, le titre, la description et les hashtags. Si rien n'est assez bon, il examine une nouvelle
-   série de clips (3 séries au plus), puis préfère ne rien publier et te prévient sur Telegram ;
+   l'accroche, le titre, la description et les hashtags. Il connaît les shorts publiés ces 3 derniers jours
+   et refuse les redites : pas un deuxième short sur la même histoire, même vue par un autre streamer.
+   Chaque série met en concurrence des streamers différents ; si rien n'est assez bon, il examine une
+   nouvelle série (4 séries au plus), puis préfère ne rien publier et te prévient sur Telegram ;
 4. **monte** chaque short en 1080×1920 : l'image entière, nette au milieu, sur un fond flouté (réglage choisi
    pour la chaîne) ; en mode `auto`, facecam en haut et jeu en bas (détection automatique du visage) ou plein
    cadre centré sur le streamer selon le clip ; **sous-titres animés mot à mot** (Whisper),
@@ -122,7 +124,7 @@ vidéo et la légende, tu enregistres, tu publies (ou tu programmes dans TikTok 
 
 Crée une clé sur [platform.claude.com](https://platform.claude.com) → secret `ANTHROPIC_API_KEY`.
 Modèle par défaut : `claude-opus-5-5`, effort `medium`, avec le repli automatique côté serveur si une
-demande est déclinée. Une requête par série de candidats (deux séries au plus par passage).
+demande est déclinée. Une requête par série de candidats (quatre séries au plus par passage).
 
 ### Twitch : la découverte des lives (5 min, gratuit)
 
@@ -256,7 +258,7 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
   aucun dépôt possible au-delà. Les shorts, déjà sur Telegram, ne sont donc gardés qu'un jour, le best-of
   7 jours, et chaque passage supprime les vidéos des passages plus anciens.
 - **Claude** : quelques centimes par passage (une requête par série de 3 candidats, avec transcriptions et
-  images), soit environ 10 à 25 $ par mois au rythme par défaut selon le nombre de séries. Facultatif.
+  images), soit environ 10 à 30 $ par mois au rythme par défaut selon le nombre de séries. Facultatif.
 - Tout le reste (Twitch, YouTube, TikTok, Telegram, Whisper, ffmpeg) est gratuit.
 
 ## Dépannage
