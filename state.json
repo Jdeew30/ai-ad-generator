@@ -51,6 +51,30 @@
    "url": "https://www.twitch.tv/aminematue/clip/CrowdedSuperCasetteBlargNaut-vpfFtKoRXAibSufo",
    "views": 756
   },
+  "twitch:CulturedInterestingOkapiTwitchRaid-pepecVeF6GImXhvB": {
+   "at": "2026-10-29T22:52:33.897821+00:00",
+   "created_at": "2026-10-28T19:16:05+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "20",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2913272330",
+    636.0,
+    696.0
+   ],
+   "streamer": "Michou",
+   "streamer_login": "michou",
+   "title": "Michou : « Le skin d'Inox te fait perdre des neurones » (Fortnite)",
+   "url": "https://www.twitch.tv/michou/clip/CulturedInterestingOkapiTwitchRaid-pepecVeF6GImXhvB",
+   "views": 464
+  },
   "twitch:FineEmpathicGrouseThisIsSparta-fiHOfxG3QFpboQuF": {
    "at": "2026-10-28T22:27:48.242639+00:00",
    "created_at": "2026-10-25T12:35:32+00:00",
@@ -273,6 +297,10 @@
    "at": "2026-10-29T16:04:54.017873+00:00",
    "reason": "revue : Extrait de 17 secondes sans action compréhensible : on n'entend qu'un décompte, puis une phrase isolée. Aucune réaction ni chute."
   },
+  "twitch:DrabCheerfulChinchillaSeemsGood-g3BzYAXvb0A4q-NF": {
+   "at": "2026-10-29T22:51:04.669258+00:00",
+   "reason": "revue : Moment de RP GTA incompréhensible sans le contexte du live : transcription confuse, accident de voiture sans enjeu clair ni vraie chute."
+  },
   "twitch:EmpathicBoredSandpiperMcaT-nJWUsGDvpjES62tF": {
    "at": "2026-10-29T19:09:27.670310+00:00",
    "reason": "revue : Bavardage sur la distribution de codes, phrases décousues, aucune action notable en jeu ni chute ; incompréhensible sans le contexte du live."
@@ -392,6 +420,10 @@
   "twitch:OriginalResoluteCiderFloof-bTS7At0zGmyUrYBx": {
    "at": "2026-10-29T22:43:22.401604+00:00",
    "reason": "revue : Jeu d'horreur sans moment fort : pas de jumpscare ni de vraie réaction, quelques jurons et des commentaires décousus. Rien de compréhensible sans le contexte du live."
+  },
+  "twitch:PatientTentativeTigerDatBoi-GdEohDzZ3vcrb6Nm": {
+   "at": "2026-10-29T22:51:04.669331+00:00",
+   "reason": "revue : Il s'agit essentiellement de la retransmission officielle d'un événement de catch (Final Slam, avec sponsor à l'écran) qui n'appartient pas au créateur ; le commentaire seul n'apporte pas de vrai moment fort."
   },
   "twitch:PoliteZanySmoothieTF2John-sE5WS3TxPHQaF3JB": {
    "at": "2026-10-28T16:02:23.867840+00:00",
