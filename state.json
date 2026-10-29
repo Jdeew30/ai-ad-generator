@@ -27,6 +27,30 @@
    "url": "https://www.twitch.tv/domingo/clip/CalmExquisiteYakinikuJKanStyle-mTy_P82A25RYqb6g",
    "views": 297
   },
+  "twitch:CrowdedSuperCasetteBlargNaut-vpfFtKoRXAibSufo": {
+   "at": "2026-10-29T13:11:31.310550+00:00",
+   "created_at": "2026-10-26T19:14:31+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "15",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2911506670",
+    1875.0,
+    1934.9
+   ],
+   "streamer": "AmineMaTue",
+   "streamer_login": "aminematue",
+   "title": "AmineMaTue : le face-à-face dégénère en plein événement",
+   "url": "https://www.twitch.tv/aminematue/clip/CrowdedSuperCasetteBlargNaut-vpfFtKoRXAibSufo",
+   "views": 756
+  },
   "twitch:FineEmpathicGrouseThisIsSparta-fiHOfxG3QFpboQuF": {
    "at": "2026-10-28T22:27:48.242639+00:00",
    "created_at": "2026-10-25T12:35:32+00:00",
@@ -169,9 +193,17 @@
    "at": "2026-10-28T20:06:28.073904+00:00",
    "reason": "revue : Simple annonce des dotations d'un événement, avec des logos de sponsors. Il n'y a ni réaction ni chute : ça ressemble à une présentation promotionnelle."
   },
+  "twitch:BusyBitterShieldBrainSlug-dRANHickGS-2EFY2": {
+   "at": "2026-10-29T13:09:42.443719+00:00",
+   "reason": "revue : Extrait de 9 s composé presque entièrement de la diffusion officielle Riot (replay d'un match pro), contenu qui n'appartient pas au créateur. La réaction de Kameto est minime et l'extrait est trop court pour être compris sans contexte."
+  },
   "twitch:CaringAmericanFlyVoteNay-91lkUkkbaeofaWHq": {
    "at": "2026-10-29T09:59:17.371892+00:00",
    "reason": "revue : Bavardage d'entrée sur le ring, transcription confuse, pas de chute, nécessite le contexte de l'événement (et logo sponsor omniprésent)."
+  },
+  "twitch:CleverHeartlessPterodactylDancingBaby-0yhHCaJE4-C5srW2": {
+   "at": "2026-10-29T13:08:30.727691+00:00",
+   "reason": "revue : Analyse de draft LPL réservée aux initiés, sans réaction ni chute. La transcription est difficile à suivre et l'extrait est inintéressant hors contexte."
   },
   "twitch:ColdbloodedCharmingOkapiHoneyBadger-OXx2h-6P43IoQpM_": {
    "at": "2026-10-28T22:19:08.244826+00:00",
@@ -205,6 +237,10 @@
    "at": "2026-10-29T09:58:01.853257+00:00",
    "reason": "revue : Le public scande des insultes (« enculé », « salope ») visant une personne pendant le face-off. La transcription est confuse et le moment est incompréhensible sans le contexte de l'événement."
   },
+  "twitch:FreezingDifferentPelicanCoolCat-UemnhSDCocOLTmgI": {
+   "at": "2026-10-29T13:08:30.727562+00:00",
+   "reason": "revue : Watch party d'un match VALORANT professionnel : l'image est surtout la diffusion officielle du tournoi, qui n'appartient pas au créateur. La réaction de Squeezie reste confuse et sans vraie chute compréhensible hors contexte."
+  },
   "twitch:GiantSolidAntUncleNox-L4hUf_x-CNqr7w-J": {
    "at": "2026-10-28T22:22:54.963431+00:00",
    "reason": "revue : note 58/100 (minimum 60). Entrée sur scène devant une foule énorme avec une référence à Randy Orton : moment fort mais la transcription a un trou de 30 s et la chute reste douce, ambiance plus que punchline."
@@ -224,6 +260,10 @@
   "twitch:InterestingDeadRabbitTBTacoRight-pVtdbvGyT5XBfLBP": {
    "at": "2026-10-28T22:01:42.253026+00:00",
    "reason": "revue : Fail visuel potentiellement drôle (l'écran passe en « NO SIGNAL » en pleine partie de ping-pong), mais il n'y a presque aucune réaction audible ni de chute claire. Sans le titre, on ne comprend pas ce qui s'est passé : moment trop faible."
+  },
+  "twitch:JollyCoweringVultureFailFish-TMRBJNgZ1kI-7ZOO": {
+   "at": "2026-10-29T13:07:01.340757+00:00",
+   "reason": "revue : Extrait de gameplay sans réaction exploitable : il n'y a presque aucune parole et le clip se termine sur une défaite sans chute claire. Le sens dépend du contexte du live."
   },
   "twitch:LaconicGlamorousButterflyNinjaGrumpy-HBjRieNwUwUZ1Psa": {
    "at": "2026-10-28T22:22:54.963495+00:00",
@@ -269,6 +309,10 @@
    "at": "2026-10-28T20:06:28.073825+00:00",
    "reason": "revue : L'explosion nucléaire contre les abeilles est visuelle, mais la réaction est faible et le moment manque de mise en place pour être compris sans connaître la partie."
   },
+  "twitch:ShyHumbleShingleNerfRedBlaster-07a_OnyUnhgLAE2M": {
+   "at": "2026-10-29T13:07:01.340815+00:00",
+   "reason": "revue : Bavardage en Just Chatting sur son envie de streamer et sur le skin d'Inox. Il n'y a ni vraie réaction ni chute, l'extrait est coupé en plein milieu et sans intérêt hors contexte."
+  },
   "twitch:SilkyRoughLemurWow-ICd0rJPdD39clXr9": {
    "at": "2026-10-28T22:06:09.799847+00:00",
    "reason": "revue : Il y a des cris et de l'agitation, mais on ne comprend pas ce qui se passe sans contexte : on voit seulement un achat dans une boutique et un captcha. Il n'y a pas de vraie chute lisible."
@@ -281,9 +325,21 @@
    "at": "2026-10-28T22:06:09.799726+00:00",
    "reason": "revue : L'extrait est surtout une vidéo de Bear Grylls (Discovery) qui n'appartient pas au créateur. La réaction de Domingo reste faible et commentée par-dessus."
   },
+  "twitch:StupidTacitPuffinSaltBae-_LeIFMEsHW-ZIh0A": {
+   "at": "2026-10-29T13:07:01.340684+00:00",
+   "reason": "revue : note 58/100 (minimum 60). Face-à-face tendu sur un ring lors d'un événement : confrontation et défi lancé en direct. L'ambiance accroche, mais la transcription est confuse et il n'y a pas de vraie chute au-delà de l'annonce du combat."
+  },
+  "twitch:SuspiciousElegantJellyfishNerfBlueBlaster-rClQHKYAHytLnmKh": {
+   "at": "2026-10-29T13:08:30.727633+00:00",
+   "reason": "revue : L'essentiel de l'extrait est une vidéo tierce sous-titrée, accompagnée de longs silences. Kameto ne réagit presque pas et le moment n'a de sens qu'avec le contexte du live."
+  },
   "twitch:TenaciousMoldyCheesecakePrimeMe-th0QrMurEuyWwZuX": {
    "at": "2026-10-28T16:02:23.867783+00:00",
    "reason": "revue : Aucun moment fort : Ponce lit un message du chat à propos d'une Switch 2 offerte en cadeau, puis parle du clip lui-même. L'extrait n'a de sens qu'avec le contexte du live et n'a pas de chute."
+  },
+  "twitch:TenderNiceReubenKAPOW-Ty0lrEZBCs-Y1-A0": {
+   "at": "2026-10-29T13:09:42.443796+00:00",
+   "reason": "revue : Simple bavardage hésitant sur une rumeur de spray gratuit pendant le saut en parachute. Il n'y a ni action, ni réaction, ni chute."
   },
   "twitch:VivaciousFragileGuanacoFeelsBadMan-ZvPgIkNTuHFcgmUP": {
    "at": "2026-10-28T16:00:10.934566+00:00",
