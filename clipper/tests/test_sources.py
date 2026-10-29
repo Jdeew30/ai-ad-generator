@@ -74,6 +74,38 @@ def test_helix_discovery(server, http):
     assert clip_call.query["started_at"] == ["2026-10-26T00:00:00Z"] and clip_call.query["ended_at"] == ["2026-10-27T12:00:00Z"]
 
 
+def test_helix_discovery_covers_french_twitch_beyond_the_list(server, http):
+    server.route("POST", "/oauth2/token", (200, {}, {"access_token": "tok"}))
+    server.route("GET", "/helix/streams", (200, {}, {"data": [{"user_login": "LiveFr"}]}))
+
+    def users(request):
+        if "id" in request.query:  # channels of the categories' top clips
+            return 200, {}, {"data": [{"id": "9", "login": "PetitStreamer"}]}
+        return 200, {}, {"data": [{"id": str(i), "login": login} for i, login in enumerate(request.query["login"], start=1)]}
+
+    def clips(request):
+        if "game_id" in request.query:
+            english = {**helix_clip("Viral-EN", 90000, login_id="8"), "language": "en"}
+            return 200, {}, {"data": [helix_clip("Viral-FR", 50000, login_id="9", name="PetitStreamer"), english, helix_clip("Clip1", 500)]}
+        return 200, {}, {"data": [helix_clip(f"Clip{request.query['broadcaster_id'][0]}", 500)]}
+
+    server.route("GET", "/helix/users", users)
+    server.route("GET", "/helix/clips", clips)
+    server.route("GET", "/helix/games/top", (200, {}, {"data": [{"id": "509658", "name": "Just Chatting"}]}))
+    server.route("GET", "/helix/games", (200, {}, {"data": [{"id": "g1", "name": "Just Chatting"}]}))
+    config = build(Config, {"twitch": {"streamers": ["squeezie"], "remember_live": 10, "discover_categories": 3}})
+    memory = {"ancienfr": "2026-10-20T10:00:00+00:00"}  # seen live last week, offline now
+    api = TwitchApi("cid", "secret", http, base_url=f"{server.url}/helix", token_url=f"{server.url}/oauth2/token")
+    found = discover_twitch(config, Secrets(), http, FakeYtDlp(), now=NOW, window=timedelta(days=7), api=api, memory=memory)
+
+    keys = [c.key for c in found]
+    assert sorted(keys) == ["twitch:Clip1", "twitch:Clip2", "twitch:Clip3", "twitch:Viral-FR"]  # no English clip, no duplicate
+    assert next(c for c in found if c.key == "twitch:Viral-FR").streamer_login == "petitstreamer"
+    assert sorted(server.calls("GET", "/helix/users")[0].query["login"]) == ["ancienfr", "livefr", "squeezie"]
+    assert server.calls("GET", "/helix/games/top")[0].query["first"] == ["3"]
+    assert memory == {"ancienfr": "2026-10-20T10:00:00+00:00", "livefr": NOW.isoformat(), "petitstreamer": NOW.isoformat()}
+
+
 def test_helix_refreshes_an_expired_app_token(server, http):
     tokens = iter(["old", "new"])
     server.route("POST", "/token", lambda _r: (200, {}, {"access_token": next(tokens)}))

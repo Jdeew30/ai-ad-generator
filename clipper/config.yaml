@@ -63,10 +63,12 @@ twitch:
     - pfut
     - joyca
     - jbzzed
-  # Avec les clés API Twitch : ajoute aussi les plus gros lives du moment dans cette langue.
+  # Avec les clés API Twitch, tout Twitch FR en plus de la liste :
   discover_live: true
   discover_language: fr
-  discover_limit: 30
+  discover_limit: 100           # les 100 plus gros lives FR du moment
+  remember_live: 150            # + jusqu'à 150 chaînes FR vues ces 14 derniers jours (même hors ligne)
+  discover_categories: 20       # + les clips FR les plus vus de la semaine dans les 20 catégories les plus regardées
   clips_per_streamer: 20
   window_hours: 168             # ancienneté maximale d'un clip pour un short (7 jours : les plus vus d'abord)
   min_views: 150               # Claude écarte ensuite les clips sans intérêt

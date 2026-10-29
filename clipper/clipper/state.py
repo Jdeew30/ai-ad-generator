@@ -63,6 +63,7 @@ class State:
         self.reviews: dict[str, dict[str, Any]] = data.get("reviews", {})
         self.compiled: dict[str, str] = data.get("compiled", {})
         self.compilations: list[dict[str, Any]] = data.get("compilations", [])
+        self.streamers_seen: dict[str, str] = data.get("streamers_seen", {})  # login -> last seen live or in the top
 
     @classmethod
     def load(cls, path: Path) -> State:
@@ -83,6 +84,7 @@ class State:
             "reviews": self.reviews,
             "compiled": self.compiled,
             "compilations": self.compilations[-60:],
+            "streamers_seen": self.streamers_seen,
         }
         self.path.parent.mkdir(parents=True, exist_ok=True)
         fd, tmp = tempfile.mkstemp(prefix=".state-", suffix=".json", dir=self.path.parent)
@@ -107,6 +109,7 @@ class State:
         self.failures = {k: v for k, v in self.failures.items() if keep(v, 7)}
         self.reviews = {k: v for k, v in self.reviews.items() if keep(v, 3)}
         self.compiled = {k: v for k, v in self.compiled.items() if keep(v, 60)}
+        self.streamers_seen = {k: v for k, v in self.streamers_seen.items() if keep(v, 14)}
 
     # --- queries ---------------------------------------------------------------------------
 

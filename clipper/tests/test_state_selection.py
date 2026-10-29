@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from clipper.config import Config, build
-from clipper.models import PublishResult, ShortMeta
+from clipper.models import PublishResult, ShortMeta, utcnow
 from clipper.selection import rank
 from clipper.state import MAX_DOWNLOAD_FAILURES, State, same_moment, spans_overlap
 
@@ -68,6 +68,16 @@ def test_prune_drops_old_entries(tmp_path: Path):
     state.rejected["new"] = {"at": (NOW - timedelta(days=1)).isoformat(), "reason": "x"}
     state.prune(NOW)
     assert list(state.rejected) == ["new"]
+
+
+def test_channels_seen_are_remembered_14_days(tmp_path: Path):
+    state = State(tmp_path / "s.json")
+    state.streamers_seen = {"recent": (NOW - timedelta(days=2)).isoformat(), "old": (NOW - timedelta(days=15)).isoformat()}
+    state.prune(NOW)
+    assert list(state.streamers_seen) == ["recent"]
+    state.streamers_seen["recent"] = utcnow().isoformat()
+    state.save()
+    assert list(State.load(tmp_path / "s.json").streamers_seen) == ["recent"]
 
 
 def test_rank_filters_dedupes_and_orders(tmp_path: Path):
