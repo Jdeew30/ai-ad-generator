@@ -3,6 +3,26 @@
  "compiled": {},
  "failures": {},
  "posted": {
+  "twitch:AuspiciousDreamyBobaNomNom-TJJVuRAv9h-2z51L": {
+   "at": "2026-10-29T22:56:48.033833+00:00",
+   "created_at": "2026-10-24T21:00:53+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "21",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": null,
+   "streamer": "Inoxtag",
+   "streamer_login": "inoxtag",
+   "title": "Michou félicite Inoxtag pour son skin Fortnite (et leak un détail)",
+   "url": "https://www.twitch.tv/inoxtag/clip/AuspiciousDreamyBobaNomNom-TJJVuRAv9h-2z51L",
+   "views": 2337
+  },
   "twitch:CalmExquisiteYakinikuJKanStyle-mTy_P82A25RYqb6g": {
    "at": "2026-10-28T16:03:21.821466+00:00",
    "created_at": "2026-10-27T19:48:30+00:00",
@@ -245,6 +265,10 @@
    "at": "2026-10-29T22:04:24.075880+00:00",
    "reason": "revue : Simple annonce de planning (réaction Koh Lanta, sortie de GTA 6), sans moment fort ni chute. Bavardage peu intéressant hors du live."
   },
+  "twitch:BombasticSuaveWerewolfMoreCowbell-RQC8sLhR4YZqzSXX": {
+   "at": "2026-10-29T22:56:25.003932+00:00",
+   "reason": "revue : Extrait de 13 s de conduite en GTA RP sans enjeu ni chute : des indications de trajet incompréhensibles sans le contexte du live."
+  },
   "twitch:BoredArtisticWhaleMcaT-71Rb7d5RcaSXhX22": {
    "at": "2026-10-29T09:58:39.278555+00:00",
    "reason": "revue : Petite rage après une mort au lance-grenade, mais la réaction est courte et l'action peu lisible. Le début de l'extrait contient un long temps mort, et la chute est trop faible pour être publiée."
@@ -424,6 +448,10 @@
   "twitch:PatientTentativeTigerDatBoi-GdEohDzZ3vcrb6Nm": {
    "at": "2026-10-29T22:51:04.669331+00:00",
    "reason": "revue : Il s'agit essentiellement de la retransmission officielle d'un événement de catch (Final Slam, avec sponsor à l'écran) qui n'appartient pas au créateur ; le commentaire seul n'apporte pas de vrai moment fort."
+  },
+  "twitch:PluckyColorfulChowderBrokeBack-COnsx14MHoX-cPT3": {
+   "at": "2026-10-29T22:56:25.003968+00:00",
+   "reason": "revue : Michou imite un Américain jaloux du skin Fortnite d'Inoxtag : l'idée est sympa, mais la réaction reste faible et la fin (« Crouton Game Show ? ») tombe à plat. Pas assez fort pour être publié."
   },
   "twitch:PoliteZanySmoothieTF2John-sE5WS3TxPHQaF3JB": {
    "at": "2026-10-28T16:02:23.867840+00:00",
