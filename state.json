@@ -185,6 +185,10 @@
    "at": "2026-10-28T19:18:45.866864+00:00",
    "reason": "revue : Discussion de groupe qui n'a de sens qu'avec le contexte du live. Il n'y a aucun moment fort identifiable ni de vraie chute, et la transcription est confuse. L'extrait n'est pas compréhensible en 3 secondes."
   },
+  "twitch:BenevolentPuzzledDillTwitchRaid--NkoXZDd-6fzg0xn": {
+   "at": "2026-10-29T16:06:02.113141+00:00",
+   "reason": "revue : Ponce dit passer sa vie à insulter une personne réelle (apparemment un élu, d'après le chat) et évoque un procès en diffamation : insultes visant une personne réelle, risque juridique. La fin est en plus un temps mort (lecture du chat)."
+  },
   "twitch:BoredArtisticWhaleMcaT-71Rb7d5RcaSXhX22": {
    "at": "2026-10-29T09:58:39.278555+00:00",
    "reason": "revue : Petite rage après une mort au lance-grenade, mais la réaction est courte et l'action peu lisible. Le début de l'extrait contient un long temps mort, et la chute est trop faible pour être publiée."
@@ -201,6 +205,10 @@
    "at": "2026-10-29T09:59:17.371892+00:00",
    "reason": "revue : Bavardage d'entrée sur le ring, transcription confuse, pas de chute, nécessite le contexte de l'événement (et logo sponsor omniprésent)."
   },
+  "twitch:CheerfulCourteousLeopardStinkyCheese-EQN1KL6DHr_P5wGc": {
+   "at": "2026-10-29T16:02:54.439480+00:00",
+   "reason": "revue : Extrait trop court et sans moment marquant : simple callout de partie sans réaction ni chute."
+  },
   "twitch:CleverHeartlessPterodactylDancingBaby-0yhHCaJE4-C5srW2": {
    "at": "2026-10-29T13:08:30.727691+00:00",
    "reason": "revue : Analyse de draft LPL réservée aux initiés, sans réaction ni chute. La transcription est difficile à suivre et l'extrait est inintéressant hors contexte."
@@ -213,9 +221,17 @@
    "at": "2026-10-28T16:00:10.934608+00:00",
    "reason": "revue : L'extrait est essentiellement une performance musicale en concert, dont la musique n'appartient vraisemblablement pas au créateur. Il n'y a pas de moment de stream à proprement parler."
   },
+  "twitch:CrackyCourteousLardTF2John-UdGyHzPBaZZBrQL1": {
+   "at": "2026-10-29T16:04:54.017930+00:00",
+   "reason": "revue : Moment mignon mais anecdotique : Squeezie montre la cicatrice de son chien opéré d'un kyste. Il n'y a ni réaction forte ni chute."
+  },
   "twitch:CuteLongJayPlanking-b9eetHD3fH2wcWI9": {
    "at": "2026-10-28T22:19:08.244772+00:00",
    "reason": "revue : L'image est essentiellement composée d'images de Koh-Lanta All Stars, une émission TV qui n'appartient pas au créateur. Domingo n'apparaît qu'en petit avec une réaction faible."
+  },
+  "twitch:CuteTawdryPandaMVGame-tatdYX4Bn_7M5Icb": {
+   "at": "2026-10-29T16:04:54.017873+00:00",
+   "reason": "revue : Extrait de 17 secondes sans action compréhensible : on n'entend qu'un décompte, puis une phrase isolée. Aucune réaction ni chute."
   },
   "twitch:EntertainingJazzyKathyCmonBruh-vA18OUXvd-JehwlB": {
    "at": "2026-10-28T22:22:54.963582+00:00",
@@ -273,6 +289,10 @@
    "at": "2026-10-29T09:58:01.853312+00:00",
    "reason": "revue : L'image est presque entièrement la diffusion officielle des Worlds de League of Legends, qui n'appartient pas au créateur. Le finish au dernier creep est tendu, mais le contenu reste essentiellement une émission tierce."
   },
+  "twitch:MildAstuteNeanderthalTebowing-LW4lLQH-7G6zl-hX": {
+   "at": "2026-10-29T16:02:54.439406+00:00",
+   "reason": "revue : note 58/100 (minimum 60). Kameto en mode hype totale avant un gros match de KC, énergie communicative. C'est un peu un moment pour initiés et il n'y a pas de vraie chute, mais il est compréhensible et reste court."
+  },
   "twitch:MushyIronicVultureBleedPurple-MBptyYkkjtks9xLk": {
    "at": "2026-10-29T09:59:17.371914+00:00",
    "reason": "revue : Réactions faibles et confuses dans un jeu d'ambiance, longs temps morts, pas de vraie chute compréhensible sans contexte."
@@ -321,6 +341,10 @@
    "at": "2026-10-28T22:06:09.799794+00:00",
    "reason": "revue : Bavardage dans le menu du jeu, sans action ni réaction notable. La transcription est confuse et le moment n'a de sens qu'avec le contexte du live."
   },
+  "twitch:SpineyCrazyCasetteGrammarKing-fn7YxBBHzaebu-IR": {
+   "at": "2026-10-29T16:02:54.439541+00:00",
+   "reason": "revue : Il s'agit surtout de la diffusion officielle d'un match LoL qui n'appartient pas au créateur, avec un cast sans moment fort. Le placement publicitaire Winamax est aussi visible."
+  },
   "twitch:SquareDistinctAirGuitarTriHard-tfS1nH4I2uXT5Y83": {
    "at": "2026-10-28T22:06:09.799726+00:00",
    "reason": "revue : L'extrait est surtout une vidéo de Bear Grylls (Discovery) qui n'appartient pas au créateur. La réaction de Domingo reste faible et commentée par-dessus."
@@ -328,6 +352,14 @@
   "twitch:StupidTacitPuffinSaltBae-_LeIFMEsHW-ZIh0A": {
    "at": "2026-10-29T13:07:01.340684+00:00",
    "reason": "revue : note 58/100 (minimum 60). Face-à-face tendu sur un ring lors d'un événement : confrontation et défi lancé en direct. L'ambiance accroche, mais la transcription est confuse et il n'y a pas de vraie chute au-delà de l'annonce du combat."
+  },
+  "twitch:SuccessfulCovertMoonUnSane-PixNxe4Ov6JtUD_a": {
+   "at": "2026-10-29T16:06:02.113197+00:00",
+   "reason": "revue : Échange sympathique mais anecdotique : la vanne sur les parents qui ont « plus d'expérience » tombe à plat, faible réaction et aucune vraie chute."
+  },
+  "twitch:SuccessfulThankfulSalmonRaccAttack-BbHgdYvXuhCYknaG": {
+   "at": "2026-10-29T16:04:54.017788+00:00",
+   "reason": "revue : Co-stream des Worlds de LoL : l'image est surtout la diffusion officielle, qui n'appartient pas au créateur. La blague sur le « momentum » est réservée aux initiés, la transcription est confuse et il n'y a pas de vraie chute."
   },
   "twitch:SuspiciousElegantJellyfishNerfBlueBlaster-rClQHKYAHytLnmKh": {
    "at": "2026-10-29T13:08:30.727633+00:00",
@@ -340,6 +372,10 @@
   "twitch:TenderNiceReubenKAPOW-Ty0lrEZBCs-Y1-A0": {
    "at": "2026-10-29T13:09:42.443796+00:00",
    "reason": "revue : Simple bavardage hésitant sur une rumeur de spray gratuit pendant le saut en parachute. Il n'y a ni action, ni réaction, ni chute."
+  },
+  "twitch:UgliestQuaintVelociraptorNomNom-KtoyU0ZYAb9MLNgg": {
+   "at": "2026-10-29T16:06:02.113073+00:00",
+   "reason": "revue : Extrait de 12,7 s sans action lisible ni vraie réaction : phrases hachées, aucune chute, incompréhensible sans contexte."
   },
   "twitch:VivaciousFragileGuanacoFeelsBadMan-ZvPgIkNTuHFcgmUP": {
    "at": "2026-10-28T16:00:10.934566+00:00",
