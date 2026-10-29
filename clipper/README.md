@@ -2,9 +2,11 @@
 
 Un robot qui, plusieurs fois par jour :
 
-1. **repère** les meilleurs moments des gros streamers : les clips Twitch les plus vus des 7 derniers jours
-   (ce sont les viewers eux-mêmes qui clippent les moments drôles), les pics « les plus revus » des vidéos
-   YouTube, et les URLs que tu ajoutes à la main ;
+1. **repère** les meilleurs moments de tout Twitch FR : les clips les plus vus des 7 derniers jours (ce sont
+   les viewers eux-mêmes qui clippent les moments forts) des 51 streamers suivis, des 100 plus gros lives FR
+   du moment, des chaînes FR vues ces 14 derniers jours (même hors ligne), et les clips FR les plus vus de la
+   semaine dans les 20 catégories les plus regardées, quelle que soit la chaîne ; plus les pics « les plus
+   revus » des vidéos YouTube et les URLs que tu ajoutes à la main ;
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
    même clip, 2 clips max par streamer et par jour, popularité *relative* au streamer, fraîcheur ;
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
@@ -198,9 +200,10 @@ you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou
 
 ## Réglages utiles (`config.yaml`)
 
-- `twitch.streamers` : la liste des logins suivis (51 streamers FR par défaut). `twitch.discover_limit` y ajoute
-  les plus gros lives FR du moment (30). Un login faux est
-  signalé dans le journal.
+- `twitch.streamers` : la liste des logins suivis (51 streamers FR par défaut). Un login faux est signalé
+  dans le journal. Avec les clés Twitch, `discover_limit` y ajoute les plus gros lives FR du moment (100),
+  `remember_live` les chaînes FR vues ces 14 derniers jours (150 au plus) et `discover_categories` les clips
+  FR les plus vus de la semaine dans les catégories les plus regardées (20).
 - `shorts.per_run` / le `cron` du workflow : le rythme de publication (5 par jour par défaut).
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.

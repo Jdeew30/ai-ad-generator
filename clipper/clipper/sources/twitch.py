@@ -82,6 +82,13 @@ class TwitchApi:
                 users[user["login"].lower()] = user
         return users
 
+    def users_by_id(self, ids: Iterable[str]) -> dict[str, dict[str, Any]]:
+        users: dict[str, dict[str, Any]] = {}
+        for batch in _chunks(sorted({i for i in ids if i}), 100):
+            for user in self.get("users", {"id": batch}).get("data", []):
+                users[user["id"]] = user
+        return users
+
     def clips(self, broadcaster_id: str, started_at: datetime, ended_at: datetime, first: int) -> list[dict[str, Any]]:
         params = {
             "broadcaster_id": broadcaster_id,
@@ -90,6 +97,15 @@ class TwitchApi:
             "first": max(1, min(first, 100)),
         }
         return self.get("clips", params).get("data", [])
+
+    def game_clips(self, game_id: str, started_at: datetime, ended_at: datetime, first: int) -> list[dict[str, Any]]:
+        """The most viewed clips of a category, every channel and language mixed."""
+        params = {"game_id": game_id, "started_at": _rfc3339(started_at), "ended_at": _rfc3339(ended_at), "first": max(1, min(first, 100))}
+        return self.get("clips", params).get("data", [])
+
+    def top_games(self, first: int) -> list[dict[str, Any]]:
+        """The categories watched the most right now."""
+        return self.get("games/top", {"first": max(1, min(first, 100))}).get("data", [])
 
     def streams(self, language: str, first: int) -> list[dict[str, Any]]:
         params = {"language": language, "type": "live", "first": max(1, min(first, 100))}
@@ -158,7 +174,13 @@ def discover_twitch(
     window: timedelta,
     per_streamer: int | None = None,
     api: TwitchApi | None = None,
+    memory: dict[str, str] | None = None,
 ) -> list[Candidate]:
+    """Clips of the followed channels and, with the API keys, of the rest of French Twitch.
+
+    `memory` (login -> last time seen) keeps the channels found live or in a category's top clips, so that
+    their clips are still looked at in the next runs, when they are offline.
+    """
     if not config.twitch.enabled:
         return []
     per_streamer = per_streamer or config.twitch.clips_per_streamer
@@ -166,25 +188,47 @@ def discover_twitch(
     if api is None and secrets.twitch_api:
         api = TwitchApi(secrets.twitch_client_id or "", secrets.twitch_client_secret or "", http)
     if api is not None:
-        return _discover_helix(config, api, logins, now=now, window=window, per_streamer=per_streamer)
+        return _discover_helix(config, api, logins, now=now, window=window, per_streamer=per_streamer, memory=memory)
     log.info("Clés API Twitch absentes : liste des clips via yt-dlp (pas de découverte des lives).")
     return _discover_listing(config, ytdlp, logins, now=now, window=window, per_streamer=per_streamer)
 
 
+def _sample(logins: list[str], count: int = 12) -> str:
+    return ", ".join(logins[:count]) + ("…" if len(logins) > count else "")
+
+
 def _discover_helix(
-    config: Config, api: TwitchApi, logins: list[str], *, now: datetime, window: timedelta, per_streamer: int
+    config: Config,
+    api: TwitchApi,
+    logins: list[str],
+    *,
+    now: datetime,
+    window: timedelta,
+    per_streamer: int,
+    memory: dict[str, str] | None = None,
 ) -> list[Candidate]:
-    if config.twitch.discover_live:
+    settings = config.twitch
+    seen_at = now.isoformat()
+    if settings.discover_live:
         try:
-            streams = api.streams(config.twitch.discover_language, config.twitch.discover_limit)
+            streams = api.streams(settings.discover_language, settings.discover_limit)
         except HttpError as exc:
             log.warning("Découverte des lives impossible : %s", exc)
             streams = []
-        added = [s["user_login"].lower() for s in streams if s["user_login"].lower() not in logins]
-        added = [login for login in added if not config.is_blocked(login)]
+        live = [s["user_login"].lower() for s in streams if not config.is_blocked(s["user_login"].lower())]
+        if memory is not None:
+            memory.update({login: seen_at for login in live})
+        added = [login for login in live if login not in logins]
         if added:
-            log.info("Lives %s ajoutés : %s", config.twitch.discover_language, ", ".join(added))
+            log.info("Lives %s ajoutés : %d chaînes (%s)", settings.discover_language, len(added), _sample(added))
         logins = logins + added
+    if memory and settings.remember_live > 0:
+        recent = sorted(memory, key=lambda login: memory[login], reverse=True)
+        remembered = [login for login in recent if login not in logins and not config.is_blocked(login)]
+        remembered = remembered[: settings.remember_live]
+        if remembered:
+            log.info("Chaînes vues ces 14 derniers jours : %d de plus (%s)", len(remembered), _sample(remembered))
+        logins = logins + remembered
     if not logins:
         return []
     try:
@@ -206,12 +250,54 @@ def _discover_helix(
         clips.extend((clip, login) for clip in found)
     if users and failures == len(users):
         raise SourceError("aucun clip Twitch récupérable (API en panne ?)")
+    if settings.discover_categories > 0:
+        known = {clip["id"] for clip, _ in clips}
+        extra = _category_clips(config, api, now=now, window=window, known=known)
+        if memory is not None:
+            memory.update({login: seen_at for _, login in extra})
+        clips.extend(extra)
     try:
         games = api.games(clip.get("game_id") or "" for clip, _ in clips)
     except HttpError as exc:
         log.warning("Noms des jeux indisponibles : %s", exc)
         games = {}
     return [candidate_from_helix(clip, login, games, config) for clip, login in clips]
+
+
+def _category_clips(
+    config: Config, api: TwitchApi, *, now: datetime, window: timedelta, known: set[str]
+) -> list[tuple[dict[str, Any], str]]:
+    """The week's most viewed French clips in the categories watched the most, whoever the channel."""
+    language = config.twitch.discover_language
+    try:
+        categories = api.top_games(config.twitch.discover_categories)
+    except HttpError as exc:
+        log.warning("Catégories populaires indisponibles : %s", exc)
+        return []
+    found: list[dict[str, Any]] = []
+    for category in categories:
+        try:
+            clips = api.game_clips(category["id"], now - window, now, 100)
+        except HttpError as exc:
+            log.warning("Clips de la catégorie %s indisponibles : %s", category.get("name"), exc)
+            continue
+        found += [clip for clip in clips if clip.get("language") == language and clip["id"] not in known]
+        known.update(clip["id"] for clip in clips)
+    if not found:
+        return []
+    try:
+        users = api.users_by_id(clip.get("broadcaster_id") or "" for clip in found)
+    except HttpError as exc:
+        log.warning("Chaînes des clips populaires introuvables : %s", exc)
+        return []
+    result = []
+    for clip in found:
+        user = users.get(clip.get("broadcaster_id") or "")
+        if user and not config.is_blocked(user["login"].lower()):
+            result.append((clip, user["login"].lower()))
+    channels = sorted({login for _, login in result})
+    log.info("Catégories populaires : %d clips %s de la semaine, %d chaînes (%s)", len(result), language, len(channels), _sample(channels))
+    return result
 
 
 def _discover_listing(

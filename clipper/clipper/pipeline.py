@@ -445,7 +445,8 @@ class Clipper:
         else:
             window = timedelta(hours=self.config.twitch.window_hours)
             try:
-                found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue)
+                found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
+                                 memory=self.state.streamers_seen)
             except (SourceError, QueueError) as exc:
                 log.error("Découverte impossible : %s", exc)
                 report.errors.append(f"découverte : {exc}")
@@ -540,7 +541,8 @@ class Clipper:
         wanted = count or settings.clips
         window = timedelta(days=settings.window_days)
         try:
-            found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, per_streamer=10)
+            found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, per_streamer=10,
+                             memory=self.state.streamers_seen)
         except SourceError as exc:
             log.error("Découverte impossible : %s", exc)
             report.errors.append(f"découverte : {exc}")
