@@ -75,6 +75,30 @@
    "url": "https://www.twitch.tv/domingo/clip/FineEmpathicGrouseThisIsSparta-fiHOfxG3QFpboQuF",
    "views": 1308
   },
+  "twitch:FreezingObedientMooseKippa-Jl1_zqoDg5tw50tt": {
+   "at": "2026-10-29T22:44:37.675406+00:00",
+   "created_at": "2026-10-29T20:38:14+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "19",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2913267911",
+    92217.0,
+    92277.0
+   ],
+   "streamer": "Mastu",
+   "streamer_login": "mastu",
+   "title": "Mastu explique sa mort la plus bête sur Minecraft",
+   "url": "https://www.twitch.tv/mastu/clip/FreezingObedientMooseKippa-Jl1_zqoDg5tw50tt",
+   "views": 463
+  },
   "twitch:HandsomeCourteousBaboonCoolStoryBob-FJT6b5z_doViYQvu": {
    "at": "2026-10-28T11:48:56.358618+00:00",
    "created_at": "2026-10-27T21:06:42+00:00",
@@ -365,6 +389,10 @@
    "at": "2026-10-29T09:59:17.371859+00:00",
    "reason": "revue : Début de live : intro, écran d'attente et menus, aucun moment notable."
   },
+  "twitch:OriginalResoluteCiderFloof-bTS7At0zGmyUrYBx": {
+   "at": "2026-10-29T22:43:22.401604+00:00",
+   "reason": "revue : Jeu d'horreur sans moment fort : pas de jumpscare ni de vraie réaction, quelques jurons et des commentaires décousus. Rien de compréhensible sans le contexte du live."
+  },
   "twitch:PoliteZanySmoothieTF2John-sE5WS3TxPHQaF3JB": {
    "at": "2026-10-28T16:02:23.867840+00:00",
    "reason": "revue : Près de 30 secondes sans parole et l'action en jeu reste illisible. Le « je peux tout vous expliquer » n'a pas de mise en place compréhensible sans le contexte de la partie de Lycans."
@@ -380,6 +408,10 @@
   "twitch:ProudWildButterflySoonerLater-bPnjaWSW0QbxjXod": {
    "at": "2026-10-28T22:19:08.244869+00:00",
    "reason": "revue : L'extrait commence par environ 30 secondes sans dialogue exploitable. La suite n'est qu'un bavardage sur le chocolat antidépresseur, sans réaction forte ni vraie chute, et reste peu compréhensible sans contexte."
+  },
+  "twitch:RoughAmazonianBatteryTinyFace-ed3wi2iy-AyhYCKf": {
+   "at": "2026-10-29T22:43:22.401521+00:00",
+   "reason": "revue : Transcription incompréhensible et pas de chute identifiable. L'extrait sur scène (événement sponsorisé MSI) se résume à une introduction sans contenu qui tienne seul."
   },
   "twitch:SavageSpunkyLaptopHotPokket-pwJjpFRp79vWUudk": {
    "at": "2026-10-28T20:06:28.073825+00:00",
