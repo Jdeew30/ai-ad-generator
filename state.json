@@ -193,9 +193,17 @@
    "at": "2026-10-29T16:06:02.113141+00:00",
    "reason": "revue : Ponce dit passer sa vie à insulter une personne réelle (apparemment un élu, d'après le chat) et évoque un procès en diffamation : insultes visant une personne réelle, risque juridique. La fin est en plus un temps mort (lecture du chat)."
   },
+  "twitch:BlatantTubularTraySmoocherZ-gi0lEnNjKSTCviIu": {
+   "at": "2026-10-29T22:04:24.075880+00:00",
+   "reason": "revue : Simple annonce de planning (réaction Koh Lanta, sortie de GTA 6), sans moment fort ni chute. Bavardage peu intéressant hors du live."
+  },
   "twitch:BoredArtisticWhaleMcaT-71Rb7d5RcaSXhX22": {
    "at": "2026-10-29T09:58:39.278555+00:00",
    "reason": "revue : Petite rage après une mort au lance-grenade, mais la réaction est courte et l'action peu lisible. Le début de l'extrait contient un long temps mort, et la chute est trop faible pour être publiée."
+  },
+  "twitch:BoxyHandsomeBisonSoonerLater-IU70tlEPHdcXGRcb": {
+   "at": "2026-10-29T22:04:24.075785+00:00",
+   "reason": "revue : Retransmission d'un match officiel (T1 vs équipe LEC, diffusion Riot) avec le cast d'origine : le contenu n'appartient pas au créateur. Aucune réaction propre du streamer."
   },
   "twitch:BraveThankfulWatermelonPogChamp-fNSWfwYc5y6GcssJ": {
    "at": "2026-10-29T19:06:18.352020+00:00",
@@ -281,6 +289,10 @@
    "at": "2026-10-28T22:22:54.963431+00:00",
    "reason": "revue : note 58/100 (minimum 60). Entrée sur scène devant une foule énorme avec une référence à Randy Orton : moment fort mais la transcription a un trou de 30 s et la chute reste douce, ambiance plus que punchline."
   },
+  "twitch:GrotesqueArtsyOilNotATK-M3G7CIfmuKhZB3TM": {
+   "at": "2026-10-29T22:07:23.506997+00:00",
+   "reason": "revue : Ouverture de packs sans réaction marquante ni chute : menus, animations sautées et commentaire monotone. La transcription s'arrête à 17,7 s, ce qui laisse un temps mort à la fin. Le moment est sans intérêt hors du live."
+  },
   "twitch:HappySlickSharkPeanutButterJellyTime-qoanZ3iOANxJSuYi": {
    "at": "2026-10-29T09:58:39.278576+00:00",
    "reason": "revue : Introduction de pré-show d'une finale, sans moment fort ni chute. Il y a un long silence, et l'extrait est plein de logos de sponsors."
@@ -293,13 +305,25 @@
    "at": "2026-10-28T22:03:37.601216+00:00",
    "reason": "revue : Il s'agit surtout de la retransmission d'un événement (annonceur sur scène, logo sponsor BoursoBank) qui n'appartient pas au créateur. L'extrait est trop court et sans réaction du streamer."
   },
+  "twitch:HilariousSpookyWatermelonDBstyle-Th-7jQpnD2NLiyb-": {
+   "at": "2026-10-29T22:04:24.075950+00:00",
+   "reason": "revue : Échange décousu et confus, sans contexte ni chute : une mise en situation inaudible puis le streamer qui lit son chat."
+  },
   "twitch:IcyDifferentPlumDatSheffy-G8ybUILuh6h_yPCf": {
    "at": "2026-10-29T19:07:52.820783+00:00",
    "reason": "revue : Bavardage autour d'une chienne qui passe dans le studio, sans réaction marquante ni chute ; le début est du gameplay commenté sans intérêt et la transcription est confuse."
   },
+  "twitch:InnocentPleasantDotterelBleedPurple-Y_UMoM93WEb36wre": {
+   "at": "2026-10-29T22:07:23.507124+00:00",
+   "reason": "revue : L'extrait montre une bagarre physique dans un ring qui doit être séparée par la sécurité, ce qui s'apparente à de la violence réelle. Les images viennent surtout de la diffusion de l'événement et non du créateur, et le commentaire est confus."
+  },
   "twitch:InterestingDeadRabbitTBTacoRight-pVtdbvGyT5XBfLBP": {
    "at": "2026-10-28T22:01:42.253026+00:00",
    "reason": "revue : Fail visuel potentiellement drôle (l'écran passe en « NO SIGNAL » en pleine partie de ping-pong), mais il n'y a presque aucune réaction audible ni de chute claire. Sans le titre, on ne comprend pas ce qui s'est passé : moment trop faible."
+  },
+  "twitch:JazzyPopularMartenBudBlast-QwfE6xEI_DxPLNFu": {
+   "at": "2026-10-29T22:05:39.216079+00:00",
+   "reason": "revue : note 55/100 (minimum 60). Annonce officielle de JLTomy (qualification directe en playoffs et recrutement de Wanzeru chez JobLife) avec un enthousiasme réel. C'est une news intéressante pour la communauté, mais le moment reste surtout informatif, sans vraie chute comique. Potentiel moyen à co"
   },
   "twitch:JollyCoweringVultureFailFish-TMRBJNgZ1kI-7ZOO": {
    "at": "2026-10-29T13:07:01.340757+00:00",
@@ -369,6 +393,10 @@
    "at": "2026-10-28T22:06:09.799847+00:00",
    "reason": "revue : Il y a des cris et de l'agitation, mais on ne comprend pas ce qui se passe sans contexte : on voit seulement un achat dans une boutique et un captcha. Il n'y a pas de vraie chute lisible."
   },
+  "twitch:SleepyEnthusiasticGaragePeteZaroll-LlUzJ8VEyL1nWvnl": {
+   "at": "2026-10-29T22:07:23.507066+00:00",
+   "reason": "revue : C'est du bavardage sur scène lors d'un événement sponsorisé (publicité Fnac x HyperX), sans moment fort ni chute. La blague sur le « streamer préféré » est molle et peu compréhensible hors contexte."
+  },
   "twitch:SpikyMistyPartridgeRiPepperonis-s6ciChYjbcoNZxUi": {
    "at": "2026-10-28T22:06:09.799794+00:00",
    "reason": "revue : Bavardage dans le menu du jeu, sans action ni réaction notable. La transcription est confuse et le moment n'a de sens qu'avec le contexte du live."
@@ -380,6 +408,10 @@
   "twitch:SquareDistinctAirGuitarTriHard-tfS1nH4I2uXT5Y83": {
    "at": "2026-10-28T22:06:09.799726+00:00",
    "reason": "revue : L'extrait est surtout une vidéo de Bear Grylls (Discovery) qui n'appartient pas au créateur. La réaction de Domingo reste faible et commentée par-dessus."
+  },
+  "twitch:StupidHelpfulZebraDuDudu-VKteDI-dZ4ARZ5nS": {
+   "at": "2026-10-29T22:05:39.216150+00:00",
+   "reason": "revue : Extrait trop court et décousu : Gotaga répond à des messages du chat sur le coach Rocket League et la « propagande ». Ce sont des blagues d'initiés, sans mise en place ni chute, incompréhensibles sans le contexte du live."
   },
   "twitch:StupidTacitPuffinSaltBae-_LeIFMEsHW-ZIh0A": {
    "at": "2026-10-29T13:07:01.340684+00:00",
@@ -412,6 +444,10 @@
   "twitch:UgliestQuaintVelociraptorNomNom-KtoyU0ZYAb9MLNgg": {
    "at": "2026-10-29T16:06:02.113073+00:00",
    "reason": "revue : Extrait de 12,7 s sans action lisible ni vraie réaction : phrases hachées, aucune chute, incompréhensible sans contexte."
+  },
+  "twitch:VenomousMildHorseShazBotstix-xEFE_K2rPKNkhYW4": {
+   "at": "2026-10-29T22:05:39.216207+00:00",
+   "reason": "revue : Simple introduction de l'épisode en public, avec mention d'un partenariat. Il n'y a aucun moment fort ni aucune chute, et l'extrait est trop court."
   },
   "twitch:VivaciousFragileGuanacoFeelsBadMan-ZvPgIkNTuHFcgmUP": {
    "at": "2026-10-28T16:00:10.934566+00:00",
