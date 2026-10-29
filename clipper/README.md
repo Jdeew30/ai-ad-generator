@@ -14,8 +14,9 @@ Un robot qui, plusieurs fois par jour :
    sur 100 et ne laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
    l'accroche, le titre, la description et les hashtags. Si rien n'est assez bon, il examine une nouvelle
    série de clips (3 séries au plus), puis préfère ne rien publier et te prévient sur Telegram ;
-4. **monte** chaque short en 1080×1920 : facecam en haut et jeu en bas (détection automatique du visage),
-   ou plein cadre centré sur le streamer, ou fond flouté ; **sous-titres animés mot à mot** (Whisper),
+4. **monte** chaque short en 1080×1920 : l'image entière, nette au milieu, sur un fond flouté (réglage choisi
+   pour la chaîne) ; en mode `auto`, facecam en haut et jeu en bas (détection automatique du visage) ou plein
+   cadre centré sur le streamer selon le clip ; **sous-titres animés mot à mot** (Whisper),
    accroche incrustée, crédit `twitch.tv/<streamer>`, son normalisé ;
 5. **publie** sur YouTube Shorts (une fois l'audit de Google accepté) et t'envoie chaque vidéo sur
    **Telegram** avec le texte prêt à coller, pour TikTok et en attendant l'audit ;
@@ -204,8 +205,9 @@ you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
 - `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (20 et 8),
   que Claude garde ou coupe. `0` pour travailler sur le clip seul.
-- `shorts.layout` et `streamers.<login>.layout` / `facecam` : forcer une mise en page, ou donner la position
-  exacte de la facecam d'un streamer.
+- `shorts.layout` : `blur` (image entière sur fond flouté, réglage de la chaîne), ou `auto` pour laisser le
+  robot choisir entre facecam en haut / jeu en bas, plein cadre et fond flouté. `streamers.<login>.layout` /
+  `facecam` : une mise en page ou la position exacte de la facecam pour un streamer précis.
 - `shorts.whisper_model` : `small` par défaut ; `large-v3-turbo` est plus précis mais plus lent.
 - `blocklist` : les chaînes à ne jamais clipper.
 - `queue.yaml` : tes URLs à passer en priorité (clip, VOD avec début/fin, vidéo YouTube).

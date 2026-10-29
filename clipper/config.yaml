@@ -90,7 +90,7 @@ shorts:
   max_per_streamer_per_day: 2
   min_duration: 8
   max_duration: 90
-  layout: auto                  # auto | split (facecam en haut) | crop (plein cadre) | blur (fond flouté)
+  layout: blur                  # blur (image entière sur fond flouté, choisi le 29/10) | auto | split (facecam en haut) | crop (plein cadre)
   captions: true                # sous-titres animés mot à mot (Whisper)
   hook: true                    # accroche incrustée en haut de la vidéo
   hook_seconds: 3
