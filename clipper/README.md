@@ -10,8 +10,10 @@ Un robot qui, plusieurs fois par jour :
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
    avec 20 s avant et 8 s après (la mise en place et la fin de la réaction ; le clip seul si le replay est
    indisponible ou muet), puis Claude reçoit la transcription + 4 images de chaque extrait ; il
-   écarte ce qui est risqué (insultes, contenu sexuel, infos privées, musique protégée…), note chaque extrait
-   sur 100 et ne laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
+   écarte ce qui est risqué (insultes, contenu sexuel, infos privées, musique protégée, retransmissions
+   officielles…), note chaque extrait sur 100 dans l'esprit des best-of Twitch FR comme « La Crème de Twitch »
+   (moments drôles, annonces et actu du milieu, anecdotes, piques entre streamers, duos, exploits) et ne
+   laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
    l'accroche, le titre, la description et les hashtags. Si rien n'est assez bon, il examine une nouvelle
    série de clips (3 séries au plus), puis préfère ne rien publier et te prévient sur Telegram ;
 4. **monte** chaque short en 1080×1920 : l'image entière, nette au milieu, sur un fond flouté (réglage choisi
@@ -203,6 +205,8 @@ you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
+- `twitch.skip_title_words` : les mots qui font écarter un clip avant tout téléchargement (watch parties,
+  pubs : « worlds », « publicité »…), Claude les refusant de toute façon.
 - `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (20 et 8),
   que Claude garde ou coupe. `0` pour travailler sur le clip seul.
 - `shorts.layout` : `blur` (image entière sur fond flouté, réglage de la chaîne), ou `auto` pour laisser le

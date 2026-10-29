@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 import math
 import statistics
+import unicodedata
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta
 
@@ -11,6 +12,17 @@ from .models import Candidate
 from .state import State, moment_of, same_moment
 
 log = logging.getLogger(__name__)
+
+
+def _plain(text: str) -> str:
+    """Lowercase without accents, so that "Publicité" and "publicite" match."""
+    return unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().lower()
+
+
+def excluded_title(title: str, words: list[str]) -> bool:
+    """A clip titled after a watch party or an ad: Claude always rejects those, so they are not even downloaded."""
+    plain = _plain(title)
+    return any(_plain(word) in plain for word in words if word.strip())
 
 
 def score(candidate: Candidate, median_views: float, now: datetime, *, freshness_weight: float) -> float:
@@ -73,6 +85,8 @@ def rank(
             skipped["trop long"] += 1
         elif not candidate.manual and candidate.source == "twitch" and candidate.views < config.twitch.min_views:
             skipped["pas assez de vues"] += 1
+        elif not candidate.manual and excluded_title(candidate.title, config.twitch.skip_title_words):
+            skipped["titre de watch party ou de pub"] += 1
         else:
             kept.append(candidate)
 

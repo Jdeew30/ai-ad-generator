@@ -70,6 +70,8 @@ twitch:
   clips_per_streamer: 20
   window_hours: 168             # ancienneté maximale d'un clip pour un short (7 jours : les plus vus d'abord)
   min_views: 150               # Claude écarte ensuite les clips sans intérêt
+  # Clips jamais téléchargés si leur titre contient un de ces mots (watch parties, pubs : Claude les refuse toujours).
+  skip_title_words: [worlds, watch party, watchparty, co-stream, costream, publicité, sponsorisé, partenariat]
 
 youtube:
   # Moments « les plus revus » des vidéos récentes. Désactivé par défaut : YouTube bloque souvent

@@ -87,6 +87,18 @@ def test_rank_filters_dedupes_and_orders(tmp_path: Path):
     assert ranked == ["twitch:big", "twitch:ok"]
 
 
+def test_watch_party_and_ad_titles_are_skipped(tmp_path: Path):
+    cfg = config(twitch={"skip_title_words": ["worlds", "publicité"]})
+    cands = [
+        make_candidate("twitch:worlds", "a", views=9000, title="🔥WORLDS JOUR 3, MATCH CAPITAL🔥"),
+        make_candidate("twitch:ad", "b", views=8000, title="Ouverture de packs - Publicite"),
+        make_candidate("twitch:fun", "c", views=900, title="il rate tout"),
+        make_candidate("manual:mine", "d", views=0, title="worlds", manual=True),
+    ]
+    ranked = [c.key for c in rank(cands, State(tmp_path / "s.json"), cfg, now=NOW)]
+    assert ranked == ["manual:mine", "twitch:fun"]  # accents and case ignored; URLs added by hand always kept
+
+
 def test_rank_relative_popularity_favours_a_standout_clip(tmp_path: Path):
     state = State(tmp_path / "s.json")
     # Streamer "big" always gets ~20k views; streamer "small" usually 300, but this clip got 3000.

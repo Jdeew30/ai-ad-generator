@@ -39,6 +39,7 @@ class TwitchConfig:
     clips_per_streamer: int = 20
     window_hours: int = 168
     min_views: int = 300
+    skip_title_words: list[str] = field(default_factory=list)  # titles of watch parties and ads, never downloaded
 
 
 @dataclass
