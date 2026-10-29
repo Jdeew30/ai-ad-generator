@@ -80,6 +80,13 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
 
+Pour un passage **ciblé** : mode `shorts` → champ **focus**, avec des chaînes Twitch, des chaînes YouTube
+(`@nom`) ou des liens de vidéos YouTube, séparés par des virgules. Par exemple `gotaga, aminematue` ou le
+lien du replay d'un événement. Seules ces sources sont regardées : les clips Twitch de la semaine (50 par
+chaîne) et les 6 passages les plus revus de chaque vidéo YouTube, quels que soient son âge et ses vues. Claude
+choisit toujours, avec la même note minimale et sans redite. Le plafond par streamer ne compte pas, puisque tu
+as demandé ces chaînes. Le champ **count** fixe le nombre de shorts (1 si vide).
+
 ### Sur ton ordinateur (pour tester ou pour YouTube)
 
 Prérequis : Python 3.10+ et ffmpeg (`winget install ffmpeg`, `brew install ffmpeg` ou `apt install ffmpeg`).

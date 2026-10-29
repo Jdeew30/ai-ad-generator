@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import dataclasses
 import logging
 import re
 import unicodedata
@@ -192,8 +193,17 @@ def discover_youtube(
     With related_channels, `related` (kept in the state) adds each YouTuber's other channels to the turns.
     """
     settings = config.youtube
-    if not settings.enabled or not settings.channels:
+    if not settings.enabled or not (settings.channels or settings.videos):
         return []
+    candidates: list[Candidate] = []
+    asked = dataclasses.replace(settings, max_age_days=100_000, min_views=0)  # videos asked for by name: any age, any views
+    for url in settings.videos:
+        try:
+            info = ytdlp.info(url)
+        except DownloadError as exc:
+            log.warning("Vidéo YouTube %s ignorée : %s", url, exc)
+            continue
+        candidates.extend(candidates_from_info(info, asked, config, now))
     channels = list(settings.channels)
     if settings.related_channels and related is not None:
         _refresh_related(settings.channels, ytdlp, related, now)
@@ -208,7 +218,6 @@ def discover_youtube(
         start = offset % len(channels)
         channels = (channels[start:] + channels[:start])[: settings.channels_per_run]
         log.info("YouTube : %s", ", ".join(channels))
-    candidates: list[Candidate] = []
     for ref in channels:
         base = channel_url(ref)
         seen: set[str] = set()

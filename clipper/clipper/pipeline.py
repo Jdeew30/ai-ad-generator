@@ -4,7 +4,6 @@ import json
 import logging
 import re
 import shutil
-from collections import deque
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -23,8 +22,8 @@ from .publishers import PublishError, build_publishers
 from .publishers.tiktok import TikTokPublisher, caption as tiktok_caption
 from .publishers.youtube import short_description
 from .render import render_short
-from .selection import rank
-from .sources import discover
+from .selection import rank, spread
+from .sources import discover, focus_config
 from .sources.manual import QueueError, manual_candidate
 from .sources.twitch import SourceError
 from .state import State
@@ -418,12 +417,13 @@ class Clipper:
             log.error("telegram : %s", exc)
 
     def run_shorts(self, *, dry_run: bool = False, count: int | None = None, url: str | None = None,
-                   start: str | None = None, end: str | None = None, queue: Path | None = None) -> RunReport:
+                   start: str | None = None, end: str | None = None, queue: Path | None = None,
+                   focus: list[str] | None = None) -> RunReport:
         report = RunReport("shorts", dry_run)
         if not dry_run:
             _ = self.publishers  # missing credentials for a required platform: fail before any work
         try:
-            self._shorts(report, dry_run=dry_run, count=count, url=url, start=start, end=end, queue=queue)
+            self._shorts(report, dry_run=dry_run, count=count, url=url, start=start, end=end, queue=queue, focus=focus)
         finally:
             if not dry_run:
                 self.state.save()
@@ -447,7 +447,7 @@ class Clipper:
         shutil.rmtree(self.paths.work, ignore_errors=True)
 
     def _shorts(self, report: RunReport, *, dry_run: bool, count: int | None, url: str | None,
-                start: str | None, end: str | None, queue: Path | None) -> None:
+                start: str | None, end: str | None, queue: Path | None, focus: list[str] | None = None) -> None:
         wanted = self.config.shorts.per_run if count is None else count
         if url:
             try:
@@ -458,16 +458,22 @@ class Clipper:
             wanted = 1
         else:
             window = timedelta(hours=self.config.twitch.window_hours)
+            config = self.config
             try:
-                found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
-                                 memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor,
-                                 youtube_related=self.state.youtube_related)
-                self.state.youtube_cursor += self.config.youtube.channels_per_run
-            except (SourceError, QueueError) as exc:
+                if focus:
+                    config = focus_config(self.config, focus)
+                    log.info("Passage ciblé : %s", ", ".join(focus))
+                    found = discover(config, self.secrets, self.http, self.ytdlp, now=self.now, window=window)
+                else:
+                    found = discover(config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
+                                     memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor,
+                                     youtube_related=self.state.youtube_related)
+                    self.state.youtube_cursor += config.youtube.channels_per_run
+            except (SourceError, QueueError, ConfigError) as exc:
                 log.error("Découverte impossible : %s", exc)
                 report.errors.append(f"découverte : {exc}")
                 return
-            ranked = rank(found, self.state, self.config, now=self.now)
+            ranked = spread(rank(found, self.state, config, now=self.now))
         if wanted <= 0 or not ranked:
             log.info("Aucun candidat à traiter.")
             return
@@ -475,7 +481,7 @@ class Clipper:
         use_ai = self.curator is not None
         # Without AI the popularity order is final: only the clips that will be posted are prepared.
         batch = wanted * self.config.shorts.candidates_factor if use_ai else wanted
-        queue = deque(ranked)
+        remaining = iter(ranked)
         recent = self.recent_shorts()
         approved: list[tuple[Prepared, Review]] = []
         unjudged = 0
@@ -483,19 +489,14 @@ class Clipper:
             if round_number:
                 log.info("Pas assez de clips retenus : revue d'une nouvelle série de candidats.")
             prepared: list[Prepared] = []
-            held: list[Candidate] = []
-            while queue and len(prepared) < batch:
-                candidate = queue.popleft()
-                login = candidate.streamer_login.lower()
-                if use_ai and login and any(item.candidate.streamer_login.lower() == login for item in prepared):
-                    held.append(candidate)  # one clip per creator in a review, for variety: the next ones wait their turn
-                    continue
+            for candidate in remaining:
                 log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
                 item = self.prepare(candidate, transcribe=self.config.shorts.captions or use_ai,
                                     sheet=use_ai and self.config.ai.review_frames, context=use_ai)
                 if item is not None:
                     prepared.append(item)
-            queue.extendleft(reversed(held))
+                    if len(prepared) >= batch:
+                        break
             if not prepared:
                 break
             # The clips approved in an earlier round count as published: no second short on their story either.

@@ -50,6 +50,7 @@ class YouTubeSourceConfig:
     channels: list[str] = field(default_factory=list)  # @handle, channel URL or channel id
     channels_per_run: int = 0  # looked at in turn, so many per run (0 = all of them every run)
     related_channels: bool = False  # also each YouTuber's other channels ("X Gaming", "X 2"...), found by search
+    videos: list[str] = field(default_factory=list)  # links of videos looked at whatever their age or views
     tabs: list[str] = field(default_factory=lambda: ["videos", "streams"])  # channel tabs listed
     videos_per_channel: int = 3
     max_age_days: int = 7

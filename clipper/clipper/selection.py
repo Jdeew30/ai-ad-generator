@@ -51,6 +51,21 @@ def score(candidate: Candidate, median_views: float, now: datetime, *, freshness
     return (base + 0.5 * relative) * (1.0 - freshness_weight + freshness_weight * fresh) * fit * (0.5 + 0.5 * heat)
 
 
+def spread(candidates: list[Candidate]) -> list[Candidate]:
+    """Best first, but a creator's next clip only comes after every other creator's previous one.
+
+    Each review then compares different creators while there are enough of them, and a run on one or two
+    channels still alternates between them.
+    """
+    turns: Counter[str] = Counter()
+    order: list[tuple[int, int]] = []
+    for index, candidate in enumerate(candidates):
+        login = candidate.streamer_login.lower()
+        order.append((turns[login] if login else 0, index))
+        turns[login] += 1
+    return [candidates[index] for _, index in sorted(order)]
+
+
 def rank(
     candidates: list[Candidate],
     state: State,

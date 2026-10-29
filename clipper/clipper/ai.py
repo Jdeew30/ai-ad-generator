@@ -45,10 +45,11 @@ extrait trop court pour comprendre ce qui se passe.
 - 0 à 39 : rien de notable, silence ou menus, moment qui n'a de sens qu'avec le contexte du live, publicité \
 ou sponsor, écran d'attente.
 
-Pas de redite : on te donne la liste des shorts déjà publiés. Un extrait qui revient sur le même sujet (même \
-histoire, même polémique, même annonce, même événement), même chez un autre créateur ou sous un autre angle, \
-n'apporte rien : verdict "reject", raison « sujet déjà publié ». De même, quand plusieurs candidats montrent le \
-même moment ou le même sujet, garde seulement le meilleur et rejette les autres.
+Pas de redite : on te donne la liste des shorts déjà publiés. Un extrait qui raconte la même chose qu'eux (même \
+histoire, même polémique, même annonce), même chez un autre créateur ou sous un autre angle, n'apporte rien : \
+verdict "reject", raison « sujet déjà publié ». Un autre moment d'un même événement (un autre match, une autre \
+réaction, un autre fail) reste bienvenu s'il raconte autre chose. De même, quand plusieurs candidats montrent le \
+même moment ou racontent la même chose, garde seulement le meilleur et rejette les autres.
 
 Rejette (verdict "reject", avec la raison) tout extrait qui contient : nudité ou contenu sexuel ; haine, \
 harcèlement ou insultes visant une personne ou un groupe ; violence réelle ou automutilation ; informations \

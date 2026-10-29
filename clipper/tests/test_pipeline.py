@@ -259,9 +259,22 @@ def test_without_any_answer_from_claude_the_owner_is_told(media, paths):
 
 
 def test_each_review_compares_clips_of_different_creators(media, paths):
+    clips = {"alpha": [entry("Alpha-Cam1", 5000, 2), entry("Alpha-3", 4000, 5)], "beta": [entry("Beta-1", 1500, 3)]}
     curator = Recording({"clip": 59})
-    clipper(media, paths, clips=CLIPS, publishers={}, curator=curator).run_shorts()
-    assert [keys for keys, _ in curator.requests] == [["twitch:Alpha-Cam1", "twitch:Beta-1"], ["twitch:Alpha-2"]]
+    clipper(media, paths, clips=clips, publishers={}, curator=curator, shorts={"min_duration": 3, "candidates_factor": 2}).run_shorts()
+    assert [keys for keys, _ in curator.requests] == [["twitch:Alpha-Cam1", "twitch:Beta-1"], ["twitch:Alpha-3"]]
+
+
+def test_a_focus_run_only_takes_the_channels_asked_for(media, paths):
+    curator = Recording({"clip": 59})
+    run = clipper(media, paths, clips=CLIPS, publishers={}, curator=curator)
+    for n in range(2):  # alpha already had its two shorts of the day: asked for by name, it is not capped
+        run.state.posted[f"twitch:old{n}"] = {"at": (NOW - timedelta(hours=1 + n)).isoformat(), "streamer_login": "alpha", "title": f"short {n}"}
+    assert not clipper(media, paths, clips=CLIPS, publishers={}, curator=Recording()).run_shorts(focus=["nobody"]).published
+    run.run_shorts(focus=["alpha"])
+    assert [keys for keys, _ in curator.requests] == [["twitch:Alpha-Cam1", "twitch:Alpha-2"]]
+    report = clipper(media, paths, clips=CLIPS, publishers={}, curator=Recording()).run_shorts(focus=["clips.twitch.tv/Foo"])
+    assert report.errors and "cible inconnue" in report.errors[0]
 
 
 def test_claude_knows_the_latest_shorts_and_a_verdict_only_holds_for_them(media, paths):
@@ -270,7 +283,7 @@ def test_claude_knows_the_latest_shorts_and_a_verdict_only_holds_for_them(media,
         run.state.posted[f"twitch:{key}"] = {"at": (NOW - timedelta(hours=hours)).isoformat(), "streamer_login": "gamma", "title": title}
     published = run.run_shorts().published[0].meta.title
     [(keys, recent)] = run.curator.requests
-    assert keys == ["twitch:Alpha-Cam1", "twitch:Beta-1"]  # both approved, only the first one published
+    assert keys == ["twitch:Alpha-Cam1", "twitch:Beta-1", "twitch:Alpha-2"]  # all approved, only the first one published
     assert recent == [(NOW - timedelta(hours=2), "Gamma : le skin d'Inox"), (NOW - timedelta(hours=20), "Delta : record du monde")]
 
     again = clipper(media, paths, clips=CLIPS, publishers={}, curator=Recording())

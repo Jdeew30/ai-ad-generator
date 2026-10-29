@@ -6,7 +6,7 @@ import pytest
 
 from clipper.config import Config, build
 from clipper.models import PublishResult, ShortMeta, utcnow
-from clipper.selection import rank
+from clipper.selection import rank, spread
 from clipper.state import MAX_DOWNLOAD_FAILURES, State, same_moment, spans_overlap
 
 from .conftest import NOW, make_candidate
@@ -157,3 +157,9 @@ def test_rank_for_compilation_reuses_posted_clips_but_not_compiled_or_rejected(t
         make_candidate("twitch:rejected", "c", views=5000),
     ]
     assert [c.key for c in rank(cands, state, config(), now=NOW, compilation=True)] == ["twitch:posted"]
+
+
+def test_spread_alternates_creators():
+    ranked = [make_candidate("twitch:a1", "alpha"), make_candidate("twitch:a2", "Alpha"), make_candidate("twitch:b1", "beta"),
+              make_candidate("twitch:a3", "alpha"), make_candidate("manual:x", "", manual=True), make_candidate("twitch:c1", "gamma")]  # fmt: skip
+    assert [c.key for c in spread(ranked)] == ["twitch:a1", "twitch:b1", "manual:x", "twitch:c1", "twitch:a2", "twitch:a3"]

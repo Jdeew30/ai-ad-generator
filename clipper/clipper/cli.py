@@ -4,6 +4,7 @@ import argparse
 import importlib
 import logging
 import os
+import re
 import secrets as stdlib_secrets
 import subprocess
 import sys
@@ -42,8 +43,9 @@ def _clipper(args: argparse.Namespace):
 
 def cmd_run(args: argparse.Namespace) -> int:
     queue = None if args.no_queue else PROJECT_DIR / "queue.yaml"
+    focus = [target for target in re.split(r"[,\s]+", args.focus or "") if target] or None
     report = _clipper(args).run_shorts(
-        dry_run=args.dry_run, count=args.count, url=args.url, start=args.start, end=args.end, queue=queue
+        dry_run=args.dry_run, count=args.count, url=args.url, start=args.start, end=args.end, queue=queue, focus=focus
     )
     _summary(report.markdown())
     return 1 if report.errors else 0
@@ -200,6 +202,8 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--start", help="début de l'extrait pour --url (ex. 1:23)")
     run.add_argument("--end", help="fin de l'extrait pour --url (ex. 2:05)")
     run.add_argument("--no-queue", action="store_true", help="ignore queue.yaml")
+    run.add_argument("--focus", help="seulement ces chaînes ou vidéos, séparées par des virgules "
+                                     "(chaîne Twitch, @chaîne YouTube ou lien de vidéo YouTube)")
     run.set_defaults(func=cmd_run)
 
     render = commands.add_parser("render", help="monte une URL en short sans publier (= run --url … --dry-run)")
