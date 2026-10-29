@@ -161,9 +161,17 @@
    "at": "2026-10-28T19:18:45.866864+00:00",
    "reason": "revue : Discussion de groupe qui n'a de sens qu'avec le contexte du live. Il n'y a aucun moment fort identifiable ni de vraie chute, et la transcription est confuse. L'extrait n'est pas compréhensible en 3 secondes."
   },
+  "twitch:BoredArtisticWhaleMcaT-71Rb7d5RcaSXhX22": {
+   "at": "2026-10-29T09:58:39.278555+00:00",
+   "reason": "revue : Petite rage après une mort au lance-grenade, mais la réaction est courte et l'action peu lisible. Le début de l'extrait contient un long temps mort, et la chute est trop faible pour être publiée."
+  },
   "twitch:BumblingSlipperyOwlKreygasm-s5rOSEQAsL1IUDQ5": {
    "at": "2026-10-28T20:06:28.073904+00:00",
    "reason": "revue : Simple annonce des dotations d'un événement, avec des logos de sponsors. Il n'y a ni réaction ni chute : ça ressemble à une présentation promotionnelle."
+  },
+  "twitch:CaringAmericanFlyVoteNay-91lkUkkbaeofaWHq": {
+   "at": "2026-10-29T09:59:17.371892+00:00",
+   "reason": "revue : Bavardage d'entrée sur le ring, transcription confuse, pas de chute, nécessite le contexte de l'événement (et logo sponsor omniprésent)."
   },
   "twitch:ColdbloodedCharmingOkapiHoneyBadger-OXx2h-6P43IoQpM_": {
    "at": "2026-10-28T22:19:08.244826+00:00",
@@ -193,9 +201,17 @@
    "at": "2026-10-28T22:03:37.601090+00:00",
    "reason": "revue : Simple discussion de gameplay sur l'emplacement des shops dans Deadlock : pas de réaction forte, pas de chute, peu compréhensible sans contexte."
   },
+  "twitch:FragileBlatantHamburgerOpieOP-hv7ugYjd5X_50fkI": {
+   "at": "2026-10-29T09:58:01.853257+00:00",
+   "reason": "revue : Le public scande des insultes (« enculé », « salope ») visant une personne pendant le face-off. La transcription est confuse et le moment est incompréhensible sans le contexte de l'événement."
+  },
   "twitch:GiantSolidAntUncleNox-L4hUf_x-CNqr7w-J": {
    "at": "2026-10-28T22:22:54.963431+00:00",
    "reason": "revue : note 58/100 (minimum 60). Entrée sur scène devant une foule énorme avec une référence à Randy Orton : moment fort mais la transcription a un trou de 30 s et la chute reste douce, ambiance plus que punchline."
+  },
+  "twitch:HappySlickSharkPeanutButterJellyTime-qoanZ3iOANxJSuYi": {
+   "at": "2026-10-29T09:58:39.278576+00:00",
+   "reason": "revue : Introduction de pré-show d'une finale, sans moment fort ni chute. Il y a un long silence, et l'extrait est plein de logos de sponsors."
   },
   "twitch:HealthyGeniusWombatCoolStoryBob-NHLaiGwUD5z8dFso": {
    "at": "2026-10-28T22:01:42.253122+00:00",
@@ -213,6 +229,14 @@
    "at": "2026-10-28T22:22:54.963495+00:00",
    "reason": "revue : Simple bavardage sur l'âge d'un enfant, sans réaction forte ni chute ; c'est une discussion privée sur la famille, peu d'intérêt hors contexte."
   },
+  "twitch:ManlyScaryBearDBstyle--uVkl2hD6jYUD5hK": {
+   "at": "2026-10-29T09:58:01.853312+00:00",
+   "reason": "revue : L'image est presque entièrement la diffusion officielle des Worlds de League of Legends, qui n'appartient pas au créateur. Le finish au dernier creep est tendu, mais le contenu reste essentiellement une émission tierce."
+  },
+  "twitch:MushyIronicVultureBleedPurple-MBptyYkkjtks9xLk": {
+   "at": "2026-10-29T09:59:17.371914+00:00",
+   "reason": "revue : Réactions faibles et confuses dans un jeu d'ambiance, longs temps morts, pas de vraie chute compréhensible sans contexte."
+  },
   "twitch:ObedientSneakyDoveCharlietheUnicorn-WmgqcgyD6iQejgrt": {
    "at": "2026-10-28T22:03:37.601163+00:00",
    "reason": "revue : Simple annonce promotionnelle d'un événement à venir : aucune action, aucune réaction, aucune chute."
@@ -221,9 +245,17 @@
    "at": "2026-10-28T22:01:42.253188+00:00",
    "reason": "revue : Longue exploration sombre avec peu de dialogue et de nombreux temps morts. Le screamer n'est pas visible et la réaction finale se limite à un simple « Ah ! », trop faible pour un moment fort."
   },
+  "twitch:OpenPunchyPuddingSoonerLater-2qIApTkvrgrW9Z1w": {
+   "at": "2026-10-29T09:59:17.371859+00:00",
+   "reason": "revue : Début de live : intro, écran d'attente et menus, aucun moment notable."
+  },
   "twitch:PoliteZanySmoothieTF2John-sE5WS3TxPHQaF3JB": {
    "at": "2026-10-28T16:02:23.867840+00:00",
    "reason": "revue : Près de 30 secondes sans parole et l'action en jeu reste illisible. Le « je peux tout vous expliquer » n'a pas de mise en place compréhensible sans le contexte de la partie de Lycans."
+  },
+  "twitch:PrettiestBovineCarrotNerfRedBlaster-pNrPTMOvOjocPLGr": {
+   "at": "2026-10-29T09:58:01.853289+00:00",
+   "reason": "revue : Teasing d'une annonce sans aucune chute : il annonce un changement pour la matinale sans rien révéler. Il y a de longs silences et rien de notable."
   },
   "twitch:ProudAliveMetalOhMyDog-1QmGBzXhvwsXF31z": {
    "at": "2026-10-28T22:21:06.130010+00:00",
@@ -260,6 +292,10 @@
   "twitch:WimpyGoodHummingbirdAMPTropPunch-hMtPybICTLl5uWNp": {
    "at": "2026-10-28T19:03:48.326255+00:00",
    "reason": "revue : Extrait trop court (10,7 s) et sans moment fort : simple introduction d'un game show coupée avant l'arrivée des invités. Aucune chute, et le contenu n'a de sens qu'avec le contexte du live."
+  },
+  "twitch:WiseDeliciousKiwiM4xHeh-asoNID6m5tmbWikB": {
+   "at": "2026-10-29T09:58:39.278525+00:00",
+   "reason": "revue : Simple annonce d'animation sur scène à la PGW, sans action, sans réaction ni chute. Le moment n'a de sens qu'avec le contexte de l'événement."
   },
   "twitch:WittyImportantCrabsPeteZaroll-djWL-kySG1qgEKg3": {
    "at": "2026-10-28T16:00:10.934639+00:00",
