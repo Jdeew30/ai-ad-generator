@@ -449,7 +449,8 @@ class Clipper:
             window = timedelta(hours=self.config.twitch.window_hours)
             try:
                 found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
-                                 memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor)
+                                 memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor,
+                                 youtube_related=self.state.youtube_related)
                 self.state.youtube_cursor += self.config.youtube.channels_per_run
             except (SourceError, QueueError) as exc:
                 log.error("Découverte impossible : %s", exc)

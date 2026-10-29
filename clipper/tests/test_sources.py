@@ -196,6 +196,35 @@ def test_youtube_channels_take_turns():
     assert ytdlp.listed == ["https://www.youtube.com/@c/videos", "https://www.youtube.com/@a/videos"]
 
 
+def test_youtube_finds_a_youtubers_other_channels():
+    from clipper.sources.youtube import related_channels
+
+    found = [
+        {"channel": "Squeezie", "uploader_id": "@Squeezie", "channel_follower_count": 19_000_000},
+        {"channel": "Squeezie Gaming", "uploader_id": "@SqueezieGaming", "channel_follower_count": 3_000_000},
+        {"channel": "Squeezie - Topic", "url": "https://www.youtube.com/channel/UC3"},
+        {"channel": "Squeezie Clips", "uploader_id": "@SqueezieClips", "channel_follower_count": 50_000},  # a fan's
+        {"channel": "Squeezie Vlog", "uploader_id": "@SqueezieVlogFan", "channel_follower_count": 800},  # too small
+        {"channel": "Squeezie 2", "url": "https://www.youtube.com/channel/UC6", "channel_follower_count": 120_000},
+    ]
+    ytdlp = FakeYtDlp({"https://www.youtube.com/results?search_query=Squeezie&sp=": found})
+    assert related_channels(ytdlp, "@Squeezie") == ["@SqueezieGaming", "https://www.youtube.com/channel/UC6"]
+
+
+def test_other_channels_join_the_turns():
+    from clipper.sources.youtube import discover_youtube
+
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b"], "tabs": ["videos"], "related_channels": True}})
+    related = {"@b": {"at": NOW.isoformat(), "channels": ["@bGaming"]}}  # looked up recently: kept as is
+    search_a = "https://www.youtube.com/results?search_query=a&sp="
+    ytdlp = FakeYtDlp({search_a: [{"channel": "a Gaming", "uploader_id": "@aGaming", "channel_follower_count": 50_000}]})
+    assert discover_youtube(config, ytdlp, now=NOW, related=related) == []
+    assert related["@a"] == {"at": NOW.isoformat(), "channels": ["@aGaming"]} and related["@b"]["channels"] == ["@bGaming"]
+    assert [url.split("youtube.com/")[1] for url in ytdlp.listed] == [
+        "results?search_query=a&sp=EgIQAg%253D%253D", "@a/videos", "@b/videos", "@aGaming/videos", "@bGaming/videos",
+    ]  # fmt: skip
+
+
 def test_discover_puts_the_queue_first(tmp_path: Path):
     queue = tmp_path / "queue.yaml"
     queue.write_text("items: [https://clips.twitch.tv/Manual]\n", encoding="utf-8")

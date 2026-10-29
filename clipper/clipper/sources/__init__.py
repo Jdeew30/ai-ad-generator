@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Any
 
 from ..config import Config, Secrets
 from ..http import Http
@@ -28,6 +29,7 @@ def discover(
     include_youtube: bool = True,
     memory: dict[str, str] | None = None,
     youtube_offset: int = 0,
+    youtube_related: dict[str, dict[str, Any]] | None = None,
 ) -> list[Candidate]:
     """Every candidate moment: the manual queue first, then Twitch clips, then YouTube peaks."""
     candidates: list[Candidate] = []
@@ -37,6 +39,6 @@ def discover(
         discover_twitch(config, secrets, http, ytdlp, now=now, window=window, per_streamer=per_streamer, memory=memory)
     )
     if include_youtube:
-        candidates.extend(discover_youtube(config, ytdlp, now=now, offset=youtube_offset))
+        candidates.extend(discover_youtube(config, ytdlp, now=now, offset=youtube_offset, related=youtube_related))
     log.info("%d candidat(s) trouvé(s)", len(candidates))
     return candidates

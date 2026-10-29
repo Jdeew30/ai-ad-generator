@@ -65,6 +65,7 @@ class State:
         self.compilations: list[dict[str, Any]] = data.get("compilations", [])
         self.streamers_seen: dict[str, str] = data.get("streamers_seen", {})  # login -> last seen live or in the top
         self.youtube_cursor: int = int(data.get("youtube_cursor", 0))  # next YouTube channel to look at
+        self.youtube_related: dict[str, dict[str, Any]] = data.get("youtube_related", {})  # YouTuber -> other channels
 
     @classmethod
     def load(cls, path: Path) -> State:
@@ -87,6 +88,7 @@ class State:
             "compilations": self.compilations[-60:],
             "streamers_seen": self.streamers_seen,
             "youtube_cursor": self.youtube_cursor,
+            "youtube_related": self.youtube_related,
         }
         self.path.parent.mkdir(parents=True, exist_ok=True)
         fd, tmp = tempfile.mkstemp(prefix=".state-", suffix=".json", dir=self.path.parent)
@@ -112,6 +114,7 @@ class State:
         self.reviews = {k: v for k, v in self.reviews.items() if keep(v, 3)}
         self.compiled = {k: v for k, v in self.compiled.items() if keep(v, 60)}
         self.streamers_seen = {k: v for k, v in self.streamers_seen.items() if keep(v, 14)}
+        self.youtube_related = {k: v for k, v in self.youtube_related.items() if keep(v, 30)}
 
     # --- queries ---------------------------------------------------------------------------
 

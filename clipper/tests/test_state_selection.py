@@ -78,6 +78,9 @@ def test_channels_seen_are_remembered_14_days(tmp_path: Path):
     state.streamers_seen["recent"] = utcnow().isoformat()
     state.save()
     assert list(State.load(tmp_path / "s.json").streamers_seen) == ["recent"]
+    state.youtube_related = {"@new": {"at": (NOW - timedelta(days=3)).isoformat()}, "@old": {"at": (NOW - timedelta(days=31)).isoformat()}}
+    state.prune(NOW)
+    assert list(state.youtube_related) == ["@new"]
 
 
 def test_rank_filters_dedupes_and_orders(tmp_path: Path):

@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import logging
 import re
+import unicodedata
 from datetime import datetime, timedelta
 from typing import Any
+from urllib.parse import quote
 
 from ..config import Config, YouTubeSourceConfig
 from ..models import Candidate, parse_time
@@ -12,6 +14,14 @@ from ..ytdlp import DownloadError, YtDlp
 log = logging.getLogger(__name__)
 
 MAX_WINDOW = 150.0  # longest section downloaded around a peak; the AI (or the template) trims it
+
+SEARCH_CHANNELS = "https://www.youtube.com/results?search_query={}&sp=EgIQAg%253D%253D"  # the "Channels" filter
+# "<name> <suffix>" titles of a YouTuber's own other channels: "Squeezie Gaming", "Djilsi Gaming", "X Vlog"...
+SECOND_CHANNEL_SUFFIXES = {"gaming", "games", "jeux", "2", "bis", "vlog", "vlogs", "live", "lives", "replay", "replays",
+                           "rediff", "rediffs", "tv", "plus", "extra", "bonus", "irl", "podcast"}  # fmt: skip
+MIN_SECOND_CHANNEL_FOLLOWERS = 10_000  # a fan's channel with the same name stays out
+RELATED_LOOKUPS_PER_RUN = 3
+RELATED_REFRESH_DAYS = 14
 
 
 def channel_url(ref: str) -> str:
@@ -127,12 +137,73 @@ def candidates_from_info(info: dict[str, Any], settings: YouTubeSourceConfig, co
     ]
 
 
-def discover_youtube(config: Config, ytdlp: YtDlp, *, now: datetime, offset: int = 0) -> list[Candidate]:
-    """Peaks of the channels' recent videos. With channels_per_run, the channels take turns from `offset`."""
+def _plain(text: str) -> str:
+    """'Maxime Biaggi Gaming' -> 'maximebiaggigaming': lowercase letters and digits, accents removed."""
+    return re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().lower())
+
+
+def related_channels(ytdlp: YtDlp, ref: str) -> list[str]:
+    """A YouTuber's other channels, found by searching their name ("Squeezie" -> "Squeezie Gaming").
+
+    Only "<name> <suffix>" titles with a known suffix count, so fan channels ("<name> Clips", "Best of <name>") and
+    the automatic "Topic" channels are left out, as are channels with few subscribers.
+    """
+    name = ref.strip().rstrip("/").rsplit("/", 1)[-1].lstrip("@")
+    base = _plain(name)
+    if not base:
+        return []
+    found: list[str] = []
+    for entry in ytdlp.list_flat(SEARCH_CHANNELS.format(quote(name)), 15):
+        title = _plain(entry.get("channel") or entry.get("title") or "")
+        if not title.startswith(base) or title[len(base):] not in SECOND_CHANNEL_SUFFIXES:
+            continue
+        followers = entry.get("channel_follower_count")
+        if followers is not None and followers < MIN_SECOND_CHANNEL_FOLLOWERS:
+            continue
+        handle = entry.get("uploader_id") or ""
+        link = handle if handle.startswith("@") else entry.get("url")
+        if link and link not in found:
+            found.append(link)
+    return found
+
+
+def _refresh_related(channels: list[str], ytdlp: YtDlp, related: dict[str, dict[str, Any]], now: datetime) -> None:
+    """Looks a few YouTubers' other channels up each run; the answers are kept RELATED_REFRESH_DAYS days."""
+    def stale(ref: str) -> bool:
+        seen = parse_time((related.get(ref.lower()) or {}).get("at"))
+        return seen is None or now - seen > timedelta(days=RELATED_REFRESH_DAYS)
+
+    for ref in [ref for ref in channels if stale(ref)][:RELATED_LOOKUPS_PER_RUN]:
+        try:
+            found = related_channels(ytdlp, ref)
+        except DownloadError as exc:
+            log.warning("Recherche des autres chaînes de %s impossible : %s", ref, exc)
+            continue  # tried again in a later run
+        related[ref.lower()] = {"at": now.isoformat(), "channels": found}
+        if found:
+            log.info("Autres chaînes de %s : %s", ref, ", ".join(found))
+
+
+def discover_youtube(
+    config: Config, ytdlp: YtDlp, *, now: datetime, offset: int = 0, related: dict[str, dict[str, Any]] | None = None
+) -> list[Candidate]:
+    """Peaks of the channels' recent videos. With channels_per_run, the channels take turns from `offset`.
+
+    With related_channels, `related` (kept in the state) adds each YouTuber's other channels to the turns.
+    """
     settings = config.youtube
     if not settings.enabled or not settings.channels:
         return []
-    channels = settings.channels
+    channels = list(settings.channels)
+    if settings.related_channels and related is not None:
+        _refresh_related(settings.channels, ytdlp, related, now)
+        for ref in settings.channels:
+            channels += (related.get(ref.lower()) or {}).get("channels", [])
+        unique: list[str] = []
+        for ref in channels:
+            if ref.lower() not in {known.lower() for known in unique}:
+                unique.append(ref)
+        channels = unique
     if 0 < settings.channels_per_run < len(channels):
         start = offset % len(channels)
         channels = (channels[start:] + channels[:start])[: settings.channels_per_run]

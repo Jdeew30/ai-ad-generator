@@ -85,10 +85,12 @@ youtube:
     "@Squeezie", "@Amixem", "@Inoxtag", "@Michou", "@mcflyetcarlito", "@cyprien", "@NormanFaitDesVideos",
     "@MisterV", "@Joyca", "@SebLaFrite", "@Lebouseuh", "@Natoo", "@LeRireJaune", "@HugoToutSeul",
     "@PierreCroce", "@LeGrandJD", "@Valouzz", "@goldenmoustache", "@StudioBagel", "@Ludovik", "@AndyRaconte",
-    "@LenaSituations", "@EnjoyPhoenix", "@LeaElui", "@PoissonFecond",
+    "@LenaSituations", "@EnjoyPhoenix", "@LeaElui", "@PoissonFecond", "@Djilsi", "@MaximeBiaggi", "@JhonRachid",
     # jeux vidéo et streamers
     "@JoueurDuGrenier", "@Gotaga", "@Mastu", "@Domingo", "@ZeratoR", "@Sardoche", "@Doigby", "@TheKAIRI78",
-    "@Grimkujow", "@FuriousJumper", "@Siphano", "@Aypierre", "@Frigiel", "@Maghla",
+    "@Grimkujow", "@FuriousJumper", "@Siphano", "@Aypierre", "@Frigiel", "@Maghla", "@WankilStudio",
+    "@AntoineDaniel", "@Locklear", "@Kameto", "@AmineMaTue", "@Anyme023", "@Terracid", "@Laink", "@Etoiles",
+    "@Ponce", "@Byilhann", "@Kaatsup", "@Mynthos", "@AlphaCast",
     # sport, auto, défis
     "@TiboInShape", "@jujufitcats", "@Vilebrequin", "@FlorianOnAir",
     # sciences, histoire, mystères, actu
@@ -96,7 +98,8 @@ youtube:
     # cuisine
     "@ChefMichelDumas", "@FastGoodCuisine",
   ]
-  channels_per_run: 8           # à tour de rôle : toutes les chaînes vues en un peu plus d'une journée
+  channels_per_run: 8           # à tour de rôle
+  related_channels: true        # + les autres chaînes de chaque YouTubeur (« Squeezie Gaming », « Djilsi Gaming »…)
   tabs: [videos]
   videos_per_channel: 2
   max_age_days: 7
