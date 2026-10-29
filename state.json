@@ -187,6 +187,30 @@
    "url": "https://www.twitch.tv/locklear/clip/InexpensiveOddLasagnaCclamChamp-CcoBA26l9HagnQkY",
    "views": 172
   },
+  "twitch:InquisitiveDeadWormArgieB8-ATeRj45rNJgEEAMB": {
+   "at": "2026-10-29T23:45:50.433657+00:00",
+   "created_at": "2026-10-26T19:19:08+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "23",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2911506670",
+    2114.0,
+    2174.0
+   ],
+   "streamer": "AmineMaTue",
+   "streamer_login": "aminematue",
+   "title": "AmineMaTue : un tag team match officialisé pour le 14 novembre",
+   "url": "https://www.twitch.tv/aminematue/clip/InquisitiveDeadWormArgieB8-ATeRj45rNJgEEAMB",
+   "views": 289
+  },
   "twitch:InquisitiveTrappedPeppermintCopyThis-JSBDEMB848Bgnzwf": {
    "at": "2026-10-29T23:08:08.605900+00:00",
    "created_at": "2026-10-25T17:47:59+00:00",
@@ -273,6 +297,10 @@
    "at": "2026-10-28T19:18:45.866864+00:00",
    "reason": "revue : Discussion de groupe qui n'a de sens qu'avec le contexte du live. Il n'y a aucun moment fort identifiable ni de vraie chute, et la transcription est confuse. L'extrait n'est pas compréhensible en 3 secondes."
   },
+  "twitch:ApatheticBovineEggnogWholeWheat-Hp9DJN1Feu576moc": {
+   "at": "2026-10-29T23:43:01.788881+00:00",
+   "reason": "revue : Simple présentation du skin Fortnite d'Inoxtag dans le casier, sans réaction marquante, avec une parenthèse logistique sur les votes. Le sujet a déjà été traité trois fois par les shorts de Michou."
+  },
   "twitch:AssiduousSavoryLionFunRun-mNw2R-UCvEcXEgrH": {
    "at": "2026-10-29T19:07:52.820712+00:00",
    "reason": "revue : Anecdote d'enfance (s'habiller au vestiaire, timidité) racontée sans vraie chute : l'histoire s'arrête sur « une fois j'étais à poil » sans suite claire, et le début n'a de sens qu'avec le contexte du live. Moment trop moyen pour être publié."
@@ -325,6 +353,10 @@
    "at": "2026-10-29T16:02:54.439480+00:00",
    "reason": "revue : Extrait trop court et sans moment marquant : simple callout de partie sans réaction ni chute."
   },
+  "twitch:CleverFurtivePorcupineAsianGlow-TvnTI0L_V80yTF_W": {
+   "at": "2026-10-29T23:44:29.230801+00:00",
+   "reason": "revue : Discours d'un catcheur peu compréhensible sans contexte, avec une transcription confuse. L'extrait ressemble surtout à de la retransmission d'événement, sans chute."
+  },
   "twitch:CleverHeartlessPterodactylDancingBaby-0yhHCaJE4-C5srW2": {
    "at": "2026-10-29T13:08:30.727691+00:00",
    "reason": "revue : Analyse de draft LPL réservée aux initiés, sans réaction ni chute. La transcription est difficile à suivre et l'extrait est inintéressant hors contexte."
@@ -341,6 +373,10 @@
    "at": "2026-10-29T16:04:54.017930+00:00",
    "reason": "revue : Moment mignon mais anecdotique : Squeezie montre la cicatrice de son chien opéré d'un kyste. Il n'y a ni réaction forte ni chute."
   },
+  "twitch:CreativeTastyMilkDuDudu-PaEEtz5XGe8fMbSE": {
+   "at": "2026-10-29T23:41:58.011301+00:00",
+   "reason": "revue : Extrait trop court et confus : quelques kills commentés sans action marquante ni réaction forte."
+  },
   "twitch:CuteLongJayPlanking-b9eetHD3fH2wcWI9": {
    "at": "2026-10-28T22:19:08.244772+00:00",
    "reason": "revue : L'image est essentiellement composée d'images de Koh-Lanta All Stars, une émission TV qui n'appartient pas au créateur. Domingo n'apparaît qu'en petit avec une réaction faible."
@@ -352,6 +388,10 @@
   "twitch:DrabCheerfulChinchillaSeemsGood-g3BzYAXvb0A4q-NF": {
    "at": "2026-10-29T22:51:04.669258+00:00",
    "reason": "revue : Moment de RP GTA incompréhensible sans le contexte du live : transcription confuse, accident de voiture sans enjeu clair ni vraie chute."
+  },
+  "twitch:ElegantViscousMacaroniOSsloth-8fdHFkIQflnxsUM5": {
+   "at": "2026-10-29T23:43:01.788923+00:00",
+   "reason": "revue : Il s'agit surtout de la retransmission officielle d'un événement (présentateurs sur le ring, annonce de partenaire), avec de la promotion billetterie et sponsor. On n'y trouve aucun moment fort du créateur."
   },
   "twitch:EmpathicBoredSandpiperMcaT-nJWUsGDvpjES62tF": {
    "at": "2026-10-29T19:09:27.670310+00:00",
@@ -392,6 +432,10 @@
   "twitch:GiantSolidAntUncleNox-L4hUf_x-CNqr7w-J": {
    "at": "2026-10-28T22:22:54.963431+00:00",
    "reason": "revue : note 58/100 (minimum 60). Entrée sur scène devant une foule énorme avec une référence à Randy Orton : moment fort mais la transcription a un trou de 30 s et la chute reste douce, ambiance plus que punchline."
+  },
+  "twitch:GlamorousSingleAnacondaPeteZarollTie-vJASZvtgRn_cGgzI": {
+   "at": "2026-10-29T23:41:58.011250+00:00",
+   "reason": "revue : Simple introduction d'événement en coulisses (sponsorisée BoursoBank) : présentation sans enjeu, ni chute ni moment marquant."
   },
   "twitch:GrotesqueArtsyOilNotATK-M3G7CIfmuKhZB3TM": {
    "at": "2026-10-29T22:07:23.506997+00:00",
@@ -473,6 +517,10 @@
    "at": "2026-10-28T22:01:42.253188+00:00",
    "reason": "revue : Longue exploration sombre avec peu de dialogue et de nombreux temps morts. Le screamer n'est pas visible et la réaction finale se limite à un simple « Ah ! », trop faible pour un moment fort."
   },
+  "twitch:OpenBlushingGarbageAllenHuhu-aLNEpUZHwug-TtfW": {
+   "at": "2026-10-29T23:44:29.230757+00:00",
+   "reason": "revue : Simple bavardage en partie de Call of Duty, sans action marquante ni chute."
+  },
   "twitch:OpenPunchyPuddingSoonerLater-2qIApTkvrgrW9Z1w": {
    "at": "2026-10-29T09:59:17.371859+00:00",
    "reason": "revue : Début de live : intro, écran d'attente et menus, aucun moment notable."
@@ -489,6 +537,10 @@
    "at": "2026-10-29T22:56:25.003968+00:00",
    "reason": "revue : Michou imite un Américain jaloux du skin Fortnite d'Inoxtag : l'idée est sympa, mais la réaction reste faible et la fin (« Crouton Game Show ? ») tombe à plat. Pas assez fort pour être publié."
   },
+  "twitch:PoisedBreakableHerbsSquadGoals-cmVHjDloCfc6VZ3X": {
+   "at": "2026-10-29T23:40:59.596150+00:00",
+   "reason": "revue : Fin de partie Fortnite surtout faite de callouts difficiles à suivre sans contexte. Le top 1 fêté en équipe (Gotaga, Inoxtag, Michou, Doigby) reste une célébration banale, sans vraie chute, avec en plus une mention promotionnelle du skin."
+  },
   "twitch:PoliteZanySmoothieTF2John-sE5WS3TxPHQaF3JB": {
    "at": "2026-10-28T16:02:23.867840+00:00",
    "reason": "revue : Près de 30 secondes sans parole et l'action en jeu reste illisible. Le « je peux tout vous expliquer » n'a pas de mise en place compréhensible sans le contexte de la partie de Lycans."
@@ -496,6 +548,10 @@
   "twitch:PrettiestBovineCarrotNerfRedBlaster-pNrPTMOvOjocPLGr": {
    "at": "2026-10-29T09:58:01.853289+00:00",
    "reason": "revue : Teasing d'une annonce sans aucune chute : il annonce un changement pour la matinale sans rien révéler. Il y a de longs silences et rien de notable."
+  },
+  "twitch:PrettiestUnsightlyMosquitoUWot-WwileHTu-USjcCVB": {
+   "at": "2026-10-29T23:41:58.011335+00:00",
+   "reason": "revue : Moment déjà publié (le face-à-face qui dégénère pendant l'événement d'AmineMaTue). L'extrait contient en plus une insulte et un son très confus."
   },
   "twitch:ProudAliveMetalOhMyDog-1QmGBzXhvwsXF31z": {
    "at": "2026-10-28T22:21:06.130010+00:00",
@@ -528,6 +584,10 @@
   "twitch:SleepyEnthusiasticGaragePeteZaroll-LlUzJ8VEyL1nWvnl": {
    "at": "2026-10-29T22:07:23.507066+00:00",
    "reason": "revue : C'est du bavardage sur scène lors d'un événement sponsorisé (publicité Fnac x HyperX), sans moment fort ni chute. La blague sur le « streamer préféré » est molle et peu compréhensible hors contexte."
+  },
+  "twitch:SparklyAwkwardCardAMPTropPunch-dMcizLWdCHacFfUm": {
+   "at": "2026-10-29T23:40:59.596197+00:00",
+   "reason": "revue : Tirage au sort d'un événement de catch peu compréhensible sans contexte. Les piques sont faibles et il n'y a pas de vraie chute. L'extrait semble en plus provenir du même événement qu'un short déjà publié."
   },
   "twitch:SpikyMistyPartridgeRiPepperonis-s6ciChYjbcoNZxUi": {
    "at": "2026-10-28T22:06:09.799794+00:00",
@@ -565,6 +625,10 @@
    "at": "2026-10-29T13:08:30.727633+00:00",
    "reason": "revue : L'essentiel de l'extrait est une vidéo tierce sous-titrée, accompagnée de longs silences. Kameto ne réagit presque pas et le moment n'a de sens qu'avec le contexte du live."
   },
+  "twitch:SuspiciousPreciousDogOneHand-DQinfI-UuJ-yXAWn": {
+   "at": "2026-10-29T23:43:01.788957+00:00",
+   "reason": "revue : Discussion sans enjeu sur des dates de création de structures, devant un écran de menu, avec de longs blancs. C'est incompréhensible sans le contexte du live."
+  },
   "twitch:TenaciousMoldyCheesecakePrimeMe-th0QrMurEuyWwZuX": {
    "at": "2026-10-28T16:02:23.867783+00:00",
    "reason": "revue : Aucun moment fort : Ponce lit un message du chat à propos d'une Switch 2 offerte en cadeau, puis parle du clip lui-même. L'extrait n'a de sens qu'avec le contexte du live et n'a pas de chute."
@@ -576,6 +640,10 @@
   "twitch:UgliestQuaintVelociraptorNomNom-KtoyU0ZYAb9MLNgg": {
    "at": "2026-10-29T16:06:02.113073+00:00",
    "reason": "revue : Extrait de 12,7 s sans action lisible ni vraie réaction : phrases hachées, aucune chute, incompréhensible sans contexte."
+  },
+  "twitch:UgliestTacitSandwichDeIlluminati-jAO3DlcJyXpsrkPL": {
+   "at": "2026-10-29T23:40:59.596232+00:00",
+   "reason": "revue : Extrait presque sans parole et incompréhensible : une phrase isolée sans enjeu ni chute."
   },
   "twitch:VenomousMildHorseShazBotstix-xEFE_K2rPKNkhYW4": {
    "at": "2026-10-29T22:05:39.216207+00:00",
@@ -754,5 +822,7 @@
   "zafeel": "2026-10-29T23:02:20.869294+00:00",
   "zetfartv": "2026-10-29T23:02:20.869294+00:00"
  },
- "version": 1
+ "version": 1,
+ "youtube_cursor": 0,
+ "youtube_related": {}
 }
