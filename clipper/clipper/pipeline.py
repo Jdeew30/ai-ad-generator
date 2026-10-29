@@ -22,8 +22,8 @@ from .publishers import PublishError, build_publishers
 from .publishers.tiktok import TikTokPublisher, caption as tiktok_caption
 from .publishers.youtube import short_description
 from .render import render_short
-from .selection import rank
-from .sources import discover
+from .selection import rank, spread
+from .sources import discover, focus_config
 from .sources.manual import QueueError, manual_candidate
 from .sources.twitch import SourceError
 from .state import State
@@ -34,7 +34,10 @@ from .ytdlp import DownloadError, YtDlp
 log = logging.getLogger(__name__)
 
 # With Claude, more batches of candidates are reviewed while the previous ones do not give enough shorts.
-REVIEW_ROUNDS = 3
+REVIEW_ROUNDS = 4
+# Claude sees what was published lately: never the same moment twice, and "(partie 2)" for the next part of a story.
+RECENT_DAYS = 3
+RECENT_SHORTS = 15
 MUTED_DB = -50.0  # a replay whose loudest sound is quieter than this was muted by Twitch (copyrighted music)
 
 
@@ -304,25 +307,32 @@ class Clipper:
 
     # --- review ------------------------------------------------------------------------------
 
-    def review(self, prepared: list[Prepared]) -> dict[str, Review]:
+    def recent_shorts(self) -> list[tuple[datetime | None, str]]:
+        """(date, title) of the latest shorts, most recent first."""
+        entries = self.state.recent_posts(self.now - timedelta(days=RECENT_DAYS))[:RECENT_SHORTS]
+        return [(parse_time(entry.get("at")), entry.get("title") or entry.get("streamer") or "?") for entry in entries]
+
+    def review(self, prepared: list[Prepared], *, recent: list[tuple[datetime | None, str]] | None = None) -> dict[str, Review]:
         reviews: dict[str, Review] = {}
         pending: list[ReviewItem] = []
+        known = [title for _, title in recent or []]
         for item in prepared:
             cached = self.state.cached_review(item.candidate.key)
             span = list(item.clip_span) if item.clip_span else None
-            if cached and cached.get("clip_span") == span:  # trims only fit the extract they were chosen on
+            # Trims only fit the extract they were chosen on, and a verdict only holds for the shorts published by then.
+            if cached and cached.get("clip_span") == span and cached.get("recent", []) == known:
                 reviews[item.candidate.key] = Review.from_dict(cached)
             else:
                 pending.append(ReviewItem(item.candidate, item.duration, item.transcript, item.sheet, item.clip_span))
         if pending and self.curator is not None:
-            reviews.update(self.curator.review(pending, now=self.now))
+            reviews.update(self.curator.review(pending, now=self.now, recent=recent))
         for item in pending:
             reviews.setdefault(item.candidate.key, template_review(item, self.config))
         for item in pending:
             review = reviews[item.candidate.key]
             if review.meta.ai:  # only Claude's opinion is worth remembering between runs
                 span = list(item.clip_span) if item.clip_span else None
-                self.state.store_review(item.candidate.key, {**review.to_dict(), "clip_span": span})
+                self.state.store_review(item.candidate.key, {**review.to_dict(), "clip_span": span, "recent": known})
         return reviews
 
     # --- shorts ------------------------------------------------------------------------------
@@ -377,6 +387,9 @@ class Clipper:
             publisher = self.publishers.get(name)
             if publisher is None:
                 continue
+            if name == "youtube" and candidate.source == "youtube" and not self.config.publish.youtube.youtube_sources:
+                log.info("youtube : extrait d'une vidéo YouTube, pas republié sur YouTube (Content ID).")
+                continue
             try:
                 result = publisher.publish_short(video, meta, candidate)
                 log.info("%s : publié %s", name, result.url or result.id or "")
@@ -404,12 +417,13 @@ class Clipper:
             log.error("telegram : %s", exc)
 
     def run_shorts(self, *, dry_run: bool = False, count: int | None = None, url: str | None = None,
-                   start: str | None = None, end: str | None = None, queue: Path | None = None) -> RunReport:
+                   start: str | None = None, end: str | None = None, queue: Path | None = None,
+                   focus: list[str] | None = None) -> RunReport:
         report = RunReport("shorts", dry_run)
         if not dry_run:
             _ = self.publishers  # missing credentials for a required platform: fail before any work
         try:
-            self._shorts(report, dry_run=dry_run, count=count, url=url, start=start, end=end, queue=queue)
+            self._shorts(report, dry_run=dry_run, count=count, url=url, start=start, end=end, queue=queue, focus=focus)
         finally:
             if not dry_run:
                 self.state.save()
@@ -433,7 +447,7 @@ class Clipper:
         shutil.rmtree(self.paths.work, ignore_errors=True)
 
     def _shorts(self, report: RunReport, *, dry_run: bool, count: int | None, url: str | None,
-                start: str | None, end: str | None, queue: Path | None) -> None:
+                start: str | None, end: str | None, queue: Path | None, focus: list[str] | None = None) -> None:
         wanted = self.config.shorts.per_run if count is None else count
         if url:
             try:
@@ -444,14 +458,22 @@ class Clipper:
             wanted = 1
         else:
             window = timedelta(hours=self.config.twitch.window_hours)
+            config = self.config
             try:
-                found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
-                                 memory=self.state.streamers_seen)
-            except (SourceError, QueueError) as exc:
+                if focus:
+                    config = focus_config(self.config, focus)
+                    log.info("Passage ciblé : %s", ", ".join(focus))
+                    found = discover(config, self.secrets, self.http, self.ytdlp, now=self.now, window=window)
+                else:
+                    found = discover(config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
+                                     memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor,
+                                     youtube_related=self.state.youtube_related)
+                    self.state.youtube_cursor += config.youtube.channels_per_run
+            except (SourceError, QueueError, ConfigError) as exc:
                 log.error("Découverte impossible : %s", exc)
                 report.errors.append(f"découverte : {exc}")
                 return
-            ranked = rank(found, self.state, self.config, now=self.now)
+            ranked = spread(rank(found, self.state, config, now=self.now))
         if wanted <= 0 or not ranked:
             log.info("Aucun candidat à traiter.")
             return
@@ -460,6 +482,7 @@ class Clipper:
         # Without AI the popularity order is final: only the clips that will be posted are prepared.
         batch = wanted * self.config.shorts.candidates_factor if use_ai else wanted
         remaining = iter(ranked)
+        recent = self.recent_shorts()
         approved: list[tuple[Prepared, Review]] = []
         unjudged = 0
         for round_number in range(REVIEW_ROUNDS if use_ai else 1):
@@ -476,7 +499,8 @@ class Clipper:
                         break
             if not prepared:
                 break
-            reviews = self.review(prepared)
+            # The clips approved in an earlier round count as published: their moment is taken too.
+            reviews = self.review(prepared, recent=[(self.now, review.meta.title) for _, review in reversed(approved)] + recent)
             for item in prepared:
                 review = reviews[item.candidate.key]
                 if use_ai and not review.meta.ai and not item.candidate.manual:
@@ -541,8 +565,9 @@ class Clipper:
         wanted = count or settings.clips
         window = timedelta(days=settings.window_days)
         try:
+            # A Twitch best-of: the weekly video goes to YouTube, where Content ID would claim YouTube extracts.
             found = discover(self.config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, per_streamer=10,
-                             memory=self.state.streamers_seen)
+                             memory=self.state.streamers_seen, include_youtube=False)
         except SourceError as exc:
             log.error("Découverte impossible : %s", exc)
             report.errors.append(f"découverte : {exc}")

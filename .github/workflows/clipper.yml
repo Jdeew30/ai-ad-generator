@@ -27,6 +27,12 @@ on:
       end:
         description: "Mode url : fin (ex. 2:05)"
         required: false
+      focus:
+        description: "Mode shorts : seulement ces chaînes ou vidéos (ex. gotaga, aminematue, @Gotaga, lien YouTube)"
+        required: false
+      count:
+        description: "Mode shorts : nombre de shorts (vide = 1)"
+        required: false
       dry_run:
         description: "Essai à blanc : monter sans publier"
         type: boolean
@@ -101,6 +107,8 @@ jobs:
           URL: ${{ inputs.url }}
           START: ${{ inputs.start }}
           END: ${{ inputs.end }}
+          FOCUS: ${{ inputs.focus }}
+          COUNT: ${{ inputs.count }}
           DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
         run: |
           case "$MODE" in
@@ -109,7 +117,7 @@ jobs:
             url)
               if [ -z "$URL" ]; then echo "::error::Le mode url demande une URL"; exit 1; fi
               python -m clipper run $DRY_RUN --url "$URL" ${START:+--start "$START"} ${END:+--end "$END"} ;;
-            *) python -m clipper run $DRY_RUN ;;
+            *) python -m clipper run $DRY_RUN ${FOCUS:+--focus "$FOCUS"} ${COUNT:+--count "$COUNT"} ;;
           esac
 
       - name: Sauvegarder l'état

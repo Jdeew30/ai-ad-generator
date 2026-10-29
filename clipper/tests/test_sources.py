@@ -187,6 +187,73 @@ def test_manual_queue(tmp_path: Path):
     assert load_queue(tmp_path / "missing.yaml") == []
 
 
+def test_youtube_channels_take_turns():
+    from clipper.sources.youtube import discover_youtube
+
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b", "@c"], "channels_per_run": 2, "tabs": ["videos"]}})
+    ytdlp = FakeYtDlp()  # every listing fails: only the URLs asked for matter here
+    assert discover_youtube(config, ytdlp, now=NOW, offset=2) == []
+    assert ytdlp.listed == ["https://www.youtube.com/@c/videos", "https://www.youtube.com/@a/videos"]
+
+
+def test_youtube_finds_a_youtubers_other_channels():
+    from clipper.sources.youtube import related_channels
+
+    found = [
+        {"channel": "Squeezie", "uploader_id": "@Squeezie", "channel_follower_count": 19_000_000},
+        {"channel": "Squeezie Gaming", "uploader_id": "@SqueezieGaming", "channel_follower_count": 3_000_000},
+        {"channel": "Squeezie - Topic", "url": "https://www.youtube.com/channel/UC3"},
+        {"channel": "Squeezie Clips", "uploader_id": "@SqueezieClips", "channel_follower_count": 50_000},  # a fan's
+        {"channel": "Squeezie Vlog", "uploader_id": "@SqueezieVlogFan", "channel_follower_count": 800},  # too small
+        {"channel": "Squeezie 2", "url": "https://www.youtube.com/channel/UC6", "channel_follower_count": 120_000},
+    ]
+    ytdlp = FakeYtDlp({"https://www.youtube.com/results?search_query=Squeezie&sp=": found})
+    assert related_channels(ytdlp, "@Squeezie") == ["@SqueezieGaming", "https://www.youtube.com/channel/UC6"]
+
+
+def test_other_channels_join_the_turns():
+    from clipper.sources.youtube import discover_youtube
+
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b"], "tabs": ["videos"], "related_channels": True}})
+    related = {"@b": {"at": NOW.isoformat(), "channels": ["@bGaming"]}}  # looked up recently: kept as is
+    search_a = "https://www.youtube.com/results?search_query=a&sp="
+    ytdlp = FakeYtDlp({search_a: [{"channel": "a Gaming", "uploader_id": "@aGaming", "channel_follower_count": 50_000}]})
+    assert discover_youtube(config, ytdlp, now=NOW, related=related) == []
+    assert related["@a"] == {"at": NOW.isoformat(), "channels": ["@aGaming"]} and related["@b"]["channels"] == ["@bGaming"]
+    assert [url.split("youtube.com/")[1] for url in ytdlp.listed] == [
+        "results?search_query=a&sp=EgIQAg%253D%253D", "@a/videos", "@b/videos", "@aGaming/videos", "@bGaming/videos",
+    ]  # fmt: skip
+
+
+def test_a_focus_run_only_looks_at_the_sources_asked_for():
+    from clipper.config import ConfigError
+    from clipper.sources import focus_config
+    from clipper.sources.youtube import discover_youtube
+
+    config = build(Config, {
+        "twitch": {"streamers": ["squeezie"], "remember_live": 150, "discover_categories": 20},
+        "youtube": {"enabled": True, "channels": ["@Squeezie"], "channels_per_run": 8, "related_channels": True, "min_views": 50000},
+    })  # fmt: skip
+    video = "https://www.youtube.com/watch?v=L38q9KHfQgY"
+    focused = focus_config(config, ["Gotaga", "https://www.twitch.tv/aminematue/", "@Gotaga", video])
+    assert focused.twitch.streamers == ["gotaga", "aminematue"] and focused.twitch.clips_per_streamer == 50
+    assert not focused.twitch.discover_live and focused.twitch.remember_live == focused.twitch.discover_categories == 0
+    assert focused.youtube.channels == ["@Gotaga"] and focused.youtube.videos == [video]
+    assert focused.youtube.channels_per_run == 0 and not focused.youtube.related_channels
+    assert focused.shorts.max_per_streamer_per_day > 1000 and config.twitch.streamers == ["squeezie"]  # the config is untouched
+    assert not focus_config(config, ["gotaga"]).youtube.enabled and not focus_config(config, [video]).twitch.enabled
+    with pytest.raises(ConfigError, match="clips.twitch.tv"):
+        focus_config(config, ["https://clips.twitch.tv/Foo"])
+
+    # A video asked for by name gives its most replayed moments, whatever its age or views.
+    heatmap = [{"start_time": i * 60.0, "end_time": (i + 1) * 60.0, "value": 0.9 if i in (20, 90, 150) else 0.1} for i in range(200)]
+    info = {"id": "L38q9KHfQgY", "title": "UN MASTERKILL COMPLÈTEMENT FOU !", "uploader_id": "@Gotaga", "view_count": 900,
+            "duration": 12000, "timestamp": (NOW - timedelta(days=40)).timestamp(), "heatmap": heatmap}  # fmt: skip
+    ytdlp = FakeYtDlp(infos={video: info})
+    found = discover_youtube(focus_config(config, [video]), ytdlp, now=NOW)
+    assert [c.start for c in found] == [1197.0, 5397.0, 8997.0] and ytdlp.listed == []  # peaks of a 3 h 20 live, 40 days old
+
+
 def test_discover_puts_the_queue_first(tmp_path: Path):
     queue = tmp_path / "queue.yaml"
     queue.write_text("items: [https://clips.twitch.tv/Manual]\n", encoding="utf-8")

@@ -71,6 +71,8 @@ class TelegramPublisher:
     def publish_short(self, video: Path, meta: ShortMeta, candidate: Candidate, published: list[PublishResult]) -> PublishResult:
         tiktok_text = f"{meta.title}\n\n{meta.hashtag_line()}\n🎥 {candidate.credit}"
         lines = [f"🎬 {meta.title}", "", "Texte à coller (TikTok) :", tiktok_text, ""]
+        if candidate.source == "youtube":
+            lines.insert(1, "⚠️ Extrait d'une vidéo YouTube : poste-le plutôt sur TikTok (sur YouTube, Content ID le repère presque toujours).")
         lines += _links(published) or ["(pas encore publié ailleurs)"]
         text = "\n".join(lines)
         try:

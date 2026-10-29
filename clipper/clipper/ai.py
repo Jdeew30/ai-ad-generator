@@ -38,11 +38,19 @@ clash bon enfant entre streamers ;
 Note chaque extrait sur 100 (score), en étant exigeant : seuls les vrais moments forts sont publiés.
 - 80 à 100 : excellent, on a envie de l'envoyer à un ami : ça accroche dès les premières secondes, on comprend \
 sans contexte et il y a une vraie chute ou une vraie révélation.
-- 60 à 79 : un bon moment d'une de ces familles, compréhensible sans contexte, sans temps mort.
-- 40 à 59 : moyen : bavardage sans enjeu, réaction faible, blague d'initiés, chute molle ou absente, ou extrait \
-trop court pour comprendre ce qui se passe.
+- 60 à 79 : un bon moment d'une de ces familles, compréhensible sans contexte, sans temps mort, qui intéresse \
+même quelqu'un qui ne suit pas ce créateur.
+- 40 à 59 : moyen : bavardage sans enjeu, réaction faible, blague ou sujet d'initiés, chute molle ou absente, ou \
+extrait trop court pour comprendre ce qui se passe.
 - 0 à 39 : rien de notable, silence ou menus, moment qui n'a de sens qu'avec le contexte du live, publicité \
 ou sponsor, écran d'attente.
+
+Shorts déjà publiés : on t'en donne la liste. Plusieurs shorts tirés d'un même live ou d'une même histoire sont \
+bienvenus s'ils sont intéressants chacun ; si l'extrait est la suite directe d'une histoire déjà publiée, termine \
+son titre par « (partie 2) », « (partie 3) »… Mais un extrait qui montre exactement le même moment qu'un short déjà \
+publié (même scène, même blague), même filmé depuis le live d'un autre streamer, n'apporte rien : verdict \
+"reject", raison « moment déjà publié ». De même, quand plusieurs candidats montrent exactement le même moment, \
+garde seulement le meilleur et rejette les autres.
 
 Rejette (verdict "reject", avec la raison) tout extrait qui contient : nudité ou contenu sexuel ; haine, \
 harcèlement ou insultes visant une personne ou un groupe ; violence réelle ou automutilation ; informations \
@@ -310,11 +318,20 @@ class ClaudeCurator:
             return None
         return data if isinstance(data, dict) else None
 
-    def review(self, items: list[ReviewItem], *, now: datetime) -> dict[str, Review]:
-        """One request for the whole batch: Claude compares the candidates with each other."""
+    def review(
+        self, items: list[ReviewItem], *, now: datetime, recent: list[tuple[datetime | None, str]] | None = None
+    ) -> dict[str, Review]:
+        """One request for the whole batch: Claude compares the candidates with each other.
+
+        `recent` lists the (date, title) of the shorts already published: the same moment is not published twice
+        (even from another streamer's live), and the next part of a published story is titled as such.
+        """
         if not items:
             return {}
         content: list[dict[str, Any]] = []
+        if recent:
+            listing = "\n".join(f"- {title} (publié {_age(at, now)})" for at, title in recent)
+            content.append({"type": "text", "text": f"Shorts déjà publiés, du plus récent au plus ancien :\n{listing}"})
         ids: dict[str, ReviewItem] = {}
         for index, item in enumerate(items, start=1):
             clip_id = f"c{index}"

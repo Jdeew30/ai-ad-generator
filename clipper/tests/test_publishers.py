@@ -189,6 +189,15 @@ def test_telegram_sends_the_video_with_a_ready_to_paste_caption(server, http, vi
     assert "Texte à coller (TikTok)".encode() in body and b"youtube : https://www.youtube.com/shorts/v" in body
 
 
+def test_telegram_flags_youtube_extracts_for_tiktok(server, http, video, monkeypatch):
+    monkeypatch.setattr(telegram_module, "probe", lambda _p: type("I", (), {"width": 1080, "height": 1920, "duration": 30.0})())
+    server.route("POST", "/bot123:abc/sendVideo", (200, {}, {"ok": True, "result": {"message_id": 78}}))
+    extract = make_candidate("youtube:abc@10-40", "squeezie", source="youtube")
+    TelegramPublisher(SECRETS, http, api_url=server.url).publish_short(video, META, extract, [])
+    [call] = server.calls("POST", "/bot123:abc/sendVideo")
+    assert "Extrait d'une vidéo YouTube : poste-le plutôt sur TikTok".encode() in call.body
+
+
 def test_telegram_errors_are_reported(server, http, video, monkeypatch):
     monkeypatch.setattr(telegram_module, "probe", lambda _p: type("I", (), {"width": 1080, "height": 1920, "duration": 30.0})())
     server.route("POST", "/bot123:abc/sendVideo", (200, {}, {"ok": False, "description": "Bad Request: chat not found"}))

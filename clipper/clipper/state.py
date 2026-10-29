@@ -64,6 +64,8 @@ class State:
         self.compiled: dict[str, str] = data.get("compiled", {})
         self.compilations: list[dict[str, Any]] = data.get("compilations", [])
         self.streamers_seen: dict[str, str] = data.get("streamers_seen", {})  # login -> last seen live or in the top
+        self.youtube_cursor: int = int(data.get("youtube_cursor", 0))  # next YouTube channel to look at
+        self.youtube_related: dict[str, dict[str, Any]] = data.get("youtube_related", {})  # YouTuber -> other channels
 
     @classmethod
     def load(cls, path: Path) -> State:
@@ -85,6 +87,8 @@ class State:
             "compiled": self.compiled,
             "compilations": self.compilations[-60:],
             "streamers_seen": self.streamers_seen,
+            "youtube_cursor": self.youtube_cursor,
+            "youtube_related": self.youtube_related,
         }
         self.path.parent.mkdir(parents=True, exist_ok=True)
         fd, tmp = tempfile.mkstemp(prefix=".state-", suffix=".json", dir=self.path.parent)
@@ -110,6 +114,7 @@ class State:
         self.reviews = {k: v for k, v in self.reviews.items() if keep(v, 3)}
         self.compiled = {k: v for k, v in self.compiled.items() if keep(v, 60)}
         self.streamers_seen = {k: v for k, v in self.streamers_seen.items() if keep(v, 14)}
+        self.youtube_related = {k: v for k, v in self.youtube_related.items() if keep(v, 30)}
 
     # --- queries ---------------------------------------------------------------------------
 
@@ -138,6 +143,11 @@ class State:
             if entry.get("streamer_login", "").lower() == login
             and (parse_time(entry.get("at")) or since) >= since
         )
+
+    def recent_posts(self, since: datetime) -> list[dict[str, Any]]:
+        """Shorts posted since `since`, most recent first."""
+        entries = [entry for entry in self.posted.values() if (parse_time(entry.get("at")) or since) >= since]
+        return sorted(entries, key=lambda entry: parse_time(entry.get("at")) or since, reverse=True)
 
     def cached_review(self, key: str) -> dict[str, Any] | None:
         return self.reviews.get(key)

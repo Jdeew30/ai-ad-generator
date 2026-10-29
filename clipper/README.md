@@ -5,8 +5,10 @@ Un robot qui, plusieurs fois par jour :
 1. **repère** les meilleurs moments de tout Twitch FR : les clips les plus vus des 7 derniers jours (ce sont
    les viewers eux-mêmes qui clippent les moments forts) des 51 streamers suivis, des 100 plus gros lives FR
    du moment, des chaînes FR vues ces 14 derniers jours (même hors ligne), et les clips FR les plus vus de la
-   semaine dans les 20 catégories les plus regardées, quelle que soit la chaîne ; plus les pics « les plus
-   revus » des vidéos YouTube et les URLs que tu ajoutes à la main ;
+   semaine dans les 20 catégories les plus regardées, quelle que soit la chaîne ; plus les passages « les
+   plus revus » des vidéos de 68 YouTubeurs FR de tous les domaines et de leurs autres chaînes (« X Gaming »,
+   « X 2 »…), à tour de rôle, et les URLs que tu
+   ajoutes à la main ;
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
    même clip, 2 clips max par streamer et par jour, popularité *relative* au streamer, fraîcheur ;
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
@@ -16,8 +18,11 @@ Un robot qui, plusieurs fois par jour :
    officielles…), note chaque extrait sur 100 dans l'esprit des best-of Twitch FR comme « La Crème de Twitch »
    (moments drôles, annonces et actu du milieu, anecdotes, piques entre streamers, duos, exploits) et ne
    laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
-   l'accroche, le titre, la description et les hashtags. Si rien n'est assez bon, il examine une nouvelle
-   série de clips (3 séries au plus), puis préfère ne rien publier et te prévient sur Telegram ;
+   l'accroche, le titre, la description et les hashtags. Il connaît les shorts publiés ces 3 derniers jours :
+   plusieurs parties d'un même live ou d'une même histoire sont possibles (« (partie 2) » dans le titre),
+   jamais deux fois le même moment, même filmé par un autre streamer. Chaque série met en concurrence des
+   streamers différents ; si rien n'est assez bon, il examine une nouvelle série (4 séries au plus), puis
+   préfère ne rien publier et te prévient sur Telegram ;
 4. **monte** chaque short en 1080×1920 : l'image entière, nette au milieu, sur un fond flouté (réglage choisi
    pour la chaîne) ; en mode `auto`, facecam en haut et jeu en bas (détection automatique du visage) ou plein
    cadre centré sur le streamer selon le clip ; **sous-titres animés mot à mot** (Whisper),
@@ -76,6 +81,14 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
 
+Pour un passage **ciblé** : mode `shorts` → champ **focus**, avec des chaînes Twitch, des chaînes YouTube
+(`@nom`) ou des liens de vidéos YouTube, séparés par des virgules. Par exemple `gotaga, aminematue` ou le
+lien du replay d'un événement. Seules ces sources sont regardées : les clips Twitch de la semaine (50 par
+chaîne) et les 6 passages les plus revus de chaque vidéo YouTube, quels que soient son âge et ses vues. Claude
+choisit toujours, avec la même note minimale. Le plafond par streamer ne compte pas, puisque tu as demandé ces
+chaînes. Le champ **count** fixe le nombre de shorts (1 si vide). Les passages planifiés, eux, regardent
+toujours tout Twitch FR et tous les YouTubeurs de la liste.
+
 ### Sur ton ordinateur (pour tester ou pour YouTube)
 
 Prérequis : Python 3.10+ et ffmpeg (`winget install ffmpeg`, `brew install ffmpeg` ou `apt install ffmpeg`).
@@ -120,7 +133,7 @@ vidéo et la légende, tu enregistres, tu publies (ou tu programmes dans TikTok 
 
 Crée une clé sur [platform.claude.com](https://platform.claude.com) → secret `ANTHROPIC_API_KEY`.
 Modèle par défaut : `claude-opus-5-5`, effort `medium`, avec le repli automatique côté serveur si une
-demande est déclinée. Une requête par série de candidats (deux séries au plus par passage).
+demande est déclinée. Une requête par série de candidats (quatre séries au plus par passage).
 
 ### Twitch : la découverte des lives (5 min, gratuit)
 
@@ -191,12 +204,21 @@ app développeur restée en mode *sandbox* (pas de validation TikTok, 10 comptes
    `GH_SECRETS_TOKEN` : un jeton GitHub *fine-grained* limité à ce dépôt avec la permission
    « Secrets : Read and write ». Sans lui, le journal te prévient s'il faut mettre le secret à jour.
 
-### YouTube comme source (facultatif)
+### YouTube comme source : les YouTubeurs FR
 
-`youtube.enabled: true` et des chaînes dans `youtube.channels` : le robot prend les vidéos récentes et
-découpe les pics « les plus revus ». YouTube bloque souvent les serveurs de GitHub (« Sign in to confirm
-you're not a bot ») : dans ce cas, lance cette partie depuis ton ordinateur, ou fournis des cookies
-(`YTDLP_COOKIES`, format Netscape, idéalement d'un compte secondaire).
+Activée : 68 YouTubeurs FR de tous les domaines (`youtube.channels`), 8 chaînes par passage à tour de rôle
+(`channels_per_run`). Avec `related_channels`, le robot cherche aussi les autres chaînes de chaque YouTubeur
+(« Squeezie Gaming », « Djilsi Gaming », « … Vlog », « … 2 ») : seulement les noms « <nom> <suffixe> » avec
+assez d'abonnés, donc ni les chaînes de fans ni les chaînes « Topic » ; 3 recherches par passage, gardées
+14 jours. Une chaîne introuvable est signalée dans le journal du passage. Le robot
+prend leurs vidéos de la semaine (plus de 50 000 vues) et découpe les passages « les plus revus ». Testé
+depuis les serveurs de GitHub le 29/10 : YouTube n'a pas bloqué. S'il bloque un jour (« Sign in to confirm
+you're not a bot »), fournis des cookies (`YTDLP_COOKIES`, format Netscape, idéalement d'un compte secondaire).
+
+**Content ID** : un extrait de vidéo YouTube republié sur YouTube est presque toujours repéré (revenus
+reversés au YouTubeur, blocage, voire avertissement). Le robot ne le republie donc jamais sur YouTube
+(`publish.youtube.youtube_sources: false`) et Telegram te conseille de le poster sur TikTok. Le best-of du
+dimanche reste 100 % Twitch.
 
 ## Réglages utiles (`config.yaml`)
 
@@ -245,7 +267,7 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
   aucun dépôt possible au-delà. Les shorts, déjà sur Telegram, ne sont donc gardés qu'un jour, le best-of
   7 jours, et chaque passage supprime les vidéos des passages plus anciens.
 - **Claude** : quelques centimes par passage (une requête par série de 3 candidats, avec transcriptions et
-  images), soit environ 10 à 25 $ par mois au rythme par défaut selon le nombre de séries. Facultatif.
+  images), soit environ 10 à 30 $ par mois au rythme par défaut selon le nombre de séries. Facultatif.
 - Tout le reste (Twitch, YouTube, TikTok, Telegram, Whisper, ffmpeg) est gratuit.
 
 ## Dépannage
