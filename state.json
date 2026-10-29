@@ -185,6 +185,10 @@
    "at": "2026-10-28T19:18:45.866864+00:00",
    "reason": "revue : Discussion de groupe qui n'a de sens qu'avec le contexte du live. Il n'y a aucun moment fort identifiable ni de vraie chute, et la transcription est confuse. L'extrait n'est pas compréhensible en 3 secondes."
   },
+  "twitch:AssiduousSavoryLionFunRun-mNw2R-UCvEcXEgrH": {
+   "at": "2026-10-29T19:07:52.820712+00:00",
+   "reason": "revue : Anecdote d'enfance (s'habiller au vestiaire, timidité) racontée sans vraie chute : l'histoire s'arrête sur « une fois j'étais à poil » sans suite claire, et le début n'a de sens qu'avec le contexte du live. Moment trop moyen pour être publié."
+  },
   "twitch:BenevolentPuzzledDillTwitchRaid--NkoXZDd-6fzg0xn": {
    "at": "2026-10-29T16:06:02.113141+00:00",
    "reason": "revue : Ponce dit passer sa vie à insulter une personne réelle (apparemment un élu, d'après le chat) et évoque un procès en diffamation : insultes visant une personne réelle, risque juridique. La fin est en plus un temps mort (lecture du chat)."
@@ -192,6 +196,10 @@
   "twitch:BoredArtisticWhaleMcaT-71Rb7d5RcaSXhX22": {
    "at": "2026-10-29T09:58:39.278555+00:00",
    "reason": "revue : Petite rage après une mort au lance-grenade, mais la réaction est courte et l'action peu lisible. Le début de l'extrait contient un long temps mort, et la chute est trop faible pour être publiée."
+  },
+  "twitch:BraveThankfulWatermelonPogChamp-fNSWfwYc5y6GcssJ": {
+   "at": "2026-10-29T19:06:18.352020+00:00",
+   "reason": "revue : Il s'agit d'une tirade virulente contre une personne nommée : il la traite de fou et l'insulte (« il pollue plus que des gens qui chient dans les lacs »). Cela relève du harcèlement ou des insultes visant une personne."
   },
   "twitch:BumblingSlipperyOwlKreygasm-s5rOSEQAsL1IUDQ5": {
    "at": "2026-10-28T20:06:28.073904+00:00",
@@ -233,6 +241,14 @@
    "at": "2026-10-29T16:04:54.017873+00:00",
    "reason": "revue : Extrait de 17 secondes sans action compréhensible : on n'entend qu'un décompte, puis une phrase isolée. Aucune réaction ni chute."
   },
+  "twitch:EmpathicBoredSandpiperMcaT-nJWUsGDvpjES62tF": {
+   "at": "2026-10-29T19:09:27.670310+00:00",
+   "reason": "revue : Bavardage sur la distribution de codes, phrases décousues, aucune action notable en jeu ni chute ; incompréhensible sans le contexte du live."
+  },
+  "twitch:EncouragingEnergeticWolverineMingLee-sFIJDmLtnNsdZVhe": {
+   "at": "2026-10-29T19:07:52.820843+00:00",
+   "reason": "revue : Extrait très court de gameplay Call of Duty sans action lisible ni réaction notable ; impossible de comprendre ce qui se passe sans contexte."
+  },
   "twitch:EntertainingJazzyKathyCmonBruh-vA18OUXvd-JehwlB": {
    "at": "2026-10-28T22:22:54.963582+00:00",
    "reason": "revue : Bavardage sans action : il montre la salle d'entraînement de catch et répète qu'il fait froid, sans chute."
@@ -257,6 +273,10 @@
    "at": "2026-10-29T13:08:30.727562+00:00",
    "reason": "revue : Watch party d'un match VALORANT professionnel : l'image est surtout la diffusion officielle du tournoi, qui n'appartient pas au créateur. La réaction de Squeezie reste confuse et sans vraie chute compréhensible hors contexte."
   },
+  "twitch:FrozenLachrymoseCheetahVoteNay-v8w9WEX_pCy5KlGw": {
+   "at": "2026-10-29T19:09:27.670254+00:00",
+   "reason": "revue : Contenu sponsorisé (collaboration commerciale Square Enix affichée à l'écran) : interview promotionnelle sans moment fort, sans réaction ni chute."
+  },
   "twitch:GiantSolidAntUncleNox-L4hUf_x-CNqr7w-J": {
    "at": "2026-10-28T22:22:54.963431+00:00",
    "reason": "revue : note 58/100 (minimum 60). Entrée sur scène devant une foule énorme avec une référence à Randy Orton : moment fort mais la transcription a un trou de 30 s et la chute reste douce, ambiance plus que punchline."
@@ -272,6 +292,10 @@
   "twitch:HilariousSmokyBasenjiCharlieBitMe-VBXX--T2Vl6SARdR": {
    "at": "2026-10-28T22:03:37.601216+00:00",
    "reason": "revue : Il s'agit surtout de la retransmission d'un événement (annonceur sur scène, logo sponsor BoursoBank) qui n'appartient pas au créateur. L'extrait est trop court et sans réaction du streamer."
+  },
+  "twitch:IcyDifferentPlumDatSheffy-G8ybUILuh6h_yPCf": {
+   "at": "2026-10-29T19:07:52.820783+00:00",
+   "reason": "revue : Bavardage autour d'une chienne qui passe dans le studio, sans réaction marquante ni chute ; le début est du gameplay commenté sans intérêt et la transcription est confuse."
   },
   "twitch:InterestingDeadRabbitTBTacoRight-pVtdbvGyT5XBfLBP": {
    "at": "2026-10-28T22:01:42.253026+00:00",
@@ -293,9 +317,17 @@
    "at": "2026-10-29T16:02:54.439406+00:00",
    "reason": "revue : note 58/100 (minimum 60). Kameto en mode hype totale avant un gros match de KC, énergie communicative. C'est un peu un moment pour initiés et il n'y a pas de vraie chute, mais il est compréhensible et reste court."
   },
+  "twitch:ModernDifferentCheeseKreygasm-bxNi0VH0ebYwHtFc": {
+   "at": "2026-10-29T19:06:18.351942+00:00",
+   "reason": "revue : Le screamer est visible, mais la réaction reste faible (« pourquoi vous faites ça ») et la suite n'est qu'un râle sur le jeu, sans vraie chute. Moment trop moyen pour être publié."
+  },
   "twitch:MushyIronicVultureBleedPurple-MBptyYkkjtks9xLk": {
    "at": "2026-10-29T09:59:17.371914+00:00",
    "reason": "revue : Réactions faibles et confuses dans un jeu d'ambiance, longs temps morts, pas de vraie chute compréhensible sans contexte."
+  },
+  "twitch:NurturingExpensiveSandwichSpicyBoy-5dnj_nDmDHpME71B": {
+   "at": "2026-10-29T19:06:18.352082+00:00",
+   "reason": "revue : C'est surtout la diffusion d'un match e-sport officiel (T1 contre MKOI) qui n'appartient pas au créateur. On y entend en plus une insulte vulgaire (« c'est une pute »), et la transcription montre un long temps mort."
   },
   "twitch:ObedientSneakyDoveCharlietheUnicorn-WmgqcgyD6iQejgrt": {
    "at": "2026-10-28T22:03:37.601163+00:00",
@@ -361,6 +393,10 @@
    "at": "2026-10-29T16:04:54.017788+00:00",
    "reason": "revue : Co-stream des Worlds de LoL : l'image est surtout la diffusion officielle, qui n'appartient pas au créateur. La blague sur le « momentum » est réservée aux initiés, la transcription est confuse et il n'y a pas de vraie chute."
   },
+  "twitch:SuperThirstyMelonRickroll-OMzO9HhL__GOnNSg": {
+   "at": "2026-10-29T19:09:27.670182+00:00",
+   "reason": "revue : note 42/100 (minimum 60). Le stress de Mastu, qui hésite à se cacher face à la mère du jeu, est lisible. En revanche, il n'y a pas de vraie chute, ce qui limite le potentiel."
+  },
   "twitch:SuspiciousElegantJellyfishNerfBlueBlaster-rClQHKYAHytLnmKh": {
    "at": "2026-10-29T13:08:30.727633+00:00",
    "reason": "revue : L'essentiel de l'extrait est une vidéo tierce sous-titrée, accompagnée de longs silences. Kameto ne réagit presque pas et le moment n'a de sens qu'avec le contexte du live."
@@ -417,30 +453,6 @@
    },
    "reason": "Le début de live où Anyme explique sa panne d'électricité et son décor improvisé est compréhensible et anecdotique. En revanche, il n'y a pas vraiment de punchline forte et le rythme reste celui d'un bavardage.",
    "score": 3.0,
-   "verdict": "publish"
-  },
-  "twitch:SuperThirstyMelonRickroll-OMzO9HhL__GOnNSg": {
-   "at": "2026-10-28T19:18:45.866728+00:00",
-   "meta": {
-    "ai": true,
-    "description": "Mastu ne sait plus s'il doit se cacher ou rester quand sa mère arrive dans Schoolboy Runaway.",
-    "hashtags": [
-     "mastu",
-     "schoolboyrunaway",
-     "twitch",
-     "stress",
-     "panique",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "IL PANIQUE TOTALEMENT",
-    "title": "Mastu en pleine panique dans Schoolboy Runaway",
-    "trim_end": 25.0,
-    "trim_start": 4.0
-   },
-   "reason": "Le stress de Mastu, qui hésite à se cacher face à la mère du jeu, est lisible. En revanche, il n'y a pas de vraie chute, ce qui limite le potentiel.",
-   "score": 42.0,
    "verdict": "publish"
   }
  },
