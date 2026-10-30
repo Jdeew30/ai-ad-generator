@@ -28,7 +28,7 @@ on:
         description: "Mode url : fin (ex. 2:05)"
         required: false
       focus:
-        description: "Mode shorts : seulement ces chaînes ou vidéos (ex. gotaga, aminematue, @Gotaga, lien YouTube)"
+        description: "Mode shorts : seulement ces chaînes ou vidéos (ex. gotaga, aminematue, @Gotaga, lien YouTube). Mode clips : une autre chaîne, pour sa POV du même moment"
         required: false
       count:
         description: "Mode shorts : nombre de shorts (vide = 1)"
@@ -116,7 +116,7 @@ jobs:
             check) python -m clipper check ;;
             clips)
               if [ -z "$URL" ]; then echo "::error::Le mode clips demande le lien d'un clip Twitch"; exit 1; fi
-              python -m clipper clips "$URL" ;;
+              python -m clipper clips "$URL" ${FOCUS:+--channel "$FOCUS"} ;;
             url)
               if [ -z "$URL" ]; then echo "::error::Le mode url demande une URL"; exit 1; fi
               python -m clipper run $DRY_RUN --url "$URL" ${START:+--start "$START"} ${END:+--end "$END"} ;;

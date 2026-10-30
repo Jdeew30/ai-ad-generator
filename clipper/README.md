@@ -88,7 +88,9 @@ résumé du passage liste les autres clips de la chaîne faits 10 minutes avant 
 parfois plus long ou commencé plus tôt), avec leur durée et leur lien. Relance ensuite le mode `url` avec le
 lien choisi (début `0`, fin = sa durée), ou avec **plusieurs liens qui se suivent**, séparés par des espaces :
 le robot les recolle en une seule vidéo, calée sur le son, où la partie commune n'apparaît qu'une fois. La
-vidéo recollée est gardée en entier.
+vidéo recollée est gardée en entier. Pour la **POV d'un autre streamer** présent au même moment, mets sa chaîne
+dans le champ **focus** du mode `clips` (ex. `hctuan`) : ce sont alors ses clips qui sont listés, avec son
+replay quand il existe (mode `url` avec `https://www.twitch.tv/videos/<replay>`, un début et une fin).
 
 Pour un passage **ciblé** : mode `shorts` → champ **focus**, avec des chaînes Twitch, des chaînes YouTube
 (`@nom`) ou des liens de vidéos YouTube, séparés par des virgules. Par exemple `gotaga, aminematue` ou le
