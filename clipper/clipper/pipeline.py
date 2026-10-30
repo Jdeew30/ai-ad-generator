@@ -16,7 +16,7 @@ from .config import Config, ConfigError, Paths, Secrets
 from .facecam import best_frame, face_stats, faces_per_frame, plan_layout
 from .github_secrets import secret_saver
 from .http import Http
-from .media import MediaError, contact_sheet, extract_frames, max_volume, probe
+from .media import MediaError, contact_sheet, extract_frames, join_overlapping, max_volume, probe
 from .models import Candidate, CompilationMeta, PublishResult, ShortMeta, Transcript, parse_time, utcnow
 from .publishers import PublishError, build_publishers
 from .publishers.tiktok import TikTokPublisher, caption as tiktok_caption
@@ -24,7 +24,7 @@ from .publishers.youtube import short_description
 from .render import render_short
 from .selection import rank, spread
 from .sources import discover, focus_config
-from .sources.manual import QueueError, manual_candidate
+from .sources.manual import QueueError, joined_candidate, links, manual_candidate
 from .sources.twitch import SourceError
 from .state import State
 from .thumbnail import make_thumbnail
@@ -259,6 +259,13 @@ class Clipper:
         log.info("Replay : %.0f s de contexte avant le clip, %.0f s après.", clip[0], duration - clip[1])
         return media, clip
 
+    def _joined(self, candidate: Candidate, workdir: Path) -> tuple[Path, dict[str, Any]]:
+        """The clips of one moment, downloaded and put back together; the first one's details."""
+        downloads = [self.ytdlp.download(url, workdir, f"part{index}") for index, url in enumerate(candidate.parts)]
+        media = join_overlapping([path for path, _ in downloads], workdir / "joined.mp4")
+        log.info("%d clips recollés : %.0f s", len(downloads), probe(media).duration)
+        return media, downloads[0][1]
+
     def prepare(self, candidate: Candidate, *, transcribe: bool, sheet: bool, context: bool = False) -> Prepared | None:
         """Downloads, then frames and transcript. With `context`, a Twitch clip comes with the replay around it."""
         workdir = self._workdir(_slug(candidate.key))
@@ -266,6 +273,10 @@ class Clipper:
         try:
             if replay:
                 media, clip_span = replay
+            elif candidate.parts:
+                media, info = self._joined(candidate, workdir)
+                self._enrich(candidate, info)
+                clip_span = None
             else:
                 media, info = self.ytdlp.download(candidate.url, workdir, "source", start=candidate.start, end=candidate.end)
                 self._enrich(candidate, info)
@@ -451,7 +462,11 @@ class Clipper:
         wanted = self.config.shorts.per_run if count is None else count
         if url:
             try:
-                ranked = [manual_candidate(url, start, end)]
+                urls = links(url)
+                joined = len(urls) > 1 and all(link.startswith(("http://", "https://")) for link in urls)
+                if joined and (start or end):
+                    raise QueueError("début et fin ne s'appliquent pas à plusieurs clips recollés")
+                ranked = [joined_candidate(urls) if joined else manual_candidate(url, start, end)]
             except QueueError as exc:
                 report.errors.append(str(exc))
                 return

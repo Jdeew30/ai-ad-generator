@@ -86,7 +86,9 @@ Avec un début **et** une fin, le passage choisi est gardé en entier (Claude é
 Pour **rallonger** un short dont le live n'a plus de replay : mode `clips` → colle le lien du clip Twitch. Le
 résumé du passage liste les autres clips de la chaîne faits 10 minutes avant ou après (souvent le même moment,
 parfois plus long ou commencé plus tôt), avec leur durée et leur lien. Relance ensuite le mode `url` avec le
-lien choisi, début `0` et fin = sa durée.
+lien choisi (début `0`, fin = sa durée), ou avec **plusieurs liens qui se suivent**, séparés par des espaces :
+le robot les recolle en une seule vidéo, calée sur le son, où la partie commune n'apparaît qu'une fois. La
+vidéo recollée est gardée en entier.
 
 Pour un passage **ciblé** : mode `shorts` → champ **focus**, avec des chaînes Twitch, des chaînes YouTube
 (`@nom`) ou des liens de vidéos YouTube, séparés par des virgules. Par exemple `gotaga, aminematue` ou le

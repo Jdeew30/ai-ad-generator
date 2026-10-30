@@ -9,7 +9,7 @@ from PIL import Image
 from clipper.compilation import Part, chapters_text, render_compilation
 from clipper.config import ShortsConfig
 from clipper.facecam import best_frame, detect_faces, face_stats, plan_layout
-from clipper.media import MediaInfo, contact_sheet, extract_frames, probe, run_ffmpeg
+from clipper.media import JOIN_RATE, MediaInfo, contact_sheet, extract_frames, join_overlapping, overlap_start, probe, run_ffmpeg
 from clipper.models import Word
 from clipper.render import render_short, target_fps
 from clipper.thumbnail import make_thumbnail
@@ -140,3 +140,30 @@ def test_thumbnail_and_frames(media, tmp_path):
     with Image.open(thumb) as image:
         assert image.size == (1280, 720)
     assert thumb.stat().st_size < 2_000_000
+
+
+def test_the_overlap_of_two_clips_is_found_on_their_sound():
+    rng = np.random.default_rng(7)
+    live = rng.standard_normal(40 * JOIN_RATE).astype(np.float32)
+    first, second = live[: 30 * JOIN_RATE], live[18 * JOIN_RATE :]  # the second clip starts 18 s into the first
+    assert overlap_start(first, second) == pytest.approx(18.0, abs=1 / JOIN_RATE)
+    elsewhere = rng.standard_normal(20 * JOIN_RATE).astype(np.float32)
+    assert overlap_start(first, elsewhere) is None and overlap_start(first, np.zeros(JOIN_RATE * 5, np.float32)) is None
+
+
+def test_clips_of_one_moment_are_put_back_together(tmp_path):
+    live = tmp_path / "live.mp4"
+    run_ffmpeg(["-f", "lavfi", "-i", "testsrc2=s=320x240:r=25:d=50", "-f", "lavfi", "-i", "anoisesrc=d=50:c=pink:r=48000:a=0.4:s=11",
+                "-t", "50", "-pix_fmt", "yuv420p", "-c:v", "libx264", "-preset", "ultrafast", "-c:a", "aac", str(live)])  # fmt: skip
+
+    def clip(name, start, length):
+        target = tmp_path / f"{name}.mp4"
+        run_ffmpeg(["-ss", str(start), "-i", str(live), "-t", str(length), "-c:v", "libx264", "-preset", "ultrafast", "-c:a", "aac", str(target)])
+        return target
+
+    # Viewers clipped 0-30 s, then 20-45 s: the overlap shows once, 45 s in all.
+    joined = join_overlapping([clip("a", 0, 30), clip("b", 20, 25)], tmp_path / "joined.mp4")
+    assert probe(joined).duration == pytest.approx(45.0, abs=0.4) and probe(joined).has_audio
+    # Two clips far apart simply follow each other.
+    apart = join_overlapping([clip("c", 0, 10), clip("d", 35, 10)], tmp_path / "apart.mp4")
+    assert probe(apart).duration == pytest.approx(20.0, abs=0.4)

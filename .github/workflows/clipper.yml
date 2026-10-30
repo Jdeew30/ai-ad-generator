@@ -19,7 +19,7 @@ on:
         options: [shorts, compilation, url, clips, check]
         default: shorts
       url:
-        description: "Mode url : clip Twitch, VOD, vidéo YouTube… Mode clips : le lien du clip Twitch"
+        description: "Mode url : clip Twitch, VOD, vidéo YouTube… ou plusieurs clips d'un même moment séparés par des espaces (recollés). Mode clips : le lien du clip Twitch"
         required: false
       start:
         description: "Mode url : début (ex. 1:23)"

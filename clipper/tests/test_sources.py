@@ -232,6 +232,16 @@ def test_manual_queue(tmp_path: Path):
         load_queue(queue)
     assert load_queue(tmp_path / "missing.yaml") == []
 
+    from clipper.sources.manual import joined_candidate, links
+
+    assert links(" https://clips.twitch.tv/A,https://clips.twitch.tv/B\n https://clips.twitch.tv/C ") == [
+        "https://clips.twitch.tv/A", "https://clips.twitch.tv/B", "https://clips.twitch.tv/C",
+    ]  # fmt: skip
+    joined = joined_candidate(["https://www.twitch.tv/inoxtag/clip/A", "https://www.twitch.tv/inoxtag/clip/B"])
+    assert joined.key.startswith("manual:") and joined.parts[1].endswith("/B") and joined.streamer_login == "inoxtag"
+    with pytest.raises(QueueError):
+        joined_candidate(["https://clips.twitch.tv/A", "pas un lien"])
+
 
 def test_youtube_channels_take_turns():
     from clipper.sources.youtube import discover_youtube

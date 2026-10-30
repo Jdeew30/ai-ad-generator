@@ -72,6 +72,24 @@ def manual_candidate(url: str, start: Any = None, end: Any = None, title: str | 
     )
 
 
+def links(text: str) -> list[str]:
+    """The links of a field holding one or several of them (separated by spaces, commas or new lines)."""
+    return [part for part in re.split(r"[\s,]+", text.strip()) if part]
+
+
+def joined_candidate(urls: list[str], title: str | None = None) -> Candidate:
+    """Several clips of one moment, in order, put back together into a single video (their live has no replay)."""
+    if len(urls) < 2:
+        raise QueueError("il faut au moins deux clips à recoller")
+    first = manual_candidate(urls[0], title=title)
+    for url in urls[1:]:
+        manual_candidate(url)  # same checks as a single link
+    digest = hashlib.sha1("|".join(urls).encode()).hexdigest()[:16]
+    first.key = f"manual:{digest}"
+    first.parts = list(urls)
+    return first
+
+
 def load_queue(path: Path) -> list[Candidate]:
     """Reads queue.yaml: URLs added by hand, processed before anything discovered."""
     if not path.is_file():
