@@ -278,7 +278,9 @@ class Clipper:
                 self._enrich(candidate, info)
                 clip_span = None
             else:
-                media, info = self.ytdlp.download(candidate.url, workdir, "source", start=candidate.start, end=candidate.end)
+                # A section is copied, not re-encoded (minutes, or more on a long live's replay): the render re-encodes it.
+                media, info = self.ytdlp.download(candidate.url, workdir, "source", start=candidate.start, end=candidate.end,
+                                                  exact=False)
                 self._enrich(candidate, info)
                 clip_span = None
             if candidate.streamer_login and self.config.is_blocked(candidate.streamer_login):

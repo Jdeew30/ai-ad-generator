@@ -449,6 +449,20 @@ def test_clips_of_one_moment_given_together_are_joined_and_kept_whole(media, pat
     assert report.errors and "plusieurs clips" in report.errors[0]
 
 
+def test_a_section_of_a_replay_is_copied_not_re_encoded(media, paths):
+    run = clipper(media, paths, clips={}, publishers={})
+    calls = []
+    download = run.ytdlp.download
+
+    def spy(url, dest_dir, name, *, start=None, end=None, exact=True):
+        calls.append((start, end, exact))
+        return download(url, dest_dir, name, start=start, end=end, exact=exact)
+
+    run.ytdlp.download = spy
+    assert run.run_shorts(url="https://www.twitch.tv/videos/2913268775", start="92030", end="92120").published
+    assert calls == [(92030.0, 92120.0, False)]  # a 25 h replay re-encoded from the cut point took over 30 minutes
+
+
 def test_weekly_compilation(media, paths):
     clips = {
         "alpha": [entry("Alpha-Cam1", 5000, 20), entry("Alpha-2", 3000, 40)],
@@ -503,8 +517,8 @@ def test_required_platform_without_credentials_fails_before_any_work(media, path
 
 def test_twitch_clipper_name_is_never_used_as_the_streamer(media, paths):
     class CuratorOnly(FakeYtDlp):
-        def download(self, url, dest_dir, name, *, start=None, end=None):
-            path, _ = super().download(url, dest_dir, name, start=start, end=end)
+        def download(self, url, dest_dir, name, *, start=None, end=None, exact=True):
+            path, _ = super().download(url, dest_dir, name, start=start, end=end, exact=exact)
             return path, {"title": "x", "uploader": "viewer42"}  # yt-dlp without broadcaster details
 
     run = clipper(media, paths, clips=CLIPS, publishers={}, streamers={"alpha": {"name": "Alpha Le Vrai"}})
