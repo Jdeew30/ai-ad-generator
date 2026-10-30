@@ -86,6 +86,40 @@ def cmd_discover(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_clips(args: argparse.Namespace) -> int:
+    from .http import Http
+    from .sources.twitch import SourceError, TwitchApi, clip_slug, clips_around
+
+    secrets = Secrets.from_env()
+    if not secrets.twitch_api:
+        log.error("Il faut les clés API Twitch (TWITCH_CLIENT_ID / TWITCH_CLIENT_SECRET).")
+        return 2
+    slug = clip_slug(args.clip) or args.clip.strip()
+    api = TwitchApi(secrets.twitch_client_id or "", secrets.twitch_client_secret or "", Http())
+    try:
+        clip, found = clips_around(api, slug, args.minutes)
+    except SourceError as exc:
+        log.error("%s", exc)
+        return 1
+    lines = [
+        f"## Clips de {clip.get('broadcaster_name') or '?'} à {args.minutes:g} min de « {clip.get('title') or slug} »",
+        "",
+        "Pour un short plus long, relance le mode `url` avec le lien voulu, et `start` / `end` pour le garder en entier.",
+        "",
+        "| créé (UTC) | durée | vues | replay | titre | lien |",
+        "|---|---|---|---|---|---|",
+    ]
+    for other in found:
+        offset = other.get("vod_offset")
+        replay = f"{other['video_id']} à {offset} s" if other.get("video_id") and offset is not None else "—"
+        mark = " ← ce clip" if other.get("id") == clip["id"] else ""
+        title = (other.get("title") or "").replace("|", "/")
+        lines.append(f"| {(other.get('created_at') or '')[:19].replace('T', ' ')} | {float(other.get('duration') or 0):.0f} s "
+                     f"| {other.get('view_count', 0)} | {replay} | {title}{mark} | {other.get('url', '')} |")
+    _summary("\n".join(lines))
+    return 0
+
+
 def cmd_check(args: argparse.Namespace) -> int:
     from .check import markdown, run_checks
     from .http import Http
@@ -221,6 +255,11 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument("--compilation", action="store_true", help="fenêtre de la compilation (7 jours)")
     discover.add_argument("--limit", type=int, default=30)
     discover.set_defaults(func=cmd_discover)
+
+    clips = commands.add_parser("clips", help="liste les autres clips d'un même moment (pour un short plus long)")
+    clips.add_argument("clip", help="lien ou identifiant d'un clip Twitch")
+    clips.add_argument("--minutes", type=float, default=10.0, help="écart maximal avec ce clip (défaut : 10 min)")
+    clips.set_defaults(func=cmd_clips)
 
     auth = commands.add_parser("auth", help="obtient les jetons à enregistrer en secrets (à lancer sur votre ordinateur)")
     auth.add_argument("service", choices=["youtube", "tiktok", "telegram"])

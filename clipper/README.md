@@ -81,6 +81,12 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
 
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
+Avec un début **et** une fin, le passage choisi est gardé en entier (Claude écrit les textes sans recouper).
+
+Pour **rallonger** un short dont le live n'a plus de replay : mode `clips` → colle le lien du clip Twitch. Le
+résumé du passage liste les autres clips de la chaîne faits 10 minutes avant ou après (souvent le même moment,
+parfois plus long ou commencé plus tôt), avec leur durée et leur lien. Relance ensuite le mode `url` avec le
+lien choisi, début `0` et fin = sa durée.
 
 Pour un passage **ciblé** : mode `shorts` → champ **focus**, avec des chaînes Twitch, des chaînes YouTube
 (`@nom`) ou des liens de vidéos YouTube, séparés par des virgules. Par exemple `gotaga, aminematue` ou le

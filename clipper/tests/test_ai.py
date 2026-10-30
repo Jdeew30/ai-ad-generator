@@ -114,6 +114,15 @@ def test_refusal_and_errors_fall_back_to_the_template(server, tmp_path):
     assert len(server.calls("POST", "/v1/messages")) == calls
 
 
+def test_a_section_picked_by_hand_is_kept_whole(server, tmp_path):
+    answer = {"clips": [{"id": "c1", "verdict": "publish", "reason": "", "score": 70, "hook": "H", "title": "T",
+                         "description": "D", "hashtags": [], "trim_start": 5, "trim_end": 20}]}  # fmt: skip
+    server.route("POST", "/v1/messages", (200, {}, message(answer)))
+    picked = make_candidate("manual:abc", "inoxtag", source="manual", manual=True, start=0.0, end=60.0)
+    [review] = curator(server).review([ReviewItem(picked, 60.0)], now=NOW).values()
+    assert review.meta.ai and (review.meta.trim_start, review.meta.trim_end) == (None, None)
+
+
 def test_missing_ids_get_the_template(server, tmp_path):
     answer = {"clips": [{"id": "c2", "verdict": "publish", "reason": "", "score": 50, "hook": "H", "title": "T",
                          "description": "D", "hashtags": [], "trim_start": 0, "trim_end": 25}]}  # fmt: skip
