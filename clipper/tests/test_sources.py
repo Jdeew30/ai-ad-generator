@@ -151,6 +151,13 @@ def test_the_other_clips_of_a_moment_are_listed(server, http):
     with pytest.raises(SourceError):
         clips_around(api, "Gone", 10)
 
+    # Another streamer's point of view of the same moment: their clips only.
+    server.route("GET", "/helix/users", lambda r: (200, {}, {"data": [{"id": "42", "login": "hctuan"}] if r.query["login"] == ["hctuan"] else []}))
+    clip, found = clips_around(api, "Short30", 10, channel="@HCTuan")
+    assert [c["id"] for c in found] == ["Before", "Long60"] and server.calls("GET", "/helix/clips")[-1].query["broadcaster_id"] == ["42"]
+    with pytest.raises(SourceError, match="introuvable"):
+        clips_around(api, "Short30", 10, channel="personne")
+
 
 def test_helix_refreshes_an_expired_app_token(server, http):
     tokens = iter(["old", "new"])

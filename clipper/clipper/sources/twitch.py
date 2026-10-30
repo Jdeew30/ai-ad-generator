@@ -284,11 +284,13 @@ def _discover_helix(
     return [candidate_from_helix(clip, login, games, config) for clip, login in clips]
 
 
-def clips_around(api: TwitchApi, slug: str, minutes: float) -> tuple[dict[str, Any], list[dict[str, Any]]]:
-    """A clip and every clip of its channel made within `minutes` of it, oldest first.
+def clips_around(
+    api: TwitchApi, slug: str, minutes: float, channel: str | None = None
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """A clip and every clip made within `minutes` of it, oldest first: on its own channel, or on `channel`.
 
     Viewers often clip the same moment several times, some longer or starting earlier: when the live's replay is
-    gone, they are the only way to show more of it.
+    gone, they are the only way to show more of it. Another streamer who was there gives another point of view.
     """
     clip = api.clip(slug)
     if clip is None:
@@ -296,9 +298,16 @@ def clips_around(api: TwitchApi, slug: str, minutes: float) -> tuple[dict[str, A
     created = parse_time(clip.get("created_at"))
     if created is None:
         raise SourceError(f"date du clip {slug} inconnue")
+    broadcaster = clip["broadcaster_id"]
+    if channel:
+        login = channel.strip().lstrip("@").lower()
+        user = api.users([login]).get(login)
+        if user is None:
+            raise SourceError(f"chaîne Twitch introuvable : {channel}")
+        broadcaster = user["id"]
     margin = timedelta(minutes=minutes)
-    found = api.clips(clip["broadcaster_id"], created - margin, created + margin, 100)
-    if not any(other.get("id") == clip["id"] for other in found):
+    found = api.clips(broadcaster, created - margin, created + margin, 100)
+    if broadcaster == clip["broadcaster_id"] and not any(other.get("id") == clip["id"] for other in found):
         found.append(clip)
     return clip, sorted(found, key=lambda other: other.get("created_at") or "")
 

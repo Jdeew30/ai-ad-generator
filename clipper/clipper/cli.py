@@ -97,14 +97,17 @@ def cmd_clips(args: argparse.Namespace) -> int:
     slug = clip_slug(args.clip) or args.clip.strip()
     api = TwitchApi(secrets.twitch_client_id or "", secrets.twitch_client_secret or "", Http())
     try:
-        clip, found = clips_around(api, slug, args.minutes)
+        clip, found = clips_around(api, slug, args.minutes, args.channel)
     except SourceError as exc:
         log.error("%s", exc)
         return 1
+    channel = args.channel or clip.get("broadcaster_name") or "?"
     lines = [
-        f"## Clips de {clip.get('broadcaster_name') or '?'} à {args.minutes:g} min de « {clip.get('title') or slug} »",
+        f"## Clips de {channel} à {args.minutes:g} min de « {clip.get('title') or slug} » ({clip.get('broadcaster_name') or '?'})",
         "",
-        "Pour un short plus long, relance le mode `url` avec le lien voulu, et `start` / `end` pour le garder en entier.",
+        "Pour un short plus long, relance le mode `url` avec le lien voulu, et `start` / `end` pour le garder en entier ; "
+        "avec plusieurs liens qui se suivent, ils sont recollés. Un clip avec replay permet aussi le lien "
+        "`https://www.twitch.tv/videos/<replay>` avec un début et une fin.",
         "",
         "| créé (UTC) | durée | vues | replay | titre | lien |",
         "|---|---|---|---|---|---|",
@@ -259,6 +262,7 @@ def build_parser() -> argparse.ArgumentParser:
     clips = commands.add_parser("clips", help="liste les autres clips d'un même moment (pour un short plus long)")
     clips.add_argument("clip", help="lien ou identifiant d'un clip Twitch")
     clips.add_argument("--minutes", type=float, default=10.0, help="écart maximal avec ce clip (défaut : 10 min)")
+    clips.add_argument("--channel", help="une autre chaîne, pour sa POV du même moment (ex. hctuan)")
     clips.set_defaults(func=cmd_clips)
 
     auth = commands.add_parser("auth", help="obtient les jetons à enregistrer en secrets (à lancer sur votre ordinateur)")
