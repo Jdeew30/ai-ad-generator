@@ -72,10 +72,9 @@ twitch:
   clips_per_streamer: 20
   window_hours: 168             # ancienneté maximale d'un clip pour un short (7 jours : les plus vus d'abord)
   min_views: 150               # Claude écarte ensuite les clips sans intérêt
-  # Clips jamais téléchargés si leur titre contient un de ces mots (watch parties, pubs : Claude les refuse toujours).
-  skip_title_words: [worlds, watch party, watchparty, co-stream, costream, publicité, sponsorisé, partenariat]
-  # Clips jamais téléchargés si le titre du LIVE contient un de ces mots : co-streams de retransmissions officielles.
-  skip_live_words: [worlds, watch party, watchparty, co-stream, costream, co stream]
+  # Clips jamais téléchargés si leur titre contient un de ces mots (pubs : Claude les refuse toujours).
+  # Les co-streams d'e-sport (Worlds, RLCS…) et le RP sont les bienvenus : pas de filtre sur le titre du live.
+  skip_title_words: [publicité, sponsorisé, partenariat]
 
 youtube:
   # Moments « les plus revus » des vidéos récentes des YouTubeurs FR. YouTube bloque parfois GitHub : voir YTDLP_COOKIES (README).

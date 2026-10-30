@@ -93,6 +93,7 @@ def test_claude_is_told_what_was_published_lately(server, tmp_path):
     )
     system = json.dumps(body["system"], ensure_ascii=False)
     assert "moment déjà publié" in system and "(partie 2)" in system
+    assert "co-streams de compétition" in system and "scènes de RP" in system  # the owner wants both
 
 
 def test_refusal_and_errors_fall_back_to_the_template(server, tmp_path):
