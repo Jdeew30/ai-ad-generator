@@ -14,11 +14,11 @@ Un robot qui, plusieurs fois par jour :
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
    avec 20 s avant et 8 s après (la mise en place et la fin de la réaction ; le clip seul si le replay est
    indisponible ou muet), puis Claude reçoit la transcription + 4 images de chaque extrait ; il
-   écarte ce qui est risqué (insultes, contenu sexuel, infos privées, musique protégée, films, matchs de
-   foot…), note chaque extrait sur 100 dans l'esprit des best-of Twitch FR comme « La Crème de Twitch »
-   (moments drôles, annonces et actu du milieu, anecdotes, piques entre streamers, duos, exploits, réactions
-   en co-stream d'e-sport, scènes de RP) et ne
-   laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
+   écarte ce qui est risqué (haine, harcèlement, contenu sexuel, infos privées, musique protégée, films,
+   matchs de foot… ; la rage et les gros mots passent), note chaque extrait sur 100 dans l'esprit des
+   best-of Twitch FR comme « La Crème de Twitch » (moments drôles, annonces et actu du milieu, anecdotes,
+   piques entre streamers, duos, exploits, réactions en co-stream d'e-sport, scènes de RP) et ne laisse
+   passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
    l'accroche, le titre, la description et les hashtags. Il connaît les shorts publiés ces 3 derniers jours :
    plusieurs parties d'un même live ou d'une même histoire sont possibles (« (partie 2) » dans le titre),
    jamais deux fois le même moment, même filmé par un autre streamer. Chaque série met en concurrence des
