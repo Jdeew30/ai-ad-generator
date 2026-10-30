@@ -211,9 +211,16 @@ Activée : 68 YouTubeurs FR de tous les domaines (`youtube.channels`), 8 chaîne
 (« Squeezie Gaming », « Djilsi Gaming », « … Vlog », « … 2 ») : seulement les noms « <nom> <suffixe> » avec
 assez d'abonnés, donc ni les chaînes de fans ni les chaînes « Topic » ; 3 recherches par passage, gardées
 14 jours. Une chaîne introuvable est signalée dans le journal du passage. Le robot
-prend leurs vidéos de la semaine (plus de 50 000 vues) et découpe les passages « les plus revus ». Testé
-depuis les serveurs de GitHub le 29/10 : YouTube n'a pas bloqué. S'il bloque un jour (« Sign in to confirm
-you're not a bot »), fournis des cookies (`YTDLP_COOKIES`, format Netscape, idéalement d'un compte secondaire).
+prend leurs vidéos de la semaine (plus de 50 000 vues) et découpe les passages « les plus revus ».
+
+YouTube bloque parfois les serveurs de GitHub (« Sign in to confirm you're not a bot ») : passé le 29/10,
+bloqué le 30/10 au matin. Le passage laisse alors YouTube de côté, et s'il ne trouve rien du tout, Telegram
+te le dit. Pour lever le blocage, fournis des cookies YouTube dans le secret `YTDLP_COOKIES` (format
+Netscape), d'un **compte Google secondaire** :
+1. sur un ordinateur, ouvre une fenêtre de navigation privée et connecte-toi à YouTube avec ce compte ;
+2. dans cette fenêtre, ouvre `https://www.youtube.com/robots.txt` dans un nouvel onglet et ferme l'onglet YouTube ;
+3. exporte les cookies avec l'extension « Get cookies.txt LOCALLY » (à autoriser en navigation privée) ;
+4. ferme la fenêtre privée sans te déconnecter, et colle tout le fichier dans le secret `YTDLP_COOKIES`.
 
 **Content ID** : un extrait de vidéo YouTube republié sur YouTube est presque toujours repéré (revenus
 reversés au YouTubeur, blocage, voire avertissement). Le robot ne le republie donc jamais sur YouTube
@@ -232,6 +239,8 @@ dimanche reste 100 % Twitch.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
 - `twitch.skip_title_words` : les mots qui font écarter un clip avant tout téléchargement (watch parties,
   pubs : « worlds », « publicité »…), Claude les refusant de toute façon.
+- `twitch.skip_live_words` : pareil, mais d'après le titre du **live** dont le clip est tiré : un co-stream des
+  Worlds ou une watch party montre surtout la retransmission officielle, qui n'appartient pas au streamer.
 - `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (20 et 8),
   que Claude garde ou coupe. `0` pour travailler sur le clip seul.
 - `shorts.layout` : `blur` (image entière sur fond flouté, réglage de la chaîne), ou `auto` pour laisser le

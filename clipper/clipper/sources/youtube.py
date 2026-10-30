@@ -23,6 +23,8 @@ SECOND_CHANNEL_SUFFIXES = {"gaming", "games", "jeux", "2", "bis", "vlog", "vlogs
 MIN_SECOND_CHANNEL_FOLLOWERS = 10_000  # a fan's channel with the same name stays out
 RELATED_LOOKUPS_PER_RUN = 3
 RELATED_REFRESH_DAYS = 14
+BLOCKED = ("YouTube bloque ce serveur (« Sign in to confirm you're not a bot ») : pas de vidéo YouTube à ce passage. "
+           "Des cookies YouTube (secret YTDLP_COOKIES) lèvent ce blocage.")
 
 
 def channel_url(ref: str) -> str:
@@ -201,6 +203,9 @@ def discover_youtube(
         try:
             info = ytdlp.info(url)
         except DownloadError as exc:
+            if exc.blocked:
+                log.warning(BLOCKED)
+                return candidates
             log.warning("Vidéo YouTube %s ignorée : %s", url, exc)
             continue
         candidates.extend(candidates_from_info(info, asked, config, now))
@@ -236,6 +241,9 @@ def discover_youtube(
                 try:
                     info = ytdlp.info(entry.get("url") or f"https://www.youtube.com/watch?v={video_id}")
                 except DownloadError as exc:
+                    if exc.blocked:
+                        log.warning(BLOCKED)
+                        return candidates
                     log.warning("Vidéo YouTube %s ignorée : %s", video_id, exc)
                     continue
                 if config.is_blocked((info.get("uploader_id") or "").lstrip("@")):

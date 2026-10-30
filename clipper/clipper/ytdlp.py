@@ -16,15 +16,17 @@ FORMAT = (
 
 
 class DownloadError(Exception):
-    def __init__(self, message: str, permanent: bool = False) -> None:
+    def __init__(self, message: str, permanent: bool = False, blocked: bool = False) -> None:
         super().__init__(message)
         self.permanent = permanent
+        self.blocked = blocked  # YouTube's anti-bot check: every other YouTube request of the run fails too
 
 
 _PERMANENT = re.compile(
     r"no longer available|not found|does not exist|private video|been removed|video unavailable|HTTP Error 404",
     re.IGNORECASE,
 )
+_BOT_CHECK = re.compile(r"confirm you.re not a bot", re.IGNORECASE)
 
 
 class _Logger:
@@ -47,6 +49,7 @@ class YtDlp:
 
     def __init__(self, cookies_file: Path | None = None) -> None:
         self.cookies_file = cookies_file
+        self.blocked = False  # YouTube asked to sign in to prove this server is not a bot
 
     def _options(self, **extra: Any) -> dict[str, Any]:
         options: dict[str, Any] = {
@@ -75,7 +78,9 @@ class YtDlp:
         except yt_dlp.utils.DownloadError as exc:
             message = re.sub(r"\x1b\[[0-9;]*m", "", str(exc)).removeprefix("ERROR: ")
             message = re.sub(r";?\s*please report this issue on.*", "", message, flags=re.S | re.I).strip()
-            raise DownloadError(message, permanent=bool(_PERMANENT.search(message))) from exc
+            blocked = bool(_BOT_CHECK.search(message))
+            self.blocked = self.blocked or blocked
+            raise DownloadError(message, permanent=bool(_PERMANENT.search(message)), blocked=blocked) from exc
 
     def list_flat(self, url: str, limit: int) -> list[dict[str, Any]]:
         info = self._run(url, self._options(extract_flat="in_playlist", playlistend=limit, lazy_playlist=True), False)

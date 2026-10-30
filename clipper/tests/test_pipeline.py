@@ -251,6 +251,20 @@ def test_a_clip_claude_did_not_judge_is_never_posted(media, paths):
     assert "twitch:Alpha-Cam1" not in state.rejected and state.failures["twitch:Alpha-Cam1"]["count"] == 1  # reviewed again later
 
 
+def test_a_run_without_any_clip_tells_the_owner(media, paths):
+    telegram = FakePublisher("telegram")
+    run = clipper(media, paths, clips={}, publishers={"telegram": telegram}, curator=Recording())
+    run.run_shorts()
+    run.run_shorts(dry_run=True)
+    run.ytdlp.blocked = True  # YouTube asked to prove the server is not a bot
+    run.run_shorts()
+    assert telegram.messages == [
+        "⏭️ Pas de short à ce passage : aucun nouveau clip trouvé.",
+        "⏭️ Pas de short à ce passage : aucun nouveau clip trouvé. YouTube bloque le serveur (vérification anti-robot) : "
+        "des cookies YouTube (secret YTDLP_COOKIES) lèvent ce blocage.",
+    ]
+
+
 def test_without_any_answer_from_claude_the_owner_is_told(media, paths):
     telegram = FakePublisher("telegram")
     report = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram}, curator=Partial([])).run_shorts()

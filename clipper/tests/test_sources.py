@@ -106,6 +106,27 @@ def test_helix_discovery_covers_french_twitch_beyond_the_list(server, http):
     assert memory == {"ancienfr": "2026-10-20T10:00:00+00:00", "livefr": NOW.isoformat(), "petitstreamer": NOW.isoformat()}
 
 
+def test_helix_skips_the_clips_of_co_streamed_lives(server, http):
+    server.route("POST", "/oauth2/token", (200, {}, {"access_token": "tok"}))
+    server.route("GET", "/helix/users", (200, {}, {"data": [{"id": "1", "login": "kameto", "display_name": "Kameto"}]}))
+    server.route("GET", "/helix/clips", (200, {}, {"data": [
+        helix_clip("CoStream", 9000, video="v1"), helix_clip("Fun", 800, video="v2"), helix_clip("Deleted", 700, video="v3"),
+        helix_clip("NoVod", 600, video=""),
+    ]}))  # fmt: skip
+    server.route("GET", "/helix/videos", (200, {}, {"data": [
+        {"id": "v1", "title": "WORLDS 2026 : KC vs AL | CO-STREAM !kc"}, {"id": "v2", "title": "On teste le nouveau jeu"},
+    ]}))  # fmt: skip
+    server.route("GET", "/helix/games", (200, {}, {"data": []}))
+    config = build(Config, {"twitch": {"streamers": ["kameto"], "discover_live": False, "skip_live_words": ["worlds", "watch party"]}})
+    api = TwitchApi("cid", "secret", http, base_url=f"{server.url}/helix", token_url=f"{server.url}/oauth2/token")
+    found = discover_twitch(config, Secrets(), http, FakeYtDlp(), now=NOW, window=timedelta(days=7), api=api)
+    assert sorted(c.key for c in found) == ["twitch:Deleted", "twitch:Fun", "twitch:NoVod"]  # an unknown live title keeps its clip
+    assert server.calls("GET", "/helix/videos")[0].query["id"] == ["v1", "v2", "v3"]
+
+    server.route("GET", "/helix/videos", (404, {}, {"error": "Not Found"}))  # none of the replays exists any more
+    assert api.videos(["v8", "v9"]) == {}
+
+
 def test_helix_refreshes_an_expired_app_token(server, http):
     tokens = iter(["old", "new"])
     server.route("POST", "/token", lambda _r: (200, {}, {"access_token": next(tokens)}))
@@ -252,6 +273,44 @@ def test_a_focus_run_only_looks_at_the_sources_asked_for():
     ytdlp = FakeYtDlp(infos={video: info})
     found = discover_youtube(focus_config(config, [video]), ytdlp, now=NOW)
     assert [c.start for c in found] == [1197.0, 5397.0, 8997.0] and ytdlp.listed == []  # peaks of a 3 h 20 live, 40 days old
+
+
+def test_youtube_anti_bot_check_stops_the_youtube_source(monkeypatch):
+    import yt_dlp
+
+    from clipper.sources.youtube import discover_youtube
+    from clipper.ytdlp import YtDlp
+
+    class Refusing:
+        def __init__(self, options):
+            pass
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+        def extract_info(self, url, download):
+            raise yt_dlp.utils.DownloadError("ERROR: [youtube] abcdefghijk: Sign in to confirm you’re not a bot. This helps protect our community.")
+
+    monkeypatch.setattr(yt_dlp, "YoutubeDL", Refusing)
+    real = YtDlp()
+    with pytest.raises(DownloadError) as caught:
+        real.info("https://www.youtube.com/watch?v=abcdefghijk")
+    assert caught.value.blocked and not caught.value.permanent and real.blocked
+
+    class Blocked(FakeYtDlp):
+        def info(self, url):
+            self.asked.append(url)
+            raise DownloadError("Sign in to confirm you're not a bot", blocked=True)
+
+    entries = [{"id": "vid00000001"}, {"id": "vid00000002"}]
+    ytdlp = Blocked({"https://www.youtube.com/@a/videos": entries, "https://www.youtube.com/@b/videos": entries})
+    ytdlp.asked = []
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b"], "tabs": ["videos"]}})
+    assert discover_youtube(config, ytdlp, now=NOW) == []
+    assert len(ytdlp.asked) == 1 and ytdlp.listed == ["https://www.youtube.com/@a/videos"]  # nothing more asked of YouTube
 
 
 def test_discover_puts_the_queue_first(tmp_path: Path):
