@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 import re
 import subprocess
+import unicodedata
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +21,8 @@ _HALLUCINATIONS = re.compile(
     r"amara\.org|sous-titr|merci d'avoir regardé|abonnez-vous|thanks for watching|subtitles by|♪",
     re.IGNORECASE,
 )
+# This many words in a row without a single letter are Whisper looping on game sound (« 9 .9 9 .9 … »), not speech.
+_LOOP = 4
 
 
 class TranscriptionError(Exception):
@@ -88,17 +91,43 @@ class Transcriber:
             )
             words: list[Word] = []
             for segment in segments:
-                if _HALLUCINATIONS.search(segment.text or ""):
+                if _HALLUCINATIONS.search(segment.text or "") or not _lettered(segment.text or ""):
                     continue
                 if segment.no_speech_prob > 0.6 and segment.avg_logprob < -1.0:
                     continue
                 for word in segment.words or []:
                     text = word.word.strip()
-                    if text:
+                    if text and _latin(text):
                         words.append(Word(start=round(word.start, 3), end=round(max(word.end, word.start + 0.05), 3), text=text))
         except Exception as exc:
             raise TranscriptionError(f"transcription de {media.name} impossible : {exc}") from exc
-        return Transcript(words=words, language=getattr(info, "language", None))
+        return Transcript(words=_without_loops(words), language=getattr(info, "language", None))
+
+
+def _lettered(text: str) -> bool:
+    return any(ch.isalpha() for ch in text)
+
+
+def _latin(text: str) -> bool:
+    """Whether every letter is a Latin one, accents included: captions are drawn with a Latin font, and the
+    other scripts only come out of Whisper as junk on game sound (« Fait는ält »)."""
+    return all("LATIN" in unicodedata.name(ch, "") for ch in text if ch.isalpha())
+
+
+def _without_loops(words: list[Word]) -> list[Word]:
+    """`words` without the runs of _LOOP or more words that have no letter."""
+    kept: list[Word] = []
+    run: list[Word] = []
+    for word in [*words, None]:
+        if word is not None and not _lettered(word.text):
+            run.append(word)
+            continue
+        if len(run) < _LOOP:
+            kept.extend(run)
+        run = []
+        if word is not None:
+            kept.append(word)
+    return kept
 
 
 def shift_words(words: list[Word], start: float, end: float | None) -> list[Word]:

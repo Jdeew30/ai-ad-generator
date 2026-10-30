@@ -74,3 +74,24 @@ def test_transcriber_feeds_samples_and_drops_hallucinations(tmp_path):
     assert isinstance(transcriber._model.audio, np.ndarray)
     assert transcriber._model.options["word_timestamps"] and transcriber._model.options["initial_prompt"] == "Live de Squeezie."
     assert [(w.text, w.start, w.end) for w in transcript.words] == [("Bonjour", 0.1, 0.5), ("à", 0.5, 0.6), ("tous", 0.6, 0.65)]
+
+
+@requires_ffmpeg
+def test_whisper_junk_on_game_sound_is_not_captioned(tmp_path):
+    tone = tmp_path / "tone.wav"
+    ffmpeg("-f", "lavfi", "-i", "sine=f=440:d=3", str(tone))
+    loop = [(0.1 * i, 0.1 * i + 0.1, token) for i, token in enumerate([" 9", " .9"] * 3)]
+
+    class FakeModel:
+        def transcribe(self, audio, **options):
+            return iter([
+                segment(" 9 .9 9 .9 9 .9 Nan, nan ?", [*loop, (1.0, 1.2, " Nan,"), (1.2, 1.4, " nan"), (1.4, 1.5, " ?")]),
+                segment(" 9 .9", [(1.6, 1.7, " 9"), (1.7, 1.8, " .9")]),  # not a single letter
+                segment(" Fait는ält Aïe, il a 16 ans", [(2.0, 2.3, " Fait는ält"), (2.3, 2.5, " Aïe,"), (2.5, 2.6, " il"),
+                                                    (2.6, 2.7, " a"), (2.7, 2.8, " 16"), (2.8, 2.9, " ans")]),
+            ]), SimpleNamespace(language="fr")  # fmt: skip
+
+    transcriber = Transcriber("small", "fr")
+    transcriber._model = FakeModel()
+    transcript = transcriber.transcribe(tone)
+    assert [w.text for w in transcript.words] == ["Nan,", "nan", "?", "Aïe,", "il", "a", "16", "ans"]
