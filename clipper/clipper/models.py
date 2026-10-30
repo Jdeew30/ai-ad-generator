@@ -51,6 +51,7 @@ class Candidate:
     thumbnail_url: str | None = None
     heat: float | None = None  # YouTube "most replayed" intensity, 0..1
     manual: bool = False  # queued by hand: skips popularity filters and AI rejection
+    parts: list[str] = field(default_factory=list)  # clips of one moment put back together, in order (url is the first)
     score: float = 0.0
 
     @property

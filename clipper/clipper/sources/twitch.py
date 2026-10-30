@@ -99,6 +99,10 @@ class TwitchApi:
         }
         return self.get("clips", params).get("data", [])
 
+    def clip(self, slug: str) -> dict[str, Any] | None:
+        data = self.get("clips", {"id": slug}).get("data", [])
+        return data[0] if data else None
+
     def game_clips(self, game_id: str, started_at: datetime, ended_at: datetime, first: int) -> list[dict[str, Any]]:
         """The most viewed clips of a category, every channel and language mixed."""
         params = {"game_id": game_id, "started_at": _rfc3339(started_at), "ended_at": _rfc3339(ended_at), "first": max(1, min(first, 100))}
@@ -278,6 +282,25 @@ def _discover_helix(
         log.warning("Noms des jeux indisponibles : %s", exc)
         games = {}
     return [candidate_from_helix(clip, login, games, config) for clip, login in clips]
+
+
+def clips_around(api: TwitchApi, slug: str, minutes: float) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """A clip and every clip of its channel made within `minutes` of it, oldest first.
+
+    Viewers often clip the same moment several times, some longer or starting earlier: when the live's replay is
+    gone, they are the only way to show more of it.
+    """
+    clip = api.clip(slug)
+    if clip is None:
+        raise SourceError(f"clip Twitch introuvable : {slug}")
+    created = parse_time(clip.get("created_at"))
+    if created is None:
+        raise SourceError(f"date du clip {slug} inconnue")
+    margin = timedelta(minutes=minutes)
+    found = api.clips(clip["broadcaster_id"], created - margin, created + margin, 100)
+    if not any(other.get("id") == clip["id"] for other in found):
+        found.append(clip)
+    return clip, sorted(found, key=lambda other: other.get("created_at") or "")
 
 
 def _skip_lives(config: Config, api: TwitchApi, clips: list[tuple[dict[str, Any], str]]) -> list[tuple[dict[str, Any], str]]:

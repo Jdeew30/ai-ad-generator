@@ -66,3 +66,29 @@ def test_cli_reports_config_errors(tmp_path, capsys):
     bad = tmp_path / "config.yaml"
     bad.write_text("shorts:\n  layout: diagonal\n", encoding="utf-8")
     assert main(["--config", str(bad), "run", "--dry-run"]) == 2
+
+
+def test_cli_lists_the_other_clips_of_a_moment(monkeypatch, capsys):
+    from clipper.sources import twitch
+
+    class FakeApi:
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def clip(self, slug):
+            return {"id": slug, "broadcaster_id": "7", "broadcaster_name": "Inoxtag", "title": "annonce skin",
+                    "created_at": "2026-10-24T19:31:23Z", "duration": 30, "view_count": 1334, "url": f"https://clips.twitch.tv/{slug}"}  # fmt: skip
+
+        def clips(self, broadcaster_id, started_at, ended_at, first):
+            return [{"id": "Long60", "created_at": "2026-10-24T19:31:50Z", "duration": 60.2, "view_count": 400,
+                     "title": "le skin | en entier", "url": "https://clips.twitch.tv/Long60", "video_id": "", "vod_offset": None}]  # fmt: skip
+
+    monkeypatch.setattr(twitch, "TwitchApi", FakeApi)
+    monkeypatch.setenv("TWITCH_CLIENT_ID", "cid")
+    monkeypatch.setenv("TWITCH_CLIENT_SECRET", "secret")
+    assert main(["clips", "https://www.twitch.tv/inoxtag/clip/Short30"]) == 0
+    out = capsys.readouterr().out
+    assert "| 2026-10-24 19:31:23 | 30 s | 1334 | — | annonce skin ← ce clip |" in out
+    assert "| 2026-10-24 19:31:50 | 60 s | 400 | — | le skin / en entier | https://clips.twitch.tv/Long60 |" in out
+    monkeypatch.delenv("TWITCH_CLIENT_ID")
+    assert main(["clips", "Short30"]) == 2

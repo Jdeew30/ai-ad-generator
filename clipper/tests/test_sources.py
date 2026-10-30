@@ -127,6 +127,31 @@ def test_helix_skips_the_clips_of_co_streamed_lives(server, http):
     assert api.videos(["v8", "v9"]) == {}
 
 
+def test_the_other_clips_of_a_moment_are_listed(server, http):
+    from clipper.sources.twitch import SourceError, clips_around
+
+    server.route("POST", "/oauth2/token", (200, {}, {"access_token": "tok"}))
+
+    def clips(request):
+        if "id" in request.query:
+            if request.query["id"] == ["Gone"]:
+                return 200, {}, {"data": []}
+            return 200, {}, {"data": [{**helix_clip("Short30", 1334, video=""), "created_at": "2026-10-24T19:31:23Z", "duration": 30}]}
+        return 200, {}, {"data": [
+            {**helix_clip("Long60", 400, video=""), "created_at": "2026-10-24T19:31:50Z", "duration": 60},
+            {**helix_clip("Before", 900, video=""), "created_at": "2026-10-24T19:29:02Z", "duration": 45},
+        ]}  # fmt: skip
+
+    server.route("GET", "/helix/clips", clips)
+    api = TwitchApi("cid", "secret", http, base_url=f"{server.url}/helix", token_url=f"{server.url}/oauth2/token")
+    clip, found = clips_around(api, "Short30", 10)
+    assert clip["id"] == "Short30" and [c["id"] for c in found] == ["Before", "Short30", "Long60"]  # oldest first, itself included
+    window = server.calls("GET", "/helix/clips")[1].query
+    assert window["broadcaster_id"] == ["1"] and window["started_at"] == ["2026-10-24T19:21:23Z"] and window["ended_at"] == ["2026-10-24T19:41:23Z"]
+    with pytest.raises(SourceError):
+        clips_around(api, "Gone", 10)
+
+
 def test_helix_refreshes_an_expired_app_token(server, http):
     tokens = iter(["old", "new"])
     server.route("POST", "/token", lambda _r: (200, {}, {"access_token": next(tokens)}))
@@ -206,6 +231,16 @@ def test_manual_queue(tmp_path: Path):
     with pytest.raises(QueueError, match="debut"):
         load_queue(queue)
     assert load_queue(tmp_path / "missing.yaml") == []
+
+    from clipper.sources.manual import joined_candidate, links
+
+    assert links(" https://clips.twitch.tv/A,https://clips.twitch.tv/B\n https://clips.twitch.tv/C ") == [
+        "https://clips.twitch.tv/A", "https://clips.twitch.tv/B", "https://clips.twitch.tv/C",
+    ]  # fmt: skip
+    joined = joined_candidate(["https://www.twitch.tv/inoxtag/clip/A", "https://www.twitch.tv/inoxtag/clip/B"])
+    assert joined.key.startswith("manual:") and joined.parts[1].endswith("/B") and joined.streamer_login == "inoxtag"
+    with pytest.raises(QueueError):
+        joined_candidate(["https://clips.twitch.tv/A", "pas un lien"])
 
 
 def test_youtube_channels_take_turns():

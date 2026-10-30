@@ -436,6 +436,19 @@ def test_single_url_mode(media, paths):
     assert youtube.calls and State.load(paths.state).posted["twitch:Gamma-Cam9"]
 
 
+def test_clips_of_one_moment_given_together_are_joined_and_kept_whole(media, paths):
+    telegram = FakePublisher("telegram")
+    run = clipper(media, paths, clips={}, publishers={"telegram": telegram}, curator=Marks({}))
+    report = run.run_shorts(url="https://www.twitch.tv/gamma/clip/Gamma-Cam9  https://www.twitch.tv/gamma/clip/Gamma-2")
+    [outcome] = report.published
+    assert outcome.candidate.parts == ["https://www.twitch.tv/gamma/clip/Gamma-Cam9", "https://www.twitch.tv/gamma/clip/Gamma-2"]
+    assert outcome.candidate.key.startswith("manual:") and outcome.candidate.streamer_login == "gamma"
+    assert outcome.duration == pytest.approx(12.0, abs=0.5)  # two 6 s clips that do not overlap, nothing cut by the review
+    assert run.ytdlp.downloads[-2:] == outcome.candidate.parts
+    report = run.run_shorts(url="https://clips.twitch.tv/A https://clips.twitch.tv/B", start="10", end="20")
+    assert report.errors and "plusieurs clips" in report.errors[0]
+
+
 def test_weekly_compilation(media, paths):
     clips = {
         "alpha": [entry("Alpha-Cam1", 5000, 20), entry("Alpha-2", 3000, 40)],

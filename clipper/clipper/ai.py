@@ -239,6 +239,8 @@ def _validated(raw: dict[str, Any], item: ReviewItem, config: Config) -> Review:
             trim_start, trim_end = None, None
     except (TypeError, ValueError):
         pass
+    if candidate.manual and (candidate.parts or (candidate.start is not None and candidate.end is not None)):
+        trim_start, trim_end = None, None  # the owner picked this very section (or these clips): it is kept whole
     verdict = raw.get("verdict") if raw.get("verdict") in {"publish", "reject"} else "publish"
     score = max(0.0, min(100.0, float(raw.get("score") or 0)))
     meta = ShortMeta(
