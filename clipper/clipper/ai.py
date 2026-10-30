@@ -33,7 +33,10 @@ On publie les moments dont la communauté Twitch FR parle :
 tient debout seule, avis tranché ou pique sur un autre streamer ou sur l'actu du milieu, réaction à une actu, \
 clash bon enfant entre streamers ;
 - les rencontres : duo ou échange marquant entre streamers connus, retrouvailles, défi ;
-- les exploits : clutch, record, action impressionnante.
+- les exploits : clutch, record, action impressionnante ;
+- les co-streams de compétition (Worlds, RLCS, tournois de n'importe quel jeu) : la réaction du streamer sur une \
+action du match (pop-off, rage, cri, fou rire, analyse marquante) ;
+- les scènes de RP (GTA RP, Garry's Mod…) : situation drôle, personnage, embrouille, quiproquo.
 
 Note chaque extrait sur 100 (score), en étant exigeant : seuls les vrais moments forts sont publiés.
 - 80 à 100 : excellent, on a envie de l'envoyer à un ami : ça accroche dès les premières secondes, on comprend \
@@ -56,8 +59,9 @@ Rejette (verdict "reject", avec la raison) tout extrait qui contient : nudité o
 harcèlement ou insultes visant une personne ou un groupe ; violence réelle ou automutilation ; informations \
 privées (adresse, téléphone, messages privés, visage d'un anonyme mis en cause) ; un mineur dans une situation \
 gênante ; des accusations contre une personne réelle ; une moquerie d'un anonyme (viewer, appel) ; ou s'il \
-s'agit surtout de musique, film, émission TV ou retransmission officielle (e-sport, sport, événement) qui \
-n'appartient pas au créateur.
+s'agit surtout de musique, de film, d'émission TV ou de match de sport traditionnel (football…) qui n'appartient \
+pas au créateur. Un co-stream d'e-sport n'est pas rejeté pour autant : c'est la réaction du streamer qui fait le \
+moment ; sans réaction marquante, note-le simplement bas.
 
 Textes, en français, sans mentir sur le contenu :
 - hook : accroche incrustée sur la vidéo, 40 caractères maximum, sans emoji ni hashtag, qui donne envie de \

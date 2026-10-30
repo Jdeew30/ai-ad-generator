@@ -14,9 +14,10 @@ Un robot qui, plusieurs fois par jour :
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
    avec 20 s avant et 8 s après (la mise en place et la fin de la réaction ; le clip seul si le replay est
    indisponible ou muet), puis Claude reçoit la transcription + 4 images de chaque extrait ; il
-   écarte ce qui est risqué (insultes, contenu sexuel, infos privées, musique protégée, retransmissions
-   officielles…), note chaque extrait sur 100 dans l'esprit des best-of Twitch FR comme « La Crème de Twitch »
-   (moments drôles, annonces et actu du milieu, anecdotes, piques entre streamers, duos, exploits) et ne
+   écarte ce qui est risqué (insultes, contenu sexuel, infos privées, musique protégée, films, matchs de
+   foot…), note chaque extrait sur 100 dans l'esprit des best-of Twitch FR comme « La Crème de Twitch »
+   (moments drôles, annonces et actu du milieu, anecdotes, piques entre streamers, duos, exploits, réactions
+   en co-stream d'e-sport, scènes de RP) et ne
    laisse passer que les vrais moments forts (60 minimum), coupe les temps morts et écrit
    l'accroche, le titre, la description et les hashtags. Il connaît les shorts publiés ces 3 derniers jours :
    plusieurs parties d'un même live ou d'une même histoire sont possibles (« (partie 2) » dans le titre),
@@ -237,10 +238,10 @@ dimanche reste 100 % Twitch.
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
-- `twitch.skip_title_words` : les mots qui font écarter un clip avant tout téléchargement (watch parties,
-  pubs : « worlds », « publicité »…), Claude les refusant de toute façon.
-- `twitch.skip_live_words` : pareil, mais d'après le titre du **live** dont le clip est tiré : un co-stream des
-  Worlds ou une watch party montre surtout la retransmission officielle, qui n'appartient pas au streamer.
+- `twitch.skip_title_words` : les mots qui font écarter un clip avant tout téléchargement (pubs :
+  « publicité », « sponsorisé »…), Claude les refusant de toute façon.
+- `twitch.skip_live_words` : pareil, mais d'après le titre du **live** dont le clip est tiré. Vide par défaut :
+  les co-streams d'e-sport (Worlds, RLCS…) sont les bienvenus, Claude y juge la réaction du streamer.
 - `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (20 et 8),
   que Claude garde ou coupe. `0` pour travailler sur le clip seul.
 - `shorts.layout` : `blur` (image entière sur fond flouté, réglage de la chaîne), ou `auto` pour laisser le
