@@ -476,6 +476,11 @@ class Clipper:
             ranked = spread(rank(found, self.state, config, now=self.now))
         if wanted <= 0 or not ranked:
             log.info("Aucun candidat à traiter.")
+            if wanted > 0 and not dry_run:
+                self.notify("⏭️ Pas de short à ce passage : aucun nouveau clip trouvé." + (
+                    " YouTube bloque le serveur (vérification anti-robot) : des cookies YouTube (secret YTDLP_COOKIES) "
+                    "lèvent ce blocage." if getattr(self.ytdlp, "blocked", False) else ""
+                ))
             return
 
         use_ai = self.curator is not None

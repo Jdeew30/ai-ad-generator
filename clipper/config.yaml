@@ -74,9 +74,11 @@ twitch:
   min_views: 150               # Claude écarte ensuite les clips sans intérêt
   # Clips jamais téléchargés si leur titre contient un de ces mots (watch parties, pubs : Claude les refuse toujours).
   skip_title_words: [worlds, watch party, watchparty, co-stream, costream, publicité, sponsorisé, partenariat]
+  # Clips jamais téléchargés si le titre du LIVE contient un de ces mots : co-streams de retransmissions officielles.
+  skip_live_words: [worlds, watch party, watchparty, co-stream, costream, co stream]
 
 youtube:
-  # Moments « les plus revus » des vidéos récentes des YouTubeurs FR (testé depuis GitHub le 29/10 : pas bloqué).
+  # Moments « les plus revus » des vidéos récentes des YouTubeurs FR. YouTube bloque parfois GitHub : voir YTDLP_COOKIES (README).
   # Ces extraits ne sont pas republiés sur YouTube (Content ID) : publish.youtube.youtube_sources.
   enabled: true
   # YouTubeurs FR de tous les domaines. Une chaîne introuvable est signalée dans le journal du passage.

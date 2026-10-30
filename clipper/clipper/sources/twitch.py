@@ -9,6 +9,7 @@ from typing import Any
 from ..config import Config, Secrets
 from ..http import Http, HttpError
 from ..models import Candidate, parse_time
+from ..selection import excluded_title
 from ..ytdlp import DownloadError, YtDlp
 
 log = logging.getLogger(__name__)
@@ -110,6 +111,19 @@ class TwitchApi:
     def streams(self, language: str, first: int) -> list[dict[str, Any]]:
         params = {"language": language, "type": "live", "first": max(1, min(first, 100))}
         return self.get("streams", params).get("data", [])
+
+    def videos(self, ids: Iterable[str]) -> dict[str, str]:
+        """Titles of the lives (VODs) the clips were cut from, by video id."""
+        titles: dict[str, str] = {}
+        for batch in _chunks(sorted({i for i in ids if i}), 100):
+            try:
+                data = self.get("videos", {"id": batch}).get("data", [])
+            except HttpError as exc:
+                if exc.status == 404:  # none of these replays exists any more
+                    continue
+                raise
+            titles.update((video["id"], video.get("title") or "") for video in data)
+        return titles
 
     def games(self, ids: Iterable[str]) -> dict[str, str]:
         names: dict[str, str] = {}
@@ -256,12 +270,31 @@ def _discover_helix(
         if memory is not None:
             memory.update({login: seen_at for _, login in extra})
         clips.extend(extra)
+    if settings.skip_live_words:
+        clips = _skip_lives(config, api, clips)
     try:
         games = api.games(clip.get("game_id") or "" for clip, _ in clips)
     except HttpError as exc:
         log.warning("Noms des jeux indisponibles : %s", exc)
         games = {}
     return [candidate_from_helix(clip, login, games, config) for clip, login in clips]
+
+
+def _skip_lives(config: Config, api: TwitchApi, clips: list[tuple[dict[str, Any], str]]) -> list[tuple[dict[str, Any], str]]:
+    """Drops, before any download, the clips cut from a live titled after a co-stream or a watch party ("Worlds"...).
+
+    Their picture is mostly the official broadcast, which the streamer does not own: Claude rejects them anyway.
+    """
+    try:
+        titles = api.videos(clip.get("video_id") or "" for clip, _ in clips)
+    except HttpError as exc:
+        log.warning("Titres des lives indisponibles : %s", exc)
+        return clips
+    words = config.twitch.skip_live_words
+    kept = [(clip, login) for clip, login in clips if not excluded_title(titles.get(clip.get("video_id") or "", ""), words)]
+    if len(kept) < len(clips):
+        log.info("Clips de co-stream ou de watch party écartés (titre du live) : %d", len(clips) - len(kept))
+    return kept
 
 
 def _category_clips(

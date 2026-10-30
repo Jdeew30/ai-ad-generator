@@ -40,6 +40,7 @@ class TwitchConfig:
     window_hours: int = 168
     min_views: int = 300
     skip_title_words: list[str] = field(default_factory=list)  # titles of watch parties and ads, never downloaded
+    skip_live_words: list[str] = field(default_factory=list)  # live titles (co-streams, watch parties) whose clips are skipped
     remember_live: int = 0  # channels seen live or in a category's top clips, looked at again for 14 days (at most)
     discover_categories: int = 0  # top categories whose most viewed clips in discover_language are taken
 
