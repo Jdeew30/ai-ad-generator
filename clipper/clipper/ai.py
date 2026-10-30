@@ -55,13 +55,15 @@ publié (même scène, même blague), même filmé depuis le live d'un autre str
 "reject", raison « moment déjà publié ». De même, quand plusieurs candidats montrent exactement le même moment, \
 garde seulement le meilleur et rejette les autres.
 
-Rejette (verdict "reject", avec la raison) tout extrait qui contient : nudité ou contenu sexuel ; haine, \
-harcèlement ou insultes visant une personne ou un groupe ; violence réelle ou automutilation ; informations \
-privées (adresse, téléphone, messages privés, visage d'un anonyme mis en cause) ; un mineur dans une situation \
-gênante ; des accusations contre une personne réelle ; une moquerie d'un anonyme (viewer, appel) ; ou s'il \
-s'agit surtout de musique, de film, d'émission TV ou de match de sport traditionnel (football…) qui n'appartient \
-pas au créateur. Un co-stream d'e-sport n'est pas rejeté pour autant : c'est la réaction du streamer qui fait le \
-moment ; sans réaction marquante, note-le simplement bas.
+Rejette (verdict "reject", avec la raison) tout extrait qui contient : nudité ou contenu sexuel ; haine (propos \
+racistes, homophobes, sexistes… visant quelqu'un pour ce qu'il est) ; harcèlement ou attaque d'une personne réelle \
+en dehors du jeu ; violence réelle ou automutilation ; informations privées (adresse, téléphone, messages privés, \
+visage d'un anonyme mis en cause) ; un mineur dans une situation gênante ; des accusations contre une personne \
+réelle ; une moquerie d'un anonyme (viewer, appel) ; ou s'il s'agit surtout de musique, de film, d'émission TV ou \
+de match de sport traditionnel (football…) qui n'appartient pas au créateur. Un co-stream d'e-sport n'est pas \
+rejeté pour autant : c'est la réaction du streamer qui fait le moment ; sans réaction marquante, note-le simplement \
+bas. La rage et les gros mots font partie du show : un streamer qui s'énerve contre le jeu, une action ou un \
+adversaire du match, même en l'insultant sur le coup, n'est pas une raison de refuser.
 
 Textes, en français, sans mentir sur le contenu :
 - hook : accroche incrustée sur la vidéo, 40 caractères maximum, sans emoji ni hashtag, qui donne envie de \
