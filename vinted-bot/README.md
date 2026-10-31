@@ -30,12 +30,27 @@ Console PS5 Slim + 2 manettes
 
 ## Démarrage rapide
 
-Il faut **Python 3.11 ou plus récent** ([python.org](https://www.python.org/downloads/)). Aucune
-autre installation n'est nécessaire.
+### En double-clic (le plus simple)
+
+1. Installez **Python 3.11 ou plus récent** depuis [python.org](https://www.python.org/downloads/).
+   Sous Windows, **cochez « Add python.exe to PATH »** pendant l'installation.
+2. Double-cliquez sur **`Lancer VintedBot (Windows).bat`** ou **`Lancer VintedBot (Mac).command`**.
+   Sur Mac, la première fois, faites un clic droit puis « Ouvrir » si macOS bloque le fichier.
+3. L'assistant vous guide : choisissez Telegram, puis collez le token donné par **@BotFather**.
+   Il trouve tout seul votre conversation et vous envoie un message de test.
+4. Le bot démarre. **Laissez la fenêtre ouverte** : les alertes arrivent sur votre téléphone.
+   Pour arrêter, fermez la fenêtre. Pour relancer, double-cliquez à nouveau.
+
+Pour modifier vos recherches, ouvrez `config.toml` avec le Bloc-notes ou TextEdit.
+
+### En ligne de commande
+
+Aucune autre installation que Python n'est nécessaire.
 
 ```bash
 cd vinted-bot
-python -m vintedbot init                      # crée config.toml et .env
+python -m vintedbot setup                     # assistant : config, Telegram ou Discord
+python -m vintedbot init                      # (ou) crée seulement config.toml et .env
 python -m vintedbot doctor                    # vérifie que Vinted répond
 python -m vintedbot analyze "switch oled" --preset console --min-price 100
 python -m vintedbot check                     # marché + meilleures offres actuelles de vos recherches
@@ -144,6 +159,7 @@ Testez ensuite avec `python -m vintedbot test-notify`.
 
 | Commande | Rôle |
 |---|---|
+| `python -m vintedbot setup` | Assistant : crée la configuration et connecte Telegram ou Discord |
 | `python -m vintedbot init` | Crée `config.toml` et `.env` |
 | `python -m vintedbot doctor` | Vérifie la connexion à Vinted et l'analyse des annonces |
 | `python -m vintedbot analyze "produit"` | Étude de marché et prix d'achat maximum (`--preset`, `--min-price`, `--min-profit`, `--include`, `--exclude`, `--pages`) |

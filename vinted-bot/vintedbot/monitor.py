@@ -144,7 +144,10 @@ class Monitor:
             cycles += 1
             if max_cycles is not None and cycles >= max_cycles:
                 break
-            self.stop_event.wait(max(1.0, min(due.values()) - self.clock()))
+            # attente par tranches d'une seconde : Ctrl+C reste immédiat, y compris sous Windows
+            deadline = time.monotonic() + max(1.0, min(due.values()) - self.clock())
+            while not self.stop_event.is_set() and time.monotonic() < deadline:
+                self.stop_event.wait(min(1.0, deadline - time.monotonic()))
         self._text("🔴 VintedBot arrêté.")
 
     def _safe_check(self, watch: Watch, due: dict[str, float]) -> bool:

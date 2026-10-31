@@ -34,6 +34,8 @@ def build_parser() -> argparse.ArgumentParser:
     base.add_argument("--env", default=".env", help="fichier de secrets (défaut : .env)")
 
     sub.add_parser("init", help="crée config.toml et .env à partir des modèles")
+    st = sub.add_parser("setup", parents=[base], help="assistant : configure Telegram ou Discord pas à pas")
+    st.add_argument("--if-needed", action="store_true", help="ne fait rien si la configuration est déjà faite")
     sub.add_parser("presets", help="liste les profils d'expert (console, sneakers...)")
     sub.add_parser("doctor", parents=[base], help="vérifie la connexion à Vinted")
 
@@ -59,7 +61,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    handlers = {"init": cmd_init, "presets": cmd_presets, "doctor": cmd_doctor, "analyze": cmd_analyze,
+    handlers = {"init": cmd_init, "setup": cmd_setup, "presets": cmd_presets, "doctor": cmd_doctor, "analyze": cmd_analyze,
                 "check": cmd_check, "run": cmd_run, "test-notify": cmd_test_notify, "stats": cmd_stats}
     try:
         return handlers[args.command](args)
@@ -71,6 +73,9 @@ def main(argv: list[str] | None = None) -> int:
         return 3
     except VintedError as e:
         print(f"Erreur Vinted : {e}", file=sys.stderr)
+        return 3
+    except OSError as e:
+        print(f"Impossible de joindre Vinted ({e}). Vérifiez votre connexion internet.", file=sys.stderr)
         return 3
     except KeyboardInterrupt:
         return 130
@@ -107,6 +112,11 @@ def cmd_init(args: argparse.Namespace) -> int:
             shutil.copyfile(PROJECT_DIR / template, target)
             print(f"{target} créé — à personnaliser")
     return 0
+
+
+def cmd_setup(args: argparse.Namespace) -> int:
+    from .setup_wizard import run_setup
+    return run_setup(Path(args.config), Path(args.env), if_needed=args.if_needed)
 
 
 def cmd_presets(args: argparse.Namespace) -> int:
