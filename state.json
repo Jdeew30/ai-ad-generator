@@ -514,6 +514,54 @@
    "title": "Kameto vit le tirage du round 5 des Worlds en direct (KC)",
    "url": "https://www.twitch.tv/kamet0/clip/SuspiciousEnchantingCurlewTakeNRG-qSV31CNiDWiK_FA3",
    "views": 1136
+  },
+  "youtube:2wJuFzwBWkI@1883-1943": {
+   "at": "2026-10-31T17:08:08.471317+00:00",
+   "created_at": "2026-10-31T13:30:36+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "43",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "youtube",
+   "span": [
+    "yt:2wJuFzwBWkI",
+    1883.0,
+    1943.0
+   ],
+   "streamer": "Inoxtag",
+   "streamer_login": "inoxtag",
+   "title": "Inoxtag et sa team après un crash d'avion : « On est des forces spéciales ! »",
+   "url": "https://www.youtube.com/watch?v=2wJuFzwBWkI",
+   "views": 620046
+  },
+  "youtube:_hzgpE0NXR8@3520-3580": {
+   "at": "2026-10-31T17:06:56.335106+00:00",
+   "created_at": "2026-10-25T16:25:31+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "42",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "youtube",
+   "span": [
+    "yt:_hzgpE0NXR8",
+    3520.0,
+    3580.0
+   ],
+   "streamer": "Amixem",
+   "streamer_login": "amixem",
+   "title": "Amixem & Cyprien : le plan d'évasion avec des draps… alors qu'il y a une porte",
+   "url": "https://www.youtube.com/watch?v=_hzgpE0NXR8",
+   "views": 5999380
   }
  },
  "rejected": {
@@ -1100,6 +1148,38 @@
   "twitch:WittyObedientSkunkCclamChamp-SsaS-OKIEopZ-85n": {
    "at": "2026-10-31T15:46:06.336632+00:00",
    "reason": "revue : Bavardage d'initiés pendant le visionnage d'une keynote : Locklear plaisante sur un futur poste de CEO de M8. C'est peu compréhensible sans contexte et il n'y a pas de vraie chute. L'annonce M8 x WoW a déjà été publiée."
+  },
+  "youtube:BByplh9JRTs@1052-1112": {
+   "at": "2026-10-31T17:06:16.386160+00:00",
+   "reason": "revue : Discussion de stratégie d'Undercover très difficile à comprendre sans le contexte du jeu, sans vraie chute."
+  },
+  "youtube:BByplh9JRTs@1355-1415": {
+   "at": "2026-10-31T17:06:16.386219+00:00",
+   "reason": "revue : Phase de vote d'Undercover décousue : le moment des indices n'est compréhensible qu'avec le contexte et la transcription est confuse."
+  },
+  "youtube:BByplh9JRTs@239-299": {
+   "at": "2026-10-31T17:00:12.441599+00:00",
+   "reason": "revue : Tour d'Undercover sans enjeu clair ni chute, réservé à ceux qui ont suivi la partie."
+  },
+  "youtube:BByplh9JRTs@2497-2557": {
+   "at": "2026-10-31T17:00:12.441761+00:00",
+   "reason": "revue : La blague « Obispo » n'a de sens qu'avec le contexte de la partie d'Undercover ; il n'y a pas de chute autonome."
+  },
+  "youtube:UCYHu98cvEA@1691-1751": {
+   "at": "2026-10-31T17:06:16.386087+00:00",
+   "reason": "revue : Action de Fortnite confuse, sans moment fort lisible ni vraie chute : la séquence est difficile à suivre hors contexte."
+  },
+  "youtube:UCYHu98cvEA@227-287": {
+   "at": "2026-10-31T17:00:12.441659+00:00",
+   "reason": "revue : Présentation du skin d'Inoxtag, sujet déjà largement couvert, suivie d'un gameplay confus sans action marquante."
+  },
+  "youtube:YOhFQb4f2H4@348-408": {
+   "at": "2026-10-31T17:00:12.441712+00:00",
+   "reason": "revue : Bavardage de vlog sur la salle de sport, sans vraie chute."
+  },
+  "youtube:_hzgpE0NXR8@4348-4408": {
+   "at": "2026-10-31T17:00:12.441527+00:00",
+   "reason": "revue : Outro de vidéo, remerciements et sponsor (NordVPN) : aucun moment fort."
   }
  },
  "reviews": {
