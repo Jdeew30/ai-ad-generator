@@ -23,10 +23,12 @@ def helix_clip(slug: str, views: int, *, offset=120, video="v1", login_id="1", n
 
 
 class FakeYtDlp:
-    def __init__(self, listings=None, infos=None):
+    def __init__(self, listings=None, infos=None, comments=None):
         self.listings = listings or {}
         self.infos = infos or {}
+        self.comments_by_url = comments or {}
         self.listed: list[str] = []
+        self.commented: list[str] = []
 
     def list_flat(self, url, limit):
         self.listed.append(url)
@@ -39,6 +41,10 @@ class FakeYtDlp:
 
     def info(self, url):
         return self.infos[url]
+
+    def comments(self, url, limit):
+        self.commented.append(url)
+        return self.comments_by_url.get(url, [])[:limit]
 
 
 def test_helix_discovery(server, http):
@@ -267,15 +273,39 @@ def test_the_log_tells_why_youtube_videos_gave_nothing(caplog):
         return {"id": video_id, "uploader_id": "@a", "view_count": 90000, "duration": 1000,
                 "timestamp": (NOW - timedelta(days=days)).timestamp(), "heatmap": heatmap, **values}  # fmt: skip
 
-    videos = [video("old", days=30), video("nomap", heatmap=None), video("flat", heat=0.2), video("good")]
-    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a"], "tabs": ["videos"], "videos_per_channel": 4}})
+    videos = [video("old", days=30), video("nomap", heatmap=None), video("flat", heat=0.2), video("good"),
+              video("talked", heatmap=None, title="Le pari")]  # fmt: skip
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a"], "tabs": ["videos"], "videos_per_channel": 5}})
+    watch = "https://www.youtube.com/watch?v={}".format
     ytdlp = FakeYtDlp(listings={"https://www.youtube.com/@a/videos": [{"id": v["id"]} for v in videos]},
-                      infos={f"https://www.youtube.com/watch?v={v['id']}": v for v in videos})  # fmt: skip
+                      infos={watch(v["id"]): v for v in videos},
+                      comments={watch("talked"): [{"text": "8:20 je suis mort 😂", "like_count": 40}]})  # fmt: skip
     with caplog.at_level("INFO", logger="clipper"):
         found = discover_youtube(config, ytdlp, now=NOW)
-    assert [c.key.split("@")[0] for c in found] == ["youtube:good"]
-    assert ("YouTube : 1 passage(s) retenu(s) ; vidéos écartées : trop ancienne (1), sans « moments les plus revus » (1), "
-            "aucun passage assez revu (1)") in caplog.text
+    assert [c.key.split("@")[0] for c in found] == ["youtube:good", "youtube:talked"]
+    assert ytdlp.commented == [watch("nomap"), watch("talked")]  # only where YouTube gave no "most replayed" data
+    assert found[1].start == 485.0 and found[1].end == 545.0  # a little before the moment cited, and what follows
+    assert "Moments cités en commentaire sous « Le pari » : 8:05-9:05" in caplog.text
+    assert ("YouTube : 2 passage(s) retenu(s) ; vidéos écartées : trop ancienne (1), "
+            "sans « moments les plus revus » ni minutage en commentaire (1), aucun passage assez revu (1)") in caplog.text
+
+
+def test_moments_viewers_point_at_in_the_comments():
+    from clipper.sources.youtube import moments_from_comments
+
+    comments = [
+        {"text": "3:45 mdr", "like_count": 120},
+        {"text": "le 3:50 😂😂", "like_count": 10},
+        {"text": "1:02:13 incroyable", "like_count": 5},
+        {"text": "0:00 intro 1:00 a 2:00 b 3:00 c 4:00 d", "like_count": 50},  # a summary: each time counts for little
+        {"text": "18:30 seul, sans like", "like_count": 0},
+        {"text": "le match du 12/10, score 2:1, rdv à 20:30 ce soir"},  # no date or score read; 20:30 alone is too weak
+        {"text": "première"},
+    ]
+    windows = moments_from_comments(comments, 4000.0, count=3)
+    assert [(start, end) for start, end, _ in windows] == [(210.0, 270.0), (3718.0, 3778.0)]
+    assert windows[0][2] > windows[1][2] >= 2.0
+    assert moments_from_comments(comments, 4000.0, count=1) == windows[:1]
 
 
 def test_signed_in_yt_dlp_reads_channels_without_the_sign_in_check(tmp_path):

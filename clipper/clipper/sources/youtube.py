@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 import logging
+import math
 import re
 import unicodedata
 from collections import Counter
@@ -24,6 +25,12 @@ SECOND_CHANNEL_SUFFIXES = {"gaming", "games", "jeux", "2", "bis", "vlog", "vlogs
 MIN_SECOND_CHANNEL_FOLLOWERS = 10_000  # a fan's channel with the same name stays out
 RELATED_LOOKUPS_PER_RUN = 8
 RELATED_REFRESH_DAYS = 14
+NO_HEATMAP = "sans « moments les plus revus »"
+NO_MOMENT = "sans « moments les plus revus » ni minutage en commentaire"
+COMMENTS_PER_VIDEO = 60  # top comments read when YouTube gives no "most replayed" data
+MIN_CITED = 2.0  # weight a moment needs from the comments: two citations, or one comment that a few people liked
+# "3:45", "1:02:13" in a comment, not part of a longer number, a date or a score
+_TIMESTAMP = re.compile(r"(?<![\d:/])(?:(\d{1,2}):)?([0-5]?\d):([0-5]\d)(?![\d:/])")
 BLOCKED = ("YouTube bloque ce serveur (« Sign in to confirm you're not a bot ») : pas de vidéo YouTube à ce passage. "
            "Des cookies YouTube (secret YTDLP_COOKIES) lèvent ce blocage.")
 
@@ -113,24 +120,67 @@ def skip_reason(info: dict[str, Any], settings: YouTubeSourceConfig, now: dateti
     if float(info.get("duration") or 0.0) < settings.segment_min * 3:
         return "trop courte"
     if not info.get("heatmap"):
-        return "sans « moments les plus revus »"
+        return NO_HEATMAP
     return None
 
 
-def candidates_from_info(info: dict[str, Any], settings: YouTubeSourceConfig, config: Config, now: datetime) -> list[Candidate]:
-    if skip_reason(info, settings, now):
+def moments_from_comments(comments: list[dict[str, Any]], duration: float, *, count: int) -> list[tuple[float, float, float]]:
+    """The moments viewers point at in the comments (« 3:45 mdr »), as (start, end, weight) windows, most cited first.
+
+    A comment counts more with its likes; one that lists many times (a summary of the video) counts for little.
+    """
+    cited: list[tuple[float, float]] = []
+    intro_end = max(duration * 0.04, 15.0)
+    for comment in comments:
+        times = {int(h or 0) * 3600 + int(m) * 60 + int(s) for h, m, s in _TIMESTAMP.findall(str(comment.get("text") or ""))}
+        times = {t for t in times if intro_end <= t < duration - 5}
+        weight = (1.0 + math.log1p(max(0, int(comment.get("like_count") or 0)))) / max(1, len(times))
+        cited += [(float(t), weight) for t in times]
+    groups: list[list[tuple[float, float]]] = []
+    for at, weight in sorted(cited):
+        if groups and at - groups[-1][0][0] <= 20.0:
+            groups[-1].append((at, weight))
+        else:
+            groups.append([(at, weight)])
+    windows: list[tuple[float, float, float]] = []
+    for group in sorted(groups, key=lambda g: -sum(w for _, w in g)):
+        weight = sum(w for _, w in group)
+        if weight < MIN_CITED or len(windows) >= count:
+            break
+        # Viewers give the start of a moment: take a little before it and its aftermath, the review trims it.
+        start = max(0.0, group[0][0] - 15.0)
+        end = min(duration, max(group[-1][0] + 30.0, start + 60.0), start + MAX_WINDOW)
+        if any(start < taken_end and end > taken_start for taken_start, taken_end, _ in windows):
+            continue
+        windows.append((start, end, round(weight, 2)))
+    return windows
+
+
+def candidates_from_info(
+    info: dict[str, Any], settings: YouTubeSourceConfig, config: Config, now: datetime, comments: list[dict[str, Any]] | None = None
+) -> list[Candidate]:
+    """The video's moments: its "most replayed" peaks, or else the times its `comments` point at."""
+    reason = skip_reason(info, settings, now)
+    if reason and not (reason == NO_HEATMAP and comments):
         return []
     uploaded = _uploaded(info)
     views = int(info.get("view_count") or 0)
     duration = float(info.get("duration") or 0.0)
-    windows = most_replayed(
-        info["heatmap"],
-        duration,
-        count=settings.segments_per_video,
-        min_peak=settings.min_peak,
-        seg_min=settings.segment_min,
-        seg_max=settings.segment_max,
-    )
+    if info.get("heatmap"):
+        windows = most_replayed(
+            info["heatmap"],
+            duration,
+            count=settings.segments_per_video,
+            min_peak=settings.min_peak,
+            seg_min=settings.segment_min,
+            seg_max=settings.segment_max,
+        )
+    else:
+        cited = moments_from_comments(comments or [], duration, count=settings.segments_per_video)
+        windows = [(start, end, min(1.0, weight / 8.0)) for start, end, weight in cited]
+        if cited:
+            log.info("Moments cités en commentaire sous « %s » : %s", info.get("title") or info.get("id"),
+                     ", ".join(f"{_clock(start)}-{_clock(end)}" for start, end, _ in cited))
     handle = (info.get("uploader_id") or "").lstrip("@") or info.get("channel_id") or ""
     login = handle.lower()
     channel = info.get("channel_url") or info.get("uploader_url") or ""
@@ -156,6 +206,33 @@ def candidates_from_info(info: dict[str, Any], settings: YouTubeSourceConfig, co
         )
         for start, end, heat in windows
     ]
+
+
+def _clock(seconds: float) -> str:
+    """1:02:13, or 3:45 under an hour."""
+    hours, rest = divmod(int(seconds), 3600)
+    return f"{hours}:{rest // 60:02d}:{rest % 60:02d}" if hours else f"{rest // 60}:{rest % 60:02d}"
+
+
+def _video_moments(
+    info: dict[str, Any], url: str, settings: YouTubeSourceConfig, config: Config, ytdlp: YtDlp, now: datetime
+) -> tuple[list[Candidate], str | None]:
+    """The video's moments, and why it has none. Without "most replayed" data its top comments are read."""
+    found = candidates_from_info(info, settings, config, now)
+    if found:
+        return found, None
+    reason = skip_reason(info, settings, now)
+    if reason != NO_HEATMAP:
+        return [], reason or "aucun passage assez revu"
+    try:
+        comments = ytdlp.comments(url, COMMENTS_PER_VIDEO)
+    except DownloadError as exc:
+        if exc.blocked:
+            raise
+        log.warning("Commentaires de la vidéo YouTube %s illisibles : %s", info.get("id"), exc)
+        comments = []
+    found = candidates_from_info(info, settings, config, now, comments=comments)
+    return found, None if found else NO_MOMENT
 
 
 def _plain(text: str) -> str:
@@ -221,15 +298,15 @@ def discover_youtube(
     for url in settings.videos:
         try:
             info = ytdlp.info(url)
+            found, reason = _video_moments(info, url, asked, config, ytdlp, now)
         except DownloadError as exc:
             if exc.blocked:
                 log.warning(BLOCKED)
                 return candidates
             log.warning("Vidéo YouTube %s ignorée : %s", url, exc)
             continue
-        found = candidates_from_info(info, asked, config, now)
-        if not found:
-            skipped[skip_reason(info, asked, now) or "aucun passage assez revu"] += 1
+        if reason:
+            skipped[reason] += 1
         candidates.extend(found)
     channels = list(settings.channels)
     if settings.related_channels and related is not None:
@@ -260,19 +337,20 @@ def discover_youtube(
                 if not video_id or video_id in seen:
                     continue
                 seen.add(video_id)
+                url = entry.get("url") or f"https://www.youtube.com/watch?v={video_id}"
                 try:
-                    info = ytdlp.info(entry.get("url") or f"https://www.youtube.com/watch?v={video_id}")
+                    info = ytdlp.info(url)
+                    if config.is_blocked((info.get("uploader_id") or "").lstrip("@")):
+                        continue
+                    found, reason = _video_moments(info, url, settings, config, ytdlp, now)
                 except DownloadError as exc:
                     if exc.blocked:
                         log.warning(BLOCKED)
                         return candidates
                     log.warning("Vidéo YouTube %s ignorée : %s", video_id, exc)
                     continue
-                if config.is_blocked((info.get("uploader_id") or "").lstrip("@")):
-                    continue
-                found = candidates_from_info(info, settings, config, now)
-                if not found:
-                    skipped[skip_reason(info, settings, now) or "aucun passage assez revu"] += 1
+                if reason:
+                    skipped[reason] += 1
                 candidates.extend(found)
     if skipped:
         log.info("YouTube : %d passage(s) retenu(s) ; vidéos écartées : %s", len(candidates),
