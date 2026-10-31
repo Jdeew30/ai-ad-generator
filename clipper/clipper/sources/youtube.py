@@ -4,6 +4,7 @@ import dataclasses
 import logging
 import re
 import unicodedata
+from collections import Counter
 from datetime import datetime, timedelta
 from typing import Any
 from urllib.parse import quote
@@ -21,7 +22,7 @@ SEARCH_CHANNELS = "https://www.youtube.com/results?search_query={}&sp=EgIQAg%253
 SECOND_CHANNEL_SUFFIXES = {"gaming", "games", "jeux", "2", "bis", "vlog", "vlogs", "live", "lives", "replay", "replays",
                            "rediff", "rediffs", "tv", "plus", "extra", "bonus", "irl", "podcast"}  # fmt: skip
 MIN_SECOND_CHANNEL_FOLLOWERS = 10_000  # a fan's channel with the same name stays out
-RELATED_LOOKUPS_PER_RUN = 3
+RELATED_LOOKUPS_PER_RUN = 8
 RELATED_REFRESH_DAYS = 14
 BLOCKED = ("YouTube bloque ce serveur (« Sign in to confirm you're not a bot ») : pas de vidéo YouTube à ce passage. "
            "Des cookies YouTube (secret YTDLP_COOKIES) lèvent ce blocage.")
@@ -93,20 +94,37 @@ def most_replayed(
     return windows
 
 
-def candidates_from_info(info: dict[str, Any], settings: YouTubeSourceConfig, config: Config, now: datetime) -> list[Candidate]:
-    if info.get("is_live") or info.get("live_status") in {"is_live", "is_upcoming", "post_live"}:
-        return []
+def _uploaded(info: dict[str, Any]) -> datetime | None:
     uploaded = parse_time(info.get("timestamp") or info.get("release_timestamp"))
     if uploaded is None and info.get("upload_date"):
         uploaded = parse_time(f"{info['upload_date'][:4]}-{info['upload_date'][4:6]}-{info['upload_date'][6:8]}")
+    return uploaded
+
+
+def skip_reason(info: dict[str, Any], settings: YouTubeSourceConfig, now: datetime) -> str | None:
+    """Why a video gives no moment before its peaks are even looked at, or None."""
+    if info.get("is_live") or info.get("live_status") in {"is_live", "is_upcoming", "post_live"}:
+        return "live"
+    uploaded = _uploaded(info)
     if uploaded and now - uploaded > timedelta(days=settings.max_age_days):
+        return "trop ancienne"
+    if int(info.get("view_count") or 0) < settings.min_views:
+        return "pas assez de vues"
+    if float(info.get("duration") or 0.0) < settings.segment_min * 3:
+        return "trop courte"
+    if not info.get("heatmap"):
+        return "sans « moments les plus revus »"
+    return None
+
+
+def candidates_from_info(info: dict[str, Any], settings: YouTubeSourceConfig, config: Config, now: datetime) -> list[Candidate]:
+    if skip_reason(info, settings, now):
         return []
+    uploaded = _uploaded(info)
     views = int(info.get("view_count") or 0)
     duration = float(info.get("duration") or 0.0)
-    if views < settings.min_views or duration < settings.segment_min * 3:
-        return []
     windows = most_replayed(
-        info.get("heatmap") or [],
+        info["heatmap"],
         duration,
         count=settings.segments_per_video,
         min_peak=settings.min_peak,
@@ -198,6 +216,7 @@ def discover_youtube(
     if not settings.enabled or not (settings.channels or settings.videos):
         return []
     candidates: list[Candidate] = []
+    skipped: Counter[str] = Counter()  # why the videos looked at gave no moment, told in the run's log
     asked = dataclasses.replace(settings, max_age_days=100_000, min_views=0)  # videos asked for by name: any age, any views
     for url in settings.videos:
         try:
@@ -208,7 +227,10 @@ def discover_youtube(
                 return candidates
             log.warning("Vidéo YouTube %s ignorée : %s", url, exc)
             continue
-        candidates.extend(candidates_from_info(info, asked, config, now))
+        found = candidates_from_info(info, asked, config, now)
+        if not found:
+            skipped[skip_reason(info, asked, now) or "aucun passage assez revu"] += 1
+        candidates.extend(found)
     channels = list(settings.channels)
     if settings.related_channels and related is not None:
         _refresh_related(settings.channels, ytdlp, related, now)
@@ -248,5 +270,11 @@ def discover_youtube(
                     continue
                 if config.is_blocked((info.get("uploader_id") or "").lstrip("@")):
                     continue
-                candidates.extend(candidates_from_info(info, settings, config, now))
+                found = candidates_from_info(info, settings, config, now)
+                if not found:
+                    skipped[skip_reason(info, settings, now) or "aucun passage assez revu"] += 1
+                candidates.extend(found)
+    if skipped:
+        log.info("YouTube : %d passage(s) retenu(s) ; vidéos écartées : %s", len(candidates),
+                 ", ".join(f"{reason} ({count})" for reason, count in skipped.most_common()))
     return candidates

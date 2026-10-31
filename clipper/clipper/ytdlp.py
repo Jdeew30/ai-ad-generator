@@ -65,6 +65,9 @@ class YtDlp:
         }
         if self.cookies_file:
             options["cookiefile"] = str(self.cookies_file)
+            # Signed in, yt-dlp gives up on a channel page it could not load instead of reading the channel through
+            # the API (« Playlists that require authentication… »): the robot only reads public videos.
+            options["extractor_args"] = {"youtubetab": {"skip": ["authcheck"]}}
         options.update(extra)
         return options
 

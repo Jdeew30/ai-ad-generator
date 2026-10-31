@@ -259,6 +259,32 @@ def test_youtube_channels_take_turns():
     assert ytdlp.listed == ["https://www.youtube.com/@c/videos", "https://www.youtube.com/@a/videos"]
 
 
+def test_the_log_tells_why_youtube_videos_gave_nothing(caplog):
+    from clipper.sources.youtube import discover_youtube
+
+    def video(video_id, days=1, heat=0.9, **values):
+        heatmap = [{"start_time": i * 10.0, "end_time": (i + 1) * 10.0, "value": heat if i == 50 else 0.1} for i in range(100)]
+        return {"id": video_id, "uploader_id": "@a", "view_count": 90000, "duration": 1000,
+                "timestamp": (NOW - timedelta(days=days)).timestamp(), "heatmap": heatmap, **values}  # fmt: skip
+
+    videos = [video("old", days=30), video("nomap", heatmap=None), video("flat", heat=0.2), video("good")]
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a"], "tabs": ["videos"], "videos_per_channel": 4}})
+    ytdlp = FakeYtDlp(listings={"https://www.youtube.com/@a/videos": [{"id": v["id"]} for v in videos]},
+                      infos={f"https://www.youtube.com/watch?v={v['id']}": v for v in videos})  # fmt: skip
+    with caplog.at_level("INFO", logger="clipper"):
+        found = discover_youtube(config, ytdlp, now=NOW)
+    assert [c.key.split("@")[0] for c in found] == ["youtube:good"]
+    assert ("YouTube : 1 passage(s) retenu(s) ; vidéos écartées : trop ancienne (1), sans « moments les plus revus » (1), "
+            "aucun passage assez revu (1)") in caplog.text
+
+
+def test_signed_in_yt_dlp_reads_channels_without_the_sign_in_check(tmp_path):
+    from clipper.ytdlp import YtDlp
+
+    assert YtDlp(cookies_file=tmp_path / "cookies.txt")._options()["extractor_args"] == {"youtubetab": {"skip": ["authcheck"]}}
+    assert "extractor_args" not in YtDlp()._options()
+
+
 def test_youtube_finds_a_youtubers_other_channels():
     from clipper.sources.youtube import related_channels
 
