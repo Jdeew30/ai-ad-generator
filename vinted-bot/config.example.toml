@@ -1,0 +1,110 @@
+# Configuration de VintedBot
+# Copiez ce fichier en config.toml (ou lancez : python -m vintedbot init).
+# Les secrets (Telegram, Discord) vont dans .env.
+
+[general]
+domain = "www.vinted.fr"   # vinted.fr, vinted.be, vinted.es, vinted.it, vinted.de...
+poll_seconds = 90          # fréquence de vérification de chaque recherche (minimum 30)
+min_interval = 3.0         # secondes minimum entre deux requêtes à Vinted (restez discret)
+per_page = 48
+bootstrap_pages = 3        # pages lues au premier passage pour apprendre le prix du marché
+min_samples = 15           # annonces comparables nécessaires avant de faire confiance au prix appris
+market_window_days = 30    # le prix du marché est calculé sur les annonces des 30 derniers jours
+notify_suspicious = true   # alerter aussi les prix « trop beaux » (signalés ⚠️ À VÉRIFIER)
+initial_digest = true      # au démarrage, envoyer les meilleures offres déjà en ligne
+max_alerts_per_check = 8
+
+[costs]
+shipping = 4.5             # port par défaut (les profils console, sneakers... ont leur propre valeur)
+buyer_fee_fixed = 0.70     # protection acheteur Vinted (si Vinted ne fournit pas le total) :
+buyer_fee_pct = 0.05       #   0,70 € + 5 % du prix
+resale_haircut = 0.10      # revente réaliste = valeur du marché - 10 % (prix affichés ≠ prix vendus)
+resale_costs = 0.0         # vos frais par revente (emballage, commission d'une autre plateforme...)
+
+[telegram]
+enabled = false            # token et chat_id dans .env
+
+[discord]
+enabled = false            # webhook dans .env
+
+# ---------------------------------------------------------------------------
+# Recherches surveillées. Pour chacune :
+#   query = "mots-clés"   OU   url = "URL copiée depuis la recherche Vinted (avec vos filtres)"
+#   preset      : general, console, jeu_video, smartphone, audio, vetement, sneakers, cartes_tcg
+#   min_price   : écarte les accessoires et annonces hors sujet (important pour un prix du marché fiable)
+#   max_price   : plafond pour les alertes (le marché est quand même appris au-dessus)
+#   min_discount: décote minimale par rapport au marché (0.25 = -25 %)
+#   min_profit  : marge minimale estimée en euros, frais et port déduits
+#   target_price: alerte immédiate dès que le prix est inférieur ou égal (même sans historique)
+#   market_price: valeur de marché fixée à la main (sinon apprise automatiquement)
+#   include / exclude : mots obligatoires / interdits ; conditions : états acceptés
+#     (neuf_etiquette, neuf, tres_bon, bon, satisfaisant)
+#   shipping, poll_seconds, enabled
+# ---------------------------------------------------------------------------
+
+[[watch]]
+name = "PS5 Slim"
+query = "ps5 slim"
+preset = "console"
+min_price = 150            # en dessous : jeux, manettes, façades...
+max_price = 380
+min_discount = 0.25
+min_profit = 40
+
+[[watch]]
+name = "Nintendo Switch OLED"
+query = "switch oled"
+preset = "console"
+min_price = 120
+max_price = 260
+min_profit = 30
+
+[[watch]]
+name = "Steam Deck"
+query = "steam deck"
+preset = "console"
+min_price = 180
+min_profit = 50
+exclude = ["etui seul", "dock"]
+
+[[watch]]
+name = "Zelda Tears of the Kingdom"
+query = "zelda tears of the kingdom switch"
+preset = "jeu_video"
+min_price = 15
+max_price = 40
+min_profit = 8
+exclude = ["amiibo", "guide", "figurine"]
+
+[[watch]]
+name = "Nike Tech Fleece"
+query = "nike tech fleece"
+preset = "vetement"
+min_price = 15
+max_price = 70
+min_profit = 15
+conditions = ["neuf_etiquette", "neuf", "tres_bon"]
+
+[[watch]]
+name = "Veste Carhartt Detroit"
+query = "carhartt detroit"
+preset = "vetement"
+include = ["carhartt"]
+min_price = 30
+min_profit = 25
+
+[[watch]]
+name = "AirPods Pro 2"
+query = "airpods pro 2"
+preset = "audio"
+min_price = 70
+min_profit = 30
+enabled = false            # activez-la si vous le souhaitez
+
+# Exemple avec une URL Vinted (filtres de taille, marque, état... repris automatiquement) :
+# [[watch]]
+# name = "Jordan 4 en 43"
+# url = "https://www.vinted.fr/catalog?search_text=jordan%204&size_ids[]=1196&status_ids[]=6&status_ids[]=1"
+# preset = "sneakers"
+# min_price = 60
+# min_profit = 40

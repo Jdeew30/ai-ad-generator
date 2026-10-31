@@ -1,0 +1,11 @@
+services:
+  vintedbot:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./config.toml:/app/config.toml:ro
+      - vintedbot-data:/app/data
+
+volumes:
+  vintedbot-data:
