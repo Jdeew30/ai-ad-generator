@@ -6,7 +6,7 @@ Un robot qui, plusieurs fois par jour :
    les viewers eux-mêmes qui clippent les moments forts) des 51 streamers suivis, des 100 plus gros lives FR
    du moment, des chaînes FR vues ces 14 derniers jours (même hors ligne), et les clips FR les plus vus de la
    semaine dans les 20 catégories les plus regardées, quelle que soit la chaîne ; plus les passages « les
-   plus revus » des vidéos de 68 YouTubeurs FR de tous les domaines et de leurs autres chaînes (« X Gaming »,
+   plus revus » des vidéos de 91 YouTubeurs FR de tous les domaines et de leurs autres chaînes (« X Gaming »,
    « X 2 »…), à tour de rôle, et les URLs que tu
    ajoutes à la main ;
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
@@ -217,12 +217,12 @@ app développeur restée en mode *sandbox* (pas de validation TikTok, 10 comptes
 
 ### YouTube comme source : les YouTubeurs FR
 
-Activée : 68 YouTubeurs FR de tous les domaines (`youtube.channels`), 8 chaînes par passage à tour de rôle
+Activée : 91 YouTubeurs FR de tous les domaines (`youtube.channels`), 12 chaînes par passage à tour de rôle
 (`channels_per_run`). Avec `related_channels`, le robot cherche aussi les autres chaînes de chaque YouTubeur
 (« Squeezie Gaming », « Djilsi Gaming », « … Vlog », « … 2 ») : seulement les noms « <nom> <suffixe> » avec
-assez d'abonnés, donc ni les chaînes de fans ni les chaînes « Topic » ; 3 recherches par passage, gardées
-14 jours. Une chaîne introuvable est signalée dans le journal du passage. Le robot
-prend leurs vidéos de la semaine (plus de 50 000 vues) et découpe les passages « les plus revus ».
+assez d'abonnés, donc ni les chaînes de fans ni les chaînes « Topic » ; 8 recherches par passage, gardées
+14 jours. Une chaîne introuvable est signalée dans le journal du passage. Le robot prend leurs vidéos de la
+semaine (plus de 20 000 vues, pour ne pas écarter les chaînes secondaires) et découpe les passages « les plus revus ».
 
 YouTube bloque parfois les serveurs de GitHub (« Sign in to confirm you're not a bot ») : passé le 29/10,
 bloqué le 30/10 au matin. Le passage laisse alors YouTube de côté, et s'il ne trouve rien du tout, Telegram

@@ -21,7 +21,7 @@ SEARCH_CHANNELS = "https://www.youtube.com/results?search_query={}&sp=EgIQAg%253
 SECOND_CHANNEL_SUFFIXES = {"gaming", "games", "jeux", "2", "bis", "vlog", "vlogs", "live", "lives", "replay", "replays",
                            "rediff", "rediffs", "tv", "plus", "extra", "bonus", "irl", "podcast"}  # fmt: skip
 MIN_SECOND_CHANNEL_FOLLOWERS = 10_000  # a fan's channel with the same name stays out
-RELATED_LOOKUPS_PER_RUN = 3
+RELATED_LOOKUPS_PER_RUN = 8
 RELATED_REFRESH_DAYS = 14
 BLOCKED = ("YouTube bloque ce serveur (« Sign in to confirm you're not a bot ») : pas de vidéo YouTube à ce passage. "
            "Des cookies YouTube (secret YTDLP_COOKIES) lèvent ce blocage.")
