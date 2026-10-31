@@ -3,6 +3,26 @@
  "compiled": {},
  "failures": {},
  "posted": {
+  "manual:8b94022394d3bcf8": {
+   "at": "2026-10-31T10:22:58.094620+00:00",
+   "created_at": "2026-10-31T00:44:40+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "36",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "manual",
+   "span": null,
+   "streamer": "Kameto",
+   "streamer_login": "kamet0",
+   "title": "Kameto réagit au tirage du round 5 des Worlds",
+   "url": "https://www.twitch.tv/kamet0/clip/SuspiciousEnchantingCurlewTakeNRG-qSV31CNiDWiK_FA3",
+   "views": 1169
+  },
   "manual:bddd129f90798bae": {
    "at": "2026-10-30T10:36:36.735512+00:00",
    "created_at": "2026-10-24T19:30:39+00:00",
