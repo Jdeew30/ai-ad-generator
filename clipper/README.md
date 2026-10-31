@@ -223,6 +223,9 @@ Activée : 91 YouTubeurs FR de tous les domaines (`youtube.channels`), 12 chaîn
 assez d'abonnés, donc ni les chaînes de fans ni les chaînes « Topic » ; 8 recherches par passage, gardées
 14 jours. Une chaîne introuvable est signalée dans le journal du passage. Le robot prend leurs vidéos de la
 semaine (plus de 20 000 vues, pour ne pas écarter les chaînes secondaires) et découpe les passages « les plus revus ».
+Quand YouTube ne fournit pas cette courbe, il lit les 60 commentaires les plus appréciés de la vidéo et prend les
+moments que les spectateurs citent (« 12:34 mdr »), d'autant plus qu'ils sont cités et aimés. Le journal du passage
+compte les vidéos écartées et dit pourquoi (trop ancienne, pas assez de vues, ni courbe ni minutage en commentaire…).
 
 YouTube bloque parfois les serveurs de GitHub (« Sign in to confirm you're not a bot ») : passé le 29/10,
 bloqué le 30/10 au matin. Le passage laisse alors YouTube de côté, et s'il ne trouve rien du tout, Telegram

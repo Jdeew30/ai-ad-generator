@@ -92,6 +92,15 @@ class YtDlp:
     def info(self, url: str) -> dict[str, Any]:
         return self._run(url, self._options(), False)
 
+    def comments(self, url: str, limit: int) -> list[dict[str, Any]]:
+        """The `limit` top comments of a YouTube video, replies left out."""
+        options = self._options(getcomments=True)
+        options["extractor_args"] = {
+            **options.get("extractor_args", {}),
+            "youtube": {"max_comments": [str(limit), str(limit), "0", "0"], "comment_sort": ["top"]},
+        }
+        return [comment for comment in self._run(url, options, False).get("comments") or [] if isinstance(comment, dict)]
+
     def download(
         self,
         url: str,
