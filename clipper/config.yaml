@@ -112,7 +112,8 @@ youtube:
   segments_per_video: 2
 
 shorts:
-  per_run: 1                    # shorts publiés à chaque passage (5 passages par jour dans le workflow)
+  per_source: {twitch: 1, youtube: 1}  # à chaque passage (5 par jour) : un short Twitch et un short YouTube
+  per_run: 1                    # sans per_source : shorts publiés à chaque passage, toutes sources confondues
   candidates_factor: 3          # avec Claude : 3 candidats examinés par série (jusqu'à 3 séries par passage)
   min_score: 60                 # note de Claude sur 100 : en dessous, le clip n'est pas publié
   context_before: 20            # secondes du replay (VOD) ajoutées avant chaque clip Twitch : la mise en place (0 = clip seul)
@@ -130,10 +131,11 @@ shorts:
   max_fps: 60
 
 compilation:
-  clips: 12                     # « TOP 12 » de la semaine
+  clips: 40                     # au plus 40 clips dans le compte à rebours
   min_clips: 5
-  window_days: 7
-  max_minutes: 15
+  window_days: 4                # deux best-of par semaine (mercredi, dimanche) : 4 jours chacun, sans clip repris
+  target_minutes: 15            # Claude retient des clips jusqu'à ce que le best-of dure 15 min…
+  max_minutes: 20               # … et jamais plus de 20
   intro: true
 
 ai:

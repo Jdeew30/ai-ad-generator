@@ -14,7 +14,7 @@ from clipper.models import PublishResult, Transcript, Word
 from clipper.pipeline import Clipper, refusal
 from clipper.state import State
 
-from .conftest import NOW, requires_ffmpeg
+from .conftest import NOW, make_candidate, requires_ffmpeg
 
 pytestmark = requires_ffmpeg
 
@@ -485,6 +485,44 @@ def test_weekly_compilation(media, paths):
     assert set(state.compiled) == {"twitch:Alpha-Cam1", "twitch:Alpha-2", "twitch:Beta-1", "twitch:Beta-Cam2"}
     again = clipper(media, paths, clips=clips, publishers={"youtube": youtube}, compilation={"clips": 4, "min_clips": 3}).run_compilation()
     assert again.compilation is None  # the same clips are never compiled twice
+
+
+def test_the_best_of_is_filled_up_to_its_length(media, paths):
+    clips = {
+        "alpha": [entry("Alpha-Cam1", 5000, 20), entry("Alpha-2", 3000, 40)],
+        "beta": [entry("Beta-1", 1500, 50), entry("Beta-Cam2", 900, 70)],
+    }
+    youtube = FakePublisher("youtube")
+    # 6 s clips: two of them reach 12 s, the most watched ones are kept.
+    run = clipper(media, paths, clips=clips, publishers={"youtube": youtube},
+                  compilation={"clips": 10, "min_clips": 2, "target_minutes": 0.2})  # fmt: skip
+    report = run.run_compilation()
+    assert report.compilation and report.compilation["title"].startswith("TOP 2")
+    assert set(State.load(paths.state).compiled) == {"twitch:Alpha-Cam1", "twitch:Alpha-2"}
+
+
+def test_a_run_takes_one_short_of_each_source(media, paths, monkeypatch):
+    import clipper.pipeline as pipeline
+
+    twitch = [make_candidate(f"twitch:Alpha-Cam{i}", "alpha", views=5000 - i, created_at=NOW - timedelta(hours=4 * i)) for i in (1, 2)]
+    youtube = make_candidate("youtube:abcdefghijk@60-120", "squeezie", source="youtube", start=60.0, end=120.0,
+                             url="https://www.youtube.com/watch?v=abcdefghijk", channel_url="https://www.youtube.com/@Squeezie")  # fmt: skip
+    found = [*twitch, youtube]
+    monkeypatch.setattr(pipeline, "discover", lambda *args, **kwargs: list(found))
+    telegram = FakePublisher("telegram")
+    run = clipper(media, paths, clips={}, publishers={"telegram": telegram},
+                  shorts={"min_duration": 3, "per_source": {"twitch": 1, "youtube": 1}})  # fmt: skip
+    report = run.run_shorts()
+    assert [outcome.candidate.key for outcome in report.published] == ["twitch:Alpha-Cam1", "youtube:abcdefghijk@60-120"]
+
+    found = twitch[1:]  # no YouTube moment this time: the Twitch short goes out, and the owner is told
+    run = clipper(media, paths, clips={}, publishers={"telegram": telegram},
+                  shorts={"min_duration": 3, "per_source": {"twitch": 1, "youtube": 1}})  # fmt: skip
+    report = run.run_shorts()
+    assert [outcome.candidate.key for outcome in report.published] == ["twitch:Alpha-Cam2"]
+    assert telegram.messages == ["⏭️ Pas de short YouTube à ce passage : aucun nouveau clip trouvé."]
+    assert len(clipper(media, paths, clips={}, shorts={"min_duration": 3, "per_source": {"twitch": 1, "youtube": 1}},
+                       publishers={}).run_shorts(count=1).published) <= 1  # a count asked for by hand is a total  # fmt: skip
 
 
 def test_outage_and_bad_url_are_reported_as_errors(media, paths):

@@ -73,6 +73,7 @@ class StreamerOverride:
 @dataclass
 class ShortsConfig:
     per_run: int = 1
+    per_source: dict[str, int] = field(default_factory=dict)  # {twitch: 1, youtube: 1}: so many of each per run, instead of per_run
     candidates_factor: int = 3  # how many candidates are downloaded and reviewed per short published
     min_score: float = 60.0  # Claude's mark out of 100 a clip needs to be posted
     context_before: float = 20.0  # seconds of the Twitch replay (VOD) kept before a clip, for the setup (0 = clip only)
@@ -92,10 +93,11 @@ class ShortsConfig:
 
 @dataclass
 class CompilationConfig:
-    clips: int = 12
+    clips: int = 40  # most clips in the countdown
     min_clips: int = 5
     window_days: int = 7
-    max_minutes: float = 15.0
+    target_minutes: float = 15.0  # clips are added until the best-of lasts this long...
+    max_minutes: float = 20.0  # ...and never past this
     intro: bool = True
 
 
@@ -241,6 +243,8 @@ def load_config(path: Path | None = None) -> Config:
     config.twitch.streamers = [s.lower().lstrip("@") for s in config.twitch.streamers]
     if config.shorts.per_run < 0 or config.shorts.candidates_factor < 1:
         raise ConfigError("config.shorts : per_run >= 0 et candidates_factor >= 1 attendus")
+    if any(source not in {"twitch", "youtube"} or count < 0 for source, count in config.shorts.per_source.items()):
+        raise ConfigError("config.shorts.per_source : twitch et youtube, avec un nombre >= 0, attendus")
     if not 0 <= config.shorts.min_score <= 100:
         raise ConfigError("config.shorts.min_score : une note entre 0 et 100 attendue")
     if config.shorts.context_before < 0 or config.shorts.context_after < 0:
