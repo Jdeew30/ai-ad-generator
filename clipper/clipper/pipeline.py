@@ -4,6 +4,7 @@ import json
 import logging
 import re
 import shutil
+import time
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -111,6 +112,25 @@ class RunReport:
 
 def _slug(text: str) -> str:
     return re.sub(r"[^A-Za-z0-9_-]+", "-", text).strip("-")[:80] or "clip"
+
+
+SOURCE_NAMES = {"twitch": "Twitch", "youtube": "YouTube"}
+COMPILATION_BATCH = 10  # clips reviewed together while the best-of is filled up to its length
+COMPILATION_PREPARE_SECONDS = 50 * 60
+
+
+def _kept_length(item: Prepared, review: Review) -> float:
+    """How long the clip lasts in the best-of, once trimmed by the review."""
+    start = review.meta.trim_start or 0.0
+    end = review.meta.trim_end if review.meta.trim_end is not None else item.duration
+    return max(0.0, end - start)
+
+
+def _platform(candidate: Candidate) -> str:
+    """twitch or youtube, a link added by hand included."""
+    if candidate.source != "manual":
+        return candidate.source
+    return "youtube" if re.search(r"youtube\.com|youtu\.be", candidate.url) else "twitch"
 
 
 def refusal(review: Review, candidate: Candidate, min_score: float) -> str | None:
@@ -462,6 +482,8 @@ class Clipper:
     def _shorts(self, report: RunReport, *, dry_run: bool, count: int | None, url: str | None,
                 start: str | None, end: str | None, queue: Path | None, focus: list[str] | None = None) -> None:
         wanted = self.config.shorts.per_run if count is None else count
+        # A scheduled run takes so many shorts of each source; a count, a focus or an URL asked for by hand do not.
+        quotas = self.config.shorts.per_source if count is None and not focus and not url else {}
         if url:
             try:
                 urls = links(url)
@@ -491,16 +513,27 @@ class Clipper:
                 report.errors.append(f"découverte : {exc}")
                 return
             ranked = spread(rank(found, self.state, config, now=self.now))
+        if not quotas:
+            self._publish_best(report, ranked, wanted, dry_run=dry_run)
+            return
+        for source, quota in quotas.items():
+            self._publish_best(report, [c for c in ranked if _platform(c) == source], quota, dry_run=dry_run, source=source)
+
+    def _publish_best(self, report: RunReport, ranked: list[Candidate], wanted: int, *, dry_run: bool,
+                      source: str | None = None) -> None:
+        """Reviews `ranked` until `wanted` clips are approved, then edits and publishes them."""
+        label = f" {SOURCE_NAMES[source]}" if source else ""
         if wanted <= 0 or not ranked:
-            log.info("Aucun candidat à traiter.")
+            log.info("Aucun candidat%s à traiter.", label)
             if wanted > 0 and not dry_run:
-                self.notify("⏭️ Pas de short à ce passage : aucun nouveau clip trouvé." + (
+                self.notify(f"⏭️ Pas de short{label} à ce passage : aucun nouveau clip trouvé." + (
                     " YouTube bloque le serveur (vérification anti-robot) : des cookies YouTube (secret YTDLP_COOKIES) "
-                    "lèvent ce blocage." if getattr(self.ytdlp, "blocked", False) else ""
+                    "lèvent ce blocage." if source != "twitch" and getattr(self.ytdlp, "blocked", False) else ""
                 ))
             return
 
         use_ai = self.curator is not None
+        examined_before = len(report.rejected)  # the other source's refusals are not this one's
         # Without AI the popularity order is final: only the clips that will be posted are prepared.
         batch = wanted * self.config.shorts.candidates_factor if use_ai else wanted
         remaining = iter(ranked)
@@ -545,13 +578,13 @@ class Clipper:
             if len(approved) >= wanted:
                 break
         approved.sort(key=lambda pair: (pair[0].candidate.manual, pair[1].score), reverse=True)
-        if not approved and report.rejected and not dry_run:
-            examined = len(report.rejected)
+        examined = len(report.rejected) - examined_before
+        if not approved and examined and not dry_run:
             if unjudged == examined:
-                self.notify("⚠️ Pas de short à ce passage : Claude n'a pas répondu (clé, crédits ou panne ?). "
+                self.notify(f"⚠️ Pas de short{label} à ce passage : Claude n'a pas répondu (clé, crédits ou panne ?). "
                             "Les clips seront réexaminés.")
             else:
-                self.notify("⏭️ Pas de short à ce passage : " + (
+                self.notify(f"⏭️ Pas de short{label} à ce passage : " + (
                     f"aucun des {examined} clips examinés n'a été retenu." if examined > 1 else "le seul clip examiné n'a pas été retenu."
                 ))
 
@@ -600,22 +633,33 @@ class Clipper:
             return
 
         use_ai = self.curator is not None
-        prepared: list[Prepared] = []
-        budget = settings.max_minutes * 60
-        used = 0.0
-        for candidate in ranked:
-            if len(prepared) >= wanted or used >= budget:
+        target, longest = settings.target_minutes * 60, settings.max_minutes * 60
+        kept: list[tuple[Prepared, Review]] = []
+        length = 0.0
+        remaining = iter(ranked)
+        deadline = time.monotonic() + COMPILATION_PREPARE_SECONDS  # the long render still has to fit in the job
+        while len(kept) < wanted and length < target and time.monotonic() < deadline:
+            prepared: list[Prepared] = []
+            for candidate in remaining:
+                log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
+                item = self.prepare(candidate, transcribe=use_ai, sheet=use_ai and self.config.ai.review_frames)
+                if item is not None:
+                    prepared.append(item)
+                if len(prepared) >= COMPILATION_BATCH or time.monotonic() >= deadline:
+                    break
+            if not prepared:
                 break
-            log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
-            item = self.prepare(candidate, transcribe=use_ai, sheet=use_ai and self.config.ai.review_frames)
-            if item is None:
-                continue
-            prepared.append(item)
-            used += item.duration
-        reviews = self.review(prepared)
-        kept = [(item, reviews[item.candidate.key]) for item in prepared if reviews[item.candidate.key].verdict != "reject"]
-        for item, review in ((i, reviews[i.candidate.key]) for i in prepared if reviews[i.candidate.key].verdict == "reject"):
-            report.rejected.append((item.candidate, review.reason))
+            reviews = self.review(prepared)
+            for item in prepared:
+                review = reviews[item.candidate.key]
+                if review.verdict == "reject":
+                    report.rejected.append((item.candidate, review.reason))
+                    continue
+                part = _kept_length(item, review)
+                if len(kept) < wanted and length < target and length + part <= longest:
+                    kept.append((item, review))
+                    length += part
+        log.info("Compilation : %d clip(s) retenu(s), %.1f min.", len(kept), length / 60)
         if len(kept) < settings.min_clips:
             log.info("Pas assez de clips retenus pour une compilation (%d).", len(kept))
             return

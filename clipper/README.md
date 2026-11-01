@@ -30,11 +30,14 @@ Un robot qui, plusieurs fois par jour :
    accroche incrustée, crédit `twitch.tv/<streamer>`, son normalisé ;
 5. **publie** sur YouTube Shorts (une fois l'audit de Google accepté) et t'envoie chaque vidéo sur
    **Telegram** avec le texte prêt à coller, pour TikTok et en attendant l'audit ;
-6. chaque dimanche, monte un **best-of de la semaine** en 16:9 (compte à rebours #12 → #1, bandeau avec le
-   nom du streamer, carte d'intro, miniature générée, chapitres et crédits dans la description). Il pèse
-   quelques centaines de Mo, bien plus que les 50 Mo qu'un bot Telegram peut envoyer : tu reçois sur
-   Telegram la miniature, le lien pour le télécharger (section « Artifacts » du passage, gardé 7 jours) et
-   un message avec le titre et la description à coller. Une fois YouTube branché, il est publié tout seul.
+6. chaque dimanche, monte un **best-of de la semaine** en 16:9 d'environ 15 minutes (Claude retient des
+   clips jusqu'à 15 min, jamais plus de 20 ; compte à rebours jusqu'au #1, bandeau avec le nom du streamer,
+   carte d'intro, miniature générée, chapitres et crédits dans la description). Il pèse plusieurs centaines
+   de Mo, bien plus que les 50 Mo qu'un bot Telegram peut envoyer : il est rangé en MP4 dans une
+   « release » du dépôt (onglet **Releases**, les 4 derniers best-of sont gardés). Tu reçois sur Telegram la
+   miniature, le titre et la description à coller, puis le lien direct du MP4. Le dépôt étant privé, ouvre
+   ce lien dans ton navigateur connecté à ton compte GitHub : sans connexion (dans Telegram par exemple),
+   GitHub répond « 404 ». Une fois YouTube branché, il est publié tout seul.
 
 Tout tourne gratuitement dans **GitHub Actions** (aucun serveur à louer). Le robot se souvient de ce qu'il
 a déjà publié grâce à une branche dédiée `clipper-state`.
@@ -76,8 +79,8 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
    publie à la main depuis Telegram.
 4. Vérifie : **Run workflow** → mode **`check`**. Le résumé du run affiche ✅ / ❌ pour chaque service, et
    Telegram reçoit un message de test. Rien n'est publié.
-5. C'est tout : 5 shorts par jour (vers 10 h, 13 h, 16 h, 19 h et 22 h à Paris l'hiver, une heure plus tard l'été)
-   et le best-of le dimanche matin.
+5. C'est tout : à chaque passage (vers 10 h, 13 h, 16 h, 19 h et 22 h à Paris l'hiver, une heure plus tard
+   l'été), un short Twitch et un short YouTube, et le best-of le dimanche matin.
 
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
@@ -247,7 +250,8 @@ dimanche reste 100 % Twitch.
   dans le journal. Avec les clés Twitch, `discover_limit` y ajoute les plus gros lives FR du moment (100),
   `remember_live` les chaînes FR vues ces 14 derniers jours (150 au plus) et `discover_categories` les clips
   FR les plus vus de la semaine dans les catégories les plus regardées (20).
-- `shorts.per_run` / le `cron` du workflow : le rythme de publication (5 par jour par défaut).
+- `shorts.per_source` / le `cron` du workflow : le rythme de publication, un short Twitch et un short YouTube
+  par passage (10 par jour). Sans `per_source`, `shorts.per_run` shorts par passage, toutes sources confondues.
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
@@ -284,11 +288,12 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
 
 ## Coûts
 
-- **GitHub Actions** : dépôt privé, 2 000 minutes gratuites par mois. Le robot en consomme environ 1 300
-  (5 passages par jour de 6 à 8 minutes, plus le best-of et les tests). Dépôt public : illimité.
+- **GitHub Actions** : dépôt privé, 2 000 minutes gratuites par mois. Depuis YouTube (lecture des
+  commentaires) et ses deux shorts par passage, un passage dure de 10 à 25 minutes : le robot dépasse les
+  2 000 minutes. Dépôt public : illimité (et les liens du best-of s'ouvrent alors sans connexion).
 - **Stockage GitHub** : 500 Mo gratuits pour les vidéos gardées par les passages (« artefacts »), et plus
-  aucun dépôt possible au-delà. Les shorts, déjà sur Telegram, ne sont donc gardés qu'un jour, le best-of
-  7 jours, et chaque passage supprime les vidéos des passages plus anciens.
+  aucun dépôt possible au-delà. Les shorts, déjà sur Telegram, ne sont donc gardés qu'un jour, et chaque
+  passage supprime les vidéos des passages plus anciens. Le best-of va dans les releases, hors de ce quota.
 - **Claude** : quelques centimes par passage (une requête par série de 3 candidats, avec transcriptions et
   images), soit environ 10 à 30 $ par mois au rythme par défaut selon le nombre de séries. Facultatif.
 - Tout le reste (Twitch, YouTube, TikTok, Telegram, Whisper, ffmpeg) est gratuit.

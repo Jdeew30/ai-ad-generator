@@ -206,7 +206,7 @@ def test_telegram_errors_are_reported(server, http, video, monkeypatch):
 
 
 
-def test_telegram_points_to_the_best_of_on_github_with_the_texts_to_paste(server, http, tmp_path, monkeypatch):
+def test_telegram_announces_the_best_of_with_the_texts_to_paste(server, http, tmp_path, monkeypatch):
     monkeypatch.setenv("GITHUB_SERVER_URL", "https://github.com")
     monkeypatch.setenv("GITHUB_REPOSITORY", "moi/clips")
     monkeypatch.setenv("GITHUB_RUN_ID", "99")
@@ -219,7 +219,7 @@ def test_telegram_points_to_the_best_of_on_github_with_the_texts_to_paste(server
 
     assert publisher.publish_compilation(tmp_path / "comp.mp4", meta, "0:00 Intro\n1:02 #12 Alpha", thumbnail, []).id == "5"
     [photo] = server.calls("POST", "/bot123:abc/sendPhoto")
-    assert "TOP 12 de la semaine".encode() in photo.body and b"https://github.com/moi/clips/actions/runs/99" in photo.body
+    assert "TOP 12 de la semaine".encode() in photo.body and "son lien de téléchargement arrive".encode() in photo.body
     [texts] = server.calls("POST", "/bot123:abc/sendMessage")
     assert texts.form()["text"] == "À coller sur YouTube\n\nTitre :\nTOP 12 de la semaine\n\nDescription :\n0:00 Intro\n1:02 #12 Alpha"
 

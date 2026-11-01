@@ -107,8 +107,8 @@ class TelegramPublisher:
         run = run_url()
         if links:
             where = links
-        elif run:  # a best-of weighs hundreds of MB, far over the 50 MB a bot may send
-            where = [f"⬇️ Vidéo trop lourde pour Telegram : elle t'attend ici, section « Artifacts » (7 jours) : {run}"]
+        elif run:  # a best-of weighs hundreds of MB, far over the 50 MB a bot may send: the workflow sends its link next
+            where = ["⬇️ Vidéo trop lourde pour Telegram : son lien de téléchargement arrive juste après."]
         else:
             where = [f"Vidéo prête : {video.name} (artefact du workflow)"]
         text = "\n".join([f"🏆 {meta.title}", "", *where])

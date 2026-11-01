@@ -1,6 +1,6 @@
 name: Clipper
 
-# Robot de la chaîne : 5 shorts par jour + le best-of du dimanche.
+# Robot de la chaîne : à chaque passage un short Twitch et un short YouTube, + le best-of du dimanche.
 # Les horaires sont en UTC (Paris = UTC+1 l'hiver, UTC+2 l'été). Les workflows planifiés ne
 # tournent que depuis la branche par défaut du dépôt.
 on:
@@ -49,7 +49,8 @@ concurrency:
 jobs:
   clip:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    # Le best-of (environ 15 min de vidéo, des dizaines de clips examinés) demande bien plus de temps qu'un passage.
+    timeout-minutes: ${{ (github.event.schedule == '41 8 * * 0' || inputs.mode == 'compilation') && 150 || 75 }}
     defaults:
       run:
         working-directory: clipper
@@ -135,7 +136,7 @@ jobs:
           fi
 
       # GitHub gratuit garde 500 Mo d'artefacts, et bloque les dépôts au-delà. Les shorts sont déjà sur
-      # Telegram : leurs copies ne restent qu'un jour. Le best-of (trop lourd pour Telegram) reste 7 jours.
+      # Telegram : leurs copies ne restent qu'un jour. Le best-of va dans une release (étape suivante).
       - name: Faire de la place (vidéos des anciens passages)
         if: always()
         continue-on-error: true
@@ -150,8 +151,40 @@ jobs:
             gh api -X DELETE "repos/$GITHUB_REPOSITORY/actions/artifacts/$id" --silent && echo "supprimé : artefact $id"
           done
 
+      # Le best-of pèse des centaines de Mo : trop pour Telegram (50 Mo) comme pour les artefacts (500 Mo en
+      # tout). Il part en MP4 dans une release du dépôt, avec sa description (chapitres, crédits), et son lien
+      # arrive sur Telegram. Les 4 derniers best-of sont gardés.
+      - name: Best-of à télécharger (release)
+        id: release
+        if: env.MODE == 'compilation' && !inputs.dry_run
+        working-directory: ${{ github.workspace }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          video=$(ls clipper-output/*_compilation.mp4 2>/dev/null | head -n 1)
+          if [ -z "$video" ]; then echo "Pas de best-of à ce passage."; exit 0; fi
+          tag="best-of-$(date -u +%F)-$GITHUB_RUN_ID"
+          files=("$video")
+          if [ -f "${video%.mp4}.jpg" ]; then files+=("${video%.mp4}.jpg"); fi
+          gh release create "$tag" "${files[@]}" --repo "$GITHUB_REPOSITORY" \
+            --title "Best-of du $(date -u +%d/%m/%Y)" --notes-file "${video%.mp4}.txt"
+          url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$tag/$(basename "$video")"
+          text="⬇️ Best-of à télécharger (MP4) : $url
+
+          Ouvre ce lien dans ton navigateur (Chrome, Safari…) connecté à ton compte GitHub : le dépôt est privé, et sans connexion (comme dans Telegram) GitHub répond « 404 ». Tous les best-of : $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases"
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl -sS --fail -o /dev/null "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+              --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" --data-urlencode "text=$text" --data "disable_web_page_preview=true"
+          fi
+          gh release list --repo "$GITHUB_REPOSITORY" --limit 100 --json tagName --jq '.[].tagName' |
+            grep '^best-of-' | tail -n +5 | while read -r old; do
+              gh release delete "$old" --repo "$GITHUB_REPOSITORY" --cleanup-tag --yes && echo "supprimé : $old"
+            done
+
       - name: Vidéos montées (à télécharger pour publier à la main si besoin)
-        if: always()
+        if: always() && (env.MODE != 'compilation' || steps.release.outcome != 'success')
         uses: actions/upload-artifact@v4
         with:
           name: clipper-${{ env.MODE }}-${{ github.run_id }}
