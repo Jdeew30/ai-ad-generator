@@ -30,7 +30,8 @@ Un robot qui, plusieurs fois par jour :
    accroche incrustée, crédit `twitch.tv/<streamer>`, son normalisé ;
 5. **publie** sur YouTube Shorts (une fois l'audit de Google accepté) et t'envoie chaque vidéo sur
    **Telegram** avec le texte prêt à coller, pour TikTok et en attendant l'audit ;
-6. chaque dimanche, monte un **best-of de la semaine** en 16:9 d'environ 15 minutes (Claude retient des
+6. chaque mercredi et chaque dimanche, monte un **best-of** des 4 derniers jours (un clip n'est jamais repris d'un
+   best-of à l'autre) en 16:9 d'environ 15 minutes (Claude retient des
    clips jusqu'à 15 min, jamais plus de 20 ; compte à rebours jusqu'au #1, bandeau avec le nom du streamer,
    carte d'intro, miniature générée, chapitres et crédits dans la description). Il pèse plusieurs centaines
    de Mo, bien plus que les 50 Mo qu'un bot Telegram peut envoyer : il est rangé en MP4 dans une
@@ -60,7 +61,7 @@ Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) �
 | Publication YouTube | ⚠️ Écrite, testée contre un faux serveur | Envoi « resumable » par morceaux avec reprise après coupure. **Tant que ton projet Google n'a pas passé l'audit de l'API, YouTube verrouille les vidéos envoyées en privé** (voir plus bas). |
 | Publication TikTok | ⚠️ Écrite, testée contre un faux serveur | Brouillon (« inbox ») ou publication directe. **En pratique, publication à la main depuis Telegram** : le règlement de l'API TikTok exclut les outils qui publient sur tes propres comptes et la reprise de contenus d'autres plateformes, donc pas d'audit, et sans audit tout reste privé (voir TikTok plus bas). |
 | Envoi Telegram | ✅ Vérifié en réel | Chaque short arrive avec le texte à coller ; un message prévient quand un passage ne trouve rien d'assez bon. |
-| Workflows GitHub Actions | ✅ Vérifié en réel | 5 passages par jour (+ best-of du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés avec 30 à 45 minutes de retard. |
+| Workflows GitHub Actions | ✅ Vérifié en réel | 5 passages par jour (+ best-of du mercredi et du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés avec 30 à 45 minutes de retard. |
 
 **Le premier passage avec tes vrais comptes est la vraie validation des publications.** Toute erreur
 (quota, jeton expiré, refus de la plateforme) apparaît telle quelle dans le résumé du workflow et sur
@@ -80,7 +81,7 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
 4. Vérifie : **Run workflow** → mode **`check`**. Le résumé du run affiche ✅ / ❌ pour chaque service, et
    Telegram reçoit un message de test. Rien n'est publié.
 5. C'est tout : à chaque passage (vers 10 h, 13 h, 16 h, 19 h et 22 h à Paris l'hiver, une heure plus tard
-   l'été), un short Twitch et un short YouTube, et le best-of le dimanche matin.
+   l'été), un short Twitch et un short YouTube, et un best-of le mercredi et le dimanche matin.
 
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
@@ -188,7 +189,7 @@ chaque clip dans la VOD (anti-doublon plus précis).
    artefacts.
 6. Quota : 10 000 unités par jour par défaut. Un envoi a longtemps coûté 1 600 unités (environ 6 envois par
    jour) ; Google aurait fortement baissé ce coût fin 2025, vérifie le chiffre actuel dans la console. Même à
-   1 600, c'est juste assez pour 5 shorts + le best-of du dimanche.
+   1 600, c'est juste assez pour les 5 shorts Twitch + un best-of (les extraits YouTube n'y sont pas renvoyés).
    Les miniatures personnalisées exigent une chaîne validée par téléphone
    ([youtube.com/verify](https://www.youtube.com/verify)).
 
@@ -241,8 +242,8 @@ Netscape), d'un **compte Google secondaire** :
 
 **Content ID** : un extrait de vidéo YouTube republié sur YouTube est presque toujours repéré (revenus
 reversés au YouTubeur, blocage, voire avertissement). Le robot ne le republie donc jamais sur YouTube
-(`publish.youtube.youtube_sources: false`) et Telegram te conseille de le poster sur TikTok. Le best-of du
-dimanche reste 100 % Twitch.
+(`publish.youtube.youtube_sources: false`) et Telegram te conseille de le poster sur TikTok. Les best-of
+restent 100 % Twitch.
 
 ## Réglages utiles (`config.yaml`)
 
@@ -289,8 +290,9 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
 ## Coûts
 
 - **GitHub Actions** : dépôt privé, 2 000 minutes gratuites par mois. Depuis YouTube (lecture des
-  commentaires) et ses deux shorts par passage, un passage dure de 10 à 25 minutes : le robot dépasse les
-  2 000 minutes. Dépôt public : illimité (et les liens du best-of s'ouvrent alors sans connexion).
+  commentaires) et ses deux shorts par passage, un passage dure de 10 à 25 minutes, et chaque best-of jusqu'à
+  1 h 30 : le robot dépasse les 2 000 minutes. Dépôt public : illimité (et les liens du best-of s'ouvrent
+  alors sans connexion).
 - **Stockage GitHub** : 500 Mo gratuits pour les vidéos gardées par les passages (« artefacts »), et plus
   aucun dépôt possible au-delà. Les shorts, déjà sur Telegram, ne sont donc gardés qu'un jour, et chaque
   passage supprime les vidéos des passages plus anciens. Le best-of va dans les releases, hors de ce quota.

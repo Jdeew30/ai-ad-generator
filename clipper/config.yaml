@@ -133,7 +133,7 @@ shorts:
 compilation:
   clips: 40                     # au plus 40 clips dans le compte à rebours
   min_clips: 5
-  window_days: 7
+  window_days: 4                # deux best-of par semaine (mercredi, dimanche) : 4 jours chacun, sans clip repris
   target_minutes: 15            # Claude retient des clips jusqu'à ce que le best-of dure 15 min…
   max_minutes: 20               # … et jamais plus de 20
   intro: true
