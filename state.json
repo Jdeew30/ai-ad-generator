@@ -79,7 +79,23 @@
   "twitch:SlickJollySwallowWutFace-4803q_zDQnSv9ky_": "2026-11-01T13:32:54.534158+00:00",
   "twitch:TiredQuaintPonyRickroll-5UhwU7uuMU9_RiNn": "2026-11-01T13:32:54.534158+00:00"
  },
- "failures": {},
+ "failures": {
+  "youtube:7U-ZIMrgTEI@242-302": {
+   "at": "2026-11-01T14:45:33.912336+00:00",
+   "count": 1,
+   "error": "non évalué par Claude"
+  },
+  "youtube:CO4AjCWQQmE@1145-1205": {
+   "at": "2026-11-01T14:45:33.912407+00:00",
+   "count": 1,
+   "error": "non évalué par Claude"
+  },
+  "youtube:ZA_3eoib31s@1965-2025": {
+   "at": "2026-11-01T14:45:33.912245+00:00",
+   "count": 1,
+   "error": "non évalué par Claude"
+  }
+ },
  "posted": {
   "manual:8b94022394d3bcf8": {
    "at": "2026-10-31T10:22:58.094620+00:00",
@@ -664,6 +680,30 @@
    "title": "Inoxtag et sa team après un crash d'avion : « On est des forces spéciales ! »",
    "url": "https://www.youtube.com/watch?v=2wJuFzwBWkI",
    "views": 620046
+  },
+  "youtube:BByplh9JRTs@2045-2105": {
+   "at": "2026-11-01T14:52:21.158350+00:00",
+   "created_at": "2026-10-31T10:00:09+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "54",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "youtube",
+   "span": [
+    "yt:BByplh9JRTs",
+    2045.0,
+    2105.0
+   ],
+   "streamer": "Mastu",
+   "streamer_login": "mastu",
+   "title": "Samuel Étienne piège tout le monde à l'Undercover de Mastu",
+   "url": "https://www.youtube.com/watch?v=BByplh9JRTs",
+   "views": 2061734
   },
   "youtube:_hzgpE0NXR8@3520-3580": {
    "at": "2026-10-31T17:06:56.335106+00:00",
@@ -1367,9 +1407,21 @@
    "at": "2026-10-31T22:02:00.155738+00:00",
    "reason": "revue : Moment absurde mais confus : la transcription est hachée, la mise en place est floue (pourquoi enlever ses chaussures ?) et il n'y a pas de vraie chute. Les 30 premières secondes sont sans dialogue."
   },
+  "youtube:2wJuFzwBWkI@3210-3270": {
+   "at": "2026-11-01T14:39:08.901131+00:00",
+   "reason": "revue : Moment moyen : on comprend que Squeezie s'est fait capturer, mais la suite est surtout du bavardage sur la fatigue d'Amine, sans vraie chute. Cette vidéo a déjà été exploitée récemment."
+  },
+  "youtube:2wJuFzwBWkI@4625-4685": {
+   "at": "2026-11-01T14:51:31.322030+00:00",
+   "reason": "revue : Images sombres et confuses, presque sans dialogue. L'extrait ne se comprend pas sans contexte, et un moment de la même vidéo a déjà été publié."
+  },
   "youtube:BByplh9JRTs@1052-1112": {
    "at": "2026-10-31T17:06:16.386160+00:00",
    "reason": "revue : Discussion de stratégie d'Undercover très difficile à comprendre sans le contexte du jeu, sans vraie chute."
+  },
+  "youtube:BByplh9JRTs@1095-1155": {
+   "at": "2026-11-01T14:39:08.901203+00:00",
+   "reason": "revue : Scène confuse et en grande partie dans le noir. La transcription est incompréhensible et on ne comprend pas l'enjeu sans le contexte de la partie."
   },
   "youtube:BByplh9JRTs@1355-1415": {
    "at": "2026-10-31T17:06:16.386219+00:00",
@@ -1402,6 +1454,14 @@
   "youtube:UCYHu98cvEA@227-287": {
    "at": "2026-10-31T17:00:12.441659+00:00",
    "reason": "revue : Présentation du skin d'Inoxtag, sujet déjà largement couvert, suivie d'un gameplay confus sans action marquante."
+  },
+  "youtube:VhNH0b_t6jg@520-580": {
+   "at": "2026-11-01T14:39:08.901262+00:00",
+   "reason": "revue : L'extrait repose surtout sur des images d'une émission TV qui n'appartient pas au créateur. La réaction d'Amine est un avis assez banal, sans chute."
+  },
+  "youtube:YOhFQb4f2H4@2385-2445": {
+   "at": "2026-11-01T14:51:31.321935+00:00",
+   "reason": "revue : Vlog sans enjeu : un débat flou sur un dessert (pomme ou pas), puis des transitions de trajet en métro. Pas de chute, pas de vraie réaction marquante."
   },
   "youtube:YOhFQb4f2H4@348-408": {
    "at": "2026-10-31T17:00:12.441712+00:00",
