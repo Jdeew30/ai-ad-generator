@@ -260,7 +260,7 @@ def test_youtube_channels_take_turns():
     from clipper.sources.youtube import discover_youtube
 
     config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b", "@c"], "channels_per_run": 2, "tabs": ["videos"]}})
-    ytdlp = FakeYtDlp()  # every listing fails: only the URLs asked for matter here
+    ytdlp = FakeYtDlp({f"https://www.youtube.com/@{name}/videos": [] for name in "abc"})  # empty channels: only the URLs matter
     assert discover_youtube(config, ytdlp, now=NOW, offset=2) == []
     assert ytdlp.listed == ["https://www.youtube.com/@c/videos", "https://www.youtube.com/@a/videos"]
 
@@ -336,12 +336,41 @@ def test_other_channels_join_the_turns():
     config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b"], "tabs": ["videos"], "related_channels": True}})
     related = {"@b": {"at": NOW.isoformat(), "channels": ["@bGaming"]}}  # looked up recently: kept as is
     search_a = "https://www.youtube.com/results?search_query=a&sp="
-    ytdlp = FakeYtDlp({search_a: [{"channel": "a Gaming", "uploader_id": "@aGaming", "channel_follower_count": 50_000}]})
+    tabs = {f"https://www.youtube.com/{handle}/videos": [] for handle in ("@a", "@b", "@aGaming", "@bGaming")}
+    ytdlp = FakeYtDlp({search_a: [{"channel": "a Gaming", "uploader_id": "@aGaming", "channel_follower_count": 50_000}], **tabs})
     assert discover_youtube(config, ytdlp, now=NOW, related=related) == []
     assert related["@a"] == {"at": NOW.isoformat(), "channels": ["@aGaming"]} and related["@b"]["channels"] == ["@bGaming"]
     assert [url.split("youtube.com/")[1] for url in ytdlp.listed] == [
         "results?search_query=a&sp=EgIQAg%253D%253D", "@a/videos", "@b/videos", "@aGaming/videos", "@bGaming/videos",
     ]  # fmt: skip
+
+
+def test_a_youtube_handle_that_does_not_exist_is_looked_up_by_its_name(caplog):
+    from clipper.sources.youtube import discover_youtube, renamed_channel
+
+    search = "https://www.youtube.com/results?search_query=Le%20Woop&sp="
+    results = [
+        {"channel": "Le Woop Gaming", "uploader_id": "@LeWoopGaming", "channel_follower_count": 900_000},  # another one
+        {"channel": "Le Woop", "uploader_id": "@LeWoopFan", "channel_follower_count": 300},  # a fan's
+        {"channel": "LE WOOP", "uploader_id": "@LeWoopOfficiel", "channel_follower_count": 4_000_000},
+    ]
+    heatmap = [{"start_time": i * 10.0, "end_time": (i + 1) * 10.0, "value": 0.9 if i == 50 else 0.1} for i in range(100)]
+    video = {"id": "w1", "uploader_id": "@LeWoopOfficiel", "view_count": 90000, "duration": 1000,
+             "timestamp": (NOW - timedelta(days=10)).timestamp(), "heatmap": heatmap}  # fmt: skip
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@LeWoop", "@Nobody"], "tabs": ["videos"],
+                                        "max_age_days": 14}})  # fmt: skip
+    ytdlp = FakeYtDlp(listings={search: results, "https://www.youtube.com/@LeWoopOfficiel/videos": [{"id": "w1"}]},
+                      infos={"https://www.youtube.com/watch?v=w1": video})  # fmt: skip
+    with caplog.at_level("INFO", logger="clipper"):
+        found = discover_youtube(config, ytdlp, now=NOW)
+    assert [c.key.split("@")[0] for c in found] == ["youtube:w1"]
+    assert "Chaîne YouTube @LeWoop introuvable : lue sous le nom @LeWoopOfficiel" in caplog.text
+    assert "Chaîne YouTube introuvable ou indisponible (https://www.youtube.com/@Nobody/videos)" in caplog.text
+    # The channel found under the very handle that failed is no other name for it.
+    assert renamed_channel(FakeYtDlp({search: [{"channel": "Le Woop", "uploader_id": "@lewoop"}]}), "@LeWoop") is None
+    duo = [{"channel": "McFly & Carlito", "uploader_id": "@McFlyEtCarlitoOff", "channel_follower_count": 7_000_000}]
+    assert renamed_channel(FakeYtDlp({"https://www.youtube.com/results?search_query=mcflyetcarlito&": duo}),
+                           "@mcflyetcarlito") == "@McFlyEtCarlitoOff"  # fmt: skip
 
 
 def test_a_focus_run_only_looks_at_the_sources_asked_for():
