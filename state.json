@@ -573,6 +573,26 @@
    "url": "https://www.twitch.tv/otplol_/clip/SilkyCrypticPartridgeOpieOP--3SGNkODbvJ6HEPu",
    "views": 598
   },
+  "twitch:SlickJollySwallowWutFace-4803q_zDQnSv9ky_": {
+   "at": "2026-11-01T14:54:37.104469+00:00",
+   "created_at": "2026-10-28T21:38:05+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "55",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "manual",
+   "span": null,
+   "streamer": "MisterMV",
+   "streamer_login": "mistermv",
+   "title": "MisterMV : la lettre très innocente de Piffulus le tyran",
+   "url": "https://www.twitch.tv/mistermv/clip/SlickJollySwallowWutFace-4803q_zDQnSv9ky_",
+   "views": 310
+  },
   "twitch:SoftElegantDumplingsPogChamp-qHpjnwbYri-raJ66": {
    "at": "2026-10-28T20:07:26.489057+00:00",
    "created_at": "2026-10-21T20:44:28+00:00",
@@ -3769,31 +3789,6 @@
    "recent": [],
    "score": 45.0,
    "verdict": "reject"
-  },
-  "twitch:SlickJollySwallowWutFace-4803q_zDQnSv9ky_": {
-   "at": "2026-11-01T12:58:41.934302+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Piffulus dicte une lettre d'amitié… avec des post-scriptum très intéressés sur la façon de tuer un dragon.",
-    "hashtags": [
-     "mistermv",
-     "jdr",
-     "roleplay",
-     "humour",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "LA LETTRE LA PLUS SUSPECTE",
-    "title": "MisterMV et la lettre très suspecte de Piffulus le tyran",
-    "trim_end": 56.0,
-    "trim_start": 0.0
-   },
-   "reason": "Scène de jeu de rôle drôle et compréhensible seule : une lettre d'amitié pleine de post-scriptum de plus en plus suspects.",
-   "recent": [],
-   "score": 73.0,
-   "verdict": "publish"
   },
   "twitch:SparklingVenomousMonitorBibleThump-apjBOio0prcdG8J3": {
    "at": "2026-11-01T12:42:54.224281+00:00",
