@@ -468,6 +468,30 @@
    "url": "https://www.twitch.tv/mastu/clip/MoldyKindShrimpBCouch-UOgzkLhqCVrI4nT8",
    "views": 456
   },
+  "twitch:MuddyLittleWolverineMrDestructoid-0mOixLn8tKcvg3kI": {
+   "at": "2026-11-01T22:36:26.639554+00:00",
+   "created_at": "2026-10-27T00:33:46+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "61",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2911512673",
+    20548.0,
+    20605.6
+   ],
+   "streamer": "Tatiana_TV",
+   "streamer_login": "tatiana_tv",
+   "title": "Tatiana_TV persuadée que Jamie la trompe sur GTA RP",
+   "url": "https://www.twitch.tv/tatiana_tv/clip/MuddyLittleWolverineMrDestructoid-0mOixLn8tKcvg3kI",
+   "views": 513
+  },
   "twitch:NurturingCloudyKiwiPrimeMe-yaCKmFqBI1qw09-r": {
    "at": "2026-11-01T13:38:01.826439+00:00",
    "created_at": "2026-10-25T18:51:44+00:00",
@@ -866,6 +890,14 @@
    "at": "2026-11-01T13:37:17.779225+00:00",
    "reason": "revue : Problème technique avec écran noir, aucun moment notable."
   },
+  "twitch:AverageAcceptableSkunkFloof-3YjUuTX_yLZgK2Eu": {
+   "at": "2026-11-01T22:33:19.173979+00:00",
+   "reason": "revue : Co-stream Fortnite sans réaction marquante : Nikof se demande juste pourquoi un truc ne s'ouvre pas, 15 s sans enjeu ni chute."
+  },
+  "twitch:AwkwardThoughtfulRingHassaanChop-VShaWC3VgpkggHXx": {
+   "at": "2026-11-01T22:33:19.174100+00:00",
+   "reason": "revue : Petit enchaînement de kills sur CoD avec une réaction faible et peu lisible, sans rien d'exceptionnel."
+  },
   "twitch:BashfulMoralGuanacoBCouch-h2DX16926PfGe57T": {
    "at": "2026-10-30T08:10:58.837243+00:00",
    "reason": "revue : Combat confus sur Garry's Mod accompagné de cris inintelligibles. On ne comprend pas l'enjeu sans le contexte du live et il n'y a aucune chute."
@@ -930,6 +962,10 @@
    "at": "2026-10-28T20:06:28.073904+00:00",
    "reason": "revue : Simple annonce des dotations d'un événement, avec des logos de sponsors. Il n'y a ni réaction ni chute : ça ressemble à une présentation promotionnelle."
   },
+  "twitch:BumblingTubularKangarooRitzMitz-rWHtBwfqUpQRHTH1": {
+   "at": "2026-11-01T21:59:20.832755+00:00",
+   "reason": "revue : Marex relance sa run de Darkest Dungeon, épuisé après une mort. Pas de vraie chute : on le voit gérer le menu de la nouvelle run, et la fin est un recadrage du chat. Le moment n'a de sens qu'avec le contexte du live."
+  },
   "twitch:BusyBitterShieldBrainSlug-dRANHickGS-2EFY2": {
    "at": "2026-10-29T13:09:42.443719+00:00",
    "reason": "revue : Extrait de 9 s composé presque entièrement de la diffusion officielle Riot (replay d'un match pro), contenu qui n'appartient pas au créateur. La réaction de Kameto est minime et l'extrait est trop court pour être compris sans contexte."
@@ -974,6 +1010,10 @@
    "at": "2026-10-28T16:00:10.934608+00:00",
    "reason": "revue : L'extrait est essentiellement une performance musicale en concert, dont la musique n'appartient vraisemblablement pas au créateur. Il n'y a pas de moment de stream à proprement parler."
   },
+  "twitch:ConfidentWittyPlumberSoBayed-51pzRMVSHCjVw0VI": {
+   "at": "2026-11-01T21:59:20.832865+00:00",
+   "reason": "revue : JLTomy spécule calmement sur la façon dont le RP s'organisera sur la map de GTA VI. Ce bavardage n'a ni enjeu ni chute."
+  },
   "twitch:CooperativeRoundMangetoutVoteNay-QhjRGq3Hw6GLwkJv": {
    "at": "2026-10-30T08:26:10.767341+00:00",
    "reason": "revue : Simple description de symboles pour une énigme coopérative : aucun enjeu, aucune chute, sans intérêt hors du live."
@@ -1009,6 +1049,10 @@
   "twitch:CuteTawdryPandaMVGame-tatdYX4Bn_7M5Icb": {
    "at": "2026-10-29T16:04:54.017873+00:00",
    "reason": "revue : Extrait de 17 secondes sans action compréhensible : on n'entend qu'un décompte, puis une phrase isolée. Aucune réaction ni chute."
+  },
+  "twitch:DarlingCourageousAuberginePJSalt-hHvtA7DqWTwjR1_X": {
+   "at": "2026-11-01T21:59:20.832941+00:00",
+   "reason": "revue : Une phrase d'intro (« Dubai Valley ») suivie d'un écran de fin de journée de Stardew Valley. Il ne se passe rien de notable."
   },
   "twitch:DependableFitCattleOhMyDog-dMDLyJRl4Y_UFSyg": {
    "at": "2026-10-30T16:06:30.607351+00:00",
@@ -1093,6 +1137,10 @@
   "twitch:GlamorousSingleAnacondaPeteZarollTie-vJASZvtgRn_cGgzI": {
    "at": "2026-10-29T23:41:58.011250+00:00",
    "reason": "revue : Simple introduction d'événement en coulisses (sponsorisée BoursoBank) : présentation sans enjeu, ni chute ni moment marquant."
+  },
+  "twitch:GracefulTentativePlumberTBTacoLeft-wDkufLJdLhg6ibxA": {
+   "at": "2026-11-01T22:32:00.221623+00:00",
+   "reason": "revue : Bavardage confus pendant un finish de map, aucune réaction marquante ni chute."
   },
   "twitch:GrotesqueArtsyOilNotATK-M3G7CIfmuKhZB3TM": {
    "at": "2026-10-29T22:07:23.506997+00:00",
@@ -1250,6 +1298,10 @@
    "at": "2026-10-30T22:00:59.959484+00:00",
    "reason": "revue : Simple dialogue scripté du jeu (le voisin arrive sans les pizzas), avec très peu de réaction de Gom4rt : pas de peur, pas de chute, pas de vrai moment fort."
   },
+  "twitch:OnerousGracefulCardTheRinger-cPrK1HYuCo1LUqDs": {
+   "at": "2026-11-01T22:33:19.174046+00:00",
+   "reason": "revue : Bavardage sans enjeu sur une idée de cosplay d'Halloween, sans décision ni chute."
+  },
   "twitch:OpenBlushingGarbageAllenHuhu-aLNEpUZHwug-TtfW": {
    "at": "2026-10-29T23:44:29.230757+00:00",
    "reason": "revue : Simple bavardage en partie de Call of Duty, sans action marquante ni chute."
@@ -1386,6 +1438,10 @@
    "at": "2026-10-29T23:40:59.596197+00:00",
    "reason": "revue : Tirage au sort d'un événement de catch peu compréhensible sans contexte. Les piques sont faibles et il n'y a pas de vraie chute. L'extrait semble en plus provenir du même événement qu'un short déjà publié."
   },
+  "twitch:SpikyCalmQuailRitzMitz-HehUMwVCqsNbnRGP": {
+   "at": "2026-11-01T22:35:15.279956+00:00",
+   "reason": "revue : Co-stream Valorant sans réaction marquante sur une action du match : il s'agit surtout d'insultes répétées envers le coach adverse. La transcription est confuse et il n'y a pas de chute."
+  },
   "twitch:SpikyMistyPartridgeRiPepperonis-s6ciChYjbcoNZxUi": {
    "at": "2026-10-28T22:06:09.799794+00:00",
    "reason": "revue : Bavardage dans le menu du jeu, sans action ni réaction notable. La transcription est confuse et le moment n'a de sens qu'avec le contexte du live."
@@ -1401,6 +1457,10 @@
   "twitch:SquareDistinctAirGuitarTriHard-tfS1nH4I2uXT5Y83": {
    "at": "2026-10-28T22:06:09.799726+00:00",
    "reason": "revue : L'extrait est surtout une vidéo de Bear Grylls (Discovery) qui n'appartient pas au créateur. La réaction de Domingo reste faible et commentée par-dessus."
+  },
+  "twitch:StrangeFragilePrariedogGivePLZ-FKo9fWVKy2Mg3Aug": {
+   "at": "2026-11-01T22:35:15.280023+00:00",
+   "reason": "revue : Débat d'initiés sur les meilleurs joueurs de LoL, coupé et sans chute ni avis vraiment marquant."
   },
   "twitch:StrongConcernedShallotTheThing-EPnoN0B_toYwGjoS": {
    "at": "2026-10-31T12:58:10.199060+00:00",
@@ -1426,6 +1486,10 @@
    "at": "2026-10-31T15:44:04.135671+00:00",
    "reason": "revue : Moment de Trackmania (Kacky) sans enjeu clair : bavardage confus sur une map, pas de vraie chute ni de réaction marquante, incompréhensible sans contexte."
   },
+  "twitch:SullenAnnoyingOpossumArgieB8-nk5Dmbz54LYG-uAy": {
+   "at": "2026-11-01T22:32:00.221553+00:00",
+   "reason": "revue : Remerciements de subs et discussion sur les maps à jouer : aucun moment fort, sans intérêt hors du live."
+  },
   "twitch:SuperThirstyMelonRickroll-OMzO9HhL__GOnNSg": {
    "at": "2026-10-29T19:09:27.670182+00:00",
    "reason": "revue : note 42/100 (minimum 60). Le stress de Mastu, qui hésite à se cacher face à la mère du jeu, est lisible. En revanche, il n'y a pas de vraie chute, ce qui limite le potentiel."
@@ -1437,6 +1501,10 @@
   "twitch:SuspiciousPreciousDogOneHand-DQinfI-UuJ-yXAWn": {
    "at": "2026-10-29T23:43:01.788957+00:00",
    "reason": "revue : Discussion sans enjeu sur des dates de création de structures, devant un écran de menu, avec de longs blancs. C'est incompréhensible sans le contexte du live."
+  },
+  "twitch:SwissBetterChimpanzeeBleedPurple-JX4JdBdY9iI2pROf": {
+   "at": "2026-11-01T22:32:00.221676+00:00",
+   "reason": "revue : Teasing d'une annonce sans révélation, avec une blague d'initiés sur la coupe de cheveux de Moman : incompréhensible sans contexte."
   },
   "twitch:TardyGrossPheasantMoreCowbell-BEmYqHrmm8AONAOM": {
    "at": "2026-11-01T15:44:54.003574+00:00",
@@ -1538,6 +1606,14 @@
    "at": "2026-11-01T19:05:28.530556+00:00",
    "reason": "revue : Extrait confus sans contexte : une énigme de jeu, un débat Pokémon autour d'un message du chat, aucune chute claire. Le moment repose aussi en partie sur un viewer qui se fait recadrer."
   },
+  "youtube:EOZKO05jStQ@1305-1365": {
+   "at": "2026-11-01T22:42:26.253558+00:00",
+   "reason": "revue : Fin d'anecdote incompréhensible sans le début de l'histoire (head spa, la tante) : morale et excuses sans chute, transcription confuse et temps morts."
+  },
+  "youtube:EOZKO05jStQ@630-690": {
+   "at": "2026-11-01T22:42:26.253687+00:00",
+   "reason": "revue : Histoire de viewer prise en cours de route (mise en place absente) et coupée avant la fin : pas de chute, accrocheur mais incomplet sans contexte."
+  },
   "youtube:ESnwlL4OnYc@19-79": {
    "at": "2026-10-31T22:02:00.155803+00:00",
    "reason": "revue : Vidéo de vulgarisation sur l'origine d'Halloween avec quelques vannes. Pas de vrai moment fort ni de chute : c'est le début d'une explication historique coupée en plein milieu."
@@ -1597,6 +1673,10 @@
   "youtube:_hzgpE0NXR8@4348-4408": {
    "at": "2026-10-31T17:00:12.441527+00:00",
    "reason": "revue : Outro de vidéo, remerciements et sponsor (NordVPN) : aucun moment fort."
+  },
+  "youtube:aA4XiGqv-8U@1312-1372": {
+   "at": "2026-11-01T22:42:26.253629+00:00",
+   "reason": "revue : Segment de promo de catch confus : musique et sponsor au début, trash talk peu audible sans vraie chute, incompréhensible sans le contexte de l'événement."
   },
   "youtube:gMUfOiuXAT4@1042-1102": {
    "at": "2026-11-01T15:51:07.798392+00:00",
@@ -1772,31 +1852,6 @@
    "recent": [],
    "score": 66.0,
    "verdict": "publish"
-  },
-  "twitch:AwkwardThoughtfulRingHassaanChop-VShaWC3VgpkggHXx": {
-   "at": "2026-11-01T12:46:10.050856+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "chowh1 réalise un enchaînement sur Call of Duty.",
-    "hashtags": [
-     "chowh1",
-     "callofduty",
-     "mw4",
-     "fps",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "L'ENCHAÎNEMENT DE DÉMON",
-    "title": "chowh1 enchaîne les kills sur MW4",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Bel enchaînement mais action courte et réaction faible, peu d'intérêt hors communauté.",
-   "recent": [],
-   "score": 50.0,
-   "verdict": "reject"
   },
   "twitch:BillowingFunTroutBuddhaBar-KMVYjKSYm4KSDbz-": {
    "at": "2026-11-01T13:11:52.085178+00:00",
@@ -3840,30 +3895,6 @@
    "score": 40.0,
    "verdict": "reject"
   },
-  "twitch:SpikyCalmQuailRitzMitz-HehUMwVCqsNbnRGP": {
-   "at": "2026-11-01T13:04:34.345523+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Mel et ses amis chambrent Ludo pendant un co-stream du Game Changers.",
-    "hashtags": [
-     "melhssn",
-     "valorant",
-     "gamechangers",
-     "twitchfr",
-     "clip",
-     "drole"
-    ],
-    "hook": "MEL CHAMBRE LUDO EN PLEIN MATCH",
-    "title": "Mel chambre Ludo pendant le match Valorant",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Chants répétitifs et insultes ciblant une personne réelle (Ludo) plutôt qu'une action du match, sans vraie chute.",
-   "recent": [],
-   "score": 42.0,
-   "verdict": "reject"
-  },
   "twitch:SpookyConsiderateDumplingsHeyGuys-9SC4y2MClb7_vYiE": {
    "at": "2026-11-01T12:50:05.453705+00:00",
    "clip_span": null,
@@ -4010,31 +4041,6 @@
    "score": 22.0,
    "verdict": "reject"
   },
-  "twitch:StrangeFragilePrariedogGivePLZ-FKo9fWVKy2Mg3Aug": {
-   "at": "2026-11-01T12:42:54.224245+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "LaureBV et son invité débattent du classement des mids.",
-    "hashtags": [
-     "laurebv",
-     "leagueoflegends",
-     "lol",
-     "debat",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "LE DÉBAT QUI DIVISE",
-    "title": "LaureBV débat des meilleurs mids de LoL",
-    "trim_end": 25.0,
-    "trim_start": 0.0
-   },
-   "reason": "Débat d'initiés sur des joueurs LoL (Rookie, Czekolad), sans chute ni enjeu clair pour un public large.",
-   "recent": [],
-   "score": 35.0,
-   "verdict": "reject"
-  },
   "twitch:SucculentColorfulReubenCoolStoryBro-zXh5MkM7enMUSjzf": {
    "at": "2026-11-01T13:11:52.085200+00:00",
    "clip_span": null,
@@ -4057,31 +4063,6 @@
    "reason": "Simple idée en l'air sur un skin, sans annonce réelle et avec une chute molle.",
    "recent": [],
    "score": 55.0,
-   "verdict": "reject"
-  },
-  "twitch:SullenAnnoyingOpossumArgieB8-nk5Dmbz54LYG-uAy": {
-   "at": "2026-11-01T12:42:54.224265+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Une option de subathon bloque la caméra de Wingo en pleine map.",
-    "hashtags": [
-     "wingo",
-     "trackmania",
-     "fail",
-     "kacky",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "WINGO SE PIÈGE TOUT SEUL",
-    "title": "Wingo bloqué en caméra arrière à cause des subs sur Trackmania",
-    "trim_end": 50.0,
-    "trim_start": 15.0
-   },
-   "reason": "Fail lié aux options de subathon (caméra bloquée), peu lisible sans le contexte du live.",
-   "recent": [],
-   "score": 45.0,
    "verdict": "reject"
   },
   "twitch:SuspiciousEnchantingCurlewTakeNRG-qSV31CNiDWiK_FA3": {
@@ -4131,31 +4112,6 @@
    "reason": "Filme une personne présentée comme nue à son insu dans un bureau : risque de nudité et atteinte à la vie privée.",
    "recent": [],
    "score": 20.0,
-   "verdict": "reject"
-  },
-  "twitch:SwissBetterChimpanzeeBleedPurple-JX4JdBdY9iI2pROf": {
-   "at": "2026-11-01T12:54:28.579935+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "ZeratoR fait monter la hype avant une annonce de Mandatory.",
-    "hashtags": [
-     "zerator",
-     "moman",
-     "mandatory",
-     "annonce",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "ZERATOR TEASE UNE ANNONCE",
-    "title": "ZeratoR tease une annonce chevelue avec Moman",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Teasing vague d'une annonce de Mandatory, sans révélation ni chute : sujet d'initiés.",
-   "recent": [],
-   "score": 40.0,
    "verdict": "reject"
   },
   "twitch:TentativeFreezingLEDOMGScoots-2FdBR8nbIVFJdpAt": {
@@ -4291,7 +4247,7 @@
   "adilrami23": "2026-11-01T18:56:52.268070+00:00",
   "adrienkefta": "2026-11-01T15:41:53.360772+00:00",
   "adztv": "2026-10-31T12:55:19.002790+00:00",
-  "aenot": "2026-10-31T21:55:18.075941+00:00",
+  "aenot": "2026-11-01T21:55:48.325708+00:00",
   "agea59": "2026-10-30T08:23:54.920356+00:00",
   "aiekillu": "2026-10-30T21:57:10.762822+00:00",
   "aiola": "2026-11-01T18:56:52.268070+00:00",
@@ -4303,16 +4259,17 @@
   "alibaba_rcm": "2026-11-01T12:34:46.023277+00:00",
   "alisonator": "2026-10-30T09:56:41.217059+00:00",
   "aloonea": "2026-11-01T18:56:52.268070+00:00",
+  "alphacast": "2026-11-01T21:55:48.325708+00:00",
   "altair": "2026-11-01T18:56:52.268070+00:00",
   "altairnative": "2026-11-01T13:34:23.723308+00:00",
   "aluka_k": "2026-11-01T13:34:23.723308+00:00",
   "ameziii": "2026-11-01T09:22:34.341086+00:00",
-  "aminematue": "2026-11-01T18:56:52.268070+00:00",
+  "aminematue": "2026-11-01T21:55:48.325708+00:00",
   "amslowtw": "2026-10-31T21:55:18.075941+00:00",
   "anaee": "2026-11-01T13:34:23.723308+00:00",
   "anaismrn": "2026-11-01T15:41:53.360772+00:00",
-  "anasnw": "2026-10-31T21:55:18.075941+00:00",
-  "aneyaris_": "2026-10-31T21:55:18.075941+00:00",
+  "anasnw": "2026-11-01T21:55:48.325708+00:00",
+  "aneyaris_": "2026-11-01T21:55:48.325708+00:00",
   "annlins": "2026-11-01T13:34:23.723308+00:00",
   "anth0xc0lab0y": "2026-10-30T21:57:10.762822+00:00",
   "anthobourse": "2026-10-30T09:37:30.370222+00:00",
@@ -4330,7 +4287,7 @@
   "aspig": "2026-11-01T13:34:23.723308+00:00",
   "astrofyke": "2026-10-30T08:04:48.037353+00:00",
   "at0mium": "2026-10-30T09:56:41.217059+00:00",
-  "atowwwww": "2026-10-29T23:02:20.869294+00:00",
+  "atowwwww": "2026-11-01T21:55:48.325708+00:00",
   "aunni": "2026-10-30T09:56:41.217059+00:00",
   "avabloom_": "2026-11-01T09:49:48.898202+00:00",
   "avamind": "2026-10-31T12:55:19.002790+00:00",
@@ -4346,7 +4303,7 @@
   "beyaz": "2026-11-01T15:41:53.360772+00:00",
   "bibixhd": "2026-11-01T18:56:52.268070+00:00",
   "bigbadhater_fr": "2026-11-01T09:49:48.898202+00:00",
-  "blaize": "2026-10-31T21:55:18.075941+00:00",
+  "blaize": "2026-11-01T21:55:48.325708+00:00",
   "blanquettetv": "2026-10-30T09:56:41.217059+00:00",
   "blazx": "2026-10-29T23:02:20.869294+00:00",
   "bluenblue": "2026-11-01T13:34:23.723308+00:00",
@@ -4368,14 +4325,14 @@
   "captainfracas": "2026-11-01T18:56:52.268070+00:00",
   "cass_andre": "2026-10-29T23:02:20.869294+00:00",
   "catboat": "2026-10-31T18:56:50.835342+00:00",
-  "cazynox": "2026-11-01T12:34:46.023277+00:00",
+  "cazynox": "2026-11-01T21:55:48.325708+00:00",
   "chaab": "2026-11-01T12:34:46.023277+00:00",
   "chap_gg": "2026-10-30T09:56:41.217059+00:00",
   "chat_": "2026-10-31T09:45:19.335711+00:00",
   "chef_zhab": "2026-11-01T13:34:23.723308+00:00",
-  "chez_lex": "2026-11-01T18:56:52.268070+00:00",
+  "chez_lex": "2026-11-01T21:55:48.325708+00:00",
   "chezkevinrazy": "2026-10-31T09:45:19.335711+00:00",
-  "chinoir": "2026-11-01T12:34:46.023277+00:00",
+  "chinoir": "2026-11-01T21:55:48.325708+00:00",
   "chloe": "2026-10-30T08:23:54.920356+00:00",
   "chocolatier_paulgarderes": "2026-10-31T12:55:19.002790+00:00",
   "chowh1": "2026-10-31T09:45:19.335711+00:00",
@@ -4404,10 +4361,13 @@
   "dahmien7": "2026-10-30T13:03:45.132800+00:00",
   "dai_mon": "2026-10-31T18:56:50.835342+00:00",
   "daium_tv": "2026-11-01T09:49:48.898202+00:00",
+  "dal_vlr": "2026-11-01T21:55:48.325708+00:00",
+  "danylchulo": "2026-11-01T21:55:48.325708+00:00",
   "dareeal": "2026-10-31T21:55:18.075941+00:00",
   "dart0is": "2026-10-31T18:56:50.835342+00:00",
   "david_kyden": "2026-10-30T18:59:06.087827+00:00",
   "dazjdm": "2026-10-30T09:56:41.217059+00:00",
+  "dealjb": "2026-11-01T21:55:48.325708+00:00",
   "defendintelligence": "2026-10-30T15:58:00.907341+00:00",
   "deneodell": "2026-11-01T13:34:23.723308+00:00",
   "deujna": "2026-10-30T09:56:41.217059+00:00",
@@ -4424,10 +4384,10 @@
   "drako__fr": "2026-10-30T15:58:00.907341+00:00",
   "drakony": "2026-10-30T09:37:30.370222+00:00",
   "drarteck": "2026-11-01T18:56:52.268070+00:00",
-  "drunge_": "2026-11-01T18:56:52.268070+00:00",
-  "dumbo_ttv69": "2026-10-31T21:55:18.075941+00:00",
+  "drunge_": "2026-11-01T21:55:48.325708+00:00",
+  "dumbo_ttv69": "2026-11-01T21:55:48.325708+00:00",
   "dustikrab": "2026-10-30T09:37:30.370222+00:00",
-  "dvm_medja": "2026-10-30T21:57:10.762822+00:00",
+  "dvm_medja": "2026-11-01T21:55:48.325708+00:00",
   "dvniel_play": "2026-10-31T18:56:50.835342+00:00",
   "dyna_plus": "2026-11-01T15:41:53.360772+00:00",
   "el8kun": "2026-10-30T15:58:00.907341+00:00",
@@ -4438,8 +4398,8 @@
   "encremecanique": "2026-10-29T23:02:20.869294+00:00",
   "enjoyphoenix": "2026-11-01T13:34:23.723308+00:00",
   "eskc": "2026-11-01T15:41:53.360772+00:00",
-  "etoiles": "2026-11-01T18:56:52.268070+00:00",
-  "etostark__": "2026-10-31T15:42:38.645163+00:00",
+  "etoiles": "2026-11-01T21:55:48.325708+00:00",
+  "etostark__": "2026-11-01T21:55:48.325708+00:00",
   "eva_competitive": "2026-11-01T09:49:48.898202+00:00",
   "eventis": "2026-10-31T18:56:50.835342+00:00",
   "evoxia": "2026-10-29T23:02:20.869294+00:00",
@@ -4447,18 +4407,19 @@
   "fairypeak": "2026-10-30T15:58:00.907341+00:00",
   "fakeheal66": "2026-10-30T13:03:45.132800+00:00",
   "falk9n": "2026-11-01T09:49:48.898202+00:00",
-  "farore": "2026-11-01T18:56:52.268070+00:00",
+  "farore": "2026-11-01T21:55:48.325708+00:00",
   "fatiiiih": "2026-10-30T15:58:00.907341+00:00",
   "fayza__": "2026-10-30T09:56:41.217059+00:00",
   "fcm_itoshi": "2026-11-01T15:41:53.360772+00:00",
   "fefegg": "2026-11-01T18:56:52.268070+00:00",
   "femimarss": "2026-11-01T18:56:52.268070+00:00",
   "ferdibee": "2026-11-01T18:56:52.268070+00:00",
+  "finnyzyy": "2026-11-01T21:55:48.325708+00:00",
   "flamby": "2026-11-01T18:56:52.268070+00:00",
   "flapiix": "2026-10-31T18:56:50.835342+00:00",
   "flavienalexzander": "2026-10-30T18:59:06.087827+00:00",
   "flonflon": "2026-10-30T09:56:41.217059+00:00",
-  "florence": "2026-11-01T18:56:52.268070+00:00",
+  "florence": "2026-11-01T21:55:48.325708+00:00",
   "fluffy": "2026-10-30T09:56:41.217059+00:00",
   "fm93quebec": "2026-10-30T13:03:45.132800+00:00",
   "fm_guru": "2026-10-31T18:56:50.835342+00:00",
@@ -4472,12 +4433,13 @@
   "fuury_off": "2026-10-31T21:55:18.075941+00:00",
   "galino": "2026-11-01T15:41:53.360772+00:00",
   "gally": "2026-11-01T09:49:48.898202+00:00",
-  "gamergentii": "2026-11-01T18:56:52.268070+00:00",
+  "gamergentii": "2026-11-01T21:55:48.325708+00:00",
   "garryschool": "2026-10-30T21:57:10.762822+00:00",
   "gastronogeek": "2026-10-31T21:55:18.075941+00:00",
   "gautslayer": "2026-11-01T18:56:52.268070+00:00",
   "gedezalu": "2026-10-31T21:55:18.075941+00:00",
   "gil2_": "2026-11-01T09:49:48.898202+00:00",
+  "giuseppemdr": "2026-11-01T21:55:48.325708+00:00",
   "globtopus": "2026-10-31T21:55:18.075941+00:00",
   "gloponus": "2026-11-01T12:34:46.023277+00:00",
   "gobgg": "2026-10-31T09:45:19.335711+00:00",
@@ -4488,35 +4450,37 @@
   "greg16s": "2026-11-01T09:22:34.341086+00:00",
   "grimkujow": "2026-10-31T21:55:18.075941+00:00",
   "gryngoss": "2026-10-30T08:04:48.037353+00:00",
-  "guezmerr": "2026-11-01T15:41:53.360772+00:00",
-  "hakaiwrld": "2026-10-31T21:55:18.075941+00:00",
+  "guezmerr": "2026-11-01T21:55:48.325708+00:00",
+  "hakaiwrld": "2026-11-01T21:55:48.325708+00:00",
   "hammerkick": "2026-11-01T09:49:48.898202+00:00",
   "hapso": "2026-10-30T13:03:45.132800+00:00",
   "hari_live": "2026-11-01T09:49:48.898202+00:00",
   "harmonyglitch": "2026-11-01T09:49:48.898202+00:00",
   "hawnie": "2026-10-31T18:56:50.835342+00:00",
   "hctuan": "2026-11-01T12:34:46.023277+00:00",
+  "heavenfox": "2026-11-01T21:55:48.325708+00:00",
   "hellias": "2026-11-01T13:34:23.723308+00:00",
   "helydia": "2026-11-01T18:56:52.268070+00:00",
   "hermanel": "2026-10-31T15:42:38.645163+00:00",
   "hermanel24h": "2026-10-30T08:04:48.037353+00:00",
-  "heyar": "2026-11-01T15:41:53.360772+00:00",
+  "heyar": "2026-11-01T21:55:48.325708+00:00",
   "hiro_llol": "2026-11-01T15:41:53.360772+00:00",
   "hiuuugs": "2026-10-30T15:58:00.907341+00:00",
   "hoosgaming": "2026-11-01T09:49:48.898202+00:00",
   "hugoauperchoir": "2026-10-31T18:56:50.835342+00:00",
   "hugodelire": "2026-10-31T21:55:18.075941+00:00",
   "hugolisoir": "2026-10-30T09:56:41.217059+00:00",
+  "hunter404x": "2026-11-01T21:55:48.325708+00:00",
   "huzounet": "2026-10-31T21:55:18.075941+00:00",
   "hyp_tv": "2026-10-30T18:59:06.087827+00:00",
   "i_reaz": "2026-11-01T15:41:53.360772+00:00",
   "icekei": "2026-10-31T15:42:38.645163+00:00",
   "idater": "2026-10-31T18:56:50.835342+00:00",
   "idkbutimleila": "2026-11-01T15:41:53.360772+00:00",
-  "idreau_": "2026-10-31T21:55:18.075941+00:00",
+  "idreau_": "2026-11-01T21:55:48.325708+00:00",
   "iguel": "2026-10-30T08:23:54.920356+00:00",
   "ikatv": "2026-11-01T09:49:48.898202+00:00",
-  "ikoneec": "2026-11-01T18:56:52.268070+00:00",
+  "ikoneec": "2026-11-01T21:55:48.325708+00:00",
   "ilianbouchi": "2026-11-01T13:34:23.723308+00:00",
   "iliesomg": "2026-10-30T15:58:00.907341+00:00",
   "inoxtag": "2026-10-31T15:42:38.645163+00:00",
@@ -4524,7 +4488,7 @@
   "iti63": "2026-10-30T08:23:54.920356+00:00",
   "itskaymie": "2026-10-31T21:55:18.075941+00:00",
   "ivanilsonlpvm": "2026-10-30T15:58:00.907341+00:00",
-  "izziftn": "2026-11-01T18:56:52.268070+00:00",
+  "izziftn": "2026-11-01T21:55:48.325708+00:00",
   "jackplaypz": "2026-11-01T09:22:34.341086+00:00",
   "jamelinho213": "2026-11-01T15:41:53.360772+00:00",
   "janusport": "2026-10-30T21:57:10.762822+00:00",
@@ -4540,7 +4504,7 @@
   "jidun": "2026-10-31T12:55:19.002790+00:00",
   "jimmyboyyy": "2026-11-01T18:56:52.268070+00:00",
   "jla_corporation": "2026-10-30T09:37:30.370222+00:00",
-  "jltomy": "2026-10-30T18:59:06.087827+00:00",
+  "jltomy": "2026-11-01T21:55:48.325708+00:00",
   "jltomy247": "2026-11-01T18:56:52.268070+00:00",
   "johncutt": "2026-11-01T09:22:34.341086+00:00",
   "johnjotv": "2026-11-01T09:49:48.898202+00:00",
@@ -4559,17 +4523,17 @@
   "katarelol": "2026-11-01T13:34:23.723308+00:00",
   "katarsisgg": "2026-11-01T09:49:48.898202+00:00",
   "katchanvt": "2026-11-01T15:41:53.360772+00:00",
-  "kaydop": "2026-10-31T09:45:19.335711+00:00",
+  "kaydop": "2026-11-01T21:55:48.325708+00:00",
   "kcsoloq": "2026-11-01T18:56:52.268070+00:00",
   "keazycs": "2026-11-01T13:34:23.723308+00:00",
   "kelianausaurus": "2026-10-31T09:45:19.335711+00:00",
-  "kemist_c10h15n": "2026-11-01T18:56:52.268070+00:00",
+  "kemist_c10h15n": "2026-11-01T21:55:48.325708+00:00",
   "kenbogard": "2026-10-30T13:03:45.132800+00:00",
   "kendrobtg": "2026-11-01T18:56:52.268070+00:00",
   "kennystream": "2026-11-01T18:56:52.268070+00:00",
   "keola": "2026-11-01T13:34:23.723308+00:00",
   "kevin02340": "2026-11-01T09:49:48.898202+00:00",
-  "khadim": "2026-11-01T18:56:52.268070+00:00",
+  "khadim": "2026-11-01T21:55:48.325708+00:00",
   "khalid_erk": "2026-10-29T23:02:20.869294+00:00",
   "kiliratv": "2026-10-29T23:02:20.869294+00:00",
   "kindalegoat": "2026-10-31T21:55:18.075941+00:00",
@@ -4577,14 +4541,14 @@
   "korioz_": "2026-10-31T21:55:18.075941+00:00",
   "krayn_live": "2026-11-01T15:41:53.360772+00:00",
   "krl_stream": "2026-11-01T12:34:46.023277+00:00",
-  "krolay": "2026-11-01T18:56:52.268070+00:00",
+  "krolay": "2026-11-01T21:55:48.325708+00:00",
   "kswinniie": "2026-10-29T23:02:20.869294+00:00",
   "kungitto": "2026-11-01T13:34:23.723308+00:00",
   "kurama_203": "2026-11-01T18:56:52.268070+00:00",
   "kusa": "2026-11-01T13:34:23.723308+00:00",
   "l3scoco": "2026-11-01T15:41:53.360772+00:00",
-  "labonneaubergejdr": "2026-11-01T18:56:52.268070+00:00",
-  "laink": "2026-10-30T18:59:06.087827+00:00",
+  "labonneaubergejdr": "2026-11-01T21:55:48.325708+00:00",
+  "laink": "2026-11-01T21:55:48.325708+00:00",
   "lamhua": "2026-10-30T15:58:00.907341+00:00",
   "laniyelle": "2026-10-30T13:03:45.132800+00:00",
   "laplanetedessirs": "2026-11-01T15:41:53.360772+00:00",
@@ -4594,7 +4558,7 @@
   "laukinawa": "2026-10-31T21:55:18.075941+00:00",
   "laurebv": "2026-10-31T15:42:38.645163+00:00",
   "lauwiny": "2026-11-01T09:49:48.898202+00:00",
-  "lawisse_": "2026-10-30T18:59:06.087827+00:00",
+  "lawisse_": "2026-11-01T21:55:48.325708+00:00",
   "laytho_": "2026-11-01T13:34:23.723308+00:00",
   "ldsleyzyx": "2026-10-29T23:02:20.869294+00:00",
   "le_corbz": "2026-11-01T15:41:53.360772+00:00",
@@ -4602,35 +4566,40 @@
   "lease001": "2026-10-31T15:42:38.645163+00:00",
   "leberga": "2026-11-01T18:56:52.268070+00:00",
   "leboldhistoire": "2026-11-01T09:22:34.341086+00:00",
+  "lebourlingueur": "2026-11-01T21:55:48.325708+00:00",
   "lecheps": "2026-11-01T13:34:23.723308+00:00",
   "lefrenchie": "2026-11-01T15:41:53.360772+00:00",
-  "legarsdesvideos": "2026-11-01T12:34:46.023277+00:00",
+  "legarsdesvideos": "2026-11-01T21:55:48.325708+00:00",
   "lege": "2026-10-30T13:03:45.132800+00:00",
   "lelivreurentrott": "2026-11-01T18:56:52.268070+00:00",
   "lemedtv": "2026-10-29T23:02:20.869294+00:00",
   "lemwakast": "2026-10-31T15:42:38.645163+00:00",
-  "lennynjag": "2026-10-30T21:57:10.762822+00:00",
+  "lenekamir": "2026-11-01T21:55:48.325708+00:00",
+  "lennynjag": "2026-11-01T21:55:48.325708+00:00",
   "leothecrack": "2026-11-01T18:56:52.268070+00:00",
   "lepandaman": "2026-11-01T12:34:46.023277+00:00",
-  "lephoceenofficiel": "2026-11-01T18:56:52.268070+00:00",
+  "lephoceenofficiel": "2026-11-01T21:55:48.325708+00:00",
+  "lepotomat": "2026-11-01T21:55:48.325708+00:00",
   "lestwins": "2026-11-01T12:34:46.023277+00:00",
   "levilaingarc0n": "2026-11-01T09:49:48.898202+00:00",
   "levraidoffy": "2026-11-01T13:34:23.723308+00:00",
-  "lexitvz": "2026-10-31T21:55:18.075941+00:00",
+  "lexitvz": "2026-11-01T21:55:48.325708+00:00",
+  "leyton_v2": "2026-11-01T21:55:48.325708+00:00",
   "ligefeu": "2026-11-01T09:49:48.898202+00:00",
   "lilith": "2026-10-31T12:55:19.002790+00:00",
   "limmigreparisien": "2026-11-01T15:41:53.360772+00:00",
-  "linca": "2026-10-30T21:57:10.762822+00:00",
+  "linca": "2026-11-01T21:55:48.325708+00:00",
   "lindseygiv": "2026-11-01T12:34:46.023277+00:00",
-  "littlebigwhale": "2026-11-01T18:56:52.268070+00:00",
-  "locklear": "2026-10-31T21:55:18.075941+00:00",
-  "loupiote3": "2026-11-01T18:56:52.268070+00:00",
+  "littlebigwhale": "2026-11-01T21:55:48.325708+00:00",
+  "locklear": "2026-11-01T21:55:48.325708+00:00",
+  "loupiote3": "2026-11-01T21:55:48.325708+00:00",
   "low4n": "2026-11-01T15:41:53.360772+00:00",
   "lu_k": "2026-11-01T18:56:52.268070+00:00",
   "lucas57tv": "2026-11-01T15:41:53.360772+00:00",
   "luccio": "2026-10-31T09:45:19.335711+00:00",
   "luke_mhw": "2026-10-30T08:04:48.037353+00:00",
   "lutsitv": "2026-10-30T09:56:41.217059+00:00",
+  "luuxia": "2026-11-01T21:55:48.325708+00:00",
   "lvcyd": "2026-11-01T09:49:48.898202+00:00",
   "lyra_elle": "2026-10-31T21:55:18.075941+00:00",
   "m4fgaming": "2026-10-30T09:56:41.217059+00:00",
@@ -4652,12 +4621,12 @@
   "marinelord": "2026-11-01T15:41:53.360772+00:00",
   "markoprank": "2026-10-30T21:57:10.762822+00:00",
   "marleymtn": "2026-10-30T18:59:06.087827+00:00",
-  "mastersnakou": "2026-11-01T18:56:52.268070+00:00",
-  "mastu": "2026-10-30T18:59:06.087827+00:00",
+  "mastersnakou": "2026-11-01T21:55:48.325708+00:00",
+  "mastu": "2026-11-01T21:55:48.325708+00:00",
   "math6tv": "2026-11-01T18:56:52.268070+00:00",
   "mathieuburgalassi": "2026-11-01T18:56:52.268070+00:00",
   "mathieusommetlive": "2026-11-01T18:56:52.268070+00:00",
-  "mathox": "2026-10-31T18:56:50.835342+00:00",
+  "mathox": "2026-11-01T21:55:48.325708+00:00",
   "mathpellerin": "2026-10-30T18:59:06.087827+00:00",
   "mathraistv": "2026-11-01T13:34:23.723308+00:00",
   "mawkzy_": "2026-10-31T21:55:18.075941+00:00",
@@ -4666,8 +4635,8 @@
   "mediapart": "2026-10-30T09:56:41.217059+00:00",
   "mehditdonc": "2026-10-31T15:42:38.645163+00:00",
   "mehdoche": "2026-10-30T21:57:10.762822+00:00",
-  "melhssn_": "2026-11-01T18:56:52.268070+00:00",
-  "melyoh": "2026-11-01T18:56:52.268070+00:00",
+  "melhssn_": "2026-11-01T21:55:48.325708+00:00",
+  "melyoh": "2026-11-01T21:55:48.325708+00:00",
   "mentalowskii": "2026-10-31T21:55:18.075941+00:00",
   "meumeu03": "2026-11-01T09:49:48.898202+00:00",
   "mickael66fr": "2026-10-30T08:23:54.920356+00:00",
@@ -4677,13 +4646,13 @@
   "mimie131986": "2026-10-30T08:23:54.920356+00:00",
   "minos": "2026-10-31T21:55:18.075941+00:00",
   "missdadou": "2026-10-31T12:55:19.002790+00:00",
-  "misterjday": "2026-10-31T21:55:18.075941+00:00",
-  "mistermv": "2026-11-01T18:56:52.268070+00:00",
+  "misterjday": "2026-11-01T21:55:48.325708+00:00",
+  "mistermv": "2026-11-01T21:55:48.325708+00:00",
   "misterpacothai": "2026-10-30T09:56:41.217059+00:00",
   "mlle_sunny": "2026-10-31T09:45:19.335711+00:00",
   "mnkway": "2026-11-01T13:34:23.723308+00:00",
-  "mohleking": "2026-11-01T18:56:52.268070+00:00",
-  "mollahski": "2026-10-31T21:55:18.075941+00:00",
+  "mohleking": "2026-11-01T21:55:48.325708+00:00",
+  "mollahski": "2026-11-01T21:55:48.325708+00:00",
   "moman": "2026-10-30T21:57:10.762822+00:00",
   "moman24h": "2026-11-01T09:22:34.341086+00:00",
   "monkeym00n": "2026-10-30T15:58:00.907341+00:00",
@@ -4695,14 +4664,15 @@
   "mrs_sweetness": "2026-10-31T21:55:18.075941+00:00",
   "mrsal_59": "2026-10-29T23:02:20.869294+00:00",
   "mrstick": "2026-10-31T18:56:50.835342+00:00",
-  "mrtiboute": "2026-10-29T23:02:20.869294+00:00",
+  "mrtiboute": "2026-11-01T21:55:48.325708+00:00",
   "mynthos": "2026-11-01T13:34:23.723308+00:00",
-  "mystk": "2026-11-01T13:34:23.723308+00:00",
+  "mystk": "2026-11-01T21:55:48.325708+00:00",
   "mywtheking": "2026-11-01T18:56:52.268070+00:00",
   "nacim_01": "2026-11-01T18:56:52.268070+00:00",
   "nagatow": "2026-11-01T18:56:52.268070+00:00",
   "nalahri": "2026-11-01T12:34:46.023277+00:00",
   "nanou_fps": "2026-10-30T08:23:54.920356+00:00",
+  "narkuss_lol": "2026-11-01T21:55:48.325708+00:00",
   "nat_ali": "2026-11-01T13:34:23.723308+00:00",
   "necotho": "2026-10-31T09:45:19.335711+00:00",
   "neikoohh_": "2026-11-01T18:56:52.268070+00:00",
@@ -4711,7 +4681,7 @@
   "newistvv": "2026-10-31T09:45:19.335711+00:00",
   "nianfo": "2026-10-30T09:56:41.217059+00:00",
   "nicolux84": "2026-10-31T21:55:18.075941+00:00",
-  "nikos": "2026-11-01T12:34:46.023277+00:00",
+  "nikos": "2026-11-01T21:55:48.325708+00:00",
   "nisqyy": "2026-11-01T18:56:52.268070+00:00",
   "noahlunsi": "2026-10-31T21:55:18.075941+00:00",
   "nobreak0": "2026-10-31T15:42:38.645163+00:00",
@@ -4731,39 +4701,43 @@
   "oonolive": "2026-11-01T15:41:53.360772+00:00",
   "opcrotte": "2026-10-30T18:59:06.087827+00:00",
   "oranor": "2026-10-31T09:45:19.335711+00:00",
-  "oraxe": "2026-11-01T15:41:53.360772+00:00",
+  "oraxe": "2026-11-01T21:55:48.325708+00:00",
   "origatwitch": "2026-10-30T13:03:45.132800+00:00",
-  "otplol_": "2026-11-01T18:56:52.268070+00:00",
+  "otplol_": "2026-11-01T21:55:48.325708+00:00",
+  "ouaicestmous": "2026-11-01T21:55:48.325708+00:00",
   "ouestfrance": "2026-10-30T08:23:54.920356+00:00",
+  "owlfr_": "2026-11-01T21:55:48.325708+00:00",
   "paastekfifa": "2026-11-01T15:41:53.360772+00:00",
   "pandowner": "2026-10-30T09:56:41.217059+00:00",
   "pantoufl": "2026-10-30T13:03:45.132800+00:00",
-  "paqmanlive": "2026-11-01T18:56:52.268070+00:00",
+  "paqmanlive": "2026-11-01T21:55:48.325708+00:00",
   "parole_mtg": "2026-11-01T09:49:48.898202+00:00",
+  "pauleta_twitch": "2026-11-01T21:55:48.325708+00:00",
   "payriixx": "2026-11-01T13:34:23.723308+00:00",
   "penombre_": "2026-10-30T08:23:54.920356+00:00",
   "peurle_ow": "2026-10-30T13:03:45.132800+00:00",
   "peyjeym": "2026-10-31T09:45:19.335711+00:00",
-  "phyzikk": "2026-10-31T21:55:18.075941+00:00",
+  "phyzikk": "2026-11-01T21:55:48.325708+00:00",
   "pimousse_tv": "2026-11-01T09:49:48.898202+00:00",
   "poachimpa": "2026-11-01T12:34:46.023277+00:00",
   "podasai": "2026-11-01T15:41:53.360772+00:00",
   "poko": "2026-11-01T18:56:52.268070+00:00",
   "pommedetfterre": "2026-10-30T13:03:45.132800+00:00",
-  "poneeeyclub": "2026-10-30T09:56:41.217059+00:00",
+  "poneeeyclub": "2026-11-01T21:55:48.325708+00:00",
   "pressea": "2026-11-01T15:41:53.360772+00:00",
   "prestoncitron": "2026-11-01T09:49:48.898202+00:00",
   "proxhy": "2026-11-01T12:34:46.023277+00:00",
-  "proze": "2026-10-31T21:55:18.075941+00:00",
+  "proze": "2026-11-01T21:55:48.325708+00:00",
+  "psg": "2026-11-01T21:55:48.325708+00:00",
   "punkill": "2026-11-01T12:34:46.023277+00:00",
   "pyrootv": "2026-10-31T15:42:38.645163+00:00",
-  "qassimiento": "2026-10-30T21:57:10.762822+00:00",
+  "qassimiento": "2026-11-01T21:55:48.325708+00:00",
   "qtnsorare": "2026-10-30T15:58:00.907341+00:00",
   "quiizntv": "2026-11-01T09:49:48.898202+00:00",
   "r_messaoud": "2026-10-31T15:42:38.645163+00:00",
   "ranellebrown": "2026-10-29T23:02:20.869294+00:00",
   "rav4chol": "2026-11-01T13:34:23.723308+00:00",
-  "ravusssss": "2026-11-01T13:34:23.723308+00:00",
+  "ravusssss": "2026-11-01T21:55:48.325708+00:00",
   "rayakuzaa": "2026-11-01T18:56:52.268070+00:00",
   "recalbox": "2026-11-01T09:49:48.898202+00:00",
   "recharging": "2026-10-31T18:56:50.835342+00:00",
@@ -4772,40 +4746,43 @@
   "renzlotv": "2026-10-30T13:03:45.132800+00:00",
   "revenja": "2026-11-01T13:34:23.723308+00:00",
   "reyyn": "2026-10-29T23:02:20.869294+00:00",
-  "rhobalas_lol": "2026-10-30T15:58:00.907341+00:00",
+  "rhobalas_lol": "2026-11-01T21:55:48.325708+00:00",
   "ribodanslasauce": "2026-11-01T15:41:53.360772+00:00",
   "riskin": "2026-11-01T15:41:53.360772+00:00",
   "rivenzi": "2026-11-01T12:34:46.023277+00:00",
   "rmcsport": "2026-11-01T15:41:53.360772+00:00",
   "robert87000": "2026-11-01T15:41:53.360772+00:00",
   "rocketbaguette": "2026-10-29T23:02:20.869294+00:00",
-  "rocky_": "2026-11-01T18:56:52.268070+00:00",
+  "rocky_": "2026-11-01T21:55:48.325708+00:00",
   "romainjacques_": "2026-11-01T15:41:53.360772+00:00",
   "ronroty": "2026-10-29T23:02:20.869294+00:00",
+  "roroowtv": "2026-11-01T21:55:48.325708+00:00",
   "rstlssradio": "2026-10-30T08:23:54.920356+00:00",
-  "ryosenseitv": "2026-10-31T21:55:18.075941+00:00",
+  "ryosenseitv": "2026-11-01T21:55:48.325708+00:00",
   "s_ziterman": "2026-10-30T08:23:54.920356+00:00",
   "saax_stream": "2026-11-01T09:49:48.898202+00:00",
   "sackzi": "2026-11-01T15:41:53.360772+00:00",
   "sakor_": "2026-11-01T15:41:53.360772+00:00",
   "salma_": "2026-11-01T13:34:23.723308+00:00",
   "sam_vnr": "2026-11-01T15:41:53.360772+00:00",
-  "samueletienne": "2026-11-01T18:56:52.268070+00:00",
+  "samueletienne": "2026-11-01T21:55:48.325708+00:00",
   "sapeuh": "2026-11-01T18:56:52.268070+00:00",
-  "sardoche": "2026-11-01T18:56:52.268070+00:00",
+  "sardoche": "2026-11-01T21:55:48.325708+00:00",
   "sartar_": "2026-11-01T09:49:48.898202+00:00",
   "sawpalin": "2026-11-01T13:34:23.723308+00:00",
   "sayonara_93": "2026-10-30T08:23:54.920356+00:00",
   "sayulaw": "2026-10-31T15:42:38.645163+00:00",
+  "sebjdg": "2026-11-01T21:55:48.325708+00:00",
   "selek___": "2026-10-30T18:59:06.087827+00:00",
   "senseikprime": "2026-10-31T21:55:18.075941+00:00",
   "senseilekam": "2026-11-01T13:34:23.723308+00:00",
+  "seriouscharly": "2026-11-01T21:55:48.325708+00:00",
   "seyytofn": "2026-11-01T12:34:46.023277+00:00",
   "shadowwgkd": "2026-11-01T18:56:52.268070+00:00",
   "shaiiko": "2026-10-30T21:57:10.762822+00:00",
   "shinii": "2026-10-30T21:57:10.762822+00:00",
   "shinytheorycraft": "2026-10-30T15:58:00.907341+00:00",
-  "shisheyu": "2026-10-30T21:57:10.762822+00:00",
+  "shisheyu": "2026-11-01T21:55:48.325708+00:00",
   "shysalia": "2026-10-31T21:55:18.075941+00:00",
   "sieurpc": "2026-11-01T15:41:53.360772+00:00",
   "siha_art": "2026-10-31T15:42:38.645163+00:00",
@@ -4814,9 +4791,9 @@
   "sinavannn": "2026-10-31T09:45:19.335711+00:00",
   "sir_thomas_": "2026-11-01T09:49:48.898202+00:00",
   "sixentv": "2026-10-31T12:55:19.002790+00:00",
-  "sixquatre": "2026-11-01T18:56:52.268070+00:00",
+  "sixquatre": "2026-11-01T21:55:48.325708+00:00",
   "skilli": "2026-11-01T13:34:23.723308+00:00",
-  "skyrroztv": "2026-11-01T12:34:46.023277+00:00",
+  "skyrroztv": "2026-11-01T21:55:48.325708+00:00",
   "skyyart": "2026-10-31T21:55:18.075941+00:00",
   "skyyart247": "2026-11-01T15:41:53.360772+00:00",
   "slbilal": "2026-11-01T15:41:53.360772+00:00",
@@ -4825,34 +4802,34 @@
   "slyders": "2026-11-01T15:41:53.360772+00:00",
   "sol_hms": "2026-10-31T09:45:19.335711+00:00",
   "solary": "2026-10-30T18:59:06.087827+00:00",
-  "solaryhs": "2026-11-01T18:56:52.268070+00:00",
+  "solaryhs": "2026-11-01T21:55:48.325708+00:00",
   "soldierlol_": "2026-10-30T08:23:54.920356+00:00",
   "spilota_": "2026-11-01T13:34:23.723308+00:00",
   "splinter": "2026-11-01T18:56:52.268070+00:00",
   "splouf_": "2026-10-30T08:23:54.920356+00:00",
-  "squeezie": "2026-11-01T18:56:52.268070+00:00",
+  "squeezie": "2026-11-01T21:55:48.325708+00:00",
   "srambad_": "2026-11-01T09:22:34.341086+00:00",
   "stachzer": "2026-11-01T09:49:48.898202+00:00",
   "standingwaltz": "2026-10-30T08:04:48.037353+00:00",
   "stazhopper": "2026-10-31T12:55:19.002790+00:00",
   "stizo_": "2026-11-01T13:34:23.723308+00:00",
-  "strano": "2026-10-31T21:55:18.075941+00:00",
+  "strano": "2026-11-01T21:55:48.325708+00:00",
   "strey_lol": "2026-11-01T13:34:23.723308+00:00",
   "stundzow": "2026-10-31T18:56:50.835342+00:00",
   "sturry316": "2026-10-29T23:02:20.869294+00:00",
   "sundae": "2026-11-01T18:56:52.268070+00:00",
-  "sura": "2026-10-31T21:55:18.075941+00:00",
-  "suro67": "2026-10-30T21:57:10.762822+00:00",
+  "sura": "2026-11-01T21:55:48.325708+00:00",
+  "suro67": "2026-11-01T21:55:48.325708+00:00",
   "svenkaa57": "2026-10-30T13:03:45.132800+00:00",
   "swavekiqs": "2026-10-31T09:45:19.335711+00:00",
-  "talmo": "2026-11-01T18:56:52.268070+00:00",
+  "talmo": "2026-11-01T21:55:48.325708+00:00",
   "tanguyvertir": "2026-10-29T23:02:20.869294+00:00",
   "tapsqcgaming": "2026-10-30T13:03:45.132800+00:00",
-  "tatiana_tv": "2026-10-31T21:55:18.075941+00:00",
-  "tayoh_": "2026-10-31T21:55:18.075941+00:00",
+  "tatiana_tv": "2026-11-01T21:55:48.325708+00:00",
+  "tayoh_": "2026-11-01T21:55:48.325708+00:00",
   "teampepsmax": "2026-10-31T09:45:19.335711+00:00",
   "tehleadersheep": "2026-10-30T13:03:45.132800+00:00",
-  "terracid": "2026-10-30T15:58:00.907341+00:00",
+  "terracid": "2026-11-01T21:55:48.325708+00:00",
   "teuff_": "2026-11-01T13:34:23.723308+00:00",
   "the_majorgaming": "2026-10-30T13:03:45.132800+00:00",
   "thefoxeur": "2026-10-30T09:56:41.217059+00:00",
@@ -4871,11 +4848,11 @@
   "toutsecomprend": "2026-11-01T09:49:48.898202+00:00",
   "toxidius78": "2026-10-31T09:45:19.335711+00:00",
   "traytonlol": "2026-10-31T21:55:18.075941+00:00",
-  "trinity": "2026-11-01T18:56:52.268070+00:00",
-  "triplaxion": "2026-11-01T18:56:52.268070+00:00",
+  "trinity": "2026-11-01T21:55:48.325708+00:00",
+  "triplaxion": "2026-11-01T21:55:48.325708+00:00",
   "tv1pb": "2026-10-31T21:55:18.075941+00:00",
   "twiks": "2026-11-01T13:34:23.723308+00:00",
-  "twincytv": "2026-11-01T18:56:52.268070+00:00",
+  "twincytv": "2026-11-01T21:55:48.325708+00:00",
   "ultia": "2026-11-01T18:56:52.268070+00:00",
   "un33d": "2026-11-01T13:34:23.723308+00:00",
   "unionftouraine": "2026-10-30T18:59:06.087827+00:00",
@@ -4890,6 +4867,7 @@
   "voltariux": "2026-11-01T13:34:23.723308+00:00",
   "vousavezledroit": "2026-10-30T18:59:06.087827+00:00",
   "wakzlol": "2026-11-01T18:56:52.268070+00:00",
+  "wankilstudio": "2026-11-01T21:55:48.325708+00:00",
   "wao247": "2026-11-01T09:49:48.898202+00:00",
   "waolol1": "2026-11-01T18:56:52.268070+00:00",
   "warkik": "2026-10-30T13:03:45.132800+00:00",
@@ -4902,37 +4880,37 @@
   "wenyn": "2026-10-31T21:55:18.075941+00:00",
   "winamaxsport": "2026-10-30T13:03:45.132800+00:00",
   "wingo": "2026-11-01T18:56:52.268070+00:00",
-  "wipr": "2026-11-01T18:56:52.268070+00:00",
+  "wipr": "2026-11-01T21:55:48.325708+00:00",
   "wissam_xelka": "2026-11-01T18:56:52.268070+00:00",
   "wissksrr": "2026-10-30T21:57:10.762822+00:00",
-  "xababtv": "2026-11-01T18:56:52.268070+00:00",
+  "xababtv": "2026-11-01T21:55:48.325708+00:00",
   "xari": "2026-10-31T18:56:50.835342+00:00",
-  "xo_trixy": "2026-10-29T23:02:20.869294+00:00",
+  "xo_trixy": "2026-11-01T21:55:48.325708+00:00",
   "xxantoinedanielxx": "2026-10-31T09:45:19.335711+00:00",
   "yann": "2026-11-01T15:41:53.360772+00:00",
-  "yannex": "2026-11-01T18:56:52.268070+00:00",
+  "yannex": "2026-11-01T21:55:48.325708+00:00",
   "yannock_": "2026-11-01T09:49:48.898202+00:00",
   "yassencore": "2026-11-01T12:34:46.023277+00:00",
   "ydle_le_boomer": "2026-10-30T08:04:48.037353+00:00",
   "yetensone": "2026-10-31T15:42:38.645163+00:00",
   "yoona": "2026-10-31T18:56:50.835342+00:00",
   "youby4": "2026-11-01T15:41:53.360772+00:00",
-  "youladecadd": "2026-11-01T12:34:46.023277+00:00",
+  "youladecadd": "2026-11-01T21:55:48.325708+00:00",
   "yugioh_francais": "2026-11-01T09:22:34.341086+00:00",
   "yugokaa": "2026-10-30T08:23:54.920356+00:00",
   "yumeptitsinge": "2026-10-31T18:56:50.835342+00:00",
   "yunaris__": "2026-10-30T15:58:00.907341+00:00",
   "yunearan": "2026-11-01T13:34:23.723308+00:00",
-  "zaardoz": "2026-10-29T23:02:20.869294+00:00",
+  "zaardoz": "2026-11-01T21:55:48.325708+00:00",
   "zaboutine": "2026-10-31T21:55:18.075941+00:00",
   "zacknani": "2026-11-01T13:34:23.723308+00:00",
   "zafeel": "2026-11-01T12:34:46.023277+00:00",
   "zaroide": "2026-10-30T15:58:00.907341+00:00",
-  "zawa_prod": "2026-10-30T21:57:10.762822+00:00",
+  "zawa_prod": "2026-11-01T21:55:48.325708+00:00",
   "zebroetleow": "2026-10-30T21:57:10.762822+00:00",
   "zedking": "2026-10-31T15:42:38.645163+00:00",
   "zenkaitv_": "2026-10-31T15:42:38.645163+00:00",
-  "zerator_247": "2026-11-01T18:56:52.268070+00:00",
+  "zerator_247": "2026-11-01T21:55:48.325708+00:00",
   "zesadpanda": "2026-11-01T15:41:53.360772+00:00",
   "zetfartv": "2026-11-01T13:34:23.723308+00:00",
   "zoltan": "2026-11-01T09:49:48.898202+00:00",
@@ -4941,7 +4919,7 @@
   "zylewr": "2026-10-31T09:45:19.335711+00:00"
  },
  "version": 1,
- "youtube_cursor": 160,
+ "youtube_cursor": 172,
  "youtube_related": {
   "@alphacast": {
    "at": "2026-11-01T13:34:23.723308+00:00",
@@ -4960,6 +4938,10 @@
   },
   "@andyraconte": {
    "at": "2026-10-30T18:59:06.087827+00:00",
+   "channels": []
+  },
+  "@angledroit": {
+   "at": "2026-11-01T21:55:48.325708+00:00",
    "channels": []
   },
   "@antoinedaniel": {
@@ -5000,6 +4982,10 @@
    "at": "2026-10-31T09:45:19.335711+00:00",
    "channels": []
   },
+  "@docseven": {
+   "at": "2026-11-01T21:55:48.325708+00:00",
+   "channels": []
+  },
   "@doigby": {
    "at": "2026-10-31T18:56:50.835342+00:00",
    "channels": [
@@ -5020,6 +5006,10 @@
    "at": "2026-10-30T21:57:10.762822+00:00",
    "channels": []
   },
+  "@epenser": {
+   "at": "2026-11-01T21:55:48.325708+00:00",
+   "channels": []
+  },
   "@etoiles": {
    "at": "2026-11-01T09:49:48.898202+00:00",
    "channels": []
@@ -5028,8 +5018,16 @@
    "at": "2026-11-01T18:56:52.268070+00:00",
    "channels": []
   },
+  "@feldup": {
+   "at": "2026-11-01T21:55:48.325708+00:00",
+   "channels": []
+  },
   "@florianonair": {
    "at": "2026-11-01T18:56:52.268070+00:00",
+   "channels": []
+  },
+  "@fouloscopie": {
+   "at": "2026-11-01T21:55:48.325708+00:00",
    "channels": []
   },
   "@frigiel": {
@@ -5062,6 +5060,10 @@
    "channels": [
     "@hctuanreplay"
    ]
+  },
+  "@hugodecrypte": {
+   "at": "2026-11-01T21:55:48.325708+00:00",
+   "channels": []
   },
   "@hugotoutseul": {
    "at": "2026-10-30T13:03:45.132800+00:00",
@@ -5161,6 +5163,10 @@
    "at": "2026-10-31T21:55:18.075941+00:00",
    "channels": []
   },
+  "@mamytwink": {
+   "at": "2026-11-01T21:55:48.325708+00:00",
+   "channels": []
+  },
   "@mastu": {
    "at": "2026-10-31T15:42:38.645163+00:00",
    "channels": []
@@ -5245,6 +5251,10 @@
   },
   "@sardoche": {
    "at": "2026-10-31T18:56:50.835342+00:00",
+   "channels": []
+  },
+  "@scienceetonnante": {
+   "at": "2026-11-01T21:55:48.325708+00:00",
    "channels": []
   },
   "@seblafrite": {
