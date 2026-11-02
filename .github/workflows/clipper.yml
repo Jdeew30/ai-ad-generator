@@ -111,6 +111,7 @@ jobs:
           TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_API_URL: ${{ secrets.TELEGRAM_API_URL }}  # facultatif : serveur Bot API local (vidéos jusqu'à 2 Go)
           GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
           YTDLP_COOKIES: ${{ secrets.YTDLP_COOKIES }}
           URL: ${{ inputs.url }}
