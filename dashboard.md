@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 02/11/2026 à 19:09 UTC.
+Mis à jour le 02/11/2026 à 22:01 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 11112 | 11112 |
-| Vidéos téléchargées et préparées | 70 | 70 |
-| Shorts envoyés | 6 | 6 |
-| Écartés par la revue | 64 | 64 |
+| Moments trouvés (Twitch + YouTube) | 14279 | 14279 |
+| Vidéos téléchargées et préparées | 88 | 88 |
+| Shorts envoyés | 7 | 7 |
+| Écartés par la revue | 81 | 81 |
 | Échecs (téléchargement, montage, envoi) | 0 | 0 |
-| Passages | 6 | 6 |
+| Passages | 7 | 7 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 30, YouTube 9, à la demande 6.
-Note moyenne de Claude : 59/100 sur 6 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 31, YouTube 9, à la demande 6.
+Note moyenne de Claude : 58/100 sur 7 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), Michou (2), Hctuan (1).
 
 ## Veille YouTube
 
 90 créateurs suivis, 80 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 80 identifiées ; 12 mises de côté (introuvables).
-307 vidéos récentes suivies, 48 regardées de près (24 avec des moments à extraire).
+308 vidéos récentes suivies, 60 regardées de près (30 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 02/11 22:34 | Twitch | Nikof | [Nikof s'enflamme : top 1 à 20 kills pour Akiira en compétition Fortnite](https://www.twitch.tv/nikof/clip/AbstemiousSillyBeeBleedPurple-kCd-rPY8zv8Whb4Y) | 56 |
 | 02/11 20:08 | YouTube | Bob Lennon | [Bob Lennon avoue sa phobie des chiens : « J'ai l'impression de regarder un requin »](https://www.youtube.com/watch?v=3BQdZzmGO4A) | 50 |
 | 02/11 19:46 | Twitch | Berlu | [Berlu explique pourquoi le serveur GTA RP Vibe ferme temporairement](https://www.twitch.tv/berlu/clip/ArbitraryAntediluvianEmuTooSpicy-QXUoal1Gd7Ryd-Jx) | 55 |
 | 02/11 17:03 | YouTube | Studio Bagel | [Éric Judor classe ses films : flop ou pas flop ? (Hot Ones, Studio Bagel)](https://www.youtube.com/watch?v=2frDDzZDNkw) | 55 |
@@ -47,10 +48,14 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 | 01/11 14:54 | à la demande | MisterMV | [MisterMV : la lettre très innocente de Piffulus le tyran](https://www.twitch.tv/mistermv/clip/SlickJollySwallowWutFace-4803q_zDQnSv9ky_) |  |
 | 01/11 14:52 | YouTube | Mastu | [Samuel Étienne piège tout le monde à l'Undercover de Mastu](https://www.youtube.com/watch?v=BByplh9JRTs) |  |
 | 01/11 13:38 | Twitch | Loupiote3 | [Loupiote : « Je regarde le ciel depuis deux ans, rien ne m'est tombé dessus »](https://www.twitch.tv/loupiote3/clip/NurturingCloudyKiwiPrimeMe-yaCKmFqBI1qw09-r) |  |
-| 01/11 09:56 | Twitch | Kameto | [Kameto craque pour Caliste après la victoire de KC aux Worlds](https://www.twitch.tv/kamet0/clip/ResourcefulCogentSparrowLitty-66ao-x7QpHgtv7C4) |  |
 
 ## Derniers échecs
 
+- youtube:p6UYeKS3EmU@2219-2279 (1×) : non évalué par Claude
+- youtube:gQ8fdTxYozU@1365-1425 (1×) : non évalué par Claude
+- youtube:6iY1MU7hlPI@1306-1366 (1×) : non évalué par Claude
+- youtube:lnYssy3QR0Q@6200-6260 (1×) : non évalué par Claude
+- youtube:iPRllqKoAOQ@660-720 (1×) : non évalué par Claude
 - twitch:InventiveSavageSwanTTours-GaE35WJ0_XxSpcgv (1×) : non évalué par Claude
 - twitch:DeterminedCrazyYogurtDoritosChip-xWhjE5OVz_Ueozqe (1×) : non évalué par Claude
 - youtube:CO4AjCWQQmE@1145-1205 (1×) : non évalué par Claude
