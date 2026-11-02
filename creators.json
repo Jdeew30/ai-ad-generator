@@ -7,7 +7,7 @@
     "alphacast": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 57,
@@ -33,7 +33,7 @@
     "aminematue": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@aminematue",
       "@aminematue_tv"
@@ -52,7 +52,7 @@
     "aminematuetv": {
      "added": "2026-11-02T15:32:49.831240+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "errors": 0,
      "followers": 695000,
      "id": "UClm72v5Y5C9KHGs-PTDmCGw",
@@ -84,14 +84,14 @@
      "categories": {
       "Comedy": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@spoutnikagency.com"
      ],
      "errors": 0,
      "followers": 9610000,
      "id": "UCgvqvBoSHB1ctlyyhoHrGwQ",
-     "last_upload": "2026-11-01T16:25:00+00:00",
+     "last_upload": "2026-11-02T16:30:30+00:00",
      "ref": "@Amixem",
      "role": "main",
      "status": "active",
@@ -114,13 +114,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @AndyRaconte/videos: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@AndyRaconte",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -138,7 +138,7 @@
     "angledroit": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -167,7 +167,7 @@
     "antoinedaniel": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 268000,
@@ -196,13 +196,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @Anyme023: This channel does not have a streams tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@Anyme023",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -220,7 +220,7 @@
     "aypierre": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1450000,
@@ -246,7 +246,7 @@
     "bagherajoneslive": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 138000,
@@ -274,13 +274,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @Byilhann: This channel does not have a streams tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@Byilhann",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -298,7 +298,7 @@
     "chefmicheldumas": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@chefmicheldumas.com",
       "@futures.social"
@@ -327,7 +327,7 @@
     "cyprien": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 14500000,
@@ -353,7 +353,7 @@
     "diablox9": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": null,
@@ -380,7 +380,7 @@
     "djilsi": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 2430000,
@@ -408,7 +408,7 @@
      "categories": {
       "Education": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 2320000,
@@ -434,7 +434,7 @@
     "doigby": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1390000,
@@ -465,7 +465,7 @@
     "drnozman": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -493,7 +493,7 @@
     "enjoyphoenix": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 3710000,
@@ -521,13 +521,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @epenser/videos: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@epenser",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -547,13 +547,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @Etoiles: This channel does not have a streams tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@Etoiles",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -573,13 +573,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @Etostark: This channel does not have a streams tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@Etostark",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -596,13 +596,15 @@
    "channels": {
     "fantabobgames": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "categories": {
+      "Gaming": 2
+     },
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 2010000,
      "id": "UCo0U1tbk3YbqiLDhkeWOviQ",
-     "last_upload": "2026-10-31T17:00:37+00:00",
+     "last_upload": "2026-11-02T16:00:23+00:00",
      "ref": "@fantabobgames",
      "role": "main",
      "status": "active",
@@ -625,7 +627,7 @@
      "categories": {
       "Howto & Style": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 9040000,
@@ -651,7 +653,7 @@
     "feldup": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1950000,
@@ -677,7 +679,7 @@
     "florianonair": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 735000,
@@ -703,7 +705,7 @@
     "fouloscopie": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 574000,
@@ -729,7 +731,7 @@
     "frigiel": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1970000,
@@ -755,9 +757,9 @@
     "furiousjumper": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "Gaming": 1
+      "Gaming": 2
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 11000000,
@@ -783,7 +785,7 @@
     "goldenmoustache": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 3390000,
@@ -809,9 +811,10 @@
     "gotaga": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
+      "Autos & Vehicles": 2,
       "Entertainment": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gotaga.tv"
      ],
@@ -850,13 +853,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @Grimkujow: This channel does not have a streams tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@Grimkujow",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -881,13 +884,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @Hctuan: This channel does not have a streams tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@Hctuan",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -910,9 +913,9 @@
     "hugodecrypte": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "News & Politics": 4
+      "News & Politics": 5
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 3830000,
@@ -939,7 +942,7 @@
     "hugotoutseul": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 2120000,
@@ -967,7 +970,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 9600000,
@@ -993,7 +996,7 @@
     "jhonrachid69": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1290000,
@@ -1019,7 +1022,7 @@
     "joueurdugrenier": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 3870000,
@@ -1045,7 +1048,7 @@
     "joyca": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 6970000,
@@ -1071,7 +1074,7 @@
     "jujufitcats": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -1098,8 +1101,10 @@
    "channels": {
     "kaatsup": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "categories": {
+      "Entertainment": 1
+     },
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 486000,
@@ -1125,7 +1130,7 @@
     "kameto": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 12,
@@ -1156,9 +1161,9 @@
     "kaydop": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "Gaming": 1
+      "Gaming": 2
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 515000,
@@ -1191,13 +1196,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @Kronomuzik: This channel does not have a streams tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@Kronomuzik",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -1215,7 +1220,7 @@
     "leaeluig": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@eluilea.com",
       "@leaelui"
@@ -1246,7 +1251,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 4620000,
@@ -1274,7 +1279,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@laxargang.ch"
      ],
@@ -1302,7 +1307,7 @@
     "lenasituations": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 3210000,
@@ -1318,7 +1323,7 @@
     "lenasituationsreplay": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "errors": 0,
      "followers": 29200,
      "id": "UCAgs5DX2GwZ0uPcFrjec2SA",
@@ -1345,13 +1350,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @LeRireJaune: This channel does not have a streams tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@LeRireJaune",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -1369,7 +1374,7 @@
     "leroidesrats": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -1397,7 +1402,7 @@
     "linksthesun": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1580000,
@@ -1423,7 +1428,7 @@
     "locklear": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 55,
@@ -1449,7 +1454,7 @@
     "lolywood": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 3150000,
@@ -1475,7 +1480,7 @@
     "ludovik": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1280000,
@@ -1501,7 +1506,7 @@
     "maghla": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@flippe_and_go_sle",
       "@maghla",
@@ -1531,7 +1536,7 @@
     "mamytwink": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -1559,7 +1564,7 @@
     "mastu": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 7090000,
@@ -1585,7 +1590,7 @@
     "mathieusommet": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1490000,
@@ -1616,7 +1621,7 @@
     "maxildan": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 17900,
@@ -1642,7 +1647,7 @@
     "maximebiaggi": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1310000,
@@ -1675,7 +1680,7 @@
      "categories": {
       "Entertainment": 2
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -1709,7 +1714,7 @@
     "michou": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 11000000,
@@ -1735,7 +1740,7 @@
     "mistermv": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 6,
@@ -1761,7 +1766,7 @@
     "mistervofficial": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@yvick"
      ],
@@ -1789,7 +1794,7 @@
     "mynthos": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": null,
@@ -1815,7 +1820,7 @@
     "natooyt": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 5170000,
@@ -1843,7 +1848,7 @@
      "categories": {
       "Gaming": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -1876,7 +1881,7 @@
     "normanfaitdesvideos": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 11200000,
@@ -1902,9 +1907,9 @@
     "pa.domingo": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "Entertainment": 1
+      "Entertainment": 2
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 1040000,
@@ -1930,7 +1935,7 @@
     "pierrecroce": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 3780000,
@@ -1956,7 +1961,7 @@
     "poissonfecond42": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@khundar.com"
      ],
@@ -1984,7 +1989,7 @@
     "ponce": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 280,
@@ -2015,7 +2020,7 @@
     "rebeudeter": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2043,7 +2048,7 @@
     "rivenzi_": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@rivenzi_"
      ],
@@ -2076,7 +2081,7 @@
     "sardochelol": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2104,7 +2109,7 @@
     "scienceetonnante": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@scienceetonnante"
      ],
@@ -2134,13 +2139,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] @SebLaFrite/videos: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@SebLaFrite",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -2157,8 +2162,10 @@
    "channels": {
     "siphano13": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "categories": {
+      "Gaming": 1
+     },
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@siphano.fr"
      ],
@@ -2186,7 +2193,7 @@
     "squeezie": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 20200000,
@@ -2216,8 +2223,10 @@
    "channels": {
     "studiobagel": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "categories": {
+      "Comedy": 1
+     },
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 3860000,
@@ -2243,7 +2252,7 @@
     "sylvainlyve": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 2040000,
@@ -2269,7 +2278,7 @@
     "thekairi78": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@monsieurdarmon.com"
      ],
@@ -2297,16 +2306,16 @@
     "tiboinshape": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "Entertainment": 4
+      "Entertainment": 5
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
      "errors": 0,
      "followers": 26900000,
      "id": "UCpWaR3gNAQGsX48cIlQC0qw",
-     "last_upload": "2026-11-01T10:33:47+00:00",
+     "last_upload": "2026-11-02T16:00:04+00:00",
      "ref": "@TiboInShape",
      "role": "main",
      "status": "active",
@@ -2327,7 +2336,7 @@
     "ultia": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 74300,
@@ -2358,7 +2367,7 @@
     "valouzz": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 2820,
@@ -2386,13 +2395,13 @@
      "categories": {},
      "checked": null,
      "error": "[youtube:tab] UCkDbXjLRSWLF9z3EyJKNL8w: This channel does not have a videos tab",
-     "errors": 2,
+     "errors": 3,
      "followers": null,
      "id": null,
      "last_upload": null,
      "ref": "@Vilebrequin",
      "role": "main",
-     "status": "active",
+     "status": "introuvable",
      "title": null,
      "url": null,
      "verified": "liste du propriétaire"
@@ -2400,7 +2409,8 @@
    },
    "name": "Vilebrequin",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "wankilfr": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -2411,7 +2421,7 @@
      "categories": {
       "Gaming": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 2750000,
@@ -2427,7 +2437,8 @@
    },
    "name": "Wankil Studio - Laink et Terracid",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "woopgang": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -2436,7 +2447,7 @@
     "woopgang": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2466,7 +2477,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@zacknaniprod.com"
      ],
@@ -2494,7 +2505,7 @@
     "zaroide": {
      "added": "2026-11-02T15:32:49.831240+00:00",
      "categories": {},
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "errors": 0,
      "followers": 44800,
      "id": "UCjxTg0GgTisgFFXynQ6_m9Q",
@@ -2509,7 +2520,8 @@
    },
    "name": "Zaroide",
    "source": "twitch",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "zerator": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -2520,7 +2532,7 @@
      "categories": {
       "Gaming": 1
      },
-     "checked": "2026-11-02T16:06:50.912374+00:00",
+     "checked": "2026-11-02T16:48:06.531879+00:00",
      "description_handles": [
       "@Unexpected_Fr",
       "@ZeratoR",
@@ -2540,10 +2552,19 @@
    },
    "name": "ZeratoR",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {
+    "@ZeratoR_Replay": {
+     "at": "2026-11-02T16:48:06.531879+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    }
+   }
   }
  },
  "lookups": {
+  "kamet0": "2026-11-02T16:48:06.531879+00:00",
+  "sardoche": "2026-11-02T16:48:06.531879+00:00",
+  "wankilstudio": "2026-11-02T16:48:06.531879+00:00",
   "wingo": "2026-11-02T16:06:50.912374+00:00",
   "wipr": "2026-11-02T16:06:50.912374+00:00",
   "youby4": "2026-11-02T16:06:50.912374+00:00",

@@ -1,33 +1,35 @@
 # Tableau de bord du clipper
 
-Mis à jour le 02/11/2026 à 16:06 UTC.
+Mis à jour le 02/11/2026 à 16:48 UTC.
 
-## Activité
+## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 5559 | 5559 |
-| Vidéos téléchargées et préparées | 26 | 26 |
-| Shorts envoyés | 2 | 2 |
-| Écartés par la revue | 24 | 24 |
+| Moments trouvés (Twitch + YouTube) | 8156 | 8156 |
+| Vidéos téléchargées et préparées | 45 | 45 |
+| Shorts envoyés | 4 | 4 |
+| Écartés par la revue | 41 | 41 |
 | Échecs (téléchargement, montage, envoi) | 0 | 0 |
-| Passages | 4 | 4 |
+| Passages | 5 | 5 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 28, YouTube 7, à la demande 6.
-Note moyenne de Claude : 65/100 sur 2 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
-Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), Locklear (3), Amixem (3), Domingo (2), AmineMaTue (2), Michou (2), Gotaga (2), GOTAGA (2).
+Par source : Twitch 29, YouTube 8, à la demande 6.
+Note moyenne de Claude : 62/100 sur 4 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), Michou (2), Hctuan (1).
 
 ## Veille YouTube
 
-90 créateurs suivis, 92 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 80 identifiées ; 0 mises de côté (introuvables).
-294 vidéos récentes suivies, 24 regardées de près (12 avec des moments à extraire).
+90 créateurs suivis, 80 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 80 identifiées ; 12 mises de côté (introuvables).
+297 vidéos récentes suivies, 36 regardées de près (16 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 02/11 17:03 | YouTube | Studio Bagel | [Éric Judor classe ses films : flop ou pas flop ? (Hot Ones, Studio Bagel)](https://www.youtube.com/watch?v=2frDDzZDNkw) | 55 |
+| 02/11 16:55 | Twitch | ZeratoR | [ZeratoR se prend un screamer à 1 € : « J'ai 38 ans ! »](https://www.twitch.tv/zerator/clip/AttractiveArtisticToadAMPTropPunch-HgvOECapqeR6j9JG) | 62 |
 | 02/11 16:04 | YouTube | Wankil Studio - Laink et Terracid | [Laink en a marre qu'on dise que Wankil n'a rien inventé](https://www.youtube.com/watch?v=5A-jZ1XDmMU) | 68 |
 | 02/11 15:43 | Twitch | TheGuill84 | [TheGuill84 se prend un screamer en plein Minecraft](https://www.twitch.tv/theguill84/clip/MoistSavagePenguinHumbleLife-UPJP20cxRNZ4YC5h) | 62 |
 | 02/11 14:20 | à la demande | GOTAGA | [Gotaga souffle la pire insulte au jeu du meilleur menteur (ft. Joyca, Djilsi, Theodort)](https://www.youtube.com/watch?v=ZA_3eoib31s) |  |
@@ -46,8 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), Locklear (3), A
 | 01/11 09:56 | Twitch | Kameto | [Kameto craque pour Caliste après la victoire de KC aux Worlds](https://www.twitch.tv/kamet0/clip/ResourcefulCogentSparrowLitty-66ao-x7QpHgtv7C4) |  |
 | 31/10 17:08 | YouTube | Inoxtag | [Inoxtag et sa team après un crash d'avion : « On est des forces spéciales ! »](https://www.youtube.com/watch?v=2wJuFzwBWkI) |  |
 | 31/10 17:06 | YouTube | Amixem | [Amixem & Cyprien : le plan d'évasion avec des draps… alors qu'il y a une porte](https://www.youtube.com/watch?v=_hzgpE0NXR8) |  |
-| 31/10 13:01 | Twitch | otplol_ | [OTP LoL : « C'est honteux » – l'erreur qui coûte la game aux Worlds](https://www.twitch.tv/otplol_/clip/SilkyCrypticPartridgeOpieOP--3SGNkODbvJ6HEPu) |  |
-| 31/10 10:22 | à la demande | Kameto | [Kameto réagit au tirage du round 5 des Worlds](https://www.twitch.tv/kamet0/clip/SuspiciousEnchantingCurlewTakeNRG-qSV31CNiDWiK_FA3) |  |
 
 ## Derniers échecs
 

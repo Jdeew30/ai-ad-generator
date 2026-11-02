@@ -162,6 +162,31 @@
    "url": "https://www.twitch.tv/hctuan/clip/DreamyInspiringHippoBCWarrior-Ya2IQphTzSPmh3aa",
    "views": 41
   },
+  "twitch:AttractiveArtisticToadAMPTropPunch-HgvOECapqeR6j9JG": {
+   "at": "2026-11-02T16:55:35.137759+00:00",
+   "created_at": "2026-10-29T19:32:48+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "80",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "score": 62.0,
+   "source": "twitch",
+   "span": [
+    "tw:2914084246",
+    6728.0,
+    6762.2
+   ],
+   "streamer": "ZeratoR",
+   "streamer_login": "zerator",
+   "title": "ZeratoR se prend un screamer à 1 € : « J'ai 38 ans ! »",
+   "url": "https://www.twitch.tv/zerator/clip/AttractiveArtisticToadAMPTropPunch-HgvOECapqeR6j9JG",
+   "views": 302
+  },
   "twitch:AuspiciousDreamyBobaNomNom-TJJVuRAv9h-2z51L": {
    "at": "2026-10-29T22:56:48.033833+00:00",
    "created_at": "2026-10-24T21:00:53+00:00",
@@ -823,6 +848,31 @@
    "url": "https://www.twitch.tv/kamet0/clip/SuspiciousEnchantingCurlewTakeNRG-qSV31CNiDWiK_FA3",
    "views": 1136
   },
+  "youtube:2frDDzZDNkw@570-630": {
+   "at": "2026-11-02T17:03:41.987374+00:00",
+   "created_at": "2026-10-23T15:30:05+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "82",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "score": 55.0,
+   "source": "youtube",
+   "span": [
+    "yt:2frDDzZDNkw",
+    570.0,
+    630.0
+   ],
+   "streamer": "Studio Bagel",
+   "streamer_login": "studiobagel",
+   "title": "Éric Judor classe ses films : flop ou pas flop ? (Hot Ones, Studio Bagel)",
+   "url": "https://www.youtube.com/watch?v=2frDDzZDNkw",
+   "views": 4513368
+  },
   "youtube:2wJuFzwBWkI@1883-1943": {
    "at": "2026-10-31T17:08:08.471317+00:00",
    "created_at": "2026-10-31T13:30:36+00:00",
@@ -1222,6 +1272,10 @@
    "at": "2026-10-29T16:02:54.439480+00:00",
    "reason": "revue : Extrait trop court et sans moment marquant : simple callout de partie sans réaction ni chute."
   },
+  "twitch:ChillyBlindingFinchGOWSkull-V78ZI-Oc6wbaClSd": {
+   "at": "2026-11-02T16:53:00.668693+00:00",
+   "reason": "revue : note 52/100 (minimum 60). Pendant un co-stream Valorant, elle goûte du lait au biberon et réagit au dégoût, ce qui est assez drôle. La mise en place est confuse au début et la chute reste modeste."
+  },
   "twitch:CleanDullWalrusSquadGoals-FSugQWh0GiQDfe64": {
    "at": "2026-10-30T09:59:34.858222+00:00",
    "reason": "revue : Fou rire entre deux streameuses dont on ne comprend pas l'origine sans le contexte du live : transcription incohérente, aucune chute lisible."
@@ -1370,6 +1424,10 @@
    "at": "2026-11-02T10:18:21.149393+00:00",
    "reason": "revue : Scène de RP incompréhensible sans contexte, dialogue confus et pas de chute claire."
   },
+  "twitch:FamousRacyNuggetsLeeroyJenkins-8XKvTIB0HcIU1S_5": {
+   "at": "2026-11-02T16:53:00.668634+00:00",
+   "reason": "revue : note 38/100 (minimum 60). Partie de paintball dans un bâtiment abandonné : ambiance tendue mais la transcription est confuse, pas de vraie chute ni d'action claire. Difficile à comprendre sans contexte."
+  },
   "twitch:FancyAstuteJaguarHotPokket-n_H5p0RfX5nEWcde": {
    "at": "2026-10-30T09:58:41.270719+00:00",
    "reason": "revue : Aucune parole exploitable, juste un compte « 2 3 4 5 ». La réaction de Kameto (mains sur le visage, rires) est incompréhensible sans contexte."
@@ -1401,6 +1459,10 @@
   "twitch:FunDeterminedSashimiShadyLulu-koikISwbaDa-dpgb": {
    "at": "2026-10-31T19:18:49.647489+00:00",
    "reason": "revue : Simple cast d'un teamfight des Worlds (TES vs BLG) sans réaction marquante du streamer : commentaire classique jusqu'à l'ace, peu d'intérêt hors contexte."
+  },
+  "twitch:FuriousAgreeablePlumCurseLit-QJUzMAkojC6W3Vv0": {
+   "at": "2026-11-02T16:53:00.668668+00:00",
+   "reason": "revue : note 12/100 (minimum 60). Simple réglage de couleurs de voiture dans le menu de Rocket League, sans réaction ni enjeu. L'extrait est trop court et coupé en pleine phrase."
   },
   "twitch:GiantConsiderateTurtleMVGame-cD01rmC_yPrWuC0O": {
    "at": "2026-10-31T19:20:35.521823+00:00",
@@ -1518,6 +1580,10 @@
    "at": "2026-11-02T11:48:08.513761+00:00",
    "reason": "revue : note 42/100 (minimum 60). Antoine Daniel explique simplement pourquoi on utilise un fond vert ou bleu. C'est un peu instructif, mais sans vraie chute et le début est confus."
   },
+  "twitch:LachrymoseEsteemedChipmunkSaltBae-PfO9xVjUDh0rJjcl": {
+   "at": "2026-11-02T16:54:51.118139+00:00",
+   "reason": "revue : note 30/100 (minimum 60). Partie de Call of Duty sans moment clair : la transcription est décousue, sans action marquante identifiable ni chute."
+  },
   "twitch:LaconicGlamorousButterflyNinjaGrumpy-HBjRieNwUwUZ1Psa": {
    "at": "2026-10-28T22:22:54.963495+00:00",
    "reason": "revue : Simple bavardage sur l'âge d'un enfant, sans réaction forte ni chute ; c'est une discussion privée sur la famille, peu d'intérêt hors contexte."
@@ -1549,6 +1615,10 @@
   "twitch:MoldyDeafMelonTinyFace-1rAkpjxcaQAXPFnK": {
    "at": "2026-11-02T15:40:42.604505+00:00",
    "reason": "revue : note 38/100 (minimum 60). Wingo termine une map Kacky et explique l'astuce du bloc qui téléporte à l'arrivée. L'explication est technique et pour initiés, et la réaction reste faible."
+  },
+  "twitch:MoldyFuriousWerewolfRickroll-Cllbma3oQPPDDjMi": {
+   "at": "2026-11-02T16:54:02.693995+00:00",
+   "reason": "revue : note 45/100 (minimum 60). Rage drôle de Marex contre son coéquipier Rhoba, qui a fait tomber un dé et ruiné une partie gagnée d'avance. Sans contexte, l'enjeu reste toutefois flou et la chute est molle."
   },
   "twitch:MoralStormyHamsterDendiFace-Y--1ZGS_rOsl3kNA": {
    "at": "2026-10-31T22:02:00.155870+00:00",
@@ -1614,6 +1684,10 @@
    "at": "2026-10-29T23:44:29.230757+00:00",
    "reason": "revue : Simple bavardage en partie de Call of Duty, sans action marquante ni chute."
   },
+  "twitch:OpenIcyRutabagaBudStar-oqZOhuvIN3txDnWe": {
+   "at": "2026-11-02T16:52:22.481148+00:00",
+   "reason": "revue : note 32/100 (minimum 60). Moment de Kacky (map 453 finie) noyé dans une discussion technique sur l'édition de profil ; pas de vraie chute, sujet d'initiés."
+  },
   "twitch:OpenPunchyPuddingSoonerLater-2qIApTkvrgrW9Z1w": {
    "at": "2026-10-29T09:59:17.371859+00:00",
    "reason": "revue : Début de live : intro, écran d'attente et menus, aucun moment notable."
@@ -1641,6 +1715,10 @@
   "twitch:PoisedBreakableHerbsSquadGoals-cmVHjDloCfc6VZ3X": {
    "at": "2026-10-29T23:40:59.596150+00:00",
    "reason": "revue : Fin de partie Fortnite surtout faite de callouts difficiles à suivre sans contexte. Le top 1 fêté en équipe (Gotaga, Inoxtag, Michou, Doigby) reste une célébration banale, sans vraie chute, avec en plus une mention promotionnelle du skin."
+  },
+  "twitch:PolishedSpicyLatteMikeHogu-TyAUKbK0EQ76OayD": {
+   "at": "2026-11-02T16:52:22.481206+00:00",
+   "reason": "revue : note 48/100 (minimum 60). Yannex finit enfin une map Kacky infernale qu'il n'avait jamais vue jusqu'au bout ; petite délivrance mais réaction assez modérée."
   },
   "twitch:PoliteZanySmoothieTF2John-sE5WS3TxPHQaF3JB": {
    "at": "2026-10-28T16:02:23.867840+00:00",
@@ -1734,6 +1812,10 @@
    "at": "2026-11-02T16:43:19.715731+00:00",
    "reason": "revue : note 45/100 (minimum 60). Petit retournement de situation (il se vante puis meurt aussitôt), mais l'extrait est très court et la réaction reste faible."
   },
+  "twitch:SeductiveCreativeKittenCharlietheUnicorn-a-HYLbR9DIh8nblL": {
+   "at": "2026-11-02T16:54:02.694030+00:00",
+   "reason": "revue : note 38/100 (minimum 60). itachi tease un roster Valorant de M8 en restant vague (« il n'y a rien »). C'est un sujet d'initiés, sans vraie révélation, et la fin est confuse."
+  },
   "twitch:ShortLitigiousHamPMSTwin-QJKzIge5FG0MHSVZ": {
    "at": "2026-11-02T14:07:12.740094+00:00",
    "reason": "revue : note 48/100 (minimum 60). Petit fail compréhensible : Nisqyy rate son test du code de la route avec 13/50. Pourtant, la réaction est faible, la chute est peu exploitée et la mise en place reste longue."
@@ -1765,6 +1847,10 @@
   "twitch:SlipperyGlutenFreeDootTheRinger-IDk9Kphq9QjL5uax": {
    "at": "2026-11-02T11:35:46.787374+00:00",
    "reason": "revue : note 38/100 (minimum 60). Co-stream des FNCS avec un avis sur le traitement d'un joueur M8, mais propos peu clairs, sans chute ni réaction forte."
+  },
+  "twitch:SmellyAgileApeUncleNox-X-QQq-2ovykB0pAq": {
+   "at": "2026-11-02T16:52:22.481182+00:00",
+   "reason": "revue : note 22/100 (minimum 60). Discussion de staff RP sur des sanctions (ATA) en conduisant à moto, sans enjeu ni chute, incompréhensible sans contexte."
   },
   "twitch:SmellyTallGorillaDoubleRainbow-GoQ-ldxNEB8ZbN0F": {
    "at": "2026-10-31T09:47:52.731117+00:00",
@@ -1894,6 +1980,14 @@
    "at": "2026-10-31T19:02:40.575564+00:00",
    "reason": "revue : Wingo choisit sa prochaine map Trackmania en parlant calmement : aucun moment fort ni réaction."
   },
+  "twitch:UninterestedRoughTrayCoolStoryBob-OYobnVUzUyYf0eGB": {
+   "at": "2026-11-02T16:54:51.118174+00:00",
+   "reason": "revue : note 48/100 (minimum 60). Une vidéo screamer se déclenche en pleine partie de Valorant et surprend Rayakuzaa. La réaction est correcte mais courte et la chute est molle."
+  },
+  "twitch:UnusualComfortableDogTBTacoRight-cdTLtAPohdbCm1Bx": {
+   "at": "2026-11-02T16:54:02.694056+00:00",
+   "reason": "revue : note 22/100 (minimum 60). Simple entraînement de combo en zone d'entraînement, sans enjeu ni réaction marquante."
+  },
   "twitch:VainGlutenFreeSquidDAESuppy-E26n94mBCD5W0rNo": {
    "at": "2026-10-31T15:44:47.488831+00:00",
    "reason": "revue : note 58/100 (minimum 60). Action de tournoi Fortnite lisible avec un vrai rebondissement : Brox sauve Gotaga au dernier moment, porté par un cast énergique. Ça reste un moment de commentaire plutôt qu'une réaction de streamer, donc un potentiel modéré."
@@ -1934,6 +2028,10 @@
    "at": "2026-10-31T15:46:06.336632+00:00",
    "reason": "revue : Bavardage d'initiés pendant le visionnage d'une keynote : Locklear plaisante sur un futur poste de CEO de M8. C'est peu compréhensible sans contexte et il n'y a pas de vraie chute. L'annonce M8 x WoW a déjà été publiée."
   },
+  "youtube:2frDDzZDNkw@991-1051": {
+   "at": "2026-11-02T17:01:58.266091+00:00",
+   "reason": "revue : note 30/100 (minimum 60). Transition sans enjeu : dédicace d'une chanson puis présentation d'une sauce, sans réaction au piment ni chute."
+  },
   "youtube:2wJuFzwBWkI@1040-1100": {
    "at": "2026-10-31T22:02:00.155738+00:00",
    "reason": "revue : Moment absurde mais confus : la transcription est hachée, la mise en place est floue (pourquoi enlever ses chaussures ?) et il n'y a pas de vraie chute. Les 30 premières secondes sont sans dialogue."
@@ -1973,6 +2071,10 @@
   "youtube:7U-ZIMrgTEI@242-302": {
    "at": "2026-11-02T15:46:58.774670+00:00",
    "reason": "revue : note 42/100 (minimum 60). Contexte documentaire sur la visite du pape, narration informative sans chute ni moment fort ; la fin (accès exclusif sur l'île de la Cité) apporte un peu d'enjeu mais reste faible."
+  },
+  "youtube:7hKpDPpTdCA@2184-2244": {
+   "at": "2026-11-02T17:01:58.266182+00:00",
+   "reason": "revue : note 40/100 (minimum 60). Inspection de survivant un peu drôle, mais sans vraie chute."
   },
   "youtube:BByplh9JRTs@1052-1112": {
    "at": "2026-10-31T17:06:16.386160+00:00",
@@ -2018,6 +2120,14 @@
    "at": "2026-10-31T22:02:00.155803+00:00",
    "reason": "revue : Vidéo de vulgarisation sur l'origine d'Halloween avec quelques vannes. Pas de vrai moment fort ni de chute : c'est le début d'une explication historique coupée en plein milieu."
   },
+  "youtube:GqL_xGWc7dY@1131-1191": {
+   "at": "2026-11-02T17:03:13.599947+00:00",
+   "reason": "revue : note 42/100 (minimum 60). Partie de HORSE sur Rocket League entre Kaydop et Zen : un vrai duo de pros, mais l'échange reste technique (triple tap, double tap, ceiling) et compréhensible surtout par les initiés. Il n'y a pas de vraie chute et la fin de l'extrait est un long temps mort."
+  },
+  "youtube:GqL_xGWc7dY@3426-3486": {
+   "at": "2026-11-02T17:01:58.266158+00:00",
+   "reason": "revue : note 42/100 (minimum 60). Défi 2v1 intéressant sur le papier, mais action peu lisible et pas de vrai temps fort audible."
+  },
   "youtube:Jy2Ixxn4lWs@3810-3870": {
    "at": "2026-11-01T13:38:57.609799+00:00",
    "reason": "revue : Bavardage sans enjeu : une séance de pendule donne un mot qui ne veut rien dire (« napig »), sans chute ni révélation. Le moment reste peu compréhensible sans le contexte de l'enquête."
@@ -2033,6 +2143,14 @@
   "youtube:Mbvu_q3jpf4@696-756": {
    "at": "2026-11-02T10:21:47.112697+00:00",
    "reason": "revue : Exploration de map Minecraft horreur façon Exit 8 : Ninjaxx énumère les tableaux, sans réaction forte, sans chute ni moment marquant."
+  },
+  "youtube:P2bTaahClso@2088-2148": {
+   "at": "2026-11-02T17:01:58.266129+00:00",
+   "reason": "revue : Surtout une émission TV (Koh-Lanta) qui n'appartient pas au créateur, avec une réaction peu marquante."
+  },
+  "youtube:P2bTaahClso@3075-3135": {
+   "at": "2026-11-02T17:01:58.266225+00:00",
+   "reason": "revue : Surtout une émission TV (Koh-Lanta) qui n'appartient pas au créateur, avec peu de réaction du streamer."
   },
   "youtube:RBlzuocAo1U@1437-1497": {
    "at": "2026-10-31T19:02:40.575537+00:00",
@@ -2284,31 +2402,6 @@
    "score": 38.0,
    "verdict": "reject"
   },
-  "twitch:AttractiveArtisticToadAMPTropPunch-HgvOECapqeR6j9JG": {
-   "at": "2026-11-01T13:18:29.839955+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Mort et en spectateur, ZeratoR se prend un screamer acheté exprès pour lui faire peur.",
-    "hashtags": [
-     "zerator",
-     "screamer",
-     "horreur",
-     "fail",
-     "twitchfr",
-     "clip",
-     "drole"
-    ],
-    "hook": "ZERATOR SE FAIT PIÉGER",
-    "title": "ZeratoR se fait screamer par Mick… « J'ai 38 ans ! »",
-    "trim_end": 34.28,
-    "trim_start": 5.0
-   },
-   "reason": "Screamer réussi sur ZeratoR, avec une réaction drôle (« J'ai 38 ans ! »).",
-   "recent": [],
-   "score": 66.0,
-   "verdict": "publish"
-  },
   "twitch:BillowingFunTroutBuddhaBar-KMVYjKSYm4KSDbz-": {
    "at": "2026-11-01T13:11:52.085178+00:00",
    "clip_span": null,
@@ -2503,31 +2596,6 @@
     "trim_start": null
    },
    "reason": "Co-stream des Champions Valorant : Squeezie s'enflamme sur une action de Safiaa, le moment est compréhensible et énergique.",
-   "recent": [],
-   "score": 62.0,
-   "verdict": "publish"
-  },
-  "twitch:ChillyBlindingFinchGOWSkull-V78ZI-Oc6wbaClSd": {
-   "at": "2026-11-01T13:04:34.345526+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "En plein co-stream Valorant, Mel teste un biberon… et la réaction ne se fait pas attendre.",
-    "hashtags": [
-     "melhssn",
-     "valorant",
-     "costream",
-     "degout",
-     "twitchfr",
-     "clip",
-     "drole"
-    ],
-    "hook": "ELLE GOÛTE LE LAIT DU BIBERON",
-    "title": "Mel goûte le lait d'un biberon en plein co-stream",
-    "trim_end": 57.1,
-    "trim_start": 18.0
-   },
-   "reason": "Situation absurde et visuelle : boire du lait au biberon en plein co-stream, avec une réaction de dégoût drôle.",
    "recent": [],
    "score": 62.0,
    "verdict": "publish"
@@ -3071,30 +3139,6 @@
    "score": 42.0,
    "verdict": "reject"
   },
-  "twitch:FuriousAgreeablePlumCurseLit-QJUzMAkojC6W3Vv0": {
-   "at": "2026-11-01T13:18:29.839961+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Mawkzy présente les couleurs de sa voiture.",
-    "hashtags": [
-     "mawkzy",
-     "rocketleague",
-     "preset",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "LE PRESET DE MAWKZY",
-    "title": "Mawkzy montre son preset Rocket League",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Présentation de preset trop courte et sans enjeu.",
-   "recent": [],
-   "score": 15.0,
-   "verdict": "reject"
-  },
   "twitch:FuriousArbitraryMinkPanicVis-mBHd8hCcopS7-3o1": {
    "at": "2026-11-01T13:18:29.839970+00:00",
    "clip_span": null,
@@ -3233,30 +3277,6 @@
    "reason": "Déambulation dans des locaux, sans contexte ni chute compréhensible.",
    "recent": [],
    "score": 25.0,
-   "verdict": "reject"
-  },
-  "twitch:LachrymoseEsteemedChipmunkSaltBae-PfO9xVjUDh0rJjcl": {
-   "at": "2026-11-01T13:07:53.685563+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Punkill enchaîne les éliminations sur Call of Duty.",
-    "hashtags": [
-     "punkill",
-     "callofduty",
-     "mw4",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "PUNKILL ET SON CLIP DINGUE",
-    "title": "Punkill sort un clip dingue sur MW4",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Action peu lisible, réaction faible et transcription sans chute claire.",
-   "recent": [],
-   "score": 40.0,
    "verdict": "reject"
   },
   "twitch:LachrymoseGracefulBeaverCopyThis-qeUUj3FjRDGdw772": {
@@ -3842,29 +3862,6 @@
    "score": 50.0,
    "verdict": "reject"
   },
-  "twitch:SeductiveCreativeKittenCharlietheUnicorn-a-HYLbR9DIh8nblL": {
-   "at": "2026-11-01T12:42:54.224262+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "itachi fait monter la hype autour d'un roster.",
-    "hashtags": [
-     "itachi",
-     "valorant",
-     "twitchfr",
-     "clip",
-     "drole"
-    ],
-    "hook": "IL EN DIT TROP ?",
-    "title": "itachi tease un nouveau roster Valorant",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Teasing de roster incompréhensible sans contexte, remerciements de subs, aucune annonce claire.",
-   "recent": [],
-   "score": 35.0,
-   "verdict": "reject"
-  },
   "twitch:SilkyCrypticPartridgeOpieOP--3SGNkODbvJ6HEPu": {
    "at": "2026-11-01T12:42:54.224272+00:00",
    "clip_span": null,
@@ -4333,6 +4330,20 @@
    "prepared": 14,
    "published": 0,
    "rejected": 14
+  },
+  {
+   "at": "2026-11-02T16:48:06.531879+00:00",
+   "by_source": {
+    "twitch": 2590,
+    "youtube": 7
+   },
+   "detected": 2597,
+   "errors": 0,
+   "failed": 0,
+   "mode": "shorts",
+   "prepared": 19,
+   "published": 2,
+   "rejected": 17
   }
  ],
  "streamers_seen": {
@@ -4349,25 +4360,26 @@
   "aenot": "2026-11-01T21:55:48.325708+00:00",
   "agea59": "2026-11-02T13:19:47.581512+00:00",
   "aiekillu": "2026-10-30T21:57:10.762822+00:00",
-  "aiola": "2026-11-02T16:06:50.912374+00:00",
+  "aiola": "2026-11-02T16:48:06.531879+00:00",
   "airka_off": "2026-11-01T18:56:52.268070+00:00",
   "akwartz": "2026-10-30T09:56:41.217059+00:00",
   "alderiate": "2026-11-01T12:34:46.023277+00:00",
   "aleaument": "2026-10-29T23:02:20.869294+00:00",
-  "alexnoviaoff": "2026-11-02T16:06:50.912374+00:00",
+  "alexnoviaoff": "2026-11-02T16:48:06.531879+00:00",
   "alexyukiii": "2026-11-01T13:34:23.723308+00:00",
   "alibaba_rcm": "2026-11-01T12:34:46.023277+00:00",
   "alisonator": "2026-10-30T09:56:41.217059+00:00",
   "aloonea": "2026-11-01T18:56:52.268070+00:00",
   "alphacast": "2026-11-01T21:55:48.325708+00:00",
-  "altair": "2026-11-02T16:06:50.912374+00:00",
+  "altaggo": "2026-11-02T16:48:06.531879+00:00",
+  "altair": "2026-11-02T16:48:06.531879+00:00",
   "altairnative": "2026-11-02T13:19:47.581512+00:00",
   "aluka_k": "2026-11-02T13:19:47.581512+00:00",
   "ameziii": "2026-11-01T09:22:34.341086+00:00",
-  "aminematue": "2026-11-01T21:55:48.325708+00:00",
+  "aminematue": "2026-11-02T16:48:06.531879+00:00",
   "amslowtw": "2026-10-31T21:55:18.075941+00:00",
   "anaee": "2026-11-02T10:10:42.670708+00:00",
-  "anaismrn": "2026-11-02T16:06:50.912374+00:00",
+  "anaismrn": "2026-11-02T16:48:06.531879+00:00",
   "anasnw": "2026-11-01T21:55:48.325708+00:00",
   "aneyaris_": "2026-11-01T21:55:48.325708+00:00",
   "annlins": "2026-11-02T15:17:22.122980+00:00",
@@ -4387,10 +4399,10 @@
   "aspig": "2026-11-01T13:34:23.723308+00:00",
   "astrofyke": "2026-10-30T08:04:48.037353+00:00",
   "at0mium": "2026-10-30T09:56:41.217059+00:00",
-  "atowwwww": "2026-11-02T16:06:50.912374+00:00",
+  "atowwwww": "2026-11-02T16:48:06.531879+00:00",
   "aunni": "2026-10-30T09:56:41.217059+00:00",
   "avabloom_": "2026-11-01T09:49:48.898202+00:00",
-  "avamind": "2026-11-02T16:06:50.912374+00:00",
+  "avamind": "2026-11-02T16:48:06.531879+00:00",
   "axoskilllive": "2026-11-02T13:19:47.581512+00:00",
   "ayss": "2026-10-30T09:56:41.217059+00:00",
   "bakabaotv": "2026-10-31T09:45:19.335711+00:00",
@@ -4400,13 +4412,13 @@
   "behop_veek": "2026-10-31T09:45:19.335711+00:00",
   "bensac4": "2026-11-02T10:10:42.670708+00:00",
   "berlu": "2026-10-30T18:59:06.087827+00:00",
-  "beyaz": "2026-11-02T16:06:50.912374+00:00",
+  "beyaz": "2026-11-02T16:48:06.531879+00:00",
   "bibixhd": "2026-11-01T18:56:52.268070+00:00",
   "bigbadhater_fr": "2026-11-01T09:49:48.898202+00:00",
   "blaize": "2026-11-01T21:55:48.325708+00:00",
   "blanquettetv": "2026-10-30T09:56:41.217059+00:00",
   "blazx": "2026-10-29T23:02:20.869294+00:00",
-  "bluenblue": "2026-11-01T13:34:23.723308+00:00",
+  "bluenblue": "2026-11-02T16:48:06.531879+00:00",
   "bmsjoel": "2026-11-01T13:34:23.723308+00:00",
   "bobafett17": "2026-10-31T12:55:19.002790+00:00",
   "bobbyvulgrif": "2026-11-01T13:34:23.723308+00:00",
@@ -4420,7 +4432,7 @@
   "cabridiy": "2026-11-02T10:10:42.670708+00:00",
   "caligraphiee": "2026-10-30T18:59:06.087827+00:00",
   "camak": "2026-10-30T21:57:10.762822+00:00",
-  "camak24h": "2026-11-02T16:06:50.912374+00:00",
+  "camak24h": "2026-11-02T16:48:06.531879+00:00",
   "cameliaaa92": "2026-10-31T21:55:18.075941+00:00",
   "canalplus": "2026-10-31T18:56:50.835342+00:00",
   "captainfracas": "2026-11-01T18:56:52.268070+00:00",
@@ -4431,29 +4443,29 @@
   "chap_gg": "2026-10-30T09:56:41.217059+00:00",
   "charcler": "2026-11-02T16:06:50.912374+00:00",
   "chat_": "2026-10-31T09:45:19.335711+00:00",
-  "chef_zhab": "2026-11-02T16:06:50.912374+00:00",
+  "chef_zhab": "2026-11-02T16:48:06.531879+00:00",
   "chez_lex": "2026-11-01T21:55:48.325708+00:00",
   "chezkevinrazy": "2026-11-02T10:10:42.670708+00:00",
-  "chinoir": "2026-11-02T16:06:50.912374+00:00",
+  "chinoir": "2026-11-02T16:48:06.531879+00:00",
   "chloe": "2026-11-02T10:10:42.670708+00:00",
   "chocolatier_paulgarderes": "2026-10-31T12:55:19.002790+00:00",
   "chowh1": "2026-11-02T10:10:42.670708+00:00",
-  "cissouryne": "2026-11-02T16:06:50.912374+00:00",
+  "cissouryne": "2026-11-02T16:48:06.531879+00:00",
   "citronviolet": "2026-11-01T09:49:48.898202+00:00",
   "clara_doxal": "2026-11-01T15:41:53.360772+00:00",
-  "clement_ttt": "2026-10-31T18:56:50.835342+00:00",
+  "clement_ttt": "2026-11-02T16:48:06.531879+00:00",
   "clemovitch": "2026-11-02T16:06:50.912374+00:00",
   "clickfps_": "2026-11-01T12:34:46.023277+00:00",
   "cmoiamar": "2026-11-01T18:56:52.268070+00:00",
-  "coaen_": "2026-10-31T15:42:38.645163+00:00",
+  "coaen_": "2026-11-02T16:48:06.531879+00:00",
   "cocottee_": "2026-10-30T18:59:06.087827+00:00",
   "coffee": "2026-11-02T13:19:47.581512+00:00",
   "colomblbl": "2026-10-31T15:42:38.645163+00:00",
   "comebacktv": "2026-11-01T15:41:53.360772+00:00",
-  "costacheu": "2026-11-02T16:06:50.912374+00:00",
+  "costacheu": "2026-11-02T16:48:06.531879+00:00",
   "crimsonstyle": "2026-10-31T09:45:19.335711+00:00",
   "crocodyletv": "2026-10-31T21:55:18.075941+00:00",
-  "croissantstrike": "2026-11-02T16:06:50.912374+00:00",
+  "croissantstrike": "2026-11-02T16:48:06.531879+00:00",
   "croshoott": "2026-10-31T09:45:19.335711+00:00",
   "cruelladk": "2026-11-01T15:41:53.360772+00:00",
   "cuddertv": "2026-10-31T15:42:38.645163+00:00",
@@ -4475,16 +4487,16 @@
   "deneodell": "2026-11-01T13:34:23.723308+00:00",
   "deujna": "2026-11-02T10:10:42.670708+00:00",
   "dfg": "2026-11-01T18:56:52.268070+00:00",
-  "dhalen": "2026-10-30T18:59:06.087827+00:00",
+  "dhalen": "2026-11-02T16:48:06.531879+00:00",
   "dims": "2026-10-31T12:55:19.002790+00:00",
   "dj_stereo_mix": "2026-11-01T09:22:34.341086+00:00",
   "djaem_": "2026-10-30T15:58:00.907341+00:00",
   "djalito212": "2026-10-30T21:57:10.762822+00:00",
   "djboucherie": "2026-10-31T18:56:50.835342+00:00",
   "dokhy": "2026-11-01T15:41:53.360772+00:00",
-  "donay_sw": "2026-11-02T16:06:50.912374+00:00",
+  "donay_sw": "2026-11-02T16:48:06.531879+00:00",
   "drakeoz_": "2026-11-02T10:10:42.670708+00:00",
-  "drako__fr": "2026-11-02T16:06:50.912374+00:00",
+  "drako__fr": "2026-11-02T16:48:06.531879+00:00",
   "drakony": "2026-11-02T15:32:49.831240+00:00",
   "drarteck": "2026-11-01T18:56:52.268070+00:00",
   "drunge_": "2026-11-01T21:55:48.325708+00:00",
@@ -4493,7 +4505,7 @@
   "dvm_medja": "2026-11-01T21:55:48.325708+00:00",
   "dvniel_play": "2026-10-31T18:56:50.835342+00:00",
   "dyna_plus": "2026-11-01T15:41:53.360772+00:00",
-  "el8kun": "2026-11-02T16:06:50.912374+00:00",
+  "el8kun": "2026-11-02T16:48:06.531879+00:00",
   "ellanatv": "2026-11-02T13:19:47.581512+00:00",
   "elparigotv": "2026-11-02T10:10:42.670708+00:00",
   "emi_mge7": "2026-11-02T16:06:50.912374+00:00",
@@ -4504,18 +4516,19 @@
   "encremecanique": "2026-10-29T23:02:20.869294+00:00",
   "enjoyphoenix": "2026-11-01T13:34:23.723308+00:00",
   "enkeo_": "2026-11-02T15:17:22.122980+00:00",
-  "eskc": "2026-11-02T16:06:50.912374+00:00",
+  "escargoog": "2026-11-02T16:48:06.531879+00:00",
+  "eskc": "2026-11-02T16:48:06.531879+00:00",
   "etoiles": "2026-11-01T21:55:48.325708+00:00",
   "etostark__": "2026-11-01T21:55:48.325708+00:00",
   "eva_competitive": "2026-11-01T09:49:48.898202+00:00",
   "eventis": "2026-10-31T18:56:50.835342+00:00",
   "evoxia": "2026-10-29T23:02:20.869294+00:00",
   "fabi1live": "2026-10-30T08:23:54.920356+00:00",
-  "fairypeak": "2026-11-02T16:06:50.912374+00:00",
+  "fairypeak": "2026-11-02T16:48:06.531879+00:00",
   "fakeheal66": "2026-11-02T13:19:47.581512+00:00",
   "fakemonster": "2026-11-02T10:10:42.670708+00:00",
   "falk9n": "2026-11-02T15:32:49.831240+00:00",
-  "farore": "2026-11-02T16:06:50.912374+00:00",
+  "farore": "2026-11-02T16:48:06.531879+00:00",
   "fatiiiih": "2026-10-30T15:58:00.907341+00:00",
   "fayza__": "2026-11-02T10:10:42.670708+00:00",
   "fcm_itoshi": "2026-11-02T10:10:42.670708+00:00",
@@ -4530,7 +4543,7 @@
   "flonflon": "2026-11-02T13:19:47.581512+00:00",
   "florence": "2026-11-01T21:55:48.325708+00:00",
   "fluffy": "2026-11-02T13:19:47.581512+00:00",
-  "fm93quebec": "2026-11-02T16:06:50.912374+00:00",
+  "fm93quebec": "2026-11-02T16:48:06.531879+00:00",
   "fm_guru": "2026-10-31T18:56:50.835342+00:00",
   "forsa": "2026-10-30T21:57:10.762822+00:00",
   "fousseyd": "2026-11-02T15:32:49.831240+00:00",
@@ -4539,13 +4552,13 @@
   "frostyqc": "2026-11-01T13:34:23.723308+00:00",
   "fugu_fps": "2026-11-01T15:41:53.360772+00:00",
   "furax22": "2026-10-30T21:57:10.762822+00:00",
-  "furgoth": "2026-11-02T16:06:50.912374+00:00",
+  "furgoth": "2026-11-02T16:48:06.531879+00:00",
   "fuury_off": "2026-10-31T21:55:18.075941+00:00",
   "g1kkid": "2026-11-02T16:06:50.912374+00:00",
-  "gaethaaan": "2026-11-02T16:06:50.912374+00:00",
+  "gaethaaan": "2026-11-02T16:48:06.531879+00:00",
   "galino": "2026-11-01T15:41:53.360772+00:00",
   "gally": "2026-11-01T09:49:48.898202+00:00",
-  "gamergentii": "2026-11-01T21:55:48.325708+00:00",
+  "gamergentii": "2026-11-02T16:48:06.531879+00:00",
   "garryschool": "2026-10-30T21:57:10.762822+00:00",
   "gastronogeek": "2026-10-31T21:55:18.075941+00:00",
   "gautslayer": "2026-11-01T18:56:52.268070+00:00",
@@ -4563,8 +4576,9 @@
   "grimkujow": "2026-10-31T21:55:18.075941+00:00",
   "gryngoss": "2026-10-30T08:04:48.037353+00:00",
   "guezmerr": "2026-11-01T21:55:48.325708+00:00",
-  "hailtotheking_r": "2026-11-02T16:06:50.912374+00:00",
+  "hailtotheking_r": "2026-11-02T16:48:06.531879+00:00",
   "hakaiwrld": "2026-11-01T21:55:48.325708+00:00",
+  "hallowfr": "2026-11-02T16:48:06.531879+00:00",
   "hammerkick": "2026-11-01T09:49:48.898202+00:00",
   "hapso": "2026-11-02T15:17:22.122980+00:00",
   "hari_live": "2026-11-01T09:49:48.898202+00:00",
@@ -4574,20 +4588,20 @@
   "heavenfox": "2026-11-01T21:55:48.325708+00:00",
   "hellias": "2026-11-02T10:10:42.670708+00:00",
   "helydia": "2026-11-01T18:56:52.268070+00:00",
-  "hermanel": "2026-11-02T16:06:50.912374+00:00",
+  "hermanel": "2026-11-02T16:48:06.531879+00:00",
   "hermanel24h": "2026-10-30T08:04:48.037353+00:00",
   "heyar": "2026-11-02T16:06:50.912374+00:00",
-  "hiro_llol": "2026-11-02T16:06:50.912374+00:00",
+  "hiro_llol": "2026-11-02T16:48:06.531879+00:00",
   "histoires_crepues": "2026-11-02T10:10:42.670708+00:00",
   "hiuuugs": "2026-10-30T15:58:00.907341+00:00",
-  "hoosgaming": "2026-11-01T09:49:48.898202+00:00",
+  "hoosgaming": "2026-11-02T16:48:06.531879+00:00",
   "hugoauperchoir": "2026-11-02T16:06:50.912374+00:00",
   "hugodelire": "2026-10-31T21:55:18.075941+00:00",
   "hugolisoir": "2026-10-30T09:56:41.217059+00:00",
   "hunter404x": "2026-11-01T21:55:48.325708+00:00",
   "huzounet": "2026-10-31T21:55:18.075941+00:00",
   "hyp_tv": "2026-10-30T18:59:06.087827+00:00",
-  "i_reaz": "2026-11-02T16:06:50.912374+00:00",
+  "i_reaz": "2026-11-02T16:48:06.531879+00:00",
   "icekei": "2026-10-31T15:42:38.645163+00:00",
   "idater": "2026-10-31T18:56:50.835342+00:00",
   "idkbutimleila": "2026-11-02T16:06:50.912374+00:00",
@@ -4596,8 +4610,8 @@
   "ikatv": "2026-11-01T09:49:48.898202+00:00",
   "ikoneec": "2026-11-01T21:55:48.325708+00:00",
   "ilianbouchi": "2026-11-01T13:34:23.723308+00:00",
-  "iliesomg": "2026-11-02T16:06:50.912374+00:00",
-  "imsofresh": "2026-11-02T16:06:50.912374+00:00",
+  "iliesomg": "2026-11-02T16:48:06.531879+00:00",
+  "imsofresh": "2026-11-02T16:48:06.531879+00:00",
   "inoxtag": "2026-10-31T15:42:38.645163+00:00",
   "ismaaalol": "2026-11-02T10:10:42.670708+00:00",
   "itachi": "2026-11-02T10:10:42.670708+00:00",
@@ -4606,7 +4620,7 @@
   "ivanilsonlpvm": "2026-10-30T15:58:00.907341+00:00",
   "izziftn": "2026-11-01T21:55:48.325708+00:00",
   "jackplaypz": "2026-11-01T09:22:34.341086+00:00",
-  "jamelinho213": "2026-11-02T16:06:50.912374+00:00",
+  "jamelinho213": "2026-11-02T16:48:06.531879+00:00",
   "janusport": "2026-10-30T21:57:10.762822+00:00",
   "jardistream": "2026-11-01T13:34:23.723308+00:00",
   "jaunerougebleu": "2026-10-31T18:56:50.835342+00:00",
@@ -4617,21 +4631,22 @@
   "jeanmassiet": "2026-11-02T13:19:47.581512+00:00",
   "jellal_fitna": "2026-10-30T15:58:00.907341+00:00",
   "jeuserieux": "2026-10-31T18:56:50.835342+00:00",
-  "jezu_lol": "2026-11-02T16:06:50.912374+00:00",
+  "jezu_lol": "2026-11-02T16:48:06.531879+00:00",
   "jidun": "2026-10-31T12:55:19.002790+00:00",
-  "jimmyboyyy": "2026-11-02T16:06:50.912374+00:00",
+  "jimmyboyyy": "2026-11-02T16:48:06.531879+00:00",
+  "jirayalecochon": "2026-11-02T16:48:06.531879+00:00",
   "jla_corporation": "2026-10-30T09:37:30.370222+00:00",
   "jltomy": "2026-11-01T21:55:48.325708+00:00",
-  "jltomy247": "2026-11-02T16:06:50.912374+00:00",
+  "jltomy247": "2026-11-02T16:48:06.531879+00:00",
   "johncutt": "2026-11-01T09:22:34.341086+00:00",
   "johnjotv": "2026-11-02T10:10:42.670708+00:00",
   "jokyjoke_": "2026-11-01T09:49:48.898202+00:00",
   "jolavanille": "2026-11-01T15:41:53.360772+00:00",
-  "jsavagew": "2026-11-02T16:06:50.912374+00:00",
-  "juliettearz": "2026-11-02T16:06:50.912374+00:00",
+  "jsavagew": "2026-11-02T16:48:06.531879+00:00",
+  "juliettearz": "2026-11-02T16:48:06.531879+00:00",
   "jvtv": "2026-10-30T09:37:30.370222+00:00",
   "kaayoute": "2026-11-01T09:49:48.898202+00:00",
-  "kaellyn": "2026-11-02T16:06:50.912374+00:00",
+  "kaellyn": "2026-11-02T16:48:06.531879+00:00",
   "kailon": "2026-10-31T21:55:18.075941+00:00",
   "kaleevision": "2026-10-30T15:58:00.907341+00:00",
   "kaly494": "2026-11-01T12:34:46.023277+00:00",
@@ -4639,13 +4654,13 @@
   "kamilabsfr": "2026-10-31T12:55:19.002790+00:00",
   "karssi": "2026-11-02T13:19:47.581512+00:00",
   "katarelol": "2026-11-01T13:34:23.723308+00:00",
-  "katarsisgg": "2026-11-02T16:06:50.912374+00:00",
+  "katarsisgg": "2026-11-02T16:48:06.531879+00:00",
   "katchanvt": "2026-11-01T15:41:53.360772+00:00",
   "kaydop": "2026-11-01T21:55:48.325708+00:00",
   "kcsoloq": "2026-11-01T18:56:52.268070+00:00",
   "keazycs": "2026-11-01T13:34:23.723308+00:00",
   "kelianausaurus": "2026-10-31T09:45:19.335711+00:00",
-  "kemist_c10h15n": "2026-11-02T16:06:50.912374+00:00",
+  "kemist_c10h15n": "2026-11-02T16:48:06.531879+00:00",
   "kenbogard": "2026-11-02T15:32:49.831240+00:00",
   "kendrobtg": "2026-11-01T18:56:52.268070+00:00",
   "kennystream": "2026-11-01T18:56:52.268070+00:00",
@@ -4660,22 +4675,22 @@
   "koka": "2026-11-02T15:17:22.122980+00:00",
   "kokihiete": "2026-11-02T13:19:47.581512+00:00",
   "korioz_": "2026-10-31T21:55:18.075941+00:00",
-  "krayn_live": "2026-11-02T16:06:50.912374+00:00",
+  "krayn_live": "2026-11-02T16:48:06.531879+00:00",
   "krl_stream": "2026-11-02T10:10:42.670708+00:00",
   "krolay": "2026-11-02T15:32:49.831240+00:00",
   "kswinniie": "2026-10-29T23:02:20.869294+00:00",
   "kungitto": "2026-11-02T10:10:42.670708+00:00",
   "kurama_203": "2026-11-01T18:56:52.268070+00:00",
   "kusa": "2026-11-01T13:34:23.723308+00:00",
-  "l3scoco": "2026-11-02T16:06:50.912374+00:00",
+  "l3scoco": "2026-11-02T16:48:06.531879+00:00",
   "labonneaubergejdr": "2026-11-01T21:55:48.325708+00:00",
   "laink": "2026-11-01T21:55:48.325708+00:00",
   "lamhua": "2026-11-02T16:06:50.912374+00:00",
   "laniyelle": "2026-11-02T10:10:42.670708+00:00",
   "lantistream": "2026-11-02T13:19:47.581512+00:00",
-  "lapi": "2026-11-02T16:06:50.912374+00:00",
+  "lapi": "2026-11-02T16:48:06.531879+00:00",
   "laplanetedessirs": "2026-11-02T10:10:42.670708+00:00",
-  "lastbaroudeur": "2026-11-02T16:06:50.912374+00:00",
+  "lastbaroudeur": "2026-11-02T16:48:06.531879+00:00",
   "latavernedepatatus": "2026-10-30T08:23:54.920356+00:00",
   "laughtedtwo": "2026-11-02T10:10:42.670708+00:00",
   "laukinawa": "2026-10-31T21:55:18.075941+00:00",
@@ -4712,12 +4727,12 @@
   "lilith": "2026-11-02T13:19:47.581512+00:00",
   "lilykonjo": "2026-11-02T10:10:42.670708+00:00",
   "limmigreparisien": "2026-11-01T15:41:53.360772+00:00",
-  "linca": "2026-11-02T16:06:50.912374+00:00",
+  "linca": "2026-11-02T16:48:06.531879+00:00",
   "lindseygiv": "2026-11-01T12:34:46.023277+00:00",
-  "littlebigwhale": "2026-11-02T16:06:50.912374+00:00",
+  "littlebigwhale": "2026-11-02T16:48:06.531879+00:00",
   "locklear": "2026-11-01T21:55:48.325708+00:00",
   "loupiote3": "2026-11-01T21:55:48.325708+00:00",
-  "low4n": "2026-11-02T16:06:50.912374+00:00",
+  "low4n": "2026-11-02T16:48:06.531879+00:00",
   "lu_k": "2026-11-01T18:56:52.268070+00:00",
   "lucas57tv": "2026-11-02T13:19:47.581512+00:00",
   "luccio": "2026-10-31T09:45:19.335711+00:00",
@@ -4738,10 +4753,12 @@
   "manatylol": "2026-11-02T15:32:49.831240+00:00",
   "maniakoshonen": "2026-11-01T13:34:23.723308+00:00",
   "maniika": "2026-10-31T09:45:19.335711+00:00",
+  "mannyy": "2026-11-02T16:48:06.531879+00:00",
+  "manvivespadel": "2026-11-02T16:48:06.531879+00:00",
   "maobigschlong": "2026-11-01T13:34:23.723308+00:00",
   "marco": "2026-10-31T21:55:18.075941+00:00",
   "marcuszeboulet": "2026-10-29T23:02:20.869294+00:00",
-  "marex": "2026-11-02T16:06:50.912374+00:00",
+  "marex": "2026-11-02T16:48:06.531879+00:00",
   "marie_panka": "2026-10-31T21:55:18.075941+00:00",
   "marikigai": "2026-11-02T13:19:47.581512+00:00",
   "marinelord": "2026-11-01T15:41:53.360772+00:00",
@@ -4756,9 +4773,9 @@
   "mathpellerin": "2026-10-30T18:59:06.087827+00:00",
   "mathraistv": "2026-11-02T10:10:42.670708+00:00",
   "mavienormale": "2026-11-02T13:19:47.581512+00:00",
-  "mawkzy_": "2026-11-02T16:06:50.912374+00:00",
+  "mawkzy_": "2026-11-02T16:48:06.531879+00:00",
   "mayadorable": "2026-10-30T13:03:45.132800+00:00",
-  "mayucca": "2026-11-02T16:06:50.912374+00:00",
+  "mayucca": "2026-11-02T16:48:06.531879+00:00",
   "mediapart": "2026-10-30T09:56:41.217059+00:00",
   "mehditdonc": "2026-10-31T15:42:38.645163+00:00",
   "mehdoche": "2026-10-30T21:57:10.762822+00:00",
@@ -4768,14 +4785,14 @@
   "mercurefps": "2026-11-02T10:10:42.670708+00:00",
   "meumeu03": "2026-11-01T09:49:48.898202+00:00",
   "mickael66fr": "2026-10-30T08:23:54.920356+00:00",
-  "mickalow": "2026-11-02T16:06:50.912374+00:00",
-  "mielcrapouille": "2026-11-02T16:06:50.912374+00:00",
+  "mickalow": "2026-11-02T16:48:06.531879+00:00",
+  "mielcrapouille": "2026-11-02T16:48:06.531879+00:00",
   "migmh": "2026-11-01T09:49:48.898202+00:00",
   "mimie131986": "2026-10-30T08:23:54.920356+00:00",
   "minos": "2026-10-31T21:55:18.075941+00:00",
   "missdadou": "2026-10-31T12:55:19.002790+00:00",
   "misterjday": "2026-11-01T21:55:48.325708+00:00",
-  "mistermv": "2026-11-02T16:06:50.912374+00:00",
+  "mistermv": "2026-11-02T16:48:06.531879+00:00",
   "misterpacothai": "2026-11-02T10:10:42.670708+00:00",
   "mlle_sunny": "2026-10-31T09:45:19.335711+00:00",
   "mnkway": "2026-11-02T10:10:42.670708+00:00",
@@ -4791,11 +4808,12 @@
   "mowraa": "2026-10-31T15:42:38.645163+00:00",
   "mrbboy45": "2026-10-29T23:02:20.869294+00:00",
   "mrderiv": "2026-10-31T21:55:18.075941+00:00",
+  "mrlev12": "2026-11-02T16:48:06.531879+00:00",
   "mrs_sweetness": "2026-10-31T21:55:18.075941+00:00",
   "mrsal_59": "2026-10-29T23:02:20.869294+00:00",
   "mrstick": "2026-10-31T18:56:50.835342+00:00",
   "mrtiboute": "2026-11-01T21:55:48.325708+00:00",
-  "mulottv": "2026-11-02T16:06:50.912374+00:00",
+  "mulottv": "2026-11-02T16:48:06.531879+00:00",
   "mynthos": "2026-11-01T13:34:23.723308+00:00",
   "mystk": "2026-11-01T21:55:48.325708+00:00",
   "mywtheking": "2026-11-01T18:56:52.268070+00:00",
@@ -4815,13 +4833,14 @@
   "nianfo": "2026-11-02T13:19:47.581512+00:00",
   "nicolux84": "2026-10-31T21:55:18.075941+00:00",
   "nikos": "2026-11-02T15:17:22.122980+00:00",
-  "nisqyy": "2026-11-02T16:06:50.912374+00:00",
+  "nisqyy": "2026-11-02T16:48:06.531879+00:00",
   "noahlunsi": "2026-10-31T21:55:18.075941+00:00",
   "nobreak0": "2026-10-31T15:42:38.645163+00:00",
-  "nociffn": "2026-11-02T16:06:50.912374+00:00",
+  "nociffn": "2026-11-02T16:48:06.531879+00:00",
   "noddus_": "2026-11-02T10:10:42.670708+00:00",
   "noki_pubg": "2026-11-01T12:34:46.023277+00:00",
-  "norianne": "2026-10-31T18:56:50.835342+00:00",
+  "nonoretdonmax": "2026-11-02T16:48:06.531879+00:00",
+  "norianne": "2026-11-02T16:48:06.531879+00:00",
   "normanajari": "2026-11-02T10:10:42.670708+00:00",
   "noto_off": "2026-10-30T21:57:10.762822+00:00",
   "notseriou_s": "2026-10-30T21:57:10.762822+00:00",
@@ -4832,14 +4851,14 @@
   "omeega": "2026-11-01T18:56:52.268070+00:00",
   "ontherobz": "2026-11-02T10:10:42.670708+00:00",
   "onutrem": "2026-11-02T10:10:42.670708+00:00",
-  "oonolive": "2026-11-02T16:06:50.912374+00:00",
+  "oonolive": "2026-11-02T16:48:06.531879+00:00",
   "opcrotte": "2026-10-30T18:59:06.087827+00:00",
   "oppanotype": "2026-11-02T16:06:50.912374+00:00",
   "oranor": "2026-10-31T09:45:19.335711+00:00",
   "oraxe": "2026-11-01T21:55:48.325708+00:00",
   "origatwitch": "2026-10-30T13:03:45.132800+00:00",
   "ostpolitik": "2026-11-02T16:06:50.912374+00:00",
-  "otplol_": "2026-11-02T16:06:50.912374+00:00",
+  "otplol_": "2026-11-02T16:48:06.531879+00:00",
   "ouaicestmous": "2026-11-01T21:55:48.325708+00:00",
   "ouestfrance": "2026-10-30T08:23:54.920356+00:00",
   "owlfr_": "2026-11-01T21:55:48.325708+00:00",
@@ -4856,16 +4875,16 @@
   "phyzikk": "2026-11-01T21:55:48.325708+00:00",
   "pimousse_tv": "2026-11-01T09:49:48.898202+00:00",
   "poachimpa": "2026-11-01T12:34:46.023277+00:00",
-  "podasai": "2026-11-02T16:06:50.912374+00:00",
+  "podasai": "2026-11-02T16:48:06.531879+00:00",
   "poko": "2026-11-02T13:19:47.581512+00:00",
   "pommedetfterre": "2026-10-30T13:03:45.132800+00:00",
-  "ponce": "2026-11-02T16:06:50.912374+00:00",
+  "ponce": "2026-11-02T16:48:06.531879+00:00",
   "poneeeyclub": "2026-11-02T10:10:42.670708+00:00",
   "pressea": "2026-11-01T15:41:53.360772+00:00",
   "prestoncitron": "2026-11-01T09:49:48.898202+00:00",
   "proxhy": "2026-11-01T12:34:46.023277+00:00",
   "proze": "2026-11-01T21:55:48.325708+00:00",
-  "psg": "2026-11-01T21:55:48.325708+00:00",
+  "psg": "2026-11-02T16:48:06.531879+00:00",
   "punkill": "2026-11-02T15:17:22.122980+00:00",
   "pyrootv": "2026-10-31T15:42:38.645163+00:00",
   "qassimiento": "2026-11-01T21:55:48.325708+00:00",
@@ -4879,15 +4898,15 @@
   "rayakuzaa": "2026-11-02T13:19:47.581512+00:00",
   "recalbox": "2026-11-01T09:49:48.898202+00:00",
   "recharging": "2026-10-31T18:56:50.835342+00:00",
-  "redemption": "2026-11-02T16:06:50.912374+00:00",
+  "redemption": "2026-11-02T16:48:06.531879+00:00",
   "relictcg": "2026-11-01T18:56:52.268070+00:00",
   "renaud_dekode": "2026-11-02T13:19:47.581512+00:00",
   "renzlotv": "2026-10-30T13:03:45.132800+00:00",
   "revenja": "2026-11-01T13:34:23.723308+00:00",
   "reyyn": "2026-10-29T23:02:20.869294+00:00",
-  "rhobalas_lol": "2026-11-02T16:06:50.912374+00:00",
-  "ribodanslasauce": "2026-11-02T16:06:50.912374+00:00",
-  "riskin": "2026-11-02T16:06:50.912374+00:00",
+  "rhobalas_lol": "2026-11-02T16:48:06.531879+00:00",
+  "ribodanslasauce": "2026-11-02T16:48:06.531879+00:00",
+  "riskin": "2026-11-02T16:48:06.531879+00:00",
   "rivenzi": "2026-11-01T12:34:46.023277+00:00",
   "rmcsport": "2026-11-01T15:41:53.360772+00:00",
   "robert87000": "2026-11-02T16:06:50.912374+00:00",
@@ -4905,12 +4924,12 @@
   "salma_": "2026-11-01T13:34:23.723308+00:00",
   "sam_vnr": "2026-11-01T15:41:53.360772+00:00",
   "samueletienne": "2026-11-02T10:10:42.670708+00:00",
-  "sapeuh": "2026-11-01T18:56:52.268070+00:00",
+  "sapeuh": "2026-11-02T16:48:06.531879+00:00",
   "sardoche": "2026-11-01T21:55:48.325708+00:00",
   "sartar_": "2026-11-02T10:10:42.670708+00:00",
   "sawpalin": "2026-11-02T10:10:42.670708+00:00",
   "sayonara_93": "2026-10-30T08:23:54.920356+00:00",
-  "sayulaw": "2026-11-02T16:06:50.912374+00:00",
+  "sayulaw": "2026-11-02T16:48:06.531879+00:00",
   "sebjdg": "2026-11-01T21:55:48.325708+00:00",
   "seikoo_rl": "2026-11-02T15:32:49.831240+00:00",
   "selek___": "2026-10-30T18:59:06.087827+00:00",
@@ -4918,7 +4937,7 @@
   "senseilekam": "2026-11-01T13:34:23.723308+00:00",
   "seriouscharly": "2026-11-01T21:55:48.325708+00:00",
   "seyytofn": "2026-11-01T12:34:46.023277+00:00",
-  "shadowwgkd": "2026-11-02T16:06:50.912374+00:00",
+  "shadowwgkd": "2026-11-02T16:48:06.531879+00:00",
   "shaiiko": "2026-10-30T21:57:10.762822+00:00",
   "shaunz": "2026-11-02T10:10:42.670708+00:00",
   "shinii": "2026-10-30T21:57:10.762822+00:00",
@@ -4932,23 +4951,23 @@
   "sinavannn": "2026-10-31T09:45:19.335711+00:00",
   "sir_thomas_": "2026-11-02T10:10:42.670708+00:00",
   "sixentv": "2026-10-31T12:55:19.002790+00:00",
-  "sixquatre": "2026-11-02T16:06:50.912374+00:00",
+  "sixquatre": "2026-11-02T16:48:06.531879+00:00",
   "skilli": "2026-11-02T13:19:47.581512+00:00",
-  "skyrroztv": "2026-11-02T16:06:50.912374+00:00",
+  "skyrroztv": "2026-11-02T16:48:06.531879+00:00",
   "skyyart": "2026-10-31T21:55:18.075941+00:00",
   "skyyart247": "2026-11-01T15:41:53.360772+00:00",
   "slbilal": "2026-11-01T15:41:53.360772+00:00",
   "slhhh_": "2026-11-01T12:34:46.023277+00:00",
   "slipix": "2026-10-30T21:57:10.762822+00:00",
-  "slyders": "2026-11-02T16:06:50.912374+00:00",
+  "slyders": "2026-11-02T16:48:06.531879+00:00",
   "smokeyz76": "2026-11-02T13:19:47.581512+00:00",
   "sol_hms": "2026-10-31T09:45:19.335711+00:00",
   "solary": "2026-10-30T18:59:06.087827+00:00",
-  "solaryhs": "2026-11-02T16:06:50.912374+00:00",
+  "solaryhs": "2026-11-02T16:48:06.531879+00:00",
   "soldierlol_": "2026-10-30T08:23:54.920356+00:00",
   "soon": "2026-11-02T13:19:47.581512+00:00",
   "spilota_": "2026-11-01T13:34:23.723308+00:00",
-  "splinter": "2026-11-02T16:06:50.912374+00:00",
+  "splinter": "2026-11-02T16:48:06.531879+00:00",
   "splouf_": "2026-10-30T08:23:54.920356+00:00",
   "squeezie": "2026-11-01T21:55:48.325708+00:00",
   "srambad_": "2026-11-02T13:19:47.581512+00:00",
@@ -4957,7 +4976,7 @@
   "stazhopper": "2026-10-31T12:55:19.002790+00:00",
   "stizo_": "2026-11-02T10:10:42.670708+00:00",
   "strano": "2026-11-01T21:55:48.325708+00:00",
-  "strey_lol": "2026-11-02T16:06:50.912374+00:00",
+  "strey_lol": "2026-11-02T16:48:06.531879+00:00",
   "stundzow": "2026-10-31T18:56:50.835342+00:00",
   "stupmedia": "2026-11-02T10:10:42.670708+00:00",
   "sturry316": "2026-10-29T23:02:20.869294+00:00",
@@ -4994,11 +5013,11 @@
   "toxidius78": "2026-11-02T13:19:47.581512+00:00",
   "traytonlol": "2026-10-31T21:55:18.075941+00:00",
   "trinity": "2026-11-01T21:55:48.325708+00:00",
-  "triplaxion": "2026-11-02T16:06:50.912374+00:00",
+  "triplaxion": "2026-11-02T16:48:06.531879+00:00",
   "tv1pb": "2026-10-31T21:55:18.075941+00:00",
-  "twiks": "2026-11-02T16:06:50.912374+00:00",
+  "twiks": "2026-11-02T16:48:06.531879+00:00",
   "twincytv": "2026-11-01T21:55:48.325708+00:00",
-  "ultia": "2026-11-01T18:56:52.268070+00:00",
+  "ultia": "2026-11-02T16:48:06.531879+00:00",
   "un33d": "2026-11-01T13:34:23.723308+00:00",
   "unionftouraine": "2026-10-30T18:59:06.087827+00:00",
   "unmondedejeux": "2026-10-30T08:23:54.920356+00:00",
@@ -5007,7 +5026,8 @@
   "varg31": "2026-10-31T15:42:38.645163+00:00",
   "vatira_": "2026-10-29T23:02:20.869294+00:00",
   "vegasvandale": "2026-11-02T15:32:49.831240+00:00",
-  "vicky_spleen": "2026-11-02T16:06:50.912374+00:00",
+  "vengics": "2026-11-02T16:48:06.531879+00:00",
+  "vicky_spleen": "2026-11-02T16:48:06.531879+00:00",
   "viouzz__": "2026-11-01T15:41:53.360772+00:00",
   "vlouue": "2026-10-29T23:02:20.869294+00:00",
   "voltariux": "2026-11-01T13:34:23.723308+00:00",
@@ -5025,8 +5045,8 @@
   "wechahine": "2026-11-01T18:56:52.268070+00:00",
   "wenyn": "2026-10-31T21:55:18.075941+00:00",
   "winamaxsport": "2026-11-02T15:32:49.831240+00:00",
-  "wingo": "2026-11-02T16:06:50.912374+00:00",
-  "wipr": "2026-11-02T16:06:50.912374+00:00",
+  "wingo": "2026-11-02T16:48:06.531879+00:00",
+  "wipr": "2026-11-02T16:48:06.531879+00:00",
   "wissam_xelka": "2026-11-01T18:56:52.268070+00:00",
   "wissksrr": "2026-10-30T21:57:10.762822+00:00",
   "xababtv": "2026-11-02T10:10:42.670708+00:00",
@@ -5034,18 +5054,18 @@
   "xo_trixy": "2026-11-01T21:55:48.325708+00:00",
   "xxantoinedanielxx": "2026-10-31T09:45:19.335711+00:00",
   "yann": "2026-11-02T15:32:49.831240+00:00",
-  "yannex": "2026-11-01T21:55:48.325708+00:00",
+  "yannex": "2026-11-02T16:48:06.531879+00:00",
   "yannock_": "2026-11-01T09:49:48.898202+00:00",
   "yassencore": "2026-11-01T12:34:46.023277+00:00",
   "ydle_le_boomer": "2026-10-30T08:04:48.037353+00:00",
   "yetensone": "2026-10-31T15:42:38.645163+00:00",
   "yoona": "2026-10-31T18:56:50.835342+00:00",
   "yorenzo_10": "2026-11-02T10:10:42.670708+00:00",
-  "youby4": "2026-11-02T16:06:50.912374+00:00",
+  "youby4": "2026-11-02T16:48:06.531879+00:00",
   "youladecadd": "2026-11-02T13:19:47.581512+00:00",
   "yugioh_francais": "2026-11-01T09:22:34.341086+00:00",
   "yugokaa": "2026-10-30T08:23:54.920356+00:00",
-  "yukaino": "2026-11-02T16:06:50.912374+00:00",
+  "yukaino": "2026-11-02T16:48:06.531879+00:00",
   "yumeptitsinge": "2026-10-31T18:56:50.835342+00:00",
   "yunaris__": "2026-10-30T15:58:00.907341+00:00",
   "yunearan": "2026-11-01T13:34:23.723308+00:00",
@@ -5053,23 +5073,23 @@
   "zaboutine": "2026-10-31T21:55:18.075941+00:00",
   "zacknani": "2026-11-01T13:34:23.723308+00:00",
   "zafeel": "2026-11-01T12:34:46.023277+00:00",
-  "zaroide": "2026-11-02T16:06:50.912374+00:00",
+  "zaroide": "2026-11-02T16:48:06.531879+00:00",
   "zawa_prod": "2026-11-01T21:55:48.325708+00:00",
   "zebroetleow": "2026-10-30T21:57:10.762822+00:00",
   "zedking": "2026-10-31T15:42:38.645163+00:00",
   "zeeked": "2026-11-02T15:32:49.831240+00:00",
   "zenkaitv_": "2026-10-31T15:42:38.645163+00:00",
-  "zerator_247": "2026-11-02T16:06:50.912374+00:00",
+  "zerator_247": "2026-11-02T16:48:06.531879+00:00",
   "zerobenef": "2026-11-02T16:06:50.912374+00:00",
   "zesadpanda": "2026-11-01T15:41:53.360772+00:00",
-  "zetfartv": "2026-11-02T16:06:50.912374+00:00",
+  "zetfartv": "2026-11-02T16:48:06.531879+00:00",
   "zoltan": "2026-11-02T10:10:42.670708+00:00",
   "zongoled0z0": "2026-10-31T12:55:19.002790+00:00",
   "zydar": "2026-11-01T18:56:52.268070+00:00",
   "zylewr": "2026-10-31T09:45:19.335711+00:00"
  },
  "version": 1,
- "youtube_cursor": 220,
+ "youtube_cursor": 232,
  "youtube_related": {
   "@alphacast": {
    "at": "2026-11-01T13:34:23.723308+00:00",
@@ -5551,6 +5571,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      19953
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     19965
     ]
    ]
   },
@@ -5558,7 +5582,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 1594,
+   "likes": 1600,
    "published": "2026-10-30T08:58:29+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "À QUELLE VITESSE FAUT-IL GIFLER UN POULET POUR LE FAIRE CUIRE ?",
@@ -5570,6 +5594,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      92911
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     93117
     ]
    ]
   },
@@ -5578,7 +5606,7 @@
    "creator": "tiboinshape",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 25783,
+   "likes": 25818,
    "outcome": "none",
    "published": "2026-10-29T12:36:23+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -5591,6 +5619,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      807949
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     808736
     ]
    ]
   },
@@ -5598,7 +5630,7 @@
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
    "examined": 0,
-   "likes": 2505,
+   "likes": 2540,
    "published": "2026-10-31T11:00:03+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Denis Brogniart et le ragebait 🤣",
@@ -5610,6 +5642,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      130285
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     132490
     ]
    ]
   },
@@ -5617,7 +5653,7 @@
    "channel": "UC4ii4_aeS8iOFzsHuhJTq2w",
    "creator": "poissonfecond42",
    "examined": 0,
-   "likes": 5820,
+   "likes": 5844,
    "published": "2026-10-29T16:31:56+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Toutes Les Orientations Sєxuelles Expliquées (en 22:22)",
@@ -5629,6 +5665,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      220567
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     221264
     ]
    ]
   },
@@ -5636,7 +5676,7 @@
    "channel": "UCoetxEkAQbHlXBv2toas_1A",
    "creator": "kaatsup",
    "examined": 0,
-   "likes": 1433,
+   "likes": 1437,
    "published": "2026-10-30T17:00:21+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Et voilà le nouveau logo !",
@@ -5648,6 +5688,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      54519
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     54615
     ]
    ]
   },
@@ -5667,6 +5711,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      27725
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     27725
     ]
    ]
   },
@@ -5674,7 +5722,7 @@
    "channel": "UC99LgIedzGD1GirhFGldfUQ",
    "creator": "enjoyphoenix",
    "examined": 0,
-   "likes": 423,
+   "likes": 424,
    "published": "2026-10-27T16:00:28+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Mon émission dédiée au paranormal 🥹",
@@ -5686,6 +5734,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      12705
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     12757
     ]
    ]
   },
@@ -5704,6 +5756,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     50021
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      50021
     ]
    ]
@@ -5724,6 +5780,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      14655
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     14655
     ]
    ]
   },
@@ -5731,7 +5791,7 @@
    "channel": "UCZ8kV8vuMdDLSerCIFfWnFQ",
    "creator": "studiobagel",
    "examined": 0,
-   "likes": 387,
+   "likes": 401,
    "published": "2026-11-01T17:00:34+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "d'Éric Judor ne sont pas toujours de rire. 🥹❤️",
@@ -5743,6 +5803,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      20432
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     20990
     ]
    ]
   },
@@ -5761,6 +5825,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     133235
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      133235
     ]
    ]
@@ -5781,14 +5849,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      51576
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     51614
     ]
    ]
   },
   "2frDDzZDNkw": {
    "channel": "UCZ8kV8vuMdDLSerCIFfWnFQ",
    "creator": "studiobagel",
-   "examined": 0,
-   "likes": 48489,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 48514,
+   "outcome": "moments",
    "published": "2026-10-23T15:30:05+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "HOT ONES : Éric Judor est-il le roi du game du piment ?",
@@ -5800,6 +5874,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      4509934
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     4513368
     ]
    ]
   },
@@ -5818,6 +5896,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     14705
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      14705
     ]
    ]
@@ -5838,6 +5920,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      36342
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     36342
     ]
    ]
   },
@@ -5846,7 +5932,7 @@
    "creator": "inoxtag",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 400118,
+   "likes": 402201,
    "outcome": "moments",
    "published": "2026-10-31T13:30:36+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -5859,6 +5945,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      9235669
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     9298640
     ]
    ]
   },
@@ -5866,7 +5956,7 @@
    "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
    "creator": "fantabobgames",
    "examined": 0,
-   "likes": 3354,
+   "likes": 3360,
    "published": "2026-10-29T17:00:29+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "POUR HALLOWEEN, J'AFFRONTE MA PHOBIE !! -CANINE- [DOGGOS]",
@@ -5878,6 +5968,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      121760
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     122060
     ]
    ]
   },
@@ -5897,6 +5991,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      100831
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     100953
     ]
    ]
   },
@@ -5916,6 +6014,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      51475
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     51475
     ]
    ]
   },
@@ -5924,7 +6026,7 @@
    "creator": "amixem",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 78946,
+   "likes": 79970,
    "outcome": "moments",
    "published": "2026-11-01T16:25:00+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -5937,6 +6039,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1848930
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1875355
     ]
    ]
   },
@@ -5944,7 +6050,7 @@
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
    "examined": 0,
-   "likes": 6853,
+   "likes": 6854,
    "published": "2026-10-23T16:00:12+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "SA RÉACTION EST HILARANTE ! (REACT Koh Lanta All Stars) #9",
@@ -5956,6 +6062,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      420609
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     420766
     ]
    ]
   },
@@ -5963,7 +6073,7 @@
    "channel": "UCo3i0nUzZjjLuM7VjAVz4zA",
    "creator": "michou",
    "examined": 0,
-   "likes": 3043,
+   "likes": 3237,
    "published": "2026-11-01T19:30:00+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "MICHOU A CRÉE UNE MAP FORTNITE 😍",
@@ -5975,6 +6085,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      42992
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     44279
     ]
    ]
   },
@@ -5994,6 +6108,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      30951
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     30951
     ]
    ]
   },
@@ -6001,7 +6119,7 @@
    "channel": "UCoaaU-pnL4J7qK7zDil6rgg",
    "creator": "leaeluig",
    "examined": 0,
-   "likes": 9929,
+   "likes": 10234,
    "published": "2026-11-01T16:53:01+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "JE RELOOK GMK (ça tourne mal)",
@@ -6013,6 +6131,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      333819
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     349370
     ]
    ]
   },
@@ -6021,7 +6143,7 @@
    "creator": "wankilfr",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 17487,
+   "likes": 17636,
    "outcome": "moments",
    "published": "2026-11-01T13:00:33+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -6034,6 +6156,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      421388
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     425748
     ]
    ]
   },
@@ -6052,6 +6178,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     4414
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      4414
     ]
    ]
@@ -6072,6 +6202,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      43647
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     43682
     ]
    ]
   },
@@ -6091,6 +6225,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      80987
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     81019
     ]
    ]
   },
@@ -6098,7 +6236,7 @@
    "channel": "UCSJxne19pJyW7l7HjHM-LRg",
    "creator": "zacknani",
    "examined": 0,
-   "likes": 26,
+   "likes": 28,
    "published": "2026-11-02T09:39:39+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Nico réponds à mes questions !👀",
@@ -6110,6 +6248,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2234
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     2487
     ]
    ]
   },
@@ -6117,7 +6259,7 @@
    "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
    "creator": "fantabobgames",
    "examined": 0,
-   "likes": 2426,
+   "likes": 2428,
    "published": "2026-10-26T16:00:04+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "J'AI DIT, TIREZ *TOUS* LES CANONS !! -Wanderburg- [RUN OP]",
@@ -6129,6 +6271,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      75170
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     75246
     ]
    ]
   },
@@ -6147,6 +6293,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     39933
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      39933
     ]
    ]
@@ -6167,6 +6317,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      18507
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     18507
     ]
    ]
   },
@@ -6174,7 +6328,7 @@
    "channel": "UC704-gdkAeYFEjudxRCEAJA",
    "creator": "thekairi78",
    "examined": 0,
-   "likes": 16791,
+   "likes": 16797,
    "published": "2026-10-23T18:00:02+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "4 ANS APRES ... ON A 8H POUR RÉUSSIR UN MAXIMUM DE DÉFIS… LE PERDANT VA REGRETTER !",
@@ -6186,6 +6340,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      425780
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     425991
     ]
    ]
   },
@@ -6193,7 +6351,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 1005,
+   "likes": 1013,
    "published": "2026-10-31T17:23:07+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "QU’EST-IL ARRIVÉ AUX DINOSAURES ?! (TERRIBLES LÉZARDS)",
@@ -6205,6 +6363,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      35164
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     35464
     ]
    ]
   },
@@ -6213,7 +6375,7 @@
    "creator": "docseven",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 4154,
+   "likes": 4193,
    "outcome": "moments",
    "published": "2026-11-01T16:00:17+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -6226,6 +6388,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      200662
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     204151
     ]
    ]
   },
@@ -6233,7 +6399,7 @@
    "channel": "UCDPK_MTu3uTUFJXRVcTJcEw",
    "creator": "mcflyetcarlito",
    "examined": 0,
-   "likes": 5054,
+   "likes": 5055,
    "published": "2026-10-20T15:31:02+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Rire en faisant l'amour : gênant ou pas ? (ft @AdeleCastilIon)",
@@ -6245,6 +6411,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      246608
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     246657
     ]
    ]
   },
@@ -6252,7 +6422,7 @@
    "channel": "UCDPK_MTu3uTUFJXRVcTJcEw",
    "creator": "mcflyetcarlito",
    "examined": 0,
-   "likes": 24009,
+   "likes": 24013,
    "published": "2026-10-22T15:23:50+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Les recos mangas de Carl (Mcfly a envie de tous les lire)",
@@ -6264,6 +6434,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1240289
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1240803
     ]
    ]
   },
@@ -6271,7 +6445,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 1129,
+   "likes": 1143,
    "published": "2026-10-31T10:24:25+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "QUI SERA LE MEILLEUR MENTEUR ? EST DE RETOUR !",
@@ -6283,6 +6457,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      11966
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     12071
     ]
    ]
   },
@@ -6291,7 +6469,7 @@
    "creator": "tiboinshape",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 10943,
+   "likes": 10997,
    "outcome": "moments",
    "published": "2026-10-30T17:21:13+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -6304,6 +6482,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      593930
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     597447
     ]
    ]
   },
@@ -6311,7 +6493,7 @@
    "channel": "UCDPK_MTu3uTUFJXRVcTJcEw",
    "creator": "mcflyetcarlito",
    "examined": 0,
-   "likes": 2610,
+   "likes": 2617,
    "published": "2026-10-28T15:36:48+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "La petite voix dans la tête de Mcfly est..",
@@ -6323,14 +6505,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      94394
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     94562
     ]
    ]
   },
   "7hKpDPpTdCA": {
    "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
    "creator": "fantabobgames",
-   "examined": 0,
-   "likes": 2987,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 3002,
+   "outcome": "moments",
    "published": "2026-10-31T17:00:37+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "VACANCES DE RÊVE EN TERRITOIRE ZOMBIE !! -Quarantine Zone: Miami Zero- [NOUVELLE ZONE]",
@@ -6342,6 +6530,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      137851
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     138739
     ]
    ]
   },
@@ -6361,6 +6553,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      78152
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     78172
     ]
    ]
   },
@@ -6368,7 +6564,7 @@
    "channel": "UCA5sfitizqs1oEbB5KY4uKQ",
    "creator": "aypierre",
    "examined": 0,
-   "likes": 3037,
+   "likes": 3045,
    "published": "2026-10-28T17:00:14+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "La vieille map Minecraft de MrBeast est fausse (la preuve)",
@@ -6380,6 +6576,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      203662
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     204161
     ]
    ]
   },
@@ -6387,7 +6587,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 235,
+   "likes": 236,
    "published": "2026-10-28T18:20:41+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "LEV12 FLANK 💀",
@@ -6399,6 +6599,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      8020
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     8038
     ]
    ]
   },
@@ -6406,7 +6610,7 @@
    "channel": "UCEUZRSYr1a2hnBfnpWslFeQ",
    "creator": "djilsi",
    "examined": 0,
-   "likes": 127468,
+   "likes": 127532,
    "published": "2026-10-24T08:59:19+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "LE DÎNER DE C*NS 4 (ft Mcfly & Carlito, Maxime Biaggi et Théodort)",
@@ -6418,6 +6622,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      5258729
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     5262130
     ]
    ]
   },
@@ -6425,7 +6633,7 @@
    "channel": "UCZ8kV8vuMdDLSerCIFfWnFQ",
    "creator": "studiobagel",
    "examined": 0,
-   "likes": 1579,
+   "likes": 1586,
    "published": "2026-10-30T09:00:17+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Débattre ❌ Se battre ✅",
@@ -6437,6 +6645,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      111940
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     112758
     ]
    ]
   },
@@ -6444,7 +6656,7 @@
    "channel": "UCSJxne19pJyW7l7HjHM-LRg",
    "creator": "zacknani",
    "examined": 0,
-   "likes": 46,
+   "likes": 49,
    "published": "2026-11-02T11:11:05+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Nico se rattrape de sa jeunesse",
@@ -6456,6 +6668,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2781
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     3107
     ]
    ]
   },
@@ -6463,7 +6679,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 4811,
+   "likes": 5122,
    "published": "2026-10-31T10:28:59+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "LES PARENTS EN SUEUR 🥵",
@@ -6475,6 +6691,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      162827
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     166695
     ]
    ]
   },
@@ -6494,6 +6714,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      32762
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     32762
     ]
    ]
   },
@@ -6501,7 +6725,7 @@
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
    "examined": 0,
-   "likes": 13196,
+   "likes": 13210,
    "published": "2026-10-27T07:00:19+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "JE SUIS TROP FORT !",
@@ -6513,6 +6737,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      480852
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     481380
     ]
    ]
   },
@@ -6532,6 +6760,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      70209
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     70407
     ]
    ]
   },
@@ -6551,6 +6783,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      90569
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     90569
     ]
    ]
   },
@@ -6558,7 +6794,7 @@
    "channel": "UCtihF1ZtlYVzoaj_bKLQZ-Q",
    "creator": "natooyt",
    "examined": 0,
-   "likes": 3805,
+   "likes": 3806,
    "published": "2026-10-27T16:45:15+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Le Mystère de Michelle G - (ANNONCE 🐾)",
@@ -6570,14 +6806,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      188875
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     188950
     ]
    ]
   },
   "Au9mA7xZtTg": {
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
-   "examined": 0,
-   "likes": 6216,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 6237,
+   "outcome": "none",
    "published": "2026-10-31T20:08:00+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Un membre des forces de l’ordre a pris feu après un jet de cocktail molotov à Paris",
@@ -6589,6 +6831,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      438781
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     440039
     ]
    ]
   },
@@ -6596,7 +6842,7 @@
    "channel": "UCAhaFPP6v3WCfK5Tjao0B7A",
    "creator": "mastu",
    "examined": 0,
-   "likes": 96995,
+   "likes": 97619,
    "published": "2026-10-31T10:00:09+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "UNDERCOVER NOCTURNE (Avec Michou, Maghla, Anyme, Samuel, Hctuan, Zaf, Leila, Kaatsup, Raska et Doig)",
@@ -6608,6 +6854,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      3244803
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     3268372
     ]
    ]
   },
@@ -6634,7 +6884,7 @@
    "channel": "UCEi0DIwuAQNe68OK_1hAN7w",
    "creator": "antoinedaniel",
    "examined": 0,
-   "likes": 331,
+   "likes": 332,
    "published": "2026-10-24T12:00:27+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "TOUT S'EFFONDRE ! | Crusader Kings 3",
@@ -6646,6 +6896,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      30401
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     30429
     ]
    ]
   },
@@ -6653,7 +6907,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 1049,
+   "likes": 1055,
    "published": "2026-10-31T08:58:38+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "PIÉGÉ DANS UN PARC D'ATTRACTIONS AVEC UNE MASCOTTE MEURTRIÈRE - Giggleland",
@@ -6665,6 +6919,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      35751
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     35871
     ]
    ]
   },
@@ -6672,7 +6930,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 21435,
+   "likes": 21438,
    "published": "2026-10-24T15:30:13+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Notre premier restaurant Starsmash se trouve au 10 rue Palais-Grillet !",
@@ -6684,6 +6942,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      606990
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     607072
     ]
    ]
   },
@@ -6691,7 +6953,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 1999,
+   "likes": 2001,
    "published": "2026-10-31T15:49:30+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Mobilisation du 31 octobre : le cortège s’est élancé dans le calme à Paris",
@@ -6703,6 +6965,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      90330
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     90571
     ]
    ]
   },
@@ -6710,7 +6976,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 1337,
+   "likes": 1348,
    "published": "2026-11-01T08:58:35+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "JE JOUE À ROBLOX DANS ROBLOX.. (Et Ça fonctionne)",
@@ -6722,6 +6988,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      53411
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     53769
     ]
    ]
   },
@@ -6730,7 +7000,7 @@
    "creator": "hugodecrypte",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 8451,
+   "likes": 8513,
    "outcome": "moments",
    "published": "2026-10-31T19:00:16+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -6743,6 +7013,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      650742
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     656223
     ]
    ]
   },
@@ -6762,6 +7036,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      152186
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     152334
     ]
    ]
   },
@@ -6770,7 +7048,7 @@
    "creator": "hugodecrypte",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 24247,
+   "likes": 24301,
    "outcome": "none",
    "published": "2026-10-31T19:34:09+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -6783,6 +7061,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      645913
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     646914
     ]
    ]
   },
@@ -6790,7 +7072,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 45817,
+   "likes": 45993,
    "published": "2026-10-27T16:36:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Fais la bonne taille",
@@ -6802,6 +7084,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      3223325
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     3228171
     ]
    ]
   },
@@ -6809,7 +7095,7 @@
    "channel": "UCbJWraz5h4F-IX2frhqKglQ",
    "creator": "kaydop",
    "examined": 0,
-   "likes": 8627,
+   "likes": 8631,
    "published": "2026-10-24T11:00:06+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "C'est super simple enfaite !! 😅 #Kaydop #twitch #rocketleague #twitchstreamer #rl",
@@ -6821,6 +7107,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      256920
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     257111
     ]
    ]
   },
@@ -6828,7 +7118,7 @@
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
    "examined": 0,
-   "likes": 1817,
+   "likes": 1836,
    "published": "2026-10-31T15:00:04+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Des lunettes dans Koh Lanta ?",
@@ -6840,6 +7130,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      116994
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     118005
     ]
    ]
   },
@@ -6847,7 +7141,7 @@
    "channel": "UCww2zZWg4Cf5xcRKG-ThmXQ",
    "creator": "normanfaitdesvideos",
    "examined": 0,
-   "likes": 379,
+   "likes": 381,
    "published": "2026-10-27T16:12:42+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "VIDÉO COMPLÈTE DISPO SUR MA CHAÎNE 🎃🇫🇷 #halloween",
@@ -6859,6 +7153,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      11995
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     12003
     ]
    ]
   },
@@ -6866,7 +7164,7 @@
    "channel": "UChzNfUfgk7sQ5VOdy2r1Jow",
    "creator": "maghla",
    "examined": 0,
-   "likes": 19897,
+   "likes": 19928,
    "published": "2026-10-26T16:00:24+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Sa tante est devenue sa belle-mère - SIP & GOSSIP #34 (ft. Mayadorable)",
@@ -6878,6 +7176,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      896258
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     897629
     ]
    ]
   },
@@ -6897,6 +7199,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      180974
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     181125
     ]
    ]
   },
@@ -6904,7 +7210,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 32826,
+   "likes": 32871,
    "published": "2026-10-23T15:30:07+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "On goûte du chocolat de luxe 🍫",
@@ -6916,6 +7222,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1342921
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1344379
     ]
    ]
   },
@@ -6923,7 +7233,7 @@
    "channel": "UCSJxne19pJyW7l7HjHM-LRg",
    "creator": "zacknani",
    "examined": 0,
-   "likes": 27,
+   "likes": 31,
    "published": "2026-11-02T11:14:27+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Nico a tourné son docu au Sénégal 🎬",
@@ -6935,6 +7245,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1191
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1351
     ]
    ]
   },
@@ -6942,7 +7256,7 @@
    "channel": "UCAgs5DX2GwZ0uPcFrjec2SA",
    "creator": "lenasituations",
    "examined": 0,
-   "likes": 623,
+   "likes": 624,
    "published": "2026-10-28T11:00:26+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "en photo c'est encore plus drôle 🤣",
@@ -6954,6 +7268,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      8433
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     8440
     ]
    ]
   },
@@ -6961,7 +7279,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 3658,
+   "likes": 3682,
    "published": "2026-10-28T21:08:54+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "INOX A TRAUMATISÉ SQUEEZIE 😂",
@@ -6973,6 +7291,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      138884
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     139783
     ]
    ]
   },
@@ -6980,7 +7302,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 116882,
+   "likes": 116898,
    "published": "2026-10-18T15:25:24+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "ON TESTE DES EXPÉRIENCES TIKTOK EXTRÊMES #2",
@@ -6992,6 +7314,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      4228671
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     4229179
     ]
    ]
   },
@@ -6999,7 +7325,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 974,
+   "likes": 975,
    "published": "2026-10-27T08:58:08+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "DANS CE JEU IL FAUT PÉTER POUR AVANCER MDR... (Fart Together Roblox)",
@@ -7011,6 +7337,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      47671
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     47721
     ]
    ]
   },
@@ -7018,7 +7348,7 @@
    "channel": "UCUl7mwOyySfZzUkq4H29nug",
    "creator": "lebouseuh",
    "examined": 0,
-   "likes": 4089,
+   "likes": 4088,
    "published": "2026-10-24T09:04:40+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Qui a la meilleure transformation Physique ? (Ft. Diego)",
@@ -7030,6 +7360,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      237772
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     237873
     ]
    ]
   },
@@ -7038,7 +7372,7 @@
    "creator": "hugodecrypte",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 315,
+   "likes": 485,
    "outcome": "none",
    "published": "2026-11-02T15:03:02+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -7051,6 +7385,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      4119
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     5834
     ]
    ]
   },
@@ -7058,7 +7396,7 @@
    "channel": "UCWnfDPdZw6A23UtuBpYBbAg",
    "creator": "drnozman",
    "examined": 0,
-   "likes": 22098,
+   "likes": 22117,
    "published": "2026-10-25T09:29:16+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Je me suis fait opérer le genou ! Voici l’opération 😀 merci @drbrunolevy",
@@ -7070,6 +7408,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      524694
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     525229
     ]
    ]
   },
@@ -7077,7 +7419,7 @@
    "channel": "UCAgs5DX2GwZ0uPcFrjec2SA",
    "creator": "lenasituations",
    "examined": 0,
-   "likes": 1995,
+   "likes": 2002,
    "published": "2026-10-30T11:00:38+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "les regards en coin juste avant les Right Round 🤣🤣",
@@ -7089,14 +7431,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      76936
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     77338
     ]
    ]
   },
   "GqL_xGWc7dY": {
    "channel": "UCbJWraz5h4F-IX2frhqKglQ",
    "creator": "kaydop",
-   "examined": 0,
-   "likes": 3446,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 3465,
+   "outcome": "moments",
    "published": "2026-10-31T13:00:14+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "ON ESSAIE DE BATTRE LE MONSTRE ZEN EN 2V1 HORSE !! ( Ma vidéo la plus drôle ?!😂)",
@@ -7108,6 +7456,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      144342
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     145706
     ]
    ]
   },
@@ -7115,7 +7467,7 @@
    "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
    "creator": "fantabobgames",
    "examined": 0,
-   "likes": 2036,
+   "likes": 2037,
    "published": "2026-10-23T14:00:26+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "LE JEU COMPLET EST INCROYABLE !! -Enshrouded- [SORTIE DE LA 1.0]",
@@ -7127,6 +7479,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      169104
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     169173
     ]
    ]
   },
@@ -7134,7 +7490,7 @@
    "channel": "UCDPK_MTu3uTUFJXRVcTJcEw",
    "creator": "mcflyetcarlito",
    "examined": 0,
-   "likes": 8618,
+   "likes": 8621,
    "published": "2026-10-19T16:12:45+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Impossible de résister à la petite voix dans sa tête (ft @AdeleCastilIon)",
@@ -7146,6 +7502,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      290264
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     290358
     ]
    ]
   },
@@ -7153,7 +7513,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 3737,
+   "likes": 3745,
    "published": "2026-10-30T22:28:21+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "“Je ne veux pas être la prochaine minute de silence“ : l’hommage aux victimes de Trappes",
@@ -7165,6 +7525,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      45272
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     45540
     ]
    ]
   },
@@ -7172,7 +7536,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 1089,
+   "likes": 1092,
    "published": "2026-10-31T14:04:05+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Les syndicats étudiants et lycéens appellent à de nouveaux blocages mardi et jeudi prochains",
@@ -7184,6 +7548,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      39040
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     39117
     ]
    ]
   },
@@ -7191,7 +7559,7 @@
    "channel": "UCSJxne19pJyW7l7HjHM-LRg",
    "creator": "zacknani",
    "examined": 0,
-   "likes": 221,
+   "likes": 222,
    "published": "2026-10-31T19:23:35+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Il a tout fait pour faire gagner Mbappé😭",
@@ -7203,14 +7571,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      11757
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     11853
     ]
    ]
   },
   "Ilsy3MwiP4w": {
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
-   "examined": 0,
-   "likes": 13462,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 13679,
+   "outcome": "none",
    "published": "2026-10-31T10:28:01+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "JOYCA SE FAIT ÉTEINDRE PAR DES ENFANTS 😂",
@@ -7222,6 +7596,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      386139
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     390387
     ]
    ]
   },
@@ -7229,7 +7607,7 @@
    "channel": "UCA5sfitizqs1oEbB5KY4uKQ",
    "creator": "aypierre",
    "examined": 0,
-   "likes": 336,
+   "likes": 342,
    "published": "2026-11-01T16:00:10+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "18 MILLIONS de comptes Minecraft en vente ?",
@@ -7241,6 +7619,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      17067
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     17388
     ]
    ]
   },
@@ -7248,7 +7630,7 @@
    "channel": "UCDPK_MTu3uTUFJXRVcTJcEw",
    "creator": "mcflyetcarlito",
    "examined": 0,
-   "likes": 2600,
+   "likes": 2604,
    "published": "2026-10-27T16:41:30+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Mcfly et Carlito, c'est fini...",
@@ -7260,6 +7642,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      81412
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     81601
     ]
    ]
   },
@@ -7278,6 +7664,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     1506
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      1506
     ]
    ]
@@ -7298,6 +7688,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      4056
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     4071
     ]
    ]
   },
@@ -7305,7 +7699,7 @@
    "channel": "UCUl7mwOyySfZzUkq4H29nug",
    "creator": "lebouseuh",
    "examined": 0,
-   "likes": 107,
+   "likes": 117,
    "published": "2026-11-01T22:39:17+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Je teste une Salle de Sport en Corée 🏋🏻‍♀️",
@@ -7317,6 +7711,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      7224
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     7659
     ]
    ]
   },
@@ -7336,6 +7734,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      352262
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     352313
     ]
    ]
   },
@@ -7343,7 +7745,7 @@
    "channel": "UCAgs5DX2GwZ0uPcFrjec2SA",
    "creator": "lenasituations",
    "examined": 0,
-   "likes": 13634,
+   "likes": 13657,
    "published": "2026-10-24T10:00:12+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Cette vidéo de Lena et marcus 🤣🤣",
@@ -7355,6 +7757,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      439882
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     440628
     ]
    ]
   },
@@ -7362,7 +7768,7 @@
    "channel": "UC99LgIedzGD1GirhFGldfUQ",
    "creator": "enjoyphoenix",
    "examined": 0,
-   "likes": 6801,
+   "likes": 6839,
    "published": "2026-10-30T17:00:02+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Il nous a empêchées de sortir... (Enquête paranormale)",
@@ -7374,6 +7780,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      216168
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     217721
     ]
    ]
   },
@@ -7393,6 +7803,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      51389
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     51389
     ]
    ]
   },
@@ -7400,7 +7814,7 @@
    "channel": "UCUl7mwOyySfZzUkq4H29nug",
    "creator": "lebouseuh",
    "examined": 0,
-   "likes": 945,
+   "likes": 950,
    "published": "2026-10-29T22:21:48+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "C'est quoi votre passion ? 😁",
@@ -7412,6 +7826,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      19951
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     20097
     ]
    ]
   },
@@ -7419,7 +7837,7 @@
    "channel": "UCL9aTJb0ur4sovxcppAopEw",
    "creator": "inoxtag",
    "examined": 0,
-   "likes": 17966,
+   "likes": 17968,
    "published": "2026-10-19T23:09:26+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "SOIRÉE AMONG US COMME A L'EPOQUE AVEC MICHOU + FORTNITE",
@@ -7431,6 +7849,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      998051
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     998226
     ]
    ]
   },
@@ -7449,6 +7871,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     106224
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      106224
     ]
    ]
@@ -7469,6 +7895,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      28852
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     28852
     ]
    ]
   },
@@ -7476,7 +7906,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 26682,
+   "likes": 26754,
    "published": "2026-10-29T16:30:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "J'ouvre un colis GTA",
@@ -7488,6 +7918,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      695530
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     697214
     ]
    ]
   },
@@ -7496,7 +7930,7 @@
    "creator": "mcflyetcarlito",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 135,
+   "likes": 426,
    "outcome": "none",
    "published": "2026-11-02T15:47:25+00:00",
    "seen": "2026-11-02T16:06:50.912374+00:00",
@@ -7505,6 +7939,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2845
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     8456
     ]
    ]
   },
@@ -7512,7 +7950,7 @@
    "channel": "UCYGjxo5ifuhnmvhPvCc3DJQ",
    "creator": "wankilfr",
    "examined": 0,
-   "likes": 25433,
+   "likes": 25442,
    "published": "2026-10-28T13:00:02+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "3 SINGES AVEUGLE, SOURD ET MUET (Bombanana)",
@@ -7524,6 +7962,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      713570
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     714338
     ]
    ]
   },
@@ -7531,7 +7973,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 317,
+   "likes": 322,
    "published": "2026-11-01T00:03:07+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "JE SUIS NATURISTE 🫣",
@@ -7543,6 +7985,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      7772
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     7902
     ]
    ]
   },
@@ -7562,6 +8008,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      71923
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     72019
     ]
    ]
   },
@@ -7569,7 +8019,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 13303,
+   "likes": 13313,
    "published": "2026-10-28T18:24:09+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "250kg développé couché !! ✅",
@@ -7581,6 +8031,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      477538
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     477636
     ]
    ]
   },
@@ -7588,7 +8042,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 2161,
+   "likes": 2167,
    "published": "2026-10-27T11:40:34+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Les électrolytes à quoi ça sert ? 💦￼",
@@ -7600,6 +8054,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      46751
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     46774
     ]
    ]
   },
@@ -7607,7 +8065,7 @@
    "channel": "UCDB1PaqiausfXbVI2Jjk0iQ",
    "creator": "ninjaxx",
    "examined": 0,
-   "likes": 10547,
+   "likes": 10552,
    "published": "2026-10-22T16:00:20+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "JE TEST LES MODS LES PLUS CHER DE MINECRAFT.. (c'est abusé)",
@@ -7619,6 +8077,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      286799
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     286980
     ]
    ]
   },
@@ -7626,7 +8088,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 34663,
+   "likes": 34665,
    "published": "2026-10-22T15:30:09+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Devine la voiture",
@@ -7638,6 +8100,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1425557
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1425630
     ]
    ]
   },
@@ -7646,7 +8112,7 @@
    "creator": "ninjaxx",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 9514,
+   "likes": 9569,
    "outcome": "moments",
    "published": "2026-10-31T17:00:04+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -7659,6 +8125,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      228467
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     229549
     ]
    ]
   },
@@ -7666,7 +8136,7 @@
    "channel": "UCzjd9v6DMprAAvOBB4sxBPA",
    "creator": "legrandjd",
    "examined": 0,
-   "likes": 1438,
+   "likes": 1444,
    "published": "2026-10-30T16:45:13+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Ce Geoguessr est trop fort!!",
@@ -7678,6 +8148,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      34703
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     34917
     ]
    ]
   },
@@ -7697,6 +8171,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      74985
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     75081
     ]
    ]
   },
@@ -7716,6 +8194,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      48953
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     49017
     ]
    ]
   },
@@ -7723,7 +8205,7 @@
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
    "examined": 0,
-   "likes": 1618,
+   "likes": 1624,
    "published": "2026-10-28T15:00:26+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "La PIRE nuit de notre vie 😱",
@@ -7735,6 +8217,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      93654
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     93929
     ]
    ]
   },
@@ -7754,6 +8240,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      63407
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     63447
     ]
    ]
   },
@@ -7761,7 +8251,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 25877,
+   "likes": 25977,
    "published": "2026-10-28T16:30:16+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "On teste 3 expériences insolites #4",
@@ -7773,6 +8263,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      992100
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     995629
     ]
    ]
   },
@@ -7792,6 +8286,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1203
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1212
     ]
    ]
   },
@@ -7799,7 +8297,7 @@
    "channel": "UCUl7mwOyySfZzUkq4H29nug",
    "creator": "lebouseuh",
    "examined": 0,
-   "likes": 2416,
+   "likes": 2418,
    "published": "2026-10-25T10:44:48+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Inoxtag arrête la muscu ❌",
@@ -7811,6 +8309,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      141364
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     141452
     ]
    ]
   },
@@ -7818,7 +8320,7 @@
    "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
    "creator": "fantabobgames",
    "examined": 0,
-   "likes": 2284,
+   "likes": 2300,
    "published": "2026-10-30T17:00:24+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "L'ENFER DE LA BUREAUCRATIE !! -Red Tape- [LAISSEZ-PASSER A38]",
@@ -7830,6 +8332,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      84924
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     85176
     ]
    ]
   },
@@ -7837,7 +8343,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 5562,
+   "likes": 5583,
    "published": "2026-10-29T10:53:23+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Froidement 😂",
@@ -7849,6 +8355,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      272815
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     273853
     ]
    ]
   },
@@ -7856,7 +8366,7 @@
    "channel": "UCUl7mwOyySfZzUkq4H29nug",
    "creator": "lebouseuh",
    "examined": 0,
-   "likes": 530,
+   "likes": 540,
    "published": "2026-11-01T11:12:24+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Le physique de Djayson Karavane 💪🏼",
@@ -7868,6 +8378,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      22861
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     23319
     ]
    ]
   },
@@ -7887,14 +8401,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      25205
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     25205
     ]
    ]
   },
   "P2bTaahClso": {
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
-   "examined": 0,
-   "likes": 5965,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 5987,
+   "outcome": "moments",
    "published": "2026-10-30T17:00:28+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "IL VA RETOURNER LE JEU ! (REACT Koh Lanta All Stars) #10",
@@ -7906,6 +8426,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      328660
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     329870
     ]
    ]
   },
@@ -7913,7 +8437,7 @@
    "channel": "UCDB1PaqiausfXbVI2Jjk0iQ",
    "creator": "ninjaxx",
    "examined": 0,
-   "likes": 8448,
+   "likes": 8451,
    "published": "2026-10-24T16:00:34+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Ce mod me permet d'OUVRIR N'IMPORTE QUOI sur Minecraft..",
@@ -7925,6 +8449,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      254510
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     254609
     ]
    ]
   },
@@ -7944,6 +8472,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      31336
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     31336
     ]
    ]
   },
@@ -7951,7 +8483,7 @@
    "channel": "UCUl7mwOyySfZzUkq4H29nug",
    "creator": "lebouseuh",
    "examined": 0,
-   "likes": 2143,
+   "likes": 2152,
    "published": "2026-10-28T22:47:16+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Valouzz va quitter la France ? 😶",
@@ -7963,6 +8495,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      124581
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     124988
     ]
    ]
   },
@@ -7982,6 +8518,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      37927
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     37927
     ]
    ]
   },
@@ -7989,7 +8529,7 @@
    "channel": "UCww2zZWg4Cf5xcRKG-ThmXQ",
    "creator": "normanfaitdesvideos",
    "examined": 0,
-   "likes": 581,
+   "likes": 580,
    "published": "2026-10-31T09:50:01+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Bonne fête de la VEILLE DE LA TOUSSAINT ! Qui fête cela malgré l’ambiance peu adéquate ? #halloween",
@@ -8001,6 +8541,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      23856
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     23989
     ]
    ]
   },
@@ -8008,7 +8552,7 @@
    "channel": "UC4ii4_aeS8iOFzsHuhJTq2w",
    "creator": "poissonfecond42",
    "examined": 0,
-   "likes": 11313,
+   "likes": 11315,
    "published": "2026-10-22T15:00:11+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "L’iceberg des morts les plus absurdes !",
@@ -8020,6 +8564,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      783007
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     783388
     ]
    ]
   },
@@ -8039,6 +8587,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      6485
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     6485
     ]
    ]
   },
@@ -8046,7 +8598,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 2294,
+   "likes": 2305,
    "published": "2026-10-30T16:50:32+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Retour à la réalité 😭",
@@ -8058,6 +8610,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      112420
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     113284
     ]
    ]
   },
@@ -8065,7 +8621,7 @@
    "channel": "UCbJWraz5h4F-IX2frhqKglQ",
    "creator": "kaydop",
    "examined": 0,
-   "likes": 15621,
+   "likes": 15628,
    "published": "2026-10-19T18:30:12+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Ca c'est fait !🤣 #Kaydop #twitch #rocketleague #twitchstreamer #rl",
@@ -8077,6 +8633,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      352963
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     353119
     ]
    ]
   },
@@ -8084,7 +8644,7 @@
    "channel": "UCNigJTVnMU8F3n08pYz0UYw",
    "creator": "aminematue",
    "examined": 0,
-   "likes": 6868,
+   "likes": 6869,
    "published": "2026-10-24T11:38:33+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "JE VAIS METTRE FIN À LA CARRIÈRE DE SQUEEZIE.",
@@ -8096,6 +8656,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      422730
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     422796
     ]
    ]
   },
@@ -8103,7 +8667,7 @@
    "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
    "creator": "fantabobgames",
    "examined": 0,
-   "likes": 1843,
+   "likes": 1845,
    "published": "2026-10-27T17:00:27+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "LA VENGEANCE DES CLONES !! -Crime Scene Cleaner- [VRAI FINAL]",
@@ -8115,6 +8679,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      90908
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     91011
     ]
    ]
   },
@@ -8122,7 +8690,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 7249,
+   "likes": 7251,
    "published": "2026-10-30T12:33:18+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "250kg au développé couché la preuve !! ✅",
@@ -8134,6 +8702,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      177094
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     177239
     ]
    ]
   },
@@ -8141,7 +8713,7 @@
    "channel": "UCDB1PaqiausfXbVI2Jjk0iQ",
    "creator": "ninjaxx",
    "examined": 0,
-   "likes": 6079,
+   "likes": 6085,
    "published": "2026-10-29T17:00:48+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Finir Minecraft en récupérant le LAIT des MOBS.. (un peu chelou)",
@@ -8153,6 +8725,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      143518
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     143665
     ]
    ]
   },
@@ -8172,6 +8748,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      11060
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     11116
     ]
    ]
   },
@@ -8191,6 +8771,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      27150
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     27150
     ]
    ]
   },
@@ -8198,7 +8782,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 656,
+   "likes": 666,
    "published": "2026-10-31T11:58:24+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "ENFERMER dans 50 Obby Effrayant Mr. Funny Dummy, Barry's Prison, Rainbow Friends...",
@@ -8210,6 +8794,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      27207
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     27325
     ]
    ]
   },
@@ -8217,7 +8805,7 @@
    "channel": "UCWnfDPdZw6A23UtuBpYBbAg",
    "creator": "drnozman",
    "examined": 0,
-   "likes": 14086,
+   "likes": 14145,
    "published": "2026-10-30T16:59:52+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Les monstres marins les plus effrayants !",
@@ -8229,6 +8817,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      768402
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     771092
     ]
    ]
   },
@@ -8236,7 +8828,7 @@
    "channel": "UCA5sfitizqs1oEbB5KY4uKQ",
    "creator": "aypierre",
    "examined": 0,
-   "likes": 725,
+   "likes": 726,
    "published": "2026-10-30T17:00:20+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Serveur Minecraft : des hackers scannent ton IP",
@@ -8248,6 +8840,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      29910
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     29984
     ]
    ]
   },
@@ -8255,7 +8851,7 @@
    "channel": "UCL9aTJb0ur4sovxcppAopEw",
    "creator": "inoxtag",
    "examined": 0,
-   "likes": 62564,
+   "likes": 62572,
    "published": "2026-10-24T21:06:50+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "BACK TO OG : TOURNOI FORTNITE à 100 000 € de Cashprize",
@@ -8267,6 +8863,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2808545
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     2809147
     ]
    ]
   },
@@ -8286,6 +8886,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      169962
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     169969
     ]
    ]
   },
@@ -8293,7 +8897,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 1171,
+   "likes": 1176,
    "published": "2026-10-31T14:01:01+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "La skippeuse Violette Dorange m’envoie une vidéo en direct de son bateau pour la Route du Rhum",
@@ -8305,6 +8909,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      22961
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     23041
     ]
    ]
   },
@@ -8312,7 +8920,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 3060,
+   "likes": 3065,
    "published": "2026-10-27T13:54:08+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Pyramid one arm pushup challenge !! 🔥",
@@ -8324,6 +8932,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      87481
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     87580
     ]
    ]
   },
@@ -8331,7 +8943,7 @@
    "channel": "UCEi0DIwuAQNe68OK_1hAN7w",
    "creator": "antoinedaniel",
    "examined": 0,
-   "likes": 415,
+   "likes": 416,
    "published": "2026-10-18T12:00:25+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "LE FAN CLUB DE JUJUK | Legion Was Here",
@@ -8343,6 +8955,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      39158
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     39172
     ]
    ]
   },
@@ -8361,6 +8977,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     45642
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      45642
     ]
    ]
@@ -8384,7 +9004,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 1463,
+   "likes": 1466,
    "published": "2026-10-29T08:58:37+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Un TSUNAMI GÉANT Frappe la Plage – Comment Survivre à une Catastrophe Naturelle",
@@ -8396,6 +9016,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      71374
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     71494
     ]
    ]
   },
@@ -8415,6 +9039,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      4158
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     4191
     ]
    ]
   },
@@ -8434,6 +9062,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      33347
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     33345
     ]
    ]
   },
@@ -8441,7 +9073,7 @@
    "channel": "UCDPK_MTu3uTUFJXRVcTJcEw",
    "creator": "mcflyetcarlito",
    "examined": 0,
-   "likes": 22462,
+   "likes": 22471,
    "published": "2026-10-18T17:23:42+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Carlito est plus séduisant que Mcfly ? (ft @AdeleCastilIon)",
@@ -8453,6 +9085,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1236598
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1237167
     ]
    ]
   },
@@ -8460,7 +9096,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 1785,
+   "likes": 1791,
    "published": "2026-10-31T18:23:04+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Qui protège le pape ?? 😱",
@@ -8472,6 +9108,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      23452
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     23535
     ]
    ]
   },
@@ -8490,6 +9130,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     9911
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      9911
     ]
    ]
@@ -8510,6 +9154,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      30332
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     30332
     ]
    ]
   },
@@ -8517,7 +9165,7 @@
    "channel": "UCNigJTVnMU8F3n08pYz0UYw",
    "creator": "aminematue",
    "examined": 0,
-   "likes": 19569,
+   "likes": 19582,
    "published": "2026-10-25T17:00:06+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "IL A ÉPOUSÉ LE DIABLE ?! - 3 mois pour se marier (saison 7) #3",
@@ -8529,6 +9177,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      848731
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     849260
     ]
    ]
   },
@@ -8536,7 +9188,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 1332,
+   "likes": 1333,
    "published": "2026-10-28T11:38:27+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Je Suis Devenu un POISSON et je dois M'ÉVADER de Mon BOCAL vers la MER !",
@@ -8548,6 +9200,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      48931
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     48971
     ]
    ]
   },
@@ -8555,7 +9211,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 7189,
+   "likes": 7237,
    "published": "2026-10-20T15:30:33+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Qui mettra tous les blocs ? #2",
@@ -8567,6 +9223,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      286435
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     287755
     ]
    ]
   },
@@ -8574,7 +9234,7 @@
    "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
    "creator": "fantabobgames",
    "examined": 0,
-   "likes": 2423,
+   "likes": 2425,
    "published": "2026-10-25T15:00:40+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "LE RETOUR DES FOUS RIRES GÉNÉALOGIQUES !! -Noble- [NOUVELLE MAJ]",
@@ -8586,6 +9246,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      121015
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     121170
     ]
    ]
   },
@@ -8593,7 +9257,7 @@
    "channel": "UCwsttsWPse6KzUzUbQDGRPA",
    "creator": "maximebiaggi",
    "examined": 0,
-   "likes": 23308,
+   "likes": 23555,
    "published": "2026-10-31T19:14:46+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "L'histoire de l'homme qui pouvait prédire la mort…",
@@ -8605,6 +9269,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      745225
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     751987
     ]
    ]
   },
@@ -8624,6 +9292,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      214925
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     214925
     ]
    ]
   },
@@ -8632,7 +9304,7 @@
    "creator": "zacknani",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 108,
+   "likes": 121,
    "outcome": "none",
    "published": "2026-11-02T11:16:01+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -8645,6 +9317,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      5545
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     6573
     ]
    ]
   },
@@ -8664,6 +9340,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      245632
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     245632
     ]
    ]
   },
@@ -8672,7 +9352,7 @@
    "creator": "zerator",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 785,
+   "likes": 795,
    "outcome": "none",
    "published": "2026-11-01T17:00:36+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -8685,6 +9365,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      37911
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     38934
     ]
    ]
   },
@@ -8693,7 +9377,7 @@
    "creator": "lebouseuh",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 5727,
+   "likes": 5775,
    "outcome": "moments",
    "published": "2026-10-31T10:29:23+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -8706,6 +9390,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      299453
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     302387
     ]
    ]
   },
@@ -8725,6 +9413,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      18185
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     18217
     ]
    ]
   },
@@ -8733,7 +9425,7 @@
    "creator": "gotaga",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 73989,
+   "likes": 74773,
    "outcome": "moments",
    "published": "2026-10-31T10:00:03+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -8746,6 +9438,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2773522
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     2802783
     ]
    ]
   },
@@ -8754,7 +9450,7 @@
    "creator": "legrandjd",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 16768,
+   "likes": 16779,
    "outcome": "moments",
    "published": "2026-10-25T17:15:19+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -8767,6 +9463,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      965748
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     966846
     ]
    ]
   },
@@ -8785,6 +9485,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     43625
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      43625
     ]
    ]
@@ -8809,7 +9513,7 @@
    "creator": "kaydop",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 3786,
+   "likes": 3831,
    "outcome": "none",
    "published": "2026-11-01T12:00:14+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -8822,6 +9526,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      95696
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     97023
     ]
    ]
   },
@@ -8829,7 +9537,7 @@
    "channel": "UCEi0DIwuAQNe68OK_1hAN7w",
    "creator": "antoinedaniel",
    "examined": 0,
-   "likes": 198,
+   "likes": 199,
    "published": "2026-10-31T13:00:24+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "ÇA SE PASSE MAL | Probably Stolen",
@@ -8841,6 +9549,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      26559
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     26696
     ]
    ]
   },
@@ -8848,7 +9560,7 @@
    "channel": "UC99LgIedzGD1GirhFGldfUQ",
    "creator": "enjoyphoenix",
    "examined": 0,
-   "likes": 2764,
+   "likes": 2766,
    "published": "2026-10-23T16:00:43+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Ils ont failli y rester ! - LBDLO #21 (ft. @TIMONTHEGRAM)",
@@ -8860,6 +9572,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      133668
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     133921
     ]
    ]
   },
@@ -8867,7 +9583,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 1806,
+   "likes": 1809,
    "published": "2026-10-26T11:59:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Comment gérer les méchants commentaires avec Giuseppe ! 🥵",
@@ -8879,6 +9595,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      49776
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     49803
     ]
    ]
   },
@@ -8898,6 +9618,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      183512
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     183605
     ]
    ]
   },
@@ -8905,7 +9629,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 197812,
+   "likes": 197922,
    "published": "2026-10-25T16:25:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "DEVINE QUI TU ES #4 ft. CYPRIEN",
@@ -8917,6 +9641,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      6347920
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     6352355
     ]
    ]
   },
@@ -8936,6 +9664,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      35943
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     35963
     ]
    ]
   },
@@ -8954,6 +9686,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     31702
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      31702
     ]
    ]
@@ -8974,6 +9710,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      55959
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     55959
     ]
    ]
   },
@@ -8981,7 +9721,7 @@
    "channel": "UCNigJTVnMU8F3n08pYz0UYw",
    "creator": "aminematue",
    "examined": 0,
-   "likes": 8924,
+   "likes": 8936,
    "published": "2026-10-28T13:30:08+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "SQUEEZIE M'EXPLOSE SUR UNE TABLE ?! - Face Off Final Slam",
@@ -8993,6 +9733,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      611691
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     612739
     ]
    ]
   },
@@ -9012,14 +9756,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      40339
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     40339
     ]
    ]
   },
   "adZKIJzWyoE": {
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
-   "examined": 0,
-   "likes": 1458,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 1485,
+   "outcome": "none",
    "published": "2026-11-01T11:50:38+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "CRASH de voitures dans le défi de 15 portes mystérieuses dans BeamNG Drive Mods !",
@@ -9031,6 +9781,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      44522
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     44992
     ]
    ]
   },
@@ -9038,7 +9792,7 @@
    "channel": "UCwsttsWPse6KzUzUbQDGRPA",
    "creator": "maximebiaggi",
    "examined": 0,
-   "likes": 62815,
+   "likes": 62845,
    "published": "2026-10-25T10:38:20+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Qui aura la scène piégée ? (ft Eric Judor, Alexandra Lamy)",
@@ -9050,6 +9804,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      3565470
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     3567807
     ]
    ]
   },
@@ -9057,7 +9815,7 @@
    "channel": "UCKq9JxyISqBHDd-fXfV3QtQ",
    "creator": "fastgoodcuisine",
    "examined": 0,
-   "likes": 7610,
+   "likes": 7621,
    "published": "2026-10-29T16:51:11+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "1 000 000 de Scoville Tenders Challenge 🐔🔥",
@@ -9069,14 +9827,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      259657
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     260125
     ]
    ]
   },
   "bY0h_Wg0_v4": {
    "channel": "UCoetxEkAQbHlXBv2toas_1A",
    "creator": "kaatsup",
-   "examined": 0,
-   "likes": 862,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 872,
+   "outcome": "none",
    "published": "2026-11-01T16:15:07+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "FOKUS TRAILER OFFICIEL",
@@ -9088,6 +9852,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      17286
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     17724
     ]
    ]
   },
@@ -9106,6 +9874,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     275388
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      275388
     ]
    ]
@@ -9126,6 +9898,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      56239
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     56239
     ]
    ]
   },
@@ -9133,7 +9909,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 6392,
+   "likes": 6429,
    "published": "2026-10-29T11:50:35+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "L’avenir est ... 😱",
@@ -9145,6 +9921,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      321410
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     323143
     ]
    ]
   },
@@ -9152,7 +9932,7 @@
    "channel": "UCbJWraz5h4F-IX2frhqKglQ",
    "creator": "kaydop",
    "examined": 0,
-   "likes": 5503,
+   "likes": 5504,
    "published": "2026-10-23T19:14:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Moi je reviens au prime sous UE6 😎 #Kaydop #twitch #rocketleague #twitchstreamer #rl",
@@ -9164,14 +9944,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      194281
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     194364
     ]
    ]
   },
   "bzNkEra9BF8": {
    "channel": "UCwa-qCAFghXwkcQvLadzRxQ",
    "creator": "siphano13",
-   "examined": 0,
-   "likes": 2432,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 2445,
+   "outcome": "none",
    "published": "2026-10-30T16:00:07+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "L'ICEBERG DE ZELDA BREATH OF THE WILD",
@@ -9183,6 +9969,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      67977
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     68492
     ]
    ]
   },
@@ -9190,7 +9980,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 3468,
+   "likes": 3471,
    "published": "2026-10-26T11:58:56+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "La communauté running c'est la pire !! 💀",
@@ -9202,6 +9992,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      145171
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     145375
     ]
    ]
   },
@@ -9209,7 +10003,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 7121,
+   "likes": 7130,
    "published": "2026-10-27T18:36:23+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Stop this lazy generation !! 😡",
@@ -9221,6 +10015,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      244327
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     245688
     ]
    ]
   },
@@ -9229,7 +10027,7 @@
    "creator": "tiboinshape",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 9560,
+   "likes": 9632,
    "outcome": "none",
    "published": "2026-11-01T10:33:47+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -9242,6 +10040,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      353393
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     355400
     ]
    ]
   },
@@ -9249,7 +10051,7 @@
    "channel": "UCkGpd4_4UAn53ZXcUf1JyFA",
    "creator": "florianonair",
    "examined": 0,
-   "likes": 1825,
+   "likes": 1826,
    "published": "2026-10-19T16:00:32+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "JAPONAIS à VOLONTÉ HAUT de GAMME : ARNAQUE ou BON PLAN ?",
@@ -9261,6 +10063,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      104861
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     104896
     ]
    ]
   },
@@ -9268,7 +10074,7 @@
    "channel": "UCL9aTJb0ur4sovxcppAopEw",
    "creator": "inoxtag",
    "examined": 0,
-   "likes": 47648,
+   "likes": 47658,
    "published": "2026-10-27T22:41:44+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "CROUTON GAME SHOW AVEC MICHOU, VALOUZZ, LEBOUSEUH, DJEUNA ET DOBBY",
@@ -9280,6 +10086,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2339338
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     2340356
     ]
    ]
   },
@@ -9298,6 +10108,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     39724
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      39724
     ]
    ]
@@ -9318,6 +10132,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      454
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     505
     ]
    ]
   },
@@ -9325,7 +10143,7 @@
    "channel": "UCKq9JxyISqBHDd-fXfV3QtQ",
    "creator": "fastgoodcuisine",
    "examined": 0,
-   "likes": 20280,
+   "likes": 20293,
    "published": "2026-10-24T10:48:55+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "1$ VS 1000$ Meal by a Chef 👨‍🍳",
@@ -9337,6 +10155,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      784164
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     784642
     ]
    ]
   },
@@ -9344,7 +10166,7 @@
    "channel": "UCohF8alLa6o1Pgm_38hcHEQ",
    "creator": "rivenzi_",
    "examined": 0,
-   "likes": 6337,
+   "likes": 6340,
    "published": "2026-10-19T16:00:28+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Léonard de Vinci, un faux génie ?",
@@ -9356,6 +10178,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      414979
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     415091
     ]
    ]
   },
@@ -9363,7 +10189,7 @@
    "channel": "UCoetxEkAQbHlXBv2toas_1A",
    "creator": "kaatsup",
    "examined": 0,
-   "likes": 729,
+   "likes": 731,
    "published": "2026-10-31T17:00:20+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Joyeux Halloween 🎃",
@@ -9375,6 +10201,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      9501
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     9550
     ]
    ]
   },
@@ -9394,6 +10224,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      110918
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     110932
     ]
    ]
   },
@@ -9401,7 +10235,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 5435,
+   "likes": 5446,
    "published": "2026-10-30T19:01:12+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Ce qui pourrait se passer aujourd'hui",
@@ -9413,6 +10247,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      468074
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     468556
     ]
    ]
   },
@@ -9432,6 +10270,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      162066
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     162150
     ]
    ]
   },
@@ -9439,7 +10281,7 @@
    "channel": "UCDB1PaqiausfXbVI2Jjk0iQ",
    "creator": "ninjaxx",
    "examined": 0,
-   "likes": 13020,
+   "likes": 13033,
    "published": "2026-10-27T16:00:38+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Je n'aurais JAMAIS dû ADOPTER cet OISEAU FLIPPANT sur Minecraft..",
@@ -9451,6 +10293,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      409689
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     410109
     ]
    ]
   },
@@ -9459,7 +10305,7 @@
    "creator": "mcflyetcarlito",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 44494,
+   "likes": 44534,
    "outcome": "none",
    "published": "2026-10-26T15:17:51+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -9472,6 +10318,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1255526
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1256649
     ]
    ]
   },
@@ -9479,7 +10329,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 939,
+   "likes": 1021,
    "published": "2026-11-02T08:47:55+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Après les vacances, les blocus lycéens se poursuivent",
@@ -9491,6 +10341,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      21303
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     23074
     ]
    ]
   },
@@ -9510,14 +10364,20 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      37279
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     37275
     ]
    ]
   },
   "efB4Oy1PgfU": {
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
-   "examined": 0,
-   "likes": 10957,
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 11430,
+   "outcome": "none",
    "published": "2026-10-31T10:33:01+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "DJILSI DANS LA PEAU D'UNE DRAG QUEEN 🫣",
@@ -9529,6 +10389,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      260055
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     265285
     ]
    ]
   },
@@ -9536,7 +10400,7 @@
    "channel": "UCkGpd4_4UAn53ZXcUf1JyFA",
    "creator": "florianonair",
    "examined": 0,
-   "likes": 1261,
+   "likes": 1262,
    "published": "2026-10-30T17:00:16+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "COUSCOUS XXL avec la STAR du KEBAB !",
@@ -9548,6 +10412,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      79575
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     79872
     ]
    ]
   },
@@ -9555,7 +10423,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 636,
+   "likes": 747,
    "published": "2026-11-02T10:42:25+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Très heureux de vous l’annoncer. 🥹",
@@ -9567,6 +10435,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      9192
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     10295
     ]
    ]
   },
@@ -9575,7 +10447,7 @@
    "creator": "tiboinshape",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 7233,
+   "likes": 7260,
    "outcome": "none",
    "published": "2026-10-31T18:29:06+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -9588,6 +10460,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      152669
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     152915
     ]
    ]
   },
@@ -9607,6 +10483,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      11192
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     11192
     ]
    ]
   },
@@ -9614,7 +10494,7 @@
    "channel": "UCUl7mwOyySfZzUkq4H29nug",
    "creator": "lebouseuh",
    "examined": 0,
-   "likes": 6128,
+   "likes": 6132,
    "published": "2026-10-21T19:54:56+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Le Physique d'Inox est impressionant 😧",
@@ -9626,6 +10506,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      326741
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     326892
     ]
    ]
   },
@@ -9645,6 +10529,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      392842
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     392930
     ]
    ]
   },
@@ -9664,6 +10552,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      42301
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     42356
     ]
    ]
   },
@@ -9671,7 +10563,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 961,
+   "likes": 973,
    "published": "2026-11-01T16:18:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Le gourmand 😭",
@@ -9683,6 +10575,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      54584
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     55286
     ]
    ]
   },
@@ -9702,6 +10598,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      23257
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     23257
     ]
    ]
   },
@@ -9709,7 +10609,7 @@
    "channel": "UCB9gfNOymNLIm5J8lf4MhtA",
    "creator": "sylvainlyve",
    "examined": 0,
-   "likes": 74851,
+   "likes": 74971,
    "published": "2026-10-29T17:15:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "J'essaye TOUTES les TWINGO",
@@ -9721,6 +10621,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2370020
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     2375898
     ]
    ]
   },
@@ -9728,7 +10632,7 @@
    "channel": "UCDPK_MTu3uTUFJXRVcTJcEw",
    "creator": "mcflyetcarlito",
    "examined": 0,
-   "likes": 42409,
+   "likes": 42419,
    "published": "2026-10-20T15:23:26+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Tournage improvisé avec le génial Benjamin Lavernhe",
@@ -9740,6 +10644,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1762415
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1762854
     ]
    ]
   },
@@ -9759,6 +10667,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      71364
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     71364
     ]
    ]
   },
@@ -9766,7 +10678,7 @@
    "channel": "UCNigJTVnMU8F3n08pYz0UYw",
    "creator": "aminematue",
    "examined": 0,
-   "likes": 23156,
+   "likes": 23161,
    "published": "2026-10-18T16:13:23+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "ELLE TROMPE SON MARI AVEC UN YOUTUBEUR ?! - 3 mois pour se marier (saison 7) #2",
@@ -9778,6 +10690,27 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1429125
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1429462
+    ]
+   ]
+  },
+  "gcpfW4JHh9Q": {
+   "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
+   "creator": "tiboinshape",
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 936,
+   "outcome": "none",
+   "published": "2026-11-02T16:00:04+00:00",
+   "seen": "2026-11-02T16:48:06.531879+00:00",
+   "title": "Ce médecin connait tous mes muscles !! 💪",
+   "views": [
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     9903
     ]
    ]
   },
@@ -9785,7 +10718,7 @@
    "channel": "UCoetxEkAQbHlXBv2toas_1A",
    "creator": "kaatsup",
    "examined": 0,
-   "likes": 556,
+   "likes": 557,
    "published": "2026-10-29T17:00:21+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Fokus Leïla ???",
@@ -9797,6 +10730,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      22501
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     22528
     ]
    ]
   },
@@ -9816,6 +10753,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      10597
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     10662
     ]
    ]
   },
@@ -9823,7 +10764,7 @@
    "channel": "UCYGjxo5ifuhnmvhPvCc3DJQ",
    "creator": "wankilfr",
    "examined": 0,
-   "likes": 52526,
+   "likes": 52551,
    "published": "2026-10-25T13:00:15+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "ON RÉAGIT À NOS VIDÉOS IA... C'EST HORRIBLE",
@@ -9835,6 +10776,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1546966
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1547858
     ]
    ]
   },
@@ -9842,7 +10787,7 @@
    "channel": "UCo3i0nUzZjjLuM7VjAVz4zA",
    "creator": "michou",
    "examined": 0,
-   "likes": 43482,
+   "likes": 43496,
    "published": "2026-10-24T17:09:11+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "MICHOU AFFRONTE UN ENFANT EN GAINAGE 🫪",
@@ -9854,6 +10799,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      959424
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     959622
     ]
    ]
   },
@@ -9873,6 +10822,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      82282
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     82283
     ]
    ]
   },
@@ -9880,7 +10833,7 @@
    "channel": "UCB9gfNOymNLIm5J8lf4MhtA",
    "creator": "sylvainlyve",
    "examined": 0,
-   "likes": 118388,
+   "likes": 118403,
    "published": "2026-10-22T16:15:18+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Rouler SANS Suspensions : ça fait quoi ?",
@@ -9892,6 +10845,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      3177691
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     3178476
     ]
    ]
   },
@@ -9911,6 +10868,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      208092
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     208092
     ]
    ]
   },
@@ -9918,7 +10879,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 407,
+   "likes": 414,
    "published": "2026-10-31T23:56:14+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "5 EXPERTS MUSCU VS THEODORT 😭",
@@ -9930,6 +10891,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      10983
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     11092
     ]
    ]
   },
@@ -9937,7 +10902,7 @@
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
    "examined": 0,
-   "likes": 965,
+   "likes": 969,
    "published": "2026-11-01T07:00:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Les votes dans Koh Lanta",
@@ -9949,6 +10914,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      53576
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     53979
     ]
    ]
   },
@@ -9956,7 +10925,7 @@
    "channel": "UCYGjxo5ifuhnmvhPvCc3DJQ",
    "creator": "wankilfr",
    "examined": 0,
-   "likes": 90952,
+   "likes": 90961,
    "published": "2026-10-18T12:00:11+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "MEGA BEST OF DES 20 ANS DE WANKIL",
@@ -9968,6 +10937,27 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      3536415
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     3537686
+    ]
+   ]
+  },
+  "lA-rWcF0h1c": {
+   "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
+   "creator": "fantabobgames",
+   "examined": 1,
+   "examined_at": "2026-11-02T16:48:06.531879+00:00",
+   "likes": 174,
+   "outcome": "none",
+   "published": "2026-11-02T16:00:23+00:00",
+   "seen": "2026-11-02T16:48:06.531879+00:00",
+   "title": "JE VEUX PARLER AU MANAGER DE L'ENFER !! -Red Tape- [BIG BOSS]",
+   "views": [
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1401
     ]
    ]
   },
@@ -9987,6 +10977,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      41990
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     42104
     ]
    ]
   },
@@ -9994,7 +10988,7 @@
    "channel": "UCEi0DIwuAQNe68OK_1hAN7w",
    "creator": "antoinedaniel",
    "examined": 0,
-   "likes": 687,
+   "likes": 688,
    "published": "2026-10-29T17:00:04+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "TOC TOC ON FRAPPE À MA PORTE  | Crack",
@@ -10006,6 +11000,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      55194
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     55323
     ]
    ]
   },
@@ -10014,7 +11012,7 @@
    "creator": "furiousjumper",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 95,
+   "likes": 185,
    "outcome": "none",
    "published": "2026-11-02T15:43:18+00:00",
    "seen": "2026-11-02T16:06:50.912374+00:00",
@@ -10023,6 +11021,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1028
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     2225
     ]
    ]
   },
@@ -10030,7 +11032,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 11374,
+   "likes": 11377,
    "published": "2026-10-21T15:30:14+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "MAKING-OF 🎬 : Expériences Tiktok Extrêmes #2",
@@ -10042,6 +11044,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      221249
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     221325
     ]
    ]
   },
@@ -10049,7 +11055,7 @@
    "channel": "UCEi0DIwuAQNe68OK_1hAN7w",
    "creator": "antoinedaniel",
    "examined": 0,
-   "likes": 307,
+   "likes": 309,
    "published": "2026-10-23T12:00:35+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "CRAIGNEZ MOI ! | Crusader Kings 3",
@@ -10061,6 +11067,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      31447
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     31486
     ]
    ]
   },
@@ -10080,6 +11090,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      55548
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     55548
     ]
    ]
   },
@@ -10087,7 +11101,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 4578,
+   "likes": 4601,
    "published": "2026-10-30T16:30:12+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Trouve les 10 films",
@@ -10099,6 +11113,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      151186
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     151828
     ]
    ]
   },
@@ -10106,7 +11124,7 @@
    "channel": "UC704-gdkAeYFEjudxRCEAJA",
    "creator": "thekairi78",
    "examined": 0,
-   "likes": 938,
+   "likes": 939,
    "published": "2026-10-29T21:25:16+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "VENAIS ON TROUVE UN TERAIN D'ENTENTE SERIEUSEMENT",
@@ -10118,6 +11136,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      62877
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     62916
     ]
    ]
   },
@@ -10125,7 +11147,7 @@
    "channel": "UCSJxne19pJyW7l7HjHM-LRg",
    "creator": "zacknani",
    "examined": 0,
-   "likes": 82,
+   "likes": 84,
    "published": "2026-10-31T19:35:47+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Mbappé BO pour le journaliste espagnol ?",
@@ -10137,6 +11159,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      5873
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     6009
     ]
    ]
   },
@@ -10144,7 +11170,7 @@
    "channel": "UCSJxne19pJyW7l7HjHM-LRg",
    "creator": "zacknani",
    "examined": 0,
-   "likes": 209,
+   "likes": 215,
    "published": "2026-10-31T19:51:36+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Un vote stratégique pour avantager Mbappé ?",
@@ -10156,6 +11182,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      11040
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     11106
     ]
    ]
   },
@@ -10163,7 +11193,7 @@
    "channel": "UCbJWraz5h4F-IX2frhqKglQ",
    "creator": "kaydop",
    "examined": 0,
-   "likes": 2281,
+   "likes": 2282,
    "published": "2026-10-22T08:00:27+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Oui bon ca arrive à tout le monde !🤣 #Kaydop #twitch #rocketleague #twitchstreamer #rl",
@@ -10175,6 +11205,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      65715
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     65747
     ]
    ]
   },
@@ -10194,6 +11228,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      56487
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     56490
     ]
    ]
   },
@@ -10201,7 +11239,7 @@
    "channel": "UCKq9JxyISqBHDd-fXfV3QtQ",
    "creator": "fastgoodcuisine",
    "examined": 0,
-   "likes": 10767,
+   "likes": 10773,
    "published": "2026-10-27T16:58:55+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Je Teste Le Tenders le plus Piquant 🌶️",
@@ -10213,6 +11251,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      312030
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     312245
     ]
    ]
   },
@@ -10232,6 +11274,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      37691
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     37691
     ]
    ]
   },
@@ -10239,7 +11285,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 26691,
+   "likes": 26733,
    "published": "2026-10-26T16:30:10+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Trouve avant l'explosion #2",
@@ -10251,6 +11297,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1561932
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1563496
     ]
    ]
   },
@@ -10258,7 +11308,7 @@
    "channel": "UCEi0DIwuAQNe68OK_1hAN7w",
    "creator": "antoinedaniel",
    "examined": 0,
-   "likes": 437,
+   "likes": 438,
    "published": "2026-10-30T17:00:31+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "ESPRIT CAIREN | Road To Empress II (partie 11)",
@@ -10270,6 +11320,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      24661
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     24771
     ]
    ]
   },
@@ -10277,7 +11331,7 @@
    "channel": "UCDB1PaqiausfXbVI2Jjk0iQ",
    "creator": "ninjaxx",
    "examined": 0,
-   "likes": 12454,
+   "likes": 12456,
    "published": "2026-10-20T16:00:11+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "J'ai joué sur un MOD HORREUR BANNI DEPUIS 1 AN.. (The Broken Script 2.0)",
@@ -10289,6 +11343,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      341041
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     341146
     ]
    ]
   },
@@ -10296,7 +11354,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 927,
+   "likes": 931,
    "published": "2026-10-31T14:02:53+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Le parcours Bastille-Nation est finalement interdit pour la manifestation du 31 octobre à Paris",
@@ -10308,6 +11366,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      39324
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     39422
     ]
    ]
   },
@@ -10315,7 +11377,7 @@
    "channel": "UC5Twj1Axp_-9HLsZ5o_cEQQ",
    "creator": "docseven",
    "examined": 0,
-   "likes": 6921,
+   "likes": 6924,
    "published": "2026-10-25T16:00:26+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "CES NOMS DE RUES CACHENT DES HISTOIRES IMPROBABLES ! - Maps",
@@ -10327,6 +11389,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      289482
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     289596
     ]
    ]
   },
@@ -10346,6 +11412,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      56459
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     56459
     ]
    ]
   },
@@ -10353,7 +11423,7 @@
    "channel": "UCoetxEkAQbHlXBv2toas_1A",
    "creator": "kaatsup",
    "examined": 0,
-   "likes": 303,
+   "likes": 317,
    "published": "2026-11-01T17:00:10+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Fokus Patinage artistique ?",
@@ -10365,6 +11435,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      6545
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     6703
     ]
    ]
   },
@@ -10372,7 +11446,7 @@
    "channel": "UCYGjxo5ifuhnmvhPvCc3DJQ",
    "creator": "wankilfr",
    "examined": 0,
-   "likes": 18170,
+   "likes": 18177,
    "published": "2026-10-22T13:30:34+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "que quelqu'un l'empêche de parler 😭🥛",
@@ -10384,6 +11458,25 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      350559
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     350658
+    ]
+   ]
+  },
+  "qvMtIdUZo6Y": {
+   "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
+   "creator": "amixem",
+   "examined": 0,
+   "likes": 366,
+   "published": "2026-11-02T16:30:30+00:00",
+   "seen": "2026-11-02T16:48:06.531879+00:00",
+   "title": "Trouve la bonne combinaison #5",
+   "views": [
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     10157
     ]
    ]
   },
@@ -10403,6 +11496,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      20375
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     20377
     ]
    ]
   },
@@ -10422,6 +11519,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      76672
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     76668
     ]
    ]
   },
@@ -10430,7 +11531,7 @@
    "creator": "pa.domingo",
    "examined": 1,
    "examined_at": "2026-11-02T16:06:50.912374+00:00",
-   "likes": 7676,
+   "likes": 7706,
    "outcome": "moments",
    "published": "2026-10-29T17:00:13+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -10443,6 +11544,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      546702
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     549733
     ]
    ]
   },
@@ -10462,6 +11567,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      70719
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     70719
     ]
    ]
   },
@@ -10469,7 +11578,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 4083,
+   "likes": 4092,
    "published": "2026-10-26T17:23:59+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Hydratez-vous avec les électrolytes InShape Nutrition !! 💦",
@@ -10481,6 +11590,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      127282
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     127403
     ]
    ]
   },
@@ -10488,7 +11601,7 @@
    "channel": "UCgvqvBoSHB1ctlyyhoHrGwQ",
    "creator": "amixem",
    "examined": 0,
-   "likes": 23800,
+   "likes": 23808,
    "published": "2026-10-19T15:30:12+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Trouve la couleur du logo #3",
@@ -10500,6 +11613,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      1794183
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1794553
     ]
    ]
   },
@@ -10518,6 +11635,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     32707
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      32707
     ]
    ]
@@ -10538,6 +11659,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      27598
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     27668
     ]
    ]
   },
@@ -10545,7 +11670,7 @@
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
    "examined": 0,
-   "likes": 918,
+   "likes": 925,
    "published": "2026-10-30T09:00:02+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Des bagarres dans Koh Lanta ?",
@@ -10557,6 +11682,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      71298
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     71667
     ]
    ]
   },
@@ -10576,6 +11705,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      79724
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     79724
     ]
    ]
   },
@@ -10583,7 +11716,7 @@
    "channel": "UCCFqUJYKT97UerMmb6DM0bw",
    "creator": "gotaga",
    "examined": 0,
-   "likes": 12,
+   "likes": 34,
    "published": "2026-11-02T15:33:38+00:00",
    "seen": "2026-11-02T16:06:50.912374+00:00",
    "title": "Stuck diamant 😭",
@@ -10591,6 +11724,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      471
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     1002
     ]
    ]
   },
@@ -10598,7 +11735,7 @@
    "channel": "UCC_r3spMB5i5QKgtdNVO0OQ",
    "creator": "pierrecroce",
    "examined": 0,
-   "likes": 4934,
+   "likes": 4940,
    "published": "2026-10-27T17:24:59+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Ces gens ont des talents inutiles #5 (on ne comprend toujours pas à quoi ça sert mais c'est marrant)",
@@ -10610,6 +11747,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      449250
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     449644
     ]
    ]
   },
@@ -10617,7 +11758,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 759,
+   "likes": 761,
    "published": "2026-10-30T15:43:23+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "J'ai fait semblant d'être un OEUF, puis j'ai obtenu le MEILLEUR ŒUF à 0,01%",
@@ -10629,6 +11770,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      39348
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     39421
     ]
    ]
   },
@@ -10636,7 +11781,7 @@
    "channel": "UCpWaR3gNAQGsX48cIlQC0qw",
    "creator": "tiboinshape",
    "examined": 0,
-   "likes": 1536,
+   "likes": 1540,
    "published": "2026-10-31T18:27:28+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Le pape arrive à Paris !! 😱",
@@ -10648,6 +11793,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      24604
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     24700
     ]
    ]
   },
@@ -10655,7 +11804,7 @@
    "channel": "UCLXDNUOO3EQ80VmD9nQBHPg",
    "creator": "fouloscopie",
    "examined": 0,
-   "likes": 18792,
+   "likes": 18846,
    "published": "2026-10-29T16:00:20+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "L'étrange science de la mode des prénoms",
@@ -10667,6 +11816,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      581611
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     583778
     ]
    ]
   },
@@ -10674,7 +11827,7 @@
    "channel": "UCLMKLU-ZuDQIsbjMvR3bbog",
    "creator": "furiousjumper",
    "examined": 0,
-   "likes": 1573,
+   "likes": 1575,
    "published": "2026-10-27T15:58:01+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "LE MAGASIN DES SAUTERELLES CHAPITRE 2 SUR ROBLOX",
@@ -10686,6 +11839,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      81738
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     81863
     ]
    ]
   },
@@ -10693,7 +11850,7 @@
    "channel": "UCow2IGnug1l3Xazkrc5jM_Q",
    "creator": "joyca",
    "examined": 0,
-   "likes": 83136,
+   "likes": 84534,
    "published": "2026-11-01T15:06:34+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "TIK TOK M'A FAIT ACHETER ÇA ! (C'est une révolution ?!) #12",
@@ -10705,6 +11862,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2184739
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     2232372
     ]
    ]
   },
@@ -10712,7 +11873,7 @@
    "channel": "UCKq9JxyISqBHDd-fXfV3QtQ",
    "creator": "fastgoodcuisine",
    "examined": 0,
-   "likes": 3814,
+   "likes": 3864,
    "published": "2026-10-31T11:00:05+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Abonne-toi pour un iPhone !",
@@ -10724,6 +11885,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      142563
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     143516
     ]
    ]
   },
@@ -10731,7 +11896,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 1583,
+   "likes": 1588,
    "published": "2026-10-30T22:26:12+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Un rassemblement a eu lieu à Trappes ce vendredi soir en hommage aux victimes",
@@ -10743,6 +11908,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      18985
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     19033
     ]
    ]
   },
@@ -10750,7 +11919,7 @@
    "channel": "UCSJxne19pJyW7l7HjHM-LRg",
    "creator": "zacknani",
    "examined": 0,
-   "likes": 64,
+   "likes": 65,
    "published": "2026-11-01T12:50:30+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Fonseca pourrait quitter l’OL ? 👀",
@@ -10762,6 +11931,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      4157
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     4219
     ]
    ]
   },
@@ -10769,7 +11942,7 @@
    "channel": "UCDPK_MTu3uTUFJXRVcTJcEw",
    "creator": "mcflyetcarlito",
    "examined": 0,
-   "likes": 5617,
+   "likes": 5619,
    "published": "2026-10-22T09:10:41+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Qui joue le mieux les émotions ?",
@@ -10781,6 +11954,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      208317
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     208384
     ]
    ]
   },
@@ -10789,7 +11966,7 @@
    "creator": "fastgoodcuisine",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 33771,
+   "likes": 34102,
    "outcome": "moments",
    "published": "2026-10-30T17:18:01+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -10802,6 +11979,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      2496372
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     2529861
     ]
    ]
   },
@@ -10809,7 +11990,7 @@
    "channel": "UCAcAnMF0OrCtUep3Y4M-ZPw",
    "creator": "hugodecrypte",
    "examined": 0,
-   "likes": 1307,
+   "likes": 1311,
    "published": "2026-10-31T14:03:46+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Des milliers de personnes sont rassemblées dans le calme à Marseille pour le début de la manif",
@@ -10821,6 +12002,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      32308
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     32378
     ]
    ]
   },
@@ -10828,7 +12013,7 @@
    "channel": "UCo0U1tbk3YbqiLDhkeWOviQ",
    "creator": "fantabobgames",
    "examined": 0,
-   "likes": 2035,
+   "likes": 2036,
    "published": "2026-10-20T15:00:20+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "ADIEU LA CARTE GRAPHIQUE !! -The Spell Brigade- [SURCHAUFFE]",
@@ -10840,6 +12025,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      96364
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     96406
     ]
    ]
   },
@@ -10847,7 +12036,7 @@
    "channel": "UCZ_oIYI9ZNpOfWbpZxWNuRQ",
    "creator": "zerator",
    "examined": 0,
-   "likes": 904,
+   "likes": 905,
    "published": "2026-10-29T17:00:38+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "TOUT CHANGER",
@@ -10859,6 +12048,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      45979
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     46036
     ]
    ]
   },
@@ -10866,7 +12059,7 @@
    "channel": "UCRCMNm2I4tM4BTmNSboc4QA",
    "creator": "pa.domingo",
    "examined": 0,
-   "likes": 976,
+   "likes": 985,
    "published": "2026-10-31T07:00:21+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Un moment iconique de Koh Lanta !",
@@ -10878,6 +12071,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      66178
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     66586
     ]
    ]
   },
@@ -10897,6 +12094,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      97403
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     97408
     ]
    ]
   },
@@ -10904,7 +12105,7 @@
    "channel": "UCUl7mwOyySfZzUkq4H29nug",
    "creator": "lebouseuh",
    "examined": 0,
-   "likes": 2470,
+   "likes": 2471,
    "published": "2026-10-28T14:26:49+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "Vous le prononcez comment ? 😂",
@@ -10916,6 +12117,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      98056
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     98122
     ]
    ]
   },
@@ -10935,6 +12140,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      76825
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     76889
     ]
    ]
   },
@@ -10942,7 +12151,7 @@
    "channel": "UCYGjxo5ifuhnmvhPvCc3DJQ",
    "creator": "wankilfr",
    "examined": 0,
-   "likes": 30325,
+   "likes": 30334,
    "published": "2026-10-21T12:00:13+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "CACA CULOTTE POUR HALLOWEEN (Fortnite)",
@@ -10954,6 +12163,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      905273
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     905426
     ]
    ]
   },
@@ -10961,7 +12174,7 @@
    "channel": "UCo3i0nUzZjjLuM7VjAVz4zA",
    "creator": "michou",
    "examined": 0,
-   "likes": 48007,
+   "likes": 48036,
    "published": "2026-10-24T09:00:17+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "J’AFFRONTE DES ENFANTS CHAMPIONS ! (et j’essaye de les battre) #2",
@@ -10973,6 +12186,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      3363894
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     3366506
     ]
    ]
   },
@@ -10992,6 +12209,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      35356
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     35356
     ]
    ]
   },
@@ -10999,7 +12220,7 @@
    "channel": "UC704-gdkAeYFEjudxRCEAJA",
    "creator": "thekairi78",
    "examined": 0,
-   "likes": 994,
+   "likes": 996,
    "published": "2026-10-31T21:44:10+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "PAS BESOINS DE DEGUISEMENT VOUS ETE DEJA MOCHE",
@@ -11011,6 +12232,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      67979
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     68089
     ]
    ]
   },
@@ -11030,6 +12255,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      164261
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     164261
     ]
    ]
   },
@@ -11038,7 +12267,7 @@
    "creator": "hugodecrypte",
    "examined": 1,
    "examined_at": "2026-11-02T15:32:49.831240+00:00",
-   "likes": 3432,
+   "likes": 4428,
    "outcome": "none",
    "published": "2026-11-02T10:59:28+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
@@ -11051,6 +12280,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      39564
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     48744
     ]
    ]
   },
@@ -11070,6 +12303,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      43127
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     43127
     ]
    ]
   },
@@ -11077,7 +12314,7 @@
    "channel": "UCEi0DIwuAQNe68OK_1hAN7w",
    "creator": "antoinedaniel",
    "examined": 0,
-   "likes": 381,
+   "likes": 384,
    "published": "2026-10-30T13:00:17+00:00",
    "seen": "2026-11-02T15:32:49.831240+00:00",
    "title": "DES HORRIBLES PROPRIÉTAIRES | Probably Stolen",
@@ -11089,6 +12326,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      48868
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     49134
     ]
    ]
   },
@@ -11108,6 +12349,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      85723
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     85732
     ]
    ]
   },
@@ -11127,6 +12372,10 @@
     [
      "2026-11-02T16:06:50.912374+00:00",
      93872
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
+     93872
     ]
    ]
   },
@@ -11145,6 +12394,10 @@
     ],
     [
      "2026-11-02T16:06:50.912374+00:00",
+     20812
+    ],
+    [
+     "2026-11-02T16:48:06.531879+00:00",
      20812
     ]
    ]
