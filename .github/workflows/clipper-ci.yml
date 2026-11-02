@@ -1,11 +1,18 @@
 name: Clipper CI
 
+# Une branche de travail est testée par sa pull request, la branche principale à chaque fusion (avec l'essai à blanc) ;
+# un nouvel envoi annule le test encore en cours du précédent : moins de minutes GitHub Actions comptées.
 on:
   push:
+    branches: [claude/modest-ptolemy-67bgwo]
     paths: ["clipper/**", ".github/workflows/clipper*.yml"]
   pull_request:
     paths: ["clipper/**", ".github/workflows/clipper*.yml"]
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:

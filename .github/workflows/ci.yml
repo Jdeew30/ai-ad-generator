@@ -1,8 +1,17 @@
 name: CI
 
+# Minutes GitHub Actions comptées (dépôt privé) : une seule fois par changement, jamais pour le seul clipper,
+# et un nouvel envoi annule le test encore en cours du précédent.
 on:
   push:
+    branches: [claude/modest-ptolemy-67bgwo]
+    paths-ignore: ["clipper/**", ".github/workflows/clipper*.yml"]
   pull_request:
+    paths-ignore: ["clipper/**", ".github/workflows/clipper*.yml"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   check:
