@@ -1,17 +1,17 @@
 # Tableau de bord du clipper
 
-Mis à jour le 02/11/2026 à 15:51 UTC.
+Mis à jour le 02/11/2026 à 16:06 UTC.
 
 ## Activité
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 2880 | 2880 |
-| Vidéos téléchargées et préparées | 12 | 12 |
+| Moments trouvés (Twitch + YouTube) | 5559 | 5559 |
+| Vidéos téléchargées et préparées | 26 | 26 |
 | Shorts envoyés | 2 | 2 |
-| Écartés par la revue | 10 | 10 |
+| Écartés par la revue | 24 | 24 |
 | Échecs (téléchargement, montage, envoi) | 0 | 0 |
-| Passages | 3 | 3 |
+| Passages | 4 | 4 |
 
 ## Shorts des 30 derniers jours
 
@@ -22,7 +22,7 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), Locklear (3), A
 ## Veille YouTube
 
 90 créateurs suivis, 92 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 80 identifiées ; 0 mises de côté (introuvables).
-291 vidéos récentes suivies, 12 regardées de près (8 avec des moments à extraire).
+294 vidéos récentes suivies, 24 regardées de près (12 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
