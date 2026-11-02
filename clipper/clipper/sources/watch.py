@@ -51,6 +51,7 @@ class FeedVideo:
     published: datetime | None
     views: int | None
     likes: int | None
+    short: bool = False  # a YouTube Short (its feed link goes to /shorts/): nothing to cut out of it
 
     @property
     def url(self) -> str:
@@ -69,13 +70,16 @@ def parse_feed(text: str | bytes) -> list[FeedVideo]:
         community = group.find("media:community", _NS) if group is not None else None
         stats = community.find("media:statistics", _NS) if community is not None else None
         rating = community.find("media:starRating", _NS) if community is not None else None
+        links = [link.get("href") or "" for link in entry.findall("atom:link", _NS)]
+        title = (entry.findtext("atom:title", default="", namespaces=_NS) or "").strip()
         videos.append(FeedVideo(
             id=video_id,
             channel_id=entry.findtext("yt:channelId", default="", namespaces=_NS),
-            title=(entry.findtext("atom:title", default="", namespaces=_NS) or "").strip(),
+            title=title,
             published=parse_time(entry.findtext("atom:published", default=None, namespaces=_NS)),
             views=_int(stats.get("views")) if stats is not None else None,
             likes=_int(rating.get("count")) if rating is not None else None,
+            short=any("/shorts/" in link for link in links) or "#short" in title.lower(),
         ))  # fmt: skip
     return videos
 
@@ -251,6 +255,8 @@ def remember(history: dict[str, dict[str, Any]], video: FeedVideo, creator: str,
                                           "published": video.published.isoformat() if video.published else None,
                                           "seen": now.isoformat(), "views": [], "examined": 0})  # fmt: skip
     entry["title"] = video.title or entry.get("title")
+    if video.short:
+        entry["short"] = True
     if video.likes is not None:
         entry["likes"] = video.likes
     if video.views is not None:
@@ -302,14 +308,18 @@ def channel_paces(history: dict[str, dict[str, Any]], now: datetime) -> dict[str
     return {channel: statistics.median(values) for channel, values in paces.items() if len(values) >= 3}
 
 
-def due(entry: dict[str, Any], now: datetime, *, max_age: timedelta) -> bool:
+def due(entry: dict[str, Any], now: datetime, *, max_age: timedelta, min_views: int = 0) -> bool:
     """Whether a video seen in a feed should be looked into this run.
 
-    Fresh enough, not looked into yet, or once more a day later when it gave nothing the first time (its « most
-    replayed » curve and its comments come with the views).
+    Fresh enough, not a Short, with `min_views` views by its feed (it may get there at a later run), not looked into
+    yet, or once more a day later when it gave nothing the first time (its « most replayed » curve and its comments
+    come with the views).
     """
     published = parse_time(entry.get("published"))
-    if published is None or now - published > max_age:
+    if published is None or now - published > max_age or entry.get("short"):
+        return False
+    views = (entry.get("views") or [[None, None]])[-1][1]
+    if views is not None and views < min_views:
         return False
     if not entry.get("examined"):
         return True
