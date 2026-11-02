@@ -549,7 +549,8 @@ class Clipper:
                     found = discover(config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
                                      memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor,
                                      youtube_related=self.state.youtube_related, creators=self.creators,
-                                     youtube_history=self.state.youtube_videos)
+                                     youtube_history=self.state.youtube_videos,
+                                     known=set(self.state.posted) | set(self.state.rejected))
                     self.state.youtube_cursor += config.youtube.channels_per_run
             except (SourceError, QueueError, ConfigError) as exc:
                 log.error("Découverte impossible : %s", exc)
@@ -560,9 +561,12 @@ class Clipper:
         if not quotas:
             self._publish_best(report, ranked, wanted, dry_run=dry_run, force=force)
             return
+        guarantee = self.config.shorts.guarantee
         for source, quota in quotas.items():
+            # A scheduled run keeps its short of each source: under the bar, its best one if marked `guarantee` or more.
             self._publish_best(report, [c for c in ranked if _platform(c) == source], quota, dry_run=dry_run, source=source,
-                               force=force)
+                               force=force or source in guarantee, floor=0.0 if force else guarantee.get(source, 0.0),
+                               at_least=None if force else 1)
 
     def _locate(self, url: str, phrase: str, start: str | None, end: str | None) -> tuple[float, float]:
         """The passage of `url` around `phrase`, which Whisper listens for from `start` to `end`."""
@@ -587,10 +591,11 @@ class Clipper:
         return max(0.0, at - FIND_BEFORE), at + FIND_AFTER
 
     def _publish_best(self, report: RunReport, ranked: list[Candidate], wanted: int, *, dry_run: bool,
-                      source: str | None = None, force: bool = False) -> None:
+                      source: str | None = None, force: bool = False, floor: float = 0.0, at_least: int | None = None) -> None:
         """Reviews `ranked` until `wanted` clips are approved, then edits and publishes them.
 
-        With `force`, when too few clips reach the bar, the best marked ones Claude did not refuse outright go out too.
+        With `force`, when too few clips reach the bar, the best marked ones Claude did not refuse outright go out too,
+        if marked `floor` or more, until `at_least` clips (`wanted` by default) go out.
         """
         label = f" {SOURCE_NAMES[source]}" if source else ""
         if wanted <= 0 or not ranked:
@@ -654,9 +659,11 @@ class Clipper:
                 approved.append((item, review))
             if len(approved) >= wanted:
                 break
-        if force and len(approved) < wanted and under_bar:
+        under_bar = [pair for pair in under_bar if pair[1].score >= floor]
+        enough = wanted if at_least is None else min(at_least, wanted)
+        if force and len(approved) < enough and under_bar:
             under_bar.sort(key=lambda pair: pair[1].score, reverse=True)
-            for item, review in under_bar[: wanted - len(approved)]:
+            for item, review in under_bar[: enough - len(approved)]:
                 key = item.candidate.key
                 log.info("Publié quand même, à la demande : %s — note %.0f/100", item.candidate.title, review.score)
                 report.rejected = [(c, why) for c, why in report.rejected if c.key != key]
@@ -704,7 +711,8 @@ class Clipper:
             report.published.append(outcome)
             log.info("Prêt : %s", video)
             if candidate.key in forced and not dry_run:
-                self.notify(f"ℹ️ Short{label} envoyé à ta demande : aucun clip n'atteignait la note minimale "
+                why = f"pour garder un short{label} à ce passage" if floor else "à ta demande"
+                self.notify(f"ℹ️ Short{label} envoyé {why} : aucun clip n'atteignait la note minimale "
                             f"({self.config.shorts.min_score:.0f}/100), celui-ci est le mieux noté ({review.score:.0f}/100).")
 
     # --- compilation -------------------------------------------------------------------------

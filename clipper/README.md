@@ -292,7 +292,9 @@ restent 100 % Twitch.
   `remember_live` les chaînes FR vues ces 14 derniers jours (150 au plus) et `discover_categories` les clips
   FR les plus vus de la semaine dans les catégories les plus regardées (20).
 - `shorts.per_source` / le `cron` du workflow : le rythme de publication, un short Twitch et deux shorts YouTube
-  par passage (15 par jour au plus : seuls les passages notés 60 ou plus partent). Sans `per_source`,
+  par passage (15 par jour au plus : seuls les passages notés 60 ou plus partent). `shorts.guarantee` garde un
+  short de chaque source à chaque passage : si rien n'atteint 60, le mieux noté part quand même s'il a au moins
+  45 (Telegram le précise ; jamais un clip que Claude refuse). Sans `per_source`,
   `shorts.per_run` shorts par passage, toutes sources confondues. Chaque short de plus allonge le passage
   (minutes GitHub Actions : 2 000 par mois sur un dépôt privé, illimitées sur un dépôt public).
 - `youtube.videos_per_run`, `youtube.max_age_days` : combien de nouvelles vidéos YouTube sont regardées de près

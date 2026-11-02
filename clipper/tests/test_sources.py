@@ -640,3 +640,27 @@ def test_new_creators_come_from_streamers_seen_live_once_their_channel_links_to_
     ytdlp.listed.clear()
     _discover_from_twitch(creators, seen, ytdlp, NOW + timedelta(hours=2), budget=3)
     assert ytdlp.listed == []  # each streamer is looked up once a month at most
+
+
+def test_the_watch_looks_past_the_passages_already_sent_or_refused(server, http, tmp_path, monkeypatch):
+    from clipper.sources import watch as watch_module
+    from clipper.sources.watch import Creators
+    from clipper.sources.youtube import discover_youtube
+
+    monkeypatch.setattr(watch_module, "FEED", server.url + "/feeds/videos.xml?channel_id={}")
+    server.route("GET", "/feeds/videos.xml", (200, {}, _feed(("peaksvideo1", "UCa", "titre", NOW - timedelta(hours=5), 90_000, 900))))
+    peaks = {20: 0.8, 50: 0.95, 80: 0.85}
+    heatmap = [{"start_time": i * 10.0, "end_time": (i + 1) * 10.0, "value": peaks.get(i, 0.1)} for i in range(100)]
+    info = {"id": "peaksvideo1", "uploader_id": "@a", "channel_id": "UCa", "view_count": 90_000, "duration": 1000,
+            "timestamp": (NOW - timedelta(hours=5)).timestamp(), "heatmap": heatmap}  # fmt: skip
+    pages = {"https://www.youtube.com/@a/videos": {"channel_id": "UCa", "channel": "A", "uploader_id": "@a", "entries": []}}
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a"], "watch": "rss", "segments_per_video": 1}})
+
+    def run(known):
+        ytdlp = FakeYtDlp(listings=pages, infos={"https://www.youtube.com/watch?v=peaksvideo1": info})
+        return discover_youtube(config, ytdlp, now=NOW, http=http, creators=Creators(tmp_path / "c.json"), history={},
+                                known=known)  # fmt: skip
+
+    [best] = run(set())
+    [next_best] = run({best.key})  # the hottest passage was already sent: the next one comes instead
+    assert best.start < 500 < best.end and next_best.start < 800 < next_best.end

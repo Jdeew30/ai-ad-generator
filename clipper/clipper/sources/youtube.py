@@ -362,7 +362,7 @@ def _refresh_related(channels: list[str], ytdlp: YtDlp, related: dict[str, dict[
 def discover_youtube(
     config: Config, ytdlp: YtDlp, *, now: datetime, offset: int = 0, related: dict[str, dict[str, Any]] | None = None,
     http: Http | None = None, creators: watch.Creators | None = None, history: dict[str, dict[str, Any]] | None = None,
-    twitch_seen: dict[str, str] | None = None,
+    twitch_seen: dict[str, str] | None = None, known: set[str] | None = None,
 ) -> list[Candidate]:
     """Peaks of the channels' recent videos.
 
@@ -393,7 +393,7 @@ def discover_youtube(
         try:
             if twitch_seen:
                 _discover_from_twitch(creators, twitch_seen, ytdlp, now, budget=settings.discover_per_run)
-            candidates.extend(_watch(config, ytdlp, http, creators, history, related, now, skipped))
+            candidates.extend(_watch(config, ytdlp, http, creators, history, related, now, skipped, known or set()))
         except DownloadError as exc:
             if not exc.blocked:
                 raise
@@ -455,7 +455,7 @@ def _tell(candidates: list[Candidate], skipped: Counter[str]) -> None:
 
 def _watch(
     config: Config, ytdlp: YtDlp, http: Http, creators: watch.Creators, history: dict[str, dict[str, Any]],
-    related: dict[str, dict[str, Any]] | None, now: datetime, skipped: Counter[str],
+    related: dict[str, dict[str, Any]] | None, now: datetime, skipped: Counter[str], known: set[str],
 ) -> list[Candidate]:
     """Every watched channel's RSS feed, then the details and moments of the most promising new videos only.
 
@@ -492,9 +492,12 @@ def _watch(
     history.clear()
     history.update(history_kept)
     paces = watch.channel_paces(history, now)
+    handled = _handled_spans(known)  # passages already sent or refused, by video
+    # A video some of whose passages were already handled comes after the untouched ones: it may hold less.
     due = sorted(((watch.pre_score(entry, paces.get(entry.get("channel") or ""), now), video_id, entry)
                   for video_id, entry in history.items() if watch.due(entry, now, max_age=window)),
-                 key=lambda item: -item[0])  # fmt: skip
+                 key=lambda item: -item[0] * (0.6 if item[1] in handled else 1.0))  # fmt: skip
+    deeper = dataclasses.replace(settings, segments_per_video=settings.segments_per_video * 3)
     log.info("YouTube : %d chaîne(s) lue(s) par flux RSS%s, %d vidéo(s) récente(s) à regarder, les %d plus prometteuses ce "
              "passage.", read, f" ({len(unread)} illisible(s) : {', '.join(unread[:8])})" if unread else "", len(due),
              min(len(due), settings.videos_per_run))  # fmt: skip
@@ -508,7 +511,12 @@ def _watch(
             if config.is_blocked((info.get("uploader_id") or "").lstrip("@")):
                 entry["outcome"] = "blocked"
                 continue
-            found, reason = _video_moments(info, url, settings, config, ytdlp, now)
+            # More moments than needed are looked for: those already sent or refused are left out.
+            found, reason = _video_moments(info, url, deeper, config, ytdlp, now)
+            fresh = [c for c in found if not _overlaps_any(c, handled.get(video_id, []))][: settings.segments_per_video]
+            if found and not fresh:
+                reason = "passages déjà traités"
+            found = fresh
         except DownloadError as exc:
             if exc.blocked:
                 entry["examined"] -= 1  # YouTube blocked the server, not this video: its turn comes again
@@ -529,6 +537,24 @@ def _watch(
                  f" : {len(found)} passage(s)" if found else f" : {reason}")
         candidates.extend(found)
     return candidates
+
+
+def _handled_spans(keys: set[str]) -> dict[str, list[tuple[float, float]]]:
+    """The passages of YouTube videos already sent or refused (« youtube:<id>@<start>-<end> »), by video."""
+    spans: dict[str, list[tuple[float, float]]] = {}
+    for key in keys:
+        match = re.fullmatch(r"youtube:([\w-]{11})@(\d+)-(\d+)", key)
+        if match:
+            spans.setdefault(match.group(1), []).append((float(match.group(2)), float(match.group(3))))
+    return spans
+
+
+def _overlaps_any(candidate: Candidate, spans: list[tuple[float, float]]) -> bool:
+    """Whether half of the passage, or more, was already handled."""
+    if candidate.start is None or candidate.end is None:
+        return False
+    length = max(candidate.end - candidate.start, 1.0)
+    return any(min(candidate.end, end) - max(candidate.start, start) >= length / 2 for start, end in spans)
 
 
 def _resolve(creators: watch.Creators, ytdlp: YtDlp, now: datetime, *, budget: int) -> None:
