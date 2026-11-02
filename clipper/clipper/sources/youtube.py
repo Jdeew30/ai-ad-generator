@@ -197,6 +197,8 @@ def candidates_from_info(
             streamer_login=login,
             channel_url=channel,
             views=views,
+            likes=info.get("like_count"),
+            comments=info.get("comment_count"),
             duration=end - start,
             created_at=uploaded,
             game=(info.get("categories") or [None])[0] if info.get("categories") else None,

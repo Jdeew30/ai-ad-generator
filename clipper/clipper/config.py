@@ -272,6 +272,7 @@ class Secrets:
     tiktok_refresh_token: str | None = None
     telegram_bot_token: str | None = None
     telegram_chat_id: str | None = None
+    telegram_api_url: str | None = None  # a local Bot API server (videos up to 2 GB) instead of api.telegram.org
     gh_secrets_token: str | None = None  # lets the bot store a rotated TikTok refresh token
     github_repository: str | None = None
     ytdlp_cookies: str | None = None  # Netscape cookies file content or path, for YouTube

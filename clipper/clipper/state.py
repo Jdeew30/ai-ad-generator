@@ -163,6 +163,7 @@ class State:
             "source": candidate.source,
             "url": candidate.url,
             "title": meta.title,
+            "score": meta.score or None,  # Claude's mark of the passage (0-100), for the dashboard
             "views": candidate.views,
             "created_at": candidate.created_at.isoformat() if candidate.created_at else None,
             "span": list(span) if span else None,

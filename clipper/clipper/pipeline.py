@@ -648,6 +648,8 @@ class Clipper:
                 if not dry_run:
                     self.state.record_failure(candidate, str(exc))
                 continue
+            if review.meta.ai:  # Claude's mark and why, shown with the video on Telegram
+                review.meta.score, review.meta.reason = review.score, review.reason
             self._write_sidecar(video, candidate, review.meta)
             outcome = ShortOutcome(candidate, video, review.meta, layout, score=review.score if review.meta.ai else None, duration=length)
             if not dry_run:

@@ -41,5 +41,5 @@ def build_publishers(config: Config, secrets: Secrets, http: Http) -> dict[str, 
     if _enabled(settings.tiktok.enabled, secrets.tiktok, "TikTok", "TIKTOK_CLIENT_KEY / _SECRET / _REFRESH_TOKEN"):
         publishers["tiktok"] = TikTokPublisher(secrets, settings.tiktok, http)
     if _enabled(settings.telegram.enabled, secrets.telegram, "Telegram", "TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID"):
-        publishers["telegram"] = TelegramPublisher(secrets, http)
+        publishers["telegram"] = TelegramPublisher(secrets, http, api_url=secrets.telegram_api_url or None)
     return publishers

@@ -179,6 +179,7 @@ def test_tiktok_chunk_plan():
 def test_telegram_sends_the_video_with_a_ready_to_paste_caption(server, http, video, monkeypatch):
     monkeypatch.setattr(telegram_module, "probe", lambda _p: type("I", (), {"width": 1080, "height": 1920, "duration": 30.0})())
     server.route("POST", "/bot123:abc/sendVideo", (200, {}, {"ok": True, "result": {"message_id": 77}}))
+    server.route("POST", "/bot123:abc/sendMessage", (200, {}, {"ok": True, "result": {"message_id": 78}}))
     publisher = TelegramPublisher(SECRETS, http, api_url=server.url)
     published = [PublishResult("youtube", True, "v", "https://www.youtube.com/shorts/v"), PublishResult("tiktok", False, detail="x")]
     result = publisher.publish_short(video, META, make_candidate("twitch:a", "squeezie"), published)
@@ -186,12 +187,60 @@ def test_telegram_sends_the_video_with_a_ready_to_paste_caption(server, http, vi
     [call] = server.calls("POST", "/bot123:abc/sendVideo")
     body = call.body
     assert b'name="chat_id"' in body and b"42" in body and b'filename="squeezie.mp4"' in body
-    assert "Texte à coller (TikTok)".encode() in body and b"youtube : https://www.youtube.com/shorts/v" in body
+    assert "👤 Squeezie · Twitch · twitch.tv/squeezie".encode() in body and "📝 « Il rage quit en plein live »".encode() in body
+    assert "🔗 https://clips.twitch.tv/a".encode() in body and b"youtube : https://www.youtube.com/shorts/v" in body
+    # The text to paste comes next, in a block Telegram copies with a tap.
+    [paste] = server.calls("POST", "/bot123:abc/sendMessage")
+    assert paste.form()["parse_mode"] == "HTML" and paste.form()["text"].endswith(
+        "<pre>Squeezie craque en live 😂\n\n#squeezie #clip\n🎥 twitch.tv/squeezie</pre>")
+
+
+def test_telegram_card_tells_who_where_when_how_much_and_why(server, http, video, monkeypatch):
+    from dataclasses import replace
+
+    from .conftest import NOW
+
+    monkeypatch.setattr(telegram_module, "probe", lambda _p: type("I", (), {"width": 1080, "height": 1920, "duration": 40.0})())
+    server.route("POST", "/bot123:abc/sendVideo", (200, {}, {"ok": True, "result": {"message_id": 1}}))
+    server.route("POST", "/bot123:abc/sendMessage", (200, {}, {"ok": True, "result": {"message_id": 2}}))
+    extract = make_candidate("youtube:ZA_3eoib31s@3862-3912", "gotaga", source="youtube", streamer="Gotaga",
+                             url="https://www.youtube.com/watch?v=ZA_3eoib31s", channel_url="https://www.youtube.com/@Gotaga",
+                             title="QUI SERA LE MEILLEUR MENTEUR ?", views=2_619_615, likes=98_000, comments=1_204,
+                             start=3862.0, end=3912.0, created_at=NOW)  # fmt: skip
+    meta = replace(META, ai=True, score=72, reason="Joyca, en enfant, lâche la pire insulte : fou rire général.")
+    TelegramPublisher(SECRETS, http, api_url=server.url).publish_short(video, meta, extract, [])
+    caption = server.calls("POST", "/bot123:abc/sendVideo")[0].body.decode("utf-8", "replace")  # the video is in it too
+    for line in ("👤 Gotaga · YouTube · youtube.com/@Gotaga", "📝 « QUI SERA LE MEILLEUR MENTEUR ? »",
+                 f"📅 {NOW.astimezone(telegram_module.PARIS):%d/%m/%Y %H:%M} · ⏱ 50 s · passage 1:04:22–1:05:12",
+                 "👁 2\u202f619\u202f615 vues · 👍 98\u202f000 · 💬 1\u202f204",
+                 "🔥 Score viral estimé : 72/100 — Joyca, en enfant, lâche la pire insulte : fou rire général.",
+                 "🔗 https://www.youtube.com/watch?v=ZA_3eoib31s&t=3862s"):  # fmt: skip
+        assert line in caption
+
+
+def test_telegram_waits_out_flood_control(server, http, video, monkeypatch):
+    monkeypatch.setattr(telegram_module, "probe", lambda _p: type("I", (), {"width": 1080, "height": 1920, "duration": 30.0})())
+    replies = [(429, {}, {"ok": False, "error_code": 429, "description": "Too Many Requests: retry after 7",
+                          "parameters": {"retry_after": 7}}),
+               (200, {}, {"ok": True, "result": {"message_id": 9}})]  # fmt: skip
+    server.route("POST", "/bot123:abc/sendVideo", lambda _request: replies.pop(0))
+    server.route("POST", "/bot123:abc/sendMessage", (200, {}, {"ok": True, "result": {"message_id": 10}}))
+    pauses: list[float] = []
+    http.sleep = pauses.append
+    assert TelegramPublisher(SECRETS, http, api_url=server.url).publish_short(video, META, make_candidate(), []).id == "9"
+    assert pauses == [7.0] and len(server.calls("POST", "/bot123:abc/sendVideo")) == 2
+
+
+def test_a_local_bot_api_server_takes_videos_up_to_2_gb(http):
+    assert TelegramPublisher(SECRETS, http).max_upload == telegram_module.MAX_UPLOAD
+    local = TelegramPublisher(SECRETS, http, api_url="http://localhost:8081")
+    assert local.max_upload == telegram_module.LOCAL_MAX_UPLOAD and local.base.startswith("http://localhost:8081/bot")
 
 
 def test_telegram_flags_youtube_extracts_for_tiktok(server, http, video, monkeypatch):
     monkeypatch.setattr(telegram_module, "probe", lambda _p: type("I", (), {"width": 1080, "height": 1920, "duration": 30.0})())
     server.route("POST", "/bot123:abc/sendVideo", (200, {}, {"ok": True, "result": {"message_id": 78}}))
+    server.route("POST", "/bot123:abc/sendMessage", (200, {}, {"ok": True, "result": {"message_id": 79}}))
     extract = make_candidate("youtube:abc@10-40", "squeezie", source="youtube")
     TelegramPublisher(SECRETS, http, api_url=server.url).publish_short(video, META, extract, [])
     [call] = server.calls("POST", "/bot123:abc/sendVideo")

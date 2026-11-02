@@ -488,3 +488,37 @@ def test_sections_are_copied_unless_exact_cuts_are_asked(tmp_path: Path):
     assert ytdlp.options["force_keyframes_at_cuts"] is True
     ytdlp.download("https://clips.twitch.tv/x", tmp_path, "replay")
     assert "download_ranges" not in ytdlp.options and "force_keyframes_at_cuts" not in ytdlp.options
+
+
+def test_a_yt_dlp_call_is_tried_again_after_a_network_hiccup_only():
+    from clipper.ytdlp import YtDlp
+
+    pauses: list[float] = []
+    ytdlp = YtDlp(sleep=pauses.append)
+    errors = [DownloadError("Unable to download webpage: HTTP Error 503: Service Unavailable"),
+              DownloadError("Read timed out")]  # fmt: skip
+
+    def once(url, options, download):
+        if errors:
+            raise errors.pop(0)
+        return {"id": "ok"}
+
+    ytdlp._once = once
+    assert ytdlp.info("https://www.youtube.com/watch?v=abc") == {"id": "ok"} and pauses == [5.0, 20.0]
+
+    def gone(url, options, download):
+        raise DownloadError("Video unavailable. This video is private", permanent=True)
+
+    ytdlp._once, pauses[:] = gone, []
+    with pytest.raises(DownloadError, match="private"):
+        ytdlp.info("https://www.youtube.com/watch?v=abc")
+    assert pauses == []  # a private video stays private
+
+
+def test_yt_dlp_retries_each_request_with_growing_pauses():
+    from clipper.ytdlp import YtDlp, _backoff
+
+    options = YtDlp()._options()
+    assert options["retries"] == 5 and options["fragment_retries"] == 5 and options["skip_unavailable_fragments"]
+    assert [_backoff(n) for n in range(7)] == [1.0, 2.0, 4.0, 8.0, 16.0, 20.0, 20.0]
+    assert options["retry_sleep_functions"]["fragment"] is _backoff
