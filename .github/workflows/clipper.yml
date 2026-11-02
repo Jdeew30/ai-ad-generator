@@ -34,6 +34,10 @@ on:
       count:
         description: "Mode shorts : nombre de shorts (vide = 1)"
         required: false
+      force:
+        description: "Mode shorts : si aucun clip n'atteint la note minimale, envoyer quand même le mieux noté par Claude"
+        type: boolean
+        default: false
       dry_run:
         description: "Essai à blanc : monter sans publier"
         type: boolean
@@ -112,6 +116,7 @@ jobs:
           FOCUS: ${{ inputs.focus }}
           COUNT: ${{ inputs.count }}
           DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
+          FORCE: ${{ inputs.force && '--force' || '' }}
         run: |
           case "$MODE" in
             compilation) python -m clipper compile $DRY_RUN ;;
@@ -122,7 +127,7 @@ jobs:
             url)
               if [ -z "$URL" ]; then echo "::error::Le mode url demande une URL"; exit 1; fi
               python -m clipper run $DRY_RUN --url "$URL" ${START:+--start "$START"} ${END:+--end "$END"} ;;
-            *) python -m clipper run $DRY_RUN ${FOCUS:+--focus "$FOCUS"} ${COUNT:+--count "$COUNT"} ;;
+            *) python -m clipper run $DRY_RUN $FORCE ${FOCUS:+--focus "$FOCUS"} ${COUNT:+--count "$COUNT"} ;;
           esac
 
       - name: Sauvegarder l'état
