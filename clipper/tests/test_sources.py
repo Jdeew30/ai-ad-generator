@@ -373,6 +373,9 @@ def test_a_youtube_handle_that_does_not_exist_is_looked_up_by_its_name(caplog):
     assert _channel_tab(lives, "@Etoiles", "videos", 1) == ("@Etoiles", [{"id": "l1"}])
     # The channel found under the very handle that failed is no other name for it.
     assert renamed_channel(FakeYtDlp({search: [{"channel": "Le Woop", "uploader_id": "@lewoop"}]}), "@LeWoop") is None
+    wankil = [{"channel": "Wankil Studio - Laink et Terracid", "uploader_id": "@wankil", "channel_follower_count": 3_000_000}]
+    assert renamed_channel(FakeYtDlp({"https://www.youtube.com/results?search_query=Wankil%20Studio&": wankil}),
+                           "@WankilStudio") == "@wankil"  # fmt: skip
     duo = [{"channel": "McFly & Carlito", "uploader_id": "@McFlyEtCarlitoOff", "channel_follower_count": 7_000_000}]
     assert renamed_channel(FakeYtDlp({"https://www.youtube.com/results?search_query=mcflyetcarlito&": duo}),
                            "@mcflyetcarlito") == "@McFlyEtCarlitoOff"  # fmt: skip

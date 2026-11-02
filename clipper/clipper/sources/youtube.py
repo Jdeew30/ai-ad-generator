@@ -268,7 +268,8 @@ def related_channels(ytdlp: YtDlp, ref: str) -> list[str]:
 def renamed_channel(ytdlp: YtDlp, ref: str) -> str | None:
     """The channel a handle that does not exist stands for, found by searching its name: "@LeWoop" -> "Le Woop"'s handle.
 
-    Only a channel titled with that very name counts ("&" read as "et"), with enough subscribers; the most followed if several.
+    Only a channel titled with that very name counts ("&" read as "et", a " - subtitle" left out), with enough subscribers;
+    the most followed if several.
     """
     name = _name(ref)
     wanted = _plain(name)
@@ -277,7 +278,8 @@ def renamed_channel(ytdlp: YtDlp, ref: str) -> str | None:
     best: tuple[int, str] | None = None
     for entry in ytdlp.list_flat(SEARCH_CHANNELS.format(quote(re.sub(r"(?<=[a-z])(?=[A-Z])", " ", name))), 10):
         title = entry.get("channel") or entry.get("title") or ""
-        if wanted not in {_plain(title), _plain(title.replace("&", "et")), _plain(title.replace("&", "and"))}:
+        names = {title, re.split(r"\s+[-–|(]", title)[0]}  # "Wankil Studio - Laink et Terracid" is "Wankil Studio"
+        if wanted not in {_plain(n.replace("&", word)) for n in names for word in ("&", "et", "and")}:
             continue
         followers = entry.get("channel_follower_count")
         link = _link(entry)
