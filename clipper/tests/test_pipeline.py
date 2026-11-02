@@ -24,7 +24,7 @@ class FakeYtDlp:
         self.media = media
         self.clips = clips
         self.downloads: list[str] = []
-        self.sections: list[tuple] = []
+        self.asked: list[tuple] = []  # (url, start, end, audio_only) of each download
 
     def list_flat(self, url, limit):
         login = url.split("twitch.tv/")[1].split("/")[0]
@@ -32,7 +32,7 @@ class FakeYtDlp:
 
     def download(self, url, dest_dir, name, *, start=None, end=None, exact=True, audio_only=False):
         self.downloads.append(url)
-        self.sections.append((url, start, end, audio_only))
+        self.asked.append((url, start, end, audio_only))
         slug = url.rsplit("/", 1)[-1]
         source = self.media["facecam" if "Cam" in slug else "noface"]
         dest_dir.mkdir(parents=True, exist_ok=True)
@@ -473,7 +473,7 @@ def test_a_passage_is_found_by_what_is_said_in_it(media, paths):
     report = run.run_shorts(url=video, find="Regarde ça !", start="45:00", end="1:08:00")
     [outcome] = report.published
     # Whisper listened to the sound from 45:00 and heard « regarde » 0.7 s in: 15 s before it, 35 s after.
-    assert run.ytdlp.sections[0] == (video, 2700.0, 4080.0, True)
+    assert run.ytdlp.asked[0] == (video, 2700.0, 4080.0, True)
     assert outcome.candidate.key == "youtube:abcdefghijk@2685-2735" and outcome.candidate.manual
     missing = clipper(media, paths, clips={}).run_shorts(url=video, find="bonjour madame")
     assert missing.published == [] and missing.errors == [
