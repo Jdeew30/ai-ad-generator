@@ -918,6 +918,30 @@
    "url": "https://www.youtube.com/watch?v=ZA_3eoib31s",
    "views": 1875147
   },
+  "youtube:ZA_3eoib31s@3590-3645": {
+   "at": "2026-11-02T14:20:20.529541+00:00",
+   "created_at": "2026-10-31T10:00:03+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "72",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "manual",
+   "span": [
+    "yt:ZA_3eoib31s",
+    3590.0,
+    3645.0
+   ],
+   "streamer": "GOTAGA",
+   "streamer_login": "gotaga",
+   "title": "Gotaga souffle la pire insulte au jeu du meilleur menteur (ft. Joyca, Djilsi, Theodort)",
+   "url": "https://www.youtube.com/watch?v=ZA_3eoib31s",
+   "views": 2696907
+  },
   "youtube:ZA_3eoib31s@3862-3912": {
    "at": "2026-11-02T12:56:42.086020+00:00",
    "created_at": "2026-10-31T10:00:03+00:00",
