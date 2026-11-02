@@ -496,7 +496,8 @@ def _watch(
     handled = _handled_spans(known)  # passages already sent or refused, by video
     # A video some of whose passages were already handled comes after the untouched ones: it may hold less.
     due = sorted(((watch.pre_score(entry, paces.get(entry.get("channel") or ""), now), video_id, entry)
-                  for video_id, entry in history.items() if watch.due(entry, now, max_age=window)),
+                  for video_id, entry in history.items()
+                  if watch.due(entry, now, max_age=window, min_views=settings.min_views)),
                  key=lambda item: -item[0] * (0.6 if item[1] in handled else 1.0))  # fmt: skip
     deeper = dataclasses.replace(settings, segments_per_video=settings.segments_per_video * 3)
     log.info("YouTube : %d chaîne(s) lue(s) par flux RSS%s, %d vidéo(s) récente(s) à regarder, les %d plus prometteuses ce "
@@ -526,7 +527,8 @@ def _watch(
             entry["outcome"] = "error"
             skipped["illisible"] += 1
             continue
-        entry["outcome"] = "moments" if found else "none"
+        # No moment yet: looked into once more a day later. Too short, live, members only…: never again.
+        entry["outcome"] = "moments" if found else "none" if reason in (NO_MOMENT, NO_HEATMAP) else "skip"
         _note_category(creators, info)
         if reason:
             skipped[reason] += 1

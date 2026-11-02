@@ -128,3 +128,25 @@ def _video(video_id, views, published, *, title="titre", likes=None):
     from clipper.sources.watch import FeedVideo
 
     return FeedVideo(id=video_id, channel_id="UCsq", title=title, published=published, views=views, likes=likes)
+
+
+def test_shorts_and_videos_with_too_few_views_are_not_looked_into():
+    xml = """<?xml version="1.0"?><feed xmlns:yt="http://www.youtube.com/xml/schemas/2015"
+      xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">
+     <entry><yt:videoId>shortvideo1</yt:videoId><yt:channelId>UCsq</yt:channelId><title>Le saut 😱</title>
+      <link rel="alternate" href="https://www.youtube.com/shorts/shortvideo1"/><published>{at}</published></entry>
+     <entry><yt:videoId>longvideo01</yt:videoId><yt:channelId>UCsq</yt:channelId><title>La vidéo</title>
+      <link rel="alternate" href="https://www.youtube.com/watch?v=longvideo01"/><published>{at}</published>
+      <media:group><media:community><media:statistics views="9000"/></media:community></media:group></entry>
+    </feed>""".format(at=(NOW - timedelta(hours=2)).isoformat())
+    short, long = parse_feed(xml)
+    assert short.short and not long.short
+    history: dict = {}
+    window = timedelta(days=14)
+    assert not due(remember(history, short, "sq", NOW), NOW, max_age=window)
+    entry = remember(history, long, "sq", NOW)
+    assert not due(entry, NOW, max_age=window, min_views=20_000)  # 9 000 views: not yet
+    long.views = 25_000
+    assert due(remember(history, long, "sq", NOW + timedelta(hours=3)), NOW, max_age=window, min_views=20_000)
+    entry.update(examined=1, outcome="skip")  # too short, live, members only: never again
+    assert not due(entry, NOW + timedelta(days=2), max_age=window, min_views=20_000)
