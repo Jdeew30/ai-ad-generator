@@ -535,11 +535,13 @@ class Clipper:
         where = f"de {clock(begin or 0.0)} à {clock(finish) if finish is not None else 'la fin'}"
         log.info("Recherche de « %s » %s…", phrase, where)
         try:
-            media, _ = self.ytdlp.download(url.strip(), self.paths.work / "find", "search", start=begin, end=finish,
-                                           exact=False, audio_only=True)
-            words = self.transcriber.transcribe(media).words
+            # The whole sound comes at once (a section is fetched by ffmpeg at playing speed): only the part is heard.
+            media, _ = self.ytdlp.download(url.strip(), self.paths.work / "find", "search", audio_only=True)
+            words = self.transcriber.transcribe(media, start=begin, end=finish).words
         except (DownloadError, TranscriptionError, MediaError) as exc:
             raise QueueError(f"recherche de « {phrase} » impossible : {exc}") from exc
+        log.info("Whisper a entendu %d mot(s)%s.", len(words),
+                 f", de {clock((begin or 0.0) + words[0].start)} à {clock((begin or 0.0) + words[-1].end)}" if words else "")
         heard = locate(words, phrase)
         if heard is None:
             raise QueueError(f"« {phrase} » introuvable {where} : une autre phrase, ou un autre passage ?")

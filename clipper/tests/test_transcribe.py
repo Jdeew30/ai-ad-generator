@@ -129,3 +129,12 @@ def test_a_phrase_is_located_even_said_loosely():
     assert locate(words, "NIQUE TA GRAND MERE") == 6.5  # case, accents and hyphens aside
     assert locate(words, "bonjour madame") is None and locate(words, "?") is None
     assert locate(words, "la plus belle insulte du monde entier") is None  # too few of its words
+
+
+@requires_ffmpeg
+def test_only_the_part_asked_for_is_heard(tmp_path):
+    tone = tmp_path / "tone.wav"
+    ffmpeg("-f", "lavfi", "-i", "sine=f=440:d=3", str(tone))
+    assert abs(load_audio(tone).size - 3 * SAMPLE_RATE) < SAMPLE_RATE // 10
+    assert abs(load_audio(tone, start=1.0, end=2.5).size - 1.5 * SAMPLE_RATE) < SAMPLE_RATE // 10
+    assert abs(load_audio(tone, start=2.0).size - SAMPLE_RATE) < SAMPLE_RATE // 10

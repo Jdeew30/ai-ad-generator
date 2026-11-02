@@ -44,9 +44,11 @@ class FakeYtDlp:
 class FakeTranscriber:
     def __init__(self):
         self.calls = 0
+        self.parts: list[tuple] = []  # (start, end) of the media listened to
 
-    def transcribe(self, media, *, prompt=None):
+    def transcribe(self, media, *, prompt=None, start=None, end=None):
         self.calls += 1
+        self.parts.append((start, end))
         return Transcript([Word(0.3, 0.7, "Attends"), Word(0.7, 1.2, "regarde"), Word(1.2, 1.8, "ça !")], "fr")
 
 
@@ -472,8 +474,8 @@ def test_a_passage_is_found_by_what_is_said_in_it(media, paths):
     video = "https://www.youtube.com/watch?v=abcdefghijk"
     report = run.run_shorts(url=video, find="Regarde ça !", start="45:00", end="1:08:00")
     [outcome] = report.published
-    # Whisper listened to the sound from 45:00 and heard « regarde » 0.7 s in: 15 s before it, 35 s after.
-    assert run.ytdlp.asked[0] == (video, 2700.0, 4080.0, True)
+    # The whole sound came, Whisper listened from 45:00 and heard « regarde » 0.7 s in: 15 s before it, 35 s after.
+    assert run.ytdlp.asked[0] == (video, None, None, True) and run.transcriber.parts[0] == (2700.0, 4080.0)
     assert outcome.candidate.key == "youtube:abcdefghijk@2685-2735" and outcome.candidate.manual
     missing = clipper(media, paths, clips={}).run_shorts(url=video, find="bonjour madame")
     assert missing.published == [] and missing.errors == [

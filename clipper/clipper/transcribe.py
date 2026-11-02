@@ -31,14 +31,16 @@ class TranscriptionError(Exception):
     pass
 
 
-def load_audio(media: Path) -> np.ndarray:
-    """Mono 16 kHz float32 samples, decoded by ffmpeg.
+def load_audio(media: Path, *, start: float | None = None, end: float | None = None) -> np.ndarray:
+    """Mono 16 kHz float32 samples, decoded by ffmpeg: the whole media, or from `start` to `end` (seconds).
 
     faster-whisper decodes files with PyAV, and its call breaks on recent PyAV releases
     (`metadata_errors` was removed); handing it samples sidesteps PyAV entirely.
     """
     try:
-        command = [ffmpeg_bin(), "-nostdin", "-hide_banner", "-loglevel", "error", "-i", str(media),
+        section = ["-ss", f"{start:.3f}"] if start else []
+        length = ["-t", f"{end - (start or 0.0):.3f}"] if end is not None else []
+        command = [ffmpeg_bin(), "-nostdin", "-hide_banner", "-loglevel", "error", *section, "-i", str(media), *length,
                    "-vn", "-ac", "1", "-ar", str(SAMPLE_RATE), "-f", "f32le", "-"]  # fmt: skip
         result = subprocess.run(command, capture_output=True, timeout=900)
     except (MediaError, subprocess.TimeoutExpired) as exc:
@@ -76,8 +78,10 @@ class Transcriber:
                 raise TranscriptionError(f"modèle Whisper « {self.model_name} » indisponible : {exc}") from exc
         return self._model
 
-    def transcribe(self, media: Path, *, prompt: str | None = None) -> Transcript:
-        audio = load_audio(media)
+    def transcribe(self, media: Path, *, prompt: str | None = None, start: float | None = None,
+                   end: float | None = None) -> Transcript:
+        """The words said in `media`, or from `start` to `end`: their times then count from `start`."""
+        audio = load_audio(media, start=start, end=end)
         if audio.size < SAMPLE_RATE // 2:
             return Transcript(words=[], language=self.language)
         model = self._load()
