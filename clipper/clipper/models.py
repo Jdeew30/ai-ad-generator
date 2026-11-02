@@ -40,6 +40,8 @@ class Candidate:
     streamer_login: str  # handle, for credits and per-streamer limits
     channel_url: str
     views: int = 0
+    likes: int | None = None  # YouTube: likes and comments of the video, when known
+    comments: int | None = None
     duration: float = 0.0  # length of the moment, in seconds
     created_at: datetime | None = None
     game: str | None = None
@@ -50,6 +52,9 @@ class Candidate:
     vod_offset: float | None = None
     thumbnail_url: str | None = None
     heat: float | None = None  # YouTube "most replayed" intensity, 0..1
+    momentum: float | None = None  # YouTube: pre-score of the video, 0-100 (views pace, likes, freshness, title)
+    creator: str | None = None  # YouTube: the creator behind the channel (« Squeezie » for « Squeezie Gaming »)
+    pace: float | None = None  # YouTube: views an hour the video gathers
     manual: bool = False  # queued by hand: skips popularity filters and AI rejection
     parts: list[str] = field(default_factory=list)  # clips of one moment put back together, in order (url is the first)
     score: float = 0.0
@@ -134,7 +139,8 @@ class ShortMeta:
     title: str  # YouTube title
     description: str
     hashtags: list[str]
-    score: float = 0.0
+    score: float = 0.0  # Claude's mark of the passage, 0-100 (an estimate of its pull, not a measure)
+    reason: str = ""  # why Claude keeps it, in a sentence
     trim_start: float | None = None  # relative to the downloaded media
     trim_end: float | None = None
     ai: bool = False  # written by Claude (True) or by the template (False)

@@ -60,6 +60,13 @@ class YouTubeSourceConfig:
     min_peak: float = 0.55  # "most replayed" intensity a peak needs (0..1)
     segment_min: float = 20.0
     segment_max: float = 58.0
+    # rss: every channel's RSS feed at each run, the most promising new videos looked into (videos_per_run);
+    # rotation: channels_per_run channels in turn, their videos_per_channel latest uploads.
+    watch: str = "rotation"
+    videos_per_run: int = 12  # rss: videos whose details and moments are fetched each run, the best pre-scored first
+    resolve_per_run: int = 40  # rss: channels whose YouTube id is looked up in a run (once per channel)
+    secondary_checks_per_run: int = 6  # rss: other channels of a YouTuber checked (description) before being watched
+    discover_per_run: int = 3  # rss: French streamers seen live on Twitch whose YouTube channel is looked for, per run
 
 
 @dataclass
@@ -249,6 +256,8 @@ def load_config(path: Path | None = None) -> Config:
         raise ConfigError("config.shorts.min_score : une note entre 0 et 100 attendue")
     if config.shorts.context_before < 0 or config.shorts.context_after < 0:
         raise ConfigError("config.shorts : context_before et context_after >= 0 attendus (en secondes)")
+    if config.youtube.watch not in {"rss", "rotation"}:
+        raise ConfigError("config.youtube.watch : rss ou rotation attendu")
     for login, override in config.streamers.items():
         if override.facecam is not None and (
             len(override.facecam) != 4 or not all(0 <= v <= 1 for v in override.facecam)
@@ -272,6 +281,7 @@ class Secrets:
     tiktok_refresh_token: str | None = None
     telegram_bot_token: str | None = None
     telegram_chat_id: str | None = None
+    telegram_api_url: str | None = None  # a local Bot API server (videos up to 2 GB) instead of api.telegram.org
     gh_secrets_token: str | None = None  # lets the bot store a rotated TikTok refresh token
     github_repository: str | None = None
     ytdlp_cookies: str | None = None  # Netscape cookies file content or path, for YouTube

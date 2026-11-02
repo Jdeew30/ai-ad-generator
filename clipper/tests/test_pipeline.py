@@ -189,6 +189,22 @@ def test_publishing_records_state_and_never_reposts(media, paths):
     assert fourth.published == [] and "Rien de nouveau" in fourth.markdown()
 
 
+def test_each_run_is_counted_and_the_dashboard_rewritten(media, paths):
+    telegram = FakePublisher("telegram")
+    clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram}, curator=Marks({"Alpha-2": 30})).run_shorts()
+    state = State.load(paths.state)
+    [run] = state.runs
+    assert (run["mode"], run["detected"], run["by_source"], run["published"], run["failed"]) == ("shorts", 3, {"twitch": 3}, 1, 0)
+    assert run["prepared"] >= 1 and next(iter(state.posted.values()))["score"] == 80
+    board = paths.state.with_name("dashboard.md").read_text(encoding="utf-8")
+    assert "| Shorts envoyés | 1 | 1 |" in board and "Note moyenne de Claude : 80/100" in board
+    assert "Twitch 1" in board and "## Derniers shorts envoyés" in board
+    assert paths.state.with_name("creators.json").exists()
+    dry = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram})
+    dry.run_shorts(dry_run=True)
+    assert len(State.load(paths.state).runs) == 1  # a dry run leaves no trace
+
+
 def test_without_publishers_the_artifact_counts_as_posted(media, paths):
     report = clipper(media, paths, clips=CLIPS, publishers={}).run_shorts()
     assert len(report.published) == 1 and not report.errors

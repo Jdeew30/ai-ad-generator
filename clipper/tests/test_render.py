@@ -167,3 +167,24 @@ def test_clips_of_one_moment_are_put_back_together(tmp_path):
     # Two clips far apart simply follow each other.
     apart = join_overlapping([clip("c", 0, 10), clip("d", 35, 10)], tmp_path / "apart.mp4")
     assert probe(apart).duration == pytest.approx(20.0, abs=0.4)
+
+
+def test_frames_of_a_section_that_trips_ffmpeg_are_still_extracted(tmp_path, monkeypatch):
+    import clipper.media as media_module
+
+    calls: list[list[str]] = []
+
+    def ffmpeg_that_aborts_on_input_seek(args, **kwargs):
+        calls.append(args)
+        if args[0] == "-ss":  # seeking the input of this section: « Assertion pkt failed »
+            raise media_module.MediaError("ffmpeg a échoué (-6) : Assertion pkt failed at src/fftools/ffmpeg_dec.c:597")
+        Path(args[-1]).write_bytes(b"jpeg")
+
+    monkeypatch.setattr(media_module, "run_ffmpeg", ffmpeg_that_aborts_on_input_seek)
+    frames = extract_frames(tmp_path / "section.mp4", tmp_path / "frames", count=3, duration=30.0)
+    assert [frame.name for frame in frames] == ["frame_00.jpg", "frame_01.jpg", "frame_02.jpg"]
+    assert calls[1][:4] == ["-err_detect", "ignore_err", "-fflags", "+discardcorrupt"]
+
+    monkeypatch.setattr(media_module, "run_ffmpeg", lambda args, **kwargs: (_ for _ in ()).throw(media_module.MediaError("x")))
+    with pytest.raises(media_module.MediaError, match="aucune image"):
+        extract_frames(tmp_path / "section.mp4", tmp_path / "none", count=2, duration=30.0)

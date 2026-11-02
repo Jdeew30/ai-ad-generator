@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import logging
 import re
+import time
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
@@ -27,6 +29,19 @@ _PERMANENT = re.compile(
     re.IGNORECASE,
 )
 _BOT_CHECK = re.compile(r"confirm you.re not a bot", re.IGNORECASE)
+# Network hiccups and server errors, worth another go after a pause (a 404 or a private video is not).
+_TRANSIENT = re.compile(
+    r"timed? ?out|temporar|connection (reset|refused|aborted)|remote end closed|incomplete ?read|"
+    r"HTTP Error 5\d\d|getaddrinfo|name or service not known|network is unreachable|ssl|eof occurred",
+    re.IGNORECASE,
+)
+ATTEMPTS = 3  # tries of a whole listing, metadata or download call; yt-dlp also retries each request inside
+PAUSES = (5.0, 20.0)  # seconds before the 2nd and the 3rd try
+
+
+def _backoff(attempt: int) -> float:
+    """yt-dlp's pause before retrying a request or a fragment: 1, 2, 4, 8… seconds, 20 at most."""
+    return min(2.0 ** attempt, 20.0)
 
 
 class _Logger:
@@ -47,9 +62,10 @@ class _Logger:
 class YtDlp:
     """Thin wrapper around the yt-dlp Python API (listing, metadata, section downloads)."""
 
-    def __init__(self, cookies_file: Path | None = None) -> None:
+    def __init__(self, cookies_file: Path | None = None, *, sleep: Callable[[float], None] = time.sleep) -> None:
         self.cookies_file = cookies_file
         self.blocked = False  # YouTube asked to sign in to prove this server is not a bot
+        self.sleep = sleep
 
     def _options(self, **extra: Any) -> dict[str, Any]:
         options: dict[str, Any] = {
@@ -58,8 +74,11 @@ class YtDlp:
             "noprogress": True,
             "logger": _Logger(),
             "socket_timeout": 30,
-            "retries": 3,
-            "fragment_retries": 3,
+            "retries": 5,
+            "fragment_retries": 5,
+            "extractor_retries": 3,
+            "skip_unavailable_fragments": True,
+            "retry_sleep_functions": {"http": _backoff, "fragment": _backoff, "extractor": _backoff},
             # YouTube needs a JavaScript runtime: deno when installed, else the Node.js already on GitHub runners.
             "js_runtimes": {"deno": {}, "node": {}},
         }
@@ -72,6 +91,19 @@ class YtDlp:
         return options
 
     def _run(self, url: str, options: dict[str, Any], download: bool) -> dict[str, Any]:
+        """One yt-dlp call, tried again after a pause when it failed on the network or a server error."""
+        for attempt in range(ATTEMPTS):
+            try:
+                return self._once(url, options, download)
+            except DownloadError as exc:
+                if exc.permanent or exc.blocked or not _TRANSIENT.search(str(exc)) or attempt + 1 == ATTEMPTS:
+                    raise
+                pause = PAUSES[min(attempt, len(PAUSES) - 1)]
+                log.warning("yt-dlp : %s — nouvel essai dans %.0f s (%s)", str(exc)[:200], pause, url)
+                self.sleep(pause)
+        raise AssertionError("unreachable")
+
+    def _once(self, url: str, options: dict[str, Any], download: bool) -> dict[str, Any]:
         import yt_dlp
 
         try:
@@ -85,9 +117,15 @@ class YtDlp:
             self.blocked = self.blocked or blocked
             raise DownloadError(message, permanent=bool(_PERMANENT.search(message)), blocked=blocked) from exc
 
-    def list_flat(self, url: str, limit: int) -> list[dict[str, Any]]:
+    def listing(self, url: str, limit: int) -> dict[str, Any]:
+        """A playlist or channel tab, its first `limit` entries unresolved: the page's own details come with them
+        (for a channel: its id, title, handle, subscribers and description)."""
         info = self._run(url, self._options(extract_flat="in_playlist", playlistend=limit, lazy_playlist=True), False)
-        return [entry for entry in (info.get("entries") or []) if isinstance(entry, dict)][:limit]
+        info["entries"] = [entry for entry in (info.get("entries") or []) if isinstance(entry, dict)][:limit]
+        return info
+
+    def list_flat(self, url: str, limit: int) -> list[dict[str, Any]]:
+        return self.listing(url, limit)["entries"]
 
     def info(self, url: str) -> dict[str, Any]:
         return self._run(url, self._options(), False)

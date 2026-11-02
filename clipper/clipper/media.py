@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 import shutil
@@ -10,6 +11,8 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image
+
+log = logging.getLogger(__name__)
 
 
 class MediaError(Exception):
@@ -180,14 +183,23 @@ def extract_frames(path: Path, out_dir: Path, *, count: int = 8, width: int = 12
     duration = duration if duration is not None else probe(path).duration
     frames: list[Path] = []
     for index in range(count):
-        at = duration * (index + 0.5) / count
+        at = f"{duration * (index + 0.5) / count:.3f}"
         target = out_dir / f"frame_{index:02d}.jpg"
-        run_ffmpeg(
-            ["-ss", f"{at:.3f}", "-i", str(path), "-frames:v", "1", "-vf", f"scale={width}:-2", "-q:v", "3", str(target)],
-            timeout=120,
-        )
-        if target.exists():
-            frames.append(target)
+        # A section copied from YouTube can start between keyframes, where seeking the input makes ffmpeg abort
+        # (« Assertion pkt failed »): then ignore the broken packets, or decode from the start up to that instant.
+        for seek in (["-ss", at, "-i", str(path)],
+                     ["-err_detect", "ignore_err", "-fflags", "+discardcorrupt", "-ss", at, "-i", str(path)],
+                     ["-i", str(path), "-ss", at]):  # fmt: skip
+            try:
+                run_ffmpeg([*seek, "-frames:v", "1", "-vf", f"scale={width}:-2", "-q:v", "3", str(target)], timeout=120)
+            except MediaError as exc:
+                log.debug("Image %s de %s : %s", at, path.name, str(exc)[-200:])
+                continue
+            if target.exists():
+                frames.append(target)
+                break
+    if not frames:
+        raise MediaError(f"aucune image lisible dans {path.name}")
     return frames
 
 

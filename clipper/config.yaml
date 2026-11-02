@@ -103,7 +103,12 @@ youtube:
     # cuisine
     "@ChefMichelDumas", "@FastGoodCuisine",
   ]
-  channels_per_run: 12          # à tour de rôle
+  watch: rss                    # le flux RSS de CHAQUE chaîne à chaque passage (gratuit, sans quota ni cookies)
+  videos_per_run: 12            # vidéos récentes regardées de près par passage : les plus prometteuses (pré-score)
+  resolve_per_run: 100          # chaînes dont l'identifiant YouTube est cherché par passage (une seule fois chacune)
+  secondary_checks_per_run: 6   # autres chaînes d'un YouTubeur vérifiées par passage avant d'être suivies
+  discover_per_run: 3           # streamers FR vus en live sur Twitch dont on cherche la chaîne YouTube, par passage
+  channels_per_run: 12          # mode « rotation » seulement : à tour de rôle
   related_channels: true        # + les autres chaînes de chaque YouTubeur (« Squeezie Gaming », « Djilsi Gaming »…)
   tabs: [videos]
   videos_per_channel: 2
@@ -112,7 +117,7 @@ youtube:
   segments_per_video: 2
 
 shorts:
-  per_source: {twitch: 1, youtube: 1}  # à chaque passage (5 par jour) : un short Twitch et un short YouTube
+  per_source: {twitch: 1, youtube: 2}  # à chaque passage (5 par jour) : un short Twitch et deux shorts YouTube
   per_run: 1                    # sans per_source : shorts publiés à chaque passage, toutes sources confondues
   candidates_factor: 3          # avec Claude : 3 candidats examinés par série (jusqu'à 3 séries par passage)
   min_score: 60                 # note de Claude sur 100 : en dessous, le clip n'est pas publié

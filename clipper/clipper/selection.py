@@ -13,6 +13,8 @@ from .state import State, moment_of, same_moment
 
 log = logging.getLogger(__name__)
 
+DIVERSITY = 0.25  # weight of a creator's shorts of the past week against its next candidates
+
 
 def _plain(text: str) -> str:
     """Lowercase without accents, so that "Publicité" and "publicite" match."""
@@ -48,7 +50,9 @@ def score(candidate: Candidate, median_views: float, now: datetime, *, freshness
     else:
         fit = 0.7  # long YouTube windows are trimmed later
     heat = candidate.heat if candidate.heat is not None else 1.0
-    return (base + 0.5 * relative) * (1.0 - freshness_weight + freshness_weight * fresh) * fit * (0.5 + 0.5 * heat)
+    # A YouTube video that takes off (views pace, likes, title) puts its moments first: x0.7 to x1.3.
+    momentum = 0.7 + 0.6 * candidate.momentum / 100 if candidate.momentum is not None else 1.0
+    return (base + 0.5 * relative) * (1.0 - freshness_weight + freshness_weight * fresh) * fit * (0.5 + 0.5 * heat) * momentum
 
 
 def spread(candidates: list[Candidate]) -> list[Candidate]:
@@ -112,6 +116,9 @@ def rank(
         peers = views_by_streamer[(candidate.source, candidate.streamer_login)]
         median = statistics.median(peers) if len(peers) >= 3 else 0.0
         candidate.score = score(candidate, median, now, freshness_weight=0.15 if compilation else 0.25)
+        if not compilation and not candidate.manual and candidate.streamer_login:
+            # Room for other creators: each short of this one in the past week lowers its next ones (x0.8, x0.67…).
+            candidate.score /= 1 + DIVERSITY * state.posted_count(candidate.streamer_login, now - timedelta(days=7))
     kept.sort(key=lambda c: c.score, reverse=True)
 
     # The same moment is often clipped by several viewers: keep the best version only.
