@@ -895,6 +895,31 @@
    "url": "https://www.youtube.com/watch?v=4X440MciNX8",
    "views": 1630710
   },
+  "youtube:5A-jZ1XDmMU@345-405": {
+   "at": "2026-11-02T16:04:10.242578+00:00",
+   "created_at": "2026-11-01T13:00:33+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "76",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "score": 68.0,
+   "source": "youtube",
+   "span": [
+    "yt:5A-jZ1XDmMU",
+    345.0,
+    405.0
+   ],
+   "streamer": "Wankil Studio - Laink et Terracid",
+   "streamer_login": "wankilfr",
+   "title": "Laink en a marre qu'on dise que Wankil n'a rien inventé",
+   "url": "https://www.youtube.com/watch?v=5A-jZ1XDmMU",
+   "views": 420869
+  },
   "youtube:BByplh9JRTs@2045-2105": {
    "at": "2026-11-01T14:52:21.158350+00:00",
    "created_at": "2026-10-31T10:00:09+00:00",
@@ -2033,6 +2058,10 @@
    "at": "2026-11-01T15:51:07.798429+00:00",
    "reason": "revue : Présentation des concurrents avant une course de Twingo, puis un petit échange sur le bouton warning qui fait sourire mais tombe à plat. Pas de vraie chute, et le moment n'intéresse guère au-delà des fans d'automobile."
   },
+  "youtube:iJi5wWrfZtU@635-695": {
+   "at": "2026-11-02T16:03:04.086020+00:00",
+   "reason": "revue : note 54/100 (minimum 60). Voiture sans suspensions sur circuit avec quelques punchlines et la révélation du frein à main, mais extrait décousu avec des temps morts."
+  },
   "youtube:uQ6Yr6sLhYs@1381-1441": {
    "at": "2026-11-01T18:37:26.948489+00:00",
    "reason": "revue : Imitation de Macron peu convaincante, chute molle, puis passage à un autre talent coupé avant la révélation : extrait sans conclusion."
@@ -2056,6 +2085,10 @@
   "youtube:uoovOlxmNqc@983-1043": {
    "at": "2026-11-02T14:10:35.412884+00:00",
    "reason": "revue : note 40/100 (minimum 60). Vulgarisation intéressante sur les prénoms (les exemples Moon, Arthas et Albus en 2025 sont amusants), mais c'est un exposé théorique sans chute ni moment fort, peu adapté au format best-of."
+  },
+  "youtube:v9wYSebfh4o@1474-1534": {
+   "at": "2026-11-02T16:03:04.085980+00:00",
+   "reason": "revue : note 52/100 (minimum 60). Test amusant de lunettes qui inversent la vision, réaction nauséeuse sympa mais chute assez molle et mise en place longue."
   },
   "youtube:v9wYSebfh4o@2145-2205": {
    "at": "2026-11-02T10:53:51.449912+00:00",
@@ -4364,6 +4397,19 @@
    "prepared": 9,
    "published": 1,
    "rejected": 8
+  },
+  {
+   "at": "2026-11-02T15:51:03.972621+00:00",
+   "by_source": {
+    "youtube": 114
+   },
+   "detected": 114,
+   "errors": 0,
+   "failed": 0,
+   "mode": "shorts",
+   "prepared": 3,
+   "published": 1,
+   "rejected": 2
   }
  ],
  "streamers_seen": {

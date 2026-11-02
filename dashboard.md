@@ -1,22 +1,22 @@
 # Tableau de bord du clipper
 
-Mis à jour le 02/11/2026 à 15:32 UTC.
+Mis à jour le 02/11/2026 à 15:51 UTC.
 
 ## Activité
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 2766 | 2766 |
-| Vidéos téléchargées et préparées | 9 | 9 |
-| Shorts envoyés | 1 | 1 |
-| Écartés par la revue | 8 | 8 |
+| Moments trouvés (Twitch + YouTube) | 2880 | 2880 |
+| Vidéos téléchargées et préparées | 12 | 12 |
+| Shorts envoyés | 2 | 2 |
+| Écartés par la revue | 10 | 10 |
 | Échecs (téléchargement, montage, envoi) | 0 | 0 |
-| Passages | 2 | 2 |
+| Passages | 3 | 3 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 28, à la demande 6, YouTube 6.
-Note moyenne de Claude : 62/100 sur 1 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 28, YouTube 7, à la demande 6.
+Note moyenne de Claude : 65/100 sur 2 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), Locklear (3), Amixem (3), Domingo (2), AmineMaTue (2), Michou (2), Gotaga (2), GOTAGA (2).
 
 ## Veille YouTube
@@ -28,6 +28,7 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), Locklear (3), A
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 02/11 16:04 | YouTube | Wankil Studio - Laink et Terracid | [Laink en a marre qu'on dise que Wankil n'a rien inventé](https://www.youtube.com/watch?v=5A-jZ1XDmMU) | 68 |
 | 02/11 15:43 | Twitch | TheGuill84 | [TheGuill84 se prend un screamer en plein Minecraft](https://www.twitch.tv/theguill84/clip/MoistSavagePenguinHumbleLife-UPJP20cxRNZ4YC5h) | 62 |
 | 02/11 14:20 | à la demande | GOTAGA | [Gotaga souffle la pire insulte au jeu du meilleur menteur (ft. Joyca, Djilsi, Theodort)](https://www.youtube.com/watch?v=ZA_3eoib31s) |  |
 | 02/11 12:56 | à la demande | GOTAGA | [Gotaga : le jeu du meilleur menteur avec Joyca, Djilsi et Theodort](https://www.youtube.com/watch?v=ZA_3eoib31s) |  |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), Locklear (3), A
 | 31/10 17:06 | YouTube | Amixem | [Amixem & Cyprien : le plan d'évasion avec des draps… alors qu'il y a une porte](https://www.youtube.com/watch?v=_hzgpE0NXR8) |  |
 | 31/10 13:01 | Twitch | otplol_ | [OTP LoL : « C'est honteux » – l'erreur qui coûte la game aux Worlds](https://www.twitch.tv/otplol_/clip/SilkyCrypticPartridgeOpieOP--3SGNkODbvJ6HEPu) |  |
 | 31/10 10:22 | à la demande | Kameto | [Kameto réagit au tirage du round 5 des Worlds](https://www.twitch.tv/kamet0/clip/SuspiciousEnchantingCurlewTakeNRG-qSV31CNiDWiK_FA3) |  |
-| 31/10 09:48 | Twitch | Kameto | [Kameto vit le tirage du round 5 des Worlds en direct (KC)](https://www.twitch.tv/kamet0/clip/SuspiciousEnchantingCurlewTakeNRG-qSV31CNiDWiK_FA3) |  |
 
 ## Derniers échecs
 
