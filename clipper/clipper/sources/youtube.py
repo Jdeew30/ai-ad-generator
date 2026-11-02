@@ -22,7 +22,8 @@ SEARCH_CHANNELS = "https://www.youtube.com/results?search_query={}&sp=EgIQAg%253
 # "<name> <suffix>" titles of a YouTuber's own other channels: "Squeezie Gaming", "Djilsi Gaming", "X Vlog"...
 SECOND_CHANNEL_SUFFIXES = {"gaming", "games", "jeux", "2", "bis", "vlog", "vlogs", "live", "lives", "replay", "replays",
                            "rediff", "rediffs", "tv", "plus", "extra", "bonus", "irl", "podcast"}  # fmt: skip
-MIN_SECOND_CHANNEL_FOLLOWERS = 10_000  # a fan's channel with the same name stays out
+MIN_FOLLOWERS = 10_000  # a fan's channel with the same name stays out
+NO_VIDEOS_TAB = "does not have a videos tab"  # yt-dlp, on a channel that only has lives (or shorts)
 RELATED_LOOKUPS_PER_RUN = 8
 RELATED_REFRESH_DAYS = 14
 NO_HEATMAP = "sans « moments les plus revus »"
@@ -246,7 +247,7 @@ def related_channels(ytdlp: YtDlp, ref: str) -> list[str]:
     Only "<name> <suffix>" titles with a known suffix count, so fan channels ("<name> Clips", "Best of <name>") and
     the automatic "Topic" channels are left out, as are channels with few subscribers.
     """
-    name = ref.strip().rstrip("/").rsplit("/", 1)[-1].lstrip("@")
+    name = _name(ref)
     base = _plain(name)
     if not base:
         return []
@@ -256,13 +257,72 @@ def related_channels(ytdlp: YtDlp, ref: str) -> list[str]:
         if not title.startswith(base) or title[len(base):] not in SECOND_CHANNEL_SUFFIXES:
             continue
         followers = entry.get("channel_follower_count")
-        if followers is not None and followers < MIN_SECOND_CHANNEL_FOLLOWERS:
+        if followers is not None and followers < MIN_FOLLOWERS:
             continue
-        handle = entry.get("uploader_id") or ""
-        link = handle if handle.startswith("@") else entry.get("url")
+        link = _link(entry)
         if link and link not in found:
             found.append(link)
     return found
+
+
+def renamed_channel(ytdlp: YtDlp, ref: str) -> str | None:
+    """The channel a handle that does not exist stands for, found by searching its name: "@LeWoop" -> "Le Woop"'s handle.
+
+    Only a channel titled with that very name counts ("&" read as "et", a " - subtitle" left out), with enough subscribers;
+    the most followed if several.
+    """
+    name = _name(ref)
+    wanted = _plain(name)
+    if not wanted:
+        return None
+    best: tuple[int, str] | None = None
+    for entry in ytdlp.list_flat(SEARCH_CHANNELS.format(quote(re.sub(r"(?<=[a-z])(?=[A-Z])", " ", name))), 10):
+        title = entry.get("channel") or entry.get("title") or ""
+        names = {title, re.split(r"\s+[-–|(]", title)[0]}  # "Wankil Studio - Laink et Terracid" is "Wankil Studio"
+        if wanted not in {_plain(n.replace("&", word)) for n in names for word in ("&", "et", "and")}:
+            continue
+        followers = entry.get("channel_follower_count")
+        link = _link(entry)
+        if not link or (followers is not None and followers < MIN_FOLLOWERS) or _name(link).lower() == name.lower():
+            continue
+        if best is None or (followers or 0) > best[0]:
+            best = (followers or 0, link)
+    return best[1] if best else None
+
+
+def _name(ref: str) -> str:
+    """'https://www.youtube.com/@Squeezie' or '@Squeezie' -> 'Squeezie'."""
+    return ref.strip().rstrip("/").rsplit("/", 1)[-1].lstrip("@")
+
+
+def _link(entry: dict[str, Any]) -> str | None:
+    """A channel search result's handle, or its address."""
+    handle = entry.get("uploader_id") or ""
+    return handle if handle.startswith("@") else entry.get("url")
+
+
+def _channel_tab(ytdlp: YtDlp, ref: str, tab: str, count: int) -> tuple[str, list[dict[str, Any]]]:
+    """The channel and the `count` latest entries of its `tab`.
+
+    Failing on the videos tab means a wrong handle, looked up by its name, or a channel of lives only: its lives are read.
+    """
+    try:
+        return ref, ytdlp.list_flat(f"{channel_url(ref)}/{tab}", count)
+    except DownloadError as exc:
+        if exc.blocked or tab != "videos":
+            raise
+        renamed = None
+        if "/@" in channel_url(ref):
+            try:
+                renamed = renamed_channel(ytdlp, ref)
+            except DownloadError:
+                pass
+        if not renamed:
+            if NO_VIDEOS_TAB not in str(exc):
+                raise exc
+            return ref, ytdlp.list_flat(f"{channel_url(ref)}/streams", count)
+    log.warning("Chaîne YouTube %s introuvable : lue sous le nom %s, à corriger dans config.yaml", ref, renamed)
+    return renamed, ytdlp.list_flat(f"{channel_url(renamed)}/{tab}", count)
 
 
 def _refresh_related(channels: list[str], ytdlp: YtDlp, related: dict[str, dict[str, Any]], now: datetime) -> None:
@@ -323,14 +383,13 @@ def discover_youtube(
         channels = (channels[start:] + channels[:start])[: settings.channels_per_run]
         log.info("YouTube : %s", ", ".join(channels))
     for ref in channels:
-        base = channel_url(ref)
         seen: set[str] = set()
         for tab in settings.tabs:
             try:
-                entries = ytdlp.list_flat(f"{base}/{tab}", settings.videos_per_channel)
+                ref, entries = _channel_tab(ytdlp, ref, tab, settings.videos_per_channel)
             except DownloadError as exc:
-                # The videos tab exists on every channel: failing there means a wrong handle (or YouTube blocking).
-                (log.warning if tab == "videos" else log.debug)("Chaîne YouTube introuvable ou indisponible (%s/%s) : %s", base, tab, exc)
+                (log.warning if tab == "videos" else log.debug)(
+                    "Chaîne YouTube introuvable ou indisponible (%s/%s) : %s", channel_url(ref), tab, exc)
                 continue
             for entry in entries:
                 video_id = entry.get("id")

@@ -23,6 +23,8 @@ _HALLUCINATIONS = re.compile(
 )
 # This many words in a row without a single letter are Whisper looping on game sound (« 9 .9 9 .9 … »), not speech.
 _LOOP = 4
+# Whisper cuts « c'est », « celle-ci » and « 1.6 » before the mark, with no space: that piece belongs to the word before.
+_ATTACHED = ("'", "’", "-", ".")
 
 
 class TranscriptionError(Exception):
@@ -95,10 +97,16 @@ class Transcriber:
                     continue
                 if segment.no_speech_prob > 0.6 and segment.avg_logprob < -1.0:
                     continue
+                first = len(words)
                 for word in segment.words or []:
                     text = word.word.strip()
-                    if text and _latin(text):
-                        words.append(Word(start=round(word.start, 3), end=round(max(word.end, word.start + 0.05), 3), text=text))
+                    if not text or not _latin(text):
+                        continue
+                    end = round(max(word.end, word.start + 0.05), 3)
+                    if word.word.startswith(_ATTACHED) and len(words) > first:
+                        words[-1] = Word(start=words[-1].start, end=end, text=words[-1].text + text)
+                    else:
+                        words.append(Word(start=round(word.start, 3), end=end, text=text))
         except Exception as exc:
             raise TranscriptionError(f"transcription de {media.name} impossible : {exc}") from exc
         return Transcript(words=_without_loops(words), language=getattr(info, "language", None))

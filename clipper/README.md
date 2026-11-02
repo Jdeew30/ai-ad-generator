@@ -225,8 +225,11 @@ Activée : 91 YouTubeurs FR de tous les domaines (`youtube.channels`), 12 chaîn
 (`channels_per_run`). Avec `related_channels`, le robot cherche aussi les autres chaînes de chaque YouTubeur
 (« Squeezie Gaming », « Djilsi Gaming », « … Vlog », « … 2 ») : seulement les noms « <nom> <suffixe> » avec
 assez d'abonnés, donc ni les chaînes de fans ni les chaînes « Topic » ; 8 recherches par passage, gardées
-14 jours. Une chaîne introuvable est signalée dans le journal du passage. Le robot prend leurs vidéos de la
-semaine (plus de 20 000 vues, pour ne pas écarter les chaînes secondaires) et découpe les passages « les plus revus ».
+14 jours. Une chaîne dont le @ n'existe pas est cherchée par son nom (« @LeWoop » → la chaîne « Le Woop », la
+plus suivie de ce nom exact) et le journal du passage donne le bon @ à mettre dans `config.yaml` ; une chaîne
+sans onglet « Vidéos » (que des lives) donne ses lives. Le robot prend
+leurs vidéos des deux dernières semaines (`max_age_days`, plus de 20 000 vues, pour ne pas écarter les chaînes
+secondaires) et découpe les passages « les plus revus ».
 Quand YouTube ne fournit pas cette courbe, il lit les 60 commentaires les plus appréciés de la vidéo et prend les
 moments que les spectateurs citent (« 12:34 mdr »), d'autant plus qu'ils sont cités et aimés. Le journal du passage
 compte les vidéos écartées et dit pourquoi (trop ancienne, pas assez de vues, ni courbe ni minutage en commentaire…).

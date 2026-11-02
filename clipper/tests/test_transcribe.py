@@ -95,3 +95,24 @@ def test_whisper_junk_on_game_sound_is_not_captioned(tmp_path):
     transcriber._model = FakeModel()
     transcript = transcriber.transcribe(tone)
     assert [w.text for w in transcript.words] == ["Nan,", "nan", "?", "Aïe,", "il", "a", "16", "ans"]
+
+
+@requires_ffmpeg
+def test_french_elisions_stay_one_word(tmp_path):
+    tone = tmp_path / "tone.wav"
+    ffmpeg("-f", "lavfi", "-i", "sine=f=440:d=2", str(tone))
+
+    class FakeModel:
+        def transcribe(self, audio, **options):
+            return iter([
+                segment(" C'est celle-ci, la 1.6", [(0.0, 0.1, " C"), (0.1, 0.3, "'est"), (0.3, 0.5, " celle"), (0.5, 0.7, "-ci,"),
+                                                   (0.7, 0.8, " la"), (0.8, 0.9, " 1"), (0.9, 1.0, ".6")]),
+                segment("'Allô ?", [(1.0, 1.2, "'Allô"), (1.2, 1.3, " ?")]),  # nothing before it in its sentence
+            ]), SimpleNamespace(language="fr")  # fmt: skip
+
+    transcriber = Transcriber("small", "fr")
+    transcriber._model = FakeModel()
+    words = transcriber.transcribe(tone).words
+    assert [(w.text, w.start, w.end) for w in words] == [
+        ("C'est", 0.0, 0.3), ("celle-ci,", 0.3, 0.7), ("la", 0.7, 0.8), ("1.6", 0.8, 1.0), ("'Allô", 1.0, 1.2), ("?", 1.2, 1.3),
+    ]  # fmt: skip

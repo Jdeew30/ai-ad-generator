@@ -107,7 +107,7 @@ youtube:
   related_channels: true        # + les autres chaînes de chaque YouTubeur (« Squeezie Gaming », « Djilsi Gaming »…)
   tabs: [videos]
   videos_per_channel: 2
-  max_age_days: 7
+  max_age_days: 14              # vidéos des deux dernières semaines
   min_views: 20000              # les chaînes secondaires (replays…) font moins de vues
   segments_per_video: 2
 
