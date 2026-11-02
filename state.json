@@ -80,6 +80,16 @@
   "twitch:TiredQuaintPonyRickroll-5UhwU7uuMU9_RiNn": "2026-11-01T13:32:54.534158+00:00"
  },
  "failures": {
+  "twitch:DeterminedCrazyYogurtDoritosChip-xWhjE5OVz_Ueozqe": {
+   "at": "2026-11-02T11:33:54.683681+00:00",
+   "count": 1,
+   "error": "non évalué par Claude"
+  },
+  "twitch:InventiveSavageSwanTTours-GaE35WJ0_XxSpcgv": {
+   "at": "2026-11-02T11:33:54.683744+00:00",
+   "count": 1,
+   "error": "non évalué par Claude"
+  },
   "youtube:7U-ZIMrgTEI@242-302": {
    "at": "2026-11-01T14:45:33.912336+00:00",
    "count": 1,
@@ -564,6 +574,30 @@
    "url": "https://www.twitch.tv/samueletienne/clip/ObliviousPlacidArtichokeSaltBae-gsVxRLGhH9BuoGzo",
    "views": 746
   },
+  "twitch:ObliviousSlipperyTildeLitFam-QSLehFCUQbHoA4Q2": {
+   "at": "2026-11-02T11:49:25.674771+00:00",
+   "created_at": "2026-10-29T20:33:34+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "67",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "twitch",
+   "span": [
+    "tw:2914132816",
+    6792.0,
+    6852.0
+   ],
+   "streamer": "Locklear",
+   "streamer_login": "locklear",
+   "title": "Locklear débarque chez M8 pour annoncer une team Overwatch… ou pas",
+   "url": "https://www.twitch.tv/locklear/clip/ObliviousSlipperyTildeLitFam-QSLehFCUQbHoA4Q2",
+   "views": 427
+  },
   "twitch:PeppyInnocentBulgogiAMPTropPunch-j3ZpDbZVrzgvNXmT": {
    "at": "2026-11-01T19:02:26.027635+00:00",
    "created_at": "2026-10-30T20:14:43+00:00",
@@ -986,6 +1020,10 @@
    "at": "2026-10-29T16:06:02.113141+00:00",
    "reason": "revue : Ponce dit passer sa vie à insulter une personne réelle (apparemment un élu, d'après le chat) et évoque un procès en diffamation : insultes visant une personne réelle, risque juridique. La fin est en plus un temps mort (lecture du chat)."
   },
+  "twitch:BlatantAdorableDiamondHeyGuys-OcV3jsNkmvuMJau-": {
+   "at": "2026-11-02T11:48:08.513833+00:00",
+   "reason": "revue : note 35/100 (minimum 60). Domingo donne des nouvelles de sa cheville et de sa rééducation. C'est du bavardage sans enjeu fort et le début est décousu."
+  },
   "twitch:BlatantTubularTraySmoocherZ-gi0lEnNjKSTCviIu": {
    "at": "2026-10-29T22:04:24.075880+00:00",
    "reason": "revue : Simple annonce de planning (réaction Koh Lanta, sortie de GTA 6), sans moment fort ni chute. Bavardage peu intéressant hors du live."
@@ -997,6 +1035,10 @@
   "twitch:BlightedZanyShrimpNerfBlueBlaster-7NNmQeBQdjf_FB0E": {
    "at": "2026-10-31T15:45:25.612174+00:00",
    "reason": "revue : Le streamer regarde un film d'horreur qui ne lui appartient pas : l'écran est occupé par le film, et sa réaction est quasi inexistante (une seule phrase banale)."
+  },
+  "twitch:BlindingDrabQueleaDancingBaby-m3nlFmHxtZTLP2U9": {
+   "at": "2026-11-02T11:46:39.370262+00:00",
+   "reason": "revue : note 25/100 (minimum 60). Co-stream VCT Game Changers : Squeezie et son invité dansent pendant une pause, avec des images de joueuses en fond. Aucune parole exploitable ni action de match, réaction peu marquante."
   },
   "twitch:BlindingFaithfulBunnyBlargNaut-K1gLO4-0szTIEyj2": {
    "at": "2026-10-31T19:20:35.521856+00:00",
@@ -1145,6 +1187,10 @@
   "twitch:ElatedGracefulLadiesSSSsss-tWz_l6RVHXGQDzGr": {
    "at": "2026-10-30T22:00:59.959418+00:00",
    "reason": "revue : Prise de parole sérieuse de Squeezie contre les propos haineux, sans contexte sur ce qui l'a déclenchée ni chute : le message est louable mais l'extrait reste un rappel moral qui ne tient pas seul en short."
+  },
+  "twitch:ElegantViscousMacaroniOSsloth-8fdHFkIQflnxsUM5": {
+   "at": "2026-11-02T11:35:46.787239+00:00",
+   "reason": "revue : Retransmission d'un événement de catch avec annonce de billetterie et partenaire sponsor : surtout de la promo, sans réaction ni moment fort du créateur."
   },
   "twitch:EmpathicBoredSandpiperMcaT-nJWUsGDvpjES62tF": {
    "at": "2026-10-29T19:09:27.670310+00:00",
@@ -1302,6 +1348,10 @@
    "at": "2026-10-29T13:07:01.340757+00:00",
    "reason": "revue : Extrait de gameplay sans réaction exploitable : il n'y a presque aucune parole et le clip se termine sur une défaite sans chute claire. Le sens dépend du contexte du live."
   },
+  "twitch:LachrymoseEntertainingWatermelonRalpherZ-sUJmI8e7h9RIfnsd": {
+   "at": "2026-11-02T11:48:08.513761+00:00",
+   "reason": "revue : note 42/100 (minimum 60). Antoine Daniel explique simplement pourquoi on utilise un fond vert ou bleu. C'est un peu instructif, mais sans vraie chute et le début est confus."
+  },
   "twitch:LaconicGlamorousButterflyNinjaGrumpy-HBjRieNwUwUZ1Psa": {
    "at": "2026-10-28T22:22:54.963495+00:00",
    "reason": "revue : Simple bavardage sur l'âge d'un enfant, sans réaction forte ni chute ; c'est une discussion privée sur la famille, peu d'intérêt hors contexte."
@@ -1450,6 +1500,10 @@
    "at": "2026-10-28T22:19:08.244869+00:00",
    "reason": "revue : L'extrait commence par environ 30 secondes sans dialogue exploitable. La suite n'est qu'un bavardage sur le chocolat antidépresseur, sans réaction forte ni vraie chute, et reste peu compréhensible sans contexte."
   },
+  "twitch:RelatedCrypticDonutFailFish-FJjuJg6fHXtMZjQ1": {
+   "at": "2026-11-02T11:46:39.370107+00:00",
+   "reason": "revue : note 42/100 (minimum 60). Réaction humoristique d'Ultia en jeu (bébé qui dort dans Resident Evil Village), petite vanne de parent épuisé, mais chute faible et fin de l'extrait creuse."
+  },
   "twitch:RelentlessBlueEndiveRiPepperonis-6HcyNzBZl8u6Ysfg": {
    "at": "2026-10-30T08:28:20.442696+00:00",
    "reason": "revue : Moment sympathique : Inoxtag croise des viewers avec le tag Team Crouton et ils se font un câlin. Mais c'est un sujet d'initiés, sans vraie chute ni enjeu, trop faible pour un best-of."
@@ -1457,6 +1511,14 @@
   "twitch:RelentlessComfortablePhoneTBCheesePull-_r1CWVEUwjTRYQkC": {
    "at": "2026-10-30T08:12:14.608469+00:00",
    "reason": "revue : JDG navigue dans le Steam store en commentant au fil de l'eau. La blague sur le faux Jésus Simulator est molle et il n'y a pas de vraie chute."
+  },
+  "twitch:ResoluteLovelyDonutYee-N0CKevezpnMicEW9": {
+   "at": "2026-11-02T11:46:39.370182+00:00",
+   "reason": "revue : note 30/100 (minimum 60). Co-stream des Worlds sur un temps de plateau : Skyyart raconte une stratégie de draft confuse, sans action de match ni réaction marquante. Transcription peu compréhensible sans contexte."
+  },
+  "twitch:ResoluteSneakyBisonSmoocherZ-ZXNGqNDjp401F8R7": {
+   "at": "2026-11-02T11:35:46.787315+00:00",
+   "reason": "revue : note 30/100 (minimum 60). Action de jeu peu lisible, callouts sans vraie chute ni réaction marquante."
   },
   "twitch:ResourcefulFragileNightingaleKevinTurtle-Hv6g3YNjypE3wwGR": {
    "at": "2026-10-30T19:02:35.284063+00:00",
@@ -1478,6 +1540,10 @@
    "at": "2026-10-28T20:06:28.073825+00:00",
    "reason": "revue : L'explosion nucléaire contre les abeilles est visuelle, mais la réaction est faible et le moment manque de mise en place pour être compris sans connaître la partie."
   },
+  "twitch:SavoryDullDootPMSTwin-v8L4OiSCXW2edCi4": {
+   "at": "2026-11-02T11:33:54.683581+00:00",
+   "reason": "revue : note 18/100 (minimum 60). Début de live avec remerciements de subs et annonce coupée avant d'arriver : aucun enjeu ni chute dans l'extrait."
+  },
   "twitch:ShyElegantLeopardJonCarnage-ihbA29XOCEqIDBKZ": {
    "at": "2026-10-31T19:18:49.647549+00:00",
    "reason": "revue : Cast hype de fin de partie d'un tournoi Fortnite, mais difficile à suivre sans contexte (qui joue, quel enjeu) et la réaction reste un cast générique répétitif."
@@ -1497,6 +1563,10 @@
   "twitch:SleepyEnthusiasticGaragePeteZaroll-LlUzJ8VEyL1nWvnl": {
    "at": "2026-10-29T22:07:23.507066+00:00",
    "reason": "revue : C'est du bavardage sur scène lors d'un événement sponsorisé (publicité Fnac x HyperX), sans moment fort ni chute. La blague sur le « streamer préféré » est molle et peu compréhensible hors contexte."
+  },
+  "twitch:SlipperyGlutenFreeDootTheRinger-IDk9Kphq9QjL5uax": {
+   "at": "2026-11-02T11:35:46.787374+00:00",
+   "reason": "revue : note 38/100 (minimum 60). Co-stream des FNCS avec un avis sur le traitement d'un joueur M8, mais propos peu clairs, sans chute ni réaction forte."
   },
   "twitch:SmellyTallGorillaDoubleRainbow-GoQ-ldxNEB8ZbN0F": {
    "at": "2026-10-31T09:47:52.731117+00:00",
@@ -1979,30 +2049,6 @@
    "recent": [],
    "score": 45.0,
    "verdict": "reject"
-  },
-  "twitch:BlatantAdorableDiamondHeyGuys-OcV3jsNkmvuMJau-": {
-   "at": "2026-11-01T12:46:10.050880+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Domingo révèle s'être blessé à la cheville et être en rééducation, ce qui compromet son rôle de coureur aux 25h qui courent.",
-    "hashtags": [
-     "domingo",
-     "25hquicourent",
-     "twitchfr",
-     "annonce",
-     "clip",
-     "drole"
-    ],
-    "hook": "DOMINGO NE COURRA PAS ?",
-    "title": "Domingo blessé : il ne sera peut-être pas coureur aux 25h qui courent",
-    "trim_end": 60.0,
-    "trim_start": 9.0
-   },
-   "reason": "Annonce d'actu : Domingo révèle qu'il ne courra peut-être pas aux 25h qui courent à cause d'une blessure à la cheville.",
-   "recent": [],
-   "score": 63.0,
-   "verdict": "publish"
   },
   "twitch:BlazingNiceRaisinBabyRage-h4lSgxAk4anVMiVV": {
    "at": "2026-11-01T13:18:29.839938+00:00",
@@ -3050,30 +3096,6 @@
    "score": 25.0,
    "verdict": "reject"
   },
-  "twitch:LachrymoseEntertainingWatermelonRalpherZ-sUJmI8e7h9RIfnsd": {
-   "at": "2026-11-01T12:54:28.579944+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Antoine Daniel imagine sa colère si quelqu'un peignait son fond vert en bleu.",
-    "hashtags": [
-     "antoinedaniel",
-     "fondvert",
-     "humour",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "QUI A PEINT SON FOND VERT ?",
-    "title": "Antoine Daniel ne veut pas qu'on peigne son fond vert en bleu",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Blague sur le fond vert peint en bleu qui repose sur le contexte du live et un message de viewer : chute trop faible.",
-   "recent": [],
-   "score": 50.0,
-   "verdict": "reject"
-  },
   "twitch:LachrymoseEsteemedChipmunkSaltBae-PfO9xVjUDh0rJjcl": {
    "at": "2026-11-01T13:07:53.685563+00:00",
    "clip_span": null,
@@ -3386,31 +3408,6 @@
    "score": 33.0,
    "verdict": "reject"
   },
-  "twitch:ObliviousSlipperyTildeLitFam-QSLehFCUQbHoA4Q2": {
-   "at": "2026-11-01T12:54:28.579922+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Locklear profite d'un setup M8 pour évoquer une future équipe Overwatch.",
-    "hashtags": [
-     "locklear",
-     "m8",
-     "overwatch",
-     "annonce",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "LOCKLEAR TEASE UNE TEAM OVERWATCH",
-    "title": "Locklear tease la future team Overwatch de M8",
-    "trim_end": 47.0,
-    "trim_start": 0.0
-   },
-   "reason": "Teasing d'une team Overwatch chez M8 noyé dans un échange chaotique, sans annonce claire ni chute : moment moyen.",
-   "recent": [],
-   "score": 48.0,
-   "verdict": "reject"
-  },
   "twitch:PeacefulAthleticFungusBuddhaBar-_i_51I_EH_VQzSve": {
    "at": "2026-11-01T12:58:41.934305+00:00",
    "clip_span": null,
@@ -3608,29 +3605,6 @@
    "recent": [],
    "score": 63.0,
    "verdict": "publish"
-  },
-  "twitch:ResoluteSneakyBisonSmoocherZ-ZXNGqNDjp401F8R7": {
-   "at": "2026-11-01T12:46:10.050883+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Gotaga cherche son adversaire sur Haunted Heist.",
-    "hashtags": [
-     "gotaga",
-     "hauntedheist",
-     "twitchfr",
-     "clip",
-     "drole"
-    ],
-    "hook": "IL EST OÙ ?",
-    "title": "Gotaga traque sur Haunted Heist",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Rien de notable, simple phase de jeu sans réaction.",
-   "recent": [],
-   "score": 28.0,
-   "verdict": "reject"
   },
   "twitch:ResourcefulCogentSparrowLitty-66ao-x7QpHgtv7C4": {
    "at": "2026-11-01T12:39:30.220034+00:00",
