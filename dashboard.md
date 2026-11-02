@@ -1,33 +1,35 @@
 # Tableau de bord du clipper
 
-Mis à jour le 02/11/2026 à 16:48 UTC.
+Mis à jour le 02/11/2026 à 19:09 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 8156 | 8156 |
-| Vidéos téléchargées et préparées | 45 | 45 |
-| Shorts envoyés | 4 | 4 |
-| Écartés par la revue | 41 | 41 |
+| Moments trouvés (Twitch + YouTube) | 11112 | 11112 |
+| Vidéos téléchargées et préparées | 70 | 70 |
+| Shorts envoyés | 6 | 6 |
+| Écartés par la revue | 64 | 64 |
 | Échecs (téléchargement, montage, envoi) | 0 | 0 |
-| Passages | 5 | 5 |
+| Passages | 6 | 6 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 29, YouTube 8, à la demande 6.
-Note moyenne de Claude : 62/100 sur 4 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 30, YouTube 9, à la demande 6.
+Note moyenne de Claude : 59/100 sur 6 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), Michou (2), Hctuan (1).
 
 ## Veille YouTube
 
 90 créateurs suivis, 80 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 80 identifiées ; 12 mises de côté (introuvables).
-297 vidéos récentes suivies, 36 regardées de près (16 avec des moments à extraire).
+307 vidéos récentes suivies, 48 regardées de près (24 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 02/11 20:08 | YouTube | Bob Lennon | [Bob Lennon avoue sa phobie des chiens : « J'ai l'impression de regarder un requin »](https://www.youtube.com/watch?v=3BQdZzmGO4A) | 50 |
+| 02/11 19:46 | Twitch | Berlu | [Berlu explique pourquoi le serveur GTA RP Vibe ferme temporairement](https://www.twitch.tv/berlu/clip/ArbitraryAntediluvianEmuTooSpicy-QXUoal1Gd7Ryd-Jx) | 55 |
 | 02/11 17:03 | YouTube | Studio Bagel | [Éric Judor classe ses films : flop ou pas flop ? (Hot Ones, Studio Bagel)](https://www.youtube.com/watch?v=2frDDzZDNkw) | 55 |
 | 02/11 16:55 | Twitch | ZeratoR | [ZeratoR se prend un screamer à 1 € : « J'ai 38 ans ! »](https://www.twitch.tv/zerator/clip/AttractiveArtisticToadAMPTropPunch-HgvOECapqeR6j9JG) | 62 |
 | 02/11 16:04 | YouTube | Wankil Studio - Laink et Terracid | [Laink en a marre qu'on dise que Wankil n'a rien inventé](https://www.youtube.com/watch?v=5A-jZ1XDmMU) | 68 |
@@ -46,8 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 | 01/11 14:52 | YouTube | Mastu | [Samuel Étienne piège tout le monde à l'Undercover de Mastu](https://www.youtube.com/watch?v=BByplh9JRTs) |  |
 | 01/11 13:38 | Twitch | Loupiote3 | [Loupiote : « Je regarde le ciel depuis deux ans, rien ne m'est tombé dessus »](https://www.twitch.tv/loupiote3/clip/NurturingCloudyKiwiPrimeMe-yaCKmFqBI1qw09-r) |  |
 | 01/11 09:56 | Twitch | Kameto | [Kameto craque pour Caliste après la victoire de KC aux Worlds](https://www.twitch.tv/kamet0/clip/ResourcefulCogentSparrowLitty-66ao-x7QpHgtv7C4) |  |
-| 31/10 17:08 | YouTube | Inoxtag | [Inoxtag et sa team après un crash d'avion : « On est des forces spéciales ! »](https://www.youtube.com/watch?v=2wJuFzwBWkI) |  |
-| 31/10 17:06 | YouTube | Amixem | [Amixem & Cyprien : le plan d'évasion avec des draps… alors qu'il y a une porte](https://www.youtube.com/watch?v=_hzgpE0NXR8) |  |
 
 ## Derniers échecs
 
