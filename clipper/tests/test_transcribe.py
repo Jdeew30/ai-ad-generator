@@ -131,6 +131,17 @@ def test_a_phrase_is_located_even_said_loosely():
     assert locate(words, "la plus belle insulte du monde entier") is None  # too few of its words
 
 
+def test_every_saying_of_a_phrase_is_listed():
+    from clipper.models import Word
+    from clipper.transcribe import context, locate, occurrences
+
+    said = "il a dit nique ta grand-mère hier puis on en reparle et Jordan répond nique ta grand-mère mdr"
+    words = [Word(i * 2.0, i * 2.0 + 1.5, text) for i, text in enumerate(said.split())]
+    assert occurrences(words, "nique ta grand-mère") == [(6.0, 1.0), (28.0, 1.0)]
+    assert locate(words, "nique ta grand-mère") == 6.0  # as well said both times: the first one
+    assert context(words, 28.0) == "Jordan répond nique ta grand-mère mdr"
+
+
 @requires_ffmpeg
 def test_only_the_part_asked_for_is_heard(tmp_path):
     tone = tmp_path / "tone.wav"

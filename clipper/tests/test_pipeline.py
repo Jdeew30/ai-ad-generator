@@ -46,7 +46,7 @@ class FakeTranscriber:
         self.calls = 0
         self.parts: list[tuple] = []  # (start, end) of the media listened to
 
-    def transcribe(self, media, *, prompt=None, start=None, end=None):
+    def transcribe(self, media, *, prompt=None, start=None, end=None, quick=False):
         self.calls += 1
         self.parts.append((start, end))
         return Transcript([Word(0.3, 0.7, "Attends"), Word(0.7, 1.2, "regarde"), Word(1.2, 1.8, "ça !")], "fr")

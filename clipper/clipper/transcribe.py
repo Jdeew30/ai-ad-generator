@@ -79,8 +79,11 @@ class Transcriber:
         return self._model
 
     def transcribe(self, media: Path, *, prompt: str | None = None, start: float | None = None,
-                   end: float | None = None) -> Transcript:
-        """The words said in `media`, or from `start` to `end`: their times then count from `start`."""
+                   end: float | None = None, quick: bool = False) -> Transcript:
+        """The words said in `media`, or from `start` to `end`: their times then count from `start`.
+
+        `quick` decodes greedily (about twice as fast): enough to find a phrase in a long video.
+        """
         audio = load_audio(media, start=start, end=end)
         if audio.size < SAMPLE_RATE // 2:
             return Transcript(words=[], language=self.language)
@@ -91,7 +94,7 @@ class Transcriber:
                 language=self.language,
                 word_timestamps=True,
                 vad_filter=True,
-                beam_size=5,
+                beam_size=1 if quick else 5,
                 condition_on_previous_text=False,
                 initial_prompt=prompt,
             )
@@ -161,19 +164,35 @@ def locate(words: list[Word], phrase: str, *, min_ratio: float = 0.6) -> float |
     Said loosely counts too (« que tu connais » for « que vous connaissez »): the passage that holds the most of its
     words, in order, wins if it holds at least `min_ratio` of them; the earliest one on a tie.
     """
+    found = occurrences(words, phrase, min_ratio=min_ratio)
+    return max(found, key=lambda pair: (pair[1], -pair[0]))[0] if found else None
+
+
+def occurrences(words: list[Word], phrase: str, *, min_ratio: float = 0.6) -> list[tuple[float, float]]:
+    """Every time `phrase` is said, loosely or not: (start, share of its words heard), a few seconds apart at least."""
     wanted = _tokens(phrase)
     heard = [(word.start, token) for word in words for token in _tokens(word.text)]
     if not wanted:
-        return None
+        return []
     span = len(wanted) + 3  # a few words more or less said in between
-    best: tuple[float, float] | None = None
+    found: list[tuple[float, float]] = []
     for index, (at, token) in enumerate(heard):
         if token not in wanted:
             continue
         ratio = _in_order(wanted, [t for _, t in heard[index:index + span]]) / len(wanted)
-        if ratio >= min_ratio and (best is None or ratio > best[0]):
-            best = (ratio, at)
-    return best[1] if best else None
+        if ratio < min_ratio:
+            continue
+        if found and at - found[-1][0] < 5.0:  # the same saying, caught from one of its later words
+            if ratio > found[-1][1]:
+                found[-1] = (at, ratio)
+            continue
+        found.append((at, ratio))
+    return found
+
+
+def context(words: list[Word], at: float, *, before: float = 4.0, after: float = 8.0) -> str:
+    """What is said around `at`, for the log."""
+    return " ".join(word.text for word in words if at - before <= word.start <= at + after)
 
 
 def _tokens(text: str) -> list[str]:

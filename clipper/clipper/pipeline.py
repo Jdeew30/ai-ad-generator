@@ -29,7 +29,7 @@ from .sources.manual import QueueError, joined_candidate, links, manual_candidat
 from .sources.twitch import SourceError
 from .state import State
 from .thumbnail import make_thumbnail
-from .transcribe import Transcriber, TranscriptionError, locate
+from .transcribe import Transcriber, TranscriptionError, context, locate, occurrences
 from .ytdlp import DownloadError, YtDlp
 
 log = logging.getLogger(__name__)
@@ -537,11 +537,13 @@ class Clipper:
         try:
             # The whole sound comes at once (a section is fetched by ffmpeg at playing speed): only the part is heard.
             media, _ = self.ytdlp.download(url.strip(), self.paths.work / "find", "search", audio_only=True)
-            words = self.transcriber.transcribe(media, start=begin, end=finish).words
+            words = self.transcriber.transcribe(media, start=begin, end=finish, quick=True).words
         except (DownloadError, TranscriptionError, MediaError) as exc:
             raise QueueError(f"recherche de « {phrase} » impossible : {exc}") from exc
         log.info("Whisper a entendu %d mot(s)%s.", len(words),
                  f", de {clock((begin or 0.0) + words[0].start)} à {clock((begin or 0.0) + words[-1].end)}" if words else "")
+        for at, ratio in occurrences(words, phrase):  # several? the log shows each, to search a narrower part
+            log.info("  %s (%.0f %%) : « %s »", clock((begin or 0.0) + at), ratio * 100, context(words, at))
         heard = locate(words, phrase)
         if heard is None:
             raise QueueError(f"« {phrase} » introuvable {where} : une autre phrase, ou un autre passage ?")
