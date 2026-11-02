@@ -5,6 +5,7 @@ import logging
 import re
 import shutil
 import time
+from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -23,8 +24,10 @@ from .publishers import PublishError, build_publishers
 from .publishers.tiktok import TikTokPublisher, caption as tiktok_caption
 from .publishers.youtube import short_description
 from .render import render_short
+from . import dashboard
 from .selection import rank, spread
 from .sources import discover, focus_config
+from .sources.watch import Creators
 from .sources.manual import QueueError, joined_candidate, links, manual_candidate, parse_timestamp
 from .sources.twitch import SourceError
 from .state import State
@@ -73,6 +76,15 @@ class RunReport:
     rejected: list[tuple[Candidate, str]] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
     compilation: dict[str, Any] | None = None
+    detected: dict[str, int] = field(default_factory=dict)  # moments found, by source
+    prepared: int = 0  # downloaded and prepared (frames, transcript)
+    failed: int = 0  # downloads, edits or sends that failed
+
+    def counts(self, at: datetime) -> dict[str, Any]:
+        """What the run did, for the dashboard."""
+        return {"at": at.isoformat(), "mode": self.mode, "detected": sum(self.detected.values()), "by_source": self.detected,
+                "prepared": self.prepared, "rejected": len(self.rejected), "published": len(self.published),
+                "failed": self.failed, "errors": len(self.errors)}  # fmt: skip
 
     def markdown(self) -> str:
         lines = [f"## Clipper — {self.mode}{' (essai à blanc)' if self.dry_run else ''}", ""]
@@ -171,6 +183,7 @@ class Clipper:
         self.ytdlp = ytdlp or YtDlp(cookies_file=self._cookies_file())
         self.now = now or utcnow()
         self.state = State.load(paths.state)
+        self.creators = self._creators()
         self.transcriber = transcriber or Transcriber(
             config.shorts.whisper_model, config.channel.language, cache_dir=paths.data / "models"
         )
@@ -450,6 +463,26 @@ class Clipper:
         except PublishError as exc:
             log.error("telegram : %s", exc)
 
+    def _creators(self) -> Creators:
+        """The base of creators and their YouTube channels, kept next to the state (creators.json)."""
+        path = self.paths.state.with_name("creators.json")
+        try:
+            return Creators.load(path)
+        except (ValueError, OSError) as exc:
+            log.error("Base des créateurs illisible (%s) : repartie de la liste de config.yaml.", exc)
+            return Creators(path)
+
+    def _keep_track(self, report: RunReport) -> None:
+        """The run's counts in the state, the base of creators saved and the dashboard rewritten."""
+        self.state.runs.append(report.counts(self.now))
+        self.state.save()
+        try:
+            self.creators.save()
+            self.paths.state.with_name("dashboard.md").write_text(dashboard.render(self.state, self.creators, self.now),
+                                                                  encoding="utf-8")
+        except OSError as exc:
+            log.error("Tableau de bord non écrit : %s", exc)
+
     def run_shorts(self, *, dry_run: bool = False, count: int | None = None, url: str | None = None,
                    start: str | None = None, end: str | None = None, queue: Path | None = None,
                    focus: list[str] | None = None, force: bool = False, find: str | None = None) -> RunReport:
@@ -465,7 +498,7 @@ class Clipper:
                          force=force, find=find)
         finally:
             if not dry_run:
-                self.state.save()
+                self._keep_track(report)
             self._cleanup()
         return report
 
@@ -515,12 +548,14 @@ class Clipper:
                 else:
                     found = discover(config, self.secrets, self.http, self.ytdlp, now=self.now, window=window, queue=queue,
                                      memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor,
-                                     youtube_related=self.state.youtube_related)
+                                     youtube_related=self.state.youtube_related, creators=self.creators,
+                                     youtube_history=self.state.youtube_videos)
                     self.state.youtube_cursor += config.youtube.channels_per_run
             except (SourceError, QueueError, ConfigError) as exc:
                 log.error("Découverte impossible : %s", exc)
                 report.errors.append(f"découverte : {exc}")
                 return
+            report.detected = dict(Counter(_platform(c) for c in found))
             ranked = spread(rank(found, self.state, config, now=self.now))
         if not quotas:
             self._publish_best(report, ranked, wanted, dry_run=dry_run, force=force)
@@ -585,10 +620,13 @@ class Clipper:
                 log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
                 item = self.prepare(candidate, transcribe=self.config.shorts.captions or use_ai,
                                     sheet=use_ai and self.config.ai.review_frames, context=use_ai)
-                if item is not None:
-                    prepared.append(item)
-                    if len(prepared) >= batch:
-                        break
+                if item is None:
+                    report.failed += 1  # the next candidate takes its place
+                    continue
+                report.prepared += 1
+                prepared.append(item)
+                if len(prepared) >= batch:
+                    break
             if not prepared:
                 break
             # The clips approved in an earlier round count as published: their moment is taken too.
@@ -645,6 +683,7 @@ class Clipper:
             except MediaError as exc:
                 log.error("Montage impossible (%s) : %s", candidate.key, exc)
                 report.errors.append(f"{candidate.key} : montage impossible ({exc})")
+                report.failed += 1
                 if not dry_run:
                     self.state.record_failure(candidate, str(exc))
                 continue
@@ -661,6 +700,7 @@ class Clipper:
                     self.state.record_post(candidate, review.meta, outcome.results)
                 else:
                     self.state.record_failure(candidate, "; ".join(r.detail or r.platform for r in failed))
+                    report.failed += 1
             report.published.append(outcome)
             log.info("Prêt : %s", video)
             if candidate.key in forced and not dry_run:

@@ -11,8 +11,10 @@ from typing import Any
 from urllib.parse import quote
 
 from ..config import Config, YouTubeSourceConfig
+from ..http import Http, HttpError
 from ..models import Candidate, parse_time
 from ..ytdlp import DownloadError, YtDlp
+from . import watch
 
 log = logging.getLogger(__name__)
 
@@ -309,18 +311,25 @@ def _link(entry: dict[str, Any]) -> str | None:
 
 
 def _channel_tab(ytdlp: YtDlp, ref: str, tab: str, count: int) -> tuple[str, list[dict[str, Any]]]:
-    """The channel and the `count` latest entries of its `tab`.
+    """The channel and the `count` latest entries of its `tab` (see _channel_listing)."""
+    ref, info = _channel_listing(ytdlp, ref, tab, count)
+    return ref, info["entries"]
+
+
+def _channel_listing(ytdlp: YtDlp, ref: str, tab: str, count: int) -> tuple[str, dict[str, Any]]:
+    """The channel and its `tab` listing: the channel's details (id, title, subscribers, description) and its `count`
+    latest entries.
 
     Failing on the videos tab means a channel of lives only, whose lives are read, or a handle that does not exist,
     looked up by its name.
     """
     try:
-        return ref, ytdlp.list_flat(f"{channel_url(ref)}/{tab}", count)
+        return ref, ytdlp.listing(f"{channel_url(ref)}/{tab}", count)
     except DownloadError as exc:
         if exc.blocked or tab != "videos":
             raise
         if NO_VIDEOS_TAB in str(exc):  # the handle is right: another channel of that name is not this one
-            return ref, ytdlp.list_flat(f"{channel_url(ref)}/streams", count)
+            return ref, ytdlp.listing(f"{channel_url(ref)}/streams", count)
         renamed = None
         if "/@" in channel_url(ref):
             try:
@@ -330,7 +339,7 @@ def _channel_tab(ytdlp: YtDlp, ref: str, tab: str, count: int) -> tuple[str, lis
         if not renamed:
             raise exc
     log.warning("Chaîne YouTube %s introuvable : lue sous le nom %s, à corriger dans config.yaml", ref, renamed)
-    return renamed, ytdlp.list_flat(f"{channel_url(renamed)}/{tab}", count)
+    return renamed, ytdlp.listing(f"{channel_url(renamed)}/{tab}", count)
 
 
 def _refresh_related(channels: list[str], ytdlp: YtDlp, related: dict[str, dict[str, Any]], now: datetime) -> None:
@@ -351,11 +360,15 @@ def _refresh_related(channels: list[str], ytdlp: YtDlp, related: dict[str, dict[
 
 
 def discover_youtube(
-    config: Config, ytdlp: YtDlp, *, now: datetime, offset: int = 0, related: dict[str, dict[str, Any]] | None = None
+    config: Config, ytdlp: YtDlp, *, now: datetime, offset: int = 0, related: dict[str, dict[str, Any]] | None = None,
+    http: Http | None = None, creators: watch.Creators | None = None, history: dict[str, dict[str, Any]] | None = None,
+    twitch_seen: dict[str, str] | None = None,
 ) -> list[Candidate]:
-    """Peaks of the channels' recent videos. With channels_per_run, the channels take turns from `offset`.
+    """Peaks of the channels' recent videos.
 
-    With related_channels, `related` (kept in the state) adds each YouTuber's other channels to the turns.
+    With watch « rss » (and `http`, `creators`, `history` from the state), every channel's feed is read at each run
+    and only the most promising new videos are looked into (see _watch). Otherwise, with channels_per_run, the
+    channels take turns from `offset`, and with related_channels, `related` adds each YouTuber's other channels.
     """
     settings = config.youtube
     if not settings.enabled or not (settings.channels or settings.videos):
@@ -376,6 +389,17 @@ def discover_youtube(
         if reason:
             skipped[reason] += 1
         candidates.extend(found)
+    if settings.watch == "rss" and http is not None and creators is not None and history is not None:
+        try:
+            if twitch_seen:
+                _discover_from_twitch(creators, twitch_seen, ytdlp, now, budget=settings.discover_per_run)
+            candidates.extend(_watch(config, ytdlp, http, creators, history, related, now, skipped))
+        except DownloadError as exc:
+            if not exc.blocked:
+                raise
+            log.warning(BLOCKED)
+        _tell(candidates, skipped)
+        return candidates
     channels = list(settings.channels)
     if settings.related_channels and related is not None:
         _refresh_related(settings.channels, ytdlp, related, now)
@@ -419,7 +443,213 @@ def discover_youtube(
                 if reason:
                     skipped[reason] += 1
                 candidates.extend(found)
+    _tell(candidates, skipped)
+    return candidates
+
+
+def _tell(candidates: list[Candidate], skipped: Counter[str]) -> None:
     if skipped:
         log.info("YouTube : %d passage(s) retenu(s) ; vidéos écartées : %s", len(candidates),
                  ", ".join(f"{reason} ({count})" for reason, count in skipped.most_common()))
+
+
+def _watch(
+    config: Config, ytdlp: YtDlp, http: Http, creators: watch.Creators, history: dict[str, dict[str, Any]],
+    related: dict[str, dict[str, Any]] | None, now: datetime, skipped: Counter[str],
+) -> list[Candidate]:
+    """Every watched channel's RSS feed, then the details and moments of the most promising new videos only.
+
+    The owner's list makes the creators; their other channels join once verified (_adopt). A channel's YouTube id is
+    looked up once (_resolve). Each feed adds its uploads to `history` with their view counts; the videos due (fresh,
+    not looked into yet) are pre-scored and the best `videos_per_run` get their « most replayed » peaks or, without
+    them, the moments their comments point at.
+    """
+    settings = config.youtube
+    creators.sync(settings.channels, now)
+    if settings.related_channels and related is not None:
+        _refresh_related(settings.channels, ytdlp, related, now)
+        _adopt(creators, related, ytdlp, now, budget=settings.secondary_checks_per_run)
+    _resolve(creators, ytdlp, now, budget=settings.resolve_per_run)
+    read = 0
+    unread: list[str] = []
+    for creator, channel in creators.watched():
+        if not channel.get("id"):
+            continue
+        try:
+            videos = watch.read_feed(http, channel["id"])
+        except HttpError as exc:
+            watch.failed(channel, f"flux RSS : {exc}")
+            unread.append(channel.get("ref") or channel["id"])
+            continue
+        read += 1
+        channel["checked"], channel["errors"] = now.isoformat(), 0
+        if videos and videos[0].published:
+            channel["last_upload"] = videos[0].published.isoformat()
+        for video in videos:
+            watch.remember(history, video, creator, now)
+    window = timedelta(days=settings.max_age_days)
+    history_kept = watch.prune(history, now, max_age=window)
+    history.clear()
+    history.update(history_kept)
+    paces = watch.channel_paces(history, now)
+    due = sorted(((watch.pre_score(entry, paces.get(entry.get("channel") or ""), now), video_id, entry)
+                  for video_id, entry in history.items() if watch.due(entry, now, max_age=window)),
+                 key=lambda item: -item[0])  # fmt: skip
+    log.info("YouTube : %d chaîne(s) lue(s) par flux RSS%s, %d vidéo(s) récente(s) à regarder, les %d plus prometteuses ce "
+             "passage.", read, f" ({len(unread)} illisible(s) : {', '.join(unread[:8])})" if unread else "", len(due),
+             min(len(due), settings.videos_per_run))  # fmt: skip
+    candidates: list[Candidate] = []
+    for momentum, video_id, entry in due[: settings.videos_per_run]:
+        url = f"https://www.youtube.com/watch?v={video_id}"
+        entry["examined"] = int(entry.get("examined") or 0) + 1
+        entry["examined_at"] = now.isoformat()
+        try:
+            info = ytdlp.info(url)
+            if config.is_blocked((info.get("uploader_id") or "").lstrip("@")):
+                entry["outcome"] = "blocked"
+                continue
+            found, reason = _video_moments(info, url, settings, config, ytdlp, now)
+        except DownloadError as exc:
+            if exc.blocked:
+                entry["examined"] -= 1  # YouTube blocked the server, not this video: its turn comes again
+                raise
+            log.warning("Vidéo YouTube %s ignorée : %s", video_id, exc)
+            entry["outcome"] = "error"
+            skipped["illisible"] += 1
+            continue
+        entry["outcome"] = "moments" if found else "none"
+        _note_category(creators, info)
+        if reason:
+            skipped[reason] += 1
+        pace = watch.velocity(entry, now)
+        creator = creators.creators.get(entry.get("creator") or "", {}).get("name")
+        for candidate in found:
+            candidate.momentum, candidate.pace, candidate.creator = momentum, pace, creator
+        log.info("  %.0f/100 %s — %s%s", momentum, info.get("channel") or entry.get("creator"), entry.get("title"),
+                 f" : {len(found)} passage(s)" if found else f" : {reason}")
+        candidates.extend(found)
     return candidates
+
+
+def _resolve(creators: watch.Creators, ytdlp: YtDlp, now: datetime, *, budget: int) -> None:
+    """Looks up the YouTube id (and title, subscribers) of watched channels that have none yet, `budget` at most.
+
+    A handle that does not exist is looked up by its name, a channel without videos is read through its lives (see
+    _channel_listing). The 2 latest uploads come with it: a feed is read from the next run on anyway.
+    """
+    for creator, channel in [(key, channel) for key, channel in creators.watched() if not channel.get("id")][:budget]:
+        try:
+            found_as, info = _channel_listing(ytdlp, channel["ref"], "videos", 2)
+        except DownloadError as exc:
+            if exc.blocked:
+                raise
+            watch.failed(channel, str(exc))
+            continue
+        if not info.get("channel_id"):
+            watch.failed(channel, "identifiant de chaîne absent de la page")
+            continue
+        watch.record_details(channel, info, now)
+        channel["description_handles"] = sorted(set(re.findall(r"@[\w.-]+", info.get("description") or "")))[:20]
+        if found_as != channel["ref"]:
+            channel["found_as"] = found_as
+        record = creators.creators[creator]
+        default_names = {watch.key_of(channel["ref"]), channel["ref"].strip().rstrip("/").rsplit("/", 1)[-1].lstrip("@")}
+        if channel.get("role") == "main" and record.get("name") in default_names:
+            record["name"] = channel.get("title") or record["name"]  # « Domingo » rather than « pa.domingo »
+
+
+def _adopt(creators: watch.Creators, related: dict[str, dict[str, Any]], ytdlp: YtDlp, now: datetime, *, budget: int) -> None:
+    """Adds a YouTuber's other channels found by search (« Squeezie Gaming ») once one of them names the other.
+
+    The search keeps « <name> <suffix> » titles with enough subscribers; that is not enough to call them the
+    creator's own. A channel is adopted when its description gives the main channel (handle, id or address) or the
+    main channel's description gives it. The others are noted as unverified and checked again two weeks later.
+    """
+    for key, creator in creators.creators.items():
+        if budget <= 0:
+            return
+        main = creator.get("channels", {}).get(key)
+        if creator.get("status") != "active" or not main:
+            continue
+        unverified = creator.setdefault("unverified", {})
+        for link in (related.get(main["ref"].lower()) or {}).get("channels", []):
+            if any(watch.key_of(link) in (ref, watch.key_of(channel.get("ref", ""))) for _, ref, channel in creators.channels()):
+                continue
+            seen = parse_time((unverified.get(link) or {}).get("at"))
+            if seen is not None and now - seen < timedelta(days=14):
+                continue
+            if budget <= 0:
+                return
+            budget -= 1
+            try:
+                _found_as, info = _channel_listing(ytdlp, link, "videos", 1)
+            except DownloadError as exc:
+                if exc.blocked:
+                    raise
+                unverified[link] = {"at": now.isoformat(), "why": str(exc)[:150]}
+                continue
+            handle = (info.get("uploader_id") or link).lower()
+            named_by_main = handle in {h.lower() for h in main.get("description_handles") or []}
+            if watch.mentions(info.get("description") or "", main) or named_by_main:
+                proof = f"nommée par la chaîne principale ({main['ref']})" if named_by_main else f"sa description cite {main['ref']}"
+                creators.add_secondary(key, link, verified=proof, now=now)
+                watch.record_details(creator["channels"][watch.key_of(link)], info, now)
+                unverified.pop(link, None)
+                log.info("Chaîne secondaire de %s vérifiée : %s (%s)", creator.get("name"), link, proof)
+            else:
+                unverified[link] = {"at": now.isoformat(), "why": "aucun lien avec la chaîne principale"}
+
+
+def _discover_from_twitch(creators: watch.Creators, twitch_seen: dict[str, str], ytdlp: YtDlp, now: datetime, *,
+                          budget: int) -> None:
+    """New creators: the YouTube channels of French streamers seen live on Twitch lately, `budget` lookups a run.
+
+    The search keeps channels titled with the streamer's very name; one is only taken when its description links to
+    that Twitch channel (twitch.tv/<login>), so that a namesake is never taken for the streamer. Each login is looked
+    up once a month at most.
+    """
+    tried = creators.lookups
+    recent = sorted((at, login) for login, at in twitch_seen.items()
+                    if (parse_time(at) or now - timedelta(days=99)) >= now - timedelta(days=2))  # fmt: skip
+    for _at, login in reversed(recent):
+        if budget <= 0:
+            return
+        last = parse_time(tried.get(login))
+        if login in creators.creators or (last is not None and now - last < timedelta(days=30)):
+            continue
+        budget -= 1
+        tried[login] = now.isoformat()
+        try:
+            results = ytdlp.list_flat(SEARCH_CHANNELS.format(quote(login)), 8)
+        except DownloadError as exc:
+            if exc.blocked:
+                raise
+            continue
+        for entry in results[:8]:
+            title = entry.get("channel") or entry.get("title") or ""
+            link = _link(entry)
+            if not link or _plain(title) != _plain(login):
+                continue
+            try:
+                _found_as, info = _channel_listing(ytdlp, link, "videos", 1)
+            except DownloadError as exc:
+                if exc.blocked:
+                    raise
+                continue
+            if f"twitch.tv/{login}" not in (info.get("description") or "").lower().replace("www.", ""):
+                continue
+            key = creators.add_creator(link, source="twitch", verified=f"sa description renvoie vers twitch.tv/{login}",
+                                       now=now, name=info.get("channel") or title)
+            watch.record_details(creators.creators[key]["channels"][watch.key_of(link)], info, now)
+            log.info("Nouveau créateur suivi sur YouTube : %s (%s), vu en live sur Twitch", info.get("channel") or title, link)
+            break
+
+
+def _note_category(creators: watch.Creators, info: dict[str, Any]) -> None:
+    """The YouTube categories of a channel's videos (Gaming, Entertainment…), counted on its record."""
+    found = creators.find_channel(info.get("channel_id") or "")
+    if found is None:
+        return
+    channel = found[1]
+    for category in info.get("categories") or []:
+        channel.setdefault("categories", {})[category] = channel.get("categories", {}).get(category, 0) + 1

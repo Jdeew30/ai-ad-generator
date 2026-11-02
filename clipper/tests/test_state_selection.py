@@ -135,8 +135,9 @@ def test_rank_respects_history_and_daily_cap(tmp_path: Path):
         make_candidate("twitch:b1", "b", views=800),
     ]
     ranked = [c.key for c in rank(cands, state, config(shorts={"max_per_streamer_per_day": 2}), now=NOW)]
-    # "a" already posted once today: one more allowed. The replay overlaps the posted VOD span.
-    assert ranked == ["twitch:a2", "twitch:b1"]
+    # "a" already posted once today: one more allowed, after "b" (room for other creators). The replay overlaps the
+    # posted VOD span.
+    assert ranked == ["twitch:b1", "twitch:a2"]
 
 
 def test_rank_manual_items_skip_popularity_filters_and_come_first(tmp_path: Path):
@@ -163,3 +164,23 @@ def test_spread_alternates_creators():
     ranked = [make_candidate("twitch:a1", "alpha"), make_candidate("twitch:a2", "Alpha"), make_candidate("twitch:b1", "beta"),
               make_candidate("twitch:a3", "alpha"), make_candidate("manual:x", "", manual=True), make_candidate("twitch:c1", "gamma")]  # fmt: skip
     assert [c.key for c in spread(ranked)] == ["twitch:a1", "twitch:b1", "manual:x", "twitch:c1", "twitch:a2", "twitch:a3"]
+
+
+def test_a_creator_posted_a_lot_this_week_leaves_room_for_others(tmp_path):
+    from clipper.config import Config, build
+    from clipper.models import ShortMeta
+    from clipper.selection import rank
+    from clipper.state import State
+
+    from .conftest import NOW, make_candidate
+
+    state = State(tmp_path / "state.json")
+    meta = ShortMeta(hook="h", title="t", description="d", hashtags=[])
+    for index in range(3):  # three shorts of « star » this week
+        state.record_post(make_candidate(f"twitch:old{index}", "star", created_at=NOW - timedelta(days=index + 2)), meta, [])
+        state.posted[f"twitch:old{index}"]["at"] = (NOW - timedelta(days=index + 1)).isoformat()
+    config = build(Config, {"shorts": {"max_per_streamer_per_day": 10}})
+    star = make_candidate("twitch:star", "star", views=1500, created_at=NOW - timedelta(hours=3))
+    newcomer = make_candidate("twitch:new", "newcomer", views=1000, created_at=NOW - timedelta(hours=3))
+    assert [c.key for c in rank([star, newcomer], state, config, now=NOW)] == ["twitch:new", "twitch:star"]
+    assert [c.key for c in rank([star, newcomer], State(tmp_path / "empty.json"), config, now=NOW)] == ["twitch:star", "twitch:new"]

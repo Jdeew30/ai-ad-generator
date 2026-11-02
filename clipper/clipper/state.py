@@ -66,6 +66,8 @@ class State:
         self.streamers_seen: dict[str, str] = data.get("streamers_seen", {})  # login -> last seen live or in the top
         self.youtube_cursor: int = int(data.get("youtube_cursor", 0))  # next YouTube channel to look at
         self.youtube_related: dict[str, dict[str, Any]] = data.get("youtube_related", {})  # YouTuber -> other channels
+        self.youtube_videos: dict[str, dict[str, Any]] = data.get("youtube_videos", {})  # video id -> seen in a feed
+        self.runs: list[dict[str, Any]] = data.get("runs", [])  # counts of each run, for the dashboard
 
     @classmethod
     def load(cls, path: Path) -> State:
@@ -89,6 +91,8 @@ class State:
             "streamers_seen": self.streamers_seen,
             "youtube_cursor": self.youtube_cursor,
             "youtube_related": self.youtube_related,
+            "youtube_videos": self.youtube_videos,
+            "runs": self.runs[-400:],
         }
         self.path.parent.mkdir(parents=True, exist_ok=True)
         fd, tmp = tempfile.mkstemp(prefix=".state-", suffix=".json", dir=self.path.parent)
@@ -115,6 +119,8 @@ class State:
         self.compiled = {k: v for k, v in self.compiled.items() if keep(v, 60)}
         self.streamers_seen = {k: v for k, v in self.streamers_seen.items() if keep(v, 14)}
         self.youtube_related = {k: v for k, v in self.youtube_related.items() if keep(v, 30)}
+        self.youtube_videos = {k: v for k, v in self.youtube_videos.items() if keep(v.get("published") or v.get("seen") or "", 30)}
+        self.runs = [run for run in self.runs if keep(run, 45)]
 
     # --- queries ---------------------------------------------------------------------------
 

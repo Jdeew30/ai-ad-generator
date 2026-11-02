@@ -52,6 +52,9 @@ class Candidate:
     vod_offset: float | None = None
     thumbnail_url: str | None = None
     heat: float | None = None  # YouTube "most replayed" intensity, 0..1
+    momentum: float | None = None  # YouTube: pre-score of the video, 0-100 (views pace, likes, freshness, title)
+    creator: str | None = None  # YouTube: the creator behind the channel (« Squeezie » for « Squeezie Gaming »)
+    pace: float | None = None  # YouTube: views an hour the video gathers
     manual: bool = False  # queued by hand: skips popularity filters and AI rejection
     parts: list[str] = field(default_factory=list)  # clips of one moment put back together, in order (url is the first)
     score: float = 0.0

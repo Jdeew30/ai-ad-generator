@@ -174,8 +174,10 @@ class TelegramPublisher:
 def card(meta: ShortMeta, candidate: Candidate) -> list[str]:
     """Who, where, when and how much: the facts of a short, then Claude's mark (an estimate, not a measure)."""
     platform = _platform(candidate)
-    who = candidate.streamer or candidate.streamer_login or "?"
+    who = candidate.creator or candidate.streamer or candidate.streamer_login or "?"
     channel = candidate.channel_url.removeprefix("https://").removeprefix("www.") if candidate.channel_url else ""
+    if candidate.creator and candidate.streamer and candidate.streamer != candidate.creator:  # one of its other channels
+        channel = f"chaîne {candidate.streamer}" + (f" ({channel})" if channel else "")
     lines = [f"🎬 {meta.title}", f"👤 {who} · {platform}" + (f" · {channel}" if channel else "")]
     if candidate.title:
         lines.append(f"📝 « {candidate.title} »")
@@ -186,6 +188,8 @@ def card(meta: ShortMeta, candidate: Candidate) -> list[str]:
     numbers = [f"👁 {_count(candidate.views)} vues" if candidate.views else "",
                f"👍 {_count(candidate.likes)}" if candidate.likes else "",
                f"💬 {_count(candidate.comments)}" if candidate.comments else ""]  # fmt: skip
+    if candidate.pace:
+        numbers.append(f"📈 {_count(int(candidate.pace))} vues/h")
     if any(numbers):
         lines.append(" · ".join(part for part in numbers if part))
     if meta.ai and meta.score:

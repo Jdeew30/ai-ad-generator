@@ -6,9 +6,9 @@ Un robot qui, plusieurs fois par jour :
    les viewers eux-mêmes qui clippent les moments forts) des 51 streamers suivis, des 100 plus gros lives FR
    du moment, des chaînes FR vues ces 14 derniers jours (même hors ligne), et les clips FR les plus vus de la
    semaine dans les 20 catégories les plus regardées, quelle que soit la chaîne ; plus les passages « les
-   plus revus » des vidéos de 89 YouTubeurs FR de tous les domaines et de leurs autres chaînes (« X Gaming »,
-   « X 2 »…), à tour de rôle, et les URLs que tu
-   ajoutes à la main ;
+   plus revus » des nouvelles vidéos de 89 YouTubeurs FR de tous les domaines, de leurs autres chaînes vérifiées
+   (« X Gaming », « X 2 »…) et des streamers FR dont il découvre la chaîne YouTube (flux RSS de chaque chaîne
+   à chaque passage), et les URLs que tu ajoutes à la main ;
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
    même clip, 2 clips max par streamer et par jour, popularité *relative* au streamer, fraîcheur ;
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
@@ -29,7 +29,8 @@ Un robot qui, plusieurs fois par jour :
    cadre centré sur le streamer selon le clip ; **sous-titres animés mot à mot** (Whisper),
    accroche incrustée, crédit `twitch.tv/<streamer>`, son normalisé ;
 5. **publie** sur YouTube Shorts (une fois l'audit de Google accepté) et t'envoie chaque vidéo sur
-   **Telegram** avec le texte prêt à coller, pour TikTok et en attendant l'audit ;
+   **Telegram** avec sa fiche (créateur, chaîne, titre original, plateforme, date, durée, vues, likes, note de
+   Claude et pourquoi, lien vers le passage) puis le texte prêt à coller, pour TikTok et en attendant l'audit ;
 6. chaque mercredi et chaque dimanche, monte un **best-of** des 4 derniers jours (un clip n'est jamais repris d'un
    best-of à l'autre) en 16:9 d'environ 15 minutes (Claude retient des
    clips jusqu'à 15 min, jamais plus de 20 ; compte à rebours jusqu'au #1, bandeau avec le nom du streamer,
@@ -40,8 +41,11 @@ Un robot qui, plusieurs fois par jour :
    ce lien dans ton navigateur connecté à ton compte GitHub : sans connexion (dans Telegram par exemple),
    GitHub répond « 404 ». Une fois YouTube branché, il est publié tout seul.
 
-Tout tourne gratuitement dans **GitHub Actions** (aucun serveur à louer). Le robot se souvient de ce qu'il
-a déjà publié grâce à une branche dédiée `clipper-state`.
+Tout tourne dans **GitHub Actions** (aucun serveur à louer). Le robot se souvient de ce qu'il a déjà publié
+grâce à une branche dédiée `clipper-state`, qui contient aussi la **base des créateurs** (`creators.json`) et le
+**tableau de bord** (`dashboard.md`, réécrit à chaque passage : moments trouvés, vidéos préparées, shorts envoyés,
+échecs, sources et créateurs les plus repris, note moyenne, veille YouTube, derniers shorts) :
+`https://github.com/Jdeew30/ai-ad-generator/blob/clipper-state/dashboard.md` (connecté à GitHub, dépôt privé).
 
 Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) ·
 [TikTok @tesmeilleursclips](https://www.tiktok.com/@tesmeilleursclips).
@@ -150,7 +154,15 @@ secret**, nom exactement comme indiqué ci-dessous (ex. `TELEGRAM_BOT_TOKEN`), v
 
 Le bot ne répond pas aux messages, c'est normal : il sert seulement à t'envoyer les vidéos. C'est la voie
 normale pour TikTok (voir plus bas), et pour YouTube tant que l'audit n'est pas accepté : tu reçois la
-vidéo et la légende, tu enregistres, tu publies (ou tu programmes dans TikTok Studio).
+vidéo et sa fiche, puis le texte à coller dans un bloc qui se copie d'un toucher ; tu enregistres, tu publies
+(ou tu programmes dans TikTok Studio).
+
+La « note » sur 100 est celle que Claude donne au passage : une estimation de son intérêt (accroche, réaction,
+humour, surprise, compréhensible sans contexte…), pas une mesure de ses futures vues. Un envoi refusé pour
+excès de messages (erreur 429) attend le délai que Telegram indique ; une coupure réseau est retentée. Une
+vidéo de plus de 50 Mo est recompressée (débit réparti sur sa durée) ; si elle reste trop lourde, tu reçois la
+fiche et le lien sans la vidéo. Pour envoyer des fichiers jusqu'à 2 Go, un serveur Bot API local
+(`telegram-bot-api`) peut être indiqué dans le secret `TELEGRAM_API_URL` (ex. `http://mon-serveur:8081`).
 
 ### Claude : le tri et les textes par IA
 
@@ -229,11 +241,28 @@ app développeur restée en mode *sandbox* (pas de validation TikTok, 10 comptes
 
 ### YouTube comme source : les YouTubeurs FR
 
-Activée : 89 YouTubeurs FR de tous les domaines (`youtube.channels`), 12 chaînes par passage à tour de rôle
-(`channels_per_run`). Avec `related_channels`, le robot cherche aussi les autres chaînes de chaque YouTubeur
-(« Squeezie Gaming », « Djilsi Gaming », « … Vlog », « … 2 ») : seulement les noms « <nom> <suffixe> » avec
-assez d'abonnés, donc ni les chaînes de fans ni les chaînes « Topic » ; 8 recherches par passage, gardées
-14 jours. Une chaîne dont le @ n'existe pas est cherchée par son nom (« @LeWoop » → la chaîne « Le Woop », la
+Activée : 89 YouTubeurs FR de tous les domaines (`youtube.channels`), suivis par **flux RSS** (`watch: rss`) :
+à chaque passage, le robot lit le flux de *chaque* chaîne (15 dernières vidéos avec vues et likes ; gratuit,
+sans quota d'API ni cookies). Il garde l'historique des vidéos vues et leurs vues à chaque passage, ce qui
+mesure la **vitesse** à laquelle une vidéo prend des vues, comparée à l'habitude de la chaîne. Chaque nouvelle
+vidéo des 14 derniers jours (`max_age_days`, fenêtre de rattrapage après une interruption) reçoit un
+**pré-score** sur 100 (vitesse des vues, vues en absolu, likes, fraîcheur, titre qui promet un moment : réaction,
+clash, première fois, record…) ; seules les 12 plus prometteuses (`videos_per_run`) sont regardées de près
+(courbe « les plus revus » ou commentaires), les autres attendent leur tour. Une vidéo qui n'a rien donné est
+revue une fois le lendemain (courbe et commentaires arrivent avec les vues). Une chaîne illisible trois passages
+de suite est mise de côté.
+
+La **base des créateurs** (`creators.json` sur la branche `clipper-state`) garde pour chaque créateur ses chaînes :
+identifiant YouTube, adresse, titre, abonnés, catégories YouTube de ses vidéos, dernière lecture, statut, et
+comment la chaîne a été vérifiée. Les chaînes de `config.yaml` sont les chaînes principales. Avec
+`related_channels`, le robot cherche aussi les autres chaînes de chaque YouTubeur (« Squeezie Gaming »,
+« … Vlog », « … 2 ») : seulement les noms « <nom> <suffixe> » avec assez d'abonnés, et une telle chaîne n'est
+**suivie qu'une fois vérifiée** : sa description cite la chaîne principale (son @, son adresse), ou la description
+de la chaîne principale la cite. Les autres restent « non vérifiées » et sont revues deux semaines plus tard.
+Le robot **découvre aussi de nouveaux créateurs** : pour les streamers FR vus en live sur Twitch ces deux derniers
+jours, il cherche une chaîne YouTube du même nom et ne la suit que si sa description renvoie vers leur Twitch
+(`twitch.tv/<login>`) ; 3 recherches par passage (`discover_per_run`), une par streamer et par mois au plus.
+Une chaîne dont le @ n'existe pas est cherchée par son nom (« @LeWoop » → la chaîne « Le Woop », la
 plus suivie de ce nom exact) et le journal du passage donne le bon @ à mettre dans `config.yaml` ; une chaîne
 sans onglet « Vidéos » (que des lives) donne ses lives. Le robot prend
 leurs vidéos des deux dernières semaines (`max_age_days`, plus de 20 000 vues, pour ne pas écarter les chaînes
@@ -262,8 +291,13 @@ restent 100 % Twitch.
   dans le journal. Avec les clés Twitch, `discover_limit` y ajoute les plus gros lives FR du moment (100),
   `remember_live` les chaînes FR vues ces 14 derniers jours (150 au plus) et `discover_categories` les clips
   FR les plus vus de la semaine dans les catégories les plus regardées (20).
-- `shorts.per_source` / le `cron` du workflow : le rythme de publication, un short Twitch et un short YouTube
-  par passage (10 par jour). Sans `per_source`, `shorts.per_run` shorts par passage, toutes sources confondues.
+- `shorts.per_source` / le `cron` du workflow : le rythme de publication, un short Twitch et deux shorts YouTube
+  par passage (15 par jour au plus : seuls les passages notés 60 ou plus partent). Sans `per_source`,
+  `shorts.per_run` shorts par passage, toutes sources confondues. Chaque short de plus allonge le passage
+  (minutes GitHub Actions : 2 000 par mois sur un dépôt privé, illimitées sur un dépôt public).
+- `youtube.videos_per_run`, `youtube.max_age_days` : combien de nouvelles vidéos YouTube sont regardées de près
+  par passage, et la fenêtre de rattrapage. Les vérifications plus fréquentes (toutes les 30 min) demandent un
+  dépôt public ou un serveur : chaque passage coûte des minutes GitHub Actions.
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.

@@ -39,6 +39,13 @@ class FakeYtDlp:
                 return entries[:limit]
         raise DownloadError("not found", permanent=True)
 
+    def listing(self, url, limit):
+        for prefix, entries in self.listings.items():
+            if isinstance(entries, dict) and url.startswith(prefix):  # a channel's details and its entries
+                self.listed.append(url)
+                return {**entries, "entries": entries.get("entries", [])[:limit]}
+        return {"entries": self.list_flat(url, limit)}
+
     def info(self, url):
         return self.infos[url]
 
@@ -522,3 +529,98 @@ def test_yt_dlp_retries_each_request_with_growing_pauses():
     assert options["retries"] == 5 and options["fragment_retries"] == 5 and options["skip_unavailable_fragments"]
     assert [_backoff(n) for n in range(7)] == [1.0, 2.0, 4.0, 8.0, 16.0, 20.0, 20.0]
     assert options["retry_sleep_functions"]["fragment"] is _backoff
+
+
+def _feed(*videos):
+    entries = "".join(
+        f"<entry><yt:videoId>{video_id}</yt:videoId><yt:channelId>{channel}</yt:channelId><title>{title}</title>"
+        f"<published>{published.isoformat()}</published><media:group><media:community>"
+        f"<media:starRating count=\"{likes}\"/><media:statistics views=\"{views}\"/></media:community></media:group></entry>"
+        for video_id, channel, title, published, views, likes in videos
+    )
+    return ('<?xml version="1.0"?><feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" '
+            'xmlns:media="http://search.yahoo.com/mrss/" xmlns="http://www.w3.org/2005/Atom">' + entries + "</feed>")
+
+
+def test_youtube_watch_reads_every_feed_and_looks_into_the_most_promising_videos(server, http, tmp_path, monkeypatch):
+    from clipper.sources import watch as watch_module
+    from clipper.sources.watch import Creators
+    from clipper.sources.youtube import discover_youtube
+
+    monkeypatch.setattr(watch_module, "FEED", server.url + "/feeds/videos.xml?channel_id={}")
+    feeds = {
+        "UCa": _feed(("hitvideo001", "UCa", "Il CRAQUE en live !", NOW - timedelta(hours=5), 400_000, 30_000),
+                     ("flatvideo01", "UCa", "vlog du dimanche", NOW - timedelta(hours=6), 30_000, 300)),
+        "UCb": _feed(("oldvideo001", "UCb", "souvenirs", NOW - timedelta(days=40), 900_000, 9_000)),
+    }  # fmt: skip
+    server.route("GET", "/feeds/videos.xml", lambda request: (200, {}, feeds[request.query["channel_id"][0]]))
+    heatmap = [{"start_time": i * 10.0, "end_time": (i + 1) * 10.0, "value": 0.9 if i == 50 else 0.1} for i in range(100)]
+    watch_url = "https://www.youtube.com/watch?v={}".format
+    infos = {watch_url(video_id): {"id": video_id, "uploader_id": "@a", "channel_id": "UCa", "channel": "Chaîne A",
+                                   "view_count": 400_000, "like_count": 30_000, "duration": 1000, "categories": ["Gaming"],
+                                   "timestamp": (NOW - timedelta(hours=5)).timestamp(), "heatmap": heatmap}
+             for video_id in ("hitvideo001", "flatvideo01")}  # fmt: skip
+    pages = {"https://www.youtube.com/@a/videos": {"channel_id": "UCa", "channel": "Chaîne A", "uploader_id": "@a",
+                                                    "channel_follower_count": 2_000_000, "description": "", "entries": []},
+             "https://www.youtube.com/@b/videos": {"channel_id": "UCb", "channel": "B", "uploader_id": "@b", "entries": []}}
+    ytdlp = FakeYtDlp(listings=pages, infos=infos)
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b"], "watch": "rss", "videos_per_run": 1}})
+    creators, history = Creators(tmp_path / "creators.json"), {}
+
+    found = discover_youtube(config, ytdlp, now=NOW, http=http, creators=creators, history=history)
+    # Only the most promising new video was looked into; the one past the catch-up window left the history.
+    assert [c.key.split("@")[0] for c in found] == ["youtube:hitvideo001"] and set(history) == {"hitvideo001", "flatvideo01"}
+    assert found[0].creator == "Chaîne A" and found[0].momentum > 0 and found[0].pace == pytest.approx(80_000)
+    assert found[0].likes == 30_000 and history["hitvideo001"]["examined"] == 1 and not history["flatvideo01"]["examined"]
+    channel = creators.creators["a"]["channels"]["a"]
+    assert (channel["id"], channel["followers"], channel["categories"]) == ("UCa", 2_000_000, {"Gaming": 1})
+
+    # Next run: the ids are known, only the feeds are read, and the other video gets its turn.
+    ytdlp.listed.clear()
+    later = discover_youtube(config, ytdlp, now=NOW + timedelta(hours=1), http=http, creators=creators, history=history)
+    assert [c.key.split("@")[0] for c in later] == ["youtube:flatvideo01"] and ytdlp.listed == []
+    assert len(server.calls("GET", "/feeds/videos.xml")) == 4
+
+
+def test_a_youtube_feed_that_cannot_be_read_does_not_stop_the_others(server, http, tmp_path, monkeypatch):
+    from clipper.sources import watch as watch_module
+    from clipper.sources.watch import Creators
+    from clipper.sources.youtube import discover_youtube
+
+    monkeypatch.setattr(watch_module, "FEED", server.url + "/feeds/videos.xml?channel_id={}")
+    server.route("GET", "/feeds/videos.xml", lambda request: (404, {}, "") if request.query["channel_id"][0] == "UCx"
+                 else (200, {}, _feed(("goodvideo01", "UCb", "titre", NOW - timedelta(hours=2), 50_000, 100))))  # fmt: skip
+    creators = Creators(tmp_path / "creators.json")
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@x", "@b"], "watch": "rss", "videos_per_run": 0}})
+    creators.sync(config.youtube.channels, NOW)
+    creators.creators["x"]["channels"]["x"]["id"], creators.creators["b"]["channels"]["b"]["id"] = "UCx", "UCb"
+    history: dict = {}
+    for hours in range(3):  # three runs in a row: the unreadable channel is set aside
+        discover_youtube(config, FakeYtDlp(), now=NOW + timedelta(hours=hours), http=http, creators=creators, history=history)
+    assert list(history) == ["goodvideo01"] and creators.creators["x"]["channels"]["x"]["status"] == "introuvable"
+    assert [channel["ref"] for _, channel in creators.watched()] == ["@b"]
+
+
+def test_new_creators_come_from_streamers_seen_live_once_their_channel_links_to_their_twitch(tmp_path):
+    from clipper.sources.watch import Creators
+    from clipper.sources.youtube import _discover_from_twitch
+
+    search = "https://www.youtube.com/results?search_query={}&sp=".format
+    ytdlp = FakeYtDlp(listings={
+        search("locklear"): [{"channel": "Locklear", "uploader_id": "@Locklear", "channel_follower_count": 900_000}],
+        "https://www.youtube.com/@Locklear/videos": {"channel_id": "UCll", "channel": "Locklear", "uploader_id": "@Locklear",
+                                                      "description": "Lives tous les soirs sur https://www.twitch.tv/locklear"},
+        search("moman"): [{"channel": "Moman", "uploader_id": "@MomanFan", "channel_follower_count": 50_000}],
+        "https://www.youtube.com/@MomanFan/videos": {"channel_id": "UCmf", "channel": "Moman", "description": "Best of"},
+    })  # fmt: skip
+    seen = {"locklear": (NOW - timedelta(hours=3)).isoformat(), "moman": (NOW - timedelta(hours=5)).isoformat(),
+            "oldtimer": (NOW - timedelta(days=9)).isoformat()}  # fmt: skip
+    creators = Creators(tmp_path / "creators.json")
+    _discover_from_twitch(creators, seen, ytdlp, NOW, budget=3)
+    assert list(creators.creators) == ["locklear"]  # the namesake without a link to twitch.tv/moman stays out
+    channel = creators.creators["locklear"]["channels"]["locklear"]
+    assert (channel["id"], channel["verified"]) == ("UCll", "sa description renvoie vers twitch.tv/locklear")
+    assert creators.creators["locklear"]["source"] == "twitch" and set(creators.lookups) == {"locklear", "moman"}
+    ytdlp.listed.clear()
+    _discover_from_twitch(creators, seen, ytdlp, NOW + timedelta(hours=2), budget=3)
+    assert ytdlp.listed == []  # each streamer is looked up once a month at most

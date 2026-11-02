@@ -117,9 +117,15 @@ class YtDlp:
             self.blocked = self.blocked or blocked
             raise DownloadError(message, permanent=bool(_PERMANENT.search(message)), blocked=blocked) from exc
 
-    def list_flat(self, url: str, limit: int) -> list[dict[str, Any]]:
+    def listing(self, url: str, limit: int) -> dict[str, Any]:
+        """A playlist or channel tab, its first `limit` entries unresolved: the page's own details come with them
+        (for a channel: its id, title, handle, subscribers and description)."""
         info = self._run(url, self._options(extract_flat="in_playlist", playlistend=limit, lazy_playlist=True), False)
-        return [entry for entry in (info.get("entries") or []) if isinstance(entry, dict)][:limit]
+        info["entries"] = [entry for entry in (info.get("entries") or []) if isinstance(entry, dict)][:limit]
+        return info
+
+    def list_flat(self, url: str, limit: int) -> list[dict[str, Any]]:
+        return self.listing(url, limit)["entries"]
 
     def info(self, url: str) -> dict[str, Any]:
         return self._run(url, self._options(), False)
