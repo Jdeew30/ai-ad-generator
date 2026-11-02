@@ -640,6 +640,14 @@ def test_new_creators_come_from_streamers_seen_live_once_their_channel_links_to_
     ytdlp.listed.clear()
     _discover_from_twitch(creators, seen, ytdlp, NOW + timedelta(hours=2), budget=3)
     assert ytdlp.listed == []  # each streamer is looked up once a month at most
+    # The owner's Twitch streamers are looked up first, then the latest seen.
+    order: list[str] = []
+    picky = FakeYtDlp()
+    picky.list_flat = lambda url, limit: order.append(url.split("search_query=")[1].split("&")[0]) or []
+    seen = {"zzz": (NOW - timedelta(hours=1)).isoformat(), "aaa": (NOW - timedelta(hours=5)).isoformat(),
+            "star": (NOW - timedelta(hours=9)).isoformat()}  # fmt: skip
+    _discover_from_twitch(Creators(tmp_path / "other.json"), seen, picky, NOW, budget=3, first=["star"])
+    assert order == ["star", "zzz", "aaa"]
 
 
 def test_the_watch_looks_past_the_passages_already_sent_or_refused(server, http, tmp_path, monkeypatch):

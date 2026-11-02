@@ -16,7 +16,9 @@ from .models import parse_time
 def render(state: Any, creators: Any, now: datetime) -> str:
     """The dashboard, in Markdown (GitHub shows it as a page)."""
     lines = [f"# Tableau de bord du clipper", "", f"Mis à jour le {now:%d/%m/%Y à %H:%M} UTC.", ""]
-    lines += ["## Activité", "", "| | 7 jours | 30 jours |", "|---|---:|---:|"]
+    first = min((run.get("at") or "" for run in state.runs), default="")
+    since = f" (compteurs tenus depuis le {parse_time(first):%d/%m/%Y})" if parse_time(first) else ""
+    lines += [f"## Activité{since}", "", "| | 7 jours | 30 jours |", "|---|---:|---:|"]
     for label, field in (("Moments trouvés (Twitch + YouTube)", "detected"), ("Vidéos téléchargées et préparées", "prepared"),
                          ("Shorts envoyés", "published"), ("Écartés par la revue", "rejected"),
                          ("Échecs (téléchargement, montage, envoi)", "failed")):  # fmt: skip
@@ -31,9 +33,13 @@ def render(state: Any, creators: Any, now: datetime) -> str:
     if marks:
         lines.append(f"Note moyenne de Claude : {sum(marks) / len(marks):.0f}/100 sur {len(marks)} short(s) notés "
                      "(une estimation de l'intérêt du passage, pas une mesure).")
-    creators_seen = Counter(entry.get("streamer") or entry.get("streamer_login") or "?" for _, entry in posts)
+    # One creator under one name, whatever its case on Twitch or YouTube (« Gotaga », « GOTAGA »).
+    creators_seen = Counter((entry.get("streamer_login") or entry.get("streamer") or "?").lower() for _, entry in posts)
+    names = {(entry.get("streamer_login") or entry.get("streamer") or "?").lower(): entry.get("streamer") or entry.get("streamer_login")
+             for _, entry in sorted(posts, key=lambda pair: pair[1].get("at") or "")}  # fmt: skip
     if creators_seen:
-        lines.append("Créateurs les plus repris : " + ", ".join(f"{name} ({count})" for name, count in creators_seen.most_common(10)) + ".")
+        lines.append("Créateurs les plus repris : " + ", ".join(f"{names[login]} ({count})"
+                                                               for login, count in creators_seen.most_common(10)) + ".")
 
     lines += ["", "## Veille YouTube", ""]
     if creators is not None:
