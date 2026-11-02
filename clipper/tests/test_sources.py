@@ -346,7 +346,7 @@ def test_other_channels_join_the_turns():
 
 
 def test_a_youtube_handle_that_does_not_exist_is_looked_up_by_its_name(caplog):
-    from clipper.sources.youtube import discover_youtube, renamed_channel
+    from clipper.sources.youtube import _channel_tab, discover_youtube, renamed_channel
 
     search = "https://www.youtube.com/results?search_query=Le%20Woop&sp="
     results = [
@@ -366,6 +366,11 @@ def test_a_youtube_handle_that_does_not_exist_is_looked_up_by_its_name(caplog):
     assert [c.key.split("@")[0] for c in found] == ["youtube:w1"]
     assert "Chaîne YouTube @LeWoop introuvable : lue sous le nom @LeWoopOfficiel" in caplog.text
     assert "Chaîne YouTube introuvable ou indisponible (https://www.youtube.com/@Nobody/videos)" in caplog.text
+    # A channel of lives only gives its lives.
+    lives = FakeYtDlp(listings={"https://www.youtube.com/@Etoiles/videos": DownloadError("[youtube:tab] @Etoiles: This "
+                                "channel does not have a videos tab", permanent=True),
+                                "https://www.youtube.com/@Etoiles/streams": [{"id": "l1"}, {"id": "l2"}]})  # fmt: skip
+    assert _channel_tab(lives, "@Etoiles", "videos", 1) == ("@Etoiles", [{"id": "l1"}])
     # The channel found under the very handle that failed is no other name for it.
     assert renamed_channel(FakeYtDlp({search: [{"channel": "Le Woop", "uploader_id": "@lewoop"}]}), "@LeWoop") is None
     duo = [{"channel": "McFly & Carlito", "uploader_id": "@McFlyEtCarlitoOff", "channel_follower_count": 7_000_000}]

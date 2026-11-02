@@ -23,6 +23,7 @@ SEARCH_CHANNELS = "https://www.youtube.com/results?search_query={}&sp=EgIQAg%253
 SECOND_CHANNEL_SUFFIXES = {"gaming", "games", "jeux", "2", "bis", "vlog", "vlogs", "live", "lives", "replay", "replays",
                            "rediff", "rediffs", "tv", "plus", "extra", "bonus", "irl", "podcast"}  # fmt: skip
 MIN_FOLLOWERS = 10_000  # a fan's channel with the same name stays out
+NO_VIDEOS_TAB = "does not have a videos tab"  # yt-dlp, on a channel that only has lives (or shorts)
 RELATED_LOOKUPS_PER_RUN = 8
 RELATED_REFRESH_DAYS = 14
 NO_HEATMAP = "sans « moments les plus revus »"
@@ -299,19 +300,25 @@ def _link(entry: dict[str, Any]) -> str | None:
 
 
 def _channel_tab(ytdlp: YtDlp, ref: str, tab: str, count: int) -> tuple[str, list[dict[str, Any]]]:
-    """The channel and the `count` latest entries of its `tab`. A handle that does not exist is looked up by its name."""
+    """The channel and the `count` latest entries of its `tab`.
+
+    Failing on the videos tab means a wrong handle, looked up by its name, or a channel of lives only: its lives are read.
+    """
     try:
         return ref, ytdlp.list_flat(f"{channel_url(ref)}/{tab}", count)
     except DownloadError as exc:
-        # The videos tab exists on every channel: failing there means a wrong handle (or YouTube blocking).
-        if exc.blocked or tab != "videos" or "/@" not in channel_url(ref):
+        if exc.blocked or tab != "videos":
             raise
-        try:
-            renamed = renamed_channel(ytdlp, ref)
-        except DownloadError:
-            renamed = None
+        renamed = None
+        if "/@" in channel_url(ref):
+            try:
+                renamed = renamed_channel(ytdlp, ref)
+            except DownloadError:
+                pass
         if not renamed:
-            raise exc
+            if NO_VIDEOS_TAB not in str(exc):
+                raise exc
+            return ref, ytdlp.list_flat(f"{channel_url(ref)}/streams", count)
     log.warning("Chaîne YouTube %s introuvable : lue sous le nom %s, à corriger dans config.yaml", ref, renamed)
     return renamed, ytdlp.list_flat(f"{channel_url(renamed)}/{tab}", count)
 
