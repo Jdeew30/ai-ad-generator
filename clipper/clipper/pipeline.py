@@ -12,7 +12,7 @@ from typing import Any
 
 from .ai import ClaudeCurator, Review, ReviewItem, clip_title, template_compilation_meta, template_review
 from .captions import clean
-from .compilation import Part, chapters_text, render_compilation
+from .compilation import Part, chapters_text, clock, render_compilation
 from .config import Config, ConfigError, Paths, Secrets
 from .facecam import best_frame, face_stats, faces_per_frame, plan_layout
 from .github_secrets import secret_saver
@@ -25,17 +25,18 @@ from .publishers.youtube import short_description
 from .render import render_short
 from .selection import rank, spread
 from .sources import discover, focus_config
-from .sources.manual import QueueError, joined_candidate, links, manual_candidate
+from .sources.manual import QueueError, joined_candidate, links, manual_candidate, parse_timestamp
 from .sources.twitch import SourceError
 from .state import State
 from .thumbnail import make_thumbnail
-from .transcribe import Transcriber, TranscriptionError
+from .transcribe import Transcriber, TranscriptionError, context, locate, occurrences
 from .ytdlp import DownloadError, YtDlp
 
 log = logging.getLogger(__name__)
 
 # With Claude, more batches of candidates are reviewed while the previous ones do not give enough shorts.
 REVIEW_ROUNDS = 4
+FIND_BEFORE, FIND_AFTER = 15.0, 35.0  # passage kept around a phrase looked for: its setup, then what it leads to
 # Claude sees what was published lately: never the same moment twice, and "(partie 2)" for the next part of a story.
 RECENT_DAYS = 3
 RECENT_SHORTS = 15
@@ -451,14 +452,17 @@ class Clipper:
 
     def run_shorts(self, *, dry_run: bool = False, count: int | None = None, url: str | None = None,
                    start: str | None = None, end: str | None = None, queue: Path | None = None,
-                   focus: list[str] | None = None, force: bool = False) -> RunReport:
-        """With `force` (a clip asked for by hand), the best clip Claude marked goes out even under the bar."""
+                   focus: list[str] | None = None, force: bool = False, find: str | None = None) -> RunReport:
+        """With `force` (a clip asked for by hand), the best clip Claude marked goes out even under the bar.
+
+        With `find`, the passage of `url` where that phrase is said is cut out (searched from `start` to `end`).
+        """
         report = RunReport("shorts", dry_run)
         if not dry_run:
             _ = self.publishers  # missing credentials for a required platform: fail before any work
         try:
             self._shorts(report, dry_run=dry_run, count=count, url=url, start=start, end=end, queue=queue, focus=focus,
-                         force=force)
+                         force=force, find=find)
         finally:
             if not dry_run:
                 self.state.save()
@@ -483,7 +487,7 @@ class Clipper:
 
     def _shorts(self, report: RunReport, *, dry_run: bool, count: int | None, url: str | None,
                 start: str | None, end: str | None, queue: Path | None, focus: list[str] | None = None,
-                force: bool = False) -> None:
+                force: bool = False, find: str | None = None) -> None:
         wanted = self.config.shorts.per_run if count is None else count
         # A scheduled run takes so many shorts of each source; a count, a focus or an URL asked for by hand do not.
         quotas = self.config.shorts.per_source if count is None and not focus and not url else {}
@@ -491,8 +495,10 @@ class Clipper:
             try:
                 urls = links(url)
                 joined = len(urls) > 1 and all(link.startswith(("http://", "https://")) for link in urls)
-                if joined and (start or end):
-                    raise QueueError("début et fin ne s'appliquent pas à plusieurs clips recollés")
+                if joined and (start or end or find):
+                    raise QueueError("début, fin et phrase ne s'appliquent pas à plusieurs clips recollés")
+                if find:
+                    start, end = self._locate(url, find, start, end)
                 ranked = [joined_candidate(urls) if joined else manual_candidate(url, start, end)]
             except QueueError as exc:
                 report.errors.append(str(exc))
@@ -522,6 +528,28 @@ class Clipper:
         for source, quota in quotas.items():
             self._publish_best(report, [c for c in ranked if _platform(c) == source], quota, dry_run=dry_run, source=source,
                                force=force)
+
+    def _locate(self, url: str, phrase: str, start: str | None, end: str | None) -> tuple[float, float]:
+        """The passage of `url` around `phrase`, which Whisper listens for from `start` to `end`."""
+        begin, finish = parse_timestamp(start), parse_timestamp(end)
+        where = f"de {clock(begin or 0.0)} à {clock(finish) if finish is not None else 'la fin'}"
+        log.info("Recherche de « %s » %s…", phrase, where)
+        try:
+            # The whole sound comes at once (a section is fetched by ffmpeg at playing speed): only the part is heard.
+            media, _ = self.ytdlp.download(url.strip(), self.paths.work / "find", "search", audio_only=True)
+            words = self.transcriber.transcribe(media, start=begin, end=finish, quick=True).words
+        except (DownloadError, TranscriptionError, MediaError) as exc:
+            raise QueueError(f"recherche de « {phrase} » impossible : {exc}") from exc
+        log.info("Whisper a entendu %d mot(s)%s.", len(words),
+                 f", de {clock((begin or 0.0) + words[0].start)} à {clock((begin or 0.0) + words[-1].end)}" if words else "")
+        for at, ratio in occurrences(words, phrase):  # several? the log shows each, to search a narrower part
+            log.info("  %s (%.0f %%) : « %s »", clock((begin or 0.0) + at), ratio * 100, context(words, at))
+        heard = locate(words, phrase)
+        if heard is None:
+            raise QueueError(f"« {phrase} » introuvable {where} : une autre phrase, ou un autre passage ?")
+        at = (begin or 0.0) + heard
+        log.info("« %s » entendu à %s.", phrase, clock(at))
+        return max(0.0, at - FIND_BEFORE), at + FIND_AFTER
 
     def _publish_best(self, report: RunReport, ranked: list[Candidate], wanted: int, *, dry_run: bool,
                       source: str | None = None, force: bool = False) -> None:

@@ -86,6 +86,10 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
 Avec un début **et** une fin, le passage choisi est gardé en entier (Claude écrit les textes sans recouper).
+Tu ne connais pas le minutage ? Mets une phrase dite dans le passage dans le champ **find** (ex. `c'est quoi la
+plus grosse insulte`) : Whisper écoute la vidéo, ou seulement de **début** à **fin** si tu les remplis (plus
+rapide sur une longue vidéo), trouve la phrase même dite un peu autrement, et le robot garde 15 s avant et 35 s
+après.
 
 Pour **rallonger** un short dont le live n'a plus de replay : mode `clips` → colle le lien du clip Twitch. Le
 résumé du passage liste les autres clips de la chaîne faits 10 minutes avant ou après (souvent le même moment,

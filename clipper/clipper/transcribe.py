@@ -31,14 +31,16 @@ class TranscriptionError(Exception):
     pass
 
 
-def load_audio(media: Path) -> np.ndarray:
-    """Mono 16 kHz float32 samples, decoded by ffmpeg.
+def load_audio(media: Path, *, start: float | None = None, end: float | None = None) -> np.ndarray:
+    """Mono 16 kHz float32 samples, decoded by ffmpeg: the whole media, or from `start` to `end` (seconds).
 
     faster-whisper decodes files with PyAV, and its call breaks on recent PyAV releases
     (`metadata_errors` was removed); handing it samples sidesteps PyAV entirely.
     """
     try:
-        command = [ffmpeg_bin(), "-nostdin", "-hide_banner", "-loglevel", "error", "-i", str(media),
+        section = ["-ss", f"{start:.3f}"] if start else []
+        length = ["-t", f"{end - (start or 0.0):.3f}"] if end is not None else []
+        command = [ffmpeg_bin(), "-nostdin", "-hide_banner", "-loglevel", "error", *section, "-i", str(media), *length,
                    "-vn", "-ac", "1", "-ar", str(SAMPLE_RATE), "-f", "f32le", "-"]  # fmt: skip
         result = subprocess.run(command, capture_output=True, timeout=900)
     except (MediaError, subprocess.TimeoutExpired) as exc:
@@ -76,8 +78,13 @@ class Transcriber:
                 raise TranscriptionError(f"modèle Whisper « {self.model_name} » indisponible : {exc}") from exc
         return self._model
 
-    def transcribe(self, media: Path, *, prompt: str | None = None) -> Transcript:
-        audio = load_audio(media)
+    def transcribe(self, media: Path, *, prompt: str | None = None, start: float | None = None,
+                   end: float | None = None, quick: bool = False) -> Transcript:
+        """The words said in `media`, or from `start` to `end`: their times then count from `start`.
+
+        `quick` decodes greedily (about twice as fast): enough to find a phrase in a long video.
+        """
+        audio = load_audio(media, start=start, end=end)
         if audio.size < SAMPLE_RATE // 2:
             return Transcript(words=[], language=self.language)
         model = self._load()
@@ -87,7 +94,7 @@ class Transcriber:
                 language=self.language,
                 word_timestamps=True,
                 vad_filter=True,
-                beam_size=5,
+                beam_size=1 if quick else 5,
                 condition_on_previous_text=False,
                 initial_prompt=prompt,
             )
@@ -149,3 +156,56 @@ def shift_words(words: list[Word], start: float, end: float | None) -> list[Word
         if new_end > new_start:
             shifted.append(Word(start=round(new_start, 3), end=round(new_end, 3), text=word.text))
     return shifted
+
+
+def locate(words: list[Word], phrase: str, *, min_ratio: float = 0.6) -> float | None:
+    """When `phrase` is said among `words`: the start of the first of its words heard, or None.
+
+    Said loosely counts too (« que tu connais » for « que vous connaissez »): the passage that holds the most of its
+    words, in order, wins if it holds at least `min_ratio` of them; the earliest one on a tie.
+    """
+    found = occurrences(words, phrase, min_ratio=min_ratio)
+    return max(found, key=lambda pair: (pair[1], -pair[0]))[0] if found else None
+
+
+def occurrences(words: list[Word], phrase: str, *, min_ratio: float = 0.6) -> list[tuple[float, float]]:
+    """Every time `phrase` is said, loosely or not: (start, share of its words heard), a few seconds apart at least."""
+    wanted = _tokens(phrase)
+    heard = [(word.start, token) for word in words for token in _tokens(word.text)]
+    if not wanted:
+        return []
+    span = len(wanted) + 3  # a few words more or less said in between
+    found: list[tuple[float, float]] = []
+    for index, (at, token) in enumerate(heard):
+        if token not in wanted:
+            continue
+        ratio = _in_order(wanted, [t for _, t in heard[index:index + span]]) / len(wanted)
+        if ratio < min_ratio:
+            continue
+        if found and at - found[-1][0] < 5.0:  # the same saying, caught from one of its later words
+            if ratio > found[-1][1]:
+                found[-1] = (at, ratio)
+            continue
+        found.append((at, ratio))
+    return found
+
+
+def context(words: list[Word], at: float, *, before: float = 4.0, after: float = 8.0) -> str:
+    """What is said around `at`, for the log."""
+    return " ".join(word.text for word in words if at - before <= word.start <= at + after)
+
+
+def _tokens(text: str) -> list[str]:
+    """« C'est quoi, la grand-mère ? » -> ['c', 'est', 'quoi', 'la', 'grand', 'mere']."""
+    plain = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().lower()
+    return re.findall(r"[a-z0-9]+", plain)
+
+
+def _in_order(wanted: list[str], heard: list[str]) -> int:
+    """How many of `wanted` are in `heard`, in the same order (longest common subsequence)."""
+    row = [0] * (len(heard) + 1)
+    for token in wanted:
+        previous = row[:]
+        for index, other in enumerate(heard, start=1):
+            row[index] = previous[index - 1] + 1 if token == other else max(previous[index], row[index - 1])
+    return row[-1]

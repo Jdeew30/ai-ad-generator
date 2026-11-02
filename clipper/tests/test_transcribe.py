@@ -116,3 +116,36 @@ def test_french_elisions_stay_one_word(tmp_path):
     assert [(w.text, w.start, w.end) for w in words] == [
         ("C'est", 0.0, 0.3), ("celle-ci,", 0.3, 0.7), ("la", 0.7, 0.8), ("1.6", 0.8, 1.0), ("'Allô", 1.0, 1.2), ("?", 1.2, 1.3),
     ]  # fmt: skip
+
+
+def test_a_phrase_is_located_even_said_loosely():
+    from clipper.models import Word
+    from clipper.transcribe import locate
+
+    said = "Bon alors petit C'est quoi la plus grosse insulte que vous connaissez ? Nique ta grand-mère"
+    words = [Word(i * 0.5, i * 0.5 + 0.4, text) for i, text in enumerate(said.split())]
+    assert locate(words, "la plus grosse insulte que vous connaissez") == 2.5
+    assert locate(words, "c'est quoi la plus grosse insulte que tu connais") == 1.5  # not word for word
+    assert locate(words, "NIQUE TA GRAND MERE") == 6.5  # case, accents and hyphens aside
+    assert locate(words, "bonjour madame") is None and locate(words, "?") is None
+    assert locate(words, "la plus belle insulte du monde entier") is None  # too few of its words
+
+
+def test_every_saying_of_a_phrase_is_listed():
+    from clipper.models import Word
+    from clipper.transcribe import context, locate, occurrences
+
+    said = "il a dit nique ta grand-mère hier puis on en reparle et Jordan répond nique ta grand-mère mdr"
+    words = [Word(i * 2.0, i * 2.0 + 1.5, text) for i, text in enumerate(said.split())]
+    assert occurrences(words, "nique ta grand-mère") == [(6.0, 1.0), (28.0, 1.0)]
+    assert locate(words, "nique ta grand-mère") == 6.0  # as well said both times: the first one
+    assert context(words, 28.0) == "Jordan répond nique ta grand-mère mdr"
+
+
+@requires_ffmpeg
+def test_only_the_part_asked_for_is_heard(tmp_path):
+    tone = tmp_path / "tone.wav"
+    ffmpeg("-f", "lavfi", "-i", "sine=f=440:d=3", str(tone))
+    assert abs(load_audio(tone).size - 3 * SAMPLE_RATE) < SAMPLE_RATE // 10
+    assert abs(load_audio(tone, start=1.0, end=2.5).size - 1.5 * SAMPLE_RATE) < SAMPLE_RATE // 10
+    assert abs(load_audio(tone, start=2.0).size - SAMPLE_RATE) < SAMPLE_RATE // 10

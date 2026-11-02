@@ -110,8 +110,9 @@ class YtDlp:
         start: float | None = None,
         end: float | None = None,
         exact: bool = True,
+        audio_only: bool = False,
     ) -> tuple[Path, dict[str, Any]]:
-        """Downloads `url`, or only its section from `start` to `end` (seconds).
+        """Downloads `url`, or only its section from `start` to `end` (seconds); with `audio_only`, only its sound.
 
         `exact` re-encodes the section so that it starts on the very frame asked for, which takes minutes on a
         long 1080p60 section. Without it the section is copied as is and starts on the keyframe just before
@@ -121,12 +122,13 @@ class YtDlp:
 
         dest_dir.mkdir(parents=True, exist_ok=True)
         extra: dict[str, Any] = {
-            "format": FORMAT,
-            "merge_output_format": "mp4",
+            "format": "bestaudio/best" if audio_only else FORMAT,
             "outtmpl": str(dest_dir / f"{name}.%(ext)s"),
             "overwrites": True,
             "noplaylist": True,
         }
+        if not audio_only:
+            extra["merge_output_format"] = "mp4"
         if start is not None or end is not None:
             extra["download_ranges"] = download_range_func(None, [(start or 0.0, end if end is not None else float("inf"))])
             extra["force_keyframes_at_cuts"] = exact
@@ -135,7 +137,7 @@ class YtDlp:
         path = next((p for p in paths if p.exists()), None)
         if path is None:
             matches = sorted(dest_dir.glob(f"{name}.*"))
-            path = next((p for p in matches if p.suffix in {".mp4", ".mkv", ".webm", ".mov"}), None)
+            path = next((p for p in matches if p.suffix in {".mp4", ".mkv", ".webm", ".mov", ".m4a", ".opus", ".mp3"}), None)
         if path is None:
             raise DownloadError(f"yt-dlp n'a produit aucun fichier pour {url}")
         return path, info
