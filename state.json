@@ -788,6 +788,30 @@
    "url": "https://www.youtube.com/watch?v=2wJuFzwBWkI",
    "views": 620046
   },
+  "youtube:4X440MciNX8@1083-1143": {
+   "at": "2026-11-02T10:54:39.470765+00:00",
+   "created_at": "2026-11-01T16:25:00+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "65",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "youtube",
+   "span": [
+    "yt:4X440MciNX8",
+    1083.0,
+    1143.0
+   ],
+   "streamer": "Amixem",
+   "streamer_login": "amixem",
+   "title": "Amixem découvre que son décorateur a mis l'eau courante dans une cabane d'enfant",
+   "url": "https://www.youtube.com/watch?v=4X440MciNX8",
+   "views": 1614459
+  },
   "youtube:BByplh9JRTs@2045-2105": {
    "at": "2026-11-01T14:52:21.158350+00:00",
    "created_at": "2026-10-31T10:00:09+00:00",
@@ -1614,6 +1638,10 @@
    "at": "2026-11-01T14:51:31.322030+00:00",
    "reason": "revue : Images sombres et confuses, presque sans dialogue. L'extrait ne se comprend pas sans contexte, et un moment de la même vidéo a déjà été publié."
   },
+  "youtube:2wJuFzwBWkI@6056-6116": {
+   "at": "2026-11-02T10:53:51.449874+00:00",
+   "reason": "revue : note 22/100 (minimum 60). Séquence nocturne très sombre et confuse : cris inintelligibles, aucune action lisible ni chute. Sans contexte, on ne comprend pas ce qui se passe."
+  },
   "youtube:BByplh9JRTs@1052-1112": {
    "at": "2026-10-31T17:06:16.386160+00:00",
    "reason": "revue : Discussion de stratégie d'Undercover très difficile à comprendre sans le contexte du jeu, sans vraie chute."
@@ -1741,6 +1769,10 @@
   "youtube:uQ6Yr6sLhYs@337-397": {
    "at": "2026-11-01T09:54:50.383724+00:00",
    "reason": "revue : Bavardage après un talent qu'on ne voit pas vraiment : souvenirs de cartes postales sans vraie chute. Le moment est incompréhensible sans le reste de la vidéo et ne retient pas l'attention."
+  },
+  "youtube:v9wYSebfh4o@2145-2205": {
+   "at": "2026-11-02T10:53:51.449912+00:00",
+   "reason": "revue : note 35/100 (minimum 60). Test d'objets TikTok assez plat. La partie sur la scie musicale arrive en cours de route et la cuillère anti-sel n'est que présentée, sans résultat. Pas de vraie chute."
   },
   "youtube:vy2tWg9-QN4@1285-1345": {
    "at": "2026-10-31T19:02:40.575499+00:00",
