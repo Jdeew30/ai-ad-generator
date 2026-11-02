@@ -24,13 +24,15 @@ class FakeYtDlp:
         self.media = media
         self.clips = clips
         self.downloads: list[str] = []
+        self.sections: list[tuple] = []
 
     def list_flat(self, url, limit):
         login = url.split("twitch.tv/")[1].split("/")[0]
         return self.clips.get(login, [])[:limit]
 
-    def download(self, url, dest_dir, name, *, start=None, end=None, exact=True):
+    def download(self, url, dest_dir, name, *, start=None, end=None, exact=True, audio_only=False):
         self.downloads.append(url)
+        self.sections.append((url, start, end, audio_only))
         slug = url.rsplit("/", 1)[-1]
         source = self.media["facecam" if "Cam" in slug else "noface"]
         dest_dir.mkdir(parents=True, exist_ok=True)
@@ -463,6 +465,19 @@ def test_single_url_mode(media, paths):
     [outcome] = report.published
     assert outcome.candidate.manual and outcome.candidate.streamer == "Gamma"
     assert youtube.calls and State.load(paths.state).posted["twitch:Gamma-Cam9"]
+
+
+def test_a_passage_is_found_by_what_is_said_in_it(media, paths):
+    run = clipper(media, paths, clips={}, publishers={"telegram": FakePublisher("telegram")})
+    video = "https://www.youtube.com/watch?v=abcdefghijk"
+    report = run.run_shorts(url=video, find="Regarde ça !", start="45:00", end="1:08:00")
+    [outcome] = report.published
+    # Whisper listened to the sound from 45:00 and heard « regarde » 0.7 s in: 15 s before it, 35 s after.
+    assert run.ytdlp.sections[0] == (video, 2700.0, 4080.0, True)
+    assert outcome.candidate.key == "youtube:abcdefghijk@2685-2735" and outcome.candidate.manual
+    missing = clipper(media, paths, clips={}).run_shorts(url=video, find="bonjour madame")
+    assert missing.published == [] and missing.errors == [
+        "« bonjour madame » introuvable de 0:00 à la fin : une autre phrase, ou un autre passage ?"]
 
 
 def test_clips_of_one_moment_given_together_are_joined_and_kept_whole(media, paths):

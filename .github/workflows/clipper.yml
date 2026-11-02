@@ -28,6 +28,9 @@ on:
       end:
         description: "Mode url : fin (ex. 2:05)"
         required: false
+      find:
+        description: "Mode url : une phrase dite dans la vidéo, pour en couper le passage (début et fin = où la chercher, vides = toute la vidéo)"
+        required: false
       focus:
         description: "Mode shorts : seulement ces chaînes ou vidéos (ex. gotaga, aminematue, @Gotaga, lien YouTube). Mode clips : une autre chaîne, pour sa POV du même moment"
         required: false
@@ -113,6 +116,7 @@ jobs:
           URL: ${{ inputs.url }}
           START: ${{ inputs.start }}
           END: ${{ inputs.end }}
+          FIND: ${{ inputs.find }}
           FOCUS: ${{ inputs.focus }}
           COUNT: ${{ inputs.count }}
           DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
@@ -126,7 +130,7 @@ jobs:
               python -m clipper clips "$URL" ${FOCUS:+--channel "$FOCUS"} ;;
             url)
               if [ -z "$URL" ]; then echo "::error::Le mode url demande une URL"; exit 1; fi
-              python -m clipper run $DRY_RUN --url "$URL" ${START:+--start "$START"} ${END:+--end "$END"} ;;
+              python -m clipper run $DRY_RUN --url "$URL" ${START:+--start "$START"} ${END:+--end "$END"} ${FIND:+--find "$FIND"} ;;
             *) python -m clipper run $DRY_RUN $FORCE ${FOCUS:+--focus "$FOCUS"} ${COUNT:+--count "$COUNT"} ;;
           esac
 

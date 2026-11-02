@@ -116,3 +116,16 @@ def test_french_elisions_stay_one_word(tmp_path):
     assert [(w.text, w.start, w.end) for w in words] == [
         ("C'est", 0.0, 0.3), ("celle-ci,", 0.3, 0.7), ("la", 0.7, 0.8), ("1.6", 0.8, 1.0), ("'Allô", 1.0, 1.2), ("?", 1.2, 1.3),
     ]  # fmt: skip
+
+
+def test_a_phrase_is_located_even_said_loosely():
+    from clipper.models import Word
+    from clipper.transcribe import locate
+
+    said = "Bon alors petit C'est quoi la plus grosse insulte que vous connaissez ? Nique ta grand-mère"
+    words = [Word(i * 0.5, i * 0.5 + 0.4, text) for i, text in enumerate(said.split())]
+    assert locate(words, "la plus grosse insulte que vous connaissez") == 2.5
+    assert locate(words, "c'est quoi la plus grosse insulte que tu connais") == 1.5  # not word for word
+    assert locate(words, "NIQUE TA GRAND MERE") == 6.5  # case, accents and hyphens aside
+    assert locate(words, "bonjour madame") is None and locate(words, "?") is None
+    assert locate(words, "la plus belle insulte du monde entier") is None  # too few of its words

@@ -149,3 +149,40 @@ def shift_words(words: list[Word], start: float, end: float | None) -> list[Word
         if new_end > new_start:
             shifted.append(Word(start=round(new_start, 3), end=round(new_end, 3), text=word.text))
     return shifted
+
+
+def locate(words: list[Word], phrase: str, *, min_ratio: float = 0.6) -> float | None:
+    """When `phrase` is said among `words`: the start of the first of its words heard, or None.
+
+    Said loosely counts too (« que tu connais » for « que vous connaissez »): the passage that holds the most of its
+    words, in order, wins if it holds at least `min_ratio` of them; the earliest one on a tie.
+    """
+    wanted = _tokens(phrase)
+    heard = [(word.start, token) for word in words for token in _tokens(word.text)]
+    if not wanted:
+        return None
+    span = len(wanted) + 3  # a few words more or less said in between
+    best: tuple[float, float] | None = None
+    for index, (at, token) in enumerate(heard):
+        if token not in wanted:
+            continue
+        ratio = _in_order(wanted, [t for _, t in heard[index:index + span]]) / len(wanted)
+        if ratio >= min_ratio and (best is None or ratio > best[0]):
+            best = (ratio, at)
+    return best[1] if best else None
+
+
+def _tokens(text: str) -> list[str]:
+    """« C'est quoi, la grand-mère ? » -> ['c', 'est', 'quoi', 'la', 'grand', 'mere']."""
+    plain = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().lower()
+    return re.findall(r"[a-z0-9]+", plain)
+
+
+def _in_order(wanted: list[str], heard: list[str]) -> int:
+    """How many of `wanted` are in `heard`, in the same order (longest common subsequence)."""
+    row = [0] * (len(heard) + 1)
+    for token in wanted:
+        previous = row[:]
+        for index, other in enumerate(heard, start=1):
+            row[index] = previous[index - 1] + 1 if token == other else max(previous[index], row[index - 1])
+    return row[-1]

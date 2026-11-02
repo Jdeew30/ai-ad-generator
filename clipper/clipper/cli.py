@@ -46,7 +46,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     focus = [target for target in re.split(r"[,\s]+", args.focus or "") if target] or None
     report = _clipper(args).run_shorts(
         dry_run=args.dry_run, count=args.count, url=args.url, start=args.start, end=args.end, queue=queue, focus=focus,
-        force=args.force,
+        force=args.force, find=args.find,
     )
     _summary(report.markdown())
     return 1 if report.errors else 0
@@ -244,12 +244,15 @@ def build_parser() -> argparse.ArgumentParser:
                                      "(chaîne Twitch, @chaîne YouTube ou lien de vidéo YouTube)")
     run.add_argument("--force", action="store_true", help="si aucun clip n'atteint la note minimale, publie quand même "
                                                           "le mieux noté par Claude (jamais un clip qu'il refuse)")
+    run.add_argument("--find", help="avec --url : une phrase dite dans la vidéo, pour en couper le passage "
+                                    "(--start et --end disent alors où la chercher)")
     run.set_defaults(func=cmd_run)
 
     render = commands.add_parser("render", help="monte une URL en short sans publier (= run --url … --dry-run)")
     render.add_argument("url")
     render.add_argument("--start")
     render.add_argument("--end")
+    render.add_argument("--find", help="une phrase dite dans la vidéo, pour en couper le passage")
     render.set_defaults(func=cmd_run, dry_run=True, count=None, no_queue=True, focus=None, force=False)
 
     compile_ = commands.add_parser("compile", help="monte et publie le best-of de la semaine")
