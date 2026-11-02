@@ -121,6 +121,7 @@ shorts:
   per_run: 1                    # sans per_source : shorts publiés à chaque passage, toutes sources confondues
   candidates_factor: 3          # avec Claude : 3 candidats examinés par série (jusqu'à 3 séries par passage)
   min_score: 60                 # note de Claude sur 100 : en dessous, le clip n'est pas publié
+  guarantee: {twitch: 45, youtube: 45}  # sinon, le meilleur part quand même s'il a au moins cette note : un short de chaque source par passage
   context_before: 20            # secondes du replay (VOD) ajoutées avant chaque clip Twitch : la mise en place (0 = clip seul)
   context_after: 8              # et après : la fin de la réaction. Claude coupe ensuite ce qui ne sert pas
   max_per_streamer_per_day: 2

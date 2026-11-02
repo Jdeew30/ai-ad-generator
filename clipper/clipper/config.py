@@ -83,6 +83,9 @@ class ShortsConfig:
     per_source: dict[str, int] = field(default_factory=dict)  # {twitch: 1, youtube: 1}: so many of each per run, instead of per_run
     candidates_factor: int = 3  # how many candidates are downloaded and reviewed per short published
     min_score: float = 60.0  # Claude's mark out of 100 a clip needs to be posted
+    # {youtube: 45}: when no clip of that source reaches min_score in a scheduled run, its best one still goes out
+    # if Claude marked it this much (never a clip it refused), so that each run keeps its short of each source.
+    guarantee: dict[str, float] = field(default_factory=dict)
     context_before: float = 20.0  # seconds of the Twitch replay (VOD) kept before a clip, for the setup (0 = clip only)
     context_after: float = 8.0  # and after it, for the end of the reaction
     max_per_streamer_per_day: int = 2
@@ -254,6 +257,8 @@ def load_config(path: Path | None = None) -> Config:
         raise ConfigError("config.shorts.per_source : twitch et youtube, avec un nombre >= 0, attendus")
     if not 0 <= config.shorts.min_score <= 100:
         raise ConfigError("config.shorts.min_score : une note entre 0 et 100 attendue")
+    if any(source not in {"twitch", "youtube"} or not 0 <= floor <= 100 for source, floor in config.shorts.guarantee.items()):
+        raise ConfigError("config.shorts.guarantee : twitch et youtube, avec une note entre 0 et 100, attendus")
     if config.shorts.context_before < 0 or config.shorts.context_after < 0:
         raise ConfigError("config.shorts : context_before et context_after >= 0 attendus (en secondes)")
     if config.youtube.watch not in {"rss", "rotation"}:

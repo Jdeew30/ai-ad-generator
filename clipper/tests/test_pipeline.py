@@ -288,6 +288,23 @@ def test_a_clip_asked_for_by_hand_goes_out_even_under_the_bar(media, paths):
                                  "celui-ci est le mieux noté (52/100)."]  # fmt: skip
 
 
+def test_a_scheduled_run_keeps_its_short_of_each_source(media, paths):
+    shorts = {"min_duration": 3, "per_source": {"twitch": 2}, "guarantee": {"twitch": 45}}
+    clips = {"alpha": [entry("Alpha-Dull", 9000, 1, "Dull moment"), entry("Alpha-Weak", 800, 2, "Weak moment")],
+             "beta": [entry("Beta-1", 1500, 3, "Flat moment")]}  # fmt: skip
+    telegram = FakePublisher("telegram")
+    marks = Marks({"Dull": 44, "Weak": 52, "Flat": 50})
+    report = clipper(media, paths, clips=clips, publishers={"telegram": telegram}, curator=marks, shorts=shorts).run_shorts()
+    # Nothing reached 60: the best marked 45 or more goes out, one only, never the whole quota.
+    assert [o.candidate.key for o in report.published] == ["twitch:Alpha-Weak"]
+    assert telegram.messages == ["ℹ️ Short Twitch envoyé pour garder un short Twitch à ce passage : aucun clip n'atteignait "
+                                 "la note minimale (60/100), celui-ci est le mieux noté (52/100)."]  # fmt: skip
+    paths.state.unlink()
+    poor = clipper(media, paths, clips=clips, publishers={"telegram": telegram}, curator=Marks({"moment": 40}), shorts=shorts)
+    assert poor.run_shorts().published == []  # all under 45: no short rather than a poor one
+    assert telegram.messages[-1] == "⏭️ Pas de short Twitch à ce passage : aucun des 3 clips examinés n'a été retenu."
+
+
 def test_a_clip_claude_did_not_judge_is_never_posted(media, paths):
     telegram = FakePublisher("telegram")
     clips = {"alpha": [entry("Alpha-Cam1", 9000, 1)], "beta": [entry("Beta-1", 1500, 3, "Beta moment")]}
