@@ -527,8 +527,24 @@ def test_yt_dlp_retries_each_request_with_growing_pauses():
 
     options = YtDlp()._options()
     assert options["retries"] == 5 and options["fragment_retries"] == 5 and options["skip_unavailable_fragments"]
-    assert [_backoff(n) for n in range(7)] == [1.0, 2.0, 4.0, 8.0, 16.0, 20.0, 20.0]
+    assert [_backoff(n=n) for n in range(7)] == [1.0, 2.0, 4.0, 8.0, 16.0, 20.0, 20.0]
     assert options["retry_sleep_functions"]["fragment"] is _backoff
+
+
+def test_yt_dlp_itself_can_call_the_pause_between_retries(monkeypatch):
+    # The retry_sleep_functions are called by yt-dlp's RetryManager, with a keyword argument: a wrong signature
+    # crashed a whole run (« _backoff() got an unexpected keyword argument 'n' »).
+    import yt_dlp.utils._utils as ytdlp_utils
+    from yt_dlp.utils import RetryManager
+
+    from clipper.ytdlp import YtDlp
+
+    pauses: list[float] = []
+    monkeypatch.setattr(ytdlp_utils.time, "sleep", pauses.append)
+    for kind in ("http", "fragment", "extractor"):
+        RetryManager.report_retry(Exception("HTTP Error 503"), 3, 5, sleep_func=YtDlp()._options()["retry_sleep_functions"][kind],
+                                  info=lambda *_: None, warn=lambda *_: None)  # fmt: skip
+    assert pauses == [4.0, 4.0, 4.0]
 
 
 def _feed(*videos):

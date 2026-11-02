@@ -57,8 +57,8 @@ class FeedVideo:
         return f"https://www.youtube.com/watch?v={self.id}"
 
 
-def parse_feed(text: str) -> list[FeedVideo]:
-    """The uploads of a YouTube RSS feed, newest first."""
+def parse_feed(text: str | bytes) -> list[FeedVideo]:
+    """The uploads of a YouTube RSS feed, newest first (bytes: the parser follows the feed's own encoding)."""
     root = ElementTree.fromstring(text)
     videos: list[FeedVideo] = []
     for entry in root.findall("atom:entry", _NS):
@@ -83,7 +83,7 @@ def parse_feed(text: str) -> list[FeedVideo]:
 def read_feed(http: Http, channel_id: str) -> list[FeedVideo]:
     response = http.get(FEED.format(channel_id), timeout=20)
     try:
-        return parse_feed(response.text)
+        return parse_feed(response.content)
     except ElementTree.ParseError as exc:
         raise HttpError(f"flux RSS illisible ({exc})") from exc
 

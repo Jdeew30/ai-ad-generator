@@ -39,9 +39,12 @@ ATTEMPTS = 3  # tries of a whole listing, metadata or download call; yt-dlp also
 PAUSES = (5.0, 20.0)  # seconds before the 2nd and the 3rd try
 
 
-def _backoff(attempt: int) -> float:
-    """yt-dlp's pause before retrying a request or a fragment: 1, 2, 4, 8… seconds, 20 at most."""
-    return min(2.0 ** attempt, 20.0)
+def _backoff(n: int) -> float:
+    """yt-dlp's pause before retrying a request or a fragment: 1, 2, 4, 8… seconds, 20 at most.
+
+    yt-dlp calls it as `sleep_func(n=retry_number)`: the parameter must be named `n`.
+    """
+    return min(2.0 ** n, 20.0)
 
 
 class _Logger:
