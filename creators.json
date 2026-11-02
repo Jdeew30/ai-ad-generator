@@ -7,22 +7,24 @@
     "alphacast": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 57,
+     "id": "UCLLmx6mq1ninfIC1TrQ0w2g",
+     "last_upload": "2016-08-29T20:48:30+00:00",
      "ref": "@AlphaCast",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Alpha Cast",
+     "url": "https://www.youtube.com/channel/UCLLmx6mq1ninfIC1TrQ0w2g",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "AlphaCast",
+   "name": "Alpha Cast",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "aminematue": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -31,22 +33,47 @@
     "aminematue": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@aminematue",
+      "@aminematue_tv"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1990000,
+     "id": "UCNigJTVnMU8F3n08pYz0UYw",
+     "last_upload": "2026-10-28T13:30:08+00:00",
      "ref": "@AmineMaTue",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Aminematue",
+     "url": "https://www.youtube.com/channel/UCNigJTVnMU8F3n08pYz0UYw",
      "verified": "liste du propriétaire"
+    },
+    "aminematuetv": {
+     "added": "2026-11-02T15:32:49.831240+00:00",
+     "categories": {},
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "errors": 0,
+     "followers": 695000,
+     "id": "UClm72v5Y5C9KHGs-PTDmCGw",
+     "last_upload": "2026-09-14T16:00:35+00:00",
+     "ref": "@AminematueTV",
+     "role": "secondary",
+     "status": "active",
+     "title": "AminematueTV",
+     "url": "https://www.youtube.com/channel/UClm72v5Y5C9KHGs-PTDmCGw",
+     "verified": "sa description cite @AmineMaTue"
     }
    },
-   "name": "AmineMaTue",
+   "name": "Aminematue",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {
+    "@aminematue277": {
+     "at": "2026-11-02T15:32:49.831240+00:00",
+     "why": "[youtube:tab] @aminematue277: This channel does not have a streams tab"
+    }
+   }
   },
   "amixem": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -54,15 +81,17 @@
    "channels": {
     "amixem": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {
+      "Comedy": 1
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
      "description_handles": [
       "@spoutnikagency.com"
      ],
      "errors": 0,
      "followers": 9610000,
      "id": "UCgvqvBoSHB1ctlyyhoHrGwQ",
-     "last_upload": null,
+     "last_upload": "2026-11-01T16:25:00+00:00",
      "ref": "@Amixem",
      "role": "main",
      "status": "active",
@@ -84,7 +113,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @AndyRaconte/videos: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -108,22 +138,27 @@
     "angledroit": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 48400,
+     "found_as": "@angledroit1117",
+     "id": "UC_KidpuCqhbvqZedgq2DPpA",
+     "last_upload": "2019-11-22T17:19:25+00:00",
      "ref": "@AngleDroit",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Angle Droit",
+     "url": "https://www.youtube.com/channel/UC_KidpuCqhbvqZedgq2DPpA",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "AngleDroit",
+   "name": "Angle Droit",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "antoinedaniel": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -132,22 +167,25 @@
     "antoinedaniel": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 268000,
+     "found_as": "@antoinedaniel-lesvod2271",
+     "id": "UCEi0DIwuAQNe68OK_1hAN7w",
+     "last_upload": "2026-10-31T13:00:24+00:00",
      "ref": "@AntoineDaniel",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Antoine Daniel - Les VOD",
+     "url": "https://www.youtube.com/channel/UCEi0DIwuAQNe68OK_1hAN7w",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "AntoineDaniel",
+   "name": "Antoine Daniel - Les VOD",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "anyme023": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -157,7 +195,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @Anyme023: This channel does not have a streams tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -171,7 +210,8 @@
    },
    "name": "Anyme023",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "aypierre": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -180,22 +220,24 @@
     "aypierre": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1450000,
+     "id": "UCA5sfitizqs1oEbB5KY4uKQ",
+     "last_upload": "2026-11-01T16:00:10+00:00",
      "ref": "@Aypierre",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Aypierre",
+     "url": "https://www.youtube.com/channel/UCA5sfitizqs1oEbB5KY4uKQ",
      "verified": "liste du propriétaire"
     }
    },
    "name": "Aypierre",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "bagherajoneslive": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -204,22 +246,24 @@
     "bagherajoneslive": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 138000,
+     "id": "UCJQupr7XZ2y2fnx5i1-YavQ",
+     "last_upload": "2026-07-12T16:16:47+00:00",
      "ref": "@BagheraJonesLive",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Baghera Jones",
+     "url": "https://www.youtube.com/channel/UCJQupr7XZ2y2fnx5i1-YavQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "BagheraJonesLive",
+   "name": "Baghera Jones",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "byilhann": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -229,7 +273,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @Byilhann: This channel does not have a streams tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -243,7 +288,8 @@
    },
    "name": "Byilhann",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "chefmicheldumas": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -252,22 +298,27 @@
     "chefmicheldumas": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@chefmicheldumas.com",
+      "@futures.social"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1300000,
+     "id": "UCSLyEx8ISkp567AjOAHYN5Q",
+     "last_upload": "2026-10-16T14:00:13+00:00",
      "ref": "@ChefMichelDumas",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Chef Michel Dumas et Jean-Pierre Dumas",
+     "url": "https://www.youtube.com/channel/UCSLyEx8ISkp567AjOAHYN5Q",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "ChefMichelDumas",
+   "name": "Chef Michel Dumas et Jean-Pierre Dumas",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "cyprien": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -276,20 +327,21 @@
     "cyprien": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 14500000,
+     "id": "UCyWqModMQlbIo8274Wh_ZsQ",
+     "last_upload": "2026-05-22T14:49:29+00:00",
      "ref": "@cyprien",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Cyprien",
+     "url": "https://www.youtube.com/channel/UCyWqModMQlbIo8274Wh_ZsQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "cyprien",
+   "name": "Cyprien",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -301,22 +353,25 @@
     "diablox9": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
      "followers": null,
-     "id": null,
-     "last_upload": null,
+     "found_as": "@diablOx-ev7iw",
+     "id": "UC_8i-GWaA9Sc5KQqtVMBb-w",
+     "last_upload": "2016-05-19T17:44:02+00:00",
      "ref": "@Diablox9",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "diablOx 9",
+     "url": "https://www.youtube.com/channel/UC_8i-GWaA9Sc5KQqtVMBb-w",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Diablox9",
+   "name": "diablOx 9",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "djilsi": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -325,16 +380,17 @@
     "djilsi": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2430000,
+     "id": "UCEUZRSYr1a2hnBfnpWslFeQ",
+     "last_upload": "2026-10-24T08:59:19+00:00",
      "ref": "@Djilsi",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Djilsi",
+     "url": "https://www.youtube.com/channel/UCEUZRSYr1a2hnBfnpWslFeQ",
      "verified": "liste du propriétaire"
     }
    },
@@ -349,23 +405,27 @@
    "channels": {
     "docseven": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": null,
+     "categories": {
+      "Education": 1
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2320000,
+     "id": "UC5Twj1Axp_-9HLsZ5o_cEQQ",
+     "last_upload": "2026-11-01T16:00:17+00:00",
      "ref": "@DocSeven",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Doc Seven",
+     "url": "https://www.youtube.com/channel/UC5Twj1Axp_-9HLsZ5o_cEQQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "DocSeven",
+   "name": "Doc Seven",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "doigby": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -374,22 +434,29 @@
     "doigby": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1390000,
+     "id": "UCen9TDD6K1ZVW44unAGxtOw",
+     "last_upload": "2026-08-07T18:05:25+00:00",
      "ref": "@Doigby",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Doigby",
+     "url": "https://www.youtube.com/channel/UCen9TDD6K1ZVW44unAGxtOw",
      "verified": "liste du propriétaire"
     }
    },
    "name": "Doigby",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {
+    "@doigbytv": {
+     "at": "2026-11-02T15:32:49.831240+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    }
+   }
   },
   "drnozman": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -398,22 +465,26 @@
     "drnozman": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 4930000,
+     "id": "UCWnfDPdZw6A23UtuBpYBbAg",
+     "last_upload": "2026-10-30T16:59:52+00:00",
      "ref": "@DrNozman",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Dr Nozman",
+     "url": "https://www.youtube.com/channel/UCWnfDPdZw6A23UtuBpYBbAg",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "DrNozman",
+   "name": "Dr Nozman",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "enjoyphoenix": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -422,20 +493,21 @@
     "enjoyphoenix": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3710000,
+     "id": "UC99LgIedzGD1GirhFGldfUQ",
+     "last_upload": "2026-10-30T17:00:02+00:00",
      "ref": "@EnjoyPhoenix",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "EnjoyPhoenix - Marie Lopez",
+     "url": "https://www.youtube.com/channel/UC99LgIedzGD1GirhFGldfUQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "EnjoyPhoenix",
+   "name": "EnjoyPhoenix - Marie Lopez",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -448,7 +520,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @epenser/videos: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -462,7 +535,8 @@
    },
    "name": "epenser",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "etoiles": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -472,7 +546,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @Etoiles: This channel does not have a streams tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -486,7 +561,8 @@
    },
    "name": "Etoiles",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "etostark": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -496,7 +572,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @Etostark: This channel does not have a streams tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -510,7 +587,8 @@
    },
    "name": "Etostark",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "fantabobgames": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -519,22 +597,24 @@
     "fantabobgames": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2010000,
+     "id": "UCo0U1tbk3YbqiLDhkeWOviQ",
+     "last_upload": "2026-10-31T17:00:37+00:00",
      "ref": "@fantabobgames",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Bob Lennon",
+     "url": "https://www.youtube.com/channel/UCo0U1tbk3YbqiLDhkeWOviQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "fantabobgames",
+   "name": "Bob Lennon",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "fastgoodcuisine": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -542,23 +622,27 @@
    "channels": {
     "fastgoodcuisine": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": null,
+     "categories": {
+      "Howto & Style": 1
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 9040000,
+     "id": "UCKq9JxyISqBHDd-fXfV3QtQ",
+     "last_upload": "2026-10-31T11:00:05+00:00",
      "ref": "@FastGoodCuisine",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "FastGoodCuisine",
+     "url": "https://www.youtube.com/channel/UCKq9JxyISqBHDd-fXfV3QtQ",
      "verified": "liste du propriétaire"
     }
    },
    "name": "FastGoodCuisine",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "feldup": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -567,22 +651,24 @@
     "feldup": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1950000,
+     "id": "UCQVaKQcp4OxSg1eC6SF3NTw",
+     "last_upload": "2026-07-02T09:27:51+00:00",
      "ref": "@Feldup",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Feldup",
+     "url": "https://www.youtube.com/channel/UCQVaKQcp4OxSg1eC6SF3NTw",
      "verified": "liste du propriétaire"
     }
    },
    "name": "Feldup",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "florianonair": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -591,22 +677,24 @@
     "florianonair": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 735000,
+     "id": "UCkGpd4_4UAn53ZXcUf1JyFA",
+     "last_upload": "2026-10-30T17:00:16+00:00",
      "ref": "@FlorianOnAir",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "FlorianOnAir",
+     "url": "https://www.youtube.com/channel/UCkGpd4_4UAn53ZXcUf1JyFA",
      "verified": "liste du propriétaire"
     }
    },
    "name": "FlorianOnAir",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "fouloscopie": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -615,22 +703,24 @@
     "fouloscopie": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 574000,
+     "id": "UCLXDNUOO3EQ80VmD9nQBHPg",
+     "last_upload": "2026-10-29T16:00:20+00:00",
      "ref": "@Fouloscopie",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Fouloscopie",
+     "url": "https://www.youtube.com/channel/UCLXDNUOO3EQ80VmD9nQBHPg",
      "verified": "liste du propriétaire"
     }
    },
    "name": "Fouloscopie",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "frigiel": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -639,22 +729,24 @@
     "frigiel": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1970000,
+     "id": "UCOYxetieucGqN2PUkoKC-Ag",
+     "last_upload": "2025-06-14T12:30:44+00:00",
      "ref": "@Frigiel",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Frigiel",
+     "url": "https://www.youtube.com/channel/UCOYxetieucGqN2PUkoKC-Ag",
      "verified": "liste du propriétaire"
     }
    },
    "name": "Frigiel",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "furiousjumper": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -663,22 +755,24 @@
     "furiousjumper": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 11000000,
+     "id": "UCLMKLU-ZuDQIsbjMvR3bbog",
+     "last_upload": "2026-11-01T11:50:38+00:00",
      "ref": "@FuriousJumper",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Furious Jumper",
+     "url": "https://www.youtube.com/channel/UCLMKLU-ZuDQIsbjMvR3bbog",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "FuriousJumper",
+   "name": "Furious Jumper",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "goldenmoustache": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -687,20 +781,21 @@
     "goldenmoustache": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3390000,
+     "id": "UCJruTcTs7Gn2Tk7YC-ENeHQ",
+     "last_upload": "2021-10-04T16:00:07+00:00",
      "ref": "@goldenmoustache",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Golden Moustache (M6)",
+     "url": "https://www.youtube.com/channel/UCJruTcTs7Gn2Tk7YC-ENeHQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "goldenmoustache",
+   "name": "Golden Moustache (M6)",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -711,21 +806,26 @@
    "channels": {
     "gotaga": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": null,
+     "categories": {
+      "Entertainment": 1
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gotaga.tv"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 4440000,
+     "id": "UCCFqUJYKT97UerMmb6DM0bw",
+     "last_upload": "2026-11-01T16:18:31+00:00",
      "ref": "@Gotaga",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "GOTAGA",
+     "url": "https://www.youtube.com/channel/UCCFqUJYKT97UerMmb6DM0bw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Gotaga",
+   "name": "GOTAGA",
    "source": "config",
    "status": "active",
    "unverified": {
@@ -747,7 +847,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @Grimkujow: This channel does not have a streams tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -761,7 +862,13 @@
    },
    "name": "Grimkujow",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {
+    "@grimkujowTV": {
+     "at": "2026-11-02T15:32:49.831240+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    }
+   }
   },
   "hctuan": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -771,7 +878,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @Hctuan: This channel does not have a streams tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -785,7 +893,13 @@
    },
    "name": "Hctuan",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {
+    "@hctuanreplay": {
+     "at": "2026-11-02T15:32:49.831240+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    }
+   }
   },
   "hugodecrypte": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -793,23 +907,28 @@
    "channels": {
     "hugodecrypte": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": null,
+     "categories": {
+      "News & Politics": 2
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3830000,
+     "found_as": "@hugodecrypteactus",
+     "id": "UCAcAnMF0OrCtUep3Y4M-ZPw",
+     "last_upload": "2026-11-02T15:03:02+00:00",
      "ref": "@HugoDecrypte",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "HugoDécrypte - Actus du jour",
+     "url": "https://www.youtube.com/channel/UCAcAnMF0OrCtUep3Y4M-ZPw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "HugoDecrypte",
+   "name": "HugoDécrypte - Actus du jour",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "hugotoutseul": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -818,20 +937,21 @@
     "hugotoutseul": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2120000,
+     "id": "UCXapBbZyOgvYwOlqYzf8dhg",
+     "last_upload": "2026-10-02T14:53:30+00:00",
      "ref": "@HugoToutSeul",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Hugo Tout Seul",
+     "url": "https://www.youtube.com/channel/UCXapBbZyOgvYwOlqYzf8dhg",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "HugoToutSeul",
+   "name": "Hugo Tout Seul",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -842,13 +962,15 @@
    "channels": {
     "inoxtag": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {
+      "Entertainment": 1
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 9600000,
      "id": "UCL9aTJb0ur4sovxcppAopEw",
-     "last_upload": null,
+     "last_upload": "2026-10-31T13:30:36+00:00",
      "ref": "@Inoxtag",
      "role": "main",
      "status": "active",
@@ -869,20 +991,21 @@
     "jhonrachid69": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1290000,
+     "id": "UCnzWXmq8l0TIguCPDsrY78Q",
+     "last_upload": "2026-08-27T15:38:49+00:00",
      "ref": "@JHONRACHID69",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "JHON RACHID",
+     "url": "https://www.youtube.com/channel/UCnzWXmq8l0TIguCPDsrY78Q",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "JHONRACHID69",
+   "name": "JHON RACHID",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -894,20 +1017,21 @@
     "joueurdugrenier": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3870000,
+     "id": "UC_yP2DpIgs5Y1uWC0T03Chw",
+     "last_upload": "2026-10-03T15:00:08+00:00",
      "ref": "@JoueurDuGrenier",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Joueur Du Grenier",
+     "url": "https://www.youtube.com/channel/UC_yP2DpIgs5Y1uWC0T03Chw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "JoueurDuGrenier",
+   "name": "Joueur Du Grenier",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -919,20 +1043,21 @@
     "joyca": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 6970000,
+     "id": "UCow2IGnug1l3Xazkrc5jM_Q",
+     "last_upload": "2026-11-01T15:06:34+00:00",
      "ref": "@Joyca",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "JOYCA",
+     "url": "https://www.youtube.com/channel/UCow2IGnug1l3Xazkrc5jM_Q",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Joyca",
+   "name": "JOYCA",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -944,22 +1069,26 @@
     "jujufitcats": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3180000,
+     "id": "UCIPbzkl1kZ_9Gyuph_FGvzg",
+     "last_upload": "2026-09-28T16:00:15+00:00",
      "ref": "@jujufitcats",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Juju Fitcats",
+     "url": "https://www.youtube.com/channel/UCIPbzkl1kZ_9Gyuph_FGvzg",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "jujufitcats",
+   "name": "Juju Fitcats",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "kaatsup": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -968,22 +1097,24 @@
     "kaatsup": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 486000,
+     "id": "UCoetxEkAQbHlXBv2toas_1A",
+     "last_upload": "2026-11-01T17:00:10+00:00",
      "ref": "@Kaatsup",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Kaatsup",
+     "url": "https://www.youtube.com/channel/UCoetxEkAQbHlXBv2toas_1A",
      "verified": "liste du propriétaire"
     }
    },
    "name": "Kaatsup",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {}
   },
   "kameto": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -992,22 +1123,29 @@
     "kameto": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 12,
+     "id": "UCuTWiw7k-2Y5hANPDYrbhag",
+     "last_upload": "2010-07-15T20:44:43+00:00",
      "ref": "@Kameto",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "kameto",
+     "url": "https://www.youtube.com/channel/UCuTWiw7k-2Y5hANPDYrbhag",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Kameto",
+   "name": "kameto",
    "source": "config",
-   "status": "active"
+   "status": "active",
+   "unverified": {
+    "@KametoLive": {
+     "at": "2026-11-02T15:32:49.831240+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    }
+   }
   },
   "kaydop": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -1015,17 +1153,20 @@
    "channels": {
     "kaydop": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": null,
+     "categories": {
+      "Gaming": 1
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 515000,
+     "id": "UCbJWraz5h4F-IX2frhqKglQ",
+     "last_upload": "2026-11-01T12:00:14+00:00",
      "ref": "@Kaydop",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Kaydop",
+     "url": "https://www.youtube.com/channel/UCbJWraz5h4F-IX2frhqKglQ",
      "verified": "liste du propriétaire"
     }
    },
@@ -1041,7 +1182,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @Kronomuzik: This channel does not have a streams tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -1064,20 +1206,24 @@
     "leaeluig": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@eluilea.com",
+      "@leaelui"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1140000,
+     "id": "UCoaaU-pnL4J7qK7zDil6rgg",
+     "last_upload": "2026-11-01T16:53:01+00:00",
      "ref": "@leaeluig",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Lea Elui",
+     "url": "https://www.youtube.com/channel/UCoaaU-pnL4J7qK7zDil6rgg",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "leaeluig",
+   "name": "Lea Elui",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1088,21 +1234,24 @@
    "channels": {
     "lebouseuh": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": null,
+     "categories": {
+      "Entertainment": 1
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 4620000,
+     "id": "UCUl7mwOyySfZzUkq4H29nug",
+     "last_upload": "2026-11-01T22:39:17+00:00",
      "ref": "@Lebouseuh",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "LeBouseuh",
+     "url": "https://www.youtube.com/channel/UCUl7mwOyySfZzUkq4H29nug",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Lebouseuh",
+   "name": "LeBouseuh",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1114,20 +1263,23 @@
     "legrandjd": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@laxargang.ch"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 4170000,
+     "id": "UCzjd9v6DMprAAvOBB4sxBPA",
+     "last_upload": "2026-10-30T16:45:13+00:00",
      "ref": "@LeGrandJD",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "LE GRAND JD",
+     "url": "https://www.youtube.com/channel/UCzjd9v6DMprAAvOBB4sxBPA",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "LeGrandJD",
+   "name": "LE GRAND JD",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1139,26 +1291,27 @@
     "lenasituations": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3210000,
+     "id": "UCDkl5M0WVaddTWE4rr2cSeA",
+     "last_upload": "2026-09-17T16:35:45+00:00",
      "ref": "@LenaSituations",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Lena Situations",
+     "url": "https://www.youtube.com/channel/UCDkl5M0WVaddTWE4rr2cSeA",
      "verified": "liste du propriétaire"
     },
     "lenasituationsreplay": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "checked": "2026-11-02T15:32:49.831240+00:00",
      "errors": 0,
      "followers": 29200,
      "id": "UCAgs5DX2GwZ0uPcFrjec2SA",
-     "last_upload": null,
+     "last_upload": "2026-10-30T11:00:38+00:00",
      "ref": "@LenaSituationsReplay",
      "role": "secondary",
      "status": "active",
@@ -1167,7 +1320,7 @@
      "verified": "sa description cite @LenaSituations"
     }
    },
-   "name": "LenaSituations",
+   "name": "Lena Situations",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1180,7 +1333,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @LeRireJaune: This channel does not have a streams tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -1204,20 +1358,23 @@
     "leroidesrats": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1420000,
+     "id": "UCuBzVunAVbcwzMfQaJVacuw",
+     "last_upload": "2025-07-07T18:26:32+00:00",
      "ref": "@leroidesrats",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "LE ROI DES RATS",
+     "url": "https://www.youtube.com/channel/UCuBzVunAVbcwzMfQaJVacuw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "leroidesrats",
+   "name": "LE ROI DES RATS",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1229,16 +1386,17 @@
     "linksthesun": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1580000,
+     "id": "UCfXXAQ-mp1uUcvSpvMcAAtw",
+     "last_upload": "2026-06-21T15:00:16+00:00",
      "ref": "@LinksTheSun",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "LinksTheSun",
+     "url": "https://www.youtube.com/channel/UCfXXAQ-mp1uUcvSpvMcAAtw",
      "verified": "liste du propriétaire"
     }
    },
@@ -1253,20 +1411,21 @@
     "locklear": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 55,
+     "id": "UCkJUmSaoChMDLv9cIX380Xw",
+     "last_upload": "2017-03-07T06:12:39+00:00",
      "ref": "@Locklear",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Alec Harter",
+     "url": "https://www.youtube.com/channel/UCkJUmSaoChMDLv9cIX380Xw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Locklear",
+   "name": "Alec Harter",
    "source": "config",
    "status": "active"
   },
@@ -1277,16 +1436,17 @@
     "lolywood": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3150000,
+     "id": "UCSse-lNI1DQ4w-8lh7vfPUw",
+     "last_upload": "2022-06-26T10:00:15+00:00",
      "ref": "@Lolywood",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Lolywood",
+     "url": "https://www.youtube.com/channel/UCSse-lNI1DQ4w-8lh7vfPUw",
      "verified": "liste du propriétaire"
     }
    },
@@ -1302,20 +1462,21 @@
     "ludovik": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1280000,
+     "id": "UCc-4HSPd7yMcK1Y5XkVVwGQ",
+     "last_upload": "2026-07-17T16:26:49+00:00",
      "ref": "@Ludovik",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "ludovik",
+     "url": "https://www.youtube.com/channel/UCc-4HSPd7yMcK1Y5XkVVwGQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Ludovik",
+   "name": "ludovik",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1327,16 +1488,21 @@
     "maghla": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@flippe_and_go_sle",
+      "@maghla",
+      "@sip_and_gossip.extrait"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1470000,
+     "id": "UChzNfUfgk7sQ5VOdy2r1Jow",
+     "last_upload": "2026-10-26T16:00:24+00:00",
      "ref": "@Maghla",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Maghla",
+     "url": "https://www.youtube.com/channel/UChzNfUfgk7sQ5VOdy2r1Jow",
      "verified": "liste du propriétaire"
     }
    },
@@ -1351,16 +1517,19 @@
     "mamytwink": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2390000,
+     "id": "UCjxfoYq1vAEGU7KD_C3I48g",
+     "last_upload": "2026-10-13T16:00:15+00:00",
      "ref": "@Mamytwink",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Mamytwink",
+     "url": "https://www.youtube.com/channel/UCjxfoYq1vAEGU7KD_C3I48g",
      "verified": "liste du propriétaire"
     }
    },
@@ -1375,16 +1544,17 @@
     "mastu": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 7090000,
+     "id": "UCAhaFPP6v3WCfK5Tjao0B7A",
+     "last_upload": "2026-10-31T10:00:09+00:00",
      "ref": "@Mastu",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Mastu",
+     "url": "https://www.youtube.com/channel/UCAhaFPP6v3WCfK5Tjao0B7A",
      "verified": "liste du propriétaire"
     }
    },
@@ -1399,20 +1569,21 @@
     "mathieusommet": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1490000,
+     "id": "UCCpwMG0qZkr62FNZktfcvYg",
+     "last_upload": "2022-09-26T16:00:23+00:00",
      "ref": "@MathieuSommet",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Mathieu Sommet",
+     "url": "https://www.youtube.com/channel/UCCpwMG0qZkr62FNZktfcvYg",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "MathieuSommet",
+   "name": "Mathieu Sommet",
    "source": "config",
    "status": "active"
   },
@@ -1423,16 +1594,17 @@
     "maxildan": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 17900,
+     "id": "UCXs7qI0_rqFzeSP9TCo_5AA",
+     "last_upload": "2025-11-18T14:44:14+00:00",
      "ref": "@Maxildan",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Maxildan",
+     "url": "https://www.youtube.com/channel/UCXs7qI0_rqFzeSP9TCo_5AA",
      "verified": "liste du propriétaire"
     }
    },
@@ -1447,20 +1619,21 @@
     "maximebiaggi": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1310000,
+     "id": "UCwsttsWPse6KzUzUbQDGRPA",
+     "last_upload": "2026-10-31T19:14:46+00:00",
      "ref": "@MaximeBiaggi",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Maxime Biaggi",
+     "url": "https://www.youtube.com/channel/UCwsttsWPse6KzUzUbQDGRPA",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "MaximeBiaggi",
+   "name": "Maxime Biaggi",
    "source": "config",
    "status": "active",
    "unverified": {
@@ -1477,20 +1650,24 @@
     "mcflyetcarlito": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 7660000,
+     "found_as": "@LeFatShow",
+     "id": "UCDPK_MTu3uTUFJXRVcTJcEw",
+     "last_upload": "2026-10-28T15:36:48+00:00",
      "ref": "@mcflyetcarlito",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Mcfly et Carlito",
+     "url": "https://www.youtube.com/channel/UCDPK_MTu3uTUFJXRVcTJcEw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "mcflyetcarlito",
+   "name": "Mcfly et Carlito",
    "source": "config",
    "status": "active",
    "unverified": {
@@ -1507,12 +1684,12 @@
     "michou": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "checked": "2026-11-02T15:32:49.831240+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 11000000,
      "id": "UCo3i0nUzZjjLuM7VjAVz4zA",
-     "last_upload": null,
+     "last_upload": "2026-11-01T19:30:00+00:00",
      "ref": "@Michou",
      "role": "main",
      "status": "active",
@@ -1533,20 +1710,21 @@
     "mistermv": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 6,
+     "id": "UCLaXgTALYXMXuynaiqCMvRg",
+     "last_upload": "2025-09-04T13:53:08+00:00",
      "ref": "@MisterMV",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Valentin Mezo",
+     "url": "https://www.youtube.com/channel/UCLaXgTALYXMXuynaiqCMvRg",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "MisterMV",
+   "name": "Valentin Mezo",
    "source": "config",
    "status": "active"
   },
@@ -1557,20 +1735,23 @@
     "mistervofficial": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@yvick"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 6530000,
+     "id": "UC8Q0SLrZLiTj5s4qc9aad-w",
+     "last_upload": "2026-06-07T08:00:38+00:00",
      "ref": "@mistervofficial",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Mister V",
+     "url": "https://www.youtube.com/channel/UC8Q0SLrZLiTj5s4qc9aad-w",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "mistervofficial",
+   "name": "Mister V",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1582,16 +1763,17 @@
     "mynthos": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
      "followers": null,
-     "id": null,
-     "last_upload": null,
+     "id": "UCIspSeohOfvkuyma367YIVg",
+     "last_upload": "2007-08-01T17:55:08+00:00",
      "ref": "@Mynthos",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Mynthos",
+     "url": "https://www.youtube.com/channel/UCIspSeohOfvkuyma367YIVg",
      "verified": "liste du propriétaire"
     }
    },
@@ -1606,20 +1788,21 @@
     "natooyt": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 5170000,
+     "id": "UCtihF1ZtlYVzoaj_bKLQZ-Q",
+     "last_upload": "2026-10-27T16:45:15+00:00",
      "ref": "@Natooyt",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Natoo",
+     "url": "https://www.youtube.com/channel/UCtihF1ZtlYVzoaj_bKLQZ-Q",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Natooyt",
+   "name": "Natoo",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1630,17 +1813,22 @@
    "channels": {
     "ninjaxx": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": null,
+     "categories": {
+      "Gaming": 1
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1900000,
+     "id": "UCDB1PaqiausfXbVI2Jjk0iQ",
+     "last_upload": "2026-10-31T17:00:04+00:00",
      "ref": "@Ninjaxx",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Ninjaxx",
+     "url": "https://www.youtube.com/channel/UCDB1PaqiausfXbVI2Jjk0iQ",
      "verified": "liste du propriétaire"
     }
    },
@@ -1655,20 +1843,21 @@
     "normanfaitdesvideos": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 11200000,
+     "id": "UCww2zZWg4Cf5xcRKG-ThmXQ",
+     "last_upload": "2026-10-31T09:50:01+00:00",
      "ref": "@NormanFaitDesVideos",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Norman",
+     "url": "https://www.youtube.com/channel/UCww2zZWg4Cf5xcRKG-ThmXQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "NormanFaitDesVideos",
+   "name": "Norman",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1680,20 +1869,21 @@
     "pa.domingo": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1040000,
+     "id": "UCRCMNm2I4tM4BTmNSboc4QA",
+     "last_upload": "2026-11-01T07:00:31+00:00",
      "ref": "@pa.domingo",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Domingo",
+     "url": "https://www.youtube.com/channel/UCRCMNm2I4tM4BTmNSboc4QA",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "pa.domingo",
+   "name": "Domingo",
    "source": "config",
    "status": "active"
   },
@@ -1704,20 +1894,21 @@
     "pierrecroce": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3780000,
+     "id": "UCC_r3spMB5i5QKgtdNVO0OQ",
+     "last_upload": "2026-10-27T17:24:59+00:00",
      "ref": "@PierreCroce",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Pierre Croce",
+     "url": "https://www.youtube.com/channel/UCC_r3spMB5i5QKgtdNVO0OQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "PierreCroce",
+   "name": "Pierre Croce",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1729,20 +1920,23 @@
     "poissonfecond42": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@khundar.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3860000,
+     "id": "UC4ii4_aeS8iOFzsHuhJTq2w",
+     "last_upload": "2026-10-29T16:31:56+00:00",
      "ref": "@poissonfecond42",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Poisson Fécond",
+     "url": "https://www.youtube.com/channel/UC4ii4_aeS8iOFzsHuhJTq2w",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "poissonfecond42",
+   "name": "Poisson Fécond",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1754,20 +1948,21 @@
     "ponce": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 280,
+     "id": "UCQNvLb5XLkpm2knLFzY4InA",
+     "last_upload": "2018-04-20T21:54:10+00:00",
      "ref": "@Ponce",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Ponce TCG",
+     "url": "https://www.youtube.com/channel/UCQNvLb5XLkpm2knLFzY4InA",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Ponce",
+   "name": "Ponce TCG",
    "source": "config",
    "status": "active"
   },
@@ -1778,20 +1973,23 @@
     "rebeudeter": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1060000,
+     "id": "UCWDyxFXoK_nPWfaw6f_sspw",
+     "last_upload": "2026-05-02T16:29:03+00:00",
      "ref": "@Rebeudeter",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "RebeuDeter",
+     "url": "https://www.youtube.com/channel/UCWDyxFXoK_nPWfaw6f_sspw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Rebeudeter",
+   "name": "RebeuDeter",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1803,20 +2001,23 @@
     "rivenzi_": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@rivenzi_"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 273000,
+     "id": "UCohF8alLa6o1Pgm_38hcHEQ",
+     "last_upload": "2026-10-19T16:00:28+00:00",
      "ref": "@Rivenzi_",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Rivenzi",
+     "url": "https://www.youtube.com/channel/UCohF8alLa6o1Pgm_38hcHEQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Rivenzi_",
+   "name": "Rivenzi",
    "source": "config",
    "status": "active"
   },
@@ -1827,20 +2028,23 @@
     "sardochelol": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 318000,
+     "id": "UCVMOlyQ_54cbymF_6nrGxPw",
+     "last_upload": "2026-10-16T18:48:39+00:00",
      "ref": "@SardocheLol",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Sardoche",
+     "url": "https://www.youtube.com/channel/UCVMOlyQ_54cbymF_6nrGxPw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "SardocheLol",
+   "name": "Sardoche",
    "source": "config",
    "status": "active"
   },
@@ -1851,16 +2055,19 @@
     "scienceetonnante": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@scienceetonnante"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1520000,
+     "id": "UCaNlbnghtwlsGF-KzAFThqA",
+     "last_upload": "2026-10-08T15:00:22+00:00",
      "ref": "@ScienceEtonnante",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "ScienceEtonnante",
+     "url": "https://www.youtube.com/channel/UCaNlbnghtwlsGF-KzAFThqA",
      "verified": "liste du propriétaire"
     }
    },
@@ -1876,7 +2083,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] @SebLaFrite/videos: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -1900,20 +2108,23 @@
     "siphano13": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@siphano.fr"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2310000,
+     "id": "UCwa-qCAFghXwkcQvLadzRxQ",
+     "last_upload": "2026-10-31T22:32:38+00:00",
      "ref": "@Siphano13",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Siphano",
+     "url": "https://www.youtube.com/channel/UCwa-qCAFghXwkcQvLadzRxQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "Siphano13",
+   "name": "Siphano",
    "source": "config",
    "status": "active"
   },
@@ -1924,12 +2135,12 @@
     "squeezie": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "checked": "2026-11-02T15:32:49.831240+00:00",
      "description_handles": [],
      "errors": 0,
      "followers": 20200000,
      "id": "UCWeg2Pkate69NFdBeuRFTAw",
-     "last_upload": null,
+     "last_upload": "2026-10-04T17:36:08+00:00",
      "ref": "@Squeezie",
      "role": "main",
      "status": "active",
@@ -1955,20 +2166,21 @@
     "studiobagel": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3860000,
+     "id": "UCZ8kV8vuMdDLSerCIFfWnFQ",
+     "last_upload": "2026-11-01T17:00:34+00:00",
      "ref": "@StudioBagel",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Studio Bagel",
+     "url": "https://www.youtube.com/channel/UCZ8kV8vuMdDLSerCIFfWnFQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "StudioBagel",
+   "name": "Studio Bagel",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -1980,20 +2192,21 @@
     "sylvainlyve": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2040000,
+     "id": "UCB9gfNOymNLIm5J8lf4MhtA",
+     "last_upload": "2026-10-29T17:15:31+00:00",
      "ref": "@SylvainLyve",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Sylvain Lyve",
+     "url": "https://www.youtube.com/channel/UCB9gfNOymNLIm5J8lf4MhtA",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "SylvainLyve",
+   "name": "Sylvain Lyve",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -2005,16 +2218,19 @@
     "thekairi78": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@monsieurdarmon.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 4050000,
+     "id": "UC704-gdkAeYFEjudxRCEAJA",
+     "last_upload": "2026-10-31T21:44:10+00:00",
      "ref": "@TheKAIRI78",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "TheKAIRI78",
+     "url": "https://www.youtube.com/channel/UC704-gdkAeYFEjudxRCEAJA",
      "verified": "liste du propriétaire"
     }
    },
@@ -2028,21 +2244,26 @@
    "channels": {
     "tiboinshape": {
      "added": "2026-11-02T15:17:22.122980+00:00",
-     "categories": {},
-     "checked": null,
+     "categories": {
+      "Entertainment": 2
+     },
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 26900000,
+     "id": "UCpWaR3gNAQGsX48cIlQC0qw",
+     "last_upload": "2026-11-01T10:33:47+00:00",
      "ref": "@TiboInShape",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Tibo InShape",
+     "url": "https://www.youtube.com/channel/UCpWaR3gNAQGsX48cIlQC0qw",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "TiboInShape",
+   "name": "Tibo InShape",
    "source": "config",
    "status": "active"
   },
@@ -2053,16 +2274,17 @@
     "ultia": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 74300,
+     "id": "UC-eeDDT2WQPZ1aMPjkNbTuQ",
+     "last_upload": "2025-04-10T17:45:59+00:00",
      "ref": "@Ultia",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Ultia",
+     "url": "https://www.youtube.com/channel/UC-eeDDT2WQPZ1aMPjkNbTuQ",
      "verified": "liste du propriétaire"
     }
    },
@@ -2077,16 +2299,17 @@
     "valouzz": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2820,
+     "id": "UCfckkBqYjogo_AljRWOzFqQ",
+     "last_upload": "2023-05-04T17:13:23+00:00",
      "ref": "@Valouzz",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Valouzz",
+     "url": "https://www.youtube.com/channel/UCfckkBqYjogo_AljRWOzFqQ",
      "verified": "liste du propriétaire"
     }
    },
@@ -2103,7 +2326,8 @@
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
      "checked": null,
-     "errors": 0,
+     "error": "[youtube:tab] UCkDbXjLRSWLF9z3EyJKNL8w: This channel does not have a videos tab",
+     "errors": 1,
      "followers": null,
      "id": null,
      "last_upload": null,
@@ -2126,20 +2350,21 @@
     "wankilfr": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 2750000,
+     "id": "UCYGjxo5ifuhnmvhPvCc3DJQ",
+     "last_upload": "2026-11-01T13:00:33+00:00",
      "ref": "@wankilfr",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Wankil Studio - Laink et Terracid",
+     "url": "https://www.youtube.com/channel/UCYGjxo5ifuhnmvhPvCc3DJQ",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "wankilfr",
+   "name": "Wankil Studio - Laink et Terracid",
    "source": "config",
    "status": "active"
   },
@@ -2150,20 +2375,23 @@
     "woopgang": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 3460000,
+     "id": "UCm3C3OSgcyzaTBXrNRupB3Q",
+     "last_upload": "2019-06-07T16:59:08+00:00",
      "ref": "@woopgang",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "Le Woop",
+     "url": "https://www.youtube.com/channel/UCm3C3OSgcyzaTBXrNRupB3Q",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "woopgang",
+   "name": "Le Woop",
    "source": "config",
    "status": "active",
    "unverified": {}
@@ -2175,23 +2403,50 @@
     "zacknani": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@zacknaniprod.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 983000,
+     "id": "UCSJxne19pJyW7l7HjHM-LRg",
+     "last_upload": "2026-11-02T11:16:01+00:00",
      "ref": "@ZackNani",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "ZACK",
+     "url": "https://www.youtube.com/channel/UCSJxne19pJyW7l7HjHM-LRg",
      "verified": "liste du propriétaire"
     }
    },
-   "name": "ZackNani",
+   "name": "ZACK",
    "source": "config",
    "status": "active",
    "unverified": {}
+  },
+  "zaroide": {
+   "added": "2026-11-02T15:32:49.831240+00:00",
+   "categories": [],
+   "channels": {
+    "zaroide": {
+     "added": "2026-11-02T15:32:49.831240+00:00",
+     "categories": {},
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "errors": 0,
+     "followers": 44800,
+     "id": "UCjxTg0GgTisgFFXynQ6_m9Q",
+     "last_upload": "2025-12-13T11:01:53+00:00",
+     "ref": "@Zaroide",
+     "role": "main",
+     "status": "active",
+     "title": "Zaroide",
+     "url": "https://www.youtube.com/channel/UCjxTg0GgTisgFFXynQ6_m9Q",
+     "verified": "sa description renvoie vers twitch.tv/zaroide"
+    }
+   },
+   "name": "Zaroide",
+   "source": "twitch",
+   "status": "active"
   },
   "zerator": {
    "added": "2026-11-02T15:17:22.122980+00:00",
@@ -2200,16 +2455,21 @@
     "zerator": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": null,
+     "checked": "2026-11-02T15:32:49.831240+00:00",
+     "description_handles": [
+      "@Unexpected_Fr",
+      "@ZeratoR",
+      "@gmail.com"
+     ],
      "errors": 0,
-     "followers": null,
-     "id": null,
-     "last_upload": null,
+     "followers": 1000000,
+     "id": "UCZ_oIYI9ZNpOfWbpZxWNuRQ",
+     "last_upload": "2026-11-01T17:00:36+00:00",
      "ref": "@ZeratoR",
      "role": "main",
      "status": "active",
-     "title": null,
-     "url": null,
+     "title": "ZeratoR",
+     "url": "https://www.youtube.com/channel/UCZ_oIYI9ZNpOfWbpZxWNuRQ",
      "verified": "liste du propriétaire"
     }
    },
@@ -2219,9 +2479,12 @@
   }
  },
  "lookups": {
+  "yukaino": "2026-11-02T15:32:49.831240+00:00",
+  "zaroide": "2026-11-02T15:32:49.831240+00:00",
   "zeeked": "2026-11-02T15:17:22.122980+00:00",
   "zerator_247": "2026-11-02T15:17:22.122980+00:00",
-  "zerobenef": "2026-11-02T15:17:22.122980+00:00"
+  "zerobenef": "2026-11-02T15:17:22.122980+00:00",
+  "zetfartv": "2026-11-02T15:32:49.831240+00:00"
  },
  "version": 1
 }
