@@ -104,6 +104,10 @@ choisit toujours, avec la même note minimale. Le plafond par streamer ne compte
 chaînes. Le champ **count** fixe le nombre de shorts (1 si vide). Les passages planifiés, eux, regardent
 toujours tout Twitch FR et tous les YouTubeurs de la liste.
 
+Case **force** (mode `shorts`) : quand tu veux un clip quoi qu'il arrive. Si aucun clip examiné n'atteint la note
+minimale, le mieux noté part quand même, et Telegram précise sa note. Un clip que Claude refuse (contenu interdit,
+moment déjà publié) ne part jamais.
+
 ### Sur ton ordinateur (pour tester ou pour YouTube)
 
 Prérequis : Python 3.10+ et ffmpeg (`winget install ffmpeg`, `brew install ffmpeg` ou `apt install ffmpeg`).

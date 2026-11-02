@@ -45,7 +45,8 @@ def cmd_run(args: argparse.Namespace) -> int:
     queue = None if args.no_queue else PROJECT_DIR / "queue.yaml"
     focus = [target for target in re.split(r"[,\s]+", args.focus or "") if target] or None
     report = _clipper(args).run_shorts(
-        dry_run=args.dry_run, count=args.count, url=args.url, start=args.start, end=args.end, queue=queue, focus=focus
+        dry_run=args.dry_run, count=args.count, url=args.url, start=args.start, end=args.end, queue=queue, focus=focus,
+        force=args.force,
     )
     _summary(report.markdown())
     return 1 if report.errors else 0
@@ -241,13 +242,15 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--no-queue", action="store_true", help="ignore queue.yaml")
     run.add_argument("--focus", help="seulement ces chaînes ou vidéos, séparées par des virgules "
                                      "(chaîne Twitch, @chaîne YouTube ou lien de vidéo YouTube)")
+    run.add_argument("--force", action="store_true", help="si aucun clip n'atteint la note minimale, publie quand même "
+                                                          "le mieux noté par Claude (jamais un clip qu'il refuse)")
     run.set_defaults(func=cmd_run)
 
     render = commands.add_parser("render", help="monte une URL en short sans publier (= run --url … --dry-run)")
     render.add_argument("url")
     render.add_argument("--start")
     render.add_argument("--end")
-    render.set_defaults(func=cmd_run, dry_run=True, count=None, no_queue=True)
+    render.set_defaults(func=cmd_run, dry_run=True, count=None, no_queue=True, focus=None, force=False)
 
     compile_ = commands.add_parser("compile", help="monte et publie le best-of de la semaine")
     compile_.add_argument("--dry-run", action="store_true")

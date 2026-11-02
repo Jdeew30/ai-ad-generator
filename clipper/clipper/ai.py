@@ -63,7 +63,9 @@ réelle ; une moquerie d'un anonyme (viewer, appel) ; ou s'il s'agit surtout de 
 de match de sport traditionnel (football…) qui n'appartient pas au créateur. Un co-stream d'e-sport n'est pas \
 rejeté pour autant : c'est la réaction du streamer qui fait le moment ; sans réaction marquante, note-le simplement \
 bas. La rage et les gros mots font partie du show : un streamer qui s'énerve contre le jeu, une action ou un \
-adversaire du match, même en l'insultant sur le coup, n'est pas une raison de refuser.
+adversaire du match, même en l'insultant sur le coup, n'est pas une raison de refuser. Le verdict "reject" est \
+réservé à ces cas et aux moments déjà publiés : un extrait simplement faible garde le verdict "publish", avec une \
+note basse.
 
 Textes, en français, sans mentir sur le contenu :
 - hook : accroche incrustée sur la vidéo, 40 caractères maximum, sans emoji ni hashtag, qui donne envie de \

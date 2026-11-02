@@ -451,12 +451,14 @@ class Clipper:
 
     def run_shorts(self, *, dry_run: bool = False, count: int | None = None, url: str | None = None,
                    start: str | None = None, end: str | None = None, queue: Path | None = None,
-                   focus: list[str] | None = None) -> RunReport:
+                   focus: list[str] | None = None, force: bool = False) -> RunReport:
+        """With `force` (a clip asked for by hand), the best clip Claude marked goes out even under the bar."""
         report = RunReport("shorts", dry_run)
         if not dry_run:
             _ = self.publishers  # missing credentials for a required platform: fail before any work
         try:
-            self._shorts(report, dry_run=dry_run, count=count, url=url, start=start, end=end, queue=queue, focus=focus)
+            self._shorts(report, dry_run=dry_run, count=count, url=url, start=start, end=end, queue=queue, focus=focus,
+                         force=force)
         finally:
             if not dry_run:
                 self.state.save()
@@ -480,7 +482,8 @@ class Clipper:
         shutil.rmtree(self.paths.work, ignore_errors=True)
 
     def _shorts(self, report: RunReport, *, dry_run: bool, count: int | None, url: str | None,
-                start: str | None, end: str | None, queue: Path | None, focus: list[str] | None = None) -> None:
+                start: str | None, end: str | None, queue: Path | None, focus: list[str] | None = None,
+                force: bool = False) -> None:
         wanted = self.config.shorts.per_run if count is None else count
         # A scheduled run takes so many shorts of each source; a count, a focus or an URL asked for by hand do not.
         quotas = self.config.shorts.per_source if count is None and not focus and not url else {}
@@ -514,14 +517,18 @@ class Clipper:
                 return
             ranked = spread(rank(found, self.state, config, now=self.now))
         if not quotas:
-            self._publish_best(report, ranked, wanted, dry_run=dry_run)
+            self._publish_best(report, ranked, wanted, dry_run=dry_run, force=force)
             return
         for source, quota in quotas.items():
-            self._publish_best(report, [c for c in ranked if _platform(c) == source], quota, dry_run=dry_run, source=source)
+            self._publish_best(report, [c for c in ranked if _platform(c) == source], quota, dry_run=dry_run, source=source,
+                               force=force)
 
     def _publish_best(self, report: RunReport, ranked: list[Candidate], wanted: int, *, dry_run: bool,
-                      source: str | None = None) -> None:
-        """Reviews `ranked` until `wanted` clips are approved, then edits and publishes them."""
+                      source: str | None = None, force: bool = False) -> None:
+        """Reviews `ranked` until `wanted` clips are approved, then edits and publishes them.
+
+        With `force`, when too few clips reach the bar, the best marked ones Claude did not refuse outright go out too.
+        """
         label = f" {SOURCE_NAMES[source]}" if source else ""
         if wanted <= 0 or not ranked:
             log.info("Aucun candidat%s à traiter.", label)
@@ -539,6 +546,8 @@ class Clipper:
         remaining = iter(ranked)
         recent = self.recent_shorts()
         approved: list[tuple[Prepared, Review]] = []
+        under_bar: list[tuple[Prepared, Review]] = []  # judged and allowed, but marked under the bar
+        forced: set[str] = set()
         unjudged = 0
         for round_number in range(REVIEW_ROUNDS if use_ai else 1):
             if round_number:
@@ -573,10 +582,22 @@ class Clipper:
                     report.rejected.append((item.candidate, reason))
                     if not dry_run:
                         self.state.record_rejection(item.candidate, f"revue : {reason}")
+                    if review.verdict != "reject":
+                        under_bar.append((item, review))
                     continue
                 approved.append((item, review))
             if len(approved) >= wanted:
                 break
+        if force and len(approved) < wanted and under_bar:
+            under_bar.sort(key=lambda pair: pair[1].score, reverse=True)
+            for item, review in under_bar[: wanted - len(approved)]:
+                key = item.candidate.key
+                log.info("Publié quand même, à la demande : %s — note %.0f/100", item.candidate.title, review.score)
+                report.rejected = [(c, why) for c, why in report.rejected if c.key != key]
+                if not dry_run:
+                    self.state.rejected.pop(key, None)
+                approved.append((item, review))
+                forced.add(key)
         approved.sort(key=lambda pair: (pair[0].candidate.manual, pair[1].score), reverse=True)
         examined = len(report.rejected) - examined_before
         if not approved and examined and not dry_run:
@@ -612,6 +633,9 @@ class Clipper:
                     self.state.record_failure(candidate, "; ".join(r.detail or r.platform for r in failed))
             report.published.append(outcome)
             log.info("Prêt : %s", video)
+            if candidate.key in forced and not dry_run:
+                self.notify(f"ℹ️ Short{label} envoyé à ta demande : aucun clip n'atteignait la note minimale "
+                            f"({self.config.shorts.min_score:.0f}/100), celui-ci est le mieux noté ({review.score:.0f}/100).")
 
     # --- compilation -------------------------------------------------------------------------
 

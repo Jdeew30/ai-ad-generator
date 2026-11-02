@@ -239,6 +239,35 @@ def test_a_slot_without_a_good_clip_is_announced(media, paths):
     assert dry.run_shorts(dry_run=True).published == [] and len(telegram.messages) == 1
 
 
+def test_a_clip_asked_for_by_hand_goes_out_even_under_the_bar(media, paths):
+    class Graded:
+        """Curator double: Claude's verdict and mark for a word of the title."""
+
+        def review(self, items, *, now, recent=None):
+            from clipper.ai import template_review
+
+            grades = {"Dull": ("publish", 45), "Weak": ("publish", 52), "Toxic": ("reject", 70)}
+            reviews = {}
+            for item in items:
+                meta = template_review(item, build(Config, {})).meta
+                meta.ai = True
+                verdict, mark = next(g for word, g in grades.items() if word in item.candidate.title)
+                reviews[item.candidate.key] = Review(verdict, "rien de notable", mark, meta)
+            return reviews
+
+    clips = {"alpha": [entry("Alpha-Dull", 9000, 1, "Dull moment"), entry("Alpha-Weak", 800, 2, "Weak moment")],
+             "beta": [entry("Beta-Toxic", 5000, 3, "Toxic moment")]}  # fmt: skip
+    telegram = FakePublisher("telegram")
+    report = clipper(media, paths, clips=clips, publishers={"telegram": telegram}, curator=Graded()).run_shorts(force=True)
+    # The best mark under the bar goes out, never a clip Claude refused, whatever its mark.
+    assert [o.candidate.key for o in report.published] == ["twitch:Alpha-Weak"]
+    assert sorted(c.key for c, _ in report.rejected) == ["twitch:Alpha-Dull", "twitch:Beta-Toxic"]
+    state = State.load(paths.state)
+    assert "twitch:Alpha-Weak" in state.posted and "twitch:Alpha-Weak" not in state.rejected
+    assert telegram.messages == ["ℹ️ Short envoyé à ta demande : aucun clip n'atteignait la note minimale (60/100), "
+                                 "celui-ci est le mieux noté (52/100)."]  # fmt: skip
+
+
 def test_a_clip_claude_did_not_judge_is_never_posted(media, paths):
     telegram = FakePublisher("telegram")
     clips = {"alpha": [entry("Alpha-Cam1", 9000, 1)], "beta": [entry("Beta-1", 1500, 3, "Beta moment")]}
