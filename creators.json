@@ -1,0 +1,2227 @@
+{
+ "creators": {
+  "alphacast": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "alphacast": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@AlphaCast",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "AlphaCast",
+   "source": "config",
+   "status": "active"
+  },
+  "aminematue": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "aminematue": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@AmineMaTue",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "AmineMaTue",
+   "source": "config",
+   "status": "active"
+  },
+  "amixem": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "amixem": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "description_handles": [
+      "@spoutnikagency.com"
+     ],
+     "errors": 0,
+     "followers": 9610000,
+     "id": "UCgvqvBoSHB1ctlyyhoHrGwQ",
+     "last_upload": null,
+     "ref": "@Amixem",
+     "role": "main",
+     "status": "active",
+     "title": "Amixem",
+     "url": "https://www.youtube.com/channel/UCgvqvBoSHB1ctlyyhoHrGwQ",
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Amixem",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "andyraconte": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "andyraconte": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@AndyRaconte",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "AndyRaconte",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "angledroit": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "angledroit": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@AngleDroit",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "AngleDroit",
+   "source": "config",
+   "status": "active"
+  },
+  "antoinedaniel": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "antoinedaniel": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@AntoineDaniel",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "AntoineDaniel",
+   "source": "config",
+   "status": "active"
+  },
+  "anyme023": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "anyme023": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Anyme023",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Anyme023",
+   "source": "config",
+   "status": "active"
+  },
+  "aypierre": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "aypierre": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Aypierre",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Aypierre",
+   "source": "config",
+   "status": "active"
+  },
+  "bagherajoneslive": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "bagherajoneslive": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@BagheraJonesLive",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "BagheraJonesLive",
+   "source": "config",
+   "status": "active"
+  },
+  "byilhann": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "byilhann": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Byilhann",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Byilhann",
+   "source": "config",
+   "status": "active"
+  },
+  "chefmicheldumas": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "chefmicheldumas": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@ChefMichelDumas",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "ChefMichelDumas",
+   "source": "config",
+   "status": "active"
+  },
+  "cyprien": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "cyprien": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@cyprien",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "cyprien",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "diablox9": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "diablox9": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Diablox9",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Diablox9",
+   "source": "config",
+   "status": "active"
+  },
+  "djilsi": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "djilsi": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Djilsi",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Djilsi",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "docseven": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "docseven": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@DocSeven",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "DocSeven",
+   "source": "config",
+   "status": "active"
+  },
+  "doigby": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "doigby": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Doigby",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Doigby",
+   "source": "config",
+   "status": "active"
+  },
+  "drnozman": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "drnozman": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@DrNozman",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "DrNozman",
+   "source": "config",
+   "status": "active"
+  },
+  "enjoyphoenix": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "enjoyphoenix": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@EnjoyPhoenix",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "EnjoyPhoenix",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "epenser": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "epenser": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@epenser",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "epenser",
+   "source": "config",
+   "status": "active"
+  },
+  "etoiles": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "etoiles": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Etoiles",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Etoiles",
+   "source": "config",
+   "status": "active"
+  },
+  "etostark": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "etostark": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Etostark",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Etostark",
+   "source": "config",
+   "status": "active"
+  },
+  "fantabobgames": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "fantabobgames": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@fantabobgames",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "fantabobgames",
+   "source": "config",
+   "status": "active"
+  },
+  "fastgoodcuisine": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "fastgoodcuisine": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@FastGoodCuisine",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "FastGoodCuisine",
+   "source": "config",
+   "status": "active"
+  },
+  "feldup": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "feldup": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Feldup",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Feldup",
+   "source": "config",
+   "status": "active"
+  },
+  "florianonair": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "florianonair": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@FlorianOnAir",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "FlorianOnAir",
+   "source": "config",
+   "status": "active"
+  },
+  "fouloscopie": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "fouloscopie": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Fouloscopie",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Fouloscopie",
+   "source": "config",
+   "status": "active"
+  },
+  "frigiel": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "frigiel": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Frigiel",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Frigiel",
+   "source": "config",
+   "status": "active"
+  },
+  "furiousjumper": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "furiousjumper": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@FuriousJumper",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "FuriousJumper",
+   "source": "config",
+   "status": "active"
+  },
+  "goldenmoustache": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "goldenmoustache": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@goldenmoustache",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "goldenmoustache",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "gotaga": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "gotaga": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Gotaga",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Gotaga",
+   "source": "config",
+   "status": "active",
+   "unverified": {
+    "@GotagaReplay": {
+     "at": "2026-11-02T15:17:22.122980+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    },
+    "@mYGotaga": {
+     "at": "2026-11-02T15:17:22.122980+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    }
+   }
+  },
+  "grimkujow": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "grimkujow": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Grimkujow",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Grimkujow",
+   "source": "config",
+   "status": "active"
+  },
+  "hctuan": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "hctuan": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Hctuan",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Hctuan",
+   "source": "config",
+   "status": "active"
+  },
+  "hugodecrypte": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "hugodecrypte": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@HugoDecrypte",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "HugoDecrypte",
+   "source": "config",
+   "status": "active"
+  },
+  "hugotoutseul": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "hugotoutseul": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@HugoToutSeul",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "HugoToutSeul",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "inoxtag": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "inoxtag": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "description_handles": [],
+     "errors": 0,
+     "followers": 9600000,
+     "id": "UCL9aTJb0ur4sovxcppAopEw",
+     "last_upload": null,
+     "ref": "@Inoxtag",
+     "role": "main",
+     "status": "active",
+     "title": "Inoxtag",
+     "url": "https://www.youtube.com/channel/UCL9aTJb0ur4sovxcppAopEw",
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Inoxtag",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "jhonrachid69": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "jhonrachid69": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@JHONRACHID69",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "JHONRACHID69",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "joueurdugrenier": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "joueurdugrenier": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@JoueurDuGrenier",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "JoueurDuGrenier",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "joyca": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "joyca": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Joyca",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Joyca",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "jujufitcats": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "jujufitcats": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@jujufitcats",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "jujufitcats",
+   "source": "config",
+   "status": "active"
+  },
+  "kaatsup": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "kaatsup": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Kaatsup",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Kaatsup",
+   "source": "config",
+   "status": "active"
+  },
+  "kameto": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "kameto": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Kameto",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Kameto",
+   "source": "config",
+   "status": "active"
+  },
+  "kaydop": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "kaydop": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Kaydop",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Kaydop",
+   "source": "config",
+   "status": "active"
+  },
+  "kronomuzik": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "kronomuzik": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Kronomuzik",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Kronomuzik",
+   "source": "config",
+   "status": "active"
+  },
+  "leaeluig": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "leaeluig": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@leaeluig",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "leaeluig",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "lebouseuh": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "lebouseuh": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Lebouseuh",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Lebouseuh",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "legrandjd": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "legrandjd": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@LeGrandJD",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "LeGrandJD",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "lenasituations": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "lenasituations": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@LenaSituations",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    },
+    "lenasituationsreplay": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "errors": 0,
+     "followers": 29200,
+     "id": "UCAgs5DX2GwZ0uPcFrjec2SA",
+     "last_upload": null,
+     "ref": "@LenaSituationsReplay",
+     "role": "secondary",
+     "status": "active",
+     "title": "Lena Situations Replay ",
+     "url": "https://www.youtube.com/channel/UCAgs5DX2GwZ0uPcFrjec2SA",
+     "verified": "sa description cite @LenaSituations"
+    }
+   },
+   "name": "LenaSituations",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "lerirejaune": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "lerirejaune": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@LeRireJaune",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "LeRireJaune",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "leroidesrats": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "leroidesrats": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@leroidesrats",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "leroidesrats",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "linksthesun": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "linksthesun": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@LinksTheSun",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "LinksTheSun",
+   "source": "config",
+   "status": "active"
+  },
+  "locklear": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "locklear": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Locklear",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Locklear",
+   "source": "config",
+   "status": "active"
+  },
+  "lolywood": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "lolywood": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Lolywood",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Lolywood",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "ludovik": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "ludovik": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Ludovik",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Ludovik",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "maghla": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "maghla": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Maghla",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Maghla",
+   "source": "config",
+   "status": "active"
+  },
+  "mamytwink": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "mamytwink": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Mamytwink",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Mamytwink",
+   "source": "config",
+   "status": "active"
+  },
+  "mastu": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "mastu": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Mastu",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Mastu",
+   "source": "config",
+   "status": "active"
+  },
+  "mathieusommet": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "mathieusommet": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@MathieuSommet",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "MathieuSommet",
+   "source": "config",
+   "status": "active"
+  },
+  "maxildan": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "maxildan": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Maxildan",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Maxildan",
+   "source": "config",
+   "status": "active"
+  },
+  "maximebiaggi": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "maximebiaggi": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@MaximeBiaggi",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "MaximeBiaggi",
+   "source": "config",
+   "status": "active",
+   "unverified": {
+    "@MaximeBiaggiReplay": {
+     "at": "2026-11-02T15:17:22.122980+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    }
+   }
+  },
+  "mcflyetcarlito": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "mcflyetcarlito": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@mcflyetcarlito",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "mcflyetcarlito",
+   "source": "config",
+   "status": "active",
+   "unverified": {
+    "@mcflyetcarlito2409": {
+     "at": "2026-11-02T15:17:22.122980+00:00",
+     "why": "[youtube:tab] @mcflyetcarlito2409: This channel does not have a streams tab"
+    }
+   }
+  },
+  "michou": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "michou": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "description_handles": [],
+     "errors": 0,
+     "followers": 11000000,
+     "id": "UCo3i0nUzZjjLuM7VjAVz4zA",
+     "last_upload": null,
+     "ref": "@Michou",
+     "role": "main",
+     "status": "active",
+     "title": "Michou",
+     "url": "https://www.youtube.com/channel/UCo3i0nUzZjjLuM7VjAVz4zA",
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Michou",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "mistermv": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "mistermv": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@MisterMV",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "MisterMV",
+   "source": "config",
+   "status": "active"
+  },
+  "mistervofficial": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "mistervofficial": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@mistervofficial",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "mistervofficial",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "mynthos": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "mynthos": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Mynthos",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Mynthos",
+   "source": "config",
+   "status": "active"
+  },
+  "natooyt": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "natooyt": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Natooyt",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Natooyt",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "ninjaxx": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "ninjaxx": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Ninjaxx",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Ninjaxx",
+   "source": "config",
+   "status": "active"
+  },
+  "normanfaitdesvideos": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "normanfaitdesvideos": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@NormanFaitDesVideos",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "NormanFaitDesVideos",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "pa.domingo": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "pa.domingo": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@pa.domingo",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "pa.domingo",
+   "source": "config",
+   "status": "active"
+  },
+  "pierrecroce": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "pierrecroce": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@PierreCroce",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "PierreCroce",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "poissonfecond42": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "poissonfecond42": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@poissonfecond42",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "poissonfecond42",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "ponce": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "ponce": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Ponce",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Ponce",
+   "source": "config",
+   "status": "active"
+  },
+  "rebeudeter": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "rebeudeter": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Rebeudeter",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Rebeudeter",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "rivenzi_": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "rivenzi_": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Rivenzi_",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Rivenzi_",
+   "source": "config",
+   "status": "active"
+  },
+  "sardochelol": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "sardochelol": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@SardocheLol",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "SardocheLol",
+   "source": "config",
+   "status": "active"
+  },
+  "scienceetonnante": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "scienceetonnante": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@ScienceEtonnante",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "ScienceEtonnante",
+   "source": "config",
+   "status": "active"
+  },
+  "seblafrite": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "seblafrite": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@SebLaFrite",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "SebLaFrite",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "siphano13": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "siphano13": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Siphano13",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Siphano13",
+   "source": "config",
+   "status": "active"
+  },
+  "squeezie": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "squeezie": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": "2026-11-02T15:17:22.122980+00:00",
+     "description_handles": [],
+     "errors": 0,
+     "followers": 20200000,
+     "id": "UCWeg2Pkate69NFdBeuRFTAw",
+     "last_upload": null,
+     "ref": "@Squeezie",
+     "role": "main",
+     "status": "active",
+     "title": "SQUEEZIE",
+     "url": "https://www.youtube.com/channel/UCWeg2Pkate69NFdBeuRFTAw",
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "SQUEEZIE",
+   "source": "config",
+   "status": "active",
+   "unverified": {
+    "@SqueezieGaming": {
+     "at": "2026-11-02T15:17:22.122980+00:00",
+     "why": "aucun lien avec la chaîne principale"
+    }
+   }
+  },
+  "studiobagel": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "studiobagel": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@StudioBagel",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "StudioBagel",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "sylvainlyve": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "sylvainlyve": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@SylvainLyve",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "SylvainLyve",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "thekairi78": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "thekairi78": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@TheKAIRI78",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "TheKAIRI78",
+   "source": "config",
+   "status": "active"
+  },
+  "tiboinshape": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "tiboinshape": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@TiboInShape",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "TiboInShape",
+   "source": "config",
+   "status": "active"
+  },
+  "ultia": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "ultia": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Ultia",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Ultia",
+   "source": "config",
+   "status": "active"
+  },
+  "valouzz": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "valouzz": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Valouzz",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Valouzz",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "vilebrequin": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "vilebrequin": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@Vilebrequin",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "Vilebrequin",
+   "source": "config",
+   "status": "active"
+  },
+  "wankilfr": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "wankilfr": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@wankilfr",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "wankilfr",
+   "source": "config",
+   "status": "active"
+  },
+  "woopgang": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "woopgang": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@woopgang",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "woopgang",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "zacknani": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "zacknani": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@ZackNani",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "ZackNani",
+   "source": "config",
+   "status": "active",
+   "unverified": {}
+  },
+  "zerator": {
+   "added": "2026-11-02T15:17:22.122980+00:00",
+   "categories": [],
+   "channels": {
+    "zerator": {
+     "added": "2026-11-02T15:17:22.122980+00:00",
+     "categories": {},
+     "checked": null,
+     "errors": 0,
+     "followers": null,
+     "id": null,
+     "last_upload": null,
+     "ref": "@ZeratoR",
+     "role": "main",
+     "status": "active",
+     "title": null,
+     "url": null,
+     "verified": "liste du propriétaire"
+    }
+   },
+   "name": "ZeratoR",
+   "source": "config",
+   "status": "active"
+  }
+ },
+ "lookups": {
+  "zeeked": "2026-11-02T15:17:22.122980+00:00",
+  "zerator_247": "2026-11-02T15:17:22.122980+00:00",
+  "zerobenef": "2026-11-02T15:17:22.122980+00:00"
+ },
+ "version": 1
+}
