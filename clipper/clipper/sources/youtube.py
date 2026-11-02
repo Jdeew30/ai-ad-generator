@@ -392,7 +392,8 @@ def discover_youtube(
     if settings.watch == "rss" and http is not None and creators is not None and history is not None:
         try:
             if twitch_seen:
-                _discover_from_twitch(creators, twitch_seen, ytdlp, now, budget=settings.discover_per_run)
+                _discover_from_twitch(creators, twitch_seen, ytdlp, now, budget=settings.discover_per_run,
+                                      first=[login.lower() for login in config.twitch.streamers])
             candidates.extend(_watch(config, ytdlp, http, creators, history, related, now, skipped, known or set()))
         except DownloadError as exc:
             if not exc.blocked:
@@ -627,17 +628,19 @@ def _adopt(creators: watch.Creators, related: dict[str, dict[str, Any]], ytdlp: 
 
 
 def _discover_from_twitch(creators: watch.Creators, twitch_seen: dict[str, str], ytdlp: YtDlp, now: datetime, *,
-                          budget: int) -> None:
+                          budget: int, first: list[str] | None = None) -> None:
     """New creators: the YouTube channels of French streamers seen live on Twitch lately, `budget` lookups a run.
 
     The search keeps channels titled with the streamer's very name; one is only taken when its description links to
     that Twitch channel (twitch.tv/<login>), so that a namesake is never taken for the streamer. Each login is looked
-    up once a month at most.
+    up once a month at most. The streamers of `first` (the owner's Twitch list) come first, then the latest seen.
     """
     tried = creators.lookups
-    recent = sorted((at, login) for login, at in twitch_seen.items()
-                    if (parse_time(at) or now - timedelta(days=99)) >= now - timedelta(days=2))  # fmt: skip
-    for _at, login in reversed(recent):
+    lately = now - timedelta(days=2)
+    recent = [login for login, at in sorted(twitch_seen.items(), key=lambda pair: pair[1], reverse=True)
+              if (parse_time(at) or now - timedelta(days=99)) >= lately]  # fmt: skip
+    ordered = [login for login in first or [] if login in recent] + [login for login in recent if login not in (first or [])]
+    for login in ordered:
         if budget <= 0:
             return
         last = parse_time(tried.get(login))
