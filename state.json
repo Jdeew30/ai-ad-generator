@@ -812,6 +812,30 @@
    "url": "https://www.youtube.com/watch?v=4X440MciNX8",
    "views": 1614459
   },
+  "youtube:4X440MciNX8@225-285": {
+   "at": "2026-11-02T11:30:53.352761+00:00",
+   "created_at": "2026-11-01T16:25:00+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "66",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "youtube",
+   "span": [
+    "yt:4X440MciNX8",
+    225.0,
+    285.0
+   ],
+   "streamer": "Amixem",
+   "streamer_login": "amixem",
+   "title": "Amixem teste une Porsche pour enfant à 20 000 €… et ça tourne mal",
+   "url": "https://www.youtube.com/watch?v=4X440MciNX8",
+   "views": 1630710
+  },
   "youtube:BByplh9JRTs@2045-2105": {
    "at": "2026-11-01T14:52:21.158350+00:00",
    "created_at": "2026-10-31T10:00:09+00:00",
@@ -1638,6 +1662,10 @@
    "at": "2026-11-01T14:51:31.322030+00:00",
    "reason": "revue : Images sombres et confuses, presque sans dialogue. L'extrait ne se comprend pas sans contexte, et un moment de la même vidéo a déjà été publié."
   },
+  "youtube:2wJuFzwBWkI@5435-5495": {
+   "at": "2026-11-02T11:29:13.241823+00:00",
+   "reason": "revue : note 56/100 (minimum 60). Moment de tension de la vidéo crash d'avion d'Inoxtag, différent du short déjà publié : la découverte du monolithe entouré de cadavres. Visuellement fort, mais c'est surtout de l'ambiance, sans vraie chute ni punchline."
+  },
   "youtube:2wJuFzwBWkI@6056-6116": {
    "at": "2026-11-02T10:53:51.449874+00:00",
    "reason": "revue : note 22/100 (minimum 60). Séquence nocturne très sombre et confuse : cris inintelligibles, aucune action lisible ni chute. Sans contexte, on ne comprend pas ce qui se passe."
@@ -1773,6 +1801,10 @@
   "youtube:v9wYSebfh4o@2145-2205": {
    "at": "2026-11-02T10:53:51.449912+00:00",
    "reason": "revue : note 35/100 (minimum 60). Test d'objets TikTok assez plat. La partie sur la scie musicale arrive en cours de route et la cuillère anti-sel n'est que présentée, sans résultat. Pas de vraie chute."
+  },
+  "youtube:v9wYSebfh4o@301-361": {
+   "at": "2026-11-02T11:29:13.241918+00:00",
+   "reason": "revue : note 44/100 (minimum 60). Test d'un gadget TikTok pour parler aux chiens avec un fou rire visible, mais la transcription est confuse et l'enjeu est difficile à comprendre sans contexte. La chute est molle."
   },
   "youtube:vy2tWg9-QN4@1285-1345": {
    "at": "2026-10-31T19:02:40.575499+00:00",
