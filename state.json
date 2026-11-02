@@ -918,6 +918,30 @@
    "url": "https://www.youtube.com/watch?v=ZA_3eoib31s",
    "views": 1875147
   },
+  "youtube:ZA_3eoib31s@3862-3912": {
+   "at": "2026-11-02T12:56:42.086020+00:00",
+   "created_at": "2026-10-31T10:00:03+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "69",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "source": "manual",
+   "span": [
+    "yt:ZA_3eoib31s",
+    3862.2,
+    3912.2
+   ],
+   "streamer": "GOTAGA",
+   "streamer_login": "gotaga",
+   "title": "Gotaga : le jeu du meilleur menteur avec Joyca, Djilsi et Theodort",
+   "url": "https://www.youtube.com/watch?v=ZA_3eoib31s",
+   "views": 2619615
+  },
   "youtube:_hzgpE0NXR8@3520-3580": {
    "at": "2026-10-31T17:06:56.335106+00:00",
    "created_at": "2026-10-25T16:25:31+00:00",
