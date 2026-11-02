@@ -268,25 +268,30 @@ def related_channels(ytdlp: YtDlp, ref: str) -> list[str]:
 def renamed_channel(ytdlp: YtDlp, ref: str) -> str | None:
     """The channel a handle that does not exist stands for, found by searching its name: "@LeWoop" -> "Le Woop"'s handle.
 
-    Only a channel titled with that very name counts ("&" read as "et", a " - subtitle" left out), with enough subscribers;
-    the most followed if several.
+    Only a channel titled with that very name counts ("&" read as "et"), with enough subscribers: the title alone first,
+    then a title with a subtitle ("Wankil Studio - Laink et Terracid"); the most followed if several.
     """
     name = _name(ref)
     wanted = _plain(name)
     if not wanted:
         return None
-    best: tuple[int, str] | None = None
+
+    def named(title: str) -> bool:
+        return wanted in {_plain(title.replace("&", word)) for word in ("&", "et", "and")}
+
+    best: tuple[tuple[bool, int], str] | None = None
     for entry in ytdlp.list_flat(SEARCH_CHANNELS.format(quote(re.sub(r"(?<=[a-z])(?=[A-Z])", " ", name))), 10):
         title = entry.get("channel") or entry.get("title") or ""
-        names = {title, re.split(r"\s+[-–|(]", title)[0]}  # "Wankil Studio - Laink et Terracid" is "Wankil Studio"
-        if wanted not in {_plain(n.replace("&", word)) for n in names for word in ("&", "et", "and")}:
+        exact = named(title)
+        if not exact and not named(re.split(r"\s+[-–|(]", title)[0]):
             continue
         followers = entry.get("channel_follower_count")
         link = _link(entry)
         if not link or (followers is not None and followers < MIN_FOLLOWERS) or _name(link).lower() == name.lower():
             continue
-        if best is None or (followers or 0) > best[0]:
-            best = (followers or 0, link)
+        rank = (exact, followers or 0)
+        if best is None or rank > best[0]:
+            best = (rank, link)
     return best[1] if best else None
 
 
@@ -304,13 +309,16 @@ def _link(entry: dict[str, Any]) -> str | None:
 def _channel_tab(ytdlp: YtDlp, ref: str, tab: str, count: int) -> tuple[str, list[dict[str, Any]]]:
     """The channel and the `count` latest entries of its `tab`.
 
-    Failing on the videos tab means a wrong handle, looked up by its name, or a channel of lives only: its lives are read.
+    Failing on the videos tab means a channel of lives only, whose lives are read, or a handle that does not exist,
+    looked up by its name.
     """
     try:
         return ref, ytdlp.list_flat(f"{channel_url(ref)}/{tab}", count)
     except DownloadError as exc:
         if exc.blocked or tab != "videos":
             raise
+        if NO_VIDEOS_TAB in str(exc):  # the handle is right: another channel of that name is not this one
+            return ref, ytdlp.list_flat(f"{channel_url(ref)}/streams", count)
         renamed = None
         if "/@" in channel_url(ref):
             try:
@@ -318,9 +326,7 @@ def _channel_tab(ytdlp: YtDlp, ref: str, tab: str, count: int) -> tuple[str, lis
             except DownloadError:
                 pass
         if not renamed:
-            if NO_VIDEOS_TAB not in str(exc):
-                raise exc
-            return ref, ytdlp.list_flat(f"{channel_url(ref)}/streams", count)
+            raise exc
     log.warning("Chaîne YouTube %s introuvable : lue sous le nom %s, à corriger dans config.yaml", ref, renamed)
     return renamed, ytdlp.list_flat(f"{channel_url(renamed)}/{tab}", count)
 
