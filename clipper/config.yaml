@@ -71,7 +71,7 @@ twitch:
   discover_categories: 20       # + les clips FR les plus vus de la semaine dans les 20 catégories les plus regardées
   clips_per_streamer: 20
   window_hours: 168             # ancienneté maximale d'un clip pour un short (7 jours : les plus vus d'abord)
-  min_views: 300               # en dessous, presque toujours des moments faibles (notes de 15 à 48 le 03/11)
+  min_views: 150               # la note de Claude fait le tri : le seul bon clip du 03/11 au soir (68/100) avait 184 vues
   # Clips jamais téléchargés si leur titre contient un de ces mots (pubs : Claude les refuse toujours).
   # Les co-streams d'e-sport (Worlds, RLCS…) et le RP sont les bienvenus : pas de filtre sur le titre du live.
   skip_title_words: [publicité, sponsorisé, partenariat]

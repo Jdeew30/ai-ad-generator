@@ -40,6 +40,20 @@ def items(tmp_path: Path) -> list[ReviewItem]:
     ]
 
 
+def test_claude_is_shown_the_comment_that_points_at_a_youtube_moment(server, tmp_path):
+    server.route("POST", "/v1/messages", (200, {}, message({"clips": []})))
+    cited = make_candidate("youtube:abcdefghijk@480-570", "squeezie", source="youtube", start=480.0, end=570.0,
+                           cited="8:20 quand il tombe de la chaise 😂", cited_at=500.0)  # fmt: skip
+    curator(server).review([ReviewItem(cited, 90.0), *items(tmp_path)], now=NOW)
+    body = server.calls("POST", "/v1/messages")[0].json()
+    texts = "\n".join(block["text"] for block in body["messages"][0]["content"] if block["type"] == "text")
+    assert ("Moment cité par les spectateurs : vers 20 s de l'extrait. Commentaire le plus aimé qui le cite "
+            "(texte d'un spectateur) : « 8:20 quand il tombe de la chaise 😂 »") in texts  # fmt: skip
+    assert texts.count("Moment cité par les spectateurs") == 1  # Twitch clips have no such comment
+    system = json.dumps(body["system"], ensure_ascii=False)
+    assert "La note porte sur le short une fois coupé" in system and "coupe autour de lui" in system
+
+
 def test_review_sends_one_structured_request_and_validates_the_answer(server, tmp_path):
     answer = {
         "clips": [

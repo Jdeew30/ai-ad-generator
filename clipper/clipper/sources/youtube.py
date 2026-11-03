@@ -7,7 +7,7 @@ import re
 import unicodedata
 from collections import Counter
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, NamedTuple
 from urllib.parse import quote
 
 from ..config import Config, YouTubeSourceConfig
@@ -32,6 +32,10 @@ NO_HEATMAP = "sans « moments les plus revus »"
 NO_MOMENT = "sans « moments les plus revus » ni minutage en commentaire"
 COMMENTS_PER_VIDEO = 60  # top comments read when YouTube gives no "most replayed" data
 MIN_CITED = 2.0  # weight a moment needs from the comments: two citations, or one comment that a few people liked
+# Around the time viewers cite: its setup before, its punchline and the reactions after (the review trims the extract).
+# 15 s before and 45 s after cut too many stories before their end (« se coupe avant toute révélation », 03/11).
+CITED_BEFORE = 20.0
+CITED_AFTER = 70.0
 # "3:45", "1:02:13" in a comment, not part of a longer number, a date or a score
 _TIMESTAMP = re.compile(r"(?<![\d:/])(?:(\d{1,2}):)?([0-5]?\d):([0-5]\d)(?![\d:/])")
 BLOCKED = ("YouTube bloque ce serveur (« Sign in to confirm you're not a bot ») : pas de vidéo YouTube à ce passage. "
@@ -127,35 +131,44 @@ def skip_reason(info: dict[str, Any], settings: YouTubeSourceConfig, now: dateti
     return None
 
 
-def moments_from_comments(comments: list[dict[str, Any]], duration: float, *, count: int) -> list[tuple[float, float, float]]:
-    """The moments viewers point at in the comments (« 3:45 mdr »), as (start, end, weight) windows, most cited first.
+class CitedMoment(NamedTuple):
+    start: float
+    end: float
+    weight: float
+    at: float  # the time viewers point at
+    comment: str  # the comment that points at it with the most likes: what happens there, in the viewers' words
+
+
+def moments_from_comments(comments: list[dict[str, Any]], duration: float, *, count: int) -> list[CitedMoment]:
+    """The moments viewers point at in the comments (« 3:45 mdr »), most cited first.
 
     A comment counts more with its likes; one that lists many times (a summary of the video) counts for little.
     """
-    cited: list[tuple[float, float]] = []
+    cited: list[tuple[float, float, str]] = []
     intro_end = max(duration * 0.04, 15.0)
     for comment in comments:
-        times = {int(h or 0) * 3600 + int(m) * 60 + int(s) for h, m, s in _TIMESTAMP.findall(str(comment.get("text") or ""))}
+        text = str(comment.get("text") or "")
+        times = {int(h or 0) * 3600 + int(m) * 60 + int(s) for h, m, s in _TIMESTAMP.findall(text)}
         times = {t for t in times if intro_end <= t < duration - 5}
         weight = (1.0 + math.log1p(max(0, int(comment.get("like_count") or 0)))) / max(1, len(times))
-        cited += [(float(t), weight) for t in times]
-    groups: list[list[tuple[float, float]]] = []
-    for at, weight in sorted(cited):
+        cited += [(float(t), weight, text) for t in times]
+    groups: list[list[tuple[float, float, str]]] = []
+    for at, weight, text in sorted(cited):
         if groups and at - groups[-1][0][0] <= 20.0:
-            groups[-1].append((at, weight))
+            groups[-1].append((at, weight, text))
         else:
-            groups.append([(at, weight)])
-    windows: list[tuple[float, float, float]] = []
-    for group in sorted(groups, key=lambda g: -sum(w for _, w in g)):
-        weight = sum(w for _, w in group)
+            groups.append([(at, weight, text)])
+    windows: list[CitedMoment] = []
+    for group in sorted(groups, key=lambda g: -sum(w for _, w, _ in g)):
+        weight = sum(w for _, w, _ in group)
         if weight < MIN_CITED or len(windows) >= count:
             break
-        # Viewers give the start of a moment: take a little before it and its aftermath, the review trims it.
-        start = max(0.0, group[0][0] - 15.0)
-        end = min(duration, max(group[-1][0] + 30.0, start + 60.0), start + MAX_WINDOW)
-        if any(start < taken_end and end > taken_start for taken_start, taken_end, _ in windows):
+        start = max(0.0, group[0][0] - CITED_BEFORE)
+        end = min(duration, max(group[-1][0] + CITED_AFTER, start + CITED_BEFORE + CITED_AFTER), start + MAX_WINDOW)
+        if any(start < taken.end and end > taken.start for taken in windows):
             continue
-        windows.append((start, end, round(weight, 2)))
+        at, _, text = max(group, key=lambda item: item[1])
+        windows.append(CitedMoment(start, end, round(weight, 2), at, " ".join(text.split())[:240]))
     return windows
 
 
@@ -169,6 +182,7 @@ def candidates_from_info(
     uploaded = _uploaded(info)
     views = int(info.get("view_count") or 0)
     duration = float(info.get("duration") or 0.0)
+    said: dict[tuple[float, float], CitedMoment] = {}
     if info.get("heatmap"):
         windows = most_replayed(
             info["heatmap"],
@@ -180,10 +194,11 @@ def candidates_from_info(
         )
     else:
         cited = moments_from_comments(comments or [], duration, count=settings.segments_per_video)
-        windows = [(start, end, min(1.0, weight / 8.0)) for start, end, weight in cited]
+        windows = [(moment.start, moment.end, min(1.0, moment.weight / 8.0)) for moment in cited]
+        said = {(moment.start, moment.end): moment for moment in cited}
         if cited:
             log.info("Moments cités en commentaire sous « %s » : %s", info.get("title") or info.get("id"),
-                     ", ".join(f"{_clock(start)}-{_clock(end)}" for start, end, _ in cited))
+                     ", ".join(f"{_clock(moment.start)}-{_clock(moment.end)}" for moment in cited))
     handle = (info.get("uploader_id") or "").lstrip("@") or info.get("channel_id") or ""
     login = handle.lower()
     channel = info.get("channel_url") or info.get("uploader_url") or ""
@@ -208,6 +223,8 @@ def candidates_from_info(
             end=end,
             heat=heat,
             thumbnail_url=info.get("thumbnail"),
+            cited=said[(start, end)].comment if (start, end) in said else None,
+            cited_at=said[(start, end)].at if (start, end) in said else None,
         )
         for start, end, heat in windows
     ]
