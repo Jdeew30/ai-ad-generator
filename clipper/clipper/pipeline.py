@@ -711,6 +711,8 @@ class Clipper:
         forced: set[str] = set()
         unjudged = 0
         for round_number in range(REVIEW_ROUNDS if use_ai else 1):
+            if use_ai and getattr(self.curator, "disabled_reason", None):
+                break  # Claude can judge nothing more in this run: no clip is prepared for nothing
             if round_number:
                 log.info("Pas assez de clips retenus : revue d'une nouvelle série de candidats.")
             prepared: list[Prepared] = []
@@ -769,7 +771,13 @@ class Clipper:
                 forced.add(key)
         approved.sort(key=lambda pair: (pair[0].candidate.manual, pair[1].score), reverse=True)
         examined = len(report.rejected) - examined_before
-        if not approved and examined and not dry_run:
+        stopped = getattr(self.curator, "disabled_reason", None) if use_ai else None
+        if stopped and not approved and not dry_run:
+            if not getattr(self, "_told_stopped", False):  # once a run, whatever the source
+                log.error("Claude hors service pour ce passage : %s", stopped)
+                self.notify(f"⚠️ Pas de short à ce passage : {stopped}. Les clips seront réexaminés ensuite.")
+                self._told_stopped = True
+        elif not approved and examined and not dry_run:
             if unjudged == examined:
                 self.notify(f"⚠️ Pas de short{label} à ce passage : Claude n'a pas répondu (clé, crédits ou panne ?). "
                             "Les clips seront réexaminés.")

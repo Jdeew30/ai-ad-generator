@@ -104,7 +104,7 @@ youtube:
     "@ChefMichelDumas", "@FastGoodCuisine",
   ]
   watch: rss                    # le flux RSS de CHAQUE chaîne à chaque passage (gratuit, sans quota ni cookies)
-  videos_per_run: 12            # vidéos récentes regardées de près par passage : les plus prometteuses (pré-score)
+  videos_per_run: 24            # vidéos récentes regardées de près par passage : les plus prometteuses (pré-score)
   resolve_per_run: 100          # chaînes dont l'identifiant YouTube est cherché par passage (une seule fois chacune)
   secondary_checks_per_run: 6   # autres chaînes d'un YouTubeur vérifiées par passage avant d'être suivies
   discover_per_run: 3           # streamers FR vus en live sur Twitch dont on cherche la chaîne YouTube, par passage

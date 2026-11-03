@@ -121,6 +121,22 @@ class Partial(Marks):
         return {key: review for key, review in super().review(items, now=now).items() if any(word in key for word in self.judged)}
 
 
+class Broke(Marks):
+    """Curator double: the Anthropic account runs out of credits at the first request of the run."""
+
+    def __init__(self):
+        super().__init__({})
+        self.disabled_reason = None
+        self.requests = 0
+
+    def review(self, items, *, now, recent=None):
+        from clipper.ai import NO_CREDITS, template_review
+
+        self.requests += 1
+        self.disabled_reason = NO_CREDITS
+        return {item.candidate.key: template_review(item, build(Config, {})) for item in items}
+
+
 class Recording(Marks):
     """Curator double: marks like Marks, and remembers each request (the clips, and the shorts said to be published)."""
 
@@ -336,6 +352,21 @@ def test_without_any_answer_from_claude_the_owner_is_told(media, paths):
     report = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram}, curator=Partial([])).run_shorts()
     assert report.published == [] and not State.load(paths.state).rejected
     assert telegram.messages == ["⚠️ Pas de short à ce passage : Claude n'a pas répondu (clé, crédits ou panne ?). Les clips seront réexaminés."]
+
+
+def test_a_run_prepares_nothing_more_once_claude_has_no_credits(media, paths):
+    logins = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"]
+    many = {login: [entry(f"{login.capitalize()}-1", 5000 - index * 100, 2)] for index, login in enumerate(logins)}
+    telegram = FakePublisher("telegram")
+    curator = Broke()
+    run = clipper(media, paths, clips=many, publishers={"telegram": telegram}, curator=curator,
+                  twitch={"streamers": logins, "min_views": 100})  # fmt: skip
+    report = run.run_shorts()
+    assert report.published == [] and curator.requests == 1
+    assert len(run.ytdlp.downloads) == 3  # the first batch only: 6 clips were there, none is prepared for nothing
+    assert telegram.messages == ["⚠️ Pas de short à ce passage : crédits de l'API Claude épuisés : à recharger sur "
+                                 "console.anthropic.com (Plans & Billing). Les clips seront réexaminés ensuite."]  # once
+    assert not State.load(paths.state).rejected  # not judged, so not refused: reviewed again at a later run
 
 
 def test_each_review_compares_clips_of_different_creators(media, paths):

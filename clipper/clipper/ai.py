@@ -20,6 +20,7 @@ log = logging.getLogger(__name__)
 FALLBACK_MODELS = {"claude-opus-5-5", "claude-opus-5", "claude-sonnet-5-5", "claude-fable-5-1"}
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 MAX_SHORT = 59.0  # trimmed length ceiling (Shorts/TikTok sweet spot)
+NO_CREDITS = "crédits de l'API Claude épuisés : à recharger sur console.anthropic.com (Plans & Billing)"
 MIN_SHORT = 8.0
 
 SHORTS_SYSTEM = """Tu es le rédacteur en chef d'une chaîne francophone (YouTube Shorts et TikTok) qui republie, \
@@ -306,6 +307,9 @@ class ClaudeCurator:
             log.error("Claude : accès refusé (%s), textes générés par gabarit.", exc.message)
             return None
         except anthropic.BadRequestError as exc:
+            if "credit balance" in str(exc.message).lower():
+                # Nothing can be judged until the account is topped up: no more request in this run.
+                self.disabled_reason = NO_CREDITS
             log.error("Claude : requête refusée (%s), textes générés par gabarit.", exc.message)
             return None
         except anthropic.RateLimitError:

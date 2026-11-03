@@ -128,6 +128,23 @@ def test_refusal_and_errors_fall_back_to_the_template(server, tmp_path):
     assert len(server.calls("POST", "/v1/messages")) == calls
 
 
+def test_claude_stops_asking_once_the_account_has_no_credits(server, tmp_path):
+    from clipper.ai import NO_CREDITS
+
+    broke = {"type": "error", "error": {"type": "invalid_request_error", "message":
+             "Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing."}}  # fmt: skip
+    server.route("POST", "/v1/messages", (400, {}, broke))
+    failing = curator(server)
+    assert not failing.review(items(tmp_path), now=NOW)["twitch:A"].meta.ai
+    assert failing.disabled_reason == NO_CREDITS
+    calls = len(server.calls("POST", "/v1/messages"))
+    failing.review(items(tmp_path), now=NOW)  # nothing can be judged until the account is topped up
+    assert len(server.calls("POST", "/v1/messages")) == calls
+    server.route("POST", "/v1/messages", (400, {}, {"type": "error", "error": {"type": "invalid_request_error",
+                                                                               "message": "max_tokens: too large"}}))
+    assert curator(server).review(items(tmp_path), now=NOW) and not curator(server).disabled_reason  # another 400
+
+
 def test_a_section_picked_by_hand_is_kept_whole(server, tmp_path):
     answer = {"clips": [{"id": "c1", "verdict": "publish", "reason": "", "score": 70, "hook": "H", "title": "T",
                          "description": "D", "hashtags": [], "trim_start": 5, "trim_end": 20}]}  # fmt: skip
