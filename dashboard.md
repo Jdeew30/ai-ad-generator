@@ -1,17 +1,17 @@
 # Tableau de bord du clipper
 
-Mis à jour le 03/11/2026 à 16:42 UTC.
+Mis à jour le 03/11/2026 à 17:26 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 24755 | 24755 |
-| Vidéos téléchargées et préparées | 173 | 173 |
+| Moments trouvés (Twitch + YouTube) | 27719 | 27719 |
+| Vidéos téléchargées et préparées | 185 | 185 |
 | Shorts envoyés | 15 | 15 |
-| Écartés par la revue | 158 | 158 |
-| Échecs (téléchargement, montage, envoi) | 7 | 7 |
-| Passages | 11 | 11 |
+| Écartés par la revue | 170 | 170 |
+| Échecs (téléchargement, montage, envoi) | 9 | 9 |
+| Passages | 12 | 12 |
 
 ## Shorts des 30 derniers jours
 
@@ -21,8 +21,8 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 
 ## Veille YouTube
 
-94 créateurs suivis, 84 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 84 identifiées ; 12 mises de côté (introuvables).
-328 vidéos récentes suivies, 87 regardées de près (47 avec des moments à extraire).
+95 créateurs suivis, 85 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 85 identifiées ; 12 mises de côté (introuvables).
+354 vidéos récentes suivies, 99 regardées de près (49 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
@@ -51,10 +51,10 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 
 ## Derniers échecs
 
+- twitch:SparklingNaiveYakinikuMVGame-qrV3hnIj3rCxADEI (3×) : préparation abandonnée au bout de 4 min
+- twitch:StormyTsundereArtichokePermaSmug-nVrdHp-lnAjLILGJ (3×) : préparation abandonnée au bout de 4 min
 - twitch:OptimisticColdbloodedElkPhilosoraptor-WknNRwhiPdSjJgj6 (1×) : préparation abandonnée au bout de 6 min
-- twitch:SparklingNaiveYakinikuMVGame-qrV3hnIj3rCxADEI (1×) : préparation abandonnée au bout de 6 min
 - twitch:FineFragilePicklesHeyGuys-icqVmQ0JHSAUn0-W (3×) : unable to download video data: HTTP Error 403: Forbidden
-- twitch:StormyTsundereArtichokePermaSmug-nVrdHp-lnAjLILGJ (2×) : préparation abandonnée au bout de 6 min
 - youtube:p6UYeKS3EmU@2219-2279 (1×) : non évalué par Claude
 - youtube:gQ8fdTxYozU@1365-1425 (1×) : non évalué par Claude
 - youtube:6iY1MU7hlPI@1306-1366 (1×) : non évalué par Claude
