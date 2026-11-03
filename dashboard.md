@@ -1,17 +1,17 @@
 # Tableau de bord du clipper
 
-Mis à jour le 03/11/2026 à 19:07 UTC.
+Mis à jour le 03/11/2026 à 22:07 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 33869 | 33869 |
-| Vidéos téléchargées et préparées | 228 | 228 |
+| Moments trouvés (Twitch + YouTube) | 37062 | 37062 |
+| Vidéos téléchargées et préparées | 244 | 244 |
 | Shorts envoyés | 17 | 17 |
-| Écartés par la revue | 211 | 211 |
-| Échecs (téléchargement, montage, envoi) | 12 | 12 |
-| Passages | 14 | 14 |
+| Écartés par la revue | 227 | 227 |
+| Échecs (téléchargement, montage, envoi) | 14 | 14 |
+| Passages | 15 | 15 |
 
 ## Shorts des 30 derniers jours
 
@@ -21,8 +21,8 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 
 ## Veille YouTube
 
-95 créateurs suivis, 85 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 85 identifiées ; 12 mises de côté (introuvables).
-358 vidéos récentes suivies, 118 regardées de près (60 avec des moments à extraire).
+97 créateurs suivis, 87 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 87 identifiées ; 12 mises de côté (introuvables).
+393 vidéos récentes suivies, 130 regardées de près (65 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
@@ -51,13 +51,13 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 
 ## Derniers échecs
 
+- youtube:0iHpCa_YM8k@455-545 (1×) : non évalué par Claude
+- youtube:yHHQx1HxnJw@1308-1418 (1×) : non évalué par Claude
+- youtube:z_L9AX4GMxY@1400-1490 (1×) : non évalué par Claude
+- youtube:yHHQx1HxnJw@1430-1520 (1×) : non évalué par Claude
+- youtube:f2rO3FR0KYE@1344-1434 (3×) : préparation abandonnée au bout de 4 min
+- youtube:Q1a2ZzOgKvI@936-1026 (3×) : préparation abandonnée au bout de 4 min
+- twitch:DepressedSquareLardPhilosoraptor-MqaGYCig4JSiiLhu (1×) : non évalué par Claude
+- twitch:NimbleAltruisticLouseCclamChamp-OMjc_XlusabTkK8D (1×) : non évalué par Claude
+- twitch:WimpyWealthyHerbsMoreCowbell-Khv5LXCv_e6NoX6x (1×) : non évalué par Claude
 - twitch:BovineLitigiousBearPipeHype-aOEuwGe4fZhXH0t7 (3×) : préparation abandonnée au bout de 4 min
-- twitch:WrongInexpensiveDeerTheTarFu-SqsHTYamdBLFzzuy (3×) : préparation abandonnée au bout de 4 min
-- twitch:BlueHardPelicanANELE-HIZx1pMUdHq99kjX (3×) : préparation abandonnée au bout de 4 min
-- twitch:SparklingNaiveYakinikuMVGame-qrV3hnIj3rCxADEI (3×) : préparation abandonnée au bout de 4 min
-- twitch:StormyTsundereArtichokePermaSmug-nVrdHp-lnAjLILGJ (3×) : préparation abandonnée au bout de 4 min
-- twitch:OptimisticColdbloodedElkPhilosoraptor-WknNRwhiPdSjJgj6 (1×) : préparation abandonnée au bout de 6 min
-- twitch:FineFragilePicklesHeyGuys-icqVmQ0JHSAUn0-W (3×) : unable to download video data: HTTP Error 403: Forbidden
-- youtube:p6UYeKS3EmU@2219-2279 (1×) : non évalué par Claude
-- youtube:gQ8fdTxYozU@1365-1425 (1×) : non évalué par Claude
-- youtube:6iY1MU7hlPI@1306-1366 (1×) : non évalué par Claude
