@@ -169,6 +169,10 @@ fiche et le lien sans la vidéo. Pour envoyer des fichiers jusqu'à 2 Go, un ser
 Crée une clé sur [platform.claude.com](https://platform.claude.com) → secret `ANTHROPIC_API_KEY`.
 Modèle par défaut : `claude-opus-5-5`, effort `medium`, avec le repli automatique côté serveur si une
 demande est déclinée. Une requête par série de candidats (quatre séries au plus par passage).
+Les crédits de l'API se rechargent sur [console.anthropic.com](https://console.anthropic.com) (Plans &
+Billing) : sans crédit, aucun clip ne peut être noté, donc aucun n'est envoyé. Le passage s'arrête alors dès
+la première requête refusée (sans préparer d'autres clips pour rien) et le dit sur Telegram ; les clips non
+notés sont réexaminés aux passages suivants.
 
 ### Twitch : la découverte des lives (5 min, gratuit)
 
@@ -247,7 +251,7 @@ sans quota d'API ni cookies). Il garde l'historique des vidéos vues et leurs vu
 mesure la **vitesse** à laquelle une vidéo prend des vues, comparée à l'habitude de la chaîne. Chaque nouvelle
 vidéo des 14 derniers jours (`max_age_days`, fenêtre de rattrapage après une interruption) reçoit un
 **pré-score** sur 100 (vitesse des vues, vues en absolu, likes, fraîcheur, titre qui promet un moment : réaction,
-clash, première fois, record…) ; seules les 12 plus prometteuses (`videos_per_run`) sont regardées de près
+clash, première fois, record…) ; seules les 24 plus prometteuses (`videos_per_run`) sont regardées de près
 (courbe « les plus revus » ou commentaires), les autres attendent leur tour. Une vidéo qui n'a rien donné est
 revue une fois le lendemain (courbe et commentaires arrivent avec les vues). Une chaîne illisible trois passages
 de suite est mise de côté.
@@ -300,8 +304,8 @@ restent 100 % Twitch.
   `shorts.per_run` shorts par passage, toutes sources confondues. Chaque short de plus allonge le passage
   (minutes GitHub Actions : 2 000 par mois sur un dépôt privé, illimitées sur un dépôt public).
 - `youtube.videos_per_run`, `youtube.max_age_days` : combien de nouvelles vidéos YouTube sont regardées de près
-  par passage, et la fenêtre de rattrapage. Les vérifications plus fréquentes (toutes les 30 min) demandent un
-  dépôt public ou un serveur : chaque passage coûte des minutes GitHub Actions.
+  par passage (24 : plus de moments parmi lesquels choisir), et la fenêtre de rattrapage. Le dépôt est public :
+  les minutes GitHub Actions sont illimitées, mais chaque passage coûte des crédits Claude (la revue).
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal
