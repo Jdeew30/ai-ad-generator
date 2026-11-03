@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 03/11/2026 à 22:07 UTC.
+Mis à jour le 03/11/2026 à 22:59 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 37062 | 37062 |
-| Vidéos téléchargées et préparées | 244 | 244 |
-| Shorts envoyés | 17 | 17 |
-| Écartés par la revue | 227 | 227 |
+| Moments trouvés (Twitch + YouTube) | 40418 | 40418 |
+| Vidéos téléchargées et préparées | 261 | 261 |
+| Shorts envoyés | 18 | 18 |
+| Écartés par la revue | 243 | 243 |
 | Échecs (téléchargement, montage, envoi) | 14 | 14 |
-| Passages | 15 | 15 |
+| Passages | 16 | 16 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 36, YouTube 14, à la demande 6.
-Note moyenne de Claude : 58/100 sur 17 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 36, YouTube 15, à la demande 6.
+Note moyenne de Claude : 58/100 sur 18 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), Michou (2), Bob Lennon (2).
 
 ## Veille YouTube
 
-97 créateurs suivis, 87 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 87 identifiées ; 12 mises de côté (introuvables).
-393 vidéos récentes suivies, 130 regardées de près (65 avec des moments à extraire).
+98 créateurs suivis, 88 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 88 identifiées ; 12 mises de côté (introuvables).
+401 vidéos récentes suivies, 142 regardées de près (69 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 03/11 23:15 | YouTube | Skyyart | [Skyyart chambre KOI pendant la qualif de T1 aux Worlds](https://www.youtube.com/watch?v=K7Evw-Zq9Kg) | 56 |
 | 03/11 19:20 | Twitch | youladecadd | [youladecadd panique en urbex et perd tout dans le noir](https://www.twitch.tv/youladecadd/clip/MuddyImpossibleJellyfishAMPEnergy-lAf-MdRCDqqFOUis) | 55 |
 | 03/11 18:52 | YouTube | TheKAIRI78 | [TheKAIRI78 découvre une assiette et menace de couper le live](https://www.youtube.com/watch?v=28PvjBl99Kc) | 64 |
 | 03/11 17:20 | Twitch | Joueur du Grenier | [Joueur du Grenier attaqué par des daims… puis il refile les biscuits à sa femme](https://www.twitch.tv/joueur_du_grenier/clip/BenevolentUnsightlyHippoPJSalt-QvcvgvMsAsNVkaL3) | 68 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 | 02/11 15:43 | Twitch | TheGuill84 | [TheGuill84 se prend un screamer en plein Minecraft](https://www.twitch.tv/theguill84/clip/MoistSavagePenguinHumbleLife-UPJP20cxRNZ4YC5h) | 62 |
 | 02/11 14:20 | à la demande | GOTAGA | [Gotaga souffle la pire insulte au jeu du meilleur menteur (ft. Joyca, Djilsi, Theodort)](https://www.youtube.com/watch?v=ZA_3eoib31s) |  |
 | 02/11 12:56 | à la demande | GOTAGA | [Gotaga : le jeu du meilleur menteur avec Joyca, Djilsi et Theodort](https://www.youtube.com/watch?v=ZA_3eoib31s) |  |
-| 02/11 11:49 | Twitch | Locklear | [Locklear débarque chez M8 pour annoncer une team Overwatch… ou pas](https://www.twitch.tv/locklear/clip/ObliviousSlipperyTildeLitFam-QSLehFCUQbHoA4Q2) |  |
 
 ## Derniers échecs
 
