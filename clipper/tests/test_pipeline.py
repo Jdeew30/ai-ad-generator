@@ -685,6 +685,49 @@ def test_the_watchdog_interrupts_only_what_runs_too_long():
     assert time_module.monotonic() - started < 2
 
 
+def test_a_watchdog_inside_another_one_leaves_it_its_time():
+    import signal as signal_module
+    import time as time_module
+
+    from clipper.pipeline import _Overtime, _SlowReplay, _watchdog
+
+    started = time_module.monotonic()
+    with pytest.raises(_Overtime), _watchdog(1.0):
+        with pytest.raises(_SlowReplay), _watchdog(0.2, _SlowReplay):
+            time_module.sleep(10)  # the inner one rings first…
+        time_module.sleep(10)  # …and the outer one still rings on time
+    assert time_module.monotonic() - started < 3
+    started = time_module.monotonic()
+    with pytest.raises(_Overtime), _watchdog(0.3):
+        with _watchdog(5, _SlowReplay):  # due after the outer one: the outer one rings
+            time_module.sleep(10)
+    assert time_module.monotonic() - started < 2
+    assert signal_module.getitimer(signal_module.ITIMER_REAL)[0] == 0  # nothing left armed
+
+
+def test_a_replay_that_does_not_come_gives_way_to_the_clip_alone(media, paths, monkeypatch, caplog):
+    import time as time_module
+
+    import clipper.pipeline as pipeline_module
+
+    class SlowReplay(ReplayYtDlp):
+        def download(self, url, dest_dir, name, *, start=None, end=None, exact=True):
+            if "/videos/" in url:
+                time_module.sleep(30)  # a replay served at a crawl
+            return super().download(url, dest_dir, name, start=start, end=end, exact=exact)
+
+    monkeypatch.setattr(pipeline_module, "REPLAY_SECONDS", 1)
+    run = with_replay(media, paths, media["noface"])
+    run.ytdlp = SlowReplay(media, media["noface"])
+    started = time_module.monotonic()
+    with caplog.at_level("INFO", logger="clipper"):
+        item = run._prepare_in_time(found_clip(), dry_run=True, transcribe=False, sheet=False, context=True)
+    assert time_module.monotonic() - started < 20  # not the 30 s of the replay, nor the 4 min of the whole clip
+    assert item is not None and item.clip_span is None  # the clip alone, not given up
+    assert run.ytdlp.downloads == ["https://clips.twitch.tv/Alpha-Cam1"]
+    assert "Replay toujours pas là au bout de 1 s, clip seul." in caplog.text and "abandonnée" not in caplog.text
+
+
 def test_a_run_short_of_time_prepares_no_new_clip(media, paths, monkeypatch, caplog):
     import clipper.pipeline as pipeline_module
 

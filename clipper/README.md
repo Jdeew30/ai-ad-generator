@@ -306,8 +306,9 @@ restent 100 % Twitch.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal
   (150 : c'est la note de Claude qui écarte les moments faibles, pas le nombre de vues).
-- Un clip dont la préparation dépasse 4 minutes (replay qui ne vient pas) est abandonné pour de bon : le
-  passage prend le suivant, et ne prépare plus rien après 55 minutes pour envoyer à temps ce qu'il a retenu.
+- Le replay autour d'un clip Twitch arrive d'habitude en quelques secondes : s'il n'est pas là au bout d'une
+  minute, le clip part seul. Un clip dont la préparation dépasse quand même 4 minutes est abandonné pour de bon :
+  le passage prend le suivant, et ne prépare plus rien après 55 minutes pour envoyer à temps ce qu'il a retenu.
 - `twitch.skip_title_words` : les mots qui font écarter un clip avant tout téléchargement (pubs :
   « publicité », « sponsorisé »…), Claude les refusant de toute façon.
 - `twitch.skip_live_words` : pareil, mais d'après le titre du **live** dont le clip est tiré. Vide par défaut :

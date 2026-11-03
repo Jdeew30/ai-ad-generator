@@ -140,6 +140,9 @@ COMPILATION_PREPARE_SECONDS = 50 * 60
 # prepared once the run has spent SHORTS_PREPARE_SECONDS, so that the clips already approved still go out in time.
 PREPARE_SECONDS = 4 * 60  # a clip takes 20 s to 2 min to prepare: one still at it after 4 min is stalled
 SHORTS_PREPARE_SECONDS = 55 * 60
+# The replay around a Twitch clip comes in 5 to 20 s. Nearly every run of 03/11 had one that never came, which cost
+# 4 minutes and the clip: after REPLAY_SECONDS the replay is dropped and the clip goes alone.
+REPLAY_SECONDS = 60
 
 
 class _Overtime(BaseException):
@@ -147,23 +150,38 @@ class _Overtime(BaseException):
     catches those, lets it through)."""
 
 
+class _SlowReplay(BaseException):
+    """Raised by the watchdog when the replay around a Twitch clip does not come in time."""
+
+
 @contextmanager
-def _watchdog(seconds: float) -> Iterator[None]:
-    """Interrupts the block with _Overtime after `seconds` (main thread only, where signals are delivered)."""
+def _watchdog(seconds: float, overtime: type[BaseException] = _Overtime) -> Iterator[None]:
+    """Interrupts the block with `overtime` after `seconds` (main thread only, where signals are delivered).
+
+    Inside another watchdog (the replay within a clip's preparation), the outer one rings instead if it is due
+    first, and keeps the time it had left once the block is over.
+    """
     if seconds <= 0 or not hasattr(signal, "SIGALRM") or threading.current_thread() is not threading.main_thread():
+        yield
+        return
+    outer, _ = signal.getitimer(signal.ITIMER_REAL)
+    if outer and outer <= seconds:
         yield
         return
 
     def ring(_signum: int, _frame: Any) -> None:
-        raise _Overtime()
+        raise overtime()
 
     previous = signal.signal(signal.SIGALRM, ring)
+    started = time.monotonic()
     signal.setitimer(signal.ITIMER_REAL, seconds)
     try:
         yield
     finally:
         signal.setitimer(signal.ITIMER_REAL, 0)
         signal.signal(signal.SIGALRM, previous)
+        if outer:
+            signal.setitimer(signal.ITIMER_REAL, max(outer - (time.monotonic() - started), 0.001))
 
 
 def _stop_children() -> None:
@@ -330,11 +348,16 @@ class Clipper:
         clip = (round(candidate.vod_offset - start, 2), round(candidate.vod_offset - start + candidate.duration, 2))
         try:
             # Copied, not re-encoded (minutes for a 1080p60 section): the render re-encodes it anyway.
-            media, _ = self.ytdlp.download(
-                f"https://www.twitch.tv/videos/{candidate.vod_id}", workdir, "replay", start=start, end=end, exact=False
-            )
+            with _watchdog(REPLAY_SECONDS, _SlowReplay):
+                media, _ = self.ytdlp.download(
+                    f"https://www.twitch.tv/videos/{candidate.vod_id}", workdir, "replay", start=start, end=end, exact=False
+                )
             duration = probe(media).duration
             level = max_volume(media)
+        except _SlowReplay:
+            _stop_children()  # the ffmpeg still waiting on the replay's stream
+            log.info("Replay toujours pas là au bout de %d s, clip seul.", REPLAY_SECONDS)
+            return None
         except (DownloadError, MediaError) as exc:
             log.info("Replay indisponible, clip seul : %s", exc)
             return None
