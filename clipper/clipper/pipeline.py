@@ -138,7 +138,7 @@ COMPILATION_PREPARE_SECONDS = 50 * 60
 # A download that stalls (a replay served at a crawl, ffmpeg waiting on a dead stream) once held a run for 71 minutes
 # until the job's timeout cancelled it with nothing sent: a clip is given up after PREPARE_SECONDS, and no new clip is
 # prepared once the run has spent SHORTS_PREPARE_SECONDS, so that the clips already approved still go out in time.
-PREPARE_SECONDS = 6 * 60
+PREPARE_SECONDS = 4 * 60  # a clip takes 20 s to 2 min to prepare: one still at it after 4 min is stalled
 SHORTS_PREPARE_SECONDS = 55 * 60
 
 
@@ -655,7 +655,9 @@ class Clipper:
             log.warning("Préparation abandonnée au bout de %d min (téléchargement bloqué ?) : %s — clip suivant.",
                         PREPARE_SECONDS // 60, candidate.key)
             if not dry_run:
-                self.state.record_failure(candidate, f"préparation abandonnée au bout de {PREPARE_SECONDS // 60} min")
+                # Its replay stalled at every run (6 min lost three times in a row on 03/11): it is not tried again.
+                self.state.record_failure(candidate, f"préparation abandonnée au bout de {PREPARE_SECONDS // 60} min",
+                                          final=True)
             return None
 
     def _publish_best(self, report: RunReport, ranked: list[Candidate], wanted: int, *, dry_run: bool,

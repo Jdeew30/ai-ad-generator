@@ -666,7 +666,9 @@ def test_a_stalled_download_is_given_up_and_the_next_clip_goes_out(media, paths,
     assert time_module.monotonic() - started < 40  # not the minute the download would have taken
     assert [o.candidate.key for o in report.published] == ["twitch:Beta-1"]
     assert "Préparation abandonnée au bout de 0 min" in caplog.text and "twitch:Beta-1 — clip suivant" not in caplog.text
-    assert State.load(paths.state).failures["twitch:Alpha-Cam1"]["error"].startswith("préparation abandonnée")
+    state = State.load(paths.state)
+    assert state.failures["twitch:Alpha-Cam1"]["error"].startswith("préparation abandonnée")
+    assert state.seen("twitch:Alpha-Cam1")  # left aside at once: it does not stall the next runs too
 
 
 def test_the_watchdog_interrupts_only_what_runs_too_long():

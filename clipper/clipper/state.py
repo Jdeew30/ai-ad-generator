@@ -182,9 +182,11 @@ class State:
         self.rejected[candidate.key] = {"at": utcnow().isoformat(), "reason": reason[:300]}
         self.reviews.pop(candidate.key, None)
 
-    def record_failure(self, candidate: Candidate, error: str) -> None:
+    def record_failure(self, candidate: Candidate, error: str, *, final: bool = False) -> None:
+        """One more failure of the clip; it is left aside after MAX_DOWNLOAD_FAILURES, or at once when `final`."""
         entry = self.failures.setdefault(candidate.key, {"count": 0})
-        entry.update(count=entry["count"] + 1, at=utcnow().isoformat(), error=error[:300])
+        count = MAX_DOWNLOAD_FAILURES if final else entry["count"] + 1
+        entry.update(count=count, at=utcnow().isoformat(), error=error[:300])
 
     def store_review(self, key: str, review: dict[str, Any]) -> None:
         self.reviews[key] = {**review, "at": utcnow().isoformat()}
