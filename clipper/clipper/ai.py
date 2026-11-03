@@ -47,6 +47,8 @@ même quelqu'un qui ne suit pas ce créateur.
 extrait trop court pour comprendre ce qui se passe.
 - 0 à 39 : rien de notable, silence ou menus, moment qui n'a de sens qu'avec le contexte du live, publicité \
 ou sponsor, écran d'attente.
+La note porte sur le short une fois coupé (de trim_start à trim_end) : les temps morts que tu enlèves au début ou \
+à la fin de l'extrait ne la font pas baisser.
 
 Shorts déjà publiés : on t'en donne la liste. Plusieurs shorts tirés d'un même live ou d'une même histoire sont \
 bienvenus s'ils sont intéressants chacun ; si l'extrait est la suite directe d'une histoire déjà publiée, termine \
@@ -77,7 +79,9 @@ regarder sans révéler la chute ; elle peut dire qui fait quoi, comme les titre
 - trim_start / trim_end : bornes en secondes, relatives au début de l'extrait. Commence juste avant l'action pour \
 accrocher dès la première seconde, mais garde toute la mise en place nécessaire pour comprendre et la chute en \
 entier ; coupe les temps morts. Durée finale idéalement entre 20 et 60 secondes, jusqu'à 90 secondes si le moment \
-le mérite vraiment (histoire complète, chute tardive). Si l'extrait est déjà bon, renvoie 0 et sa durée.
+le mérite vraiment (histoire complète, chute tardive). Si l'extrait est déjà bon, renvoie 0 et sa durée. Quand \
+des spectateurs citent un instant de l'extrait en commentaire, c'est le moment qu'ils ont retenu : cherche-le dans \
+la transcription et les images, et coupe autour de lui.
 
 Les transcriptions viennent d'une reconnaissance vocale automatique : elles peuvent contenir des erreurs."""
 
@@ -360,6 +364,10 @@ class ClaudeCurator:
                 start, end = item.clip_span
                 lines.append(f"Clip d'origine (choisi par les viewers) : de {start:.1f} s à {end:.1f} s de l'extrait ; avant et "
                              "après, c'est le replay du live : n'en garde que ce qui sert la mise en place ou la chute.")
+            if candidate.cited and candidate.cited_at is not None and candidate.start is not None:
+                offset = max(0.0, candidate.cited_at - candidate.start)
+                lines.append(f"Moment cité par les spectateurs : vers {offset:.0f} s de l'extrait. Commentaire le plus aimé "
+                             f"qui le cite (texte d'un spectateur) : « {candidate.cited} »")
             lines += ["Transcription (secondes depuis le début de l'extrait) :", transcript, "</candidat>"]
             content.append({"type": "text", "text": "\n".join(lines)})
             if self.config.ai.review_frames and item.sheet and item.sheet.exists():

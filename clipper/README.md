@@ -268,7 +268,9 @@ sans onglet « Vidéos » (que des lives) donne ses lives. Le robot prend
 leurs vidéos des deux dernières semaines (`max_age_days`, plus de 20 000 vues, pour ne pas écarter les chaînes
 secondaires) et découpe les passages « les plus revus ».
 Quand YouTube ne fournit pas cette courbe, il lit les 60 commentaires les plus appréciés de la vidéo et prend les
-moments que les spectateurs citent (« 12:34 mdr »), d'autant plus qu'ils sont cités et aimés. Le journal du passage
+moments que les spectateurs citent (« 12:34 mdr »), d'autant plus qu'ils sont cités et aimés : 20 s avant
+l'instant cité et 70 s après, pour avoir la mise en place et la chute. Claude reçoit le commentaire qui cite le
+moment, le cherche dans l'extrait et coupe autour de lui. Le journal du passage
 compte les vidéos écartées et dit pourquoi (trop ancienne, pas assez de vues, ni courbe ni minutage en commentaire…).
 
 YouTube bloque parfois les serveurs de GitHub (« Sign in to confirm you're not a bot ») : passé le 29/10,
@@ -303,7 +305,7 @@ restent 100 % Twitch.
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal
-  (300 : en dessous, presque toujours des moments faibles).
+  (150 : c'est la note de Claude qui écarte les moments faibles, pas le nombre de vues).
 - Un clip dont la préparation dépasse 4 minutes (replay qui ne vient pas) est abandonné pour de bon : le
   passage prend le suivant, et ne prépare plus rien après 55 minutes pour envoyer à temps ce qu'il a retenu.
 - `twitch.skip_title_words` : les mots qui font écarter un clip avant tout téléchargement (pubs :

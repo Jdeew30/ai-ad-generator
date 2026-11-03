@@ -291,8 +291,10 @@ def test_the_log_tells_why_youtube_videos_gave_nothing(caplog):
         found = discover_youtube(config, ytdlp, now=NOW)
     assert [c.key.split("@")[0] for c in found] == ["youtube:good", "youtube:talked"]
     assert ytdlp.commented == [watch("nomap"), watch("talked")]  # only where YouTube gave no "most replayed" data
-    assert found[1].start == 485.0 and found[1].end == 545.0  # a little before the moment cited, and what follows
-    assert "Moments cités en commentaire sous « Le pari » : 8:05-9:05" in caplog.text
+    assert found[1].start == 480.0 and found[1].end == 570.0  # its setup before the moment cited, its punchline after
+    assert (found[1].cited, found[1].cited_at) == ("8:20 je suis mort 😂", 500.0)  # what viewers say of it, for the review
+    assert found[0].cited is None  # a "most replayed" peak has no comment
+    assert "Moments cités en commentaire sous « Le pari » : 8:00-9:30" in caplog.text
     assert ("YouTube : 2 passage(s) retenu(s) ; vidéos écartées : trop ancienne (1), "
             "sans « moments les plus revus » ni minutage en commentaire (1), aucun passage assez revu (1)") in caplog.text
 
@@ -310,9 +312,15 @@ def test_moments_viewers_point_at_in_the_comments():
         {"text": "première"},
     ]
     windows = moments_from_comments(comments, 4000.0, count=3)
-    assert [(start, end) for start, end, _ in windows] == [(210.0, 270.0), (3718.0, 3778.0)]
-    assert windows[0][2] > windows[1][2] >= 2.0
+    # 20 s before the time cited and 70 s after (until 70 s after the last one cited with it): setup and punchline.
+    assert [(moment.start, moment.end) for moment in windows] == [(205.0, 310.0), (3713.0, 3803.0)]  # 3:45, 3:50 and 4:00
+    assert windows[0].weight > windows[1].weight >= 2.0
+    assert (windows[0].at, windows[0].comment) == (225.0, "3:45 mdr")  # the comment liked most tells what happens
     assert moments_from_comments(comments, 4000.0, count=1) == windows[:1]
+    # A moment cited again 60 s later falls inside the first window: it is not cut a second time.
+    again = moments_from_comments([{"text": "10:00 😂", "like_count": 50}, {"text": "11:00 la suite", "like_count": 9}],
+                                  4000.0, count=3)  # fmt: skip
+    assert [(moment.start, moment.end) for moment in again] == [(580.0, 670.0)]
 
 
 def test_signed_in_yt_dlp_reads_channels_without_the_sign_in_check(tmp_path):
