@@ -1,22 +1,22 @@
 # Tableau de bord du clipper
 
-Mis à jour le 03/11/2026 à 16:04 UTC.
+Mis à jour le 03/11/2026 à 16:42 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 23639 | 23639 |
-| Vidéos téléchargées et préparées | 149 | 149 |
-| Shorts envoyés | 14 | 14 |
-| Écartés par la revue | 135 | 135 |
-| Échecs (téléchargement, montage, envoi) | 6 | 6 |
-| Passages | 10 | 10 |
+| Moments trouvés (Twitch + YouTube) | 24755 | 24755 |
+| Vidéos téléchargées et préparées | 173 | 173 |
+| Shorts envoyés | 15 | 15 |
+| Écartés par la revue | 158 | 158 |
+| Échecs (téléchargement, montage, envoi) | 7 | 7 |
+| Passages | 11 | 11 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 34, YouTube 13, à la demande 6.
-Note moyenne de Claude : 57/100 sur 14 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 35, YouTube 13, à la demande 6.
+Note moyenne de Claude : 58/100 sur 15 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), Michou (2), Bob Lennon (2).
 
 ## Veille YouTube
@@ -28,6 +28,7 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 03/11 17:20 | Twitch | Joueur du Grenier | [Joueur du Grenier attaqué par des daims… puis il refile les biscuits à sa femme](https://www.twitch.tv/joueur_du_grenier/clip/BenevolentUnsightlyHippoPJSalt-QvcvgvMsAsNVkaL3) | 68 |
 | 03/11 16:40 | YouTube | Poisson Fécond | [La mort absurde du président Félix Faure racontée par Poisson Fécond](https://www.youtube.com/watch?v=Q40NcFRRL4g) | 62 |
 | 03/11 16:39 | YouTube | Wankil Studio - Laink et Terracid | [Laink et Terracid doivent désamorcer une bombe… aveugle, sourd et muet](https://www.youtube.com/watch?v=LI9JzL6bhtw) | 66 |
 | 03/11 16:24 | Twitch | DVM_Medja | [DVM_Medja : les négociations dérapent en GTA RP](https://www.twitch.tv/dvm_medja/clip/SullenClearBibimbapMingLee-i4Rl_5n3FmuGbbbP) | 48 |
@@ -47,10 +48,10 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 | 02/11 11:49 | Twitch | Locklear | [Locklear débarque chez M8 pour annoncer une team Overwatch… ou pas](https://www.twitch.tv/locklear/clip/ObliviousSlipperyTildeLitFam-QSLehFCUQbHoA4Q2) |  |
 | 02/11 11:30 | YouTube | Amixem | [Amixem teste une Porsche pour enfant à 20 000 €… et ça tourne mal](https://www.youtube.com/watch?v=4X440MciNX8) |  |
 | 02/11 10:54 | YouTube | Amixem | [Amixem découvre que son décorateur a mis l'eau courante dans une cabane d'enfant](https://www.youtube.com/watch?v=4X440MciNX8) |  |
-| 02/11 10:18 | Twitch | Gotaga | [Gotaga : son joueur M8 Coco champion d'Europe sur TFT et qualifié aux Worlds](https://www.twitch.tv/gotaga/clip/KitschyBoringFriseePeanutButterJellyTime-X22dzQIdHZTcyzOq) |  |
 
 ## Derniers échecs
 
+- twitch:OptimisticColdbloodedElkPhilosoraptor-WknNRwhiPdSjJgj6 (1×) : préparation abandonnée au bout de 6 min
 - twitch:SparklingNaiveYakinikuMVGame-qrV3hnIj3rCxADEI (1×) : préparation abandonnée au bout de 6 min
 - twitch:FineFragilePicklesHeyGuys-icqVmQ0JHSAUn0-W (3×) : unable to download video data: HTTP Error 403: Forbidden
 - twitch:StormyTsundereArtichokePermaSmug-nVrdHp-lnAjLILGJ (2×) : préparation abandonnée au bout de 6 min
@@ -60,4 +61,3 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 - youtube:lnYssy3QR0Q@6200-6260 (1×) : non évalué par Claude
 - youtube:iPRllqKoAOQ@660-720 (1×) : non évalué par Claude
 - twitch:InventiveSavageSwanTTours-GaE35WJ0_XxSpcgv (1×) : non évalué par Claude
-- twitch:DeterminedCrazyYogurtDoritosChip-xWhjE5OVz_Ueozqe (1×) : non évalué par Claude

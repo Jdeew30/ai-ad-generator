@@ -95,6 +95,11 @@
    "count": 1,
    "error": "non évalué par Claude"
   },
+  "twitch:OptimisticColdbloodedElkPhilosoraptor-WknNRwhiPdSjJgj6": {
+   "at": "2026-11-03T17:14:40.595264+00:00",
+   "count": 1,
+   "error": "préparation abandonnée au bout de 6 min"
+  },
   "twitch:SparklingNaiveYakinikuMVGame-qrV3hnIj3rCxADEI": {
    "at": "2026-11-03T16:21:43.663840+00:00",
    "count": 1,
@@ -296,6 +301,31 @@
    "title": "Michou félicite Inoxtag pour son skin Fortnite (et leak un détail)",
    "url": "https://www.twitch.tv/inoxtag/clip/AuspiciousDreamyBobaNomNom-TJJVuRAv9h-2z51L",
    "views": 2337
+  },
+  "twitch:BenevolentUnsightlyHippoPJSalt-QvcvgvMsAsNVkaL3": {
+   "at": "2026-11-03T17:20:26.998853+00:00",
+   "created_at": "2026-11-02T18:59:41+00:00",
+   "results": {
+    "telegram": {
+     "detail": null,
+     "id": "114",
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "score": 68.0,
+   "source": "twitch",
+   "span": [
+    "tw:2917753431",
+    1494.0,
+    1524.0
+   ],
+   "streamer": "Joueur du Grenier",
+   "streamer_login": "joueur_du_grenier",
+   "title": "Joueur du Grenier attaqué par des daims… puis il refile les biscuits à sa femme",
+   "url": "https://www.twitch.tv/joueur_du_grenier/clip/BenevolentUnsightlyHippoPJSalt-QvcvgvMsAsNVkaL3",
+   "views": 184
   },
   "twitch:CalmExquisiteYakinikuJKanStyle-mTy_P82A25RYqb6g": {
    "at": "2026-10-28T16:03:21.821466+00:00",
@@ -1466,6 +1496,10 @@
    "at": "2026-11-03T10:08:55.038527+00:00",
    "reason": "revue : note 30/100 (minimum 60). Fausse manip dans une cave Minecraft avec une petite réaction, mais l'extrait est trop court et la situation reste floue : pas de vrai jumpscare visible ni de chute."
   },
+  "twitch:AwkwardDependableDragonfruitKeyboardCat-gar4Fa2fAiCKSHCG": {
+   "at": "2026-11-03T17:19:11.632850+00:00",
+   "reason": "revue : note 18/100 (minimum 60). Partie de FC 27 quasiment sans réaction : un simple « bien joué », sans moment notable."
+  },
   "twitch:AwkwardThoughtfulRingHassaanChop-VShaWC3VgpkggHXx": {
    "at": "2026-11-01T22:33:19.174100+00:00",
    "reason": "revue : Petit enchaînement de kills sur CoD avec une réaction faible et peu lisible, sans rien d'exceptionnel."
@@ -1486,6 +1520,10 @@
    "at": "2026-10-29T16:06:02.113141+00:00",
    "reason": "revue : Ponce dit passer sa vie à insulter une personne réelle (apparemment un élu, d'après le chat) et évoque un procès en diffamation : insultes visant une personne réelle, risque juridique. La fin est en plus un temps mort (lecture du chat)."
   },
+  "twitch:BillowingFunTroutBuddhaBar-KMVYjKSYm4KSDbz-": {
+   "at": "2026-11-03T17:08:08.056689+00:00",
+   "reason": "revue : note 46/100 (minimum 60). Etoiles réagit avec humour au chat puis donne un avis sur l'impact du vol du Louvre. C'est du bavardage intéressant mais sans vraie chute."
+  },
   "twitch:BlatantAdorableDiamondHeyGuys-OcV3jsNkmvuMJau-": {
    "at": "2026-11-02T11:48:08.513833+00:00",
    "reason": "revue : note 35/100 (minimum 60). Domingo donne des nouvelles de sa cheville et de sa rééducation. C'est du bavardage sans enjeu fort et le début est décousu."
@@ -1493,6 +1531,10 @@
   "twitch:BlatantTubularTraySmoocherZ-gi0lEnNjKSTCviIu": {
    "at": "2026-10-29T22:04:24.075880+00:00",
    "reason": "revue : Simple annonce de planning (réaction Koh Lanta, sortie de GTA 6), sans moment fort ni chute. Bavardage peu intéressant hors du live."
+  },
+  "twitch:BlazingNiceRaisinBabyRage-h4lSgxAk4anVMiVV": {
+   "at": "2026-11-03T17:08:08.056536+00:00",
+   "reason": "revue : note 42/100 (minimum 60). Co-stream des Worlds avec un kill célébré, mais la réaction est modérée et le moment est peu lisible sans contexte."
   },
   "twitch:BlazingObedientPepperKappaWealth-4nLUOtw5-yblDYqq": {
    "at": "2026-10-31T12:58:10.199098+00:00",
@@ -1570,6 +1612,10 @@
    "at": "2026-10-29T09:59:17.371892+00:00",
    "reason": "revue : Bavardage d'entrée sur le ring, transcription confuse, pas de chute, nécessite le contexte de l'événement (et logo sponsor omniprésent)."
   },
+  "twitch:CaringExquisiteReubenYee-r1irKdH4n6Tf3caP": {
+   "at": "2026-11-03T17:08:08.056642+00:00",
+   "reason": "revue : note 55/100 (minimum 60). Ponce raconte une anecdote compréhensible et légèrement absurde : on lui vole son pseudo en 15 secondes. La chute est correcte, sans plus."
+  },
   "twitch:CaringPeppyPelicanRuleFive-oyzdUsTBICx68cQi": {
    "at": "2026-10-31T12:57:14.359960+00:00",
    "reason": "revue : Partie de Fortnite banale avec des commentaires confus (« danser », « je pars en BF »), sans chute claire ni moment marquant compréhensible sans contexte."
@@ -1613,6 +1659,10 @@
   "twitch:ConcernedBumblingOctopusRaccAttack-mj8BuIsELF0Nksgr": {
    "at": "2026-10-28T16:00:10.934608+00:00",
    "reason": "revue : L'extrait est essentiellement une performance musicale en concert, dont la musique n'appartient vraisemblablement pas au créateur. Il n'y a pas de moment de stream à proprement parler."
+  },
+  "twitch:ConfidentSavoryEagleShadyLulu-VEYLv8U-t9gp5CQC": {
+   "at": "2026-11-03T17:08:08.056471+00:00",
+   "reason": "revue : note 52/100 (minimum 60). LaureBV donne un avis tranché et argumenté sur le niveau de la KC. C'est un sujet d'initiés LoL, sans vraie punchline."
   },
   "twitch:ConfidentWittyPlumberSoBayed-51pzRMVSHCjVw0VI": {
    "at": "2026-11-01T21:59:20.832865+00:00",
@@ -1705,6 +1755,10 @@
   "twitch:DependableFitCattleOhMyDog-dMDLyJRl4Y_UFSyg": {
    "at": "2026-10-30T16:06:30.607351+00:00",
    "reason": "revue : Bavardage sans enjeu ni chute : Zafeel avoue n'avoir jamais fini Minecraft, réaction faible."
+  },
+  "twitch:DeterminedAthleticMoonShadyLulu-3HwtbgBHoIsn4xHs": {
+   "at": "2026-11-03T17:19:11.632761+00:00",
+   "reason": "revue : note 40/100 (minimum 60). Co-stream des Champions Valorant : Marti réussit un flawless, mais la réaction de Squeezie est peu audible et l'extrait est trop court pour vraiment comprendre l'action."
   },
   "twitch:DignifiedDarkHabaneroHassanChop-5hsxrYYUJ1w-SwMp": {
    "at": "2026-11-03T15:54:43.641911+00:00",
@@ -1813,6 +1867,10 @@
   "twitch:FragileBlatantHamburgerOpieOP-hv7ugYjd5X_50fkI": {
    "at": "2026-10-30T19:01:33.976606+00:00",
    "reason": "revue : Le face-à-face d'AmineMaTue sur le ring a déjà été publié. Ici, la transcription est confuse et dominée par des chants injurieux du public, sans moment nouveau ni chute claire."
+  },
+  "twitch:FrailSpikyMonitorDogFace--kDZ0ksEyHiZYuFv": {
+   "at": "2026-11-03T17:08:08.056591+00:00",
+   "reason": "revue : note 20/100 (minimum 60). Le streamdeck crashe au lancement du live : extrait très court, sans réaction notable, qui ne montre presque que l'écran d'attente."
   },
   "twitch:FreezingDifferentPelicanCoolCat-UemnhSDCocOLTmgI": {
    "at": "2026-10-30T09:58:41.270818+00:00",
@@ -1993,6 +2051,10 @@
   "twitch:LachrymoseEsteemedChipmunkSaltBae-PfO9xVjUDh0rJjcl": {
    "at": "2026-11-02T16:54:51.118139+00:00",
    "reason": "revue : note 30/100 (minimum 60). Partie de Call of Duty sans moment clair : la transcription est décousue, sans action marquante identifiable ni chute."
+  },
+  "twitch:LachrymoseGracefulBeaverCopyThis-qeUUj3FjRDGdw772": {
+   "at": "2026-11-03T17:08:08.056398+00:00",
+   "reason": "revue : note 45/100 (minimum 60). Gom4rt drague le PNJ agent de sécurité dans un jeu d'horreur, un peu drôle, mais la chute reste molle et le moment manque de contexte."
   },
   "twitch:LaconicCoweringWerewolfHassaanChop-oNoH7USl7W-iPf-6": {
    "at": "2026-11-03T10:08:55.038450+00:00",
@@ -2494,6 +2556,10 @@
    "at": "2026-10-29T22:05:39.216207+00:00",
    "reason": "revue : Simple introduction de l'épisode en public, avec mention d'un partenariat. Il n'y a aucun moment fort ni aucune chute, et l'extrait est trop court."
   },
+  "twitch:VenomousScaryBottleYouDontSay-Qz1Q8007i6l1UBuD": {
+   "at": "2026-11-03T17:19:11.632613+00:00",
+   "reason": "revue : note 40/100 (minimum 60). Anyme danse dans sa chambre puis commente, mais on ne comprend pas l'enjeu sans le contexte du live. La réaction est faible et il n'y a pas de vraie chute."
+  },
   "twitch:VenomousSuaveGrassDxAbomb-gcURUM6XEHIYMhrZ": {
    "at": "2026-11-03T16:22:57.698449+00:00",
    "reason": "revue : note 30/100 (minimum 60). Squeezie crée un personnage WoW à moustache et rigole, mais il n'y a quasiment aucune parole et aucune chute claire : c'est un moment d'initiés, peu compréhensible sans contexte."
@@ -2546,6 +2612,10 @@
    "at": "2026-11-03T10:17:09.912684+00:00",
    "reason": "revue : note 25/100 (minimum 60). Vidéo éducative scriptée, sans moment fort ni réaction : hors de la ligne éditoriale."
   },
+  "youtube:2frDDzZDNkw@1406-1466": {
+   "at": "2026-11-03T16:57:14.821298+00:00",
+   "reason": "revue : note 12/100 (minimum 60). Presque aucune parole ni réaction marquante pendant Hot Ones. Il ne se passe rien de notable."
+  },
   "youtube:2frDDzZDNkw@991-1051": {
    "at": "2026-11-02T17:01:58.266091+00:00",
    "reason": "revue : note 30/100 (minimum 60). Transition sans enjeu : dédicace d'une chanson puis présentation d'une sauce, sans réaction au piment ni chute."
@@ -2570,6 +2640,10 @@
    "at": "2026-11-02T10:53:51.449874+00:00",
    "reason": "revue : note 22/100 (minimum 60). Séquence nocturne très sombre et confuse : cris inintelligibles, aucune action lisible ni chute. Sans contexte, on ne comprend pas ce qui se passe."
   },
+  "youtube:2wJuFzwBWkI@6071-6131": {
+   "at": "2026-11-03T17:05:26.710638+00:00",
+   "reason": "revue : note 28/100 (minimum 60). Images très sombres, cris sans contexte et 30 secondes de silence ; on ne comprend pas ce qui se passe."
+  },
   "youtube:3BQdZzmGO4A@257-317": {
    "at": "2026-11-02T20:06:07.890049+00:00",
    "reason": "revue : note 28/100 (minimum 60). Lecture du lore du jeu sans réaction marquante ni frayeur. Pas de chute."
@@ -2581,6 +2655,10 @@
   "youtube:4897Dn_ILak@3967-4027": {
    "at": "2026-11-03T10:23:59.747596+00:00",
    "reason": "revue : note 36/100 (minimum 60). Antoine Daniel raconte une blague de cowboy puis enchaîne sur une partie de Crack sans enjeu. La chute est molle et la fin confuse."
+  },
+  "youtube:4X440MciNX8@765-825": {
+   "at": "2026-11-03T17:05:26.710402+00:00",
+   "reason": "revue : note 45/100 (minimum 60). Concept amusant (jouets géants selon le métier des parents) mais enchaînement de vannes légères sans vraie chute, puis transition vers un autre segment."
   },
   "youtube:4dc8gs9zK30@2363-2423": {
    "at": "2026-11-03T16:38:58.909415+00:00",
@@ -2597,6 +2675,10 @@
   "youtube:4yRdHIw1HDo@922-982": {
    "at": "2026-11-02T20:06:07.889995+00:00",
    "reason": "revue : note 48/100 (minimum 60). Petit échange drôle sur les cheveux de GMK (« je suis pas dans le déni, j'ai juste des cheveux »), mais le reste n'est que de la visite et du bavardage. Chute légère."
+  },
+  "youtube:5A-jZ1XDmMU@15-75": {
+   "at": "2026-11-03T17:05:26.710533+00:00",
+   "reason": "revue : note 42/100 (minimum 60). Petites vannes sur le tournevis et la trousse verrouillée, ambiance horreur qui ne prend pas ; sympa mais sans vrai temps fort."
   },
   "youtube:5A-jZ1XDmMU@502-562": {
    "at": "2026-11-02T16:46:02.132558+00:00",
@@ -2634,6 +2716,10 @@
    "at": "2026-11-03T10:17:09.912499+00:00",
    "reason": "revue : note 25/100 (minimum 60). Fin de vidéo : remerciements au restaurant et rangement, aucune chute ni moment fort."
   },
+  "youtube:8UduMkgaBE8@432-492": {
+   "at": "2026-11-03T16:57:14.821077+00:00",
+   "reason": "revue : note 42/100 (minimum 60). Vannes autour du manteau de Théodort au Dîner de cons. La transcription est confuse et le moment difficile à suivre sans contexte ; la chute est molle."
+  },
   "youtube:BByplh9JRTs@1052-1112": {
    "at": "2026-10-31T17:06:16.386160+00:00",
    "reason": "revue : Discussion de stratégie d'Undercover très difficile à comprendre sans le contexte du jeu, sans vraie chute."
@@ -2653,6 +2739,10 @@
   "youtube:BByplh9JRTs@2497-2557": {
    "at": "2026-10-31T17:00:12.441761+00:00",
    "reason": "revue : La blague « Obispo » n'a de sens qu'avec le contexte de la partie d'Undercover ; il n'y a pas de chute autonome."
+  },
+  "youtube:BByplh9JRTs@709-769": {
+   "at": "2026-11-03T17:05:26.710687+00:00",
+   "reason": "revue : note 38/100 (minimum 60). Échanges confus d'un Undercover avec beaucoup de monde, difficile à suivre sans contexte et sans chute claire."
   },
   "youtube:BY4ADbK4xUw@2317-2377": {
    "at": "2026-11-03T16:31:36.012282+00:00",
@@ -2702,6 +2792,10 @@
    "at": "2026-11-03T16:31:36.012226+00:00",
    "reason": "revue : note 28/100 (minimum 60). Vingt secondes de critique du gameplay, puis le générique de fin. Aucune chute."
   },
+  "youtube:Mbvu_q3jpf4@445-505": {
+   "at": "2026-11-03T16:57:14.821195+00:00",
+   "reason": "revue : note 36/100 (minimum 60). Exploration d'une map d'horreur avec des réactions faibles, sans vrai sursaut ni chute."
+  },
   "youtube:Mbvu_q3jpf4@551-611": {
    "at": "2026-11-02T15:46:58.774757+00:00",
    "reason": "revue : note 35/100 (minimum 60). Séquence de jeu d'horreur Minecraft avec peu de réactions de Ninjaxx, longs silences et aucune vraie chute ; l'ambiance de la maison qui parle reste intrigante."
@@ -2721,6 +2815,10 @@
   "youtube:P2bTaahClso@3075-3135": {
    "at": "2026-11-02T17:01:58.266225+00:00",
    "reason": "revue : Surtout une émission TV (Koh-Lanta) qui n'appartient pas au créateur, avec peu de réaction du streamer."
+  },
+  "youtube:P7gqAz-K4ik@870-930": {
+   "at": "2026-11-03T17:05:26.710472+00:00",
+   "reason": "revue : moment déjà publié (ZeratoR se prend un screamer à 1 € : « J'ai 38 ans ! »)"
   },
   "youtube:Q40NcFRRL4g@2576-2636": {
    "at": "2026-11-03T16:31:36.012117+00:00",
@@ -2762,6 +2860,10 @@
    "at": "2026-10-31T17:00:12.441659+00:00",
    "reason": "revue : Présentation du skin d'Inoxtag, sujet déjà largement couvert, suivie d'un gameplay confus sans action marquante."
   },
+  "youtube:VhNH0b_t6jg@3906-3966": {
+   "at": "2026-11-03T17:19:11.632905+00:00",
+   "reason": "revue : Il s'agit surtout d'une émission de télé-réalité (« 3 mois pour se marier ») qui n'appartient pas au créateur, et la réaction d'AmineMaTue est faible."
+  },
   "youtube:VhNH0b_t6jg@520-580": {
    "at": "2026-11-01T14:39:08.901262+00:00",
    "reason": "revue : L'extrait repose surtout sur des images d'une émission TV qui n'appartient pas au créateur. La réaction d'Amine est un avis assez banal, sans chute."
@@ -2786,9 +2888,17 @@
    "at": "2026-10-31T17:00:12.441712+00:00",
    "reason": "revue : Bavardage de vlog sur la salle de sport, sans vraie chute."
   },
+  "youtube:ZA_3eoib31s@2056-2116": {
+   "at": "2026-11-03T17:19:11.632692+00:00",
+   "reason": "revue : note 48/100 (minimum 60). Ce n'est pas le même moment que le short déjà publié : ici, c'est le vote d'élimination et la découverte du menteur. Mais l'échange est confus sans contexte et la révélation tombe à plat pour qui n'a pas vu la vidéo."
+  },
   "youtube:ZA_3eoib31s@4037-4075": {
    "at": "2026-11-01T19:05:28.530625+00:00",
    "reason": "revue : Outro de vidéo (remerciements, au revoir) sans moment notable."
+  },
+  "youtube:ZPBG8zvqor0@413-473": {
+   "at": "2026-11-03T16:57:14.821140+00:00",
+   "reason": "revue : note 38/100 (minimum 60). Début d'une histoire de maison hantée qui ne contient que la mise en place. L'extrait se coupe avant toute révélation."
   },
   "youtube:ZPBG8zvqor0@696-756": {
    "at": "2026-11-01T09:54:50.383618+00:00",
@@ -2805,6 +2915,10 @@
   "youtube:at3h45yIO1k@175-235": {
    "at": "2026-11-03T10:23:59.747384+00:00",
    "reason": "revue : note 42/100 (minimum 60). Extrait de l'émission de Maxime Biaggi avec Éric Judor et Alexandra Lamy, mais l'échange est décousu et incompréhensible sans le concept du jeu. Pas de vraie chute."
+  },
+  "youtube:at3h45yIO1k@420-480": {
+   "at": "2026-11-03T16:57:14.821246+00:00",
+   "reason": "revue : note 52/100 (minimum 60). Suite du faux casting de Maxime Biaggi : on voit les excuses à Alexandra Lamy et la réaction d'Éric Judor. Le sponsor est coupé en fin d'extrait."
   },
   "youtube:e4minQ0LSBM@679-739": {
    "at": "2026-11-02T19:55:22.597204+00:00",
@@ -2898,6 +3012,10 @@
    "at": "2026-11-02T11:29:13.241918+00:00",
    "reason": "revue : note 44/100 (minimum 60). Test d'un gadget TikTok pour parler aux chiens avec un fou rire visible, mais la transcription est confuse et l'enjeu est difficile à comprendre sans contexte. La chute est molle."
   },
+  "youtube:v9wYSebfh4o@720-780": {
+   "at": "2026-11-03T16:57:14.820999+00:00",
+   "reason": "revue : note 44/100 (minimum 60). Long passage de présentation produit ; la seule réaction forte arrive à la fin quand Joyca teste le blaster en rafale. Chute courte."
+  },
   "youtube:vy2tWg9-QN4@1285-1345": {
    "at": "2026-10-31T19:02:40.575499+00:00",
    "reason": "revue : Transition d'émission sans enjeu : interview de candidats et explication de règles, aucune chute ni moment fort compréhensible sans contexte."
@@ -2909,6 +3027,10 @@
   "youtube:x9x_3pgDdW8@401-461": {
    "at": "2026-11-03T10:17:09.912733+00:00",
    "reason": "revue : note 42/100 (minimum 60). Le début du duel Fortnite contre un enfant, sans issue visible : la réaction de Michou reste faible."
+  },
+  "youtube:x9x_3pgDdW8@498-558": {
+   "at": "2026-11-03T17:05:26.710586+00:00",
+   "reason": "revue : note 38/100 (minimum 60). Michou contre un enfant champion en box fight Fortnite, mais extrait sans issue ni chute, réactions faibles."
   },
   "youtube:x9x_3pgDdW8@885-945": {
    "at": "2026-11-03T10:23:59.747551+00:00",
@@ -2997,54 +3119,6 @@
    "reason": "Petite découverte sur les creepers sans enjeu ni vraie chute.",
    "recent": [],
    "score": 38.0,
-   "verdict": "reject"
-  },
-  "twitch:BillowingFunTroutBuddhaBar-KMVYjKSYm4KSDbz-": {
-   "at": "2026-11-01T13:11:52.085178+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Etoiles raconte un message reçu sur Instagram et sa façon d'y réagir.",
-    "hashtags": [
-     "etoiles",
-     "twitchfr",
-     "anecdote",
-     "clip",
-     "drole"
-    ],
-    "hook": "LE DM QU'ETOILES A REÇU",
-    "title": "Etoiles raconte le message qu'il a reçu sur Insta",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Récit d'un message privé haineux reçu d'un anonyme, sujet politique sensible et chute absente.",
-   "recent": [],
-   "score": 45.0,
-   "verdict": "reject"
-  },
-  "twitch:BlazingNiceRaisinBabyRage-h4lSgxAk4anVMiVV": {
-   "at": "2026-11-01T13:18:29.839938+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Skyyart commente une action de KC en co-stream des Worlds.",
-    "hashtags": [
-     "skyyart",
-     "leagueoflegends",
-     "worlds2026",
-     "karminecorp",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "SKYYART ANALYSE KC AUX WORLDS",
-    "title": "Skyyart réagit à une action de KC aux Worlds 2026",
-    "trim_end": 40.0,
-    "trim_start": 0.0
-   },
-   "reason": "Co-stream des Worlds avec une analyse calme, sans réaction marquante ni chute.",
-   "recent": [],
-   "score": 30.0,
    "verdict": "reject"
   },
   "twitch:BlueFrailJamAsianGlow-5dzA2H6hyxPIqiOZ": {
@@ -3244,31 +3318,6 @@
    "recent": [],
    "score": 55.0,
    "verdict": "reject"
-  },
-  "twitch:ConfidentSavoryEagleShadyLulu-VEYLv8U-t9gp5CQC": {
-   "at": "2026-11-01T13:04:34.345537+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "LaureBV analyse sans filtre le niveau de la Karmine Corp face aux meilleures équipes mondiales.",
-    "hashtags": [
-     "laurebv",
-     "karminecorp",
-     "leagueoflegends",
-     "lec",
-     "twitchfr",
-     "clip",
-     "drole"
-    ],
-    "hook": "LA KC, UNE ÉQUIPE B+ ?",
-    "title": "LaureBV donne un avis cash sur la KC : « une équipe B+ »",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Avis tranché et clair sur l'actu de la KC, qui fera réagir la communauté LoL FR.",
-   "recent": [],
-   "score": 62.0,
-   "verdict": "publish"
   },
   "twitch:ConfidentSpookyBasenjiTF2John-y8B9tou_DzG_xASp": {
    "at": "2026-11-01T13:11:52.085197+00:00",
@@ -3589,30 +3638,6 @@
    "score": 40.0,
    "verdict": "reject"
   },
-  "twitch:FrailSpikyMonitorDogFace--kDZ0ksEyHiZYuFv": {
-   "at": "2026-11-01T13:15:34.809115+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Le streamdeck de Terracid plante au lancement du live.",
-    "hashtags": [
-     "terracid",
-     "twitch",
-     "fail",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "LE STREAMDECK A LÂCHÉ",
-    "title": "Terracid : le streamdeck crash en début de live",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Écran de transition et crash du streamdeck, il ne se passe rien de notable.",
-   "recent": [],
-   "score": 15.0,
-   "verdict": "reject"
-  },
   "twitch:FreezingObedientMooseKippa-Jl1_zqoDg5tw50tt": {
    "at": "2026-11-01T09:29:33.056028+00:00",
    "clip_span": null,
@@ -3776,30 +3801,6 @@
    "reason": "Déambulation dans des locaux, sans contexte ni chute compréhensible.",
    "recent": [],
    "score": 25.0,
-   "verdict": "reject"
-  },
-  "twitch:LachrymoseGracefulBeaverCopyThis-qeUUj3FjRDGdw772": {
-   "at": "2026-11-01T12:54:28.579958+00:00",
-   "clip_span": null,
-   "meta": {
-    "ai": true,
-    "description": "Gom4rt hésite à faire confiance à un personnage dans un jeu d'horreur.",
-    "hashtags": [
-     "gom4rt",
-     "disturbingfears",
-     "horreur",
-     "clip",
-     "twitchfr",
-     "drole"
-    ],
-    "hook": "GOM4RT DOUTE DE SON SAUVEUR",
-    "title": "Gom4rt se méfie de son sauveur dans Disturbing Fears",
-    "trim_end": null,
-    "trim_start": null
-   },
-   "reason": "Réflexion calme dans un jeu d'horreur, sans frayeur ni chute.",
-   "recent": [],
-   "score": 33.0,
    "verdict": "reject"
   },
   "twitch:LongLittleButterflyAMPTropPunch-Bh1iVquhHT8S5x82": {
@@ -4746,6 +4747,20 @@
    "prepared": 24,
    "published": 3,
    "rejected": 21
+  },
+  {
+   "at": "2026-11-03T16:42:08.102997+00:00",
+   "by_source": {
+    "twitch": 1031,
+    "youtube": 85
+   },
+   "detected": 1116,
+   "errors": 0,
+   "failed": 1,
+   "mode": "shorts",
+   "prepared": 24,
+   "published": 1,
+   "rejected": 23
   }
  ],
  "streamers_seen": {
