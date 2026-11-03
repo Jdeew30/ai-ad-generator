@@ -294,7 +294,7 @@ restent 100 % Twitch.
 - `shorts.per_source` / le `cron` du workflow : le rythme de publication, un short Twitch et deux shorts YouTube
   par passage (15 par jour au plus : seuls les passages notés 60 ou plus partent). `shorts.guarantee` garde un
   short de chaque source à chaque passage : si rien n'atteint 60, le mieux noté part quand même s'il a au moins
-  45 (Telegram le précise ; jamais un clip que Claude refuse). Sans `per_source`,
+  55 (Telegram le précise ; jamais un clip que Claude refuse). Sans `per_source`,
   `shorts.per_run` shorts par passage, toutes sources confondues. Chaque short de plus allonge le passage
   (minutes GitHub Actions : 2 000 par mois sur un dépôt privé, illimitées sur un dépôt public).
 - `youtube.videos_per_run`, `youtube.max_age_days` : combien de nouvelles vidéos YouTube sont regardées de près
@@ -302,7 +302,10 @@ restent 100 % Twitch.
   dépôt public ou un serveur : chaque passage coûte des minutes GitHub Actions.
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
-- `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal.
+- `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal
+  (300 : en dessous, presque toujours des moments faibles).
+- Un clip dont la préparation dépasse 4 minutes (replay qui ne vient pas) est abandonné pour de bon : le
+  passage prend le suivant, et ne prépare plus rien après 55 minutes pour envoyer à temps ce qu'il a retenu.
 - `twitch.skip_title_words` : les mots qui font écarter un clip avant tout téléchargement (pubs :
   « publicité », « sponsorisé »…), Claude les refusant de toute façon.
 - `twitch.skip_live_words` : pareil, mais d'après le titre du **live** dont le clip est tiré. Vide par défaut :
