@@ -1,33 +1,35 @@
 # Tableau de bord du clipper
 
-Mis à jour le 03/11/2026 à 09:58 UTC.
+Mis à jour le 03/11/2026 à 15:43 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 17554 | 17554 |
-| Vidéos téléchargées et préparées | 111 | 111 |
-| Shorts envoyés | 9 | 9 |
-| Écartés par la revue | 102 | 102 |
-| Échecs (téléchargement, montage, envoi) | 1 | 1 |
-| Passages | 8 | 8 |
+| Moments trouvés (Twitch + YouTube) | 20569 | 20569 |
+| Vidéos téléchargées et préparées | 125 | 125 |
+| Shorts envoyés | 11 | 11 |
+| Écartés par la revue | 114 | 114 |
+| Échecs (téléchargement, montage, envoi) | 3 | 3 |
+| Passages | 9 | 9 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 32, YouTube 10, à la demande 6.
-Note moyenne de Claude : 56/100 sur 9 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
-Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), Michou (2), Hctuan (1).
+Par source : Twitch 33, YouTube 11, à la demande 6.
+Note moyenne de Claude : 56/100 sur 11 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), Michou (2), Bob Lennon (2).
 
 ## Veille YouTube
 
-91 créateurs suivis, 81 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 81 identifiées ; 12 mises de côté (introuvables).
-321 vidéos récentes suivies, 72 regardées de près (36 avec des moments à extraire).
+93 créateurs suivis, 83 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 83 identifiées ; 12 mises de côté (introuvables).
+328 vidéos récentes suivies, 75 regardées de près (38 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 03/11 16:03 | YouTube | Bob Lennon | [Bob Lennon reçoit une livraison absurde en enfer (Red Tape)](https://www.youtube.com/watch?v=lA-rWcF0h1c) | 58 |
+| 03/11 15:59 | Twitch | Wingo | [Wingo vire ses potes du vocal… et finit enfin la map (Trackmania Kacky)](https://www.twitch.tv/wingo/clip/LaconicUglyDogeDendiFace-0jkdWTmonSUhVo-6) | 54 |
 | 03/11 10:29 | YouTube | Maxime Biaggi | [Maxime Biaggi piège une actrice avec un faux casting](https://www.youtube.com/watch?v=at3h45yIO1k) | 48 |
 | 03/11 10:09 | Twitch | MasterSnakou | [MasterSnakou se fait surprendre sur The Unworthy](https://www.twitch.tv/mastersnakou/clip/SullenSpineyRingAMPTropPunch-DCi4NeEPEsKzaPwv) | 52 |
 | 02/11 22:34 | Twitch | Nikof | [Nikof s'enflamme : top 1 à 20 kills pour Akiira en compétition Fortnite](https://www.twitch.tv/nikof/clip/AbstemiousSillyBeeBleedPurple-kCd-rPY8zv8Whb4Y) | 56 |
@@ -46,12 +48,11 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 | 01/11 22:36 | Twitch | Tatiana_TV | [Tatiana_TV persuadée que Jamie la trompe sur GTA RP](https://www.twitch.tv/tatiana_tv/clip/MuddyLittleWolverineMrDestructoid-0mOixLn8tKcvg3kI) |  |
 | 01/11 19:06 | YouTube | Gotaga | [Gotaga : le faux bodybuilder grillé en une question](https://www.youtube.com/watch?v=ZA_3eoib31s) |  |
 | 01/11 19:02 | Twitch | Kameto | [Kameto dessine le scénario parfait pour que KC gagne les Worlds](https://www.twitch.tv/kamet0/clip/PeppyInnocentBulgogiAMPTropPunch-j3ZpDbZVrzgvNXmT) |  |
-| 01/11 15:45 | Twitch | Inoxtag | [Inoxtag dévoile le teaser de The Blood Island en live](https://www.twitch.tv/inoxtag/clip/CalmSeductiveElephantThunBeast-pUxS3seUmcfpMx6i) |  |
-| 01/11 14:54 | à la demande | MisterMV | [MisterMV : la lettre très innocente de Piffulus le tyran](https://www.twitch.tv/mistermv/clip/SlickJollySwallowWutFace-4803q_zDQnSv9ky_) |  |
 
 ## Derniers échecs
 
-- twitch:FineFragilePicklesHeyGuys-icqVmQ0JHSAUn0-W (1×) : unable to download video data: HTTP Error 403: Forbidden
+- twitch:FineFragilePicklesHeyGuys-icqVmQ0JHSAUn0-W (2×) : unable to download video data: HTTP Error 403: Forbidden
+- twitch:StormyTsundereArtichokePermaSmug-nVrdHp-lnAjLILGJ (1×) : préparation abandonnée au bout de 6 min
 - youtube:p6UYeKS3EmU@2219-2279 (1×) : non évalué par Claude
 - youtube:gQ8fdTxYozU@1365-1425 (1×) : non évalué par Claude
 - youtube:6iY1MU7hlPI@1306-1366 (1×) : non évalué par Claude
@@ -60,4 +61,3 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 - twitch:InventiveSavageSwanTTours-GaE35WJ0_XxSpcgv (1×) : non évalué par Claude
 - twitch:DeterminedCrazyYogurtDoritosChip-xWhjE5OVz_Ueozqe (1×) : non évalué par Claude
 - youtube:CO4AjCWQQmE@1145-1205 (1×) : non évalué par Claude
-- youtube:7U-ZIMrgTEI@242-302 (1×) : non évalué par Claude
