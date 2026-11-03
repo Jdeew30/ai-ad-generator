@@ -2,10 +2,15 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 import shutil
+import signal
+import threading
 import time
 from collections import Counter
+from collections.abc import Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -130,6 +135,55 @@ def _slug(text: str) -> str:
 SOURCE_NAMES = {"twitch": "Twitch", "youtube": "YouTube"}
 COMPILATION_BATCH = 10  # clips reviewed together while the best-of is filled up to its length
 COMPILATION_PREPARE_SECONDS = 50 * 60
+# A download that stalls (a replay served at a crawl, ffmpeg waiting on a dead stream) once held a run for 71 minutes
+# until the job's timeout cancelled it with nothing sent: a clip is given up after PREPARE_SECONDS, and no new clip is
+# prepared once the run has spent SHORTS_PREPARE_SECONDS, so that the clips already approved still go out in time.
+PREPARE_SECONDS = 6 * 60
+SHORTS_PREPARE_SECONDS = 55 * 60
+
+
+class _Overtime(BaseException):
+    """Raised by the watchdog in the middle of a preparation that takes too long (not an Exception: yt-dlp, which
+    catches those, lets it through)."""
+
+
+@contextmanager
+def _watchdog(seconds: float) -> Iterator[None]:
+    """Interrupts the block with _Overtime after `seconds` (main thread only, where signals are delivered)."""
+    if seconds <= 0 or not hasattr(signal, "SIGALRM") or threading.current_thread() is not threading.main_thread():
+        yield
+        return
+
+    def ring(_signum: int, _frame: Any) -> None:
+        raise _Overtime()
+
+    previous = signal.signal(signal.SIGALRM, ring)
+    signal.setitimer(signal.ITIMER_REAL, seconds)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous)
+
+
+def _stop_children() -> None:
+    """Kills what a stopped preparation left running (ffmpeg started by yt-dlp keeps reading a stalled stream)."""
+    me = os.getpid()
+    try:
+        pids = [int(name) for name in os.listdir("/proc") if name.isdigit()]
+    except OSError:
+        return
+    for pid in pids:
+        try:
+            stat = Path(f"/proc/{pid}/stat").read_text()
+            parent = int(stat.rsplit(")", 1)[1].split()[1])
+        except (OSError, ValueError, IndexError):
+            continue
+        if parent == me:
+            try:
+                os.kill(pid, signal.SIGKILL)
+            except OSError:
+                pass
 
 
 def _kept_length(item: Prepared, review: Review) -> float:
@@ -493,6 +547,7 @@ class Clipper:
         report = RunReport("shorts", dry_run)
         if not dry_run:
             _ = self.publishers  # missing credentials for a required platform: fail before any work
+        self._prepare_until = time.monotonic() + SHORTS_PREPARE_SECONDS
         try:
             self._shorts(report, dry_run=dry_run, count=count, url=url, start=start, end=end, queue=queue, focus=focus,
                          force=force, find=find)
@@ -590,6 +645,19 @@ class Clipper:
         log.info("« %s » entendu à %s.", phrase, clock(at))
         return max(0.0, at - FIND_BEFORE), at + FIND_AFTER
 
+    def _prepare_in_time(self, candidate: Candidate, *, dry_run: bool, **options: Any) -> Prepared | None:
+        """prepare(), given up after PREPARE_SECONDS: a stalled download never holds the whole run."""
+        try:
+            with _watchdog(PREPARE_SECONDS):
+                return self.prepare(candidate, **options)
+        except _Overtime:
+            _stop_children()
+            log.warning("Préparation abandonnée au bout de %d min (téléchargement bloqué ?) : %s — clip suivant.",
+                        PREPARE_SECONDS // 60, candidate.key)
+            if not dry_run:
+                self.state.record_failure(candidate, f"préparation abandonnée au bout de {PREPARE_SECONDS // 60} min")
+            return None
+
     def _publish_best(self, report: RunReport, ranked: list[Candidate], wanted: int, *, dry_run: bool,
                       source: str | None = None, force: bool = False, floor: float = 0.0, at_least: int | None = None) -> None:
         """Reviews `ranked` until `wanted` clips are approved, then edits and publishes them.
@@ -622,9 +690,12 @@ class Clipper:
                 log.info("Pas assez de clips retenus : revue d'une nouvelle série de candidats.")
             prepared: list[Prepared] = []
             for candidate in remaining:
+                if time.monotonic() > getattr(self, "_prepare_until", float("inf")):
+                    log.warning("Passage bientôt à court de temps : plus de nouvelle préparation, les clips retenus partent.")
+                    break
                 log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
-                item = self.prepare(candidate, transcribe=self.config.shorts.captions or use_ai,
-                                    sheet=use_ai and self.config.ai.review_frames, context=use_ai)
+                item = self._prepare_in_time(candidate, dry_run=dry_run, transcribe=self.config.shorts.captions or use_ai,
+                                             sheet=use_ai and self.config.ai.review_frames, context=use_ai)
                 if item is None:
                     report.failed += 1  # the next candidate takes its place
                     continue
@@ -744,7 +815,8 @@ class Clipper:
             prepared: list[Prepared] = []
             for candidate in remaining:
                 log.info("Préparation : %s — %s (%s vues)", candidate.streamer or candidate.url, candidate.title or "?", candidate.views)
-                item = self.prepare(candidate, transcribe=use_ai, sheet=use_ai and self.config.ai.review_frames)
+                item = self._prepare_in_time(candidate, dry_run=dry_run, transcribe=use_ai,
+                                             sheet=use_ai and self.config.ai.review_frames)
                 if item is not None:
                     prepared.append(item)
                 if len(prepared) >= COMPILATION_BATCH or time.monotonic() >= deadline:

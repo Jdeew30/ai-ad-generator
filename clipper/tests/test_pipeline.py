@@ -643,3 +643,51 @@ def test_twitch_clipper_name_is_never_used_as_the_streamer(media, paths):
     [outcome] = run.run_shorts(dry_run=True).published
     assert outcome.candidate.streamer == "Alpha Le Vrai" and outcome.candidate.clipper == "viewer42"
     assert outcome.meta.title.startswith("Alpha Le Vrai : ")
+
+
+def test_a_stalled_download_is_given_up_and_the_next_clip_goes_out(media, paths, monkeypatch, caplog):
+    import time as time_module
+
+    import clipper.pipeline as pipeline_module
+
+    class Stalling(FakeYtDlp):
+        def download(self, url, dest_dir, name, **options):
+            if "Alpha-Cam1" in url:
+                time_module.sleep(60)  # a replay served at a crawl: the watchdog stops it
+            return super().download(url, dest_dir, name, **options)
+
+    monkeypatch.setattr(pipeline_module, "PREPARE_SECONDS", 4)
+    telegram = FakePublisher("telegram")
+    run = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram})
+    run.ytdlp = Stalling(media, CLIPS)
+    started = time_module.monotonic()
+    with caplog.at_level("WARNING", logger="clipper"):
+        report = run.run_shorts()
+    assert time_module.monotonic() - started < 40  # not the minute the download would have taken
+    assert [o.candidate.key for o in report.published] == ["twitch:Beta-1"]
+    assert "Préparation abandonnée au bout de 0 min" in caplog.text and "twitch:Beta-1 — clip suivant" not in caplog.text
+    assert State.load(paths.state).failures["twitch:Alpha-Cam1"]["error"].startswith("préparation abandonnée")
+
+
+def test_the_watchdog_interrupts_only_what_runs_too_long():
+    import time as time_module
+
+    from clipper.pipeline import _Overtime, _watchdog
+
+    with _watchdog(2):
+        time_module.sleep(0.1)  # in time: nothing happens, and nothing is left armed
+    time_module.sleep(0.1)
+    started = time_module.monotonic()
+    with pytest.raises(_Overtime), _watchdog(0.3):
+        time_module.sleep(10)
+    assert time_module.monotonic() - started < 2
+
+
+def test_a_run_short_of_time_prepares_no_new_clip(media, paths, monkeypatch, caplog):
+    import clipper.pipeline as pipeline_module
+
+    monkeypatch.setattr(pipeline_module, "SHORTS_PREPARE_SECONDS", 0)
+    run = clipper(media, paths, clips=CLIPS, publishers={"telegram": FakePublisher("telegram")})
+    with caplog.at_level("WARNING", logger="clipper"):
+        assert run.run_shorts().published == [] and run.ytdlp.downloads == []
+    assert "plus de nouvelle préparation" in caplog.text
