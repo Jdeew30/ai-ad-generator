@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 04/11/2026 à 13:12 UTC.
+Mis à jour le 04/11/2026 à 16:00 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 43530 | 43530 |
-| Vidéos téléchargées et préparées | 283 | 283 |
-| Shorts envoyés | 19 | 19 |
-| Écartés par la revue | 264 | 264 |
+| Moments trouvés (Twitch + YouTube) | 46546 | 46546 |
+| Vidéos téléchargées et préparées | 288 | 288 |
+| Shorts envoyés | 20 | 20 |
+| Écartés par la revue | 268 | 268 |
 | Échecs (téléchargement, montage, envoi) | 14 | 14 |
-| Passages | 17 | 17 |
+| Passages | 18 | 18 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 37, YouTube 18, à la demande 6.
-Note moyenne de Claude : 58/100 sur 22 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 38, YouTube 18, à la demande 6.
+Note moyenne de Claude : 59/100 sur 23 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), otplol_ (2), Michou (2).
 
 ## Veille YouTube
 
-98 créateurs suivis, 88 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 88 identifiées ; 12 mises de côté (introuvables).
-423 vidéos récentes suivies, 157 regardées de près (79 avec des moments à extraire).
+99 créateurs suivis, 89 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 89 identifiées ; 12 mises de côté (introuvables).
+440 vidéos récentes suivies, 166 regardées de près (81 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 04/11 16:05 | Twitch | KennyStream | [KennyStream jure qu'il ne finira jamais la map 501… mauvaise idée (Trackmania Kacky)](https://www.twitch.tv/kennystream/clip/PerfectTubularRamenNononoCat-Z7mtRCaVSfQvOXtf) | 68 |
 | 04/11 13:33 | YouTube | Sylvain Lyve | [Sylvain Lyve : la voiture sans suspensions lâche en plein test (partie 2)](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 55 |
 | 04/11 10:38 | YouTube | Mastu | [Undercover nocturne : Samuel perdu, Raska démasqué (Mastu)](https://www.youtube.com/watch?v=BByplh9JRTs) | 63 |
 | 04/11 10:38 | YouTube | Sylvain Lyve | [Sylvain Lyve roule sans suspensions… et ça fait très mal](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 67 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), Ami
 | 02/11 20:08 | YouTube | Bob Lennon | [Bob Lennon avoue sa phobie des chiens : « J'ai l'impression de regarder un requin »](https://www.youtube.com/watch?v=3BQdZzmGO4A) | 50 |
 | 02/11 19:46 | Twitch | Berlu | [Berlu explique pourquoi le serveur GTA RP Vibe ferme temporairement](https://www.twitch.tv/berlu/clip/ArbitraryAntediluvianEmuTooSpicy-QXUoal1Gd7Ryd-Jx) | 55 |
 | 02/11 17:03 | YouTube | Studio Bagel | [Éric Judor classe ses films : flop ou pas flop ? (Hot Ones, Studio Bagel)](https://www.youtube.com/watch?v=2frDDzZDNkw) | 55 |
-| 02/11 16:55 | Twitch | ZeratoR | [ZeratoR se prend un screamer à 1 € : « J'ai 38 ans ! »](https://www.twitch.tv/zerator/clip/AttractiveArtisticToadAMPTropPunch-HgvOECapqeR6j9JG) | 62 |
 
 ## Derniers échecs
 
