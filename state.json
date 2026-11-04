@@ -479,6 +479,27 @@
    "url": "https://www.twitch.tv/aminematue/clip/CrowdedSuperCasetteBlargNaut-vpfFtKoRXAibSufo",
    "views": 756
   },
+  "twitch:CrunchyTangentialDootCurseLit-0c_su2PiYv4ZzhK2": {
+   "at": "2026-11-04T10:16:59+00:00",
+   "created_at": null,
+   "results": {
+    "telegram": {
+     "detail": "remis à la main : l'état du passage n° 96 n'a pas pu être enregistré (GitHub, erreur 500)",
+     "id": null,
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "score": 55.0,
+   "source": "twitch",
+   "span": null,
+   "streamer": "otplol_",
+   "streamer_login": "otplol_",
+   "title": "La Karmine Corp file en quart de finale des Worlds ! (co-stream otplol_)",
+   "url": "https://www.twitch.tv/otplol_/clip/CrunchyTangentialDootCurseLit-0c_su2PiYv4ZzhK2",
+   "views": 826
+  },
   "twitch:CulturedInterestingOkapiTwitchRaid-pepecVeF6GImXhvB": {
    "at": "2026-10-29T22:52:33.897821+00:00",
    "created_at": "2026-10-28T19:16:05+00:00",
@@ -1300,6 +1321,31 @@
    "url": "https://www.youtube.com/watch?v=5A-jZ1XDmMU",
    "views": 420869
   },
+  "youtube:BByplh9JRTs@1274-1364": {
+   "at": "2026-11-04T10:38:49+00:00",
+   "created_at": null,
+   "results": {
+    "telegram": {
+     "detail": "remis à la main : l'état du passage n° 96 n'a pas pu être enregistré (GitHub, erreur 500)",
+     "id": null,
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "score": 63.0,
+   "source": "youtube",
+   "span": [
+    "yt:BByplh9JRTs",
+    1274.0,
+    1364.0
+   ],
+   "streamer": "Mastu",
+   "streamer_login": "mastu",
+   "title": "Undercover nocturne : Samuel perdu, Raska démasqué (Mastu)",
+   "url": "https://www.youtube.com/watch?v=BByplh9JRTs",
+   "views": 4221802
+  },
   "youtube:BByplh9JRTs@2045-2105": {
    "at": "2026-11-01T14:52:21.158350+00:00",
    "created_at": "2026-10-31T10:00:09+00:00",
@@ -1519,6 +1565,31 @@
    "title": "Maxime Biaggi piège une actrice avec un faux casting",
    "url": "https://www.youtube.com/watch?v=at3h45yIO1k",
    "views": 3629525
+  },
+  "youtube:iJi5wWrfZtU@922-1012": {
+   "at": "2026-11-04T10:38:10+00:00",
+   "created_at": null,
+   "results": {
+    "telegram": {
+     "detail": "remis à la main : l'état du passage n° 96 n'a pas pu être enregistré (GitHub, erreur 500)",
+     "id": null,
+     "ok": true,
+     "platform": "telegram",
+     "url": null
+    }
+   },
+   "score": 67.0,
+   "source": "youtube",
+   "span": [
+    "yt:iJi5wWrfZtU",
+    922.0,
+    1012.0
+   ],
+   "streamer": "Sylvain Lyve",
+   "streamer_login": "sylvainlyve",
+   "title": "Sylvain Lyve roule sans suspensions… et ça fait très mal",
+   "url": "https://www.youtube.com/watch?v=iJi5wWrfZtU",
+   "views": 3225751
   },
   "youtube:lA-rWcF0h1c@872-932": {
    "at": "2026-11-03T16:03:04.038226+00:00",
