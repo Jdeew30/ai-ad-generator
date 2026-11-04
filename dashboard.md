@@ -1,33 +1,35 @@
 # Tableau de bord du clipper
 
-Mis à jour le 04/11/2026 à 19:12 UTC.
+Mis à jour le 04/11/2026 à 22:08 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 49547 | 49547 |
-| Vidéos téléchargées et préparées | 308 | 308 |
-| Shorts envoyés | 21 | 21 |
-| Écartés par la revue | 287 | 287 |
+| Moments trouvés (Twitch + YouTube) | 52631 | 52631 |
+| Vidéos téléchargées et préparées | 323 | 323 |
+| Shorts envoyés | 23 | 23 |
+| Écartés par la revue | 300 | 300 |
 | Échecs (téléchargement, montage, envoi) | 14 | 14 |
-| Passages | 19 | 19 |
+| Passages | 20 | 20 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 38, YouTube 19, à la demande 6.
-Note moyenne de Claude : 59/100 sur 24 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 39, YouTube 20, à la demande 6.
+Note moyenne de Claude : 59/100 sur 26 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), ZeratoR (2), Domingo (2), otplol_ (2).
 
 ## Veille YouTube
 
 99 créateurs suivis, 89 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 89 identifiées ; 12 mises de côté (introuvables).
-448 vidéos récentes suivies, 173 regardées de près (88 avec des moments à extraire).
+453 vidéos récentes suivies, 183 regardées de près (92 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 04/11 22:20 | YouTube | LE GRAND JD | [LE GRAND JD : un phénomène inexpliqué filmé dans un château hanté](https://www.youtube.com/watch?v=JgkT6Ip56s4) | 62 |
+| 04/11 22:15 | Twitch | xo_trixy | [xo_trixy se fait voler toutes ses cerises sur Farming Simulator 25](https://www.twitch.tv/xo_trixy/clip/SuperProductiveNoodlePunchTrees-JZ8j8K08BDCP9C_A) | 58 |
 | 04/11 19:33 | YouTube | ZeratoR | [ZeratoR invente une langue en expliquant un film](https://www.youtube.com/watch?v=CO4AjCWQQmE) | 58 |
 | 04/11 16:05 | Twitch | KennyStream | [KennyStream jure qu'il ne finira jamais la map 501… mauvaise idée (Trackmania Kacky)](https://www.twitch.tv/kennystream/clip/PerfectTubularRamenNononoCat-Z7mtRCaVSfQvOXtf) | 68 |
 | 04/11 13:33 | YouTube | Sylvain Lyve | [Sylvain Lyve : la voiture sans suspensions lâche en plein test (partie 2)](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 55 |
@@ -46,8 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), Ami
 | 03/11 10:29 | YouTube | Maxime Biaggi | [Maxime Biaggi piège une actrice avec un faux casting](https://www.youtube.com/watch?v=at3h45yIO1k) | 48 |
 | 03/11 10:09 | Twitch | MasterSnakou | [MasterSnakou se fait surprendre sur The Unworthy](https://www.twitch.tv/mastersnakou/clip/SullenSpineyRingAMPTropPunch-DCi4NeEPEsKzaPwv) | 52 |
 | 02/11 22:34 | Twitch | Nikof | [Nikof s'enflamme : top 1 à 20 kills pour Akiira en compétition Fortnite](https://www.twitch.tv/nikof/clip/AbstemiousSillyBeeBleedPurple-kCd-rPY8zv8Whb4Y) | 56 |
-| 02/11 20:08 | YouTube | Bob Lennon | [Bob Lennon avoue sa phobie des chiens : « J'ai l'impression de regarder un requin »](https://www.youtube.com/watch?v=3BQdZzmGO4A) | 50 |
-| 02/11 19:46 | Twitch | Berlu | [Berlu explique pourquoi le serveur GTA RP Vibe ferme temporairement](https://www.twitch.tv/berlu/clip/ArbitraryAntediluvianEmuTooSpicy-QXUoal1Gd7Ryd-Jx) | 55 |
 
 ## Derniers échecs
 
