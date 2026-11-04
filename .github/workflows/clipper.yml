@@ -135,16 +135,37 @@ jobs:
             *) python -m clipper run $DRY_RUN $FORCE ${FOCUS:+--focus "$FOCUS"} ${COUNT:+--count "$COUNT"} ;;
           esac
 
+      # Le 04/11, GitHub a répondu « Internal Server Error » à l'envoi de l'état deux passages de suite : l'état
+      # était perdu (clips envoyés oubliés, donc renvoyables) et le lien du best-of n'était pas parti. L'envoi est
+      # retenté ; s'il échoue quand même, l'état est joint au passage (artefact) pour être remis à la main.
       - name: Sauvegarder l'état
+        id: save
         if: always()
         working-directory: ${{ github.workspace }}/.clipper-state
         run: |
           git add -A
-          if ! git diff --cached --quiet; then
-            git -c user.name="clipper-bot" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-              commit -q -m "clipper: état du $(date -u '+%F %H:%M') UTC"
-            git push -q origin HEAD:clipper-state
-          fi
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name="clipper-bot" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "clipper: état du $(date -u '+%F %H:%M') UTC"
+          for wait in 15 45 90 0; do
+            if git push -q origin HEAD:clipper-state; then exit 0; fi
+            if [ "$wait" = 0 ]; then break; fi
+            echo "Envoi de l'état refusé par GitHub, nouvel essai dans $wait s…"
+            sleep "$wait"
+          done
+          echo "::error::État non sauvegardé (GitHub refuse l'envoi) : il est joint à ce passage (etat-non-sauvegarde)."
+          exit 1
+
+      - name: État non sauvegardé (à remettre sur la branche clipper-state)
+        if: failure() && steps.save.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: etat-non-sauvegarde-${{ github.run_id }}
+          path: |
+            .clipper-state/*.json
+            .clipper-state/*.md
+          retention-days: 7
+          include-hidden-files: true  # .clipper-state est un dossier caché
 
       # GitHub gratuit garde 500 Mo d'artefacts, et bloque les dépôts au-delà. Les shorts sont déjà sur
       # Telegram : leurs copies ne restent qu'un jour. Le best-of va dans une release (étape suivante).
@@ -167,7 +188,7 @@ jobs:
       # arrive sur Telegram. Les 4 derniers best-of sont gardés.
       - name: Best-of à télécharger (release)
         id: release
-        if: env.MODE == 'compilation' && !inputs.dry_run
+        if: ${{ !cancelled() && env.MODE == 'compilation' && !inputs.dry_run }}
         working-directory: ${{ github.workspace }}
         env:
           GH_TOKEN: ${{ github.token }}
@@ -184,7 +205,7 @@ jobs:
           url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$tag/$(basename "$video")"
           text="⬇️ Best-of à télécharger (MP4) : $url
 
-          Ouvre ce lien dans ton navigateur (Chrome, Safari…) connecté à ton compte GitHub : le dépôt est privé, et sans connexion (comme dans Telegram) GitHub répond « 404 ». Tous les best-of : $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases"
+          Si GitHub répond « 404 » (dépôt privé), ouvre le lien dans ton navigateur connecté à ton compte GitHub. Tous les best-of : $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases"
           if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
             curl -sS --fail -o /dev/null "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
               --data-urlencode "chat_id=$TELEGRAM_CHAT_ID" --data-urlencode "text=$text" --data "disable_web_page_preview=true"
