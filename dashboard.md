@@ -1,33 +1,37 @@
 # Tableau de bord du clipper
 
-Mis à jour le 03/11/2026 à 22:59 UTC.
+Mis à jour le 04/11/2026 à 13:12 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 40418 | 40418 |
-| Vidéos téléchargées et préparées | 261 | 261 |
-| Shorts envoyés | 18 | 18 |
-| Écartés par la revue | 243 | 243 |
+| Moments trouvés (Twitch + YouTube) | 43530 | 43530 |
+| Vidéos téléchargées et préparées | 283 | 283 |
+| Shorts envoyés | 19 | 19 |
+| Écartés par la revue | 264 | 264 |
 | Échecs (téléchargement, montage, envoi) | 14 | 14 |
-| Passages | 16 | 16 |
+| Passages | 17 | 17 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 36, YouTube 15, à la demande 6.
-Note moyenne de Claude : 58/100 sur 18 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
-Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), Michou (2), Bob Lennon (2).
+Par source : Twitch 37, YouTube 18, à la demande 6.
+Note moyenne de Claude : 58/100 sur 22 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), AmineMaTue (3), Locklear (3), Amixem (3), Domingo (2), otplol_ (2), Michou (2).
 
 ## Veille YouTube
 
 98 créateurs suivis, 88 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 88 identifiées ; 12 mises de côté (introuvables).
-401 vidéos récentes suivies, 142 regardées de près (69 avec des moments à extraire).
+423 vidéos récentes suivies, 157 regardées de près (79 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 04/11 13:33 | YouTube | Sylvain Lyve | [Sylvain Lyve : la voiture sans suspensions lâche en plein test (partie 2)](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 55 |
+| 04/11 10:38 | YouTube | Mastu | [Undercover nocturne : Samuel perdu, Raska démasqué (Mastu)](https://www.youtube.com/watch?v=BByplh9JRTs) | 63 |
+| 04/11 10:38 | YouTube | Sylvain Lyve | [Sylvain Lyve roule sans suspensions… et ça fait très mal](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 67 |
+| 04/11 10:16 | Twitch | otplol_ | [La Karmine Corp file en quart de finale des Worlds ! (co-stream otplol_)](https://www.twitch.tv/otplol_/clip/CrunchyTangentialDootCurseLit-0c_su2PiYv4ZzhK2) | 55 |
 | 03/11 23:15 | YouTube | Skyyart | [Skyyart chambre KOI pendant la qualif de T1 aux Worlds](https://www.youtube.com/watch?v=K7Evw-Zq9Kg) | 56 |
 | 03/11 19:20 | Twitch | youladecadd | [youladecadd panique en urbex et perd tout dans le noir](https://www.twitch.tv/youladecadd/clip/MuddyImpossibleJellyfishAMPEnergy-lAf-MdRCDqqFOUis) | 55 |
 | 03/11 18:52 | YouTube | TheKAIRI78 | [TheKAIRI78 découvre une assiette et menace de couper le live](https://www.youtube.com/watch?v=28PvjBl99Kc) | 64 |
@@ -44,10 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (4), GOTAGA (4), Ami
 | 02/11 19:46 | Twitch | Berlu | [Berlu explique pourquoi le serveur GTA RP Vibe ferme temporairement](https://www.twitch.tv/berlu/clip/ArbitraryAntediluvianEmuTooSpicy-QXUoal1Gd7Ryd-Jx) | 55 |
 | 02/11 17:03 | YouTube | Studio Bagel | [Éric Judor classe ses films : flop ou pas flop ? (Hot Ones, Studio Bagel)](https://www.youtube.com/watch?v=2frDDzZDNkw) | 55 |
 | 02/11 16:55 | Twitch | ZeratoR | [ZeratoR se prend un screamer à 1 € : « J'ai 38 ans ! »](https://www.twitch.tv/zerator/clip/AttractiveArtisticToadAMPTropPunch-HgvOECapqeR6j9JG) | 62 |
-| 02/11 16:04 | YouTube | Wankil Studio - Laink et Terracid | [Laink en a marre qu'on dise que Wankil n'a rien inventé](https://www.youtube.com/watch?v=5A-jZ1XDmMU) | 68 |
-| 02/11 15:43 | Twitch | TheGuill84 | [TheGuill84 se prend un screamer en plein Minecraft](https://www.twitch.tv/theguill84/clip/MoistSavagePenguinHumbleLife-UPJP20cxRNZ4YC5h) | 62 |
-| 02/11 14:20 | à la demande | GOTAGA | [Gotaga souffle la pire insulte au jeu du meilleur menteur (ft. Joyca, Djilsi, Theodort)](https://www.youtube.com/watch?v=ZA_3eoib31s) |  |
-| 02/11 12:56 | à la demande | GOTAGA | [Gotaga : le jeu du meilleur menteur avec Joyca, Djilsi et Theodort](https://www.youtube.com/watch?v=ZA_3eoib31s) |  |
 
 ## Derniers échecs
 
