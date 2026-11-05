@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 05/11/2026 à 19:11 UTC.
+Mis à jour le 05/11/2026 à 22:07 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 64585 | 64585 |
-| Vidéos téléchargées et préparées | 367 | 367 |
-| Shorts envoyés | 28 | 28 |
-| Écartés par la revue | 339 | 339 |
-| Échecs (téléchargement, montage, envoi) | 14 | 14 |
-| Passages | 24 | 24 |
+| Moments trouvés (Twitch + YouTube) | 67625 | 67625 |
+| Vidéos téléchargées et préparées | 375 | 375 |
+| Shorts envoyés | 29 | 29 |
+| Écartés par la revue | 346 | 346 |
+| Échecs (téléchargement, montage, envoi) | 15 | 15 |
+| Passages | 25 | 25 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 42, YouTube 22, à la demande 6.
-Note moyenne de Claude : 59/100 sur 31 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
-Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), AmineMaTue (3), Locklear (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3), Hctuan (2).
+Par source : Twitch 43, YouTube 22, à la demande 6.
+Note moyenne de Claude : 59/100 sur 32 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), Domingo (3), AmineMaTue (3), Locklear (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
-100 créateurs suivis, 90 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 90 identifiées ; 12 mises de côté (introuvables).
-471 vidéos récentes suivies, 190 regardées de près (95 avec des moments à extraire).
+101 créateurs suivis, 91 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 91 identifiées ; 12 mises de côté (introuvables).
+479 vidéos récentes suivies, 199 regardées de près (99 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 05/11 22:11 | Twitch | Domingo | [Domingo devine les recettes de tous les films Pixar… avec un calcul de tête](https://www.twitch.tv/domingo/clip/RelentlessCharmingNarwhalDansGame-9Ic79dCNZNMXC1K5) | 60 |
 | 05/11 19:27 | YouTube | Sylvain Lyve | [Sylvain Lyve teste sa Dacia à l'huile de tournesol sur piste… ça sent la frite](https://www.youtube.com/watch?v=N1A1Z-VlKUI) | 64 |
 | 05/11 16:14 | Twitch | Hctuan | [Hctuan bat l'Ender Dragon en hardcore après 48 h de run](https://www.twitch.tv/hctuan/clip/SullenProtectiveScorpionRickroll-EXQ0XBHXqfSj1Jw3) | 66 |
 | 05/11 13:27 | Twitch | LaureBV | [LaureBV : « Toutes les planètes sont alignées » pour la Karmine Corp aux Worlds](https://www.twitch.tv/laurebv/clip/SeductiveConsiderateCormorantNotATK-1Hfy5i-BRMBQu_F2) | 55 |
@@ -47,10 +48,10 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), Ami
 | 03/11 17:20 | Twitch | Joueur du Grenier | [Joueur du Grenier attaqué par des daims… puis il refile les biscuits à sa femme](https://www.twitch.tv/joueur_du_grenier/clip/BenevolentUnsightlyHippoPJSalt-QvcvgvMsAsNVkaL3) | 68 |
 | 03/11 16:40 | YouTube | Poisson Fécond | [La mort absurde du président Félix Faure racontée par Poisson Fécond](https://www.youtube.com/watch?v=Q40NcFRRL4g) | 62 |
 | 03/11 16:39 | YouTube | Wankil Studio - Laink et Terracid | [Laink et Terracid doivent désamorcer une bombe… aveugle, sourd et muet](https://www.youtube.com/watch?v=LI9JzL6bhtw) | 66 |
-| 03/11 16:24 | Twitch | DVM_Medja | [DVM_Medja : les négociations dérapent en GTA RP](https://www.twitch.tv/dvm_medja/clip/SullenClearBibimbapMingLee-i4Rl_5n3FmuGbbbP) | 48 |
 
 ## Derniers échecs
 
+- youtube:epH_fKG1khk@55-148 (3×) : préparation abandonnée au bout de 4 min
 - youtube:0iHpCa_YM8k@455-545 (1×) : non évalué par Claude
 - youtube:yHHQx1HxnJw@1308-1418 (1×) : non évalué par Claude
 - youtube:z_L9AX4GMxY@1400-1490 (1×) : non évalué par Claude
@@ -60,4 +61,3 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), Ami
 - twitch:DepressedSquareLardPhilosoraptor-MqaGYCig4JSiiLhu (1×) : non évalué par Claude
 - twitch:NimbleAltruisticLouseCclamChamp-OMjc_XlusabTkK8D (1×) : non évalué par Claude
 - twitch:WimpyWealthyHerbsMoreCowbell-Khv5LXCv_e6NoX6x (1×) : non évalué par Claude
-- twitch:BovineLitigiousBearPipeHype-aOEuwGe4fZhXH0t7 (3×) : préparation abandonnée au bout de 4 min
