@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 05/11/2026 à 16:08 UTC.
+Mis à jour le 05/11/2026 à 19:11 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 61736 | 61736 |
-| Vidéos téléchargées et préparées | 352 | 352 |
-| Shorts envoyés | 27 | 27 |
-| Écartés par la revue | 325 | 325 |
+| Moments trouvés (Twitch + YouTube) | 64585 | 64585 |
+| Vidéos téléchargées et préparées | 367 | 367 |
+| Shorts envoyés | 28 | 28 |
+| Écartés par la revue | 339 | 339 |
 | Échecs (téléchargement, montage, envoi) | 14 | 14 |
-| Passages | 23 | 23 |
+| Passages | 24 | 24 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 42, YouTube 21, à la demande 6.
-Note moyenne de Claude : 59/100 sur 30 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
-Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), AmineMaTue (3), Locklear (3), Bob Lennon (3), Amixem (3), Hctuan (2), ZeratoR (2).
+Par source : Twitch 42, YouTube 22, à la demande 6.
+Note moyenne de Claude : 59/100 sur 31 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), AmineMaTue (3), Locklear (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3), Hctuan (2).
 
 ## Veille YouTube
 
 100 créateurs suivis, 90 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 90 identifiées ; 12 mises de côté (introuvables).
-458 vidéos récentes suivies, 187 regardées de près (93 avec des moments à extraire).
+471 vidéos récentes suivies, 190 regardées de près (95 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 05/11 19:27 | YouTube | Sylvain Lyve | [Sylvain Lyve teste sa Dacia à l'huile de tournesol sur piste… ça sent la frite](https://www.youtube.com/watch?v=N1A1Z-VlKUI) | 64 |
 | 05/11 16:14 | Twitch | Hctuan | [Hctuan bat l'Ender Dragon en hardcore après 48 h de run](https://www.twitch.tv/hctuan/clip/SullenProtectiveScorpionRickroll-EXQ0XBHXqfSj1Jw3) | 66 |
 | 05/11 13:27 | Twitch | LaureBV | [LaureBV : « Toutes les planètes sont alignées » pour la Karmine Corp aux Worlds](https://www.twitch.tv/laurebv/clip/SeductiveConsiderateCormorantNotATK-1Hfy5i-BRMBQu_F2) | 55 |
 | 05/11 10:18 | YouTube | Bob Lennon | [Bob Lennon attaque toute une ville ennemie sur Crimson Desert](https://www.youtube.com/watch?v=f6amVCjQtzA) | 63 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), Ami
 | 03/11 16:40 | YouTube | Poisson Fécond | [La mort absurde du président Félix Faure racontée par Poisson Fécond](https://www.youtube.com/watch?v=Q40NcFRRL4g) | 62 |
 | 03/11 16:39 | YouTube | Wankil Studio - Laink et Terracid | [Laink et Terracid doivent désamorcer une bombe… aveugle, sourd et muet](https://www.youtube.com/watch?v=LI9JzL6bhtw) | 66 |
 | 03/11 16:24 | Twitch | DVM_Medja | [DVM_Medja : les négociations dérapent en GTA RP](https://www.twitch.tv/dvm_medja/clip/SullenClearBibimbapMingLee-i4Rl_5n3FmuGbbbP) | 48 |
-| 03/11 16:03 | YouTube | Bob Lennon | [Bob Lennon reçoit une livraison absurde en enfer (Red Tape)](https://www.youtube.com/watch?v=lA-rWcF0h1c) | 58 |
 
 ## Derniers échecs
 
