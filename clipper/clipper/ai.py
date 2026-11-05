@@ -95,6 +95,10 @@ Termine juste après la chute ou la réaction à la chute, sans traîner : un sh
 boucle. Coupe les temps morts. Si l'extrait est déjà bon, renvoie 0 et sa durée. Quand \
 des spectateurs citent un instant de l'extrait en commentaire, c'est le moment qu'ils ont retenu : cherche-le dans \
 la transcription et les images, et coupe autour de lui.
+- long_start / long_end : la version longue du même moment, pour TikTok qui ne rémunère que les vidéos de plus \
+d'une minute : de 61 à 90 secondes, avec toute la mise en place, la chute et les réactions qui suivent, sans temps \
+mort. Elle démarre elle aussi sur une situation qui accroche. Si le moment ne tient pas 61 secondes sans temps \
+mort, renvoie 0 et 0.
 
 Les transcriptions viennent d'une reconnaissance vocale automatique : elles peuvent contenir des erreurs."""
 
@@ -122,9 +126,12 @@ SHORTS_SCHEMA: dict[str, Any] = {
                     "hashtags": {"type": "array", "items": {"type": "string"}},
                     "trim_start": {"type": "number"},
                     "trim_end": {"type": "number"},
+                    "long_start": {"type": "number"},
+                    "long_end": {"type": "number"},
                 },
                 "required": [
                     "id", "verdict", "reason", "score", "hook", "title", "description", "hashtags", "trim_start", "trim_end",
+                    "long_start", "long_end",
                 ],  # fmt: skip
                 "additionalProperties": False,
             },
@@ -176,6 +183,8 @@ class Review:
                 "trim_start": self.meta.trim_start,
                 "trim_end": self.meta.trim_end,
                 "ai": self.meta.ai,
+                "long_start": self.meta.long_start,
+                "long_end": self.meta.long_end,
             },
         }
 
@@ -260,12 +269,28 @@ def _validated(raw: dict[str, Any], item: ReviewItem, config: Config) -> Review:
         pass
     if candidate.manual and (candidate.parts or (candidate.start is not None and candidate.end is not None)):
         trim_start, trim_end = None, None  # the owner picked this very section (or these clips): it is kept whole
+    long_start, long_end = _long_cut(raw, item, config)
     verdict = raw.get("verdict") if raw.get("verdict") in {"publish", "reject"} else "publish"
     score = max(0.0, min(100.0, float(raw.get("score") or 0)))
     meta = ShortMeta(
-        hook=hook, title=title, description=description, hashtags=tags, trim_start=trim_start, trim_end=trim_end, ai=True
-    )
+        hook=hook, title=title, description=description, hashtags=tags, trim_start=trim_start, trim_end=trim_end, ai=True,
+        long_start=long_start, long_end=long_end,
+    )  # fmt: skip
     return Review(verdict=verdict, reason=_cut(str(raw.get("reason") or ""), 300), score=score, meta=meta)
+
+
+def _long_cut(raw: dict[str, Any], item: ReviewItem, config: Config) -> tuple[float | None, float | None]:
+    """Claude's long cut of the moment, when it fits in the extract and lasts long_min to long_max seconds."""
+    if item.candidate.manual:
+        return None, None
+    rules = config.shorts
+    try:
+        start, end = max(0.0, float(raw.get("long_start") or 0.0)), min(item.duration, float(raw.get("long_end") or 0.0))
+    except (TypeError, ValueError):
+        return None, None
+    if not rules.long_min <= end - start <= rules.long_max + 0.5:  # 0 and 0: no long cut; never under a minute
+        return None, None
+    return round(start, 2), round(end, 2)
 
 
 def _age(created: datetime | None, now: datetime) -> str:

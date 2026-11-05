@@ -12,7 +12,7 @@ Un robot qui, plusieurs fois par jour :
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
    même clip, 2 clips max par streamer et par jour, popularité *relative* au streamer, fraîcheur ;
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
-   avec 20 s avant et 8 s après (la mise en place et la fin de la réaction ; le clip seul si le replay est
+   avec 30 s avant et 15 s après (la mise en place et la fin de la réaction ; le clip seul si le replay est
    indisponible ou muet), puis Claude reçoit la transcription + 4 images de chaque extrait ; il
    écarte ce qui est risqué (haine, harcèlement, contenu sexuel, infos privées, musique protégée, films,
    matchs de foot… ; la rage et les gros mots passent), note chaque extrait sur 100 dans l'esprit des
@@ -184,6 +184,14 @@ Le robot vise donc :
 - **Des shorts courts et nets** : 12 à 35 secondes visées, 60 au plus. Le short démarre sur l'action, finit
   juste après la chute (il se revoit en boucle), et son accroche ouvre une question sans révéler la chute.
 
+**Vidéos de plus d'une minute (programme de rémunération TikTok)** : TikTok ne rémunère que les vidéos de plus
+d'une minute. Claude coupe donc chaque moment deux fois : un short de 12 à 35 secondes, et une version longue de 61
+à 90 secondes (mise en place, chute et réactions, sans temps mort) quand le moment la tient. Les deux premiers
+shorts du jour qui en ont une (`shorts.long_per_day`, `long_min`, `long_max`) sortent dans leur version longue ;
+la fiche Telegram l'indique (« 💰 Version longue (1 min 05) »). TikTok ne rémunère que les contenus qu'il juge
+originaux : ces versions longues, sous-titrées et coupées, ont plus de chances que des clips repostés tels quels,
+sans garantie.
+
 ### Claude : le tri et les textes par IA
 
 Crée une clé sur [platform.claude.com](https://platform.claude.com) → secret `ANTHROPIC_API_KEY`.
@@ -340,7 +348,7 @@ restent 100 % Twitch.
   « publicité », « sponsorisé »…), Claude les refusant de toute façon.
 - `twitch.skip_live_words` : pareil, mais d'après le titre du **live** dont le clip est tiré. Vide par défaut :
   les co-streams d'e-sport (Worlds, RLCS…) sont les bienvenus, Claude y juge la réaction du streamer.
-- `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (20 et 8),
+- `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (30 et 15, assez pour une version longue),
   que Claude garde ou coupe. `0` pour travailler sur le clip seul.
 - `shorts.layout` : `blur` (image entière sur fond flouté, réglage de la chaîne), ou `auto` pour laisser le
   robot choisir entre facecam en haut / jeu en bas, plein cadre et fond flouté. `streamers.<login>.layout` /

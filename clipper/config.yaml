@@ -121,10 +121,13 @@ shorts:
   per_run: 1                    # sans per_source : shorts publiés à chaque passage, toutes sources confondues
   candidates_factor: 3          # avec Claude : 3 candidats examinés par série et par short voulu
   review_rounds: 2              # 2 séries au plus par source et par passage : le passage suivant (2 h après) prend la suite
+  long_per_day: 2               # TikTok ne rémunère que les vidéos de plus d'une minute : les 2 premiers shorts du jour qui s'y prêtent
+  long_min: 61                  #   sortent dans leur version longue (61 à 90 s, coupée par Claude)
+  long_max: 90
   min_score: 60                 # note de Claude sur 100 : en dessous, le clip n'est pas publié
   guarantee: {}                # plus de clip « pour garder un short » sous la barre : seuls les moments forts partent (05/11)
-  context_before: 20            # secondes du replay (VOD) ajoutées avant chaque clip Twitch : la mise en place (0 = clip seul)
-  context_after: 8              # et après : la fin de la réaction. Claude coupe ensuite ce qui ne sert pas
+  context_before: 30            # secondes du replay (VOD) ajoutées avant chaque clip Twitch : la mise en place (0 = clip seul)
+  context_after: 15             # et après : la fin de la réaction (assez pour une version longue). Claude coupe ensuite ce qui ne sert pas
   max_per_streamer_per_day: 2
   min_duration: 8
   max_duration: 90

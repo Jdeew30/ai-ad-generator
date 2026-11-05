@@ -146,6 +146,9 @@ class ShortMeta:
     trim_start: float | None = None  # relative to the downloaded media
     trim_end: float | None = None
     ai: bool = False  # written by Claude (True) or by the template (False)
+    long_start: float | None = None  # Claude's long cut of the moment (61-90 s, monetizable on TikTok), if it has one
+    long_end: float | None = None
+    long: bool = False  # rendered as the long cut
 
     def tags(self) -> list[str]:
         return [h.lstrip("#") for h in self.hashtags if h.strip("# ")]

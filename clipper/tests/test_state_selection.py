@@ -196,3 +196,14 @@ def test_a_creator_posted_a_lot_this_week_leaves_room_for_others(tmp_path):
     newcomer = make_candidate("twitch:new", "newcomer", views=1000, created_at=NOW - timedelta(hours=3))
     assert [c.key for c in rank([star, newcomer], state, config, now=NOW)] == ["twitch:new", "twitch:star"]
     assert [c.key for c in rank([star, newcomer], State(tmp_path / "empty.json"), config, now=NOW)] == ["twitch:star", "twitch:new"]
+
+
+def test_the_state_counts_the_long_shorts_of_the_day(tmp_path: Path):
+    state = State(tmp_path / "s.json")
+    state.record_post(make_candidate("twitch:long"), meta(), [], length=65.4)
+    state.record_post(make_candidate("twitch:short"), meta(), [], length=28.0)
+    state.record_post(make_candidate("twitch:unknown"), meta(), [])
+    assert state.posted["twitch:long"]["length"] == 65.4 and state.posted["twitch:unknown"]["length"] is None
+    assert state.long_count(NOW - timedelta(days=1), 61) == 1
+    state.posted["twitch:long"]["at"] = (NOW - timedelta(days=2)).isoformat()
+    assert state.long_count(NOW - timedelta(days=1), 61) == 0  # sent another day

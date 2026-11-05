@@ -188,6 +188,9 @@ def card(meta: ShortMeta, candidate: Candidate, *, now: datetime | None = None) 
     if candidate.start is not None and candidate.end is not None and platform == "YouTube":
         when.append(f"passage {_clock(candidate.start)}–{_clock(candidate.end)}")
     lines.append(" · ".join(part for part in when if part))
+    if meta.long and meta.trim_start is not None and meta.trim_end is not None:
+        seconds = round(meta.trim_end - meta.trim_start)
+        lines.append(f"💰 Version longue ({seconds // 60} min {seconds % 60:02d}) : plus d'une minute, monétisable sur TikTok")
     if candidate.created_at and not candidate.manual:
         age = ((now or datetime.now(timezone.utc)) - candidate.created_at).total_seconds() / 3600
         if 0 <= age < FRESH_HOURS:
