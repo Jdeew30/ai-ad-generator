@@ -82,6 +82,7 @@ class ShortsConfig:
     per_run: int = 1
     per_source: dict[str, int] = field(default_factory=dict)  # {twitch: 1, youtube: 1}: so many of each per run, instead of per_run
     candidates_factor: int = 3  # how many candidates are downloaded and reviewed per short published
+    review_rounds: int = 4  # with Claude: batches of candidates reviewed at most per source and run, while none is kept
     min_score: float = 60.0  # Claude's mark out of 100 a clip needs to be posted
     # {youtube: 45}: when no clip of that source reaches min_score in a scheduled run, its best one still goes out
     # if Claude marked it this much (never a clip it refused), so that each run keeps its short of each source.
@@ -251,8 +252,8 @@ def load_config(path: Path | None = None) -> Config:
         raise ConfigError(f"{path} n'est pas un YAML valide : {exc}") from exc
     config = build(Config, data or {}, "config")
     config.twitch.streamers = [s.lower().lstrip("@") for s in config.twitch.streamers]
-    if config.shorts.per_run < 0 or config.shorts.candidates_factor < 1:
-        raise ConfigError("config.shorts : per_run >= 0 et candidates_factor >= 1 attendus")
+    if config.shorts.per_run < 0 or config.shorts.candidates_factor < 1 or config.shorts.review_rounds < 1:
+        raise ConfigError("config.shorts : per_run >= 0, candidates_factor >= 1 et review_rounds >= 1 attendus")
     if any(source not in {"twitch", "youtube"} or count < 0 for source, count in config.shorts.per_source.items()):
         raise ConfigError("config.shorts.per_source : twitch et youtube, avec un nombre >= 0, attendus")
     if not 0 <= config.shorts.min_score <= 100:

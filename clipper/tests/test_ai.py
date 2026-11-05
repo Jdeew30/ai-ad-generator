@@ -128,6 +128,18 @@ def test_refusal_and_errors_fall_back_to_the_template(server, tmp_path):
     assert len(server.calls("POST", "/v1/messages")) == calls
 
 
+def test_claude_cuts_short_tight_shorts(server, tmp_path):
+    long_cut = {"clips": [{"id": "c1", "verdict": "publish", "reason": "fou rire", "score": 75, "hook": "IL CRAQUE",
+                           "title": "t", "description": "d", "hashtags": [], "trim_start": 5, "trim_end": 85}]}  # fmt: skip
+    server.route("POST", "/v1/messages", (200, {}, message(long_cut)))
+    item = ReviewItem(make_candidate("youtube:x@0-90", "squeezie", source="youtube"), 90.0)
+    review = curator(server).review([item], now=NOW)["youtube:x@0-90"]
+    assert (review.meta.trim_start, review.meta.trim_end) == (5.0, 65.0)  # a minute at most
+    system = json.dumps(server.calls("POST", "/v1/messages")[0].json()["system"], ensure_ascii=False)
+    assert "vise 12 à 35 secondes" in system and "dès la première seconde" in system and "se revoit en boucle" in system
+    assert "arrêter le pouce" in system  # the mark is about stopping the scroll of a stranger
+
+
 def test_claude_stops_asking_once_the_account_has_no_credits(server, tmp_path):
     from clipper.ai import NO_CREDITS
 

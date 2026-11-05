@@ -42,8 +42,6 @@ from .ytdlp import DownloadError, YtDlp
 
 log = logging.getLogger(__name__)
 
-# With Claude, more batches of candidates are reviewed while the previous ones do not give enough shorts.
-REVIEW_ROUNDS = 4
 FIND_BEFORE, FIND_AFTER = 15.0, 35.0  # passage kept around a phrase looked for: its setup, then what it leads to
 # Claude sees what was published lately: never the same moment twice, and "(partie 2)" for the next part of a story.
 RECENT_DAYS = 3
@@ -710,7 +708,8 @@ class Clipper:
         under_bar: list[tuple[Prepared, Review]] = []  # judged and allowed, but marked under the bar
         forced: set[str] = set()
         unjudged = 0
-        for round_number in range(REVIEW_ROUNDS if use_ai else 1):
+        # With Claude, more batches are reviewed while the previous ones do not give enough shorts (shorts.review_rounds).
+        for round_number in range(self.config.shorts.review_rounds if use_ai else 1):
             if use_ai and getattr(self.curator, "disabled_reason", None):
                 break  # Claude can judge nothing more in this run: no clip is prepared for nothing
             if round_number:

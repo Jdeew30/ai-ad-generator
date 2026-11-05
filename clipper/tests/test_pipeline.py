@@ -254,6 +254,14 @@ def test_a_second_batch_is_reviewed_when_the_first_is_rejected(media, paths):
     assert [c.key for c, _ in report.rejected] == ["twitch:Alpha-Toxic"] and run.transcriber.calls == 2
 
 
+def test_no_more_batches_than_review_rounds_are_reviewed(media, paths):
+    clips = {"alpha": [entry("Alpha-Toxic", 9000, 1, "Toxic moment")], "beta": [entry("Beta-1", 1500, 3)]}
+    run = clipper(media, paths, clips=clips, publishers={}, curator=RejectFirst(),
+                  shorts={"min_duration": 3, "candidates_factor": 1, "review_rounds": 1})  # fmt: skip
+    report = run.run_shorts()
+    assert report.published == [] and run.transcriber.calls == 1  # Beta-1 waits for the next run
+
+
 def test_clips_marked_under_the_bar_are_not_posted(media, paths):
     clips = {"alpha": [entry("Alpha-Dull", 9000, 1, "Dull moment")], "beta": [entry("Beta-1", 1500, 3)]}
     telegram = FakePublisher("telegram")

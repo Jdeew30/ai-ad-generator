@@ -14,6 +14,9 @@ from .state import State, moment_of, same_moment
 log = logging.getLogger(__name__)
 
 DIVERSITY = 0.25  # weight of a creator's shorts of the past week against its next candidates
+# Twitch shorts: how much the views an hour count, against the views piled up. The clips posted on 03/11 were 67 h
+# old (median) with 600 views: the moments everyone talks about had been posted by other accounts long before.
+PACE_WEIGHT = 0.7
 
 
 def _plain(text: str) -> str:
@@ -27,20 +30,25 @@ def excluded_title(title: str, words: list[str]) -> bool:
     return any(_plain(word) in plain for word in words if word.strip())
 
 
-def score(candidate: Candidate, median_views: float, now: datetime, *, freshness_weight: float) -> float:
+def score(candidate: Candidate, median_views: float, now: datetime, *, freshness_weight: float, pace_weight: float = 0.0) -> float:
     """Popularity, relative to the streamer's usual numbers, weighted by freshness and length fit.
 
     The relative term matters: a 2 000-view clip from a 3 000-viewer streamer is a better
     moment than a 5 000-view clip from a streamer whose every clip gets 20 000 views.
+    With `pace_weight`, the views a clip gathers an hour count that much in its popularity: the moment
+    taking off right now goes first, before an older clip that piled up more views in three days.
     """
     if candidate.manual:
         return 1e9
     views = max(candidate.views, 0)
+    age_hours = (now - candidate.created_at).total_seconds() / 3600 if candidate.created_at else 24.0
     base = math.log10(views + 10)
+    if pace_weight:
+        pace = views / max(age_hours, 1.0)
+        base = (1.0 - pace_weight) * base + pace_weight * (math.log10(pace + 1) + 1.0)
     relative = 0.0
     if median_views > 0:
         relative = max(-1.0, min(2.0, math.log2((views + 1) / (median_views + 1))))
-    age_hours = (now - candidate.created_at).total_seconds() / 3600 if candidate.created_at else 24.0
     fresh = math.exp(-max(age_hours, 0.0) / 36.0)
     duration = candidate.duration
     if 15 <= duration <= 60:
@@ -115,7 +123,11 @@ def rank(
     for candidate in kept:
         peers = views_by_streamer[(candidate.source, candidate.streamer_login)]
         median = statistics.median(peers) if len(peers) >= 3 else 0.0
-        candidate.score = score(candidate, median, now, freshness_weight=0.15 if compilation else 0.25)
+        # Shorts: on Twitch, the clip taking off now goes first (the one posted first gets the views).
+        pace_weight = PACE_WEIGHT if not compilation and candidate.source == "twitch" else 0.0
+        candidate.score = score(candidate, median, now, freshness_weight=0.15 if compilation else 0.25, pace_weight=pace_weight)
+        if pace_weight and candidate.created_at and candidate.pace is None:
+            candidate.pace = candidate.views / max((now - candidate.created_at).total_seconds() / 3600, 1.0)
         if not compilation and not candidate.manual and candidate.streamer_login:
             # Room for other creators: each short of this one in the past week lowers its next ones (x0.8, x0.67…).
             candidate.score /= 1 + DIVERSITY * state.posted_count(candidate.streamer_login, now - timedelta(days=7))

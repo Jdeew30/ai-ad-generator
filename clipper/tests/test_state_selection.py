@@ -119,8 +119,20 @@ def test_rank_relative_popularity_favours_a_standout_clip(tmp_path: Path):
     cands += [make_candidate(f"twitch:small{i}", "small", views=300, created_at=NOW - timedelta(hours=i + 3)) for i in range(4)]
     cands.append(make_candidate("twitch:standout", "small", views=3000, created_at=NOW - timedelta(hours=2)))
     ranked = [c.key for c in rank(cands, state, config(shorts={"max_per_streamer_per_day": 10}), now=NOW)]
-    assert ranked[0] == "twitch:standout"
-    assert ranked.index("twitch:big0") < ranked.index("twitch:small0")
+    # The clip taking off right now goes first; the standout comes next, before the big streamer's older clips.
+    assert ranked[:3] == ["twitch:big0", "twitch:standout", "twitch:big1"]
+    assert ranked.index("twitch:standout") < ranked.index("twitch:small0")
+
+
+def test_a_clip_taking_off_now_goes_before_an_older_one_with_more_views(tmp_path: Path):
+    old = make_candidate("twitch:old", "a", views=9000, created_at=NOW - timedelta(hours=60))
+    fresh = make_candidate("twitch:fresh", "b", views=1200, created_at=NOW - timedelta(hours=3))
+    state = State(tmp_path / "s.json")
+    ranked = rank([old, fresh], state, config(), now=NOW)
+    assert [c.key for c in ranked] == ["twitch:fresh", "twitch:old"]  # 400 views an hour against 150
+    assert round(fresh.pace) == 400  # shown on the Telegram card
+    # A best-of looks back over days: there, the views piled up still count first.
+    assert [c.key for c in rank([old, fresh], state, config(), now=NOW, compilation=True)] == ["twitch:old", "twitch:fresh"]
 
 
 def test_rank_respects_history_and_daily_cap(tmp_path: Path):

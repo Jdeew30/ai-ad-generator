@@ -218,6 +218,19 @@ def test_telegram_card_tells_who_where_when_how_much_and_why(server, http, video
         assert line in caption
 
 
+def test_the_card_says_to_post_a_fresh_moment_right_away():
+    from datetime import timedelta
+
+    from clipper.publishers.telegram import card
+
+    from .conftest import NOW
+
+    fresh = make_candidate(created_at=NOW - timedelta(hours=2))
+    assert "⚡ Tout frais (il y a 2 h) : à poster maintenant, avant les autres comptes" in card(META, fresh, now=NOW)
+    old = make_candidate(created_at=NOW - timedelta(hours=30))
+    assert not any(line.startswith("⚡") for line in card(META, old, now=NOW))
+
+
 def test_telegram_waits_out_flood_control(server, http, video, monkeypatch):
     monkeypatch.setattr(telegram_module, "probe", lambda _p: type("I", (), {"width": 1080, "height": 1920, "duration": 30.0})())
     replies = [(429, {}, {"ok": False, "error_code": 429, "description": "Too Many Requests: retry after 7",
