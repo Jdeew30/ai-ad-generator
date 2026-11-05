@@ -173,8 +173,11 @@ Constat du 05/11 sur les 71 shorts envoyés :
 - **Peu de bons moments examinés** : 3 % des clips Twitch examinés atteignaient 60/100.
 
 Le robot vise donc :
-- **Le moment qui part maintenant** : clips de moins de 36 h, classés par vues à l'heure, et un passage toutes
-  les 2 heures. La fiche Telegram dit « ⚡ Tout frais : à poster maintenant » quand le moment a moins de 12 h.
+- **Le moment qui part maintenant** : clips classés par vues à l'heure, et un passage toutes les 2 heures. La
+  fiche Telegram dit « ⚡ Tout frais : à poster maintenant » quand le moment a moins de 12 h. Les pépites de petits
+  streamers restent dans la course une semaine : le short le plus vu du compte (Loupiote, « je regarde le ciel
+  depuis deux ans, rien ne m'est tombé dessus », 75,6k vues sur TikTok) était un clip de 1 000 vues vieux de
+  7 jours, que personne d'autre n'avait posté.
 - **Des moments forts seulement** : plus de clip envoyé sous la barre de 60 « pour garder un short ». Claude note
   le potentiel viral : un inconnu s'arrête-t-il dès la première seconde, comprend-il en trois secondes, a-t-il
   envie de partager ?
@@ -325,10 +328,11 @@ restent 100 % Twitch.
   les minutes GitHub Actions sont illimitées, mais chaque passage coûte des crédits Claude (la revue).
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
-- `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (36 h : le moment qui part maintenant)
-  et le nombre de vues minimal (150 : c'est la note de Claude qui écarte les moments faibles). Les clips Twitch
-  sont classés d'abord par vues à l'heure : celui qui part maintenant passe avant un clip plus vu mais vieux de
-  trois jours, que les autres comptes ont déjà posté.
+- `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal
+  (150 : c'est la note de Claude qui écarte les moments faibles). Les clips Twitch sont classés d'abord par vues
+  à l'heure : celui qui part maintenant passe avant un clip plus vu mais vieux de trois jours, que les autres
+  comptes ont déjà posté. Un clip qui fait bien plus que d'habitude pour son streamer garde un bonus : la pépite
+  d'un petit streamer, que personne d'autre ne poste, reste bonne une semaine.
 - Le replay autour d'un clip Twitch arrive d'habitude en quelques secondes : s'il n'est pas là au bout d'une
   minute, le clip part seul. Un clip dont la préparation dépasse quand même 4 minutes est abandonné pour de bon :
   le passage prend le suivant, et ne prépare plus rien après 55 minutes pour envoyer à temps ce qu'il a retenu.

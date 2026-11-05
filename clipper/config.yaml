@@ -70,7 +70,7 @@ twitch:
   remember_live: 150            # + jusqu'à 150 chaînes FR vues ces 14 derniers jours (même hors ligne)
   discover_categories: 20       # + les clips FR les plus vus de la semaine dans les 20 catégories les plus regardées
   clips_per_streamer: 20
-  window_hours: 36              # clips de moins de 36 h : le moment qui part maintenant (posté le premier, il prend les vues)
+  window_hours: 168             # 7 jours : les clips qui partent maintenant d'abord (vues à l'heure), mais une pépite de petit streamer reste bonne une semaine (Loupiote, 75,6k vues sur TikTok, postée à 7 jours)
   min_views: 150               # la note de Claude fait le tri : le seul bon clip du 03/11 au soir (68/100) avait 184 vues
   # Clips jamais téléchargés si leur titre contient un de ces mots (pubs : Claude les refuse toujours).
   # Les co-streams d'e-sport (Worlds, RLCS…) et le RP sont les bienvenus : pas de filtre sur le titre du live.
