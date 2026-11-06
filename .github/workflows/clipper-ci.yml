@@ -5,9 +5,9 @@ name: Clipper CI
 on:
   push:
     branches: [claude/modest-ptolemy-67bgwo]
-    paths: ["clipper/**", ".github/workflows/clipper*.yml"]
+    paths: ["clipper/**", ".github/workflows/clipper*.yml", ".github/scripts/**"]
   pull_request:
-    paths: ["clipper/**", ".github/workflows/clipper*.yml"]
+    paths: ["clipper/**", ".github/workflows/clipper*.yml", ".github/scripts/**"]
   workflow_dispatch:
 
 concurrency:
@@ -29,20 +29,9 @@ jobs:
           cache: pip
           cache-dependency-path: clipper/requirements*.txt
       - name: Installer ffmpeg
-        # Même installation bornée que le passage (clipper.yml) : un miroir Ubuntu peut bloquer apt sans rien afficher.
+        # Même installation que le passage (clipper.yml) : essais bornés, puis l'archive officielle d'Ubuntu.
         timeout-minutes: 15
-        run: |
-          opts=(-qq -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 -o Acquire::Retries=2)
-          for attempt in 1 2 3; do
-            if timeout -k 10 120 sudo apt-get update "${opts[@]}" &&
-               timeout -k 10 240 sudo apt-get install -y "${opts[@]}" ffmpeg; then
-              exit 0
-            fi
-            echo "::warning::Installation de ffmpeg bloquée ou en échec (essai $attempt sur 3)"
-            sudo dpkg --configure -a || true
-            sleep 10
-          done
-          exit 1
+        run: bash "$GITHUB_WORKSPACE/.github/scripts/install-ffmpeg.sh"
       - run: pip install -r requirements-dev.txt
       - run: python -m pytest -q
 
@@ -68,20 +57,9 @@ jobs:
           cache: pip
           cache-dependency-path: clipper/requirements*.txt
       - name: Installer ffmpeg
-        # Même installation bornée que le passage (clipper.yml) : un miroir Ubuntu peut bloquer apt sans rien afficher.
+        # Même installation que le passage (clipper.yml) : essais bornés, puis l'archive officielle d'Ubuntu.
         timeout-minutes: 15
-        run: |
-          opts=(-qq -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 -o Acquire::Retries=2)
-          for attempt in 1 2 3; do
-            if timeout -k 10 120 sudo apt-get update "${opts[@]}" &&
-               timeout -k 10 240 sudo apt-get install -y "${opts[@]}" ffmpeg; then
-              exit 0
-            fi
-            echo "::warning::Installation de ffmpeg bloquée ou en échec (essai $attempt sur 3)"
-            sudo dpkg --configure -a || true
-            sleep 10
-          done
-          exit 1
+        run: bash "$GITHUB_WORKSPACE/.github/scripts/install-ffmpeg.sh"
       - run: pip install -r requirements.txt
       - name: Modèle Whisper en cache
         uses: actions/cache@v4
