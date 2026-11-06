@@ -1,3 +1,4 @@
+import logging
 from datetime import timedelta
 from pathlib import Path
 
@@ -630,6 +631,7 @@ def test_a_youtube_feed_outage_sets_no_channel_aside(server, http, tmp_path, mon
     from clipper.sources.watch import Creators
     from clipper.sources.youtube import discover_youtube
 
+    caplog.set_level(logging.INFO)
     monkeypatch.setattr(watch_module, "FEED", server.url + "/feeds/videos.xml?channel_id={}")
     status = dict.fromkeys(("UCa", "UCb", "UCc", "UCd"), 500)
 
@@ -654,13 +656,22 @@ def test_a_youtube_feed_outage_sets_no_channel_aside(server, http, tmp_path, mon
 
     runs(range(3))  # every feed down three runs in a row: YouTube's doing, no channel is set aside
     assert all(channel["status"] == "active" and channel["errors"] == 0 for channel in channels.values())
-    assert channels["a"]["error"].startswith("flux RSS : GET") and "flux RSS en panne (4 illisible(s), 0 lu(s))" in caplog.text
+    assert channels["a"]["error"].startswith("flux RSS : GET")
+    assert "flux RSS en panne (4 illisible(s), 0 lu(s) ; HTTP 500 × 4)" in caplog.text
     assert len(server.calls("GET", "/feeds/videos.xml")) == 4 * 2 * 3  # one retry per feed: an outage costs seconds
     # Back up, but two feeds fail alone: only the one that does not exist (HTTP 404) counts against its channel.
     status.update(UCa=200, UCb=500, UCc=404, UCd=200)
     runs(range(3, 6))
     assert (channels["a"]["errors"], channels["b"]["status"], channels["b"]["errors"]) == (0, "active", 0)
     assert channels["c"]["status"] == "introuvable" and channels["c"]["set_aside"] == (NOW + timedelta(hours=5)).isoformat()
+    assert "2 illisible(s) : @b, @c ; HTTP 500 × 1, HTTP 404 × 1)" in caplog.text
+
+
+def test_a_feed_outage_is_many_feeds_failing_at_once_not_a_few_channels():
+    from clipper.sources.youtube import feed_outage
+
+    assert feed_outage(91, 2) and feed_outage(4, 0) and feed_outage(20, 73)  # all, or a fifth of them: YouTube's doing
+    assert not feed_outage(2, 2) and not feed_outage(3, 0) and not feed_outage(18, 75)  # a few channels: theirs
 
 
 def test_new_creators_come_from_streamers_seen_live_once_their_channel_links_to_their_twitch(tmp_path):

@@ -290,7 +290,8 @@ clash, première fois, record…) ; seules les 24 plus prometteuses (`videos_per
 (courbe « les plus revus » ou commentaires), les autres attendent leur tour. Une vidéo qui n'a rien donné est
 revue une fois le lendemain (courbe et commentaires arrivent avec les vues). Une chaîne introuvable trois passages
 de suite (flux inexistant, chaîne qu'on ne retrouve pas) est mise de côté, puis retentée une fois par semaine.
-Si la plupart des flux échouent en même temps, la panne vient de YouTube, et aucune chaîne n'est mise de côté.
+Si plus d'un flux sur cinq échoue en même temps, la panne vient de YouTube (son serveur de flux répond parfois
+404 à tous pendant des heures), et aucune chaîne n'est mise de côté.
 
 La **base des créateurs** (`creators.json` sur la branche `clipper-state`) garde pour chaque créateur ses chaînes :
 identifiant YouTube, adresse, titre, abonnés, catégories YouTube de ses vidéos, dernière lecture, statut, et
