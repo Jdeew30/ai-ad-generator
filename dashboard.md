@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 06/11/2026 à 09:30 UTC.
+Mis à jour le 06/11/2026 à 09:52 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 70698 | 70698 |
-| Vidéos téléchargées et préparées | 387 | 387 |
-| Shorts envoyés | 29 | 29 |
-| Écartés par la revue | 358 | 358 |
+| Moments trouvés (Twitch + YouTube) | 73724 | 73724 |
+| Vidéos téléchargées et préparées | 399 | 399 |
+| Shorts envoyés | 30 | 30 |
+| Écartés par la revue | 369 | 369 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 26 | 26 |
+| Passages | 27 | 27 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 43, YouTube 22, à la demande 6.
-Note moyenne de Claude : 59/100 sur 32 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
-Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), Domingo (3), AmineMaTue (3), Locklear (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
+Par source : Twitch 44, YouTube 22, à la demande 6.
+Note moyenne de Claude : 59/100 sur 33 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), AmineMaTue (4), GOTAGA (4), Domingo (3), Locklear (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
 101 créateurs suivis, 92 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 92 identifiées ; 11 mises de côté (introuvables).
-485 vidéos récentes suivies, 201 regardées de près (99 avec des moments à extraire).
+486 vidéos récentes suivies, 201 regardées de près (99 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 06/11 09:58 | Twitch | AmineMaTue | [AmineMaTue juge le burger de Valouzz : « un terrain de foot au fond de ma banlieue »](https://www.twitch.tv/aminematue/clip/VastLachrymoseDotterelDatSheffy-qdVGQp1XwnHQlidQ) | 50 |
 | 05/11 22:11 | Twitch | Domingo | [Domingo devine les recettes de tous les films Pixar… avec un calcul de tête](https://www.twitch.tv/domingo/clip/RelentlessCharmingNarwhalDansGame-9Ic79dCNZNMXC1K5) | 60 |
 | 05/11 19:27 | YouTube | Sylvain Lyve | [Sylvain Lyve teste sa Dacia à l'huile de tournesol sur piste… ça sent la frite](https://www.youtube.com/watch?v=N1A1Z-VlKUI) | 64 |
 | 05/11 16:14 | Twitch | Hctuan | [Hctuan bat l'Ender Dragon en hardcore après 48 h de run](https://www.twitch.tv/hctuan/clip/SullenProtectiveScorpionRickroll-EXQ0XBHXqfSj1Jw3) | 66 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (6), Kameto (5), Mastu (5), GOTAGA (4), Dom
 | 03/11 18:52 | YouTube | TheKAIRI78 | [TheKAIRI78 découvre une assiette et menace de couper le live](https://www.youtube.com/watch?v=28PvjBl99Kc) | 64 |
 | 03/11 17:20 | Twitch | Joueur du Grenier | [Joueur du Grenier attaqué par des daims… puis il refile les biscuits à sa femme](https://www.twitch.tv/joueur_du_grenier/clip/BenevolentUnsightlyHippoPJSalt-QvcvgvMsAsNVkaL3) | 68 |
 | 03/11 16:40 | YouTube | Poisson Fécond | [La mort absurde du président Félix Faure racontée par Poisson Fécond](https://www.youtube.com/watch?v=Q40NcFRRL4g) | 62 |
-| 03/11 16:39 | YouTube | Wankil Studio - Laink et Terracid | [Laink et Terracid doivent désamorcer une bombe… aveugle, sourd et muet](https://www.youtube.com/watch?v=LI9JzL6bhtw) | 66 |
 
 ## Derniers échecs
 
