@@ -149,6 +149,7 @@ class ShortMeta:
     long_start: float | None = None  # Claude's long cut of the moment (61-90 s, monetizable on TikTok), if it has one
     long_end: float | None = None
     long: bool = False  # rendered as the long cut
+    hook_alternatives: list[str] = field(default_factory=list)  # Claude's other hooks: caption ideas for TikTok
 
     def tags(self) -> list[str]:
         return [h.lstrip("#") for h in self.hashtags if h.strip("# ")]

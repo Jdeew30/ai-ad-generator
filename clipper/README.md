@@ -181,8 +181,15 @@ Le robot vise donc :
 - **Des moments forts seulement** : plus de clip envoyé sous la barre de 60 « pour garder un short ». Claude note
   le potentiel viral : un inconnu s'arrête-t-il dès la première seconde, comprend-il en trois secondes, a-t-il
   envie de partager ?
-- **Des shorts courts et nets** : 12 à 35 secondes visées, 60 au plus. Le short démarre sur l'action, finit
-  juste après la chute (il se revoit en boucle), et son accroche ouvre une question sans révéler la chute.
+- **Des shorts courts et nets** : 12 à 35 secondes visées, 60 au plus (et une version longue de plus d'une
+  minute par moment, voir plus bas). Le short démarre sur l'action et finit juste après la chute (il se revoit en
+  boucle).
+- **Des accroches qui font rester** : l'accroche reste au-dessus de la vidéo pendant tout le short, en gros et dès
+  la première image, celle que TikTok montre en vignette sur le profil (sans elle, la vignette n'est que du flou).
+  Elle dit qui et
+  ce qui se passe, et ouvre une question ou une émotion sans révéler la chute, comme « LOUPIOTE N'EN PEUT PLUS DE CE
+  CONSEIL » (75 600 vues). Jamais d'étiquette vague. Claude en écrit trois, garde la plus forte sur la vidéo, et la
+  fiche Telegram donne les deux autres pour la légende TikTok (« 💡 Autres accroches »).
 
 **Vidéos de plus d'une minute (programme de rémunération TikTok)** : TikTok ne rémunère que les vidéos de plus
 d'une minute. Claude coupe donc chaque moment deux fois : un short de 12 à 35 secondes, et une version longue de 61

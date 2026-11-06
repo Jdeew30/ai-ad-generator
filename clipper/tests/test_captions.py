@@ -68,6 +68,7 @@ def test_short_ass_highlights_one_word_at_a_time():
     assert captions[2].split(",")[2] == "0:00:01.95"  # last word lingers 0.35 s
     [hook] = dialogues(ass, "Hook")
     assert hook.split(",")[2] == "0:00:03.00" and "IL PÈTE UN CÂBLE EN\\NPLEIN LIVE" in hook and "😂" not in hook
+    assert hook.split(",")[1] == "0:00:00.00" and "\\fad(0," in hook  # on the very first frame: the TikTok cover
     [credit] = dialogues(ass, "Credit")
     assert credit.endswith("twitch.tv/squeezie") and credit.split(",")[2] == "0:00:05.00"
 

@@ -19,7 +19,7 @@ class TextLayout:
     hook_until: float | None = None  # None: the hook stays for the whole video
     credit_y: int | None = 1300
     caption_size: int = 96
-    hook_size: int = 74
+    hook_size: int = 104  # read first, and on the profile's thumbnails: as big as two lines allow
     credit_size: int = 38
 
 
@@ -134,9 +134,10 @@ def build_short_ass(
     center = layout.width // 2
     events: list[str] = []
     if hook and clean(hook):
-        lines = wrap(clean(hook).upper(), 20)[:3]
+        lines = wrap(clean(hook).upper(), 22)[:3]
         until = min(duration, layout.hook_until) if layout.hook_until else duration
-        events.append(_event(2, 0.0, until, "Hook", f"{{\\an5\\pos({center},{layout.hook_y})\\fad(150,150)}}" + "\\N".join(lines)))
+        # No fade-in: the very first frame is the cover TikTok shows on the profile, and it must carry the hook.
+        events.append(_event(2, 0.0, until, "Hook", f"{{\\an5\\pos({center},{layout.hook_y})\\fad(0,150)}}" + "\\N".join(lines)))
     if credit and layout.credit_y is not None and clean(credit):
         events.append(_event(1, 0.0, duration, "Credit", f"{{\\an5\\pos({center},{layout.credit_y})}}{clean(credit)}"))
 

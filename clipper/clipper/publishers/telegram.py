@@ -205,6 +205,8 @@ def card(meta: ShortMeta, candidate: Candidate, *, now: datetime | None = None) 
     if meta.ai and meta.score:
         reason = meta.reason if len(meta.reason) <= 260 else meta.reason[:259].rstrip() + "…"
         lines.append(f"🔥 Score viral estimé : {meta.score:.0f}/100" + (f" — {reason}" if reason else ""))
+    if meta.hook_alternatives:
+        lines.append("💡 Autres accroches (pour ta légende TikTok) : " + " · ".join(f"« {hook} »" for hook in meta.hook_alternatives))
     lines.append(f"🔗 {source_link(candidate)}")
     return lines
 
