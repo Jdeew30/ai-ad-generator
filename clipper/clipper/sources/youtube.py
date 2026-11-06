@@ -510,9 +510,10 @@ def _watch(
             channel["last_upload"] = videos[0].published.isoformat()
         for video in videos:
             watch.remember(history, video, creator, now)
-    # Most feeds failing at once is YouTube failing, not the channels: none of them is set aside for it. Otherwise
-    # only a feed that does not exist (HTTP 404: channel closed, wrong id) counts toward setting its channel aside.
-    outage = len(failures) > read
+    # Many feeds failing at once is YouTube failing, not the channels (its feed server can answer 404 to every feed for
+    # hours): none of them is set aside for it. Otherwise only a feed that does not exist (HTTP 404: channel closed,
+    # wrong id) counts toward setting its channel aside.
+    outage = feed_outage(len(failures), read)
     for channel, exc in failures:
         if outage or exc.status != 404:
             channel["error"] = f"flux RSS : {exc}"[:200]
@@ -576,6 +577,11 @@ def _watch(
                  f" : {len(found)} passage(s)" if found else f" : {reason}")
         candidates.extend(found)
     return candidates
+
+
+def feed_outage(failed: int, read: int) -> bool:
+    """Whether so many feeds failed in a run (more than 3, and more than a fifth) that YouTube is the one failing."""
+    return failed > max(3, (failed + read) // 5)
 
 
 def _handled_spans(keys: set[str]) -> dict[str, list[tuple[float, float]]]:
