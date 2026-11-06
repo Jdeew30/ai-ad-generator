@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 06/11/2026 à 19:56 UTC.
+Mis à jour le 06/11/2026 à 23:29 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 85755 | 85755 |
-| Vidéos téléchargées et préparées | 448 | 448 |
-| Shorts envoyés | 35 | 35 |
-| Écartés par la revue | 413 | 413 |
+| Moments trouvés (Twitch + YouTube) | 88990 | 88990 |
+| Vidéos téléchargées et préparées | 460 | 460 |
+| Shorts envoyés | 36 | 36 |
+| Écartés par la revue | 424 | 424 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 31 | 31 |
+| Passages | 32 | 32 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 48, YouTube 23, à la demande 6.
-Note moyenne de Claude : 59/100 sur 38 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 49, YouTube 23, à la demande 6.
+Note moyenne de Claude : 58/100 sur 39 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
-103 créateurs suivis, 94 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 94 identifiées ; 11 mises de côté (introuvables).
+104 créateurs suivis, 95 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 95 identifiées ; 11 mises de côté (introuvables).
 512 vidéos récentes suivies, 203 regardées de près (97 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 06/11 23:36 | Twitch | TraYtoNlol | [TraYtoN explose sur l'action de Viper : « VIPERRRR »](https://www.twitch.tv/traytonlol/clip/RudeBoldSalmonWoofer-WVjBGa61YwyGHWml) | 52 |
 | 06/11 20:10 | YouTube | AmineMaTue | [AmineMaTue et Inoxtag testent des chips… « wa ça a crépité »](https://www.youtube.com/watch?v=fUFDaRK_Kl4) | 63 |
 | 06/11 20:06 | Twitch | Locklear | [Locklear appelle le client « Mr Pedal »… mauvaise idée](https://www.twitch.tv/locklear/clip/CulturedBombasticHabaneroBrainSlug-TeMGENHuoHbL9yzR) | 63 |
 | 06/11 18:03 | Twitch | NeyRha_ | [NeyRha_ rate le boss d'AION 2 à 1 % à cause du chrono de l'instance](https://www.twitch.tv/neyrha_/clip/CautiousBoldTomatoArsonNoSexy-Cso_trz2NN1qTMy8) | 46 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (5),
 | 04/11 13:33 | YouTube | Sylvain Lyve | [Sylvain Lyve : la voiture sans suspensions lâche en plein test (partie 2)](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 55 |
 | 04/11 10:38 | YouTube | Mastu | [Undercover nocturne : Samuel perdu, Raska démasqué (Mastu)](https://www.youtube.com/watch?v=BByplh9JRTs) | 63 |
 | 04/11 10:38 | YouTube | Sylvain Lyve | [Sylvain Lyve roule sans suspensions… et ça fait très mal](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 67 |
-| 04/11 10:16 | Twitch | otplol_ | [La Karmine Corp file en quart de finale des Worlds ! (co-stream otplol_)](https://www.twitch.tv/otplol_/clip/CrunchyTangentialDootCurseLit-0c_su2PiYv4ZzhK2) | 55 |
 
 ## Derniers échecs
 
