@@ -92,3 +92,35 @@ def test_cli_lists_the_other_clips_of_a_moment(monkeypatch, capsys):
     assert "| 2026-10-24 19:31:50 | 60 s | 400 | — | le skin / en entier | https://clips.twitch.tv/Long60 |" in out
     monkeypatch.delenv("TWITCH_CLIENT_ID")
     assert main(["clips", "Short30"]) == 2
+
+
+def test_a_scheduled_run_does_nothing_when_another_run_just_did_the_slot(monkeypatch, capsys):
+    from datetime import datetime, timedelta, timezone
+
+    from clipper import cli
+
+    now = datetime(2026, 11, 6, 9, 7, tzinfo=timezone.utc)
+    ran: list[dict] = []
+
+    class FakeClipper:
+        def __init__(self, last):
+            self.now, self.last = now, last
+
+        def last_shorts_run(self):
+            return self.last
+
+        def run_shorts(self, **kwargs):
+            ran.append(kwargs)
+            return type("Report", (), {"markdown": lambda self: "## Clipper — shorts", "errors": []})()
+
+    def run(last, *flags):
+        monkeypatch.setattr(cli, "_clipper", lambda args: FakeClipper(last))
+        return main(["run", "--dry-run", *flags])
+
+    # The backup schedule, 30 min after the regular run: nothing to do.
+    assert run(now - timedelta(minutes=30), "--skip-if-ran-within", "60") == 0 and ran == []
+    assert "Rien à faire : un passage a déjà commencé il y a 30 min." in capsys.readouterr().out
+    # GitHub dropped the regular run (the last one is 2 h old), or never ran, or a run by hand: the work is done.
+    assert run(now - timedelta(minutes=150), "--skip-if-ran-within", "60") == 0 and len(ran) == 1
+    assert run(None, "--skip-if-ran-within", "60") == 0 and len(ran) == 2
+    assert run(now - timedelta(minutes=5)) == 0 and len(ran) == 3

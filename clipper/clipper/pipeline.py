@@ -560,6 +560,13 @@ class Clipper:
         except OSError as exc:
             log.error("Tableau de bord non écrit : %s", exc)
 
+    def last_shorts_run(self) -> datetime | None:
+        """When the last run of shorts started (dry runs leave no trace)."""
+        for run in reversed(self.state.runs):
+            if run.get("mode") == "shorts":
+                return parse_time(run.get("at"))
+        return None
+
     def run_shorts(self, *, dry_run: bool = False, count: int | None = None, url: str | None = None,
                    start: str | None = None, end: str | None = None, queue: Path | None = None,
                    focus: list[str] | None = None, force: bool = False, find: str | None = None) -> RunReport:

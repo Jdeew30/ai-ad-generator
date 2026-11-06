@@ -6,6 +6,9 @@ name: Clipper
 on:
   schedule:
     - cron: "37 8-22/2 * * *" # toutes les 2 h, de ~9h37 à ~23h37 à Paris (hiver)
+    # Secours, 30 min après : GitHub ne garantit pas ses passages planifiés et en saute parfois (le 6/11 à 8h37 UTC).
+    # Celui-ci ne fait rien si un passage a commencé il y a moins d'une heure (--skip-if-ran-within).
+    - cron: "7 9-23/2 * * *"
     - cron: "41 7 * * 3" # mercredi ~8h41 : best-of du début de semaine
     - cron: "41 7 * * 0" # dimanche ~8h41 : best-of de la fin de semaine
   workflow_dispatch:
@@ -132,6 +135,8 @@ jobs:
           COUNT: ${{ inputs.count }}
           DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
           FORCE: ${{ inputs.force && '--force' || '' }}
+          # Passage planifié : rien à faire si un autre a déjà fait ce créneau (secours, ou retard de GitHub).
+          SLOT: ${{ github.event_name == 'schedule' && '60' || '' }}
         run: |
           case "$MODE" in
             compilation) python -m clipper compile $DRY_RUN ;;
@@ -142,7 +147,8 @@ jobs:
             url)
               if [ -z "$URL" ]; then echo "::error::Le mode url demande une URL"; exit 1; fi
               python -m clipper run $DRY_RUN --url "$URL" ${START:+--start "$START"} ${END:+--end "$END"} ${FIND:+--find "$FIND"} ;;
-            *) python -m clipper run $DRY_RUN $FORCE ${FOCUS:+--focus "$FOCUS"} ${COUNT:+--count "$COUNT"} ;;
+            *) python -m clipper run $DRY_RUN $FORCE ${FOCUS:+--focus "$FOCUS"} ${COUNT:+--count "$COUNT"} \
+                 ${SLOT:+--skip-if-ran-within "$SLOT"} ;;
           esac
 
       # Le 04/11, GitHub a répondu « Internal Server Error » à l'envoi de l'état deux passages de suite : l'état

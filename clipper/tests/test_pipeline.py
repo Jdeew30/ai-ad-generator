@@ -3,7 +3,7 @@
 import json
 import re
 import shutil
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import pytest
@@ -288,6 +288,14 @@ def test_the_first_shorts_of_the_day_go_out_in_their_long_cut(media, paths):
                     curator=LongCuts({}), shorts=shorts)  # fmt: skip
     [third] = again.run_shorts().published
     assert not third.meta.long
+
+
+def test_the_last_run_of_shorts_is_known_from_the_state(media, paths):
+    run = clipper(media, paths, clips=CLIPS)
+    assert run.last_shorts_run() is None
+    run.state.runs = [{"at": "2026-11-06T08:37:00+00:00", "mode": "shorts"},
+                      {"at": "2026-11-06T07:41:00+00:00", "mode": "compilation"}]  # fmt: skip
+    assert run.last_shorts_run() == datetime(2026, 11, 6, 8, 37, tzinfo=timezone.utc)  # a best-of is not a run of shorts
 
 
 def test_clips_marked_under_the_bar_are_not_posted(media, paths):

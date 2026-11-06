@@ -8,6 +8,7 @@ import re
 import secrets as stdlib_secrets
 import subprocess
 import sys
+from datetime import timedelta
 from pathlib import Path
 
 from .config import ASSETS_DIR, PROJECT_DIR, ConfigError, Paths, Secrets, load_config, load_dotenv
@@ -44,7 +45,15 @@ def _clipper(args: argparse.Namespace):
 def cmd_run(args: argparse.Namespace) -> int:
     queue = None if args.no_queue else PROJECT_DIR / "queue.yaml"
     focus = [target for target in re.split(r"[,\s]+", args.focus or "") if target] or None
-    report = _clipper(args).run_shorts(
+    clipper = _clipper(args)
+    last = clipper.last_shorts_run() if args.skip_if_ran_within else None
+    if last is not None and clipper.now - last < timedelta(minutes=args.skip_if_ran_within):
+        # A backup schedule, or GitHub's late start of the regular one: another run already did this slot's work.
+        minutes = (clipper.now - last).total_seconds() / 60
+        log.info("Un passage a déjà commencé il y a %.0f min : rien à faire cette fois.", minutes)
+        _summary(f"## Clipper — shorts\n\nRien à faire : un passage a déjà commencé il y a {minutes:.0f} min.\n")
+        return 0
+    report = clipper.run_shorts(
         dry_run=args.dry_run, count=args.count, url=args.url, start=args.start, end=args.end, queue=queue, focus=focus,
         force=args.force, find=args.find,
     )
@@ -240,6 +249,9 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--start", help="début de l'extrait pour --url (ex. 1:23)")
     run.add_argument("--end", help="fin de l'extrait pour --url (ex. 2:05)")
     run.add_argument("--no-queue", action="store_true", help="ignore queue.yaml")
+    run.add_argument("--skip-if-ran-within", type=float, metavar="MINUTES",
+                     help="ne fait rien si un passage de shorts a commencé il y a moins de MINUTES minutes "
+                          "(passages planifiés : celui de secours, ou un passage lancé en retard par GitHub)")
     run.add_argument("--focus", help="seulement ces chaînes ou vidéos, séparées par des virgules "
                                      "(chaîne Twitch, @chaîne YouTube ou lien de vidéo YouTube)")
     run.add_argument("--force", action="store_true", help="si aucun clip n'atteint la note minimale, publie quand même "
