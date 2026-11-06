@@ -160,6 +160,22 @@ def test_claude_gives_a_long_cut_of_a_minute_or_more_when_the_moment_holds_it(se
     assert (reviews["youtube:a@0-90"].meta.trim_start, reviews["youtube:a@0-90"].meta.trim_end) == (10.0, 40.0)  # the short
 
 
+def test_claude_writes_three_hooks_and_keeps_the_strongest_on_the_video(server, tmp_path):
+    answer = {"clips": [{"id": "c1", "verdict": "publish", "reason": "r", "score": 75,
+                         "hook": "LOUPIOTE N'EN PEUT PLUS DE CE CONSEIL", "title": "t", "description": "d", "hashtags": [],
+                         "trim_start": 0, "trim_end": 30, "long_start": 0, "long_end": 0,
+                         "hook_alternatives": ["Tu aurais fait quoi ? 😂", "loupiote n'en peut plus de ce conseil",
+                                               "QUAND ON TE DONNE UN CONSEIL", "", "UNE QUATRIÈME"]}]}  # fmt: skip
+    server.route("POST", "/v1/messages", (200, {}, message(answer)))
+    review = curator(server).review(items(tmp_path)[:1], now=NOW)["twitch:A"]
+    assert review.meta.hook == "LOUPIOTE N'EN PEUT PLUS DE CE CONSEIL"
+    # Cleaned (no emoji), never the hook again, two at most.
+    assert review.meta.hook_alternatives == ["Tu aurais fait quoi ?", "QUAND ON TE DONNE UN CONSEIL"]
+    system = json.dumps(server.calls("POST", "/v1/messages")[0].json()["system"], ensure_ascii=False)
+    assert "LOUPIOTE N'EN PEUT PLUS DE CE CONSEIL" in system and "Jamais d'étiquette vague" in system
+    assert "Écris d'abord trois accroches" in system
+
+
 def test_claude_stops_asking_once_the_account_has_no_credits(server, tmp_path):
     from clipper.ai import NO_CREDITS
 

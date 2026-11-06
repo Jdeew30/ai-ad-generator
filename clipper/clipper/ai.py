@@ -79,10 +79,20 @@ réservé à ces cas et aux moments déjà publiés : un extrait simplement faib
 note basse.
 
 Textes, en français, sans mentir sur le contenu :
-- hook : accroche incrustée en haut de la vidéo pendant les premières secondes, 40 caractères maximum (six mots \
-idéalement), sans emoji ni hashtag. Elle ouvre une question ou une tension qui donne envie de voir la suite, sans \
-révéler la chute ; elle dit qui fait quoi quand le créateur est connu, comme les titres des best-of Twitch FR \
-(ex. « TERRACID, LE PIRE CHANTEUR », « IL NE S'Y ATTENDAIT PAS »).
+- hook : l'accroche incrustée en haut de la vidéo, la première chose qu'on lit : c'est elle qui fait rester ou \
+défiler. 40 caractères maximum (3 à 7 mots), sans emoji ni hashtag. Elle dit qui et ce qui se passe, au présent, \
+et ouvre une question, une tension ou une émotion qu'on veut voir se résoudre, sans révéler la chute ni mentir. \
+Formules qui marchent :
+  - le nom et une réaction extrême : « LOUPIOTE N'EN PEUT PLUS DE CE CONSEIL » (75 600 vues sur le compte), \
+« SQUEEZIE PERD TOUS SES MOYENS » ;
+  - le mystère : « IL N'AURAIT JAMAIS DÛ DIRE ÇA », « PERSONNE NE S'ATTENDAIT À ÇA » ;
+  - l'enjeu : « 10 000 € SUR UN SEUL TIR », « IL A 3 SECONDES POUR RÉPONDRE » ;
+  - la situation que tout le monde connaît : « QUAND TA MÈRE TE DONNE UN CONSEIL » ;
+  - la question au spectateur : « QUI A RAISON ? », « TU AURAIS FAIT QUOI ? ».
+  Jamais d'étiquette vague (« MOMENT DRÔLE », « FOU RIRE EN LIVE », « CLIP INCROYABLE ») : elle ne donne aucune \
+raison de rester.
+- hook_alternatives : deux autres accroches, d'autres formules que hook, qui servent de légende sur TikTok. \
+Écris d'abord trois accroches, garde la plus forte dans hook et les deux autres ici.
 - title : titre YouTube de 90 caractères maximum, avec le nom du créateur, au plus un emoji, pas de hashtag.
 - description : une ou deux phrases avec le nom du créateur et ce qui se passe, dans les mots que les gens \
 tapent pour chercher (TikTok et YouTube s'en servent pour la recherche).
@@ -121,6 +131,7 @@ SHORTS_SCHEMA: dict[str, Any] = {
                     "reason": {"type": "string"},
                     "score": {"type": "integer"},
                     "hook": {"type": "string"},
+                    "hook_alternatives": {"type": "array", "items": {"type": "string"}},
                     "title": {"type": "string"},
                     "description": {"type": "string"},
                     "hashtags": {"type": "array", "items": {"type": "string"}},
@@ -131,7 +142,7 @@ SHORTS_SCHEMA: dict[str, Any] = {
                 },
                 "required": [
                     "id", "verdict", "reason", "score", "hook", "title", "description", "hashtags", "trim_start", "trim_end",
-                    "long_start", "long_end",
+                    "long_start", "long_end", "hook_alternatives",
                 ],  # fmt: skip
                 "additionalProperties": False,
             },
@@ -185,6 +196,7 @@ class Review:
                 "ai": self.meta.ai,
                 "long_start": self.meta.long_start,
                 "long_end": self.meta.long_end,
+                "hook_alternatives": self.meta.hook_alternatives,
             },
         }
 
@@ -254,6 +266,11 @@ def _validated(raw: dict[str, Any], item: ReviewItem, config: Config) -> Review:
     candidate = item.candidate
     fallback = template_review(item, config)
     hook = _cut(clean(str(raw.get("hook") or "")), 48) or fallback.meta.hook
+    alternatives: list[str] = []
+    for text in raw.get("hook_alternatives") or []:
+        other = _cut(clean(str(text or "")), 48)
+        if other and other.upper() != hook.upper() and other.upper() not in (a.upper() for a in alternatives):
+            alternatives.append(other)
     title = _cut(clean(str(raw.get("title") or "")), 95) or fallback.meta.title
     description = _cut(str(raw.get("description") or "").strip(), 900) or fallback.meta.description
     tags = _hashtags([*(raw.get("hashtags") or []), candidate.streamer_login, *config.channel.hashtags])
@@ -274,7 +291,7 @@ def _validated(raw: dict[str, Any], item: ReviewItem, config: Config) -> Review:
     score = max(0.0, min(100.0, float(raw.get("score") or 0)))
     meta = ShortMeta(
         hook=hook, title=title, description=description, hashtags=tags, trim_start=trim_start, trim_end=trim_end, ai=True,
-        long_start=long_start, long_end=long_end,
+        long_start=long_start, long_end=long_end, hook_alternatives=alternatives[:2],
     )  # fmt: skip
     return Review(verdict=verdict, reason=_cut(str(raw.get("reason") or ""), 300), score=score, meta=meta)
 

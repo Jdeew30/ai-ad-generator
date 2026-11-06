@@ -231,6 +231,19 @@ def test_the_card_says_to_post_a_fresh_moment_right_away():
     assert not any(line.startswith("⚡") for line in card(META, old, now=NOW))
 
 
+def test_the_card_offers_the_other_hooks_for_the_tiktok_caption():
+    from dataclasses import replace
+
+    from clipper.publishers.telegram import card
+
+    from .conftest import NOW
+
+    meta = replace(META, hook_alternatives=["QUI A RAISON ?", "IL N'AURAIT JAMAIS DÛ DIRE ÇA"])
+    assert ("💡 Autres accroches (pour ta légende TikTok) : « QUI A RAISON ? » · « IL N'AURAIT JAMAIS DÛ DIRE ÇA »"
+            in card(meta, make_candidate(), now=NOW))  # fmt: skip
+    assert not any(line.startswith("💡") for line in card(META, make_candidate(), now=NOW))
+
+
 def test_the_card_says_a_long_cut_can_earn_money_on_tiktok():
     from dataclasses import replace
 
