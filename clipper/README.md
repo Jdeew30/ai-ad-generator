@@ -65,7 +65,7 @@ Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) �
 | Publication YouTube | ⚠️ Écrite, testée contre un faux serveur | Envoi « resumable » par morceaux avec reprise après coupure. **Tant que ton projet Google n'a pas passé l'audit de l'API, YouTube verrouille les vidéos envoyées en privé** (voir plus bas). |
 | Publication TikTok | ⚠️ Écrite, testée contre un faux serveur | Brouillon (« inbox ») ou publication directe. **En pratique, publication à la main depuis Telegram** : le règlement de l'API TikTok exclut les outils qui publient sur tes propres comptes et la reprise de contenus d'autres plateformes, donc pas d'audit, et sans audit tout reste privé (voir TikTok plus bas). |
 | Envoi Telegram | ✅ Vérifié en réel | Chaque short arrive avec le texte à coller ; un message prévient quand un passage ne trouve rien d'assez bon. |
-| Workflows GitHub Actions | ✅ Vérifié en réel | Un passage toutes les 2 heures de 9 h 37 à 23 h 37 (+ best-of du mercredi et du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés avec 30 à 60 minutes de retard. |
+| Workflows GitHub Actions | ✅ Vérifié en réel | Un passage toutes les 2 heures de 9 h 37 à 23 h 37 (+ best-of du mercredi et du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés en retard et en saute parfois : un passage de secours, 30 min après chacun, le remplace s'il n'a pas eu lieu. |
 
 **Le premier passage avec tes vrais comptes est la vraie validation des publications.** Toute erreur
 (quota, jeton expiré, refus de la plateforme) apparaît telle quelle dans le résumé du workflow et sur
@@ -84,8 +84,8 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
    publie à la main depuis Telegram.
 4. Vérifie : **Run workflow** → mode **`check`**. Le résumé du run affiche ✅ / ❌ pour chaque service, et
    Telegram reçoit un message de test. Rien n'est publié.
-5. C'est tout : à chaque passage (vers 10 h, 13 h, 16 h, 19 h et 22 h à Paris l'hiver, une heure plus tard
-   l'été), un short Twitch et un short YouTube, et un best-of le mercredi et le dimanche matin.
+5. C'est tout : à chaque passage (toutes les 2 heures de 9 h 37 à 23 h 37 à Paris l'hiver, une heure plus tard
+   l'été), jusqu'à deux shorts Twitch et un short YouTube, et un best-of le mercredi et le dimanche matin.
 
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
