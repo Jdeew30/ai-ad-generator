@@ -518,9 +518,12 @@ def _watch(
             channel["error"] = f"flux RSS : {exc}"[:200]
         else:
             watch.failed(channel, f"flux RSS : {exc}", now)
+    # What YouTube answered, to tell its outages apart (« HTTP 404 × 86, HTTP 500 × 5 »).
+    causes = Counter(f"HTTP {exc.status}" if exc.status else str(exc)[:60] for _, exc in failures)
+    why = ", ".join(f"{cause} × {count}" for cause, count in causes.most_common(3))
     if outage:
-        log.warning("YouTube : flux RSS en panne (%d illisible(s), %d lu(s)) : aucune chaîne mise de côté pour ça.",
-                    len(failures), read)
+        log.warning("YouTube : flux RSS en panne (%d illisible(s), %d lu(s) ; %s) : aucune chaîne mise de côté pour ça.",
+                    len(failures), read, why)
     window = timedelta(days=settings.max_age_days)
     history_kept = watch.prune(history, now, max_age=window)
     history.clear()
@@ -534,7 +537,7 @@ def _watch(
                  key=lambda item: -item[0] * (0.6 if item[1] in handled else 1.0))  # fmt: skip
     deeper = dataclasses.replace(settings, segments_per_video=settings.segments_per_video * 3)
     log.info("YouTube : %d chaîne(s) lue(s) par flux RSS%s, %d vidéo(s) récente(s) à regarder, les %d plus prometteuses ce "
-             "passage.", read, f" ({len(unread)} illisible(s) : {', '.join(unread[:8])})" if unread else "", len(due),
+             "passage.", read, f" ({len(unread)} illisible(s) : {', '.join(unread[:8])} ; {why})" if unread else "", len(due),
              min(len(due), settings.videos_per_run))  # fmt: skip
     candidates: list[Candidate] = []
     for momentum, video_id, entry in due[: settings.videos_per_run]:
