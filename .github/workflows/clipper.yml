@@ -82,7 +82,21 @@ jobs:
           cache-dependency-path: clipper/requirements.txt
 
       - name: Installer ffmpeg
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+        # Un miroir Ubuntu peut bloquer apt sans rien afficher (passage d'essai n° 108 : 12 min, d'habitude 20 s) :
+        # une connexion muette est coupée au bout de 30 s, chaque essai est borné, et l'installation est reprise.
+        timeout-minutes: 15
+        run: |
+          opts=(-qq -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 -o Acquire::Retries=2)
+          for attempt in 1 2 3; do
+            if timeout -k 10 120 sudo apt-get update "${opts[@]}" &&
+               timeout -k 10 240 sudo apt-get install -y "${opts[@]}" ffmpeg; then
+              exit 0
+            fi
+            echo "::warning::Installation de ffmpeg bloquée ou en échec (essai $attempt sur 3)"
+            sudo dpkg --configure -a || true
+            sleep 10
+          done
+          exit 1
 
       - name: Installer les dépendances
         run: pip install -r requirements.txt
