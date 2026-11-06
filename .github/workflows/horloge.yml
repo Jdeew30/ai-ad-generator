@@ -1,0 +1,43 @@
+name: Horloge du robot
+
+# Depuis le 6/11, GitHub ne lance plus le planning de clipper.yml : aucun passage « schedule », écrit en plage
+# (« 8-22/2 ») comme en liste (« 8,10,… »). Ce petit workflow a son propre planning, aux mêmes heures : il lance un
+# passage de clipper.yml s'il n'y en a pas eu depuis une heure. Si GitHub le lance, le robot repart seul, comme avant.
+on:
+  schedule:
+    - cron: "37 8,10,12,14,16,18,20,22 * * *" # ~9h37 à ~23h37 à Paris (hiver)
+    - cron: "7 9,11,13,15,17,19,21,23 * * *" # secours, 30 min après
+  workflow_dispatch:
+
+permissions:
+  actions: write
+
+concurrency:
+  group: horloge
+  cancel-in-progress: false
+
+jobs:
+  lancer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Lancer un passage s'il n'y en a pas eu depuis une heure
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ github.ref_name }} # planifié : la branche par défaut
+        run: |
+          last=$(gh run list --workflow clipper.yml --limit 1 --json createdAt,status --jq '.[0] // empty | "\(.createdAt) \(.status)"')
+          created=${last%% *}
+          status=${last##* }
+          echo "Dernier passage de clipper.yml : ${last:-aucun}"
+          if [ -n "$last" ] && [ "$status" != "completed" ]; then
+            echo "Un passage est en cours : rien à lancer."
+            exit 0
+          fi
+          if [ -n "$created" ] && [ $(( $(date -u +%s) - $(date -u -d "$created" +%s) )) -lt 3600 ]; then
+            echo "Un passage a commencé il y a moins d'une heure : rien à lancer."
+            exit 0
+          fi
+          gh workflow run clipper.yml --ref "$BRANCH" -f mode=shorts
+          echo "Passage lancé."
