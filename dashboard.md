@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 06/11/2026 à 14:28 UTC.
+Mis à jour le 06/11/2026 à 17:53 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 79800 | 79800 |
-| Vidéos téléchargées et préparées | 423 | 423 |
-| Shorts envoyés | 32 | 32 |
-| Écartés par la revue | 391 | 391 |
+| Moments trouvés (Twitch + YouTube) | 82707 | 82707 |
+| Vidéos téléchargées et préparées | 435 | 435 |
+| Shorts envoyés | 33 | 33 |
+| Écartés par la revue | 402 | 402 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 29 | 29 |
+| Passages | 30 | 30 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 46, YouTube 22, à la demande 6.
-Note moyenne de Claude : 59/100 sur 35 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 47, YouTube 22, à la demande 6.
+Note moyenne de Claude : 58/100 sur 36 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (4), GOTAGA (4), Domingo (3), Locklear (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
 102 créateurs suivis, 93 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 93 identifiées ; 11 mises de côté (introuvables).
-496 vidéos récentes suivies, 201 regardées de près (97 avec des moments à extraire).
+502 vidéos récentes suivies, 198 regardées de près (96 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 06/11 18:03 | Twitch | NeyRha_ | [NeyRha_ rate le boss d'AION 2 à 1 % à cause du chrono de l'instance](https://www.twitch.tv/neyrha_/clip/CautiousBoldTomatoArsonNoSexy-Cso_trz2NN1qTMy8) | 46 |
 | 06/11 14:34 | Twitch | Gom4rt | [Gom4rt frappe une poule dans Zelda… et le regrette amèrement](https://www.twitch.tv/gom4rt/clip/TastyModernKaleDancingBaby-VdSn7qKYqkBv9w_X) | 54 |
 | 06/11 12:27 | Twitch | Inoxtag | [Inoxtag annonce la date de la vidéo GTA de Squeezie : le 17 novembre](https://www.twitch.tv/inoxtag/clip/FilthyDistinctHamKAPOW-Hkicv7uEYxO7eV6o) | 55 |
 | 06/11 09:58 | Twitch | AmineMaTue | [AmineMaTue juge le burger de Valouzz : « un terrain de foot au fond de ma banlieue »](https://www.twitch.tv/aminematue/clip/VastLachrymoseDotterelDatSheffy-qdVGQp1XwnHQlidQ) | 50 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (4),
 | 04/11 10:16 | Twitch | otplol_ | [La Karmine Corp file en quart de finale des Worlds ! (co-stream otplol_)](https://www.twitch.tv/otplol_/clip/CrunchyTangentialDootCurseLit-0c_su2PiYv4ZzhK2) | 55 |
 | 03/11 23:15 | YouTube | Skyyart | [Skyyart chambre KOI pendant la qualif de T1 aux Worlds](https://www.youtube.com/watch?v=K7Evw-Zq9Kg) | 56 |
 | 03/11 19:20 | Twitch | youladecadd | [youladecadd panique en urbex et perd tout dans le noir](https://www.twitch.tv/youladecadd/clip/MuddyImpossibleJellyfishAMPEnergy-lAf-MdRCDqqFOUis) | 55 |
-| 03/11 18:52 | YouTube | TheKAIRI78 | [TheKAIRI78 découvre une assiette et menace de couper le live](https://www.youtube.com/watch?v=28PvjBl99Kc) | 64 |
 
 ## Derniers échecs
 
