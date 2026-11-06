@@ -70,7 +70,7 @@ twitch:
   remember_live: 150            # + jusqu'à 150 chaînes FR vues ces 14 derniers jours (même hors ligne)
   discover_categories: 20       # + les clips FR les plus vus de la semaine dans les 20 catégories les plus regardées
   clips_per_streamer: 20
-  window_hours: 168             # ancienneté maximale d'un clip pour un short (7 jours : les plus vus d'abord)
+  window_hours: 168             # 7 jours : les clips qui partent maintenant d'abord (vues à l'heure), mais une pépite de petit streamer reste bonne une semaine (Loupiote, 75,6k vues sur TikTok, postée à 7 jours)
   min_views: 150               # la note de Claude fait le tri : le seul bon clip du 03/11 au soir (68/100) avait 184 vues
   # Clips jamais téléchargés si leur titre contient un de ces mots (pubs : Claude les refuse toujours).
   # Les co-streams d'e-sport (Worlds, RLCS…) et le RP sont les bienvenus : pas de filtre sur le titre du live.
@@ -117,13 +117,17 @@ youtube:
   segments_per_video: 2
 
 shorts:
-  per_source: {twitch: 1, youtube: 2}  # à chaque passage (5 par jour) : un short Twitch et deux shorts YouTube
+  per_source: {twitch: 2, youtube: 1}  # à chaque passage (toutes les 2 h) : jusqu'à deux shorts Twitch et un YouTube
   per_run: 1                    # sans per_source : shorts publiés à chaque passage, toutes sources confondues
-  candidates_factor: 3          # avec Claude : 3 candidats examinés par série (jusqu'à 3 séries par passage)
+  candidates_factor: 3          # avec Claude : 3 candidats examinés par série et par short voulu
+  review_rounds: 2              # 2 séries au plus par source et par passage : le passage suivant (2 h après) prend la suite
+  long_per_day: 2               # TikTok ne rémunère que les vidéos de plus d'une minute : les 2 premiers shorts du jour qui s'y prêtent
+  long_min: 61                  #   sortent dans leur version longue (61 à 90 s, coupée par Claude)
+  long_max: 90
   min_score: 60                 # note de Claude sur 100 : en dessous, le clip n'est pas publié
-  guarantee: {twitch: 55, youtube: 55}  # sinon, le meilleur part quand même s'il a au moins cette note : un short de chaque source par passage
-  context_before: 20            # secondes du replay (VOD) ajoutées avant chaque clip Twitch : la mise en place (0 = clip seul)
-  context_after: 8              # et après : la fin de la réaction. Claude coupe ensuite ce qui ne sert pas
+  guarantee: {}                # plus de clip « pour garder un short » sous la barre : seuls les moments forts partent (05/11)
+  context_before: 30            # secondes du replay (VOD) ajoutées avant chaque clip Twitch : la mise en place (0 = clip seul)
+  context_after: 15             # et après : la fin de la réaction (assez pour une version longue). Claude coupe ensuite ce qui ne sert pas
   max_per_streamer_per_day: 2
   min_duration: 8
   max_duration: 90

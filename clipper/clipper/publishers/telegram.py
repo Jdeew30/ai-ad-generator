@@ -5,7 +5,7 @@ import json
 import logging
 import os
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -171,7 +171,10 @@ class TelegramPublisher:
         return list(found.items())
 
 
-def card(meta: ShortMeta, candidate: Candidate) -> list[str]:
+FRESH_HOURS = 12  # a moment younger than this is said to be posted right away: the first accounts get the views
+
+
+def card(meta: ShortMeta, candidate: Candidate, *, now: datetime | None = None) -> list[str]:
     """Who, where, when and how much: the facts of a short, then Claude's mark (an estimate, not a measure)."""
     platform = _platform(candidate)
     who = candidate.creator or candidate.streamer or candidate.streamer_login or "?"
@@ -185,6 +188,13 @@ def card(meta: ShortMeta, candidate: Candidate) -> list[str]:
     if candidate.start is not None and candidate.end is not None and platform == "YouTube":
         when.append(f"passage {_clock(candidate.start)}–{_clock(candidate.end)}")
     lines.append(" · ".join(part for part in when if part))
+    if meta.long and meta.trim_start is not None and meta.trim_end is not None:
+        seconds = round(meta.trim_end - meta.trim_start)
+        lines.append(f"💰 Version longue ({seconds // 60} min {seconds % 60:02d}) : plus d'une minute, monétisable sur TikTok")
+    if candidate.created_at and not candidate.manual:
+        age = ((now or datetime.now(timezone.utc)) - candidate.created_at).total_seconds() / 3600
+        if 0 <= age < FRESH_HOURS:
+            lines.append(f"⚡ Tout frais (il y a {max(1, round(age))} h) : à poster maintenant, avant les autres comptes")
     numbers = [f"👁 {_count(candidate.views)} vues" if candidate.views else "",
                f"👍 {_count(candidate.likes)}" if candidate.likes else "",
                f"💬 {_count(candidate.comments)}" if candidate.comments else ""]  # fmt: skip

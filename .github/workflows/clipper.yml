@@ -1,17 +1,13 @@
 name: Clipper
 
-# Robot de la chaîne : à chaque passage un short Twitch et un short YouTube, + un best-of le mercredi et le dimanche.
-# Les horaires sont en UTC (Paris = UTC+1 l'hiver, UTC+2 l'été). Les workflows planifiés ne
-# tournent que depuis la branche par défaut du dépôt.
+# Robot de la chaîne : toutes les 2 heures, les moments qui partent en ce moment (Twitch et YouTube), + un best-of
+# le mercredi et le dimanche. Les horaires sont en UTC (Paris = UTC+1 l'hiver, UTC+2 l'été) ; GitHub lance souvent
+# les passages planifiés avec du retard. Les workflows planifiés ne tournent que depuis la branche par défaut.
 on:
   schedule:
-    - cron: "11 9 * * *" # ~10h11 à Paris (hiver)
-    - cron: "13 12 * * *" # ~13h13
-    - cron: "17 15 * * *" # ~16h17
-    - cron: "19 18 * * *" # ~19h19
-    - cron: "23 21 * * *" # ~22h23
-    - cron: "41 8 * * 3" # mercredi ~9h41 : best-of du début de semaine
-    - cron: "41 8 * * 0" # dimanche ~9h41 : best-of de la fin de semaine
+    - cron: "37 8-22/2 * * *" # toutes les 2 h, de ~9h37 à ~23h37 à Paris (hiver)
+    - cron: "41 7 * * 3" # mercredi ~8h41 : best-of du début de semaine
+    - cron: "41 7 * * 0" # dimanche ~8h41 : best-of de la fin de semaine
   workflow_dispatch:
     inputs:
       mode:
@@ -58,14 +54,14 @@ jobs:
   clip:
     runs-on: ubuntu-latest
     # Le best-of (environ 15 min de vidéo, des dizaines de clips examinés) demande bien plus de temps qu'un passage.
-    timeout-minutes: ${{ (github.event.schedule == '41 8 * * 0' || github.event.schedule == '41 8 * * 3' || inputs.mode == 'compilation') && 150 || 75 }}
+    timeout-minutes: ${{ (github.event.schedule == '41 7 * * 0' || github.event.schedule == '41 7 * * 3' || inputs.mode == 'compilation') && 150 || 75 }}
     defaults:
       run:
         working-directory: clipper
     env:
       CLIPPER_STATE_PATH: ${{ github.workspace }}/.clipper-state/state.json
       CLIPPER_OUTPUT_DIR: ${{ github.workspace }}/clipper-output
-      MODE: ${{ github.event_name == 'schedule' && ((github.event.schedule == '41 8 * * 0' || github.event.schedule == '41 8 * * 3') && 'compilation' || 'shorts') || inputs.mode }}
+      MODE: ${{ github.event_name == 'schedule' && ((github.event.schedule == '41 7 * * 0' || github.event.schedule == '41 7 * * 3') && 'compilation' || 'shorts') || inputs.mode }}
     steps:
       - uses: actions/checkout@v4
 

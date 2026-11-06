@@ -11,10 +11,11 @@ import time
 from collections import Counter
 from collections.abc import Iterator
 from contextlib import contextmanager
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from .ai import ClaudeCurator, Review, ReviewItem, clip_title, template_compilation_meta, template_review
 from .captions import clean
@@ -41,9 +42,8 @@ from .transcribe import Transcriber, TranscriptionError, context, locate, occurr
 from .ytdlp import DownloadError, YtDlp
 
 log = logging.getLogger(__name__)
+PARIS = ZoneInfo("Europe/Paris")  # the owner's day, for the long shorts sent each day
 
-# With Claude, more batches of candidates are reviewed while the previous ones do not give enough shorts.
-REVIEW_ROUNDS = 4
 FIND_BEFORE, FIND_AFTER = 15.0, 35.0  # passage kept around a phrase looked for: its setup, then what it leads to
 # Claude sees what was published lately: never the same moment twice, and "(partie 2)" for the next part of a story.
 RECENT_DAYS = 3
@@ -710,7 +710,8 @@ class Clipper:
         under_bar: list[tuple[Prepared, Review]] = []  # judged and allowed, but marked under the bar
         forced: set[str] = set()
         unjudged = 0
-        for round_number in range(REVIEW_ROUNDS if use_ai else 1):
+        # With Claude, more batches are reviewed while the previous ones do not give enough shorts (shorts.review_rounds).
+        for round_number in range(self.config.shorts.review_rounds if use_ai else 1):
             if use_ai and getattr(self.curator, "disabled_reason", None):
                 break  # Claude can judge nothing more in this run: no clip is prepared for nothing
             if round_number:
@@ -788,6 +789,10 @@ class Clipper:
 
         for item, review in approved[:wanted]:
             candidate = item.candidate
+            if self._long_wanted(candidate, review.meta):
+                # TikTok only pays for videos past a minute: today's first ones are cut long.
+                review.meta = replace(review.meta, trim_start=review.meta.long_start, trim_end=review.meta.long_end, long=True)
+                log.info("Version longue (%.0f s) pour %s", review.meta.trim_end - review.meta.trim_start, candidate.key)
             try:
                 video, layout = self._render(item, review.meta)
                 length = probe(video).duration
@@ -808,7 +813,7 @@ class Clipper:
                 report.errors += [f"{r.platform} : {r.detail}" for r in failed]
                 if not outcome.results or any(r.ok for r in outcome.results):
                     # Without publishers the video is an artifact to post by hand: it counts as done.
-                    self.state.record_post(candidate, review.meta, outcome.results)
+                    self.state.record_post(candidate, review.meta, outcome.results, length=length)
                 else:
                     self.state.record_failure(candidate, "; ".join(r.detail or r.platform for r in failed))
                     report.failed += 1
@@ -818,6 +823,14 @@ class Clipper:
                 why = f"pour garder un short{label} à ce passage" if floor else "à ta demande"
                 self.notify(f"ℹ️ Short{label} envoyé {why} : aucun clip n'atteignait la note minimale "
                             f"({self.config.shorts.min_score:.0f}/100), celui-ci est le mieux noté ({review.score:.0f}/100).")
+
+    def _long_wanted(self, candidate: Candidate, meta: ShortMeta) -> bool:
+        """Whether this short goes out in its long cut: it has one, and today's long shorts are not all sent yet."""
+        rules = self.config.shorts
+        if not rules.long_per_day or candidate.manual or meta.long_start is None or meta.long_end is None:
+            return False
+        midnight = self.now.astimezone(PARIS).replace(hour=0, minute=0, second=0, microsecond=0)
+        return self.state.long_count(midnight, rules.long_min) < rules.long_per_day
 
     # --- compilation -------------------------------------------------------------------------
 

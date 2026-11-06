@@ -150,6 +150,14 @@ class State:
             and (parse_time(entry.get("at")) or since) >= since
         )
 
+    def long_count(self, since: datetime, min_length: float) -> int:
+        """Shorts sent since `since` that last `min_length` seconds or more."""
+        return sum(
+            1
+            for entry in self.posted.values()
+            if (entry.get("length") or 0) >= min_length and (parse_time(entry.get("at")) or since) >= since
+        )
+
     def recent_posts(self, since: datetime) -> list[dict[str, Any]]:
         """Shorts posted since `since`, most recent first."""
         entries = [entry for entry in self.posted.values() if (parse_time(entry.get("at")) or since) >= since]
@@ -160,7 +168,7 @@ class State:
 
     # --- updates ---------------------------------------------------------------------------
 
-    def record_post(self, candidate: Candidate, meta: ShortMeta, results: list[PublishResult]) -> None:
+    def record_post(self, candidate: Candidate, meta: ShortMeta, results: list[PublishResult], *, length: float | None = None) -> None:
         span = candidate.vod_span()
         self.posted[candidate.key] = {
             "at": utcnow().isoformat(),
@@ -173,6 +181,7 @@ class State:
             "views": candidate.views,
             "created_at": candidate.created_at.isoformat() if candidate.created_at else None,
             "span": list(span) if span else None,
+            "length": round(length, 1) if length else None,  # seconds of the short sent
             "results": {r.platform: r.to_dict() for r in results},
         }
         self.failures.pop(candidate.key, None)

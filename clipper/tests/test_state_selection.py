@@ -119,8 +119,20 @@ def test_rank_relative_popularity_favours_a_standout_clip(tmp_path: Path):
     cands += [make_candidate(f"twitch:small{i}", "small", views=300, created_at=NOW - timedelta(hours=i + 3)) for i in range(4)]
     cands.append(make_candidate("twitch:standout", "small", views=3000, created_at=NOW - timedelta(hours=2)))
     ranked = [c.key for c in rank(cands, state, config(shorts={"max_per_streamer_per_day": 10}), now=NOW)]
-    assert ranked[0] == "twitch:standout"
-    assert ranked.index("twitch:big0") < ranked.index("twitch:small0")
+    # The clip taking off right now goes first; the standout comes next, before the big streamer's older clips.
+    assert ranked[:3] == ["twitch:big0", "twitch:standout", "twitch:big1"]
+    assert ranked.index("twitch:standout") < ranked.index("twitch:small0")
+
+
+def test_a_clip_taking_off_now_goes_before_an_older_one_with_more_views(tmp_path: Path):
+    old = make_candidate("twitch:old", "a", views=9000, created_at=NOW - timedelta(hours=60))
+    fresh = make_candidate("twitch:fresh", "b", views=1200, created_at=NOW - timedelta(hours=3))
+    state = State(tmp_path / "s.json")
+    ranked = rank([old, fresh], state, config(), now=NOW)
+    assert [c.key for c in ranked] == ["twitch:fresh", "twitch:old"]  # 400 views an hour against 150
+    assert round(fresh.pace) == 400  # shown on the Telegram card
+    # A best-of looks back over days: there, the views piled up still count first.
+    assert [c.key for c in rank([old, fresh], state, config(), now=NOW, compilation=True)] == ["twitch:old", "twitch:fresh"]
 
 
 def test_rank_respects_history_and_daily_cap(tmp_path: Path):
@@ -184,3 +196,14 @@ def test_a_creator_posted_a_lot_this_week_leaves_room_for_others(tmp_path):
     newcomer = make_candidate("twitch:new", "newcomer", views=1000, created_at=NOW - timedelta(hours=3))
     assert [c.key for c in rank([star, newcomer], state, config, now=NOW)] == ["twitch:new", "twitch:star"]
     assert [c.key for c in rank([star, newcomer], State(tmp_path / "empty.json"), config, now=NOW)] == ["twitch:star", "twitch:new"]
+
+
+def test_the_state_counts_the_long_shorts_of_the_day(tmp_path: Path):
+    state = State(tmp_path / "s.json")
+    state.record_post(make_candidate("twitch:long"), meta(), [], length=65.4)
+    state.record_post(make_candidate("twitch:short"), meta(), [], length=28.0)
+    state.record_post(make_candidate("twitch:unknown"), meta(), [])
+    assert state.posted["twitch:long"]["length"] == 65.4 and state.posted["twitch:unknown"]["length"] is None
+    assert state.long_count(NOW - timedelta(days=1), 61) == 1
+    state.posted["twitch:long"]["at"] = (NOW - timedelta(days=2)).isoformat()
+    assert state.long_count(NOW - timedelta(days=1), 61) == 0  # sent another day

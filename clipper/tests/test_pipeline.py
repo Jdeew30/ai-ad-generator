@@ -137,6 +137,17 @@ class Broke(Marks):
         return {item.candidate.key: template_review(item, build(Config, {})) for item in items}
 
 
+class LongCuts(Marks):
+    """Curator double: like Marks, with a short cut and a long cut of every clip."""
+
+    def review(self, items, *, now, recent=None):
+        reviews = super().review(items, now=now, recent=recent)
+        for review in reviews.values():
+            review.meta.trim_start, review.meta.trim_end = 1.0, 3.0
+            review.meta.long_start, review.meta.long_end = 0.5, 4.5
+        return reviews
+
+
 class Recording(Marks):
     """Curator double: marks like Marks, and remembers each request (the clips, and the shorts said to be published)."""
 
@@ -252,6 +263,31 @@ def test_a_second_batch_is_reviewed_when_the_first_is_rejected(media, paths):
     report = run.run_shorts()
     assert [o.candidate.key for o in report.published] == ["twitch:Beta-1"]
     assert [c.key for c, _ in report.rejected] == ["twitch:Alpha-Toxic"] and run.transcriber.calls == 2
+
+
+def test_no_more_batches_than_review_rounds_are_reviewed(media, paths):
+    clips = {"alpha": [entry("Alpha-Toxic", 9000, 1, "Toxic moment")], "beta": [entry("Beta-1", 1500, 3)]}
+    run = clipper(media, paths, clips=clips, publishers={}, curator=RejectFirst(),
+                  shorts={"min_duration": 3, "candidates_factor": 1, "review_rounds": 1})  # fmt: skip
+    report = run.run_shorts()
+    assert report.published == [] and run.transcriber.calls == 1  # Beta-1 waits for the next run
+
+
+def test_the_first_shorts_of_the_day_go_out_in_their_long_cut(media, paths):
+    telegram = FakePublisher("telegram")
+    shorts = {"min_duration": 3, "per_run": 2, "long_per_day": 1, "long_min": 3.5, "long_max": 5}
+    run = clipper(media, paths, clips=CLIPS, publishers={"telegram": telegram}, curator=LongCuts({}), shorts=shorts)
+    report = run.run_shorts()
+    first, second = report.published
+    assert first.meta.long and first.duration == pytest.approx(4.0, abs=0.3)  # the long cut: 0.5 to 4.5 s
+    assert not second.meta.long and second.duration == pytest.approx(2.0, abs=0.3)  # one long a day: the short cut
+    lengths = {key: entry["length"] for key, entry in State.load(paths.state).posted.items()}
+    assert lengths[first.candidate.key] == pytest.approx(4.0, abs=0.3)
+    # The next run, the same day: the long short of the day is already out.
+    again = clipper(media, paths, clips={"alpha": [entry("Alpha-New", 4000, 1)]}, publishers={"telegram": telegram},
+                    curator=LongCuts({}), shorts=shorts)  # fmt: skip
+    [third] = again.run_shorts().published
+    assert not third.meta.long
 
 
 def test_clips_marked_under_the_bar_are_not_posted(media, paths):

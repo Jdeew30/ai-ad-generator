@@ -22,11 +22,14 @@ FALLBACK_BETA = "server-side-fallback-2026-07-01"
 MAX_SHORT = 59.0  # trimmed length ceiling (Shorts/TikTok sweet spot)
 NO_CREDITS = "crédits de l'API Claude épuisés : à recharger sur console.anthropic.com (Plans & Billing)"
 MIN_SHORT = 8.0
+MAX_TRIMMED = 60.0  # longest short Claude may cut: past a minute, viewers swipe before the end
 
 SHORTS_SYSTEM = """Tu es le rédacteur en chef d'une chaîne francophone (YouTube Shorts et TikTok) qui republie, \
 en les créditant, les meilleurs moments de streamers et de vidéastes, dans l'esprit des best-of quotidiens de \
-Twitch FR comme « La Crème de Twitch ». On te présente des extraits candidats : pour chacun, tu décides s'il \
-mérite d'être publié, tu notes son potentiel, et tu écris les textes de publication.
+Twitch FR comme « La Crème de Twitch ». Le compte doit percer : chaque short est jugé sur sa capacité à arrêter \
+le pouce d'un inconnu qui fait défiler TikTok, à être regardé jusqu'au bout, revu et partagé. On te présente des \
+extraits candidats : pour chacun, tu décides s'il mérite d'être publié, tu notes son potentiel viral, et tu écris \
+les textes de publication.
 
 On publie les moments dont la communauté Twitch FR parle :
 - les moments drôles : fou rire, fail, malaise, rage, punchline, situation absurde, performance ratée ;
@@ -39,7 +42,12 @@ clash bon enfant entre streamers ;
 action du match (pop-off, rage, cri, fou rire, analyse marquante) ;
 - les scènes de RP (GTA RP, Garry's Mod…) : situation drôle, personnage, embrouille, quiproquo.
 
-Note chaque extrait sur 100 (score), en étant exigeant : seuls les vrais moments forts sont publiés.
+Note chaque extrait sur 100 (score), en étant exigeant : seuls les vrais moments forts sont publiés. Pose-toi ces \
+questions : un inconnu s'arrête-t-il dès la première seconde ? Comprend-il ce qui se passe en trois secondes, sans \
+connaître le créateur ? Rit-il, est-il choqué, impressionné ? A-t-il envie de commenter ou de l'envoyer à un ami ? \
+Un créateur très connu du grand public, ou un événement dont tout le monde parle (Worlds avec la KC, ZEvent, \
+GP Explorer…), donne plus de chances à un moment fort ; un petit streamer n'est pas un défaut si la situation parle \
+à tout le monde, une blague de communauté l'est.
 - 80 à 100 : excellent, on a envie de l'envoyer à un ami : ça accroche dès les premières secondes, on comprend \
 sans contexte et il y a une vraie chute ou une vraie révélation.
 - 60 à 79 : un bon moment d'une de ces familles, compréhensible sans contexte, sans temps mort, qui intéresse \
@@ -71,18 +79,26 @@ réservé à ces cas et aux moments déjà publiés : un extrait simplement faib
 note basse.
 
 Textes, en français, sans mentir sur le contenu :
-- hook : accroche incrustée sur la vidéo, 40 caractères maximum, sans emoji ni hashtag, qui donne envie de \
-regarder sans révéler la chute ; elle peut dire qui fait quoi, comme les titres des best-of Twitch FR \
+- hook : accroche incrustée en haut de la vidéo pendant les premières secondes, 40 caractères maximum (six mots \
+idéalement), sans emoji ni hashtag. Elle ouvre une question ou une tension qui donne envie de voir la suite, sans \
+révéler la chute ; elle dit qui fait quoi quand le créateur est connu, comme les titres des best-of Twitch FR \
 (ex. « TERRACID, LE PIRE CHANTEUR », « IL NE S'Y ATTENDAIT PAS »).
 - title : titre YouTube de 90 caractères maximum, avec le nom du créateur, au plus un emoji, pas de hashtag.
-- description : une ou deux phrases.
+- description : une ou deux phrases avec le nom du créateur et ce qui se passe, dans les mots que les gens \
+tapent pour chercher (TikTok et YouTube s'en servent pour la recherche).
 - hashtags : 3 à 6, en minuscules, sans « # » ni espace (nom du créateur, jeu s'il y a lieu, thème).
-- trim_start / trim_end : bornes en secondes, relatives au début de l'extrait. Commence juste avant l'action pour \
-accrocher dès la première seconde, mais garde toute la mise en place nécessaire pour comprendre et la chute en \
-entier ; coupe les temps morts. Durée finale idéalement entre 20 et 60 secondes, jusqu'à 90 secondes si le moment \
-le mérite vraiment (histoire complète, chute tardive). Si l'extrait est déjà bon, renvoie 0 et sa durée. Quand \
+- trim_start / trim_end : bornes en secondes, relatives au début de l'extrait. Un short court se regarde jusqu'au \
+bout et se revoit : vise 12 à 35 secondes, 45 au plus, et jusqu'à 60 secondes seulement pour une histoire \
+complète qui tient en haleine. Commence au plus près de l'action : dès la première seconde, on voit la situation \
+ou la réaction, pas une mise en place ; ne garde de la mise en place que le strict nécessaire pour comprendre. \
+Termine juste après la chute ou la réaction à la chute, sans traîner : un short qui finit net se revoit en \
+boucle. Coupe les temps morts. Si l'extrait est déjà bon, renvoie 0 et sa durée. Quand \
 des spectateurs citent un instant de l'extrait en commentaire, c'est le moment qu'ils ont retenu : cherche-le dans \
 la transcription et les images, et coupe autour de lui.
+- long_start / long_end : la version longue du même moment, pour TikTok qui ne rémunère que les vidéos de plus \
+d'une minute : de 61 à 90 secondes, avec toute la mise en place, la chute et les réactions qui suivent, sans temps \
+mort. Elle démarre elle aussi sur une situation qui accroche. Si le moment ne tient pas 61 secondes sans temps \
+mort, renvoie 0 et 0.
 
 Les transcriptions viennent d'une reconnaissance vocale automatique : elles peuvent contenir des erreurs."""
 
@@ -110,9 +126,12 @@ SHORTS_SCHEMA: dict[str, Any] = {
                     "hashtags": {"type": "array", "items": {"type": "string"}},
                     "trim_start": {"type": "number"},
                     "trim_end": {"type": "number"},
+                    "long_start": {"type": "number"},
+                    "long_end": {"type": "number"},
                 },
                 "required": [
                     "id", "verdict", "reason", "score", "hook", "title", "description", "hashtags", "trim_start", "trim_end",
+                    "long_start", "long_end",
                 ],  # fmt: skip
                 "additionalProperties": False,
             },
@@ -164,6 +183,8 @@ class Review:
                 "trim_start": self.meta.trim_start,
                 "trim_end": self.meta.trim_end,
                 "ai": self.meta.ai,
+                "long_start": self.meta.long_start,
+                "long_end": self.meta.long_end,
             },
         }
 
@@ -241,19 +262,35 @@ def _validated(raw: dict[str, Any], item: ReviewItem, config: Config) -> Review:
         start, end = float(raw.get("trim_start", 0.0)), float(raw.get("trim_end", item.duration))
         start, end = max(0.0, start), min(item.duration, end)
         if end - start >= min(MIN_SHORT, item.duration) - 0.01 and (start > 0.05 or end < item.duration - 0.05):
-            trim_start, trim_end = round(start, 2), round(min(end, start + 180.0), 2)
+            trim_start, trim_end = round(start, 2), round(min(end, start + MAX_TRIMMED), 2)
         elif end - start >= min(MIN_SHORT, item.duration) - 0.01:
             trim_start, trim_end = None, None
     except (TypeError, ValueError):
         pass
     if candidate.manual and (candidate.parts or (candidate.start is not None and candidate.end is not None)):
         trim_start, trim_end = None, None  # the owner picked this very section (or these clips): it is kept whole
+    long_start, long_end = _long_cut(raw, item, config)
     verdict = raw.get("verdict") if raw.get("verdict") in {"publish", "reject"} else "publish"
     score = max(0.0, min(100.0, float(raw.get("score") or 0)))
     meta = ShortMeta(
-        hook=hook, title=title, description=description, hashtags=tags, trim_start=trim_start, trim_end=trim_end, ai=True
-    )
+        hook=hook, title=title, description=description, hashtags=tags, trim_start=trim_start, trim_end=trim_end, ai=True,
+        long_start=long_start, long_end=long_end,
+    )  # fmt: skip
     return Review(verdict=verdict, reason=_cut(str(raw.get("reason") or ""), 300), score=score, meta=meta)
+
+
+def _long_cut(raw: dict[str, Any], item: ReviewItem, config: Config) -> tuple[float | None, float | None]:
+    """Claude's long cut of the moment, when it fits in the extract and lasts long_min to long_max seconds."""
+    if item.candidate.manual:
+        return None, None
+    rules = config.shorts
+    try:
+        start, end = max(0.0, float(raw.get("long_start") or 0.0)), min(item.duration, float(raw.get("long_end") or 0.0))
+    except (TypeError, ValueError):
+        return None, None
+    if not rules.long_min <= end - start <= rules.long_max + 0.5:  # 0 and 0: no long cut; never under a minute
+        return None, None
+    return round(start, 2), round(end, 2)
 
 
 def _age(created: datetime | None, now: datetime) -> str:

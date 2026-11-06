@@ -128,6 +128,38 @@ def test_refusal_and_errors_fall_back_to_the_template(server, tmp_path):
     assert len(server.calls("POST", "/v1/messages")) == calls
 
 
+def test_claude_cuts_short_tight_shorts(server, tmp_path):
+    long_cut = {"clips": [{"id": "c1", "verdict": "publish", "reason": "fou rire", "score": 75, "hook": "IL CRAQUE",
+                           "title": "t", "description": "d", "hashtags": [], "trim_start": 5, "trim_end": 85}]}  # fmt: skip
+    server.route("POST", "/v1/messages", (200, {}, message(long_cut)))
+    item = ReviewItem(make_candidate("youtube:x@0-90", "squeezie", source="youtube"), 90.0)
+    review = curator(server).review([item], now=NOW)["youtube:x@0-90"]
+    assert (review.meta.trim_start, review.meta.trim_end) == (5.0, 65.0)  # a minute at most
+    system = json.dumps(server.calls("POST", "/v1/messages")[0].json()["system"], ensure_ascii=False)
+    assert "vise 12 à 35 secondes" in system and "dès la première seconde" in system and "se revoit en boucle" in system
+    assert "arrêter le pouce" in system  # the mark is about stopping the scroll of a stranger
+
+
+def test_claude_gives_a_long_cut_of_a_minute_or_more_when_the_moment_holds_it(server, tmp_path):
+    def clip(clip_id, long_start, long_end):
+        return {"id": clip_id, "verdict": "publish", "reason": "r", "score": 75, "hook": "h", "title": "t",
+                "description": "d", "hashtags": [], "trim_start": 10, "trim_end": 40,
+                "long_start": long_start, "long_end": long_end}  # fmt: skip
+
+    answer = {"clips": [clip("c1", 3, 70), clip("c2", 0, 0), clip("c3", 10, 55), clip("c4", 0, 120)]}
+    server.route("POST", "/v1/messages", (200, {}, message(answer)))
+    keys = ["youtube:a@0-90", "youtube:b@0-90", "youtube:c@0-90", "youtube:d@0-130"]
+    batch = [ReviewItem(make_candidate(key, "squeezie", source="youtube"), 90.0 if "130" not in key else 130.0) for key in keys]
+    reviews = curator(server).review(batch, now=NOW)
+    assert [(reviews[k].meta.long_start, reviews[k].meta.long_end) for k in keys] == [
+        (3.0, 70.0),  # 67 s: kept
+        (None, None),  # 0 and 0: the moment does not hold a minute
+        (None, None),  # 45 s: under a minute, TikTok would not pay for it
+        (None, None),  # 120 s: past the 90 s at most
+    ]
+    assert (reviews["youtube:a@0-90"].meta.trim_start, reviews["youtube:a@0-90"].meta.trim_end) == (10.0, 40.0)  # the short
+
+
 def test_claude_stops_asking_once_the_account_has_no_credits(server, tmp_path):
     from clipper.ai import NO_CREDITS
 

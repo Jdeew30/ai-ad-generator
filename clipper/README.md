@@ -12,7 +12,7 @@ Un robot qui, plusieurs fois par jour :
 2. **trie** : anti-doublon (le même moment clippé par 10 viewers ne sort qu'une fois), jamais deux fois le
    même clip, 2 clips max par streamer et par jour, popularité *relative* au streamer, fraîcheur ;
 3. **fait juger** les candidats par **Claude** (facultatif) : chaque clip Twitch est repris dans le replay du live
-   avec 20 s avant et 8 s après (la mise en place et la fin de la réaction ; le clip seul si le replay est
+   avec 30 s avant et 15 s après (la mise en place et la fin de la réaction ; le clip seul si le replay est
    indisponible ou muet), puis Claude reçoit la transcription + 4 images de chaque extrait ; il
    écarte ce qui est risqué (haine, harcèlement, contenu sexuel, infos privées, musique protégée, films,
    matchs de foot… ; la rage et les gros mots passent), note chaque extrait sur 100 dans l'esprit des
@@ -65,7 +65,7 @@ Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) �
 | Publication YouTube | ⚠️ Écrite, testée contre un faux serveur | Envoi « resumable » par morceaux avec reprise après coupure. **Tant que ton projet Google n'a pas passé l'audit de l'API, YouTube verrouille les vidéos envoyées en privé** (voir plus bas). |
 | Publication TikTok | ⚠️ Écrite, testée contre un faux serveur | Brouillon (« inbox ») ou publication directe. **En pratique, publication à la main depuis Telegram** : le règlement de l'API TikTok exclut les outils qui publient sur tes propres comptes et la reprise de contenus d'autres plateformes, donc pas d'audit, et sans audit tout reste privé (voir TikTok plus bas). |
 | Envoi Telegram | ✅ Vérifié en réel | Chaque short arrive avec le texte à coller ; un message prévient quand un passage ne trouve rien d'assez bon. |
-| Workflows GitHub Actions | ✅ Vérifié en réel | 5 passages par jour (+ best-of du mercredi et du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés avec 30 à 45 minutes de retard. |
+| Workflows GitHub Actions | ✅ Vérifié en réel | Un passage toutes les 2 heures de 9 h 37 à 23 h 37 (+ best-of du mercredi et du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés avec 30 à 60 minutes de retard. |
 
 **Le premier passage avec tes vrais comptes est la vraie validation des publications.** Toute erreur
 (quota, jeton expiré, refus de la plateforme) apparaît telle quelle dans le résumé du workflow et sur
@@ -164,11 +164,39 @@ vidéo de plus de 50 Mo est recompressée (débit réparti sur sa durée) ; si e
 fiche et le lien sans la vidéo. Pour envoyer des fichiers jusqu'à 2 Go, un serveur Bot API local
 (`telegram-bot-api`) peut être indiqué dans le secret `TELEGRAM_API_URL` (ex. `http://mon-serveur:8081`).
 
+### Ligne éditoriale : faire percer le compte
+
+Constat du 05/11 sur les 71 shorts envoyés :
+- **Clips Twitch trop vieux** : 67 h d'âge médian à l'envoi, alors que les autres comptes de clips postent les
+  moments forts dans les heures qui suivent le live.
+- **Clips Twitch trop confidentiels** : 600 vues médianes, 41 sur 43 sous 2 000 vues.
+- **Peu de bons moments examinés** : 3 % des clips Twitch examinés atteignaient 60/100.
+
+Le robot vise donc :
+- **Le moment qui part maintenant** : clips classés par vues à l'heure, et un passage toutes les 2 heures. La
+  fiche Telegram dit « ⚡ Tout frais : à poster maintenant » quand le moment a moins de 12 h. Les pépites de petits
+  streamers restent dans la course une semaine : le short le plus vu du compte (Loupiote, « je regarde le ciel
+  depuis deux ans, rien ne m'est tombé dessus », 75,6k vues sur TikTok) était un clip de 1 000 vues vieux de
+  7 jours, que personne d'autre n'avait posté.
+- **Des moments forts seulement** : plus de clip envoyé sous la barre de 60 « pour garder un short ». Claude note
+  le potentiel viral : un inconnu s'arrête-t-il dès la première seconde, comprend-il en trois secondes, a-t-il
+  envie de partager ?
+- **Des shorts courts et nets** : 12 à 35 secondes visées, 60 au plus. Le short démarre sur l'action, finit
+  juste après la chute (il se revoit en boucle), et son accroche ouvre une question sans révéler la chute.
+
+**Vidéos de plus d'une minute (programme de rémunération TikTok)** : TikTok ne rémunère que les vidéos de plus
+d'une minute. Claude coupe donc chaque moment deux fois : un short de 12 à 35 secondes, et une version longue de 61
+à 90 secondes (mise en place, chute et réactions, sans temps mort) quand le moment la tient. Les deux premiers
+shorts du jour qui en ont une (`shorts.long_per_day`, `long_min`, `long_max`) sortent dans leur version longue ;
+la fiche Telegram l'indique (« 💰 Version longue (1 min 05) »). TikTok ne rémunère que les contenus qu'il juge
+originaux : ces versions longues, sous-titrées et coupées, ont plus de chances que des clips repostés tels quels,
+sans garantie.
+
 ### Claude : le tri et les textes par IA
 
 Crée une clé sur [platform.claude.com](https://platform.claude.com) → secret `ANTHROPIC_API_KEY`.
 Modèle par défaut : `claude-opus-5-5`, effort `medium`, avec le repli automatique côté serveur si une
-demande est déclinée. Une requête par série de candidats (quatre séries au plus par passage).
+demande est déclinée. Une requête par série de candidats (`shorts.review_rounds` séries au plus par source).
 Les crédits de l'API se rechargent sur [console.anthropic.com](https://console.anthropic.com) (Plans &
 Billing) : sans crédit, aucun clip ne peut être noté, donc aucun n'est envoyé. Le passage s'arrête alors dès
 la première requête refusée (sans préparer d'autres clips pour rien) et le dit sur Telegram ; les clips non
@@ -297,19 +325,22 @@ restent 100 % Twitch.
   dans le journal. Avec les clés Twitch, `discover_limit` y ajoute les plus gros lives FR du moment (100),
   `remember_live` les chaînes FR vues ces 14 derniers jours (150 au plus) et `discover_categories` les clips
   FR les plus vus de la semaine dans les catégories les plus regardées (20).
-- `shorts.per_source` / le `cron` du workflow : le rythme de publication, un short Twitch et deux shorts YouTube
-  par passage (15 par jour au plus : seuls les passages notés 60 ou plus partent). `shorts.guarantee` garde un
-  short de chaque source à chaque passage : si rien n'atteint 60, le mieux noté part quand même s'il a au moins
-  55 (Telegram le précise ; jamais un clip que Claude refuse). Sans `per_source`,
-  `shorts.per_run` shorts par passage, toutes sources confondues. Chaque short de plus allonge le passage
-  (minutes GitHub Actions : 2 000 par mois sur un dépôt privé, illimitées sur un dépôt public).
+- `shorts.per_source` / le `cron` du workflow : le rythme de publication, jusqu'à deux shorts Twitch et un short
+  YouTube par passage, un passage toutes les 2 heures de 9 h 37 à 23 h 37 (seuls les moments notés 60 ou plus
+  partent). `shorts.review_rounds` : séries de candidats examinées au plus par source et par passage (2 : le
+  passage suivant prend la suite, et les crédits Claude restent ceux de 5 passages de 4 séries).
+  `shorts.guarantee` (vide depuis le 05/11) peut garder un short de chaque source à chaque passage, même sous
+  60 : il envoyait des clips jugés faibles. Sans `per_source`, `shorts.per_run` shorts par passage.
 - `youtube.videos_per_run`, `youtube.max_age_days` : combien de nouvelles vidéos YouTube sont regardées de près
   par passage (24 : plus de moments parmi lesquels choisir), et la fenêtre de rattrapage. Le dépôt est public :
   les minutes GitHub Actions sont illimitées, mais chaque passage coûte des crédits Claude (la revue).
 - `shorts.min_score` : la note de Claude (sur 100) qu'un clip doit avoir pour être publié, 60 par défaut.
   Plus haut : moins de shorts mais meilleurs.
 - `twitch.window_hours` / `twitch.min_views` : l'âge maximal des clips (7 jours) et le nombre de vues minimal
-  (150 : c'est la note de Claude qui écarte les moments faibles, pas le nombre de vues).
+  (150 : c'est la note de Claude qui écarte les moments faibles). Les clips Twitch sont classés d'abord par vues
+  à l'heure : celui qui part maintenant passe avant un clip plus vu mais vieux de trois jours, que les autres
+  comptes ont déjà posté. Un clip qui fait bien plus que d'habitude pour son streamer garde un bonus : la pépite
+  d'un petit streamer, que personne d'autre ne poste, reste bonne une semaine.
 - Le replay autour d'un clip Twitch arrive d'habitude en quelques secondes : s'il n'est pas là au bout d'une
   minute, le clip part seul. Un clip dont la préparation dépasse quand même 4 minutes est abandonné pour de bon :
   le passage prend le suivant, et ne prépare plus rien après 55 minutes pour envoyer à temps ce qu'il a retenu.
@@ -317,7 +348,7 @@ restent 100 % Twitch.
   « publicité », « sponsorisé »…), Claude les refusant de toute façon.
 - `twitch.skip_live_words` : pareil, mais d'après le titre du **live** dont le clip est tiré. Vide par défaut :
   les co-streams d'e-sport (Worlds, RLCS…) sont les bienvenus, Claude y juge la réaction du streamer.
-- `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (20 et 8),
+- `shorts.context_before` / `context_after` : les secondes de replay ajoutées autour de chaque clip (30 et 15, assez pour une version longue),
   que Claude garde ou coupe. `0` pour travailler sur le clip seul.
 - `shorts.layout` : `blur` (image entière sur fond flouté, réglage de la chaîne), ou `auto` pour laisser le
   robot choisir entre facecam en haut / jeu en bas, plein cadre et fond flouté. `streamers.<login>.layout` /
@@ -353,8 +384,9 @@ chances. Lis aussi le règlement de chaque streamer (beaucoup indiquent leur pos
 - **Stockage GitHub** : 500 Mo gratuits pour les vidéos gardées par les passages (« artefacts »), et plus
   aucun dépôt possible au-delà. Les shorts, déjà sur Telegram, ne sont donc gardés qu'un jour, et chaque
   passage supprime les vidéos des passages plus anciens. Le best-of va dans les releases, hors de ce quota.
-- **Claude** : quelques centimes par passage (une requête par série de 3 candidats, avec transcriptions et
-  images), soit environ 10 à 30 $ par mois au rythme par défaut selon le nombre de séries. Facultatif.
+- **Claude** : une requête par série de candidats (avec transcriptions et images), soit 10 à 40 centimes par
+  passage et environ 1 à 3 $ par jour au rythme par défaut, selon le nombre de séries (estimation : le chiffre
+  exact est dans console.anthropic.com, rubrique Usage). Facultatif.
 - Tout le reste (Twitch, YouTube, TikTok, Telegram, Whisper, ffmpeg) est gratuit.
 
 ## Dépannage
