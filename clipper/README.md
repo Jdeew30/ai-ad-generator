@@ -335,11 +335,13 @@ restent 100 % Twitch.
   `remember_live` les chaînes FR vues ces 14 derniers jours (150 au plus) et `discover_categories` les clips
   FR les plus vus de la semaine dans les catégories les plus regardées (20).
 - `shorts.per_source` / le `cron` du workflow : le rythme de publication, jusqu'à deux shorts Twitch et un short
-  YouTube par passage, un passage toutes les 2 heures de 9 h 37 à 23 h 37 (seuls les moments notés 60 ou plus
-  partent). `shorts.review_rounds` : séries de candidats examinées au plus par source et par passage (2 : le
+  YouTube par passage, un passage toutes les 2 heures de 9 h 37 à 23 h 37 (les moments notés 60 ou plus, et
+  sinon le mieux noté s'il a au moins 45). `shorts.review_rounds` : séries de candidats examinées au plus par source et par passage (2 : le
   passage suivant prend la suite, et les crédits Claude restent ceux de 5 passages de 4 séries).
-  `shorts.guarantee` (vide depuis le 05/11) peut garder un short de chaque source à chaque passage, même sous
-  60 : il envoyait des clips jugés faibles. Sans `per_source`, `shorts.per_run` shorts par passage.
+  `shorts.guarantee` (45 pour Twitch et YouTube) garde un short de chaque source à chaque passage : quand aucun
+  clip n'atteint 60, le mieux noté part s'il a au moins 45, et Telegram le signale. Vide (`{}`), seuls les
+  moments notés 60 ou plus partent, et un passage peut n'en envoyer aucun. Sans `per_source`, `shorts.per_run`
+  shorts par passage.
 - `youtube.videos_per_run`, `youtube.max_age_days` : combien de nouvelles vidéos YouTube sont regardées de près
   par passage (24 : plus de moments parmi lesquels choisir), et la fenêtre de rattrapage. Le dépôt est public :
   les minutes GitHub Actions sont illimitées, mais chaque passage coûte des crédits Claude (la revue).

@@ -125,7 +125,8 @@ shorts:
   long_min: 61                  #   sortent dans leur version longue (61 à 90 s, coupée par Claude)
   long_max: 90
   min_score: 60                 # note de Claude sur 100 : en dessous, le clip n'est pas publié
-  guarantee: {}                # plus de clip « pour garder un short » sous la barre : seuls les moments forts partent (05/11)
+  guarantee: {twitch: 45, youtube: 45}  # sous 60, le mieux noté part quand même s'il a au moins 45, signalé comme tel :
+                                # un short de chaque source à chaque passage (« envoie de tout », 06/11)
   context_before: 30            # secondes du replay (VOD) ajoutées avant chaque clip Twitch : la mise en place (0 = clip seul)
   context_after: 15             # et après : la fin de la réaction (assez pour une version longue). Claude coupe ensuite ce qui ne sert pas
   max_per_streamer_per_day: 2
