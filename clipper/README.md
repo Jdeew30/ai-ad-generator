@@ -184,7 +184,9 @@ Le robot vise donc :
 - **Des shorts courts et nets** : 12 à 35 secondes visées, 60 au plus (et une version longue de plus d'une
   minute par moment, voir plus bas). Le short démarre sur l'action et finit juste après la chute (il se revoit en
   boucle).
-- **Des accroches qui font rester** : l'accroche reste au-dessus de la vidéo pendant tout le short. Elle dit qui et
+- **Des accroches qui font rester** : l'accroche reste au-dessus de la vidéo pendant tout le short, en gros et dès
+  la première image, celle que TikTok montre en vignette sur le profil (sans elle, la vignette n'est que du flou).
+  Elle dit qui et
   ce qui se passe, et ouvre une question ou une émotion sans révéler la chute, comme « LOUPIOTE N'EN PEUT PLUS DE CE
   CONSEIL » (75 600 vues). Jamais d'étiquette vague. Claude en écrit trois, garde la plus forte sur la vidéo, et la
   fiche Telegram donne les deux autres pour la légende TikTok (« 💡 Autres accroches »).
