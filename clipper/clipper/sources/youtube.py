@@ -484,19 +484,24 @@ def _watch(
     """
     settings = config.youtube
     creators.sync(settings.channels, now)
+    revived = creators.revive(now)
+    if revived:
+        log.info("YouTube : chaîne(s) mise(s) de côté retentée(s) : %s", ", ".join(revived))
     if settings.related_channels and related is not None:
         _refresh_related(settings.channels, ytdlp, related, now)
         _adopt(creators, related, ytdlp, now, budget=settings.secondary_checks_per_run)
     _resolve(creators, ytdlp, now, budget=settings.resolve_per_run)
     read = 0
     unread: list[str] = []
+    failures: list[tuple[dict[str, Any], HttpError]] = []
+    feeds = Http(http.session, timeout=20, retries=1, sleep=http.sleep)  # each feed is read again at the next run
     for creator, channel in creators.watched():
         if not channel.get("id"):
             continue
         try:
-            videos = watch.read_feed(http, channel["id"])
+            videos = watch.read_feed(feeds, channel["id"])
         except HttpError as exc:
-            watch.failed(channel, f"flux RSS : {exc}")
+            failures.append((channel, exc))
             unread.append(channel.get("ref") or channel["id"])
             continue
         read += 1
@@ -505,6 +510,17 @@ def _watch(
             channel["last_upload"] = videos[0].published.isoformat()
         for video in videos:
             watch.remember(history, video, creator, now)
+    # Most feeds failing at once is YouTube failing, not the channels: none of them is set aside for it. Otherwise
+    # only a feed that does not exist (HTTP 404: channel closed, wrong id) counts toward setting its channel aside.
+    outage = len(failures) > read
+    for channel, exc in failures:
+        if outage or exc.status != 404:
+            channel["error"] = f"flux RSS : {exc}"[:200]
+        else:
+            watch.failed(channel, f"flux RSS : {exc}", now)
+    if outage:
+        log.warning("YouTube : flux RSS en panne (%d illisible(s), %d lu(s)) : aucune chaîne mise de côté pour ça.",
+                    len(failures), read)
     window = timedelta(days=settings.max_age_days)
     history_kept = watch.prune(history, now, max_age=window)
     history.clear()
@@ -589,10 +605,10 @@ def _resolve(creators: watch.Creators, ytdlp: YtDlp, now: datetime, *, budget: i
         except DownloadError as exc:
             if exc.blocked:
                 raise
-            watch.failed(channel, str(exc))
+            watch.failed(channel, str(exc), now)
             continue
         if not info.get("channel_id"):
-            watch.failed(channel, "identifiant de chaîne absent de la page")
+            watch.failed(channel, "identifiant de chaîne absent de la page", now)
             continue
         watch.record_details(channel, info, now)
         channel["description_handles"] = sorted(set(re.findall(r"@[\w.-]+", info.get("description") or "")))[:20]
