@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 06/11/2026 à 12:17 UTC.
+Mis à jour le 06/11/2026 à 14:28 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 76771 | 76771 |
-| Vidéos téléchargées et préparées | 411 | 411 |
-| Shorts envoyés | 31 | 31 |
-| Écartés par la revue | 380 | 380 |
+| Moments trouvés (Twitch + YouTube) | 79800 | 79800 |
+| Vidéos téléchargées et préparées | 423 | 423 |
+| Shorts envoyés | 32 | 32 |
+| Écartés par la revue | 391 | 391 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 28 | 28 |
+| Passages | 29 | 29 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 45, YouTube 22, à la demande 6.
-Note moyenne de Claude : 59/100 sur 34 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 46, YouTube 22, à la demande 6.
+Note moyenne de Claude : 59/100 sur 35 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (4), GOTAGA (4), Domingo (3), Locklear (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
-101 créateurs suivis, 92 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 92 identifiées ; 11 mises de côté (introuvables).
-492 vidéos récentes suivies, 201 regardées de près (97 avec des moments à extraire).
+102 créateurs suivis, 93 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 93 identifiées ; 11 mises de côté (introuvables).
+496 vidéos récentes suivies, 201 regardées de près (97 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 06/11 14:34 | Twitch | Gom4rt | [Gom4rt frappe une poule dans Zelda… et le regrette amèrement](https://www.twitch.tv/gom4rt/clip/TastyModernKaleDancingBaby-VdSn7qKYqkBv9w_X) | 54 |
 | 06/11 12:27 | Twitch | Inoxtag | [Inoxtag annonce la date de la vidéo GTA de Squeezie : le 17 novembre](https://www.twitch.tv/inoxtag/clip/FilthyDistinctHamKAPOW-Hkicv7uEYxO7eV6o) | 55 |
 | 06/11 09:58 | Twitch | AmineMaTue | [AmineMaTue juge le burger de Valouzz : « un terrain de foot au fond de ma banlieue »](https://www.twitch.tv/aminematue/clip/VastLachrymoseDotterelDatSheffy-qdVGQp1XwnHQlidQ) | 50 |
 | 05/11 22:11 | Twitch | Domingo | [Domingo devine les recettes de tous les films Pixar… avec un calcul de tête](https://www.twitch.tv/domingo/clip/RelentlessCharmingNarwhalDansGame-9Ic79dCNZNMXC1K5) | 60 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (4),
 | 03/11 23:15 | YouTube | Skyyart | [Skyyart chambre KOI pendant la qualif de T1 aux Worlds](https://www.youtube.com/watch?v=K7Evw-Zq9Kg) | 56 |
 | 03/11 19:20 | Twitch | youladecadd | [youladecadd panique en urbex et perd tout dans le noir](https://www.twitch.tv/youladecadd/clip/MuddyImpossibleJellyfishAMPEnergy-lAf-MdRCDqqFOUis) | 55 |
 | 03/11 18:52 | YouTube | TheKAIRI78 | [TheKAIRI78 découvre une assiette et menace de couper le live](https://www.youtube.com/watch?v=28PvjBl99Kc) | 64 |
-| 03/11 17:20 | Twitch | Joueur du Grenier | [Joueur du Grenier attaqué par des daims… puis il refile les biscuits à sa femme](https://www.twitch.tv/joueur_du_grenier/clip/BenevolentUnsightlyHippoPJSalt-QvcvgvMsAsNVkaL3) | 68 |
 
 ## Derniers échecs
 
