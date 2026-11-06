@@ -31,6 +31,7 @@ FEED = "https://www.youtube.com/feeds/videos.xml?channel_id={}"
 _NS = {"atom": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015",
        "media": "http://search.yahoo.com/mrss/"}  # fmt: skip
 MAX_ERRORS = 3  # a channel that cannot be read so many runs in a row is set aside (« introuvable »)
+RETRY_DAYS = 7  # a channel set aside gets one more try a week: YouTube may have been the one failing
 SNAPSHOTS = 6  # view counts kept per video, to measure how fast it grows
 # Words of titles that often go with a moment worth a short (a reaction, a fight, a first, a fail…).
 _HOOKS = re.compile(
@@ -189,6 +190,22 @@ class Creators:
             if creator.get("source") == "config" and key not in listed:
                 creator["status"] = "removed"
 
+    def revive(self, now: datetime) -> list[str]:
+        """The channels set aside RETRY_DAYS ago or more, back for one more try: their refs.
+
+        YouTube can fail for a few hours (feeds, channel pages), and a channel set aside then would be lost for good.
+        A single failure sets it aside for another RETRY_DAYS days.
+        """
+        revived: list[str] = []
+        for key, ref, channel in self.channels():
+            if self.creators[key].get("status") != "active" or channel.get("status") != "introuvable":
+                continue
+            since = parse_time(channel.get("set_aside"))
+            if since is None or now - since >= timedelta(days=RETRY_DAYS):
+                channel["status"], channel["errors"] = "active", MAX_ERRORS - 1
+                revived.append(channel.get("ref") or ref)
+        return revived
+
     def watched(self) -> list[tuple[str, dict[str, Any]]]:
         """(creator key, channel) of every channel to read: active creators, active and verified channels."""
         return [(key, channel) for key, _ref, channel in self.channels()
@@ -229,11 +246,11 @@ def record_details(channel: dict[str, Any], info: dict[str, Any], now: datetime)
     channel["errors"] = 0
 
 
-def failed(channel: dict[str, Any], why: str) -> None:
+def failed(channel: dict[str, Any], why: str, now: datetime) -> None:
     channel["errors"] = int(channel.get("errors") or 0) + 1
     channel["error"] = why[:200]
     if channel["errors"] >= MAX_ERRORS:
-        channel["status"] = "introuvable"
+        channel["status"], channel["set_aside"] = "introuvable", now.isoformat()
         log.warning("Chaîne YouTube %s mise de côté après %d échecs : %s", channel.get("ref"), channel["errors"], why[:200])
 
 

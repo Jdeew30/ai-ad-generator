@@ -625,6 +625,44 @@ def test_a_youtube_feed_that_cannot_be_read_does_not_stop_the_others(server, htt
     assert [channel["ref"] for _, channel in creators.watched()] == ["@b"]
 
 
+def test_a_youtube_feed_outage_sets_no_channel_aside(server, http, tmp_path, monkeypatch, caplog):
+    from clipper.sources import watch as watch_module
+    from clipper.sources.watch import Creators
+    from clipper.sources.youtube import discover_youtube
+
+    monkeypatch.setattr(watch_module, "FEED", server.url + "/feeds/videos.xml?channel_id={}")
+    status = dict.fromkeys(("UCa", "UCb", "UCc", "UCd"), 500)
+
+    def feed(request):
+        channel_id = request.query["channel_id"][0]
+        if status[channel_id] != 200:
+            return status[channel_id], {}, ""
+        return 200, {}, _feed(("goodvideo01", channel_id, "titre", NOW - timedelta(hours=2), 50_000, 100))
+
+    server.route("GET", "/feeds/videos.xml", feed)
+    creators = Creators(tmp_path / "creators.json")
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a", "@b", "@c", "@d"], "watch": "rss",
+                                        "videos_per_run": 0}})  # fmt: skip
+    creators.sync(config.youtube.channels, NOW)
+    channels = {key: creators.creators[key]["channels"][key] for key in "abcd"}
+    for key, channel in channels.items():
+        channel["id"] = f"UC{key}"
+
+    def runs(hours):
+        for hour in hours:
+            discover_youtube(config, FakeYtDlp(), now=NOW + timedelta(hours=hour), http=http, creators=creators, history={})
+
+    runs(range(3))  # every feed down three runs in a row: YouTube's doing, no channel is set aside
+    assert all(channel["status"] == "active" and channel["errors"] == 0 for channel in channels.values())
+    assert channels["a"]["error"].startswith("flux RSS : GET") and "flux RSS en panne (4 illisible(s), 0 lu(s))" in caplog.text
+    assert len(server.calls("GET", "/feeds/videos.xml")) == 4 * 2 * 3  # one retry per feed: an outage costs seconds
+    # Back up, but two feeds fail alone: only the one that does not exist (HTTP 404) counts against its channel.
+    status.update(UCa=200, UCb=500, UCc=404, UCd=200)
+    runs(range(3, 6))
+    assert (channels["a"]["errors"], channels["b"]["status"], channels["b"]["errors"]) == (0, "active", 0)
+    assert channels["c"]["status"] == "introuvable" and channels["c"]["set_aside"] == (NOW + timedelta(hours=5)).isoformat()
+
+
 def test_new_creators_come_from_streamers_seen_live_once_their_channel_links_to_their_twitch(tmp_path):
     from clipper.sources.watch import Creators
     from clipper.sources.youtube import _discover_from_twitch

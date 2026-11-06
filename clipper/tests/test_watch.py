@@ -3,9 +3,11 @@ from datetime import timedelta
 import pytest
 
 from clipper.sources.watch import (
+    MAX_ERRORS,
     Creators,
     channel_paces,
     due,
+    failed,
     mentions,
     parse_feed,
     pre_score,
@@ -78,6 +80,23 @@ def test_the_creators_database_follows_the_owners_list(tmp_path):
     again = Creators.load(tmp_path / "creators.json")
     assert again.creators == db.creators and again.summary() == {"creators": 1, "channels": 2, "with_id": 0,
                                                                  "secondary": 1, "set_aside": 0}  # fmt: skip
+
+
+def test_a_channel_set_aside_gets_one_more_try_a_week(tmp_path):
+    db = Creators(tmp_path / "creators.json")
+    db.sync(["@old", "@recent", "@gone"], NOW)
+    old, recent, gone = (db.creators[key]["channels"][key] for key in ("old", "recent", "gone"))
+    for _ in range(MAX_ERRORS):
+        failed(recent, "flux RSS : HTTP 404", NOW - timedelta(days=3))
+    old["status"], old["errors"] = "introuvable", MAX_ERRORS  # set aside before the date was kept: tried at once
+    gone["status"] = "introuvable"
+    db.sync(["@old", "@recent"], NOW)  # taken off the owner's list: not tried again
+    assert recent["status"] == "introuvable" and db.watched() == []
+    assert db.revive(NOW) == ["@old"] and (old["status"], old["errors"]) == ("active", MAX_ERRORS - 1)
+    failed(old, "toujours introuvable", NOW)  # a single failure sets it aside for another week
+    assert old["status"] == "introuvable" and old["set_aside"] == NOW.isoformat()
+    assert db.revive(NOW + timedelta(days=4)) == ["@recent"] and recent["status"] == "active"
+    assert db.revive(NOW + timedelta(days=6)) == [] and db.revive(NOW + timedelta(days=7)) == ["@old"]
 
 
 def test_a_secondary_channel_is_verified_by_its_description():
