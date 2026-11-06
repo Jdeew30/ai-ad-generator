@@ -5,10 +5,12 @@ name: Clipper
 # les passages planifiés avec du retard. Les workflows planifiés ne tournent que depuis la branche par défaut.
 on:
   schedule:
-    - cron: "37 8-22/2 * * *" # toutes les 2 h, de ~9h37 à ~23h37 à Paris (hiver)
-    # Secours, 30 min après : GitHub ne garantit pas ses passages planifiés et en saute parfois (le 6/11 à 8h37 UTC).
+    # Heures en liste, la forme des exemples de GitHub (« 30 5,17 * * * ») : écrites « 8-22/2 » (plage avec pas), elles
+    # n'ont jamais été lancées le 6/11, alors que les heures fixes d'avant l'étaient (avec environ 1 h de retard).
+    - cron: "37 8,10,12,14,16,18,20,22 * * *" # toutes les 2 h, de ~9h37 à ~23h37 à Paris (hiver)
+    # Secours, 30 min après : GitHub ne garantit pas ses passages planifiés et en saute parfois.
     # Celui-ci ne fait rien si un passage a commencé il y a moins d'une heure (--skip-if-ran-within).
-    - cron: "7 9-23/2 * * *"
+    - cron: "7 9,11,13,15,17,19,21,23 * * *"
     - cron: "41 7 * * 3" # mercredi ~8h41 : best-of du début de semaine
     - cron: "41 7 * * 0" # dimanche ~8h41 : best-of de la fin de semaine
   workflow_dispatch:
