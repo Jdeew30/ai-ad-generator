@@ -290,15 +290,15 @@ def test_the_first_shorts_of_the_day_go_out_in_their_long_cut(media, paths):
     assert not third.meta.long
 
 
-def test_youtube_passages_always_go_out_in_their_long_cut(media, paths):
+def test_youtube_passages_share_the_long_cuts_of_the_day(media, paths):
     from clipper.models import ShortMeta
 
     run = clipper(media, paths, clips=CLIPS, shorts={"long_per_day": 1, "long_min": 61})
     meta = ShortMeta("HOOK", "titre", "desc", [], long_start=4.0, long_end=74.0)
-    run.state.record_post(make_candidate("twitch:Earlier"), meta, [], length=70.0)  # today's long short is already out
     story = make_candidate("youtube:storyvideo1@296-379", "a", source="youtube")
-    assert run._long_wanted(story, meta) and not run._long_wanted(make_candidate("twitch:Next"), meta)
-    assert not run._long_wanted(story, ShortMeta("HOOK", "titre", "desc", []))  # no long cut found: the short one
+    assert run._long_wanted(story, meta) and not run._long_wanted(story, ShortMeta("HOOK", "titre", "desc", []))
+    run.state.record_post(make_candidate("twitch:Earlier"), meta, [], length=70.0)  # today's long short is already out
+    assert not run._long_wanted(story, meta) and not run._long_wanted(make_candidate("twitch:Next"), meta)
 
 
 def test_youtube_captions_are_read_by_claude_within_the_run_budget(tmp_path):

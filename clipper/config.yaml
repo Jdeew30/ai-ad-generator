@@ -119,13 +119,12 @@ youtube:
                                 #   pour y trouver les passages (une requête Claude chacune)
 
 shorts:
-  per_source: {twitch: 2, youtube: 2}  # à chaque passage (toutes les 2 h) : jusqu'à deux shorts Twitch et deux YouTube
+  per_source: {twitch: 2, youtube: 1}  # à chaque passage (toutes les 2 h) : jusqu'à deux shorts Twitch et un YouTube
   per_run: 1                    # sans per_source : shorts publiés à chaque passage, toutes sources confondues
   candidates_factor: 3          # avec Claude : 3 candidats examinés par série et par short voulu
   review_rounds: 2              # 2 séries au plus par source et par passage : le passage suivant (2 h après) prend la suite
-  long_per_day: 6               # TikTok ne rémunère que les vidéos de plus d'une minute (compte monétisé le 07/11) : les 6
-  long_min: 61                  #   premiers shorts du jour qui s'y prêtent sortent dans leur version longue (61 à 90 s,
-                                #   coupée par Claude) ; ceux de YouTube toujours, quand Claude en trouve une
+  long_per_day: 2               # TikTok ne rémunère que les vidéos de plus d'une minute : les 2 premiers shorts du jour qui s'y prêtent
+  long_min: 61                  #   sortent dans leur version longue (61 à 90 s, coupée par Claude)
   long_max: 90
   min_score: 60                 # note de Claude sur 100 : en dessous, le clip n'est pas publié
   guarantee: {twitch: 45, youtube: 45}  # sous 60, le mieux noté part quand même s'il a au moins 45, signalé comme tel :
