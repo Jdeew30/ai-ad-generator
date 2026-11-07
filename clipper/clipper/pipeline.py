@@ -317,6 +317,15 @@ class Clipper:
             return None
         return ClaudeCurator(self.secrets.anthropic_api_key, self.config)
 
+    def _source_turns(self, quotas: dict[str, int]) -> list[str]:
+        """The sources in the order this run tries them: first the one after the source of the last short sent."""
+        order = [source for source, quota in quotas.items() if quota > 0]
+        sent = [(entry.get("at") or "", entry.get("source")) for entry in self.state.posted.values() if entry.get("source") in order]
+        if not sent:
+            return order
+        after = order.index(max(sent)[1]) + 1
+        return order[after:] + order[:after]
+
     def _caption_finder(self) -> CaptionMoments | None:
         """Claude reading the captions of YouTube videos without other clues, so many a run (captions_per_run)."""
         settings = self.config.youtube
@@ -648,6 +657,7 @@ class Clipper:
         wanted = self.config.shorts.per_run if count is None else count
         # A scheduled run takes so many shorts of each source; a count, a focus or an URL asked for by hand do not.
         quotas = self.config.shorts.per_source if count is None and not focus and not url else {}
+        turns = self._source_turns(quotas) if self.config.shorts.alternate and len(quotas) > 1 else []
         if url:
             try:
                 urls = links(url)
@@ -675,7 +685,8 @@ class Clipper:
                                      youtube_related=self.state.youtube_related, creators=self.creators,
                                      youtube_history=self.state.youtube_videos,
                                      known=set(self.state.posted) | set(self.state.rejected),
-                                     youtube_finder=self._caption_finder())
+                                     youtube_finder=self._caption_finder(),
+                                     include_youtube=not turns or turns[0] == "youtube")
                     self.state.youtube_cursor += config.youtube.channels_per_run
             except (SourceError, QueueError, ConfigError) as exc:
                 log.error("Découverte impossible : %s", exc)
@@ -687,6 +698,17 @@ class Clipper:
             self._publish_best(report, ranked, wanted, dry_run=dry_run, force=force)
             return
         guarantee = self.config.shorts.guarantee
+        if turns:
+            # One short this run: the source whose turn it is, the other one only when it has nothing to send.
+            log.info("Short de ce passage : %s d'abord.", " puis ".join(turns))
+            for source in turns:
+                sent = len(report.published)
+                self._publish_best(report, [c for c in ranked if _platform(c) == source], 1, dry_run=dry_run, source=source,
+                                   force=force or source in guarantee, floor=0.0 if force else guarantee.get(source, 0.0),
+                                   at_least=None if force else 1)  # fmt: skip
+                if len(report.published) > sent:
+                    break
+            return
         for source, quota in quotas.items():
             # A scheduled run keeps its short of each source: under the bar, its best one if marked `guarantee` or more.
             self._publish_best(report, [c for c in ranked if _platform(c) == source], quota, dry_run=dry_run, source=source,

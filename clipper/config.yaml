@@ -119,7 +119,8 @@ youtube:
                                 #   pour y trouver les passages (une requête Claude chacune)
 
 shorts:
-  per_source: {twitch: 2, youtube: 1}  # à chaque passage (toutes les 2 h) : jusqu'à deux shorts Twitch et un YouTube
+  per_source: {twitch: 1, youtube: 1}  # 5 passages par jour (9h37, 12h37, 15h37, 18h37, 21h37) : 4 à 5 clips par jour
+  alternate: true               # un short par passage, Twitch et YouTube chacun leur tour (l'autre s'il n'a rien)
   per_run: 1                    # sans per_source : shorts publiés à chaque passage, toutes sources confondues
   candidates_factor: 3          # avec Claude : 3 candidats examinés par série et par short voulu
   review_rounds: 2              # 2 séries au plus par source et par passage : le passage suivant (2 h après) prend la suite

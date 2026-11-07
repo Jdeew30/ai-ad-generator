@@ -1,17 +1,15 @@
 name: Clipper
 
-# Robot de la chaîne : toutes les 2 heures, les moments qui partent en ce moment (Twitch et YouTube), + un best-of
+# Robot de la chaîne : 5 passages par jour, un short chacun (Twitch et YouTube chacun leur tour), + un best-of
 # le mercredi et le dimanche. Les horaires sont en UTC (Paris = UTC+1 l'hiver, UTC+2 l'été) ; GitHub lance souvent
 # les passages planifiés avec du retard. Les workflows planifiés ne tournent que depuis la branche par défaut.
 on:
   schedule:
     # Heures en liste, la forme des exemples de GitHub (« 30 5,17 * * * ») : écrites « 8-22/2 » (plage avec pas), elles
-    # n'ont jamais été lancées le 6/11, alors que les heures fixes d'avant l'étaient (avec environ 1 h de retard).
-    - cron: "37 8,10,12,14,16,18,20,22 * * *" # toutes les 2 h, de ~9h37 à ~23h37 à Paris (hiver)
-    # Secours, 30 min après : GitHub ne garantit pas ses passages planifiés et en saute parfois.
-    # Un passage planifié ne fait rien si un passage a commencé il y a moins de 100 min (--skip-if-ran-within) : GitHub
+    # n'ont jamais été lancées le 6/11. 5 passages par jour, un short chacun (Twitch et YouTube chacun leur tour).
+    - cron: "37 8,11,14,17,20 * * *" # ~9h37, 12h37, 15h37, 18h37, 21h37 à Paris (hiver)
+    # Un passage planifié ne fait rien si un passage a commencé il y a moins de 170 min (--skip-if-ran-within) : GitHub
     # les lance avec 1 h à 2 h de retard, et la tâche Claude « vérification toutes les heures » lance ceux qu'il saute.
-    - cron: "7 9,11,13,15,17,19,21,23 * * *"
     - cron: "41 7 * * 3" # mercredi ~8h41 : best-of du début de semaine
     - cron: "41 7 * * 0" # dimanche ~8h41 : best-of de la fin de semaine
   workflow_dispatch:
@@ -128,7 +126,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
           FORCE: ${{ inputs.force && '--force' || '' }}
           # Passage planifié : rien à faire si un autre a déjà fait ce créneau (secours, ou retard de GitHub).
-          SLOT: ${{ github.event_name == 'schedule' && '100' || '' }}
+          SLOT: ${{ github.event_name == 'schedule' && '170' || '' }}
         run: |
           case "$MODE" in
             compilation) python -m clipper compile $DRY_RUN ;;

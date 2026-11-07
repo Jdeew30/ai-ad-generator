@@ -65,7 +65,7 @@ Chaînes : [YouTube](https://www.youtube.com/channel/UC7iURKSML3pyYVII8bbcRUw) �
 | Publication YouTube | ⚠️ Écrite, testée contre un faux serveur | Envoi « resumable » par morceaux avec reprise après coupure. **Tant que ton projet Google n'a pas passé l'audit de l'API, YouTube verrouille les vidéos envoyées en privé** (voir plus bas). |
 | Publication TikTok | ⚠️ Écrite, testée contre un faux serveur | Brouillon (« inbox ») ou publication directe. **En pratique, publication à la main depuis Telegram** : le règlement de l'API TikTok exclut les outils qui publient sur tes propres comptes et la reprise de contenus d'autres plateformes, donc pas d'audit, et sans audit tout reste privé (voir TikTok plus bas). |
 | Envoi Telegram | ✅ Vérifié en réel | Chaque short arrive avec le texte à coller ; un message prévient quand un passage ne trouve rien d'assez bon. |
-| Workflows GitHub Actions | ✅ Vérifié en réel | Un passage toutes les 2 heures de 9 h 37 à 23 h 37 (+ best-of du mercredi et du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés en retard et en saute parfois : un passage de secours, 30 min après chacun, le remplace s'il n'a pas eu lieu. |
+| Workflows GitHub Actions | ✅ Vérifié en réel | 5 passages par jour, vers 9 h 37, 12 h 37, 15 h 37, 18 h 37 et 21 h 37 (+ best-of du mercredi et du dimanche) sur ton dépôt. GitHub lance souvent les passages planifiés en retard et en saute parfois : une tâche planifiée Claude vérifie chaque heure et lance le passage qui manque. |
 
 **Le premier passage avec tes vrais comptes est la vraie validation des publications.** Toute erreur
 (quota, jeton expiré, refus de la plateforme) apparaît telle quelle dans le résumé du workflow et sur
@@ -84,8 +84,9 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
    publie à la main depuis Telegram.
 4. Vérifie : **Run workflow** → mode **`check`**. Le résumé du run affiche ✅ / ❌ pour chaque service, et
    Telegram reçoit un message de test. Rien n'est publié.
-5. C'est tout : à chaque passage (toutes les 2 heures de 9 h 37 à 23 h 37 à Paris l'hiver, une heure plus tard
-   l'été), jusqu'à deux shorts Twitch et un short YouTube, et un best-of le mercredi et le dimanche matin.
+5. C'est tout : 5 passages par jour (vers 9 h 37, 12 h 37, 15 h 37, 18 h 37 et 21 h 37 à Paris), un short chacun,
+   Twitch et YouTube chacun leur tour : 4 à 5 clips par jour, dont 1 ou 2 de plus d'une minute ; et un best-of le
+   mercredi et le dimanche matin.
 
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
@@ -173,7 +174,7 @@ Constat du 05/11 sur les 71 shorts envoyés :
 - **Peu de bons moments examinés** : 3 % des clips Twitch examinés atteignaient 60/100.
 
 Le robot vise donc :
-- **Le moment qui part maintenant** : clips classés par vues à l'heure, et un passage toutes les 2 heures. La
+- **Le moment qui part maintenant** : clips classés par vues à l'heure, et un passage toutes les 3 heures. La
   fiche Telegram dit « ⚡ Tout frais : à poster maintenant » quand le moment a moins de 12 h. Les pépites de petits
   streamers restent dans la course une semaine : le short le plus vu du compte (Loupiote, « je regarde le ciel
   depuis deux ans, rien ne m'est tombé dessus », 75,6k vues sur TikTok) était un clip de 1 000 vues vieux de
@@ -342,9 +343,10 @@ restent 100 % Twitch.
   dans le journal. Avec les clés Twitch, `discover_limit` y ajoute les plus gros lives FR du moment (100),
   `remember_live` les chaînes FR vues ces 14 derniers jours (150 au plus) et `discover_categories` les clips
   FR les plus vus de la semaine dans les catégories les plus regardées (20).
-- `shorts.per_source` / le `cron` du workflow : le rythme de publication, jusqu'à deux shorts Twitch et un
-  short YouTube par passage, un passage toutes les 2 heures de 9 h 37 à 23 h 37 (les moments notés 60 ou plus, et
-  sinon le mieux noté s'il a au moins 45). `shorts.review_rounds` : séries de candidats examinées au plus par source et par passage (2 : le
+- `shorts.per_source`, `shorts.alternate` / le `cron` du workflow : le rythme de publication, un short par passage,
+  Twitch et YouTube chacun leur tour (l'autre source quand celle du tour n'a rien), 5 passages par jour (les
+  moments notés 60 ou plus, et sinon le mieux noté s'il a au moins 45). Le tour de Twitch ne cherche pas sur
+  YouTube. `shorts.review_rounds` : séries de candidats examinées au plus par source et par passage (2 : le
   passage suivant prend la suite, et les crédits Claude restent ceux de 5 passages de 4 séries).
   `shorts.guarantee` (45 pour Twitch et YouTube) garde un short de chaque source à chaque passage : quand aucun
   clip n'atteint 60, le mieux noté part s'il a au moins 45, et Telegram le signale. Vide (`{}`), seuls les
