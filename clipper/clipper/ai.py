@@ -176,7 +176,10 @@ surprend, une anecdote qui se termine ;
 - dure de 61 à 90 secondes : le compte est rémunéré par TikTok pour les vidéos de plus d'une minute. Plus court (30 \
 à 60 secondes) seulement si le moment ne tient pas une minute sans temps mort.
 Évite l'introduction et la conclusion de la vidéo, les placements de produit et les sponsors, les remerciements, les \
-passages qui n'ont de sens qu'avec le reste de la vidéo, la musique sans parole.
+passages qui n'ont de sens qu'avec le reste de la vidéo, la musique sans parole. Évite aussi les passages où l'on \
+voit surtout une émission TV, un film, un clip musical ou un match de sport traditionnel qui n'appartient pas au \
+créateur (un « react » de Koh-Lanta, par exemple) : ils ne sont pas publiés. Un match d'e-sport commenté par le \
+créateur, un jeu vidéo auquel il joue ou une discussion entre créateurs conviennent.
 
 Donne start et end en secondes depuis le début de la vidéo (les minutages entre crochets sont les débuts des \
 lignes) : commence sur la phrase qui accroche, termine juste après la chute ou la réaction qui la suit. Pour chaque \
