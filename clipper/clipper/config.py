@@ -84,6 +84,9 @@ class StreamerOverride:
 class ShortsConfig:
     per_run: int = 1
     per_source: dict[str, int] = field(default_factory=dict)  # {twitch: 1, youtube: 1}: so many of each per run, instead of per_run
+    # With per_source: one short a run, the sources taking turns (first the one after the source of the last short
+    # sent), the next one only when it has nothing to send. Off: each source sends its per_source shorts every run.
+    alternate: bool = False
     candidates_factor: int = 3  # how many candidates are downloaded and reviewed per short published
     review_rounds: int = 4  # with Claude: batches of candidates reviewed at most per source and run, while none is kept
     # Long cuts (TikTok only pays for videos past a minute): so many shorts a day (Paris) are rendered from Claude's
