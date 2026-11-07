@@ -7,7 +7,7 @@ import re
 import unicodedata
 from collections import Counter
 from datetime import datetime, timedelta
-from typing import Any, NamedTuple
+from typing import Any, NamedTuple, Protocol
 from urllib.parse import quote
 
 from ..config import Config, YouTubeSourceConfig
@@ -30,6 +30,9 @@ RELATED_LOOKUPS_PER_RUN = 8
 RELATED_REFRESH_DAYS = 14
 NO_HEATMAP = "sans « moments les plus revus »"
 NO_MOMENT = "sans « moments les plus revus » ni minutage en commentaire"
+NO_CAPTION_MOMENT = "rien de fort dans ses sous-titres"
+CAPTION_HEAT = 0.7  # a passage Claude found in the captions ranks like a fair « most replayed » peak
+CAPTION_MARGIN = 4.0  # seconds kept around such a passage: the review cuts the short in it
 COMMENTS_PER_VIDEO = 60  # top comments read when YouTube gives no "most replayed" data
 MIN_CITED = 2.0  # weight a moment needs from the comments: two citations, or one comment that a few people liked
 # Around the time viewers cite: its setup before, its punchline and the reactions after (the review trims the extract).
@@ -180,7 +183,6 @@ def candidates_from_info(
     if reason and not (reason == NO_HEATMAP and comments):
         return []
     uploaded = _uploaded(info)
-    views = int(info.get("view_count") or 0)
     duration = float(info.get("duration") or 0.0)
     said: dict[tuple[float, float], CitedMoment] = {}
     if info.get("heatmap"):
@@ -199,6 +201,16 @@ def candidates_from_info(
         if cited:
             log.info("Moments cités en commentaire sous « %s » : %s", info.get("title") or info.get("id"),
                      ", ".join(f"{_clock(moment.start)}-{_clock(moment.end)}" for moment in cited))
+    return _candidates(info, windows, config, uploaded, said=said)
+
+
+def _candidates(
+    info: dict[str, Any], windows: list[tuple[float, float, float]], config: Config, uploaded: datetime | None, *,
+    said: dict[tuple[float, float], CitedMoment] | None = None, pitches: dict[tuple[float, float], str] | None = None,
+) -> list[Candidate]:
+    """The candidates of a video's passages (start, end, heat), with what the viewers or Claude said of each."""
+    said, pitches = said or {}, pitches or {}
+    views = int(info.get("view_count") or 0)
     handle = (info.get("uploader_id") or "").lstrip("@") or info.get("channel_id") or ""
     login = handle.lower()
     channel = info.get("channel_url") or info.get("uploader_url") or ""
@@ -225,6 +237,7 @@ def candidates_from_info(
             thumbnail_url=info.get("thumbnail"),
             cited=said[(start, end)].comment if (start, end) in said else None,
             cited_at=said[(start, end)].at if (start, end) in said else None,
+            pitch=pitches.get((start, end)),
         )
         for start, end, heat in windows
     ]
@@ -236,10 +249,22 @@ def _clock(seconds: float) -> str:
     return f"{hours}:{rest // 60:02d}:{rest % 60:02d}" if hours else f"{rest // 60}:{rest % 60:02d}"
 
 
+class CaptionFinder(Protocol):
+    """Claude reading a video's captions for its passages worth a short (see Clipper._caption_finder)."""
+
+    remaining: int  # videos it may still read in this run
+
+    def __call__(self, info: dict[str, Any], url: str) -> list[tuple[float, float, str]] | None:
+        """(start, end, what happens there) of the best passages, best first; [] when it found none or the video has
+        no captions; None when it could not read them in this run (no Claude, no request left)."""
+
+
 def _video_moments(
-    info: dict[str, Any], url: str, settings: YouTubeSourceConfig, config: Config, ytdlp: YtDlp, now: datetime
+    info: dict[str, Any], url: str, settings: YouTubeSourceConfig, config: Config, ytdlp: YtDlp, now: datetime,
+    finder: CaptionFinder | None = None,
 ) -> tuple[list[Candidate], str | None]:
-    """The video's moments, and why it has none. Without "most replayed" data its top comments are read."""
+    """The video's moments, and why it has none. Without "most replayed" data its top comments are read, and
+    without timestamped comments either, its captions (by `finder`)."""
     found = candidates_from_info(info, settings, config, now)
     if found:
         return found, None
@@ -254,7 +279,20 @@ def _video_moments(
         log.warning("Commentaires de la vidéo YouTube %s illisibles : %s", info.get("id"), exc)
         comments = []
     found = candidates_from_info(info, settings, config, now, comments=comments)
-    return found, None if found else NO_MOMENT
+    if found or finder is None:
+        return found, None if found else NO_MOMENT
+    passages = finder(info, url)
+    if passages is None:
+        return [], NO_MOMENT
+    duration = float(info.get("duration") or 0.0)
+    windows = [(max(0.0, start - CAPTION_MARGIN), min(duration or end + CAPTION_MARGIN, end + CAPTION_MARGIN), CAPTION_HEAT)
+               for start, end, _ in passages]  # fmt: skip
+    pitches = {window[:2]: why for window, (_, _, why) in zip(windows, passages, strict=True)}
+    found = _candidates(info, windows, config, _uploaded(info), pitches=pitches)
+    if found:
+        log.info("Passages repérés dans les sous-titres de « %s » : %s", info.get("title") or info.get("id"),
+                 ", ".join(f"{_clock(start)}-{_clock(end)}" for start, end, _ in windows))
+    return found, None if found else NO_CAPTION_MOMENT
 
 
 def _plain(text: str) -> str:
@@ -379,7 +417,7 @@ def _refresh_related(channels: list[str], ytdlp: YtDlp, related: dict[str, dict[
 def discover_youtube(
     config: Config, ytdlp: YtDlp, *, now: datetime, offset: int = 0, related: dict[str, dict[str, Any]] | None = None,
     http: Http | None = None, creators: watch.Creators | None = None, history: dict[str, dict[str, Any]] | None = None,
-    twitch_seen: dict[str, str] | None = None, known: set[str] | None = None,
+    twitch_seen: dict[str, str] | None = None, known: set[str] | None = None, finder: CaptionFinder | None = None,
 ) -> list[Candidate]:
     """Peaks of the channels' recent videos.
 
@@ -411,7 +449,7 @@ def discover_youtube(
             if twitch_seen:
                 _discover_from_twitch(creators, twitch_seen, ytdlp, now, budget=settings.discover_per_run,
                                       first=[login.lower() for login in config.twitch.streamers])
-            candidates.extend(_watch(config, ytdlp, http, creators, history, related, now, skipped, known or set()))
+            candidates.extend(_watch(config, ytdlp, http, creators, history, related, now, skipped, known or set(), finder))
         except DownloadError as exc:
             if not exc.blocked:
                 raise
@@ -474,6 +512,7 @@ def _tell(candidates: list[Candidate], skipped: Counter[str]) -> None:
 def _watch(
     config: Config, ytdlp: YtDlp, http: Http, creators: watch.Creators, history: dict[str, dict[str, Any]],
     related: dict[str, dict[str, Any]] | None, now: datetime, skipped: Counter[str], known: set[str],
+    finder: CaptionFinder | None = None,
 ) -> list[Candidate]:
     """Every watched channel's RSS feed, then the details and moments of the most promising new videos only.
 
@@ -534,14 +573,21 @@ def _watch(
     # A video some of whose passages were already handled comes after the untouched ones: it may hold less.
     due = sorted(((watch.pre_score(entry, paces.get(entry.get("channel") or ""), now), video_id, entry)
                   for video_id, entry in history.items()
-                  if watch.due(entry, now, max_age=window, min_views=settings.min_views)),
+                  if watch.due(entry, now, max_age=window, min_views=settings.min_views, captions=finder is not None)),
                  key=lambda item: -item[0] * (0.6 if item[1] in handled else 1.0))  # fmt: skip
     deeper = dataclasses.replace(settings, segments_per_video=settings.segments_per_video * 3)
     log.info("YouTube : %d chaîne(s) lue(s) par flux RSS%s, %d vidéo(s) récente(s) à regarder, les %d plus prometteuses ce "
              "passage.", read, f" ({len(unread)} illisible(s) : {', '.join(unread[:8])} ; {why})" if unread else "", len(due),
              min(len(due), settings.videos_per_run))  # fmt: skip
     candidates: list[Candidate] = []
-    for momentum, video_id, entry in due[: settings.videos_per_run]:
+    looked_into = 0
+    for momentum, video_id, entry in due:
+        if looked_into >= settings.videos_per_run:
+            break
+        read_before = bool(entry.get("captions"))
+        if finder is not None and entry.get("outcome") == "none" and not read_before and finder.remaining <= 0:
+            continue  # looked into already: only its captions can still give a moment, at a later run
+        looked_into += 1
         url = f"https://www.youtube.com/watch?v={video_id}"
         entry["examined"] = int(entry.get("examined") or 0) + 1
         entry["examined_at"] = now.isoformat()
@@ -551,7 +597,9 @@ def _watch(
                 entry["outcome"] = "blocked"
                 continue
             # More moments than needed are looked for: those already sent or refused are left out.
-            found, reason = _video_moments(info, url, deeper, config, ytdlp, now)
+            found, reason = _video_moments(info, url, deeper, config, ytdlp, now, None if read_before else finder)
+            if reason == NO_CAPTION_MOMENT or any(c.pitch for c in found):
+                entry["captions"] = True  # read once: its captions do not change
             fresh = [c for c in found if not _overlaps_any(c, handled.get(video_id, []))][: settings.segments_per_video]
             if found and not fresh:
                 reason = "passages déjà traités"
@@ -565,7 +613,7 @@ def _watch(
             skipped["illisible"] += 1
             continue
         # No moment yet: looked into once more a day later. Too short, live, members only…: never again.
-        entry["outcome"] = "moments" if found else "none" if reason in (NO_MOMENT, NO_HEATMAP) else "skip"
+        entry["outcome"] = "moments" if found else "none" if reason in (NO_MOMENT, NO_HEATMAP, NO_CAPTION_MOMENT) else "skip"
         _note_category(creators, info)
         if reason:
             skipped[reason] += 1

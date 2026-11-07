@@ -260,3 +260,42 @@ def test_a_rejected_fallback_beta_is_retried_without_it(server, tmp_path):
     reviews = curator(server).review(items(tmp_path)[:1], now=NOW)
     assert reviews["twitch:A"].meta.ai and reviews["twitch:A"].score == 70
     assert len(server.calls("POST", "/v1/messages")) == 2
+
+
+def test_claude_finds_the_passages_of_a_youtube_video_in_its_captions(server):
+    moments = [
+        {"start": 312.0, "end": 389.5, "why": "Il raconte sa pire chute à vélo, chute comprise."},
+        {"start": 330.0, "end": 400.0, "why": "chevauche le premier"},
+        {"start": 500.0, "end": 510.0, "why": "trop court"},
+        {"start": 1180.0, "end": 1290.0, "why": "déborde de la vidéo : coupé à sa fin"},
+        {"start": 700.0, "end": 780.0, "why": "un de trop"},
+    ]
+    server.route("POST", "/v1/messages", (200, {}, message({"moments": moments})))
+    found = curator(server).find_moments(title="J'ai testé le vélo le plus cher", channel="Squeezie", duration=1230.0,
+                                         transcript="[5:12] alors là je tombe\n[5:27] et personne ne m'aide", count=2)  # fmt: skip
+    assert [(m.start, m.end, m.why) for m in found] == [
+        (312.0, 389.5, "Il raconte sa pire chute à vélo, chute comprise."),
+        (1180.0, 1230.0, "déborde de la vidéo : coupé à sa fin"),
+    ]
+    body = server.calls("POST", "/v1/messages")[0].json()
+    text = body["messages"][0]["content"][0]["text"]
+    assert "Chaîne : Squeezie" in text and "Durée : 20 min 30 s" in text and "Renvoie au plus 2 passages." in text
+    assert "<transcription>\n[5:12] alors là je tombe" in text
+    assert body["output_config"]["format"]["schema"]["required"] == ["moments"]
+    assert "61 à 90 secondes" in json.dumps(body["system"], ensure_ascii=False)
+
+
+def test_no_answer_from_claude_leaves_the_video_for_later(server):
+    server.route("POST", "/v1/messages", (529, {}, {"type": "error", "error": {"type": "overloaded_error", "message": "busy"}}))
+    assert curator(server).find_moments(title="t", channel="c", duration=600.0, transcript="[0:00] x", count=2) is None
+
+
+def test_the_reviewer_is_told_what_was_seen_in_the_captions(server, tmp_path):
+    server.route("POST", "/v1/messages", (200, {}, message({"clips": []})))
+    found = make_candidate("youtube:abcdefghijk@308-394", "squeezie", source="youtube", start=308.0, end=394.0,
+                           pitch="Il raconte sa pire chute à vélo, chute comprise.")  # fmt: skip
+    curator(server).review([ReviewItem(found, 86.0), *items(tmp_path)], now=NOW)
+    body = server.calls("POST", "/v1/messages")[0].json()
+    texts = "\n".join(block["text"] for block in body["messages"][0]["content"] if block["type"] == "text")
+    assert ("Passage repéré en lisant les sous-titres de la vidéo, à vérifier sur l'extrait : Il raconte sa pire chute "
+            "à vélo, chute comprise.") in texts and texts.count("Passage repéré") == 1  # fmt: skip

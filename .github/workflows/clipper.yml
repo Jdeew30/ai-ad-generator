@@ -9,7 +9,8 @@ on:
     # n'ont jamais été lancées le 6/11, alors que les heures fixes d'avant l'étaient (avec environ 1 h de retard).
     - cron: "37 8,10,12,14,16,18,20,22 * * *" # toutes les 2 h, de ~9h37 à ~23h37 à Paris (hiver)
     # Secours, 30 min après : GitHub ne garantit pas ses passages planifiés et en saute parfois.
-    # Celui-ci ne fait rien si un passage a commencé il y a moins d'une heure (--skip-if-ran-within).
+    # Un passage planifié ne fait rien si un passage a commencé il y a moins de 100 min (--skip-if-ran-within) : GitHub
+    # les lance avec 1 h à 2 h de retard, et la tâche Claude « vérification toutes les heures » lance ceux qu'il saute.
     - cron: "7 9,11,13,15,17,19,21,23 * * *"
     - cron: "41 7 * * 3" # mercredi ~8h41 : best-of du début de semaine
     - cron: "41 7 * * 0" # dimanche ~8h41 : best-of de la fin de semaine
@@ -127,7 +128,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
           FORCE: ${{ inputs.force && '--force' || '' }}
           # Passage planifié : rien à faire si un autre a déjà fait ce créneau (secours, ou retard de GitHub).
-          SLOT: ${{ github.event_name == 'schedule' && '60' || '' }}
+          SLOT: ${{ github.event_name == 'schedule' && '100' || '' }}
         run: |
           case "$MODE" in
             compilation) python -m clipper compile $DRY_RUN ;;

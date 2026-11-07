@@ -290,6 +290,64 @@ def test_the_first_shorts_of_the_day_go_out_in_their_long_cut(media, paths):
     assert not third.meta.long
 
 
+def test_youtube_passages_always_go_out_in_their_long_cut(media, paths):
+    from clipper.models import ShortMeta
+
+    run = clipper(media, paths, clips=CLIPS, shorts={"long_per_day": 1, "long_min": 61})
+    meta = ShortMeta("HOOK", "titre", "desc", [], long_start=4.0, long_end=74.0)
+    run.state.record_post(make_candidate("twitch:Earlier"), meta, [], length=70.0)  # today's long short is already out
+    story = make_candidate("youtube:storyvideo1@296-379", "a", source="youtube")
+    assert run._long_wanted(story, meta) and not run._long_wanted(make_candidate("twitch:Next"), meta)
+    assert not run._long_wanted(story, ShortMeta("HOOK", "titre", "desc", []))  # no long cut found: the short one
+
+
+def test_youtube_captions_are_read_by_claude_within_the_run_budget(tmp_path):
+    from clipper.ai import FoundMoment
+    from clipper.pipeline import CaptionMoments
+    from clipper.ytdlp import DownloadError
+
+    class Captions:
+        def captions(self, url, work, name):
+            if name == "nocaptions1":
+                return None
+            if name == "refusedvid1":
+                raise DownloadError("Unable to download video subtitles for 'fr': HTTP Error 429: Too Many Requests")
+            if name == "blockedvid1":
+                raise DownloadError("Sign in to confirm you're not a bot", blocked=True)
+            work.mkdir(parents=True, exist_ok=True)
+            path = work / f"{name}.fr.json3"
+            path.write_text(json.dumps({"events": [{"tStartMs": 1000, "segs": [{"utf8": "bon alors"}]}]}), encoding="utf-8")
+            return path
+
+    asked: list[dict] = []
+
+    def find(**request):
+        asked.append(request)
+        return None if request["title"] == "busy" else [FoundMoment(300.0, 375.0, "Il raconte sa chute.")]
+
+    def video(video_id, title="story"):
+        return {"id": video_id, "title": title, "channel": "Chaîne A", "duration": 1200}
+
+    finder = CaptionMoments(find, Captions(), tmp_path / "captions", budget=3, count=2)
+    assert finder(video("storyvideo1"), "url") == [(300.0, 375.0, "Il raconte sa chute.")]
+    assert asked == [{"title": "story", "channel": "Chaîne A", "duration": 1200.0, "transcript": "[0:01] bon alors", "count": 2}]
+    assert finder(video("nocaptions1"), "url") == [] and finder(video("refusedvid1"), "url") == []  # nothing to read
+    assert len(asked) == 1 and finder.remaining == 0 and finder(video("storyvideo2"), "url") is None  # budget spent
+    with pytest.raises(DownloadError):
+        CaptionMoments(find, Captions(), tmp_path / "captions", budget=1, count=2)(video("blockedvid1"), "url")
+    busy = CaptionMoments(find, Captions(), tmp_path / "captions", budget=1, count=2)
+    assert busy(video("storyvideo3", "busy"), "url") is None and busy.remaining == 1  # Claude silent: read again later
+
+
+def test_the_caption_reader_exists_only_with_claude_and_a_budget(media, paths):
+    assert clipper(media, paths, clips=CLIPS)._caption_finder() is None  # no captions_per_run
+    run = clipper(media, paths, clips=CLIPS, youtube={"captions_per_run": 4, "segments_per_video": 2})
+    assert run._caption_finder() is None  # without Claude, nothing reads the captions
+    run.curator = type("Reader", (), {"find_moments": lambda self, **kw: []})()
+    finder = run._caption_finder()
+    assert (finder.remaining, finder.count) == (4, 2)
+
+
 def test_the_last_run_of_shorts_is_known_from_the_state(media, paths):
     run = clipper(media, paths, clips=CLIPS)
     assert run.last_shorts_run() is None

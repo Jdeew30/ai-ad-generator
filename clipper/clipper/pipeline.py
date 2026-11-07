@@ -35,6 +35,7 @@ from .selection import rank, spread
 from .sources import discover, focus_config
 from .sources.watch import Creators
 from .sources.manual import QueueError, joined_candidate, links, manual_candidate, parse_timestamp
+from .sources.subtitles import parse_captions, timed_transcript
 from .sources.twitch import SourceError
 from .state import State
 from .thumbnail import make_thumbnail
@@ -232,6 +233,35 @@ def refusal(review: Review, candidate: Candidate, min_score: float) -> str | Non
     return None
 
 
+class CaptionMoments:
+    """The passages of a YouTube video, read in its captions by Claude (find_moments), for `budget` videos a run."""
+
+    def __init__(self, find: Any, ytdlp: YtDlp, work: Path, *, budget: int, count: int) -> None:
+        self.find, self.ytdlp, self.work, self.remaining, self.count = find, ytdlp, work, budget, count
+
+    def __call__(self, info: dict[str, Any], url: str) -> list[tuple[float, float, str]] | None:
+        if self.remaining <= 0:
+            return None
+        self.remaining -= 1
+        try:
+            path = self.ytdlp.captions(url, self.work, str(info.get("id") or "video"))
+        except DownloadError as exc:
+            if exc.blocked:
+                raise
+            log.warning("Sous-titres de la vidéo YouTube %s illisibles : %s", info.get("id"), exc)
+            return []
+        transcript = timed_transcript(parse_captions(path)) if path else ""
+        if not transcript:
+            log.info("Pas de sous-titres français pour « %s ».", info.get("title") or info.get("id"))
+            return []
+        moments = self.find(title=str(info.get("title") or ""), channel=str(info.get("channel") or info.get("uploader") or ""),
+                            duration=float(info.get("duration") or 0.0), transcript=transcript, count=self.count)  # fmt: skip
+        if moments is None:
+            self.remaining += 1  # Claude did not answer: the video is read again at a later run
+            return None
+        return [(moment.start, moment.end, moment.why) for moment in moments]
+
+
 class Clipper:
     """Discovery -> download -> transcription -> review -> edit -> publish, with the state kept between runs."""
 
@@ -286,6 +316,15 @@ class Clipper:
             log.info("ANTHROPIC_API_KEY absente : sélection par popularité et textes par gabarit (sans IA).")
             return None
         return ClaudeCurator(self.secrets.anthropic_api_key, self.config)
+
+    def _caption_finder(self) -> CaptionMoments | None:
+        """Claude reading the captions of YouTube videos without other clues, so many a run (captions_per_run)."""
+        settings = self.config.youtube
+        find = getattr(self.curator, "find_moments", None)
+        if not settings.captions_per_run or find is None:
+            return None
+        return CaptionMoments(find, self.ytdlp, self.paths.work / "captions", budget=settings.captions_per_run,
+                              count=settings.segments_per_video)  # fmt: skip
 
     @property
     def publishers(self) -> dict[str, Any]:
@@ -635,7 +674,8 @@ class Clipper:
                                      memory=self.state.streamers_seen, youtube_offset=self.state.youtube_cursor,
                                      youtube_related=self.state.youtube_related, creators=self.creators,
                                      youtube_history=self.state.youtube_videos,
-                                     known=set(self.state.posted) | set(self.state.rejected))
+                                     known=set(self.state.posted) | set(self.state.rejected),
+                                     youtube_finder=self._caption_finder())
                     self.state.youtube_cursor += config.youtube.channels_per_run
             except (SourceError, QueueError, ConfigError) as exc:
                 log.error("Découverte impossible : %s", exc)
@@ -832,10 +872,13 @@ class Clipper:
                             f"({self.config.shorts.min_score:.0f}/100), celui-ci est le mieux noté ({review.score:.0f}/100).")
 
     def _long_wanted(self, candidate: Candidate, meta: ShortMeta) -> bool:
-        """Whether this short goes out in its long cut: it has one, and today's long shorts are not all sent yet."""
+        """Whether this short goes out in its long cut: it has one, and it comes from YouTube or today's long shorts
+        are not all sent yet."""
         rules = self.config.shorts
         if not rules.long_per_day or candidate.manual or meta.long_start is None or meta.long_end is None:
             return False
+        if candidate.source == "youtube":
+            return True  # a passage of a YouTube video tells a story: its long cut is the short (and it is paid)
         midnight = self.now.astimezone(PARIS).replace(hour=0, minute=0, second=0, microsecond=0)
         return self.state.long_count(midnight, rules.long_min) < rules.long_per_day
 

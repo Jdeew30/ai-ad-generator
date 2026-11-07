@@ -36,6 +36,9 @@ _TRANSIENT = re.compile(
     re.IGNORECASE,
 )
 ATTEMPTS = 3  # tries of a whole listing, metadata or download call; yt-dlp also retries each request inside
+# Captions asked for, best first: the channel's French ones, YouTube's automatic ones in the video's own French
+# (« fr-orig » when YouTube also offers translations), then the French translation of a video in another language.
+CAPTION_LANGUAGES = ("fr", "fr-FR", "fr-orig")
 PAUSES = (5.0, 20.0)  # seconds before the 2nd and the 3rd try
 
 
@@ -141,6 +144,21 @@ class YtDlp:
             "youtube": {"max_comments": [str(limit), str(limit), "0", "0"], "comment_sort": ["top"]},
         }
         return [comment for comment in self._run(url, options, False).get("comments") or [] if isinstance(comment, dict)]
+
+    def captions(self, url: str, dest_dir: Path, name: str) -> Path | None:
+        """The video's French captions, the channel's own or else YouTube's automatic ones, as a json3 (or vtt)
+        file, without the video; None when it has none."""
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        for old in dest_dir.glob(f"{name}.*"):
+            old.unlink()
+        options = self._options(
+            skip_download=True, writesubtitles=True, writeautomaticsub=True, subtitleslangs=list(CAPTION_LANGUAGES),
+            subtitlesformat="json3/vtt/best", outtmpl=str(dest_dir / f"{name}.%(ext)s"), overwrites=True, noplaylist=True,
+        )  # fmt: skip
+        self._run(url, options, True)
+        files = {path.name.removeprefix(f"{name}.").rsplit(".", 1)[0]: path for path in dest_dir.glob(f"{name}.*.*")
+                 if path.suffix in {".json3", ".vtt"}}  # fmt: skip
+        return next((files[language] for language in CAPTION_LANGUAGES if language in files), None)
 
     def download(
         self,

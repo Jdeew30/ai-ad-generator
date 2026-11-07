@@ -325,12 +325,13 @@ def channel_paces(history: dict[str, dict[str, Any]], now: datetime) -> dict[str
     return {channel: statistics.median(values) for channel, values in paces.items() if len(values) >= 3}
 
 
-def due(entry: dict[str, Any], now: datetime, *, max_age: timedelta, min_views: int = 0) -> bool:
+def due(entry: dict[str, Any], now: datetime, *, max_age: timedelta, min_views: int = 0, captions: bool = False) -> bool:
     """Whether a video seen in a feed should be looked into this run.
 
     Fresh enough, not a Short, with `min_views` views by its feed (it may get there at a later run), not looked into
     yet, or once more a day later when it gave nothing the first time (its « most replayed » curve and its comments
-    come with the views).
+    come with the views). With `captions` (Claude reads the captions of videos without either), a video that gave
+    nothing and whose captions were not read yet is looked into again.
     """
     published = parse_time(entry.get("published"))
     if published is None or now - published > max_age or entry.get("short"):
@@ -339,6 +340,8 @@ def due(entry: dict[str, Any], now: datetime, *, max_age: timedelta, min_views: 
     if views is not None and views < min_views:
         return False
     if not entry.get("examined"):
+        return True
+    if captions and entry.get("outcome") == "none" and not entry.get("captions"):
         return True
     last = parse_time(entry.get("examined_at"))
     return entry.get("examined", 0) < 2 and entry.get("outcome") == "none" and (last is None or now - last >= timedelta(hours=20))
