@@ -737,6 +737,35 @@ def test_a_run_takes_one_short_of_each_source(media, paths, monkeypatch):
                        publishers={}).run_shorts(count=1).published) <= 1  # a count asked for by hand is a total  # fmt: skip
 
 
+def test_with_alternate_a_run_sends_one_short_the_sources_taking_turns(media, paths, monkeypatch):
+    import clipper.pipeline as pipeline
+
+    twitch = [make_candidate(f"twitch:{name.capitalize()}-Cam", name, views=5000 - i, created_at=NOW - timedelta(hours=4 * i))
+              for i, name in enumerate(("alpha", "beta", "gamma"), start=1)]  # fmt: skip
+    youtube = make_candidate("youtube:abcdefghijk@60-120", "squeezie", source="youtube", start=60.0, end=120.0,
+                             url="https://www.youtube.com/watch?v=abcdefghijk", channel_url="https://www.youtube.com/@Squeezie")  # fmt: skip
+    asked: list[bool] = []
+
+    def discover(*args, include_youtube=True, **kwargs):
+        asked.append(include_youtube)
+        return [c for c in [*twitch, youtube] if include_youtube or c.source != "youtube"]
+
+    monkeypatch.setattr(pipeline, "discover", discover)
+    telegram = FakePublisher("telegram")
+    shorts = {"min_duration": 3, "per_source": {"twitch": 1, "youtube": 1}, "alternate": True}
+
+    def sent():
+        report = clipper(media, paths, clips={}, publishers={"telegram": telegram}, shorts=shorts).run_shorts()
+        return [outcome.candidate.key for outcome in report.published]
+
+    assert sent() == ["twitch:Alpha-Cam"] and asked == [False]  # one short; on Twitch's turn, YouTube is not looked into
+    assert sent() == ["youtube:abcdefghijk@60-120"] and asked[-1] is True  # then YouTube's turn
+    assert sent() == ["twitch:Beta-Cam"] and asked[-1] is False
+    # YouTube's turn again, with nothing new there: the Twitch short goes out instead.
+    assert sent() == ["twitch:Gamma-Cam"] and asked[-1] is True
+    assert telegram.messages[-1] == "⏭️ Pas de short YouTube à ce passage : aucun nouveau clip trouvé."
+
+
 def test_outage_and_bad_url_are_reported_as_errors(media, paths):
     class Down(FakeYtDlp):
         def list_flat(self, url, limit):
