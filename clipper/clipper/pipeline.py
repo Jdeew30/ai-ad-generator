@@ -872,13 +872,10 @@ class Clipper:
                             f"({self.config.shorts.min_score:.0f}/100), celui-ci est le mieux noté ({review.score:.0f}/100).")
 
     def _long_wanted(self, candidate: Candidate, meta: ShortMeta) -> bool:
-        """Whether this short goes out in its long cut: it has one, and it comes from YouTube or today's long shorts
-        are not all sent yet."""
+        """Whether this short goes out in its long cut: it has one, and today's long shorts are not all sent yet."""
         rules = self.config.shorts
         if not rules.long_per_day or candidate.manual or meta.long_start is None or meta.long_end is None:
             return False
-        if candidate.source == "youtube":
-            return True  # a passage of a YouTube video tells a story: its long cut is the short (and it is paid)
         midnight = self.now.astimezone(PARIS).replace(hour=0, minute=0, second=0, microsecond=0)
         return self.state.long_count(midnight, rules.long_min) < rules.long_per_day
 
