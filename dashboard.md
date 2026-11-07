@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 07/11/2026 à 15:38 UTC.
+Mis à jour le 07/11/2026 à 18:39 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 101605 | 101605 |
-| Vidéos téléchargées et préparées | 514 | 514 |
-| Shorts envoyés | 41 | 41 |
-| Écartés par la revue | 473 | 473 |
+| Moments trouvés (Twitch + YouTube) | 104520 | 104520 |
+| Vidéos téléchargées et préparées | 517 | 517 |
+| Shorts envoyés | 42 | 42 |
+| Écartés par la revue | 475 | 475 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 36 | 36 |
+| Passages | 37 | 37 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 53, YouTube 24, à la demande 6.
-Note moyenne de Claude : 58/100 sur 44 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 53, YouTube 25, à la demande 6.
+Note moyenne de Claude : 58/100 sur 45 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
 104 créateurs suivis, 95 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 95 identifiées ; 11 mises de côté (introuvables).
-539 vidéos récentes suivies, 228 regardées de près (105 avec des moments à extraire).
+535 vidéos récentes suivies, 229 regardées de près (107 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 07/11 18:47 | YouTube | EnjoyPhoenix - Marie Lopez | [EnjoyPhoenix raconte l'homme accusé à tort après l'attaque au sarin de Matsumoto](https://www.youtube.com/watch?v=leEJeQqEvps) | 62 |
 | 07/11 15:42 | Twitch | ClemQuiCourt | [Tibo InShape se fait « killcam » en pleine backyard caritative ClemQuiCourt](https://www.twitch.tv/clemquicourt/clip/MoistColdbloodedKoupreyMcaT-0uiknPM4p5Pade2L) | 45 |
 | 07/11 12:39 | YouTube | Skyyart | [Skyyart explose sur le teamfight T1 vs KC aux Worlds : « il a évité les deux harpons ! »](https://www.youtube.com/watch?v=ZKUP4oo-8nM) | 62 |
 | 07/11 12:25 | Twitch | Kameto | [Kameto en fou rire devant le TikTok « c'est moi Dobby »](https://www.twitch.tv/kamet0/clip/TalentedProductiveArmadilloMikeHogu-7Bo95lKZUglV2XEN) | 56 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 | 05/11 10:18 | YouTube | Bob Lennon | [Bob Lennon attaque toute une ville ennemie sur Crimson Desert](https://www.youtube.com/watch?v=f6amVCjQtzA) | 63 |
 | 05/11 10:15 | Twitch | MasterSnakou | [MasterSnakou raconte le pire coup d'un élève en cours de techno](https://www.twitch.tv/mastersnakou/clip/SpinelessResoluteGerbilSMOrc-ux7Hyw3s_iJvzpkn) | 62 |
 | 04/11 22:20 | YouTube | LE GRAND JD | [LE GRAND JD : un phénomène inexpliqué filmé dans un château hanté](https://www.youtube.com/watch?v=JgkT6Ip56s4) | 62 |
-| 04/11 22:15 | Twitch | xo_trixy | [xo_trixy se fait voler toutes ses cerises sur Farming Simulator 25](https://www.twitch.tv/xo_trixy/clip/SuperProductiveNoodlePunchTrees-JZ8j8K08BDCP9C_A) | 58 |
 
 ## Derniers échecs
 
