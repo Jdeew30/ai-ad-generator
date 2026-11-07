@@ -1,23 +1,23 @@
 # Tableau de bord du clipper
 
-Mis à jour le 06/11/2026 à 23:29 UTC.
+Mis à jour le 07/11/2026 à 00:51 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 88990 | 88990 |
-| Vidéos téléchargées et préparées | 460 | 460 |
-| Shorts envoyés | 36 | 36 |
-| Écartés par la revue | 424 | 424 |
+| Moments trouvés (Twitch + YouTube) | 92328 | 92328 |
+| Vidéos téléchargées et préparées | 472 | 472 |
+| Shorts envoyés | 37 | 37 |
+| Écartés par la revue | 435 | 435 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 32 | 32 |
+| Passages | 33 | 33 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 49, YouTube 23, à la demande 6.
-Note moyenne de Claude : 58/100 sur 39 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
-Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
+Par source : Twitch 50, YouTube 23, à la demande 6.
+Note moyenne de Claude : 58/100 sur 40 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Créateurs les plus repris : Inoxtag (8), Kameto (5), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
@@ -28,6 +28,7 @@ Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (5),
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 07/11 01:00 | Twitch | Inoxtag | [Inoxtag dévoile des planches exclusives du nouveau tome de son manga](https://www.twitch.tv/inoxtag/clip/SteamyMuddyGrouseHeyGirl-i1gC-LgiLcv7WKRg) | 50 |
 | 06/11 23:36 | Twitch | TraYtoNlol | [TraYtoN explose sur l'action de Viper : « VIPERRRR »](https://www.twitch.tv/traytonlol/clip/RudeBoldSalmonWoofer-WVjBGa61YwyGHWml) | 52 |
 | 06/11 20:10 | YouTube | AmineMaTue | [AmineMaTue et Inoxtag testent des chips… « wa ça a crépité »](https://www.youtube.com/watch?v=fUFDaRK_Kl4) | 63 |
 | 06/11 20:06 | Twitch | Locklear | [Locklear appelle le client « Mr Pedal »… mauvaise idée](https://www.twitch.tv/locklear/clip/CulturedBombasticHabaneroBrainSlug-TeMGENHuoHbL9yzR) | 63 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (7), Kameto (5), Mastu (5), AmineMaTue (5),
 | 04/11 16:05 | Twitch | KennyStream | [KennyStream jure qu'il ne finira jamais la map 501… mauvaise idée (Trackmania Kacky)](https://www.twitch.tv/kennystream/clip/PerfectTubularRamenNononoCat-Z7mtRCaVSfQvOXtf) | 68 |
 | 04/11 13:33 | YouTube | Sylvain Lyve | [Sylvain Lyve : la voiture sans suspensions lâche en plein test (partie 2)](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 55 |
 | 04/11 10:38 | YouTube | Mastu | [Undercover nocturne : Samuel perdu, Raska démasqué (Mastu)](https://www.youtube.com/watch?v=BByplh9JRTs) | 63 |
-| 04/11 10:38 | YouTube | Sylvain Lyve | [Sylvain Lyve roule sans suspensions… et ça fait très mal](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 67 |
 
 ## Derniers échecs
 
