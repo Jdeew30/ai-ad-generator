@@ -1,22 +1,22 @@
 # Tableau de bord du clipper
 
-Mis à jour le 07/11/2026 à 12:10 UTC.
+Mis à jour le 07/11/2026 à 15:38 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 98503 | 98503 |
-| Vidéos téléchargées et préparées | 508 | 508 |
-| Shorts envoyés | 40 | 40 |
-| Écartés par la revue | 468 | 468 |
+| Moments trouvés (Twitch + YouTube) | 101605 | 101605 |
+| Vidéos téléchargées et préparées | 514 | 514 |
+| Shorts envoyés | 41 | 41 |
+| Écartés par la revue | 473 | 473 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 35 | 35 |
+| Passages | 36 | 36 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 52, YouTube 24, à la demande 6.
-Note moyenne de Claude : 58/100 sur 43 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 53, YouTube 24, à la demande 6.
+Note moyenne de Claude : 58/100 sur 44 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
@@ -28,6 +28,7 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 07/11 15:42 | Twitch | ClemQuiCourt | [Tibo InShape se fait « killcam » en pleine backyard caritative ClemQuiCourt](https://www.twitch.tv/clemquicourt/clip/MoistColdbloodedKoupreyMcaT-0uiknPM4p5Pade2L) | 45 |
 | 07/11 12:39 | YouTube | Skyyart | [Skyyart explose sur le teamfight T1 vs KC aux Worlds : « il a évité les deux harpons ! »](https://www.youtube.com/watch?v=ZKUP4oo-8nM) | 62 |
 | 07/11 12:25 | Twitch | Kameto | [Kameto en fou rire devant le TikTok « c'est moi Dobby »](https://www.twitch.tv/kamet0/clip/TalentedProductiveArmadilloMikeHogu-7Bo95lKZUglV2XEN) | 56 |
 | 07/11 11:22 | Twitch | Wingo | [Wingo termine enfin la KR7 505 sur Trackmania : « la libération ! »](https://www.twitch.tv/wingo/clip/ZealousHomelyWhaleLitty-NoScr4sRj_WgO0MN) | 56 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 | 05/11 10:15 | Twitch | MasterSnakou | [MasterSnakou raconte le pire coup d'un élève en cours de techno](https://www.twitch.tv/mastersnakou/clip/SpinelessResoluteGerbilSMOrc-ux7Hyw3s_iJvzpkn) | 62 |
 | 04/11 22:20 | YouTube | LE GRAND JD | [LE GRAND JD : un phénomène inexpliqué filmé dans un château hanté](https://www.youtube.com/watch?v=JgkT6Ip56s4) | 62 |
 | 04/11 22:15 | Twitch | xo_trixy | [xo_trixy se fait voler toutes ses cerises sur Farming Simulator 25](https://www.twitch.tv/xo_trixy/clip/SuperProductiveNoodlePunchTrees-JZ8j8K08BDCP9C_A) | 58 |
-| 04/11 19:33 | YouTube | ZeratoR | [ZeratoR invente une langue en expliquant un film](https://www.youtube.com/watch?v=CO4AjCWQQmE) | 58 |
 
 ## Derniers échecs
 
