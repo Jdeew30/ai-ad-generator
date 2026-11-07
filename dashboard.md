@@ -1,22 +1,22 @@
 # Tableau de bord du clipper
 
-Mis à jour le 07/11/2026 à 18:39 UTC.
+Mis à jour le 07/11/2026 à 22:39 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 104520 | 104520 |
-| Vidéos téléchargées et préparées | 517 | 517 |
-| Shorts envoyés | 42 | 42 |
-| Écartés par la revue | 475 | 475 |
+| Moments trouvés (Twitch + YouTube) | 107685 | 107685 |
+| Vidéos téléchargées et préparées | 523 | 523 |
+| Shorts envoyés | 43 | 43 |
+| Écartés par la revue | 480 | 480 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 37 | 37 |
+| Passages | 38 | 38 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 53, YouTube 25, à la demande 6.
-Note moyenne de Claude : 58/100 sur 45 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 54, YouTube 25, à la demande 6.
+Note moyenne de Claude : 58/100 sur 46 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
@@ -28,6 +28,7 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 07/11 22:44 | Twitch | Ponce | [Khalen révèle par accident qu'il peut tuer Ponce sur Lycans](https://www.twitch.tv/ponce/clip/BovineEasyMochaAMPEnergy-jKkjkvQmLJkuNhqM) | 55 |
 | 07/11 18:47 | YouTube | EnjoyPhoenix - Marie Lopez | [EnjoyPhoenix raconte l'homme accusé à tort après l'attaque au sarin de Matsumoto](https://www.youtube.com/watch?v=leEJeQqEvps) | 62 |
 | 07/11 15:42 | Twitch | ClemQuiCourt | [Tibo InShape se fait « killcam » en pleine backyard caritative ClemQuiCourt](https://www.twitch.tv/clemquicourt/clip/MoistColdbloodedKoupreyMcaT-0uiknPM4p5Pade2L) | 45 |
 | 07/11 12:39 | YouTube | Skyyart | [Skyyart explose sur le teamfight T1 vs KC aux Worlds : « il a évité les deux harpons ! »](https://www.youtube.com/watch?v=ZKUP4oo-8nM) | 62 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 | 05/11 13:27 | Twitch | LaureBV | [LaureBV : « Toutes les planètes sont alignées » pour la Karmine Corp aux Worlds](https://www.twitch.tv/laurebv/clip/SeductiveConsiderateCormorantNotATK-1Hfy5i-BRMBQu_F2) | 55 |
 | 05/11 10:18 | YouTube | Bob Lennon | [Bob Lennon attaque toute une ville ennemie sur Crimson Desert](https://www.youtube.com/watch?v=f6amVCjQtzA) | 63 |
 | 05/11 10:15 | Twitch | MasterSnakou | [MasterSnakou raconte le pire coup d'un élève en cours de techno](https://www.twitch.tv/mastersnakou/clip/SpinelessResoluteGerbilSMOrc-ux7Hyw3s_iJvzpkn) | 62 |
-| 04/11 22:20 | YouTube | LE GRAND JD | [LE GRAND JD : un phénomène inexpliqué filmé dans un château hanté](https://www.youtube.com/watch?v=JgkT6Ip56s4) | 62 |
 
 ## Derniers échecs
 
