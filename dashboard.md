@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 07/11/2026 à 00:51 UTC.
+Mis à jour le 07/11/2026 à 11:12 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 92328 | 92328 |
-| Vidéos téléchargées et préparées | 472 | 472 |
-| Shorts envoyés | 37 | 37 |
-| Écartés par la revue | 435 | 435 |
+| Moments trouvés (Twitch + YouTube) | 95420 | 95420 |
+| Vidéos téléchargées et préparées | 489 | 489 |
+| Shorts envoyés | 38 | 38 |
+| Écartés par la revue | 451 | 451 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 33 | 33 |
+| Passages | 34 | 34 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 50, YouTube 23, à la demande 6.
-Note moyenne de Claude : 58/100 sur 40 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 51, YouTube 23, à la demande 6.
+Note moyenne de Claude : 58/100 sur 41 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (8), Kameto (5), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
 104 créateurs suivis, 95 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 95 identifiées ; 11 mises de côté (introuvables).
-512 vidéos récentes suivies, 203 regardées de près (97 avec des moments à extraire).
+535 vidéos récentes suivies, 213 regardées de près (100 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 07/11 11:22 | Twitch | Wingo | [Wingo termine enfin la KR7 505 sur Trackmania : « la libération ! »](https://www.twitch.tv/wingo/clip/ZealousHomelyWhaleLitty-NoScr4sRj_WgO0MN) | 56 |
 | 07/11 01:00 | Twitch | Inoxtag | [Inoxtag dévoile des planches exclusives du nouveau tome de son manga](https://www.twitch.tv/inoxtag/clip/SteamyMuddyGrouseHeyGirl-i1gC-LgiLcv7WKRg) | 50 |
 | 06/11 23:36 | Twitch | TraYtoNlol | [TraYtoN explose sur l'action de Viper : « VIPERRRR »](https://www.twitch.tv/traytonlol/clip/RudeBoldSalmonWoofer-WVjBGa61YwyGHWml) | 52 |
 | 06/11 20:10 | YouTube | AmineMaTue | [AmineMaTue et Inoxtag testent des chips… « wa ça a crépité »](https://www.youtube.com/watch?v=fUFDaRK_Kl4) | 63 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (8), Kameto (5), Mastu (5), AmineMaTue (5),
 | 04/11 19:33 | YouTube | ZeratoR | [ZeratoR invente une langue en expliquant un film](https://www.youtube.com/watch?v=CO4AjCWQQmE) | 58 |
 | 04/11 16:05 | Twitch | KennyStream | [KennyStream jure qu'il ne finira jamais la map 501… mauvaise idée (Trackmania Kacky)](https://www.twitch.tv/kennystream/clip/PerfectTubularRamenNononoCat-Z7mtRCaVSfQvOXtf) | 68 |
 | 04/11 13:33 | YouTube | Sylvain Lyve | [Sylvain Lyve : la voiture sans suspensions lâche en plein test (partie 2)](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 55 |
-| 04/11 10:38 | YouTube | Mastu | [Undercover nocturne : Samuel perdu, Raska démasqué (Mastu)](https://www.youtube.com/watch?v=BByplh9JRTs) | 63 |
 
 ## Derniers échecs
 
