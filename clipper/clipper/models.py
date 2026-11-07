@@ -57,6 +57,7 @@ class Candidate:
     pace: float | None = None  # YouTube: views an hour the video gathers
     cited: str | None = None  # YouTube: the viewers' comment that points at this moment (« 12:45 mdr »)
     cited_at: float | None = None  # and the time it points at, in seconds into the video
+    pitch: str | None = None  # YouTube: what Claude saw in the captions to pick this passage (« il raconte… »)
     manual: bool = False  # queued by hand: skips popularity filters and AI rejection
     parts: list[str] = field(default_factory=list)  # clips of one moment put back together, in order (url is the first)
     score: float = 0.0

@@ -75,6 +75,7 @@ def discover(
     creators: Any = None,
     youtube_history: dict[str, dict[str, Any]] | None = None,
     known: set[str] | None = None,
+    youtube_finder: Any = None,
 ) -> list[Candidate]:
     """Every candidate moment: the manual queue first, then Twitch clips, then YouTube peaks."""
     candidates: list[Candidate] = []
@@ -85,6 +86,7 @@ def discover(
     )
     if include_youtube:
         candidates.extend(discover_youtube(config, ytdlp, now=now, offset=youtube_offset, related=youtube_related, http=http,
-                                           creators=creators, history=youtube_history, twitch_seen=memory, known=known))
+                                           creators=creators, history=youtube_history, twitch_seen=memory, known=known,
+                                           finder=youtube_finder))
     log.info("%d candidat(s) trouvé(s)", len(candidates))
     return candidates

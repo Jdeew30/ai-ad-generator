@@ -164,6 +164,73 @@ COMPILATION_SCHEMA: dict[str, Any] = {
     "additionalProperties": False,
 }
 
+MOMENTS_SYSTEM = """Tu es le rédacteur en chef d'une chaîne francophone TikTok et YouTube Shorts qui republie, en \
+les créditant, les meilleurs moments de vidéastes YouTube. On te donne la transcription minutée (les sous-titres, \
+souvent automatiques) d'une vidéo récente : trouve les passages qui feraient les meilleurs shorts verticaux.
+
+Un bon passage :
+- tient debout seul : un inconnu qui ne connaît ni la vidéo ni le créateur comprend la situation en quelques secondes ;
+- accroche dès sa première phrase (une question, une tension, une situation étonnante) et a une vraie chute : une \
+révélation, une punchline, une réaction forte, un fail, un fou rire, un retournement, un chiffre ou un fait qui \
+surprend, une anecdote qui se termine ;
+- dure de 61 à 90 secondes : le compte est rémunéré par TikTok pour les vidéos de plus d'une minute. Plus court (30 \
+à 60 secondes) seulement si le moment ne tient pas une minute sans temps mort.
+Évite l'introduction et la conclusion de la vidéo, les placements de produit et les sponsors, les remerciements, les \
+passages qui n'ont de sens qu'avec le reste de la vidéo, la musique sans parole.
+
+Donne start et end en secondes depuis le début de la vidéo (les minutages entre crochets sont les débuts des \
+lignes) : commence sur la phrase qui accroche, termine juste après la chute ou la réaction qui la suit. Pour chaque \
+passage, why : en une phrase, ce qui s'y passe et pourquoi ça accroche. Du meilleur au moins bon, sans \
+chevauchement. Si aucun passage ne mérite un short, renvoie une liste vide : mieux vaut rien qu'un passage moyen.
+
+La transcription vient d'une reconnaissance vocale automatique : elle peut contenir des erreurs."""
+
+MOMENTS_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "moments": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {"start": {"type": "number"}, "end": {"type": "number"}, "why": {"type": "string"}},
+                "required": ["start", "end", "why"],
+                "additionalProperties": False,
+            },
+        },
+    },
+    "required": ["moments"],
+    "additionalProperties": False,
+}
+MOMENT_MIN = 25.0  # a passage Claude finds in the captions: long enough to understand the situation…
+MOMENT_MAX = 120.0  # …and short enough for a short (the review then cuts it to 61-90 s or less)
+
+
+@dataclass
+class FoundMoment:
+    """A passage of a YouTube video Claude found in its captions, in seconds from the start of the video."""
+
+    start: float
+    end: float
+    why: str
+
+
+def valid_moments(raw: Any, duration: float, count: int) -> list[FoundMoment]:
+    """Claude's passages kept in the video, of a usable length, without overlaps, `count` at most."""
+    moments: list[FoundMoment] = []
+    for item in raw if isinstance(raw, list) else []:
+        try:
+            start, end = max(0.0, float(item["start"])), float(item["end"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if duration > 0:
+            end = min(end, duration)
+        if not MOMENT_MIN <= end - start <= MOMENT_MAX or any(start < m.end and end > m.start for m in moments):
+            continue
+        moments.append(FoundMoment(start, end, " ".join(str(item.get("why") or "").split())[:240]))
+        if len(moments) >= count:
+            break
+    return moments
+
 
 @dataclass
 class ReviewItem:
@@ -426,6 +493,8 @@ class ClaudeCurator:
                 offset = max(0.0, candidate.cited_at - candidate.start)
                 lines.append(f"Moment cité par les spectateurs : vers {offset:.0f} s de l'extrait. Commentaire le plus aimé "
                              f"qui le cite (texte d'un spectateur) : « {candidate.cited} »")
+            if candidate.pitch:
+                lines.append(f"Passage repéré en lisant les sous-titres de la vidéo, à vérifier sur l'extrait : {candidate.pitch}")
             lines += ["Transcription (secondes depuis le début de l'extrait) :", transcript, "</candidat>"]
             content.append({"type": "text", "text": "\n".join(lines)})
             if self.config.ai.review_frames and item.sheet and item.sheet.exists():
@@ -453,6 +522,19 @@ class ClaudeCurator:
         for item in missing:
             reviews[item.candidate.key] = template_review(item, self.config)
         return reviews
+
+    def find_moments(self, *, title: str, channel: str, duration: float, transcript: str, count: int) -> list[FoundMoment] | None:
+        """The passages of a YouTube video worth a short, best first, read in its timed captions; None when Claude
+        gave no answer (the video can be read again at a later run)."""
+        minutes, seconds = divmod(int(duration), 60)
+        content = [{"type": "text", "text": (
+            f"Chaîne : {channel}\nTitre : {title}\nDurée : {minutes} min {seconds:02d} s\n"
+            f"Renvoie au plus {count} passages.\n\n<transcription>\n{transcript}\n</transcription>"
+        )}]  # fmt: skip
+        data = self._call(MOMENTS_SYSTEM, content, MOMENTS_SCHEMA)
+        if data is None:
+            return None
+        return valid_moments(data.get("moments"), duration, count)
 
     def compilation_meta(self, clips: list[tuple[Candidate, str]], *, period: str) -> CompilationMeta:
         fallback = template_compilation_meta(clips, self.config, period=period)

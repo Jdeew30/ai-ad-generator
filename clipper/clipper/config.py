@@ -67,6 +67,9 @@ class YouTubeSourceConfig:
     resolve_per_run: int = 40  # rss: channels whose YouTube id is looked up in a run (once per channel)
     secondary_checks_per_run: int = 6  # rss: other channels of a YouTuber checked (description) before being watched
     discover_per_run: int = 3  # rss: French streamers seen live on Twitch whose YouTube channel is looked for, per run
+    # Videos without « most replayed » peaks nor timestamped comments (most of them in their first days) whose
+    # captions Claude reads to find their passages, per run (0 = never). Each one is a Claude request.
+    captions_per_run: int = 0
 
 
 @dataclass

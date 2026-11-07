@@ -85,7 +85,7 @@ Telegram ; rien n'est marqué « publié » sans réponse positive de la platefo
 4. Vérifie : **Run workflow** → mode **`check`**. Le résumé du run affiche ✅ / ❌ pour chaque service, et
    Telegram reçoit un message de test. Rien n'est publié.
 5. C'est tout : à chaque passage (toutes les 2 heures de 9 h 37 à 23 h 37 à Paris l'hiver, une heure plus tard
-   l'été), jusqu'à deux shorts Twitch et un short YouTube, et un best-of le mercredi et le dimanche matin.
+   l'été), jusqu'à deux shorts Twitch et deux shorts YouTube, et un best-of le mercredi et le dimanche matin.
 
 Le workflow sert aussi de télécommande depuis l'appli GitHub sur ton téléphone : **Run workflow** →
 mode `url` → colle l'URL d'un clip ou d'une vidéo (avec début et fin si besoin) → il est monté et publié.
@@ -193,9 +193,10 @@ Le robot vise donc :
 
 **Vidéos de plus d'une minute (programme de rémunération TikTok)** : TikTok ne rémunère que les vidéos de plus
 d'une minute. Claude coupe donc chaque moment deux fois : un short de 12 à 35 secondes, et une version longue de 61
-à 90 secondes (mise en place, chute et réactions, sans temps mort) quand le moment la tient. Les deux premiers
-shorts du jour qui en ont une (`shorts.long_per_day`, `long_min`, `long_max`) sortent dans leur version longue ;
-la fiche Telegram l'indique (« 💰 Version longue (1 min 05) »). TikTok ne rémunère que les contenus qu'il juge
+à 90 secondes (mise en place, chute et réactions, sans temps mort) quand le moment la tient. Les six premiers
+shorts du jour qui en ont une (`shorts.long_per_day`, `long_min`, `long_max`) sortent dans leur version longue, et
+ceux de YouTube toujours (un passage de vidéo raconte une histoire) ; la fiche Telegram l'indique (« 💰 Version
+longue (1 min 05) »). TikTok ne rémunère que les contenus qu'il juge
 originaux : ces versions longues, sous-titrées et coupées, ont plus de chances que des clips repostés tels quels,
 sans garantie.
 
@@ -288,7 +289,15 @@ vidéo des 14 derniers jours (`max_age_days`, fenêtre de rattrapage après une 
 **pré-score** sur 100 (vitesse des vues, vues en absolu, likes, fraîcheur, titre qui promet un moment : réaction,
 clash, première fois, record…) ; seules les 24 plus prometteuses (`videos_per_run`) sont regardées de près
 (courbe « les plus revus » ou commentaires), les autres attendent leur tour. Une vidéo qui n'a rien donné est
-revue une fois le lendemain (courbe et commentaires arrivent avec les vues). Une chaîne introuvable trois passages
+revue une fois le lendemain (courbe et commentaires arrivent avec les vues).
+
+**Les sous-titres, lus par Claude** : la plupart des vidéos n'ont, les premiers jours, ni courbe « les plus revus »
+ni minutage en commentaire. Pour celles-là, le robot récupère leurs sous-titres français (ceux de la chaîne, sinon
+les automatiques de YouTube, sans télécharger la vidéo) et Claude y repère les passages qui feraient les meilleurs
+shorts, de 61 à 90 secondes de préférence (`youtube.captions_per_run` vidéos par passage, 6 : une requête Claude
+chacune). Ces passages suivent ensuite le même chemin que les autres : téléchargés, transcrits, notés et coupés par
+la revue. Chaque vidéo n'est lue qu'une fois ; celles déjà regardées sans résultat le sont aussi, plus tard, dans
+l'ordre du pré-score. Une chaîne introuvable trois passages
 de suite (flux inexistant, chaîne qu'on ne retrouve pas) est mise de côté, puis retentée une fois par semaine.
 Si plus d'un flux sur cinq échoue en même temps, la panne vient de YouTube (son serveur de flux répond parfois
 404 à tous pendant des heures), et aucune chaîne n'est mise de côté.
@@ -334,8 +343,8 @@ restent 100 % Twitch.
   dans le journal. Avec les clés Twitch, `discover_limit` y ajoute les plus gros lives FR du moment (100),
   `remember_live` les chaînes FR vues ces 14 derniers jours (150 au plus) et `discover_categories` les clips
   FR les plus vus de la semaine dans les catégories les plus regardées (20).
-- `shorts.per_source` / le `cron` du workflow : le rythme de publication, jusqu'à deux shorts Twitch et un short
-  YouTube par passage, un passage toutes les 2 heures de 9 h 37 à 23 h 37 (les moments notés 60 ou plus, et
+- `shorts.per_source` / le `cron` du workflow : le rythme de publication, jusqu'à deux shorts Twitch et deux
+  shorts YouTube par passage, un passage toutes les 2 heures de 9 h 37 à 23 h 37 (les moments notés 60 ou plus, et
   sinon le mieux noté s'il a au moins 45). `shorts.review_rounds` : séries de candidats examinées au plus par source et par passage (2 : le
   passage suivant prend la suite, et les crédits Claude restent ceux de 5 passages de 4 séries).
   `shorts.guarantee` (45 pour Twitch et YouTube) garde un short de chaque source à chaque passage : quand aucun

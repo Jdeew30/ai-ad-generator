@@ -324,6 +324,30 @@ def test_moments_viewers_point_at_in_the_comments():
     assert [(moment.start, moment.end) for moment in again] == [(580.0, 670.0)]
 
 
+def test_yt_dlp_fetches_french_captions_only_and_picks_the_best_track(tmp_path, monkeypatch):
+    from clipper.ytdlp import YtDlp
+
+    seen: list[dict] = []
+
+    def run(self, url, options, download):
+        seen.append(options)
+        for track in written:
+            (tmp_path / f"vid.{track}").write_text("{}", encoding="utf-8")
+        return {}
+
+    monkeypatch.setattr(YtDlp, "_run", run)
+    (tmp_path / "vid.en.json3").write_text("{}", encoding="utf-8")  # left by an earlier call: cleared first
+    written = ["fr-orig.json3", "fr.vtt"]
+    assert YtDlp().captions("https://www.youtube.com/watch?v=vid", tmp_path, "vid") == tmp_path / "vid.fr.vtt"
+    options = seen[0]
+    assert options["skip_download"] and options["writeautomaticsub"] and options["writesubtitles"]
+    assert options["subtitleslangs"] == ["fr", "fr-FR", "fr-orig"] and options["subtitlesformat"] == "json3/vtt/best"
+    written = ["fr-orig.json3"]
+    assert YtDlp().captions("https://www.youtube.com/watch?v=vid", tmp_path, "vid") == tmp_path / "vid.fr-orig.json3"
+    written = []
+    assert YtDlp().captions("https://www.youtube.com/watch?v=vid", tmp_path, "vid") is None
+
+
 def test_signed_in_yt_dlp_reads_channels_without_the_sign_in_check(tmp_path):
     from clipper.ytdlp import YtDlp
 
@@ -665,6 +689,70 @@ def test_a_youtube_feed_outage_sets_no_channel_aside(server, http, tmp_path, mon
     assert (channels["a"]["errors"], channels["b"]["status"], channels["b"]["errors"]) == (0, "active", 0)
     assert channels["c"]["status"] == "introuvable" and channels["c"]["set_aside"] == (NOW + timedelta(hours=5)).isoformat()
     assert "2 illisible(s) : @b, @c ; HTTP 500 × 1, HTTP 404 × 1)" in caplog.text
+
+
+def test_youtube_videos_without_clues_are_read_in_their_captions(server, http, tmp_path, monkeypatch):
+    from clipper.sources import watch as watch_module
+    from clipper.sources.watch import Creators
+    from clipper.sources.youtube import discover_youtube
+
+    monkeypatch.setattr(watch_module, "FEED", server.url + "/feeds/videos.xml?channel_id={}")
+    feed = _feed(("storyvideo1", "UCa", "Ma PIRE chute à vélo !", NOW - timedelta(hours=4), 300_000, 20_000),
+                 ("quietvideo1", "UCa", "vlog", NOW - timedelta(hours=30), 40_000, 400))  # fmt: skip
+    server.route("GET", "/feeds/videos.xml", (200, {}, feed))
+    watch_url = "https://www.youtube.com/watch?v={}".format
+    infos = {watch_url(video_id): {"id": video_id, "uploader_id": "@a", "channel_id": "UCa", "channel": "Chaîne A",
+                                   "title": video_id, "view_count": views, "duration": 1200,
+                                   "timestamp": (NOW - timedelta(hours=4)).timestamp()}
+             for video_id, views in (("storyvideo1", 300_000), ("quietvideo1", 40_000))}  # no heatmap, no comments
+    pages = {"https://www.youtube.com/@a/videos": {"channel_id": "UCa", "channel": "Chaîne A", "uploader_id": "@a", "entries": []}}
+
+    class CountingYtDlp(FakeYtDlp):
+        asked: list[str] = []
+
+        def info(self, url):
+            self.asked.append(url.rsplit("=", 1)[1])
+            return super().info(url)
+
+    class Finder:
+        def __init__(self, remaining, answers=None):
+            self.remaining, self.answers, self.read = remaining, answers or {}, []
+
+        def __call__(self, info, url):
+            if self.remaining <= 0:
+                return None
+            self.remaining -= 1
+            self.read.append(info["id"])
+            return self.answers.get(info["id"], [])
+
+    config = build(Config, {"youtube": {"enabled": True, "channels": ["@a"], "watch": "rss", "videos_per_run": 2,
+                                        "captions_per_run": 1}})  # fmt: skip
+    creators, history = Creators(tmp_path / "creators.json"), {}
+
+    def run(hours, finder):
+        ytdlp = CountingYtDlp(listings=pages, infos=infos)
+        ytdlp.asked = []
+        found = discover_youtube(config, ytdlp, now=NOW + timedelta(hours=hours), http=http, creators=creators,
+                                 history=history, finder=finder)  # fmt: skip
+        return found, ytdlp.asked
+
+    # The best video has no other clue: its captions give a passage, a few seconds kept around it for the cut.
+    first = Finder(1, {"storyvideo1": [(300.0, 375.0, "Il raconte sa pire chute, chute comprise.")]})
+    found, asked = run(0, first)
+    assert [c.key for c in found] == ["youtube:storyvideo1@296-379"] and found[0].pitch.startswith("Il raconte")
+    assert found[0].heat == 0.7 and asked == ["storyvideo1", "quietvideo1"] and first.read == ["storyvideo1"]
+    assert history["storyvideo1"]["captions"] and history["storyvideo1"]["outcome"] == "moments"
+    # The other one came after the last request of the run: it waits for its captions without being fetched again.
+    assert history["quietvideo1"]["outcome"] == "none" and not history["quietvideo1"].get("captions")
+    assert run(1, Finder(0)) == ([], [])
+    # Read at the next run that has a request left; nothing strong in them: never read again.
+    later = Finder(1)
+    assert run(2, later) == ([], ["quietvideo1"]) and later.read == ["quietvideo1"]
+    assert history["quietvideo1"]["captions"] and run(30, Finder(1)) == ([], [])
+    # Without the caption reader, a video that gave nothing is still looked into once more a day later.
+    history.clear()
+    assert run(0, None)[1] == ["storyvideo1", "quietvideo1"] and run(1, None)[1] == []
+    assert run(25, None)[1] == ["storyvideo1", "quietvideo1"] and not history["storyvideo1"].get("captions")
 
 
 def test_a_feed_outage_is_many_feeds_failing_at_once_not_a_few_channels():
