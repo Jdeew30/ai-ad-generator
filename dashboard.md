@@ -1,33 +1,35 @@
 # Tableau de bord du clipper
 
-Mis à jour le 07/11/2026 à 11:12 UTC.
+Mis à jour le 07/11/2026 à 12:10 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 95420 | 95420 |
-| Vidéos téléchargées et préparées | 489 | 489 |
-| Shorts envoyés | 38 | 38 |
-| Écartés par la revue | 451 | 451 |
+| Moments trouvés (Twitch + YouTube) | 98503 | 98503 |
+| Vidéos téléchargées et préparées | 508 | 508 |
+| Shorts envoyés | 40 | 40 |
+| Écartés par la revue | 468 | 468 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 34 | 34 |
+| Passages | 35 | 35 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 51, YouTube 23, à la demande 6.
-Note moyenne de Claude : 58/100 sur 41 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
-Créateurs les plus repris : Inoxtag (8), Kameto (5), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
+Par source : Twitch 52, YouTube 24, à la demande 6.
+Note moyenne de Claude : 58/100 sur 43 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
 104 créateurs suivis, 95 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 95 identifiées ; 11 mises de côté (introuvables).
-535 vidéos récentes suivies, 213 regardées de près (100 avec des moments à extraire).
+539 vidéos récentes suivies, 228 regardées de près (105 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 07/11 12:39 | YouTube | Skyyart | [Skyyart explose sur le teamfight T1 vs KC aux Worlds : « il a évité les deux harpons ! »](https://www.youtube.com/watch?v=ZKUP4oo-8nM) | 62 |
+| 07/11 12:25 | Twitch | Kameto | [Kameto en fou rire devant le TikTok « c'est moi Dobby »](https://www.twitch.tv/kamet0/clip/TalentedProductiveArmadilloMikeHogu-7Bo95lKZUglV2XEN) | 56 |
 | 07/11 11:22 | Twitch | Wingo | [Wingo termine enfin la KR7 505 sur Trackmania : « la libération ! »](https://www.twitch.tv/wingo/clip/ZealousHomelyWhaleLitty-NoScr4sRj_WgO0MN) | 56 |
 | 07/11 01:00 | Twitch | Inoxtag | [Inoxtag dévoile des planches exclusives du nouveau tome de son manga](https://www.twitch.tv/inoxtag/clip/SteamyMuddyGrouseHeyGirl-i1gC-LgiLcv7WKRg) | 50 |
 | 06/11 23:36 | Twitch | TraYtoNlol | [TraYtoN explose sur l'action de Viper : « VIPERRRR »](https://www.twitch.tv/traytonlol/clip/RudeBoldSalmonWoofer-WVjBGa61YwyGHWml) | 52 |
@@ -46,8 +48,6 @@ Créateurs les plus repris : Inoxtag (8), Kameto (5), Mastu (5), AmineMaTue (5),
 | 04/11 22:20 | YouTube | LE GRAND JD | [LE GRAND JD : un phénomène inexpliqué filmé dans un château hanté](https://www.youtube.com/watch?v=JgkT6Ip56s4) | 62 |
 | 04/11 22:15 | Twitch | xo_trixy | [xo_trixy se fait voler toutes ses cerises sur Farming Simulator 25](https://www.twitch.tv/xo_trixy/clip/SuperProductiveNoodlePunchTrees-JZ8j8K08BDCP9C_A) | 58 |
 | 04/11 19:33 | YouTube | ZeratoR | [ZeratoR invente une langue en expliquant un film](https://www.youtube.com/watch?v=CO4AjCWQQmE) | 58 |
-| 04/11 16:05 | Twitch | KennyStream | [KennyStream jure qu'il ne finira jamais la map 501… mauvaise idée (Trackmania Kacky)](https://www.twitch.tv/kennystream/clip/PerfectTubularRamenNononoCat-Z7mtRCaVSfQvOXtf) | 68 |
-| 04/11 13:33 | YouTube | Sylvain Lyve | [Sylvain Lyve : la voiture sans suspensions lâche en plein test (partie 2)](https://www.youtube.com/watch?v=iJi5wWrfZtU) | 55 |
 
 ## Derniers échecs
 

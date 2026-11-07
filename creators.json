@@ -7,7 +7,7 @@
     "aenot": {
      "added": "2026-11-03T22:07:30.128650+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 38300,
@@ -33,7 +33,7 @@
     "aiolatv": {
      "added": "2026-11-03T16:04:15.417206+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 1090,
@@ -59,7 +59,7 @@
     "alphacast": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -88,7 +88,7 @@
      "categories": {
       "Entertainment": 4
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@aminematue",
       "@aminematue_tv"
@@ -108,7 +108,7 @@
     "aminematuetv": {
      "added": "2026-11-02T15:32:49.831240+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 695000,
@@ -141,7 +141,7 @@
      "categories": {
       "Comedy": 2
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@spoutnikagency.com"
      ],
@@ -197,7 +197,7 @@
     "aneyarisjr": {
      "added": "2026-11-03T22:59:19.594671+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 9860,
@@ -223,7 +223,7 @@
     "angledroit": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -252,8 +252,10 @@
    "channels": {
     "antistar_tv": {
      "added": "2026-11-05T10:09:20.073384+00:00",
-     "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "categories": {
+      "Gaming": 1
+     },
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 11500,
@@ -281,7 +283,7 @@
      "categories": {
       "Gaming": 24
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -336,14 +338,14 @@
     "arthurray": {
      "added": "2026-11-03T17:26:53.902332+00:00",
      "categories": {
-      "Gaming": 26
+      "Gaming": 30
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 126000,
      "id": "UCNL-PktThtkU9V9mUSA6_xw",
-     "last_upload": "2026-11-06T17:00:29+00:00",
+     "last_upload": "2026-11-07T11:49:01+00:00",
      "ref": "@ArthurRay",
      "role": "main",
      "status": "active",
@@ -364,14 +366,14 @@
     "aspigtv": {
      "added": "2026-11-04T16:00:08.823604+00:00",
      "categories": {
-      "Gaming": 7
+      "Gaming": 13
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 49900,
      "id": "UCp6-YIv7oUetK0E_-RKlgXw",
-     "last_upload": "2026-11-07T08:00:31+00:00",
+     "last_upload": "2026-11-07T01:12:17+00:00",
      "ref": "@AsPigTv",
      "role": "main",
      "status": "active",
@@ -392,7 +394,7 @@
     "aypierre": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -419,7 +421,7 @@
     "bagherajoneslive": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -446,7 +448,7 @@
     "boblegob": {
      "added": "2026-11-06T19:56:30.884360+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 26100,
@@ -474,7 +476,7 @@
      "categories": {
       "Entertainment": 2
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 28900,
@@ -500,7 +502,7 @@
     "brizereins": {
      "added": "2026-11-06T14:28:05.210385+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 2030,
@@ -553,7 +555,7 @@
     "camak": {
      "added": "2026-11-06T23:29:44.424138+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 65000,
@@ -579,7 +581,7 @@
     "chefmicheldumas": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@chefmicheldumas.com",
       "@futures.social"
@@ -611,7 +613,7 @@
      "categories": {
       "Gaming": 10
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 341000,
@@ -637,7 +639,7 @@
     "cyprien": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -664,7 +666,7 @@
     "diablox9": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -692,9 +694,9 @@
     "djilsi": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "Entertainment": 2
+      "Entertainment": 3
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -723,7 +725,7 @@
      "categories": {
       "Education": 2
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -750,7 +752,7 @@
     "doigby": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -784,7 +786,7 @@
      "categories": {
       "Science & Technology": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -815,7 +817,7 @@
      "categories": {
       "Entertainment": 3
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -925,7 +927,7 @@
      "categories": {
       "Gaming": 17
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -954,7 +956,7 @@
      "categories": {
       "Howto & Style": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -981,7 +983,7 @@
     "feldup": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1010,7 +1012,7 @@
      "categories": {
       "Entertainment": 11
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1039,7 +1041,7 @@
      "categories": {
       "Science & Technology": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1066,7 +1068,7 @@
     "frigiel": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1093,15 +1095,15 @@
     "furiousjumper": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "Gaming": 46
+      "Gaming": 47
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 11000000,
      "id": "UCLMKLU-ZuDQIsbjMvR3bbog",
-     "last_upload": "2026-11-07T08:58:02+00:00",
+     "last_upload": "2026-11-07T11:58:00+00:00",
      "ref": "@FuriousJumper",
      "role": "main",
      "status": "active",
@@ -1122,7 +1124,7 @@
     "goldenmoustache": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1153,7 +1155,7 @@
       "Entertainment": 1,
       "Gaming": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gotaga.tv"
      ],
@@ -1161,7 +1163,7 @@
      "errors": 0,
      "followers": 4440000,
      "id": "UCCFqUJYKT97UerMmb6DM0bw",
-     "last_upload": "2026-11-06T14:16:08+00:00",
+     "last_upload": "2026-11-07T11:25:40+00:00",
      "ref": "@Gotaga",
      "role": "main",
      "status": "active",
@@ -1255,16 +1257,16 @@
     "hugodecrypte": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "News & Politics": 16
+      "News & Politics": 17
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 3830000,
      "found_as": "@hugodecrypteactus",
      "id": "UCAcAnMF0OrCtUep3Y4M-ZPw",
-     "last_upload": "2026-11-06T21:30:19+00:00",
+     "last_upload": "2026-11-07T11:03:18+00:00",
      "ref": "@HugoDecrypte",
      "role": "main",
      "status": "active",
@@ -1285,7 +1287,7 @@
     "hugotoutseul": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1315,7 +1317,7 @@
       "Entertainment": 1,
       "Gaming": 4
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1342,7 +1344,7 @@
     "jakernised": {
      "added": "2026-11-03T15:43:03.411844+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 7,
@@ -1368,7 +1370,7 @@
     "jhonrachid69": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1395,7 +1397,7 @@
     "joueurdugrenier": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1424,7 +1426,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1451,7 +1453,7 @@
     "jujufitcats": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -1482,7 +1484,7 @@
      "categories": {
       "Entertainment": 3
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1509,7 +1511,7 @@
     "kameto": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1543,7 +1545,7 @@
      "categories": {
       "Gaming": 5
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1575,10 +1577,11 @@
     "kenbogard4323": {
      "added": "2026-11-03T15:43:03.411844+00:00",
      "categories": {
+      "Entertainment": 2,
       "Gaming": 1,
       "Music": 2
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 23700,
@@ -1606,7 +1609,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1635,7 +1638,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@eluilea.com",
       "@leaelui"
@@ -1667,13 +1670,13 @@
      "categories": {
       "Entertainment": 2
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 4620000,
      "id": "UCUl7mwOyySfZzUkq4H29nug",
-     "last_upload": "2026-11-06T17:17:44+00:00",
+     "last_upload": "2026-11-07T11:18:27+00:00",
      "ref": "@Lebouseuh",
      "role": "main",
      "status": "active",
@@ -1696,7 +1699,7 @@
      "categories": {
       "Entertainment": 2
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@laxargang.ch"
      ],
@@ -1725,7 +1728,7 @@
     "lenasituations": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1742,7 +1745,7 @@
     "lenasituationsreplay": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 29200,
@@ -1795,7 +1798,7 @@
     "leroidesrats": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -1824,7 +1827,7 @@
     "linksthesun": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1851,7 +1854,7 @@
     "locklear": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1878,7 +1881,7 @@
     "lolywood": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1905,7 +1908,7 @@
     "ludovik": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -1934,7 +1937,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@flippe_and_go_sle",
       "@maghla",
@@ -1965,7 +1968,7 @@
     "mamytwink": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -1996,7 +1999,7 @@
      "categories": {
       "Comedy": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2023,7 +2026,7 @@
     "mathieusommet": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2055,7 +2058,7 @@
     "maxildan": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2084,7 +2087,7 @@
      "categories": {
       "Entertainment": 3
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2118,7 +2121,7 @@
      "categories": {
       "Entertainment": 6
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2155,7 +2158,7 @@
      "categories": {
       "Entertainment": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2182,7 +2185,7 @@
     "mistermv": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2209,7 +2212,7 @@
     "mistervofficial": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@yvick"
      ],
@@ -2238,7 +2241,7 @@
     "mynthos": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2267,7 +2270,7 @@
      "categories": {
       "Comedy": 3
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2296,7 +2299,7 @@
      "categories": {
       "Gaming": 7
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2332,7 +2335,7 @@
      "categories": {
       "Comedy": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2359,9 +2362,9 @@
     "pa.domingo": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "Entertainment": 4
+      "Entertainment": 5
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2390,7 +2393,7 @@
      "categories": {
       "Comedy": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2419,7 +2422,7 @@
      "categories": {
       "Education": 4
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@khundar.com"
      ],
@@ -2448,7 +2451,7 @@
     "ponce": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2480,7 +2483,7 @@
     "rebeudeter": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2509,7 +2512,7 @@
     "rivenzi_": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@rivenzi_"
      ],
@@ -2543,7 +2546,7 @@
     "sardochelol": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2572,7 +2575,7 @@
     "scienceetonnante": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@scienceetonnante"
      ],
@@ -2628,9 +2631,9 @@
     "siphano13": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {
-      "Gaming": 12
+      "Gaming": 17
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@siphano.fr"
      ],
@@ -2660,9 +2663,9 @@
      "added": "2026-11-03T22:07:30.128650+00:00",
      "categories": {
       "Entertainment": 1,
-      "Gaming": 19
+      "Gaming": 21
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 1460000,
@@ -2688,7 +2691,7 @@
     "squeezie": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2722,7 +2725,7 @@
      "categories": {
       "Comedy": 1
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2751,7 +2754,7 @@
      "categories": {
       "Autos & Vehicles": 3
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2781,7 +2784,7 @@
       "Entertainment": 1,
       "Gaming": 11
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@monsieurdarmon.com"
      ],
@@ -2812,7 +2815,7 @@
      "categories": {
       "Entertainment": 7
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2841,7 +2844,7 @@
     "ultia": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2873,7 +2876,7 @@
     "valouzz": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2929,7 +2932,7 @@
      "categories": {
       "Gaming": 6
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [],
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
@@ -2956,7 +2959,7 @@
     "woopgang": {
      "added": "2026-11-02T15:17:22.122980+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@gmail.com"
      ],
@@ -2987,7 +2990,7 @@
      "categories": {
       "Entertainment": 4
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@zacknaniprod.com"
      ],
@@ -3016,7 +3019,7 @@
     "zaroide": {
      "added": "2026-11-02T15:32:49.831240+00:00",
      "categories": {},
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "error": "flux RSS : GET https://www.youtube.com/feeds/videos.xml -> HTTP 404 : <!DOCTYPE html> <html lang=en>   <meta charset=utf-8>   <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=devic",
      "errors": 0,
      "followers": 44800,
@@ -3044,7 +3047,7 @@
      "categories": {
       "Gaming": 4
      },
-     "checked": "2026-11-07T11:12:10.009906+00:00",
+     "checked": "2026-11-07T12:10:20.881443+00:00",
      "description_handles": [
       "@Unexpected_Fr",
       "@ZeratoR",
@@ -3141,10 +3144,13 @@
   "camak24h": "2026-11-06T17:53:35.265413+00:00",
   "cazynox": "2026-11-05T22:07:45.824370+00:00",
   "chap_gg": "2026-11-07T11:12:10.009906+00:00",
+  "chat_": "2026-11-07T12:10:20.881443+00:00",
   "chemiistrytv": "2026-11-07T00:51:19.324591+00:00",
   "chez_lex": "2026-11-06T23:29:44.424138+00:00",
   "chowh1": "2026-11-03T09:58:52.257112+00:00",
   "circonflexe_": "2026-11-07T00:51:19.324591+00:00",
+  "clara_doxal": "2026-11-07T12:10:20.881443+00:00",
+  "clemquicourt": "2026-11-07T12:10:20.881443+00:00",
   "domingo": "2026-11-02T19:09:56.229584+00:00",
   "gom4rt": "2026-11-02T22:01:17.987061+00:00",
   "jirayalecochon": "2026-11-02T22:01:17.987061+00:00",
