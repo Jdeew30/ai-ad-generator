@@ -1,22 +1,22 @@
 # Tableau de bord du clipper
 
-Mis à jour le 08/11/2026 à 15:33 UTC.
+Mis à jour le 08/11/2026 à 21:22 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 116784 | 116784 |
-| Vidéos téléchargées et préparées | 541 | 541 |
-| Shorts envoyés | 46 | 46 |
-| Écartés par la revue | 495 | 495 |
+| Moments trouvés (Twitch + YouTube) | 119900 | 119900 |
+| Vidéos téléchargées et préparées | 547 | 547 |
+| Shorts envoyés | 47 | 47 |
+| Écartés par la revue | 500 | 500 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 41 | 41 |
+| Passages | 42 | 42 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 55, YouTube 27, à la demande 6.
-Note moyenne de Claude : 58/100 sur 49 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 56, YouTube 27, à la demande 6.
+Note moyenne de Claude : 58/100 sur 50 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
@@ -28,6 +28,7 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 08/11 21:24 | Twitch | Redemption | [Redemption voit sa run Pokémon Platine s'effondrer à cause de Requiem](https://www.twitch.tv/redemption/clip/TiredSweetSkirretUncleNox-Vc4ohj8I61zOWHFH) | 50 |
 | 08/11 15:54 | YouTube | Siphano | [Siphano panique face aux Effrois du remake de Zelda Ocarina of Time](https://www.youtube.com/watch?v=cLwzD5a1XTw) | 58 |
 | 08/11 11:44 | Twitch | Anyme023 | [Anyme sur byIlhan : « J'étais là pour lui… et il s'en prend à mes parents »](https://www.twitch.tv/anyme023/clip/AmericanSleepyOcelotHassanChop-nF-TSBfNZb7btXYQ) | 56 |
 | 08/11 08:51 | YouTube | HugoDécrypte - Actus du jour | [HugoDécrypte : la défaite historique de Trump aux midterms, même le Texas bascule](https://www.youtube.com/watch?v=oVjMozpBkTo) | 52 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 | 06/11 09:58 | Twitch | AmineMaTue | [AmineMaTue juge le burger de Valouzz : « un terrain de foot au fond de ma banlieue »](https://www.twitch.tv/aminematue/clip/VastLachrymoseDotterelDatSheffy-qdVGQp1XwnHQlidQ) | 50 |
 | 05/11 22:11 | Twitch | Domingo | [Domingo devine les recettes de tous les films Pixar… avec un calcul de tête](https://www.twitch.tv/domingo/clip/RelentlessCharmingNarwhalDansGame-9Ic79dCNZNMXC1K5) | 60 |
 | 05/11 19:27 | YouTube | Sylvain Lyve | [Sylvain Lyve teste sa Dacia à l'huile de tournesol sur piste… ça sent la frite](https://www.youtube.com/watch?v=N1A1Z-VlKUI) | 64 |
-| 05/11 16:14 | Twitch | Hctuan | [Hctuan bat l'Ender Dragon en hardcore après 48 h de run](https://www.twitch.tv/hctuan/clip/SullenProtectiveScorpionRickroll-EXQ0XBHXqfSj1Jw3) | 66 |
 
 ## Derniers échecs
 
