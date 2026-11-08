@@ -1,33 +1,34 @@
 # Tableau de bord du clipper
 
-Mis à jour le 08/11/2026 à 11:39 UTC.
+Mis à jour le 08/11/2026 à 15:33 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 113891 | 113891 |
-| Vidéos téléchargées et préparées | 535 | 535 |
-| Shorts envoyés | 45 | 45 |
-| Écartés par la revue | 490 | 490 |
+| Moments trouvés (Twitch + YouTube) | 116784 | 116784 |
+| Vidéos téléchargées et préparées | 541 | 541 |
+| Shorts envoyés | 46 | 46 |
+| Écartés par la revue | 495 | 495 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 40 | 40 |
+| Passages | 41 | 41 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 55, YouTube 26, à la demande 6.
-Note moyenne de Claude : 58/100 sur 48 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 55, YouTube 27, à la demande 6.
+Note moyenne de Claude : 58/100 sur 49 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
 
-105 créateurs suivis, 96 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 96 identifiées ; 11 mises de côté (introuvables).
-541 vidéos récentes suivies, 234 regardées de près (115 avec des moments à extraire).
+107 créateurs suivis, 98 chaînes lues à chaque passage par leur flux RSS (dont 2 chaînes secondaires vérifiées), 98 identifiées ; 11 mises de côté (introuvables).
+563 vidéos récentes suivies, 239 regardées de près (119 avec des moments à extraire).
 
 ## Derniers shorts envoyés
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 08/11 15:54 | YouTube | Siphano | [Siphano panique face aux Effrois du remake de Zelda Ocarina of Time](https://www.youtube.com/watch?v=cLwzD5a1XTw) | 58 |
 | 08/11 11:44 | Twitch | Anyme023 | [Anyme sur byIlhan : « J'étais là pour lui… et il s'en prend à mes parents »](https://www.twitch.tv/anyme023/clip/AmericanSleepyOcelotHassanChop-nF-TSBfNZb7btXYQ) | 56 |
 | 08/11 08:51 | YouTube | HugoDécrypte - Actus du jour | [HugoDécrypte : la défaite historique de Trump aux midterms, même le Texas bascule](https://www.youtube.com/watch?v=oVjMozpBkTo) | 52 |
 | 07/11 22:44 | Twitch | Ponce | [Khalen révèle par accident qu'il peut tuer Ponce sur Lycans](https://www.twitch.tv/ponce/clip/BovineEasyMochaAMPEnergy-jKkjkvQmLJkuNhqM) | 55 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 | 05/11 22:11 | Twitch | Domingo | [Domingo devine les recettes de tous les films Pixar… avec un calcul de tête](https://www.twitch.tv/domingo/clip/RelentlessCharmingNarwhalDansGame-9Ic79dCNZNMXC1K5) | 60 |
 | 05/11 19:27 | YouTube | Sylvain Lyve | [Sylvain Lyve teste sa Dacia à l'huile de tournesol sur piste… ça sent la frite](https://www.youtube.com/watch?v=N1A1Z-VlKUI) | 64 |
 | 05/11 16:14 | Twitch | Hctuan | [Hctuan bat l'Ender Dragon en hardcore après 48 h de run](https://www.twitch.tv/hctuan/clip/SullenProtectiveScorpionRickroll-EXQ0XBHXqfSj1Jw3) | 66 |
-| 05/11 13:27 | Twitch | LaureBV | [LaureBV : « Toutes les planètes sont alignées » pour la Karmine Corp aux Worlds](https://www.twitch.tv/laurebv/clip/SeductiveConsiderateCormorantNotATK-1Hfy5i-BRMBQu_F2) | 55 |
 
 ## Derniers échecs
 
