@@ -1,22 +1,22 @@
 # Tableau de bord du clipper
 
-Mis à jour le 08/11/2026 à 08:38 UTC.
+Mis à jour le 08/11/2026 à 11:39 UTC.
 
 ## Activité (compteurs tenus depuis le 02/11/2026)
 
 | | 7 jours | 30 jours |
 |---|---:|---:|
-| Moments trouvés (Twitch + YouTube) | 110803 | 110803 |
-| Vidéos téléchargées et préparées | 529 | 529 |
-| Shorts envoyés | 44 | 44 |
-| Écartés par la revue | 485 | 485 |
+| Moments trouvés (Twitch + YouTube) | 113891 | 113891 |
+| Vidéos téléchargées et préparées | 535 | 535 |
+| Shorts envoyés | 45 | 45 |
+| Écartés par la revue | 490 | 490 |
 | Échecs (téléchargement, montage, envoi) | 15 | 15 |
-| Passages | 39 | 39 |
+| Passages | 40 | 40 |
 
 ## Shorts des 30 derniers jours
 
-Par source : Twitch 54, YouTube 26, à la demande 6.
-Note moyenne de Claude : 58/100 sur 47 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
+Par source : Twitch 55, YouTube 26, à la demande 6.
+Note moyenne de Claude : 58/100 sur 48 short(s) notés (une estimation de l'intérêt du passage, pas une mesure).
 Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5), Locklear (4), GOTAGA (4), Domingo (3), Bob Lennon (3), Amixem (3), Sylvain Lyve (3).
 
 ## Veille YouTube
@@ -28,6 +28,7 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 
 | Date | Source | Créateur | Short | Note |
 |---|---|---|---|---:|
+| 08/11 11:44 | Twitch | Anyme023 | [Anyme sur byIlhan : « J'étais là pour lui… et il s'en prend à mes parents »](https://www.twitch.tv/anyme023/clip/AmericanSleepyOcelotHassanChop-nF-TSBfNZb7btXYQ) | 56 |
 | 08/11 08:51 | YouTube | HugoDécrypte - Actus du jour | [HugoDécrypte : la défaite historique de Trump aux midterms, même le Texas bascule](https://www.youtube.com/watch?v=oVjMozpBkTo) | 52 |
 | 07/11 22:44 | Twitch | Ponce | [Khalen révèle par accident qu'il peut tuer Ponce sur Lycans](https://www.twitch.tv/ponce/clip/BovineEasyMochaAMPEnergy-jKkjkvQmLJkuNhqM) | 55 |
 | 07/11 18:47 | YouTube | EnjoyPhoenix - Marie Lopez | [EnjoyPhoenix raconte l'homme accusé à tort après l'attaque au sarin de Matsumoto](https://www.youtube.com/watch?v=leEJeQqEvps) | 62 |
@@ -47,7 +48,6 @@ Créateurs les plus repris : Inoxtag (8), Kameto (6), Mastu (5), AmineMaTue (5),
 | 05/11 19:27 | YouTube | Sylvain Lyve | [Sylvain Lyve teste sa Dacia à l'huile de tournesol sur piste… ça sent la frite](https://www.youtube.com/watch?v=N1A1Z-VlKUI) | 64 |
 | 05/11 16:14 | Twitch | Hctuan | [Hctuan bat l'Ender Dragon en hardcore après 48 h de run](https://www.twitch.tv/hctuan/clip/SullenProtectiveScorpionRickroll-EXQ0XBHXqfSj1Jw3) | 66 |
 | 05/11 13:27 | Twitch | LaureBV | [LaureBV : « Toutes les planètes sont alignées » pour la Karmine Corp aux Worlds](https://www.twitch.tv/laurebv/clip/SeductiveConsiderateCormorantNotATK-1Hfy5i-BRMBQu_F2) | 55 |
-| 05/11 10:18 | YouTube | Bob Lennon | [Bob Lennon attaque toute une ville ennemie sur Crimson Desert](https://www.youtube.com/watch?v=f6amVCjQtzA) | 63 |
 
 ## Derniers échecs
 
