@@ -1,17 +1,10 @@
 name: Clipper
 
-# Robot de la chaîne : 5 passages par jour, un short chacun (Twitch et YouTube chacun leur tour), + un best-of
-# le mercredi et le dimanche. Les horaires sont en UTC (Paris = UTC+1 l'hiver, UTC+2 l'été) ; GitHub lance souvent
-# les passages planifiés avec du retard. Les workflows planifiés ne tournent que depuis la branche par défaut.
+# Robot de la chaîne. Arrêté le 8/11 à la demande du propriétaire (« on va tout arrêter, le compte ne peut pas être
+# monétisé ») : plus aucun passage planifié. Il ne se lance plus qu'à la main (Actions → Clipper → Run workflow).
+# Pour le relancer tout seul, remettre le bloc « schedule » (5 passages par jour, best-ofs du mercredi et du dimanche) :
+# voir l'historique de ce fichier.
 on:
-  schedule:
-    # Heures en liste, la forme des exemples de GitHub (« 30 5,17 * * * ») : écrites « 8-22/2 » (plage avec pas), elles
-    # n'ont jamais été lancées le 6/11. 5 passages par jour, un short chacun (Twitch et YouTube chacun leur tour).
-    - cron: "37 8,11,14,17,20 * * *" # ~9h37, 12h37, 15h37, 18h37, 21h37 à Paris (hiver)
-    # Un passage planifié ne fait rien si un passage a commencé il y a moins de 170 min (--skip-if-ran-within) : GitHub
-    # les lance avec 1 h à 2 h de retard, et la tâche Claude « vérification toutes les heures » lance ceux qu'il saute.
-    - cron: "41 7 * * 3" # mercredi ~8h41 : best-of du début de semaine
-    - cron: "41 7 * * 0" # dimanche ~8h41 : best-of de la fin de semaine
   workflow_dispatch:
     inputs:
       mode:
